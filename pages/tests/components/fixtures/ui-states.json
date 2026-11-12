@@ -1,0 +1,210 @@
+[
+ {
+  "name": "rich-wireframe-stress:s1",
+  "input": {
+   "screen": "<script>alert(1)</script>",
+   "empty": {
+    "shows": "No orders <b>yet</b>"
+   },
+   "loading": {
+    "shows": "Skeleton rows"
+   },
+   "error": {
+    "na": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   },
+   "offline": {
+    "shows": "Banner: you are offline"
+   },
+   "partial": {
+    "shows": "Some rows failed to load"
+   }
+  },
+  "props": {
+   "heading": "<script>alert(1)</script>",
+   "layout": null,
+   "tiles": [
+    {
+     "name": "empty",
+     "na": null,
+     "shows": "No orders <b>yet</b>"
+    },
+    {
+     "name": "loading",
+     "na": null,
+     "shows": "Skeleton rows"
+    },
+    {
+     "name": "error",
+     "na": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "shows": ""
+    },
+    {
+     "name": "offline",
+     "na": null,
+     "shows": "Banner: you are offline"
+    },
+    {
+     "name": "partial",
+     "na": null,
+     "shows": "Some rows failed to load"
+    }
+   ],
+   "copy": "<script>alert(1)</script> (ui-states)\n- empty: No orders <b>yet</b>\n- loading: Skeleton rows\n- error: n/a, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n- offline: Banner: you are offline\n- partial: Some rows failed to load"
+  },
+  "html": "<div class=\"vb ui-states\" data-copy=\"&lt;script&gt;alert(1)&lt;/script&gt; (ui-states)\n- empty: No orders &lt;b&gt;yet&lt;/b&gt;\n- loading: Skeleton rows\n- error: n/a, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n- offline: Banner: you are offline\n- partial: Some rows failed to load\"><section class=\"vb-card\"><h4 class=\"vb-title\">&lt;script&gt;alert(1)&lt;/script&gt;</h4><p class=\"vb-alt\">5 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><span class=\"vb-badge vb-na\">n/a</span> <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div><div class=\"vb-state vb-state-offline\"><h5>offline</h5><p>Banner: you are offline</p></div><div class=\"vb-state vb-state-partial\"><h5>partial</h5><p>Some rows failed to load</p></div></div></section></div>"
+ },
+ {
+  "name": "rich-wireframe:s1",
+  "input": {
+   "screen": "Orders list",
+   "empty": {
+    "shows": "No orders yet, with a Create order button"
+   },
+   "loading": {
+    "shows": "Skeleton rows"
+   },
+   "error": {
+    "shows": "Message and a Retry button"
+   }
+  },
+  "props": {
+   "heading": "Orders list",
+   "layout": null,
+   "tiles": [
+    {
+     "name": "empty",
+     "na": null,
+     "shows": "No orders yet, with a Create order button"
+    },
+    {
+     "name": "loading",
+     "na": null,
+     "shows": "Skeleton rows"
+    },
+    {
+     "name": "error",
+     "na": null,
+     "shows": "Message and a Retry button"
+    }
+   ],
+   "copy": "Orders list (ui-states)\n- empty: No orders yet, with a Create order button\n- loading: Skeleton rows\n- error: Message and a Retry button"
+  },
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders list (ui-states)\n- empty: No orders yet, with a Create order button\n- loading: Skeleton rows\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders list</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders yet, with a Create order button</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
+ },
+ {
+  "name": "rich-wireframe:s2",
+  "input": {
+   "screen": "Order detail",
+   "layout": "grid",
+   "empty": {
+    "na": "an order always has lines"
+   },
+   "loading": {
+    "shows": "Skeleton lines"
+   },
+   "error": {
+    "shows": "Message and a Retry button"
+   }
+  },
+  "props": {
+   "heading": "Order detail",
+   "layout": "grid",
+   "tiles": [
+    {
+     "name": "empty",
+     "na": "an order always has lines",
+     "shows": ""
+    },
+    {
+     "name": "loading",
+     "na": null,
+     "shows": "Skeleton lines"
+    },
+    {
+     "name": "error",
+     "na": null,
+     "shows": "Message and a Retry button"
+    }
+   ],
+   "copy": "Order detail (ui-states)\n- empty: n/a, an order always has lines\n- loading: Skeleton lines\n- error: Message and a Retry button"
+  },
+  "html": "<div class=\"vb ui-states\" data-copy=\"Order detail (ui-states)\n- empty: n/a, an order always has lines\n- loading: Skeleton lines\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Order detail</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><span class=\"vb-badge vb-na\">n/a</span> <span>an order always has lines</span></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton lines</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
+ },
+ {
+  "name": "unit-0",
+  "input": {
+   "empty": {
+    "shows": "Nothing <b>yet</b>"
+   },
+   "error": {
+    "shows": "Retry"
+   },
+   "layout": "grid",
+   "loading": {
+    "na": "instant"
+   },
+   "screen": "Orders"
+  },
+  "props": {
+   "heading": "Orders",
+   "layout": "grid",
+   "tiles": [
+    {
+     "name": "empty",
+     "na": null,
+     "shows": "Nothing <b>yet</b>"
+    },
+    {
+     "name": "error",
+     "na": null,
+     "shows": "Retry"
+    },
+    {
+     "name": "loading",
+     "na": "instant",
+     "shows": ""
+    }
+   ],
+   "copy": "Orders (ui-states)\n- empty: Nothing <b>yet</b>\n- error: Retry\n- loading: n/a, instant"
+  },
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
+ },
+ {
+  "name": "unit-1",
+  "input": {
+   "empty": {
+    "shows": "Nothing <b>yet</b>"
+   },
+   "error": {
+    "shows": "Retry"
+   },
+   "loading": {
+    "na": "instant"
+   },
+   "screen": "Orders"
+  },
+  "props": {
+   "heading": "Orders",
+   "layout": null,
+   "tiles": [
+    {
+     "name": "empty",
+     "na": null,
+     "shows": "Nothing <b>yet</b>"
+    },
+    {
+     "name": "error",
+     "na": null,
+     "shows": "Retry"
+    },
+    {
+     "name": "loading",
+     "na": "instant",
+     "shows": ""
+    }
+   ],
+   "copy": "Orders (ui-states)\n- empty: Nothing <b>yet</b>\n- error: Retry\n- loading: n/a, instant"
+  },
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
+ }
+]

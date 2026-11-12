@@ -1,0 +1,3702 @@
+[
+ {
+  "name": "rich-sequence-stress:h2",
+  "input": {
+   "desc": "Two actors, one very long unbroken step and a long label.",
+   "actors": [
+    {
+     "id": "a",
+     "label": "A very long actor label that wraps over two lines and then is cut off"
+    },
+    {
+     "id": "b",
+     "label": "B"
+    }
+   ],
+   "steps": [
+    {
+     "from": "a",
+     "to": "b",
+     "text": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+    },
+    {
+     "from": "b",
+     "to": "b",
+     "text": "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+     "kind": "async"
+    },
+    {
+     "from": "a",
+     "to": "b",
+     "text": "ok",
+     "kind": "note"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "Two actors, one very long unbroken step and a long label.",
+   "counts": "3 steps, 2 actors",
+   "drawing": {
+    "width": 456,
+    "height": 252,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "title",
+        {},
+        "A very long actor label that wraps over two lines and then is cut off"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M108 44 V240"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "34",
+         "y": "1",
+         "width": "148",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "A very long"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "34",
+         "text-anchor": "middle"
+        },
+        "actor label tha…"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M276 44 V240"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "240",
+         "y": "1",
+         "width": "72",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "276",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "B"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "454",
+         "height": "74"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "qqqqqqqqqqqqqqqqqq"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "86",
+         "text-anchor": "middle"
+        },
+        "qqqqqqqqqqqqqqqqqq"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "102",
+         "text-anchor": "middle"
+        },
+        "qqqqqqqqqqqqqqqqq…"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M108 118 H276"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "276,118 267,113 267,123"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-async",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "133",
+         "width": "454",
+         "height": "62"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "320",
+         "y": "146",
+         "text-anchor": "start"
+        },
+        "rrrrrrrrrrrrrr"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "320",
+         "y": "162",
+         "text-anchor": "start"
+        },
+        "rrrrrrrrrrrrrr"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "320",
+         "y": "178",
+         "text-anchor": "start"
+        },
+        "rrrrrrrrrrrrr…"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M276 144 H312 V158 H276"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M285 153 L276 158 L285 163"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-note",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "197",
+         "width": "454",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-note-box",
+         "x": "98",
+         "y": "200",
+         "width": "188",
+         "height": "36",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "222",
+         "text-anchor": "middle"
+        },
+        "ok"
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "A very long actor label that wraps over two lines and then is cut off to B: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+    "B to B (async): rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    "Note over A very long actor label that wraps over two lines and then is cut off to B: ok"
+   ],
+   "copy": "1. A very long actor label that wraps over two lines and then is cut off to B: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq\n2. B to B (async): rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr\n3. Note over A very long actor label that wraps over two lines and then is cut off to B: ok"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. A very long actor label that wraps over two lines and then is cut off to B: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq\n2. B to B (async): rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr\n3. Note over A very long actor label that wraps over two lines and then is cut off to B: ok\"><p class=\"vb-alt vd-sequence-summary\">Two actors, one very long unbroken step and a long label. (3 steps, 2 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 456 252\" width=\"456\" height=\"252\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>Two actors, one very long unbroken step and a long label.</desc><g class=\"vd-sequence-actor\"><title>A very long actor label that wraps over two lines and then is cut off</title><path class=\"vd-sequence-life\" d=\"M108 44 V240\"/><rect class=\"vd-sequence-actor-box\" x=\"34\" y=\"1\" width=\"148\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"108\" y=\"18\" text-anchor=\"middle\">A very long</text><text class=\"vd-sequence-name\" x=\"108\" y=\"34\" text-anchor=\"middle\">actor label tha…</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M276 44 V240\"/><rect class=\"vd-sequence-actor-box\" x=\"240\" y=\"1\" width=\"72\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"276\" y=\"18\" text-anchor=\"middle\">B</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"454\" height=\"74\"/><text class=\"vd-sequence-text\" x=\"192\" y=\"70\" text-anchor=\"middle\">qqqqqqqqqqqqqqqqqq</text><text class=\"vd-sequence-text\" x=\"192\" y=\"86\" text-anchor=\"middle\">qqqqqqqqqqqqqqqqqq</text><text class=\"vd-sequence-text\" x=\"192\" y=\"102\" text-anchor=\"middle\">qqqqqqqqqqqqqqqqq…</text><path class=\"vd-sequence-line\" d=\"M108 118 H276\"/><polygon class=\"vd-sequence-head\" points=\"276,118 267,113 267,123\"/></g><g class=\"vd-sequence-row vd-sequence-async\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"133\" width=\"454\" height=\"62\"/><text class=\"vd-sequence-text\" x=\"320\" y=\"146\" text-anchor=\"start\">rrrrrrrrrrrrrr</text><text class=\"vd-sequence-text\" x=\"320\" y=\"162\" text-anchor=\"start\">rrrrrrrrrrrrrr</text><text class=\"vd-sequence-text\" x=\"320\" y=\"178\" text-anchor=\"start\">rrrrrrrrrrrrr…</text><path class=\"vd-sequence-line\" d=\"M276 144 H312 V158 H276\"/><path class=\"vd-sequence-head-open\" d=\"M285 153 L276 158 L285 163\"/></g><g class=\"vd-sequence-row vd-sequence-note\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"197\" width=\"454\" height=\"42\"/><rect class=\"vd-sequence-note-box\" x=\"98\" y=\"200\" width=\"188\" height=\"36\" rx=\"4\"/><text class=\"vd-sequence-text\" x=\"192\" y=\"222\" text-anchor=\"middle\">ok</text></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">A very long actor label that wraps over two lines and then is cut off to B: qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</li><li class=\"vd-sequence-step\" data-step=\"1\">B to B (async): rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</li><li class=\"vd-sequence-step\" data-step=\"2\">Note over A very long actor label that wraps over two lines and then is cut off to B: ok</li></ol></div>"
+ },
+ {
+  "name": "rich-sequence:s1",
+  "input": {
+   "title": "Sign in",
+   "desc": "The browser signs a user in through the API, a cache and the user store.",
+   "actors": [
+    {
+     "id": "b",
+     "label": "Browser"
+    },
+    {
+     "id": "api",
+     "label": "API"
+    },
+    {
+     "id": "cache",
+     "label": "Cache"
+    },
+    {
+     "id": "db",
+     "label": "User store"
+    }
+   ],
+   "steps": [
+    {
+     "from": "b",
+     "to": "api",
+     "text": "POST /login with the email and password"
+    },
+    {
+     "from": "api",
+     "to": "cache",
+     "text": "lookup session"
+    },
+    {
+     "from": "cache",
+     "to": "api",
+     "text": "miss",
+     "kind": "return"
+    },
+    {
+     "from": "api",
+     "to": "db",
+     "text": "find user by email",
+     "group": "cache miss"
+    },
+    {
+     "from": "db",
+     "to": "api",
+     "text": "user row",
+     "kind": "return",
+     "group": "cache miss"
+    },
+    {
+     "from": "api",
+     "to": "api",
+     "text": "verify the password hash"
+    },
+    {
+     "from": "api",
+     "to": "cache",
+     "text": "store session",
+     "kind": "async"
+    },
+    {
+     "from": "b",
+     "to": "db",
+     "text": "Passwords are never sent back.",
+     "kind": "note"
+    },
+    {
+     "from": "api",
+     "to": "b",
+     "text": "200 with a session cookie",
+     "kind": "return"
+    }
+   ]
+  },
+  "props": {
+   "title": "Sign in",
+   "name": "Sign in",
+   "desc": "The browser signs a user in through the API, a cache and the user store.",
+   "counts": "9 steps, 4 actors",
+   "drawing": {
+    "width": 648,
+    "height": 570,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-frame"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-frame-box",
+         "x": "12",
+         "y": "220",
+         "width": "624",
+         "height": "122",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-frame-label",
+         "x": "20",
+         "y": "237",
+         "text-anchor": "start"
+        },
+        "cache miss"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V558"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Browser"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V558"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "213",
+         "y": "1",
+         "width": "72",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "API"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V558"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "363",
+         "y": "1",
+         "width": "72",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Cache"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M549 44 V558"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "499",
+         "y": "1",
+         "width": "100",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "549",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "User store"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "646",
+         "height": "74"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "POST /login"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "86",
+         "text-anchor": "middle"
+        },
+        "with the email"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "102",
+         "text-anchor": "middle"
+        },
+        "and password"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 118 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,118 240,113 240,123"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "133",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "324",
+         "y": "146",
+         "text-anchor": "middle"
+        },
+        "lookup session"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 162 H399"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "399,162 390,157 390,167"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "177",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "324",
+         "y": "190",
+         "text-anchor": "middle"
+        },
+        "miss"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M399 206 H249"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M258 201 L249 206 L258 211"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "3"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "247",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "399",
+         "y": "260",
+         "text-anchor": "middle"
+        },
+        "find user by email"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 276 H549"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "549,276 540,271 540,281"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "4"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "291",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "399",
+         "y": "304",
+         "text-anchor": "middle"
+        },
+        "user row"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M549 320 H249"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M258 315 L249 320 L258 325"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "5"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "347",
+         "width": "646",
+         "height": "62"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "293",
+         "y": "360",
+         "text-anchor": "start"
+        },
+        "verify the"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "293",
+         "y": "376",
+         "text-anchor": "start"
+        },
+        "password"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "293",
+         "y": "392",
+         "text-anchor": "start"
+        },
+        "hash"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 358 H285 V372 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,372 258,367 258,377"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-async",
+       "data-step": "6"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "411",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "324",
+         "y": "424",
+         "text-anchor": "middle"
+        },
+        "store session"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 440 H399"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M390 435 L399 440 L390 445"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-note",
+       "data-step": "7"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "455",
+         "width": "646",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-note-box",
+         "x": "89",
+         "y": "458",
+         "width": "470",
+         "height": "36",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "324",
+         "y": "480",
+         "text-anchor": "middle"
+        },
+        "Passwords are never sent back."
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "8"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "499",
+         "width": "646",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "512",
+         "text-anchor": "middle"
+        },
+        "200 with a"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "528",
+         "text-anchor": "middle"
+        },
+        "session cookie"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M249 544 H99"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M108 539 L99 544 L108 549"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Browser to API: POST /login with the email and password",
+    "API to Cache: lookup session",
+    "Cache to API (return): miss",
+    "API to User store: find user by email (group: cache miss)",
+    "User store to API (return): user row (group: cache miss)",
+    "API to API: verify the password hash",
+    "API to Cache (async): store session",
+    "Note over Browser to User store: Passwords are never sent back.",
+    "API to Browser (return): 200 with a session cookie"
+   ],
+   "copy": "1. Browser to API: POST /login with the email and password\n2. API to Cache: lookup session\n3. Cache to API (return): miss\n4. API to User store: find user by email (group: cache miss)\n5. User store to API (return): user row (group: cache miss)\n6. API to API: verify the password hash\n7. API to Cache (async): store session\n8. Note over Browser to User store: Passwords are never sent back.\n9. API to Browser (return): 200 with a session cookie"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Browser to API: POST /login with the email and password\n2. API to Cache: lookup session\n3. Cache to API (return): miss\n4. API to User store: find user by email (group: cache miss)\n5. User store to API (return): user row (group: cache miss)\n6. API to API: verify the password hash\n7. API to Cache (async): store session\n8. Note over Browser to User store: Passwords are never sent back.\n9. API to Browser (return): 200 with a session cookie\"><h4 class=\"vb-title vd-sequence-title\">Sign in</h4><p class=\"vb-alt vd-sequence-summary\">The browser signs a user in through the API, a cache and the user store. (9 steps, 4 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sign in (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 648 570\" width=\"648\" height=\"570\" role=\"img\" aria-label=\"Sign in\" focusable=\"false\"><title>Sign in</title><desc>The browser signs a user in through the API, a cache and the user store.</desc><g class=\"vd-sequence-frame\"><rect class=\"vd-sequence-frame-box\" x=\"12\" y=\"220\" width=\"624\" height=\"122\" rx=\"4\"/><text class=\"vd-sequence-frame-label\" x=\"20\" y=\"237\" text-anchor=\"start\">cache miss</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V558\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Browser</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V558\"/><rect class=\"vd-sequence-actor-box\" x=\"213\" y=\"1\" width=\"72\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">API</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V558\"/><rect class=\"vd-sequence-actor-box\" x=\"363\" y=\"1\" width=\"72\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Cache</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M549 44 V558\"/><rect class=\"vd-sequence-actor-box\" x=\"499\" y=\"1\" width=\"100\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"549\" y=\"18\" text-anchor=\"middle\">User store</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"646\" height=\"74\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">POST /login</text><text class=\"vd-sequence-text\" x=\"174\" y=\"86\" text-anchor=\"middle\">with the email</text><text class=\"vd-sequence-text\" x=\"174\" y=\"102\" text-anchor=\"middle\">and password</text><path class=\"vd-sequence-line\" d=\"M99 118 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,118 240,113 240,123\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"133\" width=\"646\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"324\" y=\"146\" text-anchor=\"middle\">lookup session</text><path class=\"vd-sequence-line\" d=\"M249 162 H399\"/><polygon class=\"vd-sequence-head\" points=\"399,162 390,157 390,167\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"177\" width=\"646\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"324\" y=\"190\" text-anchor=\"middle\">miss</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M399 206 H249\"/><path class=\"vd-sequence-head-open\" d=\"M258 201 L249 206 L258 211\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"3\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"247\" width=\"646\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"399\" y=\"260\" text-anchor=\"middle\">find user by email</text><path class=\"vd-sequence-line\" d=\"M249 276 H549\"/><polygon class=\"vd-sequence-head\" points=\"549,276 540,271 540,281\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"4\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"291\" width=\"646\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"399\" y=\"304\" text-anchor=\"middle\">user row</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M549 320 H249\"/><path class=\"vd-sequence-head-open\" d=\"M258 315 L249 320 L258 325\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"5\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"347\" width=\"646\" height=\"62\"/><text class=\"vd-sequence-text\" x=\"293\" y=\"360\" text-anchor=\"start\">verify the</text><text class=\"vd-sequence-text\" x=\"293\" y=\"376\" text-anchor=\"start\">password</text><text class=\"vd-sequence-text\" x=\"293\" y=\"392\" text-anchor=\"start\">hash</text><path class=\"vd-sequence-line\" d=\"M249 358 H285 V372 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,372 258,367 258,377\"/></g><g class=\"vd-sequence-row vd-sequence-async\" data-step=\"6\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"411\" width=\"646\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"324\" y=\"424\" text-anchor=\"middle\">store session</text><path class=\"vd-sequence-line\" d=\"M249 440 H399\"/><path class=\"vd-sequence-head-open\" d=\"M390 435 L399 440 L390 445\"/></g><g class=\"vd-sequence-row vd-sequence-note\" data-step=\"7\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"455\" width=\"646\" height=\"42\"/><rect class=\"vd-sequence-note-box\" x=\"89\" y=\"458\" width=\"470\" height=\"36\" rx=\"4\"/><text class=\"vd-sequence-text\" x=\"324\" y=\"480\" text-anchor=\"middle\">Passwords are never sent back.</text></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"8\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"499\" width=\"646\" height=\"58\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"512\" text-anchor=\"middle\">200 with a</text><text class=\"vd-sequence-text\" x=\"174\" y=\"528\" text-anchor=\"middle\">session cookie</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M249 544 H99\"/><path class=\"vd-sequence-head-open\" d=\"M108 539 L99 544 L108 549\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Browser to API: POST /login with the email and password</li><li class=\"vd-sequence-step\" data-step=\"1\">API to Cache: lookup session</li><li class=\"vd-sequence-step\" data-step=\"2\">Cache to API (return): miss</li><li class=\"vd-sequence-step\" data-step=\"3\">API to User store: find user by email (group: cache miss)</li><li class=\"vd-sequence-step\" data-step=\"4\">User store to API (return): user row (group: cache miss)</li><li class=\"vd-sequence-step\" data-step=\"5\">API to API: verify the password hash</li><li class=\"vd-sequence-step\" data-step=\"6\">API to Cache (async): store session</li><li class=\"vd-sequence-step\" data-step=\"7\">Note over Browser to User store: Passwords are never sent back.</li><li class=\"vd-sequence-step\" data-step=\"8\">API to Browser (return): 200 with a session cookie</li></ol></div>"
+ },
+ {
+  "name": "rich-sequence:s2",
+  "input": {
+   "desc": "One actor calls itself.",
+   "actors": [
+    {
+     "id": "w",
+     "label": "Worker"
+    }
+   ],
+   "steps": [
+    {
+     "from": "w",
+     "to": "w",
+     "text": "retry with backoff"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "One actor calls itself.",
+   "counts": "1 step, 1 actor",
+   "drawing": {
+    "width": 247,
+    "height": 116,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V104"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "63",
+         "y": "1",
+         "width": "72",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Worker"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "245",
+         "height": "46"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "143",
+         "y": "70",
+         "text-anchor": "start"
+        },
+        "retry with"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "143",
+         "y": "86",
+         "text-anchor": "start"
+        },
+        "backoff"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 68 H135 V82 H99"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "99,82 108,77 108,87"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Worker to Worker: retry with backoff"
+   ],
+   "copy": "1. Worker to Worker: retry with backoff"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Worker to Worker: retry with backoff\"><p class=\"vb-alt vd-sequence-summary\">One actor calls itself. (1 step, 1 actor)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 247 116\" width=\"247\" height=\"116\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>One actor calls itself.</desc><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V104\"/><rect class=\"vd-sequence-actor-box\" x=\"63\" y=\"1\" width=\"72\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Worker</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"245\" height=\"46\"/><text class=\"vd-sequence-text\" x=\"143\" y=\"70\" text-anchor=\"start\">retry with</text><text class=\"vd-sequence-text\" x=\"143\" y=\"86\" text-anchor=\"start\">backoff</text><path class=\"vd-sequence-line\" d=\"M99 68 H135 V82 H99\"/><polygon class=\"vd-sequence-head\" points=\"99,82 108,77 108,87\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Worker to Worker: retry with backoff</li></ol></div>"
+ },
+ {
+  "name": "unit-0",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "hello",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "text": "think",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "kind": "return",
+     "text": "back",
+     "to": "a0"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "3 steps, 3 actors",
+   "drawing": {
+    "width": 498,
+    "height": 200,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "211",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "361",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "hello"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 86 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,86 240,81 240,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "101",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "293",
+         "y": "114",
+         "text-anchor": "start"
+        },
+        "think"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 112 H285 V126 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,126 258,121 258,131"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "145",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "158",
+         "text-anchor": "middle"
+        },
+        "back"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M249 174 H99"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M108 169 L99 174 L108 179"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 1: hello",
+    "Actor 1 to Actor 1: think",
+    "Actor 1 to Actor 0 (return): back"
+   ],
+   "copy": "1. Actor 0 to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to Actor 0 (return): back"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to Actor 0 (return): back\"><p class=\"vb-alt vd-sequence-summary\">d (3 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 498 200\" width=\"498\" height=\"200\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"211\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"361\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">hello</text><path class=\"vd-sequence-line\" d=\"M99 86 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,86 240,81 240,91\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"101\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"293\" y=\"114\" text-anchor=\"start\">think</text><path class=\"vd-sequence-line\" d=\"M249 112 H285 V126 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,126 258,121 258,131\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"145\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"158\" text-anchor=\"middle\">back</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M249 174 H99\"/><path class=\"vd-sequence-head-open\" d=\"M108 169 L99 174 L108 179\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 1: hello</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 1 to Actor 1: think</li><li class=\"vd-sequence-step\" data-step=\"2\">Actor 1 to Actor 0 (return): back</li></ol></div>"
+ },
+ {
+  "name": "unit-1",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "hello",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "text": "think",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "kind": "return",
+     "text": "back",
+     "to": "a0"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "3 steps, 3 actors",
+   "drawing": {
+    "width": 552,
+    "height": 200,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "title",
+        {},
+        "AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M108 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "34",
+         "y": "1",
+         "width": "148",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Averyveryverylon"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "34",
+         "text-anchor": "middle"
+        },
+        "glabelwithnobre…"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M276 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "238",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "276",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M444 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "406",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "444",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "550",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "hello"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M108 86 H276"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "276,86 267,81 267,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "101",
+         "width": "550",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "320",
+         "y": "114",
+         "text-anchor": "start"
+        },
+        "think"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M276 112 H312 V126 H276"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "276,126 285,121 285,131"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "145",
+         "width": "550",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "158",
+         "text-anchor": "middle"
+        },
+        "back"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M276 174 H108"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M117 169 L108 174 L117 179"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks to Actor 1: hello",
+    "Actor 1 to Actor 1: think",
+    "Actor 1 to AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks (return): back"
+   ],
+   "copy": "1. AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks (return): back"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks (return): back\"><p class=\"vb-alt vd-sequence-summary\">d (3 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 552 200\" width=\"552\" height=\"200\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-actor\"><title>AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks</title><path class=\"vd-sequence-life\" d=\"M108 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"34\" y=\"1\" width=\"148\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"108\" y=\"18\" text-anchor=\"middle\">Averyveryverylon</text><text class=\"vd-sequence-name\" x=\"108\" y=\"34\" text-anchor=\"middle\">glabelwithnobre…</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M276 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"238\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"276\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M444 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"406\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"444\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"550\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"192\" y=\"70\" text-anchor=\"middle\">hello</text><path class=\"vd-sequence-line\" d=\"M108 86 H276\"/><polygon class=\"vd-sequence-head\" points=\"276,86 267,81 267,91\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"101\" width=\"550\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"320\" y=\"114\" text-anchor=\"start\">think</text><path class=\"vd-sequence-line\" d=\"M276 112 H312 V126 H276\"/><polygon class=\"vd-sequence-head\" points=\"276,126 285,121 285,131\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"145\" width=\"550\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"192\" y=\"158\" text-anchor=\"middle\">back</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M276 174 H108\"/><path class=\"vd-sequence-head-open\" d=\"M117 169 L108 174 L117 179\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks to Actor 1: hello</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 1 to Actor 1: think</li><li class=\"vd-sequence-step\" data-step=\"2\">Actor 1 to AveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaksAveryveryverylonglabelwithnobreaks (return): back</li></ol></div>"
+ },
+ {
+  "name": "unit-2",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "c",
+     "to": "a1"
+    },
+    {
+     "from": "a0",
+     "kind": "async",
+     "text": "a",
+     "to": "a1"
+    },
+    {
+     "from": "a0",
+     "kind": "note",
+     "text": "n",
+     "to": "a1"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "3 steps, 3 actors",
+   "drawing": {
+    "width": 498,
+    "height": 200,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "211",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "361",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "c"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 86 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,86 240,81 240,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-async",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "101",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "114",
+         "text-anchor": "middle"
+        },
+        "a"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 130 H249"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M240 125 L249 130 L240 135"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-note",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "145",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-note-box",
+         "x": "89",
+         "y": "148",
+         "width": "170",
+         "height": "36",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "170",
+         "text-anchor": "middle"
+        },
+        "n"
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 1: c",
+    "Actor 0 to Actor 1 (async): a",
+    "Note over Actor 0 to Actor 1: n"
+   ],
+   "copy": "1. Actor 0 to Actor 1: c\n2. Actor 0 to Actor 1 (async): a\n3. Note over Actor 0 to Actor 1: n"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 1: c\n2. Actor 0 to Actor 1 (async): a\n3. Note over Actor 0 to Actor 1: n\"><p class=\"vb-alt vd-sequence-summary\">d (3 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 498 200\" width=\"498\" height=\"200\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"211\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"361\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">c</text><path class=\"vd-sequence-line\" d=\"M99 86 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,86 240,81 240,91\"/></g><g class=\"vd-sequence-row vd-sequence-async\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"101\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"114\" text-anchor=\"middle\">a</text><path class=\"vd-sequence-line\" d=\"M99 130 H249\"/><path class=\"vd-sequence-head-open\" d=\"M240 125 L249 130 L240 135\"/></g><g class=\"vd-sequence-row vd-sequence-note\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"145\" width=\"496\" height=\"42\"/><rect class=\"vd-sequence-note-box\" x=\"89\" y=\"148\" width=\"170\" height=\"36\" rx=\"4\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"170\" text-anchor=\"middle\">n</text></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 1: c</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 0 to Actor 1 (async): a</li><li class=\"vd-sequence-step\" data-step=\"2\">Note over Actor 0 to Actor 1: n</li></ol></div>"
+ },
+ {
+  "name": "unit-3",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "x",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "group": "alt: cache",
+     "text": "y",
+     "to": "a0"
+    },
+    {
+     "from": "a0",
+     "group": "alt: cache",
+     "text": "z",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "group": "loop",
+     "text": "w",
+     "to": "a0"
+    },
+    {
+     "from": "a0",
+     "text": "v",
+     "to": "a1"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "5 steps, 3 actors",
+   "drawing": {
+    "width": 498,
+    "height": 364,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-frame"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-frame-box",
+         "x": "12",
+         "y": "100",
+         "width": "474",
+         "height": "122",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-frame-label",
+         "x": "20",
+         "y": "117",
+         "text-anchor": "start"
+        },
+        "alt: cache"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-frame"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-frame-box",
+         "x": "12",
+         "y": "226",
+         "width": "474",
+         "height": "78",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-frame-label",
+         "x": "20",
+         "y": "243",
+         "text-anchor": "start"
+        },
+        "loop"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V352"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V352"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "211",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V352"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "361",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "x"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 86 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,86 240,81 240,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "127",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "140",
+         "text-anchor": "middle"
+        },
+        "y"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 156 H99"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "99,156 108,151 108,161"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "171",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "184",
+         "text-anchor": "middle"
+        },
+        "z"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 200 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,200 240,195 240,205"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "3"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "253",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "266",
+         "text-anchor": "middle"
+        },
+        "w"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 282 H99"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "99,282 108,277 108,287"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "4"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "309",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "322",
+         "text-anchor": "middle"
+        },
+        "v"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 338 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,338 240,333 240,343"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 1: x",
+    "Actor 1 to Actor 0: y (group: alt: cache)",
+    "Actor 0 to Actor 1: z (group: alt: cache)",
+    "Actor 1 to Actor 0: w (group: loop)",
+    "Actor 0 to Actor 1: v"
+   ],
+   "copy": "1. Actor 0 to Actor 1: x\n2. Actor 1 to Actor 0: y (group: alt: cache)\n3. Actor 0 to Actor 1: z (group: alt: cache)\n4. Actor 1 to Actor 0: w (group: loop)\n5. Actor 0 to Actor 1: v"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 1: x\n2. Actor 1 to Actor 0: y (group: alt: cache)\n3. Actor 0 to Actor 1: z (group: alt: cache)\n4. Actor 1 to Actor 0: w (group: loop)\n5. Actor 0 to Actor 1: v\"><p class=\"vb-alt vd-sequence-summary\">d (5 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 498 364\" width=\"498\" height=\"364\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-frame\"><rect class=\"vd-sequence-frame-box\" x=\"12\" y=\"100\" width=\"474\" height=\"122\" rx=\"4\"/><text class=\"vd-sequence-frame-label\" x=\"20\" y=\"117\" text-anchor=\"start\">alt: cache</text></g><g class=\"vd-sequence-frame\"><rect class=\"vd-sequence-frame-box\" x=\"12\" y=\"226\" width=\"474\" height=\"78\" rx=\"4\"/><text class=\"vd-sequence-frame-label\" x=\"20\" y=\"243\" text-anchor=\"start\">loop</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V352\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V352\"/><rect class=\"vd-sequence-actor-box\" x=\"211\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V352\"/><rect class=\"vd-sequence-actor-box\" x=\"361\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">x</text><path class=\"vd-sequence-line\" d=\"M99 86 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,86 240,81 240,91\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"127\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"140\" text-anchor=\"middle\">y</text><path class=\"vd-sequence-line\" d=\"M249 156 H99\"/><polygon class=\"vd-sequence-head\" points=\"99,156 108,151 108,161\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"171\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"184\" text-anchor=\"middle\">z</text><path class=\"vd-sequence-line\" d=\"M99 200 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,200 240,195 240,205\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"3\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"253\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"266\" text-anchor=\"middle\">w</text><path class=\"vd-sequence-line\" d=\"M249 282 H99\"/><polygon class=\"vd-sequence-head\" points=\"99,282 108,277 108,287\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"4\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"309\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"322\" text-anchor=\"middle\">v</text><path class=\"vd-sequence-line\" d=\"M99 338 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,338 240,333 240,343\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 1: x</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 1 to Actor 0: y (group: alt: cache)</li><li class=\"vd-sequence-step\" data-step=\"2\">Actor 0 to Actor 1: z (group: alt: cache)</li><li class=\"vd-sequence-step\" data-step=\"3\">Actor 1 to Actor 0: w (group: loop)</li><li class=\"vd-sequence-step\" data-step=\"4\">Actor 0 to Actor 1: v</li></ol></div>"
+ },
+ {
+  "name": "unit-5",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "one",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "kind": "return",
+     "text": "two",
+     "to": "a0"
+    },
+    {
+     "from": "a0",
+     "group": "g",
+     "kind": "async",
+     "text": "three",
+     "to": "a1"
+    },
+    {
+     "from": "a0",
+     "kind": "note",
+     "text": "four",
+     "to": "a2"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "4 steps, 3 actors",
+   "drawing": {
+    "width": 498,
+    "height": 282,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-frame"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-frame-box",
+         "x": "12",
+         "y": "144",
+         "width": "474",
+         "height": "78",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-frame-label",
+         "x": "20",
+         "y": "161",
+         "text-anchor": "start"
+        },
+        "g"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V270"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V270"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "211",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V270"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "361",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "one"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 86 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,86 240,81 240,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "101",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "114",
+         "text-anchor": "middle"
+        },
+        "two"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M249 130 H99"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M108 125 L99 130 L108 135"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-async",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "171",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "184",
+         "text-anchor": "middle"
+        },
+        "three"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 200 H249"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M240 195 L249 200 L240 205"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-note",
+       "data-step": "3"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "227",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-note-box",
+         "x": "89",
+         "y": "230",
+         "width": "320",
+         "height": "36",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "249",
+         "y": "252",
+         "text-anchor": "middle"
+        },
+        "four"
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 1: one",
+    "Actor 1 to Actor 0 (return): two",
+    "Actor 0 to Actor 1 (async): three (group: g)",
+    "Note over Actor 0 to Actor 2: four"
+   ],
+   "copy": "1. Actor 0 to Actor 1: one\n2. Actor 1 to Actor 0 (return): two\n3. Actor 0 to Actor 1 (async): three (group: g)\n4. Note over Actor 0 to Actor 2: four"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 1: one\n2. Actor 1 to Actor 0 (return): two\n3. Actor 0 to Actor 1 (async): three (group: g)\n4. Note over Actor 0 to Actor 2: four\"><p class=\"vb-alt vd-sequence-summary\">d (4 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 498 282\" width=\"498\" height=\"282\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-frame\"><rect class=\"vd-sequence-frame-box\" x=\"12\" y=\"144\" width=\"474\" height=\"78\" rx=\"4\"/><text class=\"vd-sequence-frame-label\" x=\"20\" y=\"161\" text-anchor=\"start\">g</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V270\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V270\"/><rect class=\"vd-sequence-actor-box\" x=\"211\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V270\"/><rect class=\"vd-sequence-actor-box\" x=\"361\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">one</text><path class=\"vd-sequence-line\" d=\"M99 86 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,86 240,81 240,91\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"101\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"114\" text-anchor=\"middle\">two</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M249 130 H99\"/><path class=\"vd-sequence-head-open\" d=\"M108 125 L99 130 L108 135\"/></g><g class=\"vd-sequence-row vd-sequence-async\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"171\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"184\" text-anchor=\"middle\">three</text><path class=\"vd-sequence-line\" d=\"M99 200 H249\"/><path class=\"vd-sequence-head-open\" d=\"M240 195 L249 200 L240 205\"/></g><g class=\"vd-sequence-row vd-sequence-note\" data-step=\"3\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"227\" width=\"496\" height=\"42\"/><rect class=\"vd-sequence-note-box\" x=\"89\" y=\"230\" width=\"320\" height=\"36\" rx=\"4\"/><text class=\"vd-sequence-text\" x=\"249\" y=\"252\" text-anchor=\"middle\">four</text></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 1: one</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 1 to Actor 0 (return): two</li><li class=\"vd-sequence-step\" data-step=\"2\">Actor 0 to Actor 1 (async): three (group: g)</li><li class=\"vd-sequence-step\" data-step=\"3\">Note over Actor 0 to Actor 2: four</li></ol></div>"
+ },
+ {
+  "name": "unit-6",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "t",
+     "to": "a0"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "Sequence diagram",
+   "desc": "d",
+   "counts": "1 step, 1 actor",
+   "drawing": {
+    "width": 198,
+    "height": 112,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V100"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "196",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "143",
+         "y": "70",
+         "text-anchor": "start"
+        },
+        "t"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 68 H135 V82 H99"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "99,82 108,77 108,87"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 0: t"
+   ],
+   "copy": "1. Actor 0 to Actor 0: t"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 0: t\"><p class=\"vb-alt vd-sequence-summary\">d (1 step, 1 actor)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"Sequence diagram (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 198 112\" width=\"198\" height=\"112\" role=\"img\" aria-label=\"Sequence diagram\" focusable=\"false\"><title>Sequence diagram</title><desc>d</desc><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V100\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"196\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"143\" y=\"70\" text-anchor=\"start\">t</text><path class=\"vd-sequence-line\" d=\"M99 68 H135 V82 H99\"/><polygon class=\"vd-sequence-head\" points=\"99,82 108,77 108,87\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 0: t</li></ol></div>"
+ },
+ {
+  "name": "unit-7",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "Actor 0"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "d",
+   "steps": [
+    {
+     "from": "a0",
+     "text": "hello",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "text": "think",
+     "to": "a1"
+    },
+    {
+     "from": "a1",
+     "kind": "return",
+     "text": "back",
+     "to": "a0"
+    }
+   ],
+   "title": "T"
+  },
+  "props": {
+   "title": "T",
+   "name": "T",
+   "desc": "d",
+   "counts": "3 steps, 3 actors",
+   "drawing": {
+    "width": 498,
+    "height": 200,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M99 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "61",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "99",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 0"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M249 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "211",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "249",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M399 44 V188"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "361",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "399",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "57",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "70",
+         "text-anchor": "middle"
+        },
+        "hello"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M99 86 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,86 240,81 240,91"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "101",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "293",
+         "y": "114",
+         "text-anchor": "start"
+        },
+        "think"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M249 112 H285 V126 H249"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "249,126 258,121 258,131"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-return",
+       "data-step": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "145",
+         "width": "496",
+         "height": "42"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "174",
+         "y": "158",
+         "text-anchor": "middle"
+        },
+        "back"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line vd-sequence-dashed",
+         "d": "M249 174 H99"
+        },
+        null
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-head-open",
+         "d": "M108 169 L99 174 L108 179"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "Actor 0 to Actor 1: hello",
+    "Actor 1 to Actor 1: think",
+    "Actor 1 to Actor 0 (return): back"
+   ],
+   "copy": "1. Actor 0 to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to Actor 0 (return): back"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. Actor 0 to Actor 1: hello\n2. Actor 1 to Actor 1: think\n3. Actor 1 to Actor 0 (return): back\"><h4 class=\"vb-title vd-sequence-title\">T</h4><p class=\"vb-alt vd-sequence-summary\">d (3 steps, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"T (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 498 200\" width=\"498\" height=\"200\" role=\"img\" aria-label=\"T\" focusable=\"false\"><title>T</title><desc>d</desc><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M99 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"61\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"99\" y=\"18\" text-anchor=\"middle\">Actor 0</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M249 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"211\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"249\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M399 44 V188\"/><rect class=\"vd-sequence-actor-box\" x=\"361\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"399\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"57\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"70\" text-anchor=\"middle\">hello</text><path class=\"vd-sequence-line\" d=\"M99 86 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,86 240,81 240,91\"/></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"1\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"101\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"293\" y=\"114\" text-anchor=\"start\">think</text><path class=\"vd-sequence-line\" d=\"M249 112 H285 V126 H249\"/><polygon class=\"vd-sequence-head\" points=\"249,126 258,121 258,131\"/></g><g class=\"vd-sequence-row vd-sequence-return\" data-step=\"2\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"145\" width=\"496\" height=\"42\"/><text class=\"vd-sequence-text\" x=\"174\" y=\"158\" text-anchor=\"middle\">back</text><path class=\"vd-sequence-line vd-sequence-dashed\" d=\"M249 174 H99\"/><path class=\"vd-sequence-head-open\" d=\"M108 169 L99 174 L108 179\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">Actor 0 to Actor 1: hello</li><li class=\"vd-sequence-step\" data-step=\"1\">Actor 1 to Actor 1: think</li><li class=\"vd-sequence-step\" data-step=\"2\">Actor 1 to Actor 0 (return): back</li></ol></div>"
+ },
+ {
+  "name": "unit-8",
+  "input": {
+   "actors": [
+    {
+     "id": "a0",
+     "label": "<script>alert(1)</script><img src=x onerror=1>"
+    },
+    {
+     "id": "a1",
+     "label": "Actor 1"
+    },
+    {
+     "id": "a2",
+     "label": "Actor 2"
+    }
+   ],
+   "desc": "<script>alert(1)</script><img src=x onerror=1>",
+   "steps": [
+    {
+     "from": "a0",
+     "group": "<script>alert(1)</script><img src=x onerror=1>",
+     "text": "<script>alert(1)</script><img src=x onerror=1>",
+     "to": "a1"
+    }
+   ],
+   "title": "<script>alert(1)</script><img src=x onerror=1>"
+  },
+  "props": {
+   "title": "<script>alert(1)</script><img src=x onerror=1>",
+   "name": "<script>alert(1)</script><img src=x onerror=1>",
+   "desc": "<script>alert(1)</script><img src=x onerror=1>",
+   "counts": "1 step, 3 actors",
+   "drawing": {
+    "width": 552,
+    "height": 178,
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-sequence-frame"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-frame-box",
+         "x": "12",
+         "y": "56",
+         "width": "528",
+         "height": "110",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-frame-label",
+         "x": "20",
+         "y": "73",
+         "text-anchor": "start"
+        },
+        "<script>alert(1)</script><img src=x onerror=1>"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script><img src=x onerror=1>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M108 44 V166"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "34",
+         "y": "1",
+         "width": "148",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "<script>alert(1)"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "108",
+         "y": "34",
+         "text-anchor": "middle"
+        },
+        "</script><img…"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M276 44 V166"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "238",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "276",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-actor"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-sequence-life",
+         "d": "M444 44 V166"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-sequence-actor-box",
+         "x": "406",
+         "y": "1",
+         "width": "76",
+         "height": "42",
+         "rx": "4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-name",
+         "x": "444",
+         "y": "18",
+         "text-anchor": "middle"
+        },
+        "Actor 2"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-sequence-row vd-sequence-call",
+       "data-step": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-sequence-hit",
+         "x": "1",
+         "y": "83",
+         "width": "550",
+         "height": "74"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "96",
+         "text-anchor": "middle"
+        },
+        "<script>alert(1)</"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "112",
+         "text-anchor": "middle"
+        },
+        "script><img src=x"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-sequence-text",
+         "x": "192",
+         "y": "128",
+         "text-anchor": "middle"
+        },
+        "onerror=1>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-sequence-line",
+         "d": "M108 144 H276"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-sequence-head",
+         "points": "276,144 267,139 267,149"
+        },
+        null
+       ]
+      ]
+     ]
+    ]
+   },
+   "steps": [
+    "<script>alert(1)</script><img src=x onerror=1> to Actor 1: <script>alert(1)</script><img src=x onerror=1> (group: <script>alert(1)</script><img src=x onerror=1>)"
+   ],
+   "copy": "1. <script>alert(1)</script><img src=x onerror=1> to Actor 1: <script>alert(1)</script><img src=x onerror=1> (group: <script>alert(1)</script><img src=x onerror=1>)"
+  },
+  "html": "<div class=\"vb sequence vd-sequence\" data-copy=\"1. &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; to Actor 1: &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (group: &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;)\"><h4 class=\"vb-title vd-sequence-title\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</h4><p class=\"vb-alt vd-sequence-summary\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (1 step, 3 actors)</p><div class=\"vd-sequence-view\" role=\"region\" tabindex=\"0\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (scrollable)\"><svg class=\"vd-sequence-svg\" viewBox=\"0 0 552 178\" width=\"552\" height=\"178\" role=\"img\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;\" focusable=\"false\"><title>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</title><desc>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</desc><g class=\"vd-sequence-frame\"><rect class=\"vd-sequence-frame-box\" x=\"12\" y=\"56\" width=\"528\" height=\"110\" rx=\"4\"/><text class=\"vd-sequence-frame-label\" x=\"20\" y=\"73\" text-anchor=\"start\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</text></g><g class=\"vd-sequence-actor\"><title>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</title><path class=\"vd-sequence-life\" d=\"M108 44 V166\"/><rect class=\"vd-sequence-actor-box\" x=\"34\" y=\"1\" width=\"148\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"108\" y=\"18\" text-anchor=\"middle\">&lt;script&gt;alert(1)</text><text class=\"vd-sequence-name\" x=\"108\" y=\"34\" text-anchor=\"middle\">&lt;/script&gt;&lt;img…</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M276 44 V166\"/><rect class=\"vd-sequence-actor-box\" x=\"238\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"276\" y=\"18\" text-anchor=\"middle\">Actor 1</text></g><g class=\"vd-sequence-actor\"><path class=\"vd-sequence-life\" d=\"M444 44 V166\"/><rect class=\"vd-sequence-actor-box\" x=\"406\" y=\"1\" width=\"76\" height=\"42\" rx=\"4\"/><text class=\"vd-sequence-name\" x=\"444\" y=\"18\" text-anchor=\"middle\">Actor 2</text></g><g class=\"vd-sequence-row vd-sequence-call\" data-step=\"0\"><rect class=\"vd-sequence-hit\" x=\"1\" y=\"83\" width=\"550\" height=\"74\"/><text class=\"vd-sequence-text\" x=\"192\" y=\"96\" text-anchor=\"middle\">&lt;script&gt;alert(1)&lt;/</text><text class=\"vd-sequence-text\" x=\"192\" y=\"112\" text-anchor=\"middle\">script&gt;&lt;img src=x</text><text class=\"vd-sequence-text\" x=\"192\" y=\"128\" text-anchor=\"middle\">onerror=1&gt;</text><path class=\"vd-sequence-line\" d=\"M108 144 H276\"/><polygon class=\"vd-sequence-head\" points=\"276,144 267,139 267,149\"/></g></svg></div><ol class=\"vd-sequence-steps\" aria-label=\"Steps\"><li class=\"vd-sequence-step\" data-step=\"0\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; to Actor 1: &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (group: &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;)</li></ol></div>"
+ }
+]

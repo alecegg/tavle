@@ -1,0 +1,88 @@
+[
+ {
+  "name": "uncounted",
+  "input": {},
+  "markers": null,
+  "props": {
+   "text": "Change counts appear when the page is rendered.",
+   "copy": "Change counts appear when the page is rendered."
+  },
+  "html": "<aside class=\"vb change-summary vd-change-summary\" aria-label=\"Change summary\" data-copy=\"Change counts appear when the page is rendered.\"><p class=\"vd-change-summary-label\"><span class=\"vd-change-summary-glyph\" aria-hidden=\"true\">~</span> Changes</p><p class=\"vb-alt vd-change-summary-text\">Change counts appear when the page is rendered.</p></aside>"
+ },
+ {
+  "name": "empty",
+  "input": {},
+  "markers": [],
+  "props": {
+   "text": "No changes marked on this page.",
+   "copy": "No changes marked on this page."
+  },
+  "html": "<aside class=\"vb change-summary vd-change-summary\" aria-label=\"Change summary\" data-copy=\"No changes marked on this page.\"><p class=\"vd-change-summary-label\"><span class=\"vd-change-summary-glyph\" aria-hidden=\"true\">~</span> Changes</p><p class=\"vb-alt vd-change-summary-text\">No changes marked on this page.</p></aside>"
+ },
+ {
+  "name": "titled",
+  "input": {
+   "title": "What"
+  },
+  "markers": [
+   [
+    "file",
+    "added"
+   ]
+  ],
+  "props": {
+   "title": "What",
+   "text": "1 file added",
+   "copy": "What\n1 file added"
+  },
+  "html": "<aside class=\"vb change-summary vd-change-summary\" aria-label=\"Change summary\" data-copy=\"What\n1 file added\"><p class=\"vd-change-summary-label\"><span class=\"vd-change-summary-glyph\" aria-hidden=\"true\">~</span> Changes</p><p class=\"vd-change-summary-title\">What</p><p class=\"vb-alt vd-change-summary-text\">1 file added</p></aside>"
+ },
+ {
+  "name": "many",
+  "input": {
+   "title": "T"
+  },
+  "markers": [
+   [
+    "file",
+    "added"
+   ],
+   [
+    "file",
+    "added"
+   ],
+   [
+    "field",
+    "removed"
+   ],
+   [
+    "endpoint",
+    "modified"
+   ]
+  ],
+  "props": {
+   "title": "T",
+   "text": "2 files added, 1 endpoint changed, 1 field removed",
+   "copy": "T\n2 files added, 1 endpoint changed, 1 field removed"
+  },
+  "html": "<aside class=\"vb change-summary vd-change-summary\" aria-label=\"Change summary\" data-copy=\"T\n2 files added, 1 endpoint changed, 1 field removed\"><p class=\"vd-change-summary-label\"><span class=\"vd-change-summary-glyph\" aria-hidden=\"true\">~</span> Changes</p><p class=\"vd-change-summary-title\">T</p><p class=\"vb-alt vd-change-summary-text\">2 files added, 1 endpoint changed, 1 field removed</p></aside>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "title": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+  },
+  "markers": [
+   [
+    "entity",
+    "renamed"
+   ]
+  ],
+  "props": {
+   "title": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "text": "1 entity renamed",
+   "copy": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n1 entity renamed"
+  },
+  "html": "<aside class=\"vb change-summary vd-change-summary\" aria-label=\"Change summary\" data-copy=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\n1 entity renamed\"><p class=\"vd-change-summary-label\"><span class=\"vd-change-summary-glyph\" aria-hidden=\"true\">~</span> Changes</p><p class=\"vd-change-summary-title\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</p><p class=\"vb-alt vd-change-summary-text\">1 entity renamed</p></aside>"
+ }
+]

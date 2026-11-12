@@ -1,0 +1,130 @@
+[
+ {
+  "url": "https://x.test/a",
+  "kind": "link"
+ },
+ {
+  "url": "http://x.test",
+  "kind": "link"
+ },
+ {
+  "url": "#frag",
+  "kind": "link"
+ },
+ {
+  "url": "#a b",
+  "kind": "relative"
+ },
+ {
+  "url": "docs/x.md",
+  "kind": "relative"
+ },
+ {
+  "url": "../up",
+  "kind": "relative"
+ },
+ {
+  "url": "./x",
+  "kind": "relative"
+ },
+ {
+  "url": "javascript:alert(1)",
+  "kind": "text"
+ },
+ {
+  "url": "JavaScript:alert(1)",
+  "kind": "text"
+ },
+ {
+  "url": "//host/x",
+  "kind": "text"
+ },
+ {
+  "url": "\\\\x",
+  "kind": "text"
+ },
+ {
+  "url": "a\\b",
+  "kind": "text"
+ },
+ {
+  "url": "mailto:a@b",
+  "kind": "text"
+ },
+ {
+  "url": "&#106;avascript:x",
+  "kind": "text"
+ },
+ {
+  "url": "https://x.test/a b",
+  "kind": "text"
+ },
+ {
+  "url": "https://x.test/%41",
+  "kind": "link"
+ },
+ {
+  "url": "https://x.test/é",
+  "kind": "text"
+ },
+ {
+  "url": "docs/é",
+  "kind": "text"
+ },
+ {
+  "url": "",
+  "kind": "text"
+ },
+ {
+  "url": " ",
+  "kind": "text"
+ },
+ {
+  "url": "a:b",
+  "kind": "text"
+ },
+ {
+  "url": "a/b:c",
+  "kind": "relative"
+ },
+ {
+  "url": "?q=1",
+  "kind": "relative"
+ },
+ {
+  "url": "x\ty",
+  "kind": "relative"
+ },
+ {
+  "url": "https://",
+  "kind": "text"
+ },
+ {
+  "url": "&amp;x",
+  "kind": "relative"
+ },
+ {
+  "url": "&colon;x",
+  "kind": "text"
+ },
+ {
+  "url": "ja&#x76;ascript:y",
+  "kind": "text"
+ },
+ {
+  "url": "file:///etc/passwd",
+  "kind": "text"
+ },
+ {
+  "url": "ftp://x",
+  "kind": "text"
+ },
+ {
+  "url": "/abs/path",
+  "kind": "relative"
+ },
+ {
+  "url": "https://a.test/[x]",
+  "kind": "link"
+ }
+]

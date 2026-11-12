@@ -1,0 +1,218 @@
+[
+ {
+  "name": "rich-recipes-recap-numbers",
+  "props": {
+   "item": [
+    {
+     "label": "Stuck jobs",
+     "value": 3,
+     "delta": "-12",
+     "good": "down",
+     "direction": "down"
+    },
+    {
+     "label": "Retries per hour",
+     "value": 240
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"Stuck jobs: 3 (down 12)\nRetries per hour: 240\"><p class=\"vb-alt vd-stats-summary\">2 stats</p><div class=\"vd-stats-grid vd-stats-n2\"><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Stuck jobs: 3, down 12\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Stuck jobs</dt><dd class=\"vd-stats-value\">3</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">12</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"Retries per hour: 240\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Retries per hour</dt><dd class=\"vd-stats-value\">240</dd></dl></div></div></section>"
+ },
+ {
+  "name": "rich-stats-stress-h1",
+  "props": {
+   "item": [
+    {
+     "label": "<script>alert(1)</script> \"><img src=x onerror=1>",
+     "value": "<b>1</b>",
+     "delta": "+<i>9</i>%",
+     "direction": "up",
+     "good": "down",
+     "note": "<b>note</b> `<i>c</i>`"
+    },
+    {
+     "label": "שלום עולם, תווית ארוכה",
+     "value": "١٢٣٤٥ مرحبا بالعالم",
+     "delta": "-3%",
+     "good": "up"
+    },
+    {
+     "label": "Forty character value case",
+     "value": "1,234,567 requests per second sustained now",
+     "delta": "12,345,678 more than last week at peak",
+     "direction": "up",
+     "good": "up"
+    },
+    {
+     "label": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "value": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+     "delta": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+     "direction": "down",
+     "note": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "label": "bidi ‮evil‬ label word word word word word word word word word word word word word word word word word word ",
+     "value": "v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v ",
+     "delta": "word word word word word word word word word word word word word word word word word word ",
+     "direction": "flat",
+     "note": "word word word word word word word word word word word word word word word word word word "
+    },
+    {
+     "label": "Tone override",
+     "value": 0,
+     "decimals": 3,
+     "tone": "decision",
+     "delta": 0
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;: &lt;b&gt;1&lt;/b&gt; (up &lt;i&gt;9&lt;/i&gt;%)\nשלום עולם, תווית ארוכה: ١٢٣٤٥ مرحبا بالعالم (down 3%)\nForty character value case: 1,234,567 requests per second sustained now (up 12,345,678 more than last week at peak)\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy (down zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz)\nbidi ‮evil‬ label word word word word word word word word word word word word word word word word word word : v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v  (flat word word word word word word word word word word word word word word word word word word)\nTone override: 0.000 (flat 0.000)\"><p class=\"vb-alt vd-stats-summary\">6 stats</p><div class=\"vd-stats-grid vd-stats-n6\"><div class=\"vd-stats-card vd-stats-risk\" role=\"group\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;: &lt;b&gt;1&lt;/b&gt;, up &lt;i&gt;9&lt;/i&gt;%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;</dt><dd class=\"vd-stats-value\">&lt;b&gt;1&lt;/b&gt;</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">&lt;i&gt;9&lt;/i&gt;%</span></dd><dd class=\"vd-stats-note\">&lt;b&gt;note&lt;/b&gt; <code>&lt;i&gt;c&lt;/i&gt;</code></dd></dl></div><div class=\"vd-stats-card vd-stats-risk\" role=\"group\" aria-label=\"שלום עולם, תווית ארוכה: ١٢٣٤٥ مرحبا بالعالم, down 3%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">שלום עולם, תווית ארוכה</dt><dd class=\"vd-stats-value\">١٢٣٤٥ مرحبا بالعالم</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">3%</span></dd></dl></div><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Forty character value case: 1,234,567 requests per second sustained now, up 12,345,678 more than last week at peak\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Forty character value case</dt><dd class=\"vd-stats-value\">1,234,567 requests per second sustained now</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">12,345,678 more than last week at peak</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy, down zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</dt><dd class=\"vd-stats-value\">yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</span></dd><dd class=\"vd-stats-note\">nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"bidi ‮evil‬ label word word word word word word word word word word word word word word word word word word : v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v , flat word word word word word word word word word word word word word word word word word word\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">bidi ‮evil‬ label word word word word word word word word word word word word word word word word word word </dt><dd class=\"vd-stats-value\">v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v </dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▬</span> <span class=\"vd-stats-word\">flat</span></span> <span class=\"vd-stats-number\">word word word word word word word word word word word word word word word word word word</span></dd><dd class=\"vd-stats-note\">word word word word word word word word word word word word word word word word word word </dd></dl></div><div class=\"vd-stats-card vd-stats-decision\" role=\"group\" aria-label=\"Tone override: 0.000, flat 0.000\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Tone override</dt><dd class=\"vd-stats-value\">0.000</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▬</span> <span class=\"vd-stats-word\">flat</span></span> <span class=\"vd-stats-number\">0.000</span></dd></dl></div></div></section>"
+ },
+ {
+  "name": "rich-stats-stress-h2",
+  "props": {
+   "item": [
+    {
+     "label": "A",
+     "value": 1
+    },
+    {
+     "label": "B",
+     "value": "40 characters of value text here ok."
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"A: 1\nB: 40 characters of value text here ok.\"><p class=\"vb-alt vd-stats-summary\">2 stats</p><div class=\"vd-stats-grid vd-stats-n2\"><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"A: 1\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">A</dt><dd class=\"vd-stats-value\">1</dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"B: 40 characters of value text here ok.\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">B</dt><dd class=\"vd-stats-value\">40 characters of value text here ok.</dd></dl></div></div></section>"
+ },
+ {
+  "name": "rich-stats-s1",
+  "props": {
+   "item": [
+    {
+     "label": "Requests",
+     "value": 1204331,
+     "delta": "12%",
+     "direction": "up",
+     "good": "up"
+    },
+    {
+     "label": "p95 latency",
+     "value": "212 ms",
+     "delta": "-8%",
+     "good": "down",
+     "note": "Since the cache change."
+    },
+    {
+     "label": "Error rate",
+     "value": 0.4,
+     "decimals": 2,
+     "delta": "0.1 pt",
+     "direction": "up",
+     "good": "down"
+    },
+    {
+     "label": "Uptime",
+     "value": "99.98%",
+     "delta": "0%",
+     "direction": "flat"
+    },
+    {
+     "label": "Open incidents",
+     "value": 3
+    },
+    {
+     "label": "Queue depth",
+     "value": 18250,
+     "delta": -1200,
+     "good": "down",
+     "note": "Drained `retry` lane."
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"Requests: 1,204,331 (up 12%)\np95 latency: 212 ms (down 8%)\nError rate: 0.40 (up 0.1 pt)\nUptime: 99.98% (flat 0%)\nOpen incidents: 3\nQueue depth: 18,250 (down 1,200)\"><p class=\"vb-alt vd-stats-summary\">6 stats</p><div class=\"vd-stats-grid vd-stats-n6\"><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Requests: 1,204,331, up 12%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Requests</dt><dd class=\"vd-stats-value\">1,204,331</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">12%</span></dd></dl></div><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"p95 latency: 212 ms, down 8%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">p95 latency</dt><dd class=\"vd-stats-value\">212 ms</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">8%</span></dd><dd class=\"vd-stats-note\">Since the cache change.</dd></dl></div><div class=\"vd-stats-card vd-stats-risk\" role=\"group\" aria-label=\"Error rate: 0.40, up 0.1 pt\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Error rate</dt><dd class=\"vd-stats-value\">0.40</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">0.1 pt</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"Uptime: 99.98%, flat 0%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Uptime</dt><dd class=\"vd-stats-value\">99.98%</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▬</span> <span class=\"vd-stats-word\">flat</span></span> <span class=\"vd-stats-number\">0%</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"Open incidents: 3\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Open incidents</dt><dd class=\"vd-stats-value\">3</dd></dl></div><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Queue depth: 18,250, down 1,200\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Queue depth</dt><dd class=\"vd-stats-value\">18,250</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">1,200</span></dd><dd class=\"vd-stats-note\">Drained <code>retry</code> lane.</dd></dl></div></div></section>"
+ },
+ {
+  "name": "rich-stats-s2",
+  "props": {
+   "item": [
+    {
+     "label": "Passed",
+     "value": 412,
+     "delta": "5",
+     "direction": "up",
+     "good": "up"
+    },
+    {
+     "label": "Failed",
+     "value": 2,
+     "delta": "1",
+     "direction": "down",
+     "good": "down"
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"Passed: 412 (up 5)\nFailed: 2 (down 1)\"><p class=\"vb-alt vd-stats-summary\">2 stats</p><div class=\"vd-stats-grid vd-stats-n2\"><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Passed: 412, up 5\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Passed</dt><dd class=\"vd-stats-value\">412</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">5</span></dd></dl></div><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Failed: 2, down 1\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Failed</dt><dd class=\"vd-stats-value\">2</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">1</span></dd></dl></div></div></section>"
+ },
+ {
+  "name": "hand-numbers",
+  "props": {
+   "item": [
+    {
+     "label": "Big",
+     "value": 1234567.891,
+     "decimals": 1,
+     "delta": -1234.5,
+     "good": "up"
+    },
+    {
+     "label": "Int",
+     "value": 1000000,
+     "delta": 0
+    },
+    {
+     "label": "Float",
+     "value": 1234.5,
+     "delta": 2000.25,
+     "good": "down"
+    },
+    {
+     "label": "Neg",
+     "value": -9876543,
+     "delta": "+1,200",
+     "tone": "warning",
+     "note": "Use `x` <b>"
+    },
+    {
+     "label": "Str",
+     "value": "<&>",
+     "delta": "−5%",
+     "direction": "up",
+     "good": "up"
+    },
+    {
+     "label": "Dec0",
+     "value": 2.5,
+     "decimals": 1,
+     "delta": 0.5
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"Big: 1,234,567.9 (down 1,234.5)\nInt: 1,000,000 (flat 0)\nFloat: 1,234.5 (up 2,000.25)\nNeg: -9,876,543 (up 1,200)\nStr: &lt;&amp;&gt; (up 5%)\nDec0: 2.5 (up 0.5)\"><p class=\"vb-alt vd-stats-summary\">6 stats</p><div class=\"vd-stats-grid vd-stats-n6\"><div class=\"vd-stats-card vd-stats-risk\" role=\"group\" aria-label=\"Big: 1,234,567.9, down 1,234.5\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Big</dt><dd class=\"vd-stats-value\">1,234,567.9</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▼</span> <span class=\"vd-stats-word\">down</span></span> <span class=\"vd-stats-number\">1,234.5</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"Int: 1,000,000, flat 0\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Int</dt><dd class=\"vd-stats-value\">1,000,000</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▬</span> <span class=\"vd-stats-word\">flat</span></span> <span class=\"vd-stats-number\">0</span></dd></dl></div><div class=\"vd-stats-card vd-stats-risk\" role=\"group\" aria-label=\"Float: 1,234.5, up 2,000.25\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Float</dt><dd class=\"vd-stats-value\">1,234.5</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">2,000.25</span></dd></dl></div><div class=\"vd-stats-card vd-stats-warning\" role=\"group\" aria-label=\"Neg: -9,876,543, up 1,200\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Neg</dt><dd class=\"vd-stats-value\">-9,876,543</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">1,200</span></dd><dd class=\"vd-stats-note\">Use <code>x</code> &lt;b&gt;</dd></dl></div><div class=\"vd-stats-card vd-stats-success\" role=\"group\" aria-label=\"Str: &lt;&amp;&gt;, up 5%\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Str</dt><dd class=\"vd-stats-value\">&lt;&amp;&gt;</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">5%</span></dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"Dec0: 2.5, up 0.5\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">Dec0</dt><dd class=\"vd-stats-value\">2.5</dd><dd class=\"vd-stats-delta\"><span class=\"vd-stats-mark\"><span class=\"vd-stats-glyph\" aria-hidden=\"true\">▲</span> <span class=\"vd-stats-word\">up</span></span> <span class=\"vd-stats-number\">0.5</span></dd></dl></div></div></section>"
+ },
+ {
+  "name": "hand-single",
+  "props": {
+   "item": [
+    {
+     "label": "A",
+     "value": 1
+    },
+    {
+     "label": "B",
+     "value": "x"
+    }
+   ]
+  },
+  "html": "<section class=\"vb stats vd-stats\" aria-label=\"Stats\" data-copy=\"A: 1\nB: x\"><p class=\"vb-alt vd-stats-summary\">2 stats</p><div class=\"vd-stats-grid vd-stats-n2\"><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"A: 1\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">A</dt><dd class=\"vd-stats-value\">1</dd></dl></div><div class=\"vd-stats-card vd-stats-neutral\" role=\"group\" aria-label=\"B: x\"><dl class=\"vd-stats-body\"><dt class=\"vd-stats-label\">B</dt><dd class=\"vd-stats-value\">x</dd></dl></div></div></section>"
+ }
+]

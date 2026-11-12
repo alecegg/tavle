@@ -1,0 +1,1946 @@
+[
+ {
+  "name": "rich-matrix-stress-h1",
+  "props": {
+   "title": "Title <img src=x onerror=1> word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word ",
+   "options": [
+    {
+     "id": "x",
+     "label": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "note": "<b>note</b> word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word "
+    },
+    {
+     "id": "y",
+     "label": "<script>alert(1)</script> \"><img src=x onerror=1>"
+    },
+    {
+     "id": "z",
+     "label": "שלום עולם"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "p",
+     "label": "<script>alert(1)</script> \"><img src=x onerror=1> word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word ",
+     "weight": 5
+    },
+    {
+     "id": "q",
+     "label": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+     "weight": 1
+    },
+    {
+     "id": "r",
+     "label": "مرحبا بالعالم"
+    }
+   ],
+   "cells": [
+    [
+     "yes",
+     "<script>alert(1)</script> \"><img src=x onerror=1>",
+     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word "
+    ],
+    [
+     "no",
+     "partial",
+     ""
+    ],
+    [
+     "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+     "yes",
+     "yes"
+    ]
+   ],
+   "recommended": "y"
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx | &lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; (recommended) | שלום עולם |\n| --- | --- | --- | --- |\n| &lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word (weight 5) | yes | &lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; | word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word |\n| yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy (weight 1) | no | partial | Not rated |\n| مرحبا بالعالم | zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz | yes | yes |\n| Weighted total | 10 of 14 | 3 of 14 | 2 of 14 |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Title &lt;img src=x onerror=1&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word </h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Title &lt;img src=x onerror=1&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word \"><table class=\"vb-table vb-table-stack\" aria-label=\"Title &lt;img src=x onerror=1&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word  (4 rows, 4 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</th><th scope=\"col\" class=\"vd-matrix-rec\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;, Recommended\">&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;</th><th scope=\"col\">שלום עולם</th></tr></thead><tbody><tr><td data-label=\"Criterion\">&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word  (weight 5)</td><td data-label=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td class=\"vd-matrix-rec\" data-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; (recommended)\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;</span></td><td data-label=\"שלום עולם\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word</span></td></tr><tr><td data-label=\"Criterion\">yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy (weight 1)</td><td data-label=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td class=\"vd-matrix-rec\" data-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; (recommended)\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"שלום עולם\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>Not rated</span></td></tr><tr><td data-label=\"Criterion\">مرحبا بالعالم</td><td data-label=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</span></td><td class=\"vd-matrix-rec\" data-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; (recommended)\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"שלום עולם\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td></tr><tr><td data-label=\"Criterion\">Weighted total</td><td data-label=\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>10 of 14</span></td><td class=\"vd-matrix-rec\" data-label=\"&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; (recommended)\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>3 of 14</span></td><td data-label=\"שלום עולם\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>2 of 14</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">3 options compared on 3 criteria. Recommended: &lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;. Weighted total: yes or high scores 2, partial or medium 1, no or low 0, times the weight.</p></section><div class=\"vd-matrix-notes\" role=\"region\" tabindex=\"0\" aria-label=\"Option notes\"><ul><li><strong>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</strong>: &lt;b&gt;note&lt;/b&gt; word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word </li></ul></div></div>"
+ },
+ {
+  "name": "rich-matrix-stress-w1",
+  "props": {
+   "title": "Twelve options",
+   "options": [
+    {
+     "id": "o0",
+     "label": "Option number 0",
+     "note": "note 0"
+    },
+    {
+     "id": "o1",
+     "label": "Option number 1",
+     "note": "note 1"
+    },
+    {
+     "id": "o2",
+     "label": "Option number 2",
+     "note": "note 2"
+    },
+    {
+     "id": "o3",
+     "label": "Option number 3",
+     "note": "note 3"
+    },
+    {
+     "id": "o4",
+     "label": "Option number 4",
+     "note": "note 4"
+    },
+    {
+     "id": "o5",
+     "label": "Option number 5",
+     "note": "note 5"
+    },
+    {
+     "id": "o6",
+     "label": "Option number 6",
+     "note": "note 6"
+    },
+    {
+     "id": "o7",
+     "label": "Option number 7",
+     "note": "note 7"
+    },
+    {
+     "id": "o8",
+     "label": "Option number 8",
+     "note": "note 8"
+    },
+    {
+     "id": "o9",
+     "label": "Option number 9",
+     "note": "note 9"
+    },
+    {
+     "id": "o10",
+     "label": "Option number 10",
+     "note": "note 10"
+    },
+    {
+     "id": "o11",
+     "label": "Option number 11",
+     "note": "note 11"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "a",
+     "label": "Cost",
+     "weight": 4
+    },
+    {
+     "id": "b",
+     "label": "Speed"
+    }
+   ],
+   "cells": [
+    [
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     ""
+    ],
+    [
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     "partial",
+     "yes",
+     "no",
+     ""
+    ]
+   ],
+   "recommended": "o7"
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | Option number 0 | Option number 1 | Option number 2 | Option number 3 | Option number 4 | Option number 5 | Option number 6 | Option number 7 (recommended) | Option number 8 | Option number 9 | Option number 10 | Option number 11 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| Cost (weight 4) | yes | no | partial | yes | no | partial | yes | no | partial | yes | no | Not rated |\n| Speed | yes | no | partial | yes | no | partial | yes | no | partial | yes | no | Not rated |\n| Weighted total | 10 of 10 | 0 of 10 | 5 of 10 | 10 of 10 | 0 of 10 | 5 of 10 | 10 of 10 | 0 of 10 | 5 of 10 | 10 of 10 | 0 of 10 | 0 of 10 |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Twelve options</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Twelve options\"><table class=\"vb-table vb-table-stack\" aria-label=\"Twelve options (3 rows, 13 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\">Option number 0</th><th scope=\"col\">Option number 1</th><th scope=\"col\">Option number 2</th><th scope=\"col\">Option number 3</th><th scope=\"col\">Option number 4</th><th scope=\"col\">Option number 5</th><th scope=\"col\">Option number 6</th><th scope=\"col\" class=\"vd-matrix-rec\" aria-label=\"Option number 7, Recommended\">Option number 7</th><th scope=\"col\">Option number 8</th><th scope=\"col\">Option number 9</th><th scope=\"col\">Option number 10</th><th scope=\"col\">Option number 11</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Cost (weight 4)</td><td data-label=\"Option number 0\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 1\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 2\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 3\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 4\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 5\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 6\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td class=\"vd-matrix-rec\" data-label=\"Option number 7 (recommended)\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 8\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 9\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 10\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 11\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>Not rated</span></td></tr><tr><td data-label=\"Criterion\">Speed</td><td data-label=\"Option number 0\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 1\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 2\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 3\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 4\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 5\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 6\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td class=\"vd-matrix-rec\" data-label=\"Option number 7 (recommended)\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 8\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Option number 9\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Option number 10\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Option number 11\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>Not rated</span></td></tr><tr><td data-label=\"Criterion\">Weighted total</td><td data-label=\"Option number 0\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>10 of 10</span></td><td data-label=\"Option number 1\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>0 of 10</span></td><td data-label=\"Option number 2\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>5 of 10</span></td><td data-label=\"Option number 3\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>10 of 10</span></td><td data-label=\"Option number 4\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>0 of 10</span></td><td data-label=\"Option number 5\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>5 of 10</span></td><td data-label=\"Option number 6\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>10 of 10</span></td><td class=\"vd-matrix-rec\" data-label=\"Option number 7 (recommended)\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>0 of 10</span></td><td data-label=\"Option number 8\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>5 of 10</span></td><td data-label=\"Option number 9\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>10 of 10</span></td><td data-label=\"Option number 10\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>0 of 10</span></td><td data-label=\"Option number 11\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>0 of 10</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">12 options compared on 2 criteria. Recommended: Option number 7. Weighted total: yes or high scores 2, partial or medium 1, no or low 0, times the weight.</p></section><div class=\"vd-matrix-notes\" role=\"region\" tabindex=\"0\" aria-label=\"Option notes\"><ul><li><strong>Option number 0</strong>: note 0</li><li><strong>Option number 1</strong>: note 1</li><li><strong>Option number 2</strong>: note 2</li><li><strong>Option number 3</strong>: note 3</li><li><strong>Option number 4</strong>: note 4</li><li><strong>Option number 5</strong>: note 5</li><li><strong>Option number 6</strong>: note 6</li><li><strong>Option number 7</strong>: note 7</li><li><strong>Option number 8</strong>: note 8</li><li><strong>Option number 9</strong>: note 9</li><li><strong>Option number 10</strong>: note 10</li><li><strong>Option number 11</strong>: note 11</li></ul></div></div>"
+ },
+ {
+  "name": "rich-matrix-stress-b1",
+  "props": {
+   "title": "Two hundred criteria",
+   "options": [
+    {
+     "id": "a",
+     "label": "Left"
+    },
+    {
+     "id": "b",
+     "label": "Right"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "c0",
+     "label": "Criterion 0"
+    },
+    {
+     "id": "c1",
+     "label": "Criterion 1"
+    },
+    {
+     "id": "c2",
+     "label": "Criterion 2"
+    },
+    {
+     "id": "c3",
+     "label": "Criterion 3"
+    },
+    {
+     "id": "c4",
+     "label": "Criterion 4"
+    },
+    {
+     "id": "c5",
+     "label": "Criterion 5"
+    },
+    {
+     "id": "c6",
+     "label": "Criterion 6"
+    },
+    {
+     "id": "c7",
+     "label": "Criterion 7"
+    },
+    {
+     "id": "c8",
+     "label": "Criterion 8"
+    },
+    {
+     "id": "c9",
+     "label": "Criterion 9"
+    },
+    {
+     "id": "c10",
+     "label": "Criterion 10"
+    },
+    {
+     "id": "c11",
+     "label": "Criterion 11"
+    },
+    {
+     "id": "c12",
+     "label": "Criterion 12"
+    },
+    {
+     "id": "c13",
+     "label": "Criterion 13"
+    },
+    {
+     "id": "c14",
+     "label": "Criterion 14"
+    },
+    {
+     "id": "c15",
+     "label": "Criterion 15"
+    },
+    {
+     "id": "c16",
+     "label": "Criterion 16"
+    },
+    {
+     "id": "c17",
+     "label": "Criterion 17"
+    },
+    {
+     "id": "c18",
+     "label": "Criterion 18"
+    },
+    {
+     "id": "c19",
+     "label": "Criterion 19"
+    },
+    {
+     "id": "c20",
+     "label": "Criterion 20"
+    },
+    {
+     "id": "c21",
+     "label": "Criterion 21"
+    },
+    {
+     "id": "c22",
+     "label": "Criterion 22"
+    },
+    {
+     "id": "c23",
+     "label": "Criterion 23"
+    },
+    {
+     "id": "c24",
+     "label": "Criterion 24"
+    },
+    {
+     "id": "c25",
+     "label": "Criterion 25"
+    },
+    {
+     "id": "c26",
+     "label": "Criterion 26"
+    },
+    {
+     "id": "c27",
+     "label": "Criterion 27"
+    },
+    {
+     "id": "c28",
+     "label": "Criterion 28"
+    },
+    {
+     "id": "c29",
+     "label": "Criterion 29"
+    },
+    {
+     "id": "c30",
+     "label": "Criterion 30"
+    },
+    {
+     "id": "c31",
+     "label": "Criterion 31"
+    },
+    {
+     "id": "c32",
+     "label": "Criterion 32"
+    },
+    {
+     "id": "c33",
+     "label": "Criterion 33"
+    },
+    {
+     "id": "c34",
+     "label": "Criterion 34"
+    },
+    {
+     "id": "c35",
+     "label": "Criterion 35"
+    },
+    {
+     "id": "c36",
+     "label": "Criterion 36"
+    },
+    {
+     "id": "c37",
+     "label": "Criterion 37"
+    },
+    {
+     "id": "c38",
+     "label": "Criterion 38"
+    },
+    {
+     "id": "c39",
+     "label": "Criterion 39"
+    },
+    {
+     "id": "c40",
+     "label": "Criterion 40"
+    },
+    {
+     "id": "c41",
+     "label": "Criterion 41"
+    },
+    {
+     "id": "c42",
+     "label": "Criterion 42"
+    },
+    {
+     "id": "c43",
+     "label": "Criterion 43"
+    },
+    {
+     "id": "c44",
+     "label": "Criterion 44"
+    },
+    {
+     "id": "c45",
+     "label": "Criterion 45"
+    },
+    {
+     "id": "c46",
+     "label": "Criterion 46"
+    },
+    {
+     "id": "c47",
+     "label": "Criterion 47"
+    },
+    {
+     "id": "c48",
+     "label": "Criterion 48"
+    },
+    {
+     "id": "c49",
+     "label": "Criterion 49"
+    },
+    {
+     "id": "c50",
+     "label": "Criterion 50"
+    },
+    {
+     "id": "c51",
+     "label": "Criterion 51"
+    },
+    {
+     "id": "c52",
+     "label": "Criterion 52"
+    },
+    {
+     "id": "c53",
+     "label": "Criterion 53"
+    },
+    {
+     "id": "c54",
+     "label": "Criterion 54"
+    },
+    {
+     "id": "c55",
+     "label": "Criterion 55"
+    },
+    {
+     "id": "c56",
+     "label": "Criterion 56"
+    },
+    {
+     "id": "c57",
+     "label": "Criterion 57"
+    },
+    {
+     "id": "c58",
+     "label": "Criterion 58"
+    },
+    {
+     "id": "c59",
+     "label": "Criterion 59"
+    },
+    {
+     "id": "c60",
+     "label": "Criterion 60"
+    },
+    {
+     "id": "c61",
+     "label": "Criterion 61"
+    },
+    {
+     "id": "c62",
+     "label": "Criterion 62"
+    },
+    {
+     "id": "c63",
+     "label": "Criterion 63"
+    },
+    {
+     "id": "c64",
+     "label": "Criterion 64"
+    },
+    {
+     "id": "c65",
+     "label": "Criterion 65"
+    },
+    {
+     "id": "c66",
+     "label": "Criterion 66"
+    },
+    {
+     "id": "c67",
+     "label": "Criterion 67"
+    },
+    {
+     "id": "c68",
+     "label": "Criterion 68"
+    },
+    {
+     "id": "c69",
+     "label": "Criterion 69"
+    },
+    {
+     "id": "c70",
+     "label": "Criterion 70"
+    },
+    {
+     "id": "c71",
+     "label": "Criterion 71"
+    },
+    {
+     "id": "c72",
+     "label": "Criterion 72"
+    },
+    {
+     "id": "c73",
+     "label": "Criterion 73"
+    },
+    {
+     "id": "c74",
+     "label": "Criterion 74"
+    },
+    {
+     "id": "c75",
+     "label": "Criterion 75"
+    },
+    {
+     "id": "c76",
+     "label": "Criterion 76"
+    },
+    {
+     "id": "c77",
+     "label": "Criterion 77"
+    },
+    {
+     "id": "c78",
+     "label": "Criterion 78"
+    },
+    {
+     "id": "c79",
+     "label": "Criterion 79"
+    },
+    {
+     "id": "c80",
+     "label": "Criterion 80"
+    },
+    {
+     "id": "c81",
+     "label": "Criterion 81"
+    },
+    {
+     "id": "c82",
+     "label": "Criterion 82"
+    },
+    {
+     "id": "c83",
+     "label": "Criterion 83"
+    },
+    {
+     "id": "c84",
+     "label": "Criterion 84"
+    },
+    {
+     "id": "c85",
+     "label": "Criterion 85"
+    },
+    {
+     "id": "c86",
+     "label": "Criterion 86"
+    },
+    {
+     "id": "c87",
+     "label": "Criterion 87"
+    },
+    {
+     "id": "c88",
+     "label": "Criterion 88"
+    },
+    {
+     "id": "c89",
+     "label": "Criterion 89"
+    },
+    {
+     "id": "c90",
+     "label": "Criterion 90"
+    },
+    {
+     "id": "c91",
+     "label": "Criterion 91"
+    },
+    {
+     "id": "c92",
+     "label": "Criterion 92"
+    },
+    {
+     "id": "c93",
+     "label": "Criterion 93"
+    },
+    {
+     "id": "c94",
+     "label": "Criterion 94"
+    },
+    {
+     "id": "c95",
+     "label": "Criterion 95"
+    },
+    {
+     "id": "c96",
+     "label": "Criterion 96"
+    },
+    {
+     "id": "c97",
+     "label": "Criterion 97"
+    },
+    {
+     "id": "c98",
+     "label": "Criterion 98"
+    },
+    {
+     "id": "c99",
+     "label": "Criterion 99"
+    },
+    {
+     "id": "c100",
+     "label": "Criterion 100"
+    },
+    {
+     "id": "c101",
+     "label": "Criterion 101"
+    },
+    {
+     "id": "c102",
+     "label": "Criterion 102"
+    },
+    {
+     "id": "c103",
+     "label": "Criterion 103"
+    },
+    {
+     "id": "c104",
+     "label": "Criterion 104"
+    },
+    {
+     "id": "c105",
+     "label": "Criterion 105"
+    },
+    {
+     "id": "c106",
+     "label": "Criterion 106"
+    },
+    {
+     "id": "c107",
+     "label": "Criterion 107"
+    },
+    {
+     "id": "c108",
+     "label": "Criterion 108"
+    },
+    {
+     "id": "c109",
+     "label": "Criterion 109"
+    },
+    {
+     "id": "c110",
+     "label": "Criterion 110"
+    },
+    {
+     "id": "c111",
+     "label": "Criterion 111"
+    },
+    {
+     "id": "c112",
+     "label": "Criterion 112"
+    },
+    {
+     "id": "c113",
+     "label": "Criterion 113"
+    },
+    {
+     "id": "c114",
+     "label": "Criterion 114"
+    },
+    {
+     "id": "c115",
+     "label": "Criterion 115"
+    },
+    {
+     "id": "c116",
+     "label": "Criterion 116"
+    },
+    {
+     "id": "c117",
+     "label": "Criterion 117"
+    },
+    {
+     "id": "c118",
+     "label": "Criterion 118"
+    },
+    {
+     "id": "c119",
+     "label": "Criterion 119"
+    },
+    {
+     "id": "c120",
+     "label": "Criterion 120"
+    },
+    {
+     "id": "c121",
+     "label": "Criterion 121"
+    },
+    {
+     "id": "c122",
+     "label": "Criterion 122"
+    },
+    {
+     "id": "c123",
+     "label": "Criterion 123"
+    },
+    {
+     "id": "c124",
+     "label": "Criterion 124"
+    },
+    {
+     "id": "c125",
+     "label": "Criterion 125"
+    },
+    {
+     "id": "c126",
+     "label": "Criterion 126"
+    },
+    {
+     "id": "c127",
+     "label": "Criterion 127"
+    },
+    {
+     "id": "c128",
+     "label": "Criterion 128"
+    },
+    {
+     "id": "c129",
+     "label": "Criterion 129"
+    },
+    {
+     "id": "c130",
+     "label": "Criterion 130"
+    },
+    {
+     "id": "c131",
+     "label": "Criterion 131"
+    },
+    {
+     "id": "c132",
+     "label": "Criterion 132"
+    },
+    {
+     "id": "c133",
+     "label": "Criterion 133"
+    },
+    {
+     "id": "c134",
+     "label": "Criterion 134"
+    },
+    {
+     "id": "c135",
+     "label": "Criterion 135"
+    },
+    {
+     "id": "c136",
+     "label": "Criterion 136"
+    },
+    {
+     "id": "c137",
+     "label": "Criterion 137"
+    },
+    {
+     "id": "c138",
+     "label": "Criterion 138"
+    },
+    {
+     "id": "c139",
+     "label": "Criterion 139"
+    },
+    {
+     "id": "c140",
+     "label": "Criterion 140"
+    },
+    {
+     "id": "c141",
+     "label": "Criterion 141"
+    },
+    {
+     "id": "c142",
+     "label": "Criterion 142"
+    },
+    {
+     "id": "c143",
+     "label": "Criterion 143"
+    },
+    {
+     "id": "c144",
+     "label": "Criterion 144"
+    },
+    {
+     "id": "c145",
+     "label": "Criterion 145"
+    },
+    {
+     "id": "c146",
+     "label": "Criterion 146"
+    },
+    {
+     "id": "c147",
+     "label": "Criterion 147"
+    },
+    {
+     "id": "c148",
+     "label": "Criterion 148"
+    },
+    {
+     "id": "c149",
+     "label": "Criterion 149"
+    },
+    {
+     "id": "c150",
+     "label": "Criterion 150"
+    },
+    {
+     "id": "c151",
+     "label": "Criterion 151"
+    },
+    {
+     "id": "c152",
+     "label": "Criterion 152"
+    },
+    {
+     "id": "c153",
+     "label": "Criterion 153"
+    },
+    {
+     "id": "c154",
+     "label": "Criterion 154"
+    },
+    {
+     "id": "c155",
+     "label": "Criterion 155"
+    },
+    {
+     "id": "c156",
+     "label": "Criterion 156"
+    },
+    {
+     "id": "c157",
+     "label": "Criterion 157"
+    },
+    {
+     "id": "c158",
+     "label": "Criterion 158"
+    },
+    {
+     "id": "c159",
+     "label": "Criterion 159"
+    },
+    {
+     "id": "c160",
+     "label": "Criterion 160"
+    },
+    {
+     "id": "c161",
+     "label": "Criterion 161"
+    },
+    {
+     "id": "c162",
+     "label": "Criterion 162"
+    },
+    {
+     "id": "c163",
+     "label": "Criterion 163"
+    },
+    {
+     "id": "c164",
+     "label": "Criterion 164"
+    },
+    {
+     "id": "c165",
+     "label": "Criterion 165"
+    },
+    {
+     "id": "c166",
+     "label": "Criterion 166"
+    },
+    {
+     "id": "c167",
+     "label": "Criterion 167"
+    },
+    {
+     "id": "c168",
+     "label": "Criterion 168"
+    },
+    {
+     "id": "c169",
+     "label": "Criterion 169"
+    },
+    {
+     "id": "c170",
+     "label": "Criterion 170"
+    },
+    {
+     "id": "c171",
+     "label": "Criterion 171"
+    },
+    {
+     "id": "c172",
+     "label": "Criterion 172"
+    },
+    {
+     "id": "c173",
+     "label": "Criterion 173"
+    },
+    {
+     "id": "c174",
+     "label": "Criterion 174"
+    },
+    {
+     "id": "c175",
+     "label": "Criterion 175"
+    },
+    {
+     "id": "c176",
+     "label": "Criterion 176"
+    },
+    {
+     "id": "c177",
+     "label": "Criterion 177"
+    },
+    {
+     "id": "c178",
+     "label": "Criterion 178"
+    },
+    {
+     "id": "c179",
+     "label": "Criterion 179"
+    },
+    {
+     "id": "c180",
+     "label": "Criterion 180"
+    },
+    {
+     "id": "c181",
+     "label": "Criterion 181"
+    },
+    {
+     "id": "c182",
+     "label": "Criterion 182"
+    },
+    {
+     "id": "c183",
+     "label": "Criterion 183"
+    },
+    {
+     "id": "c184",
+     "label": "Criterion 184"
+    },
+    {
+     "id": "c185",
+     "label": "Criterion 185"
+    },
+    {
+     "id": "c186",
+     "label": "Criterion 186"
+    },
+    {
+     "id": "c187",
+     "label": "Criterion 187"
+    },
+    {
+     "id": "c188",
+     "label": "Criterion 188"
+    },
+    {
+     "id": "c189",
+     "label": "Criterion 189"
+    },
+    {
+     "id": "c190",
+     "label": "Criterion 190"
+    },
+    {
+     "id": "c191",
+     "label": "Criterion 191"
+    },
+    {
+     "id": "c192",
+     "label": "Criterion 192"
+    },
+    {
+     "id": "c193",
+     "label": "Criterion 193"
+    },
+    {
+     "id": "c194",
+     "label": "Criterion 194"
+    },
+    {
+     "id": "c195",
+     "label": "Criterion 195"
+    },
+    {
+     "id": "c196",
+     "label": "Criterion 196"
+    },
+    {
+     "id": "c197",
+     "label": "Criterion 197"
+    },
+    {
+     "id": "c198",
+     "label": "Criterion 198"
+    },
+    {
+     "id": "c199",
+     "label": "Criterion 199"
+    }
+   ],
+   "cells": [
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ],
+    [
+     "high",
+     "low"
+    ]
+   ]
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | Left | Right |\n| --- | --- | --- |\n| Criterion 0 | high | low |\n| Criterion 1 | high | low |\n| Criterion 2 | high | low |\n| Criterion 3 | high | low |\n| Criterion 4 | high | low |\n| Criterion 5 | high | low |\n| Criterion 6 | high | low |\n| Criterion 7 | high | low |\n| Criterion 8 | high | low |\n| Criterion 9 | high | low |\n| Criterion 10 | high | low |\n| Criterion 11 | high | low |\n| Criterion 12 | high | low |\n| Criterion 13 | high | low |\n| Criterion 14 | high | low |\n| Criterion 15 | high | low |\n| Criterion 16 | high | low |\n| Criterion 17 | high | low |\n| Criterion 18 | high | low |\n| Criterion 19 | high | low |\n| Criterion 20 | high | low |\n| Criterion 21 | high | low |\n| Criterion 22 | high | low |\n| Criterion 23 | high | low |\n| Criterion 24 | high | low |\n| Criterion 25 | high | low |\n| Criterion 26 | high | low |\n| Criterion 27 | high | low |\n| Criterion 28 | high | low |\n| Criterion 29 | high | low |\n| Criterion 30 | high | low |\n| Criterion 31 | high | low |\n| Criterion 32 | high | low |\n| Criterion 33 | high | low |\n| Criterion 34 | high | low |\n| Criterion 35 | high | low |\n| Criterion 36 | high | low |\n| Criterion 37 | high | low |\n| Criterion 38 | high | low |\n| Criterion 39 | high | low |\n| Criterion 40 | high | low |\n| Criterion 41 | high | low |\n| Criterion 42 | high | low |\n| Criterion 43 | high | low |\n| Criterion 44 | high | low |\n| Criterion 45 | high | low |\n| Criterion 46 | high | low |\n| Criterion 47 | high | low |\n| Criterion 48 | high | low |\n| Criterion 49 | high | low |\n| Criterion 50 | high | low |\n| Criterion 51 | high | low |\n| Criterion 52 | high | low |\n| Criterion 53 | high | low |\n| Criterion 54 | high | low |\n| Criterion 55 | high | low |\n| Criterion 56 | high | low |\n| Criterion 57 | high | low |\n| Criterion 58 | high | low |\n| Criterion 59 | high | low |\n| Criterion 60 | high | low |\n| Criterion 61 | high | low |\n| Criterion 62 | high | low |\n| Criterion 63 | high | low |\n| Criterion 64 | high | low |\n| Criterion 65 | high | low |\n| Criterion 66 | high | low |\n| Criterion 67 | high | low |\n| Criterion 68 | high | low |\n| Criterion 69 | high | low |\n| Criterion 70 | high | low |\n| Criterion 71 | high | low |\n| Criterion 72 | high | low |\n| Criterion 73 | high | low |\n| Criterion 74 | high | low |\n| Criterion 75 | high | low |\n| Criterion 76 | high | low |\n| Criterion 77 | high | low |\n| Criterion 78 | high | low |\n| Criterion 79 | high | low |\n| Criterion 80 | high | low |\n| Criterion 81 | high | low |\n| Criterion 82 | high | low |\n| Criterion 83 | high | low |\n| Criterion 84 | high | low |\n| Criterion 85 | high | low |\n| Criterion 86 | high | low |\n| Criterion 87 | high | low |\n| Criterion 88 | high | low |\n| Criterion 89 | high | low |\n| Criterion 90 | high | low |\n| Criterion 91 | high | low |\n| Criterion 92 | high | low |\n| Criterion 93 | high | low |\n| Criterion 94 | high | low |\n| Criterion 95 | high | low |\n| Criterion 96 | high | low |\n| Criterion 97 | high | low |\n| Criterion 98 | high | low |\n| Criterion 99 | high | low |\n| Criterion 100 | high | low |\n| Criterion 101 | high | low |\n| Criterion 102 | high | low |\n| Criterion 103 | high | low |\n| Criterion 104 | high | low |\n| Criterion 105 | high | low |\n| Criterion 106 | high | low |\n| Criterion 107 | high | low |\n| Criterion 108 | high | low |\n| Criterion 109 | high | low |\n| Criterion 110 | high | low |\n| Criterion 111 | high | low |\n| Criterion 112 | high | low |\n| Criterion 113 | high | low |\n| Criterion 114 | high | low |\n| Criterion 115 | high | low |\n| Criterion 116 | high | low |\n| Criterion 117 | high | low |\n| Criterion 118 | high | low |\n| Criterion 119 | high | low |\n| Criterion 120 | high | low |\n| Criterion 121 | high | low |\n| Criterion 122 | high | low |\n| Criterion 123 | high | low |\n| Criterion 124 | high | low |\n| Criterion 125 | high | low |\n| Criterion 126 | high | low |\n| Criterion 127 | high | low |\n| Criterion 128 | high | low |\n| Criterion 129 | high | low |\n| Criterion 130 | high | low |\n| Criterion 131 | high | low |\n| Criterion 132 | high | low |\n| Criterion 133 | high | low |\n| Criterion 134 | high | low |\n| Criterion 135 | high | low |\n| Criterion 136 | high | low |\n| Criterion 137 | high | low |\n| Criterion 138 | high | low |\n| Criterion 139 | high | low |\n| Criterion 140 | high | low |\n| Criterion 141 | high | low |\n| Criterion 142 | high | low |\n| Criterion 143 | high | low |\n| Criterion 144 | high | low |\n| Criterion 145 | high | low |\n| Criterion 146 | high | low |\n| Criterion 147 | high | low |\n| Criterion 148 | high | low |\n| Criterion 149 | high | low |\n| Criterion 150 | high | low |\n| Criterion 151 | high | low |\n| Criterion 152 | high | low |\n| Criterion 153 | high | low |\n| Criterion 154 | high | low |\n| Criterion 155 | high | low |\n| Criterion 156 | high | low |\n| Criterion 157 | high | low |\n| Criterion 158 | high | low |\n| Criterion 159 | high | low |\n| Criterion 160 | high | low |\n| Criterion 161 | high | low |\n| Criterion 162 | high | low |\n| Criterion 163 | high | low |\n| Criterion 164 | high | low |\n| Criterion 165 | high | low |\n| Criterion 166 | high | low |\n| Criterion 167 | high | low |\n| Criterion 168 | high | low |\n| Criterion 169 | high | low |\n| Criterion 170 | high | low |\n| Criterion 171 | high | low |\n| Criterion 172 | high | low |\n| Criterion 173 | high | low |\n| Criterion 174 | high | low |\n| Criterion 175 | high | low |\n| Criterion 176 | high | low |\n| Criterion 177 | high | low |\n| Criterion 178 | high | low |\n| Criterion 179 | high | low |\n| Criterion 180 | high | low |\n| Criterion 181 | high | low |\n| Criterion 182 | high | low |\n| Criterion 183 | high | low |\n| Criterion 184 | high | low |\n| Criterion 185 | high | low |\n| Criterion 186 | high | low |\n| Criterion 187 | high | low |\n| Criterion 188 | high | low |\n| Criterion 189 | high | low |\n| Criterion 190 | high | low |\n| Criterion 191 | high | low |\n| Criterion 192 | high | low |\n| Criterion 193 | high | low |\n| Criterion 194 | high | low |\n| Criterion 195 | high | low |\n| Criterion 196 | high | low |\n| Criterion 197 | high | low |\n| Criterion 198 | high | low |\n| Criterion 199 | high | low |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Two hundred criteria</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Two hundred criteria\"><table class=\"vb-table vb-table-stack\" aria-label=\"Two hundred criteria (200 rows, 3 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\">Left</th><th scope=\"col\">Right</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Criterion 0</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 1</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 2</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 3</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 4</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 5</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 6</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 7</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 8</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 9</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 10</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 11</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 12</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 13</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 14</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 15</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 16</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 17</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 18</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 19</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 20</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 21</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 22</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 23</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 24</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 25</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 26</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 27</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 28</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 29</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 30</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 31</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 32</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 33</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 34</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 35</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 36</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 37</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 38</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 39</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 40</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 41</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 42</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 43</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 44</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 45</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 46</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 47</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 48</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 49</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 50</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 51</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 52</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 53</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 54</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 55</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 56</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 57</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 58</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 59</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 60</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 61</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 62</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 63</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 64</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 65</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 66</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 67</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 68</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 69</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 70</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 71</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 72</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 73</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 74</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 75</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 76</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 77</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 78</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 79</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 80</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 81</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 82</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 83</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 84</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 85</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 86</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 87</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 88</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 89</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 90</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 91</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 92</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 93</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 94</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 95</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 96</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 97</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 98</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 99</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 100</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 101</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 102</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 103</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 104</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 105</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 106</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 107</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 108</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 109</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 110</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 111</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 112</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 113</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 114</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 115</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 116</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 117</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 118</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 119</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 120</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 121</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 122</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 123</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 124</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 125</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 126</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 127</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 128</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 129</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 130</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 131</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 132</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 133</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 134</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 135</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 136</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 137</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 138</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 139</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 140</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 141</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 142</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 143</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 144</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 145</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 146</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 147</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 148</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 149</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 150</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 151</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 152</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 153</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 154</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 155</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 156</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 157</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 158</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 159</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 160</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 161</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 162</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 163</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 164</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 165</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 166</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 167</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 168</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 169</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 170</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 171</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 172</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 173</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 174</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 175</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 176</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 177</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 178</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 179</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 180</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 181</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 182</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 183</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 184</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 185</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 186</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 187</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 188</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 189</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 190</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 191</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 192</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 193</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 194</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 195</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 196</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 197</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 198</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Criterion 199</td><td data-label=\"Left\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Right\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">2 options compared on 200 criteria.</p></section></div>"
+ },
+ {
+  "name": "rich-matrix-m1",
+  "props": {
+   "title": "Queue storage",
+   "options": [
+    {
+     "id": "sqlite",
+     "label": "SQLite",
+     "note": "One writer is enough for this load."
+    },
+    {
+     "id": "pg",
+     "label": "Postgres"
+    },
+    {
+     "id": "mq",
+     "label": "Message broker",
+     "note": "Adds a service to run."
+    }
+   ],
+   "criteria": [
+    {
+     "id": "ops",
+     "label": "Easy to run",
+     "weight": 3
+    },
+    {
+     "id": "scale",
+     "label": "Scales out",
+     "weight": 2
+    },
+    {
+     "id": "cost",
+     "label": "Low cost"
+    }
+   ],
+   "cells": [
+    [
+     "yes",
+     "partial",
+     "no"
+    ],
+    [
+     "no",
+     "yes",
+     "yes"
+    ],
+    [
+     "yes",
+     "partial",
+     "partial"
+    ]
+   ],
+   "recommended": "sqlite"
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | SQLite (recommended) | Postgres | Message broker |\n| --- | --- | --- | --- |\n| Easy to run (weight 3) | yes | partial | no |\n| Scales out (weight 2) | no | yes | yes |\n| Low cost | yes | partial | partial |\n| Weighted total | 8 of 12 | 8 of 12 | 5 of 12 |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Queue storage</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Queue storage\"><table class=\"vb-table vb-table-stack\" aria-label=\"Queue storage (4 rows, 4 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\" class=\"vd-matrix-rec\" aria-label=\"SQLite, Recommended\">SQLite</th><th scope=\"col\">Postgres</th><th scope=\"col\">Message broker</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Easy to run (weight 3)</td><td class=\"vd-matrix-rec\" data-label=\"SQLite (recommended)\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Postgres\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Message broker\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td></tr><tr><td data-label=\"Criterion\">Scales out (weight 2)</td><td class=\"vd-matrix-rec\" data-label=\"SQLite (recommended)\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td data-label=\"Postgres\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Message broker\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td></tr><tr><td data-label=\"Criterion\">Low cost</td><td class=\"vd-matrix-rec\" data-label=\"SQLite (recommended)\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td data-label=\"Postgres\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td><td data-label=\"Message broker\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td></tr><tr><td data-label=\"Criterion\">Weighted total</td><td class=\"vd-matrix-rec\" data-label=\"SQLite (recommended)\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>8 of 12</span></td><td data-label=\"Postgres\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>8 of 12</span></td><td data-label=\"Message broker\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>5 of 12</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">3 options compared on 3 criteria. Recommended: SQLite. Weighted total: yes or high scores 2, partial or medium 1, no or low 0, times the weight.</p></section><div class=\"vd-matrix-notes\" role=\"region\" tabindex=\"0\" aria-label=\"Option notes\"><ul><li><strong>SQLite</strong>: One writer is enough for this load.</li><li><strong>Message broker</strong>: Adds a service to run.</li></ul></div></div>"
+ },
+ {
+  "name": "rich-matrix-m2",
+  "props": {
+   "options": [
+    {
+     "id": "a",
+     "label": "Option A"
+    },
+    {
+     "id": "b",
+     "label": "Option B"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "speed",
+     "label": "Speed"
+    },
+    {
+     "id": "risk",
+     "label": "Migration risk"
+    }
+   ],
+   "cells": [
+    [
+     "high",
+     "low"
+    ],
+    [
+     "medium",
+     "high"
+    ]
+   ]
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | Option A | Option B |\n| --- | --- | --- |\n| Speed | high | low |\n| Migration risk | medium | high |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Options compared</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Options compared\"><table class=\"vb-table vb-table-stack\" aria-label=\"Options compared (2 rows, 3 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\">Option A</th><th scope=\"col\">Option B</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Speed</td><td data-label=\"Option A\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td><td data-label=\"Option B\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>low</span></td></tr><tr><td data-label=\"Criterion\">Migration risk</td><td data-label=\"Option A\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>medium</span></td><td data-label=\"Option B\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>high</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">2 options compared on 2 criteria.</p></section></div>"
+ },
+ {
+  "name": "rich-matrix-m3",
+  "props": {
+   "options": [
+    {
+     "id": "only",
+     "label": "Only option"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "fit",
+     "label": "Fits the plan"
+    }
+   ],
+   "cells": [
+    [
+     "yes"
+    ]
+   ],
+   "recommended": "only"
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | Only option (recommended) |\n| --- | --- |\n| Fits the plan | yes |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Options compared</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Options compared\"><table class=\"vb-table vb-table-stack\" aria-label=\"Options compared (1 rows, 2 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\" class=\"vd-matrix-rec\" aria-label=\"Only option, Recommended\">Only option</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Fits the plan</td><td class=\"vd-matrix-rec\" data-label=\"Only option (recommended)\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">1 option compared on 1 criterion. Recommended: Only option.</p></section></div>"
+ },
+ {
+  "name": "rich-recipes-recap-options",
+  "props": {
+   "title": "Retry policy",
+   "options": [
+    {
+     "id": "fixed",
+     "label": "Fixed delay"
+    },
+    {
+     "id": "backoff",
+     "label": "Backoff"
+    }
+   ],
+   "criteria": [
+    {
+     "id": "load",
+     "label": "Gentle on a failing host",
+     "weight": 3
+    },
+    {
+     "id": "simple",
+     "label": "Simple to explain"
+    }
+   ],
+   "cells": [
+    [
+     "no",
+     "yes"
+    ],
+    [
+     "yes",
+     "partial"
+    ]
+   ],
+   "recommended": "backoff"
+  },
+  "html": "<div class=\"vb matrix vd-matrix\" data-copy=\"| Criterion | Fixed delay | Backoff (recommended) |\n| --- | --- | --- |\n| Gentle on a failing host (weight 3) | no | yes |\n| Simple to explain | yes | partial |\n| Weighted total | 2 of 8 | 7 of 8 |\"><section class=\"vb-card\"><h4 class=\"vb-title\">Retry policy</h4><div class=\"vb-scroll\" role=\"region\" tabindex=\"0\" aria-label=\"Retry policy\"><table class=\"vb-table vb-table-stack\" aria-label=\"Retry policy (3 rows, 3 columns)\"><thead><tr><th scope=\"col\">Criterion</th><th scope=\"col\">Fixed delay</th><th scope=\"col\" class=\"vd-matrix-rec\" aria-label=\"Backoff, Recommended\">Backoff</th></tr></thead><tbody><tr><td data-label=\"Criterion\">Gentle on a failing host (weight 3)</td><td data-label=\"Fixed delay\"><span class=\"vb-status vb-status-bad\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✕</span>no</span></td><td class=\"vd-matrix-rec\" data-label=\"Backoff (recommended)\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td></tr><tr><td data-label=\"Criterion\">Simple to explain</td><td data-label=\"Fixed delay\"><span class=\"vb-status vb-status-ok\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">✓</span>yes</span></td><td class=\"vd-matrix-rec\" data-label=\"Backoff (recommended)\"><span class=\"vb-status vb-status-warn\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">▲</span>partial</span></td></tr><tr><td data-label=\"Criterion\">Weighted total</td><td data-label=\"Fixed delay\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>2 of 8</span></td><td class=\"vd-matrix-rec\" data-label=\"Backoff (recommended)\"><span class=\"vb-status vb-status-neutral\"><span class=\"vb-status-glyph\" aria-hidden=\"true\">●</span>7 of 8</span></td></tr></tbody></table></div><p class=\"vb-alt vb-foot\">2 options compared on 2 criteria. Recommended: Backoff. Weighted total: yes or high scores 2, partial or medium 1, no or low 0, times the weight.</p></section></div>"
+ }
+]

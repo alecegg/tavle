@@ -1,0 +1,1865 @@
+[
+ {
+  "name": "same",
+  "input": {
+   "before": "a\nb\n",
+   "after": "a\nb\n"
+  },
+  "props": {
+   "name": "diff",
+   "language": "",
+   "uid": "ef867c73",
+   "digits": 1,
+   "split": false,
+   "change": "",
+   "was": "",
+   "count": "No changes",
+   "copy": "--- a/diff\n+++ b/diff",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,2 +1,2 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "a",
+       "code": [
+        [
+         "",
+         "a"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 2,
+       "new": 2,
+       "text": "b",
+       "code": [
+        [
+         "",
+         "b"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/diff\n+++ b/diff\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\">diff</span><span class=\"vd-diff-count\">No changes</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of diff, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,2 +1,2 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">a</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">b</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "added-file",
+  "input": {
+   "filename": "n.txt",
+   "before": "",
+   "after": "x\ny\n"
+  },
+  "props": {
+   "name": "n.txt",
+   "language": "",
+   "uid": "e6b7d45b",
+   "digits": 1,
+   "split": false,
+   "change": "added",
+   "was": "",
+   "count": "+2 added, -0 removed",
+   "copy": "--- a/n.txt\n+++ b/n.txt\n@@ -0,0 +1,2 @@\n+x\n+y",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -0,0 +1,2 @@",
+     "rows": [
+      {
+       "kind": "add",
+       "old": null,
+       "new": 1,
+       "text": "x",
+       "code": [
+        [
+         "",
+         "x"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "y",
+       "code": [
+        [
+         "",
+         "y"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/n.txt\n+++ b/n.txt\n@@ -0,0 +1,2 @@\n+x\n+y\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">n.txt</span></span><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span><span class=\"vd-diff-count\">+2 added, -0 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of n.txt, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -0,0 +1,2 @@</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">x</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">y</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "removed-file",
+  "input": {
+   "filename": "n.txt",
+   "before": "x\ny\n",
+   "after": ""
+  },
+  "props": {
+   "name": "n.txt",
+   "language": "",
+   "uid": "5f50ad94",
+   "digits": 1,
+   "split": false,
+   "change": "removed",
+   "was": "",
+   "count": "+0 added, -2 removed",
+   "copy": "--- a/n.txt\n+++ b/n.txt\n@@ -1,2 +0,0 @@\n-x\n-y",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,2 +0,0 @@",
+     "rows": [
+      {
+       "kind": "del",
+       "old": 1,
+       "new": null,
+       "text": "x",
+       "code": [
+        [
+         "",
+         "x"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 2,
+       "new": null,
+       "text": "y",
+       "code": [
+        [
+         "",
+         "y"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/n.txt\n+++ b/n.txt\n@@ -1,2 +0,0 @@\n-x\n-y\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">n.txt</span></span><span class=\"vd-change-badge vd-change-removed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-</span> removed</span><span class=\"vd-diff-count\">+0 added, -2 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of n.txt, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,2 +0,0 @@</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">x</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">y</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "fold",
+  "input": {
+   "filename": "f.txt",
+   "before": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+   "after": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline fifteen\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n"
+  },
+  "props": {
+   "name": "f.txt",
+   "language": "",
+   "uid": "68fe29b3",
+   "digits": 2,
+   "split": false,
+   "change": "modified",
+   "was": "",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/f.txt\n+++ b/f.txt\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18",
+   "blocks": [
+    {
+     "kind": "fold",
+     "header": "",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "line 1",
+       "code": [
+        [
+         "",
+         "line 1"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 2,
+       "new": 2,
+       "text": "line 2",
+       "code": [
+        [
+         "",
+         "line 2"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 3,
+       "new": 3,
+       "text": "line 3",
+       "code": [
+        [
+         "",
+         "line 3"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 4,
+       "new": 4,
+       "text": "line 4",
+       "code": [
+        [
+         "",
+         "line 4"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 5,
+       "new": 5,
+       "text": "line 5",
+       "code": [
+        [
+         "",
+         "line 5"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 6,
+       "new": 6,
+       "text": "line 6",
+       "code": [
+        [
+         "",
+         "line 6"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 7,
+       "new": 7,
+       "text": "line 7",
+       "code": [
+        [
+         "",
+         "line 7"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 8,
+       "new": 8,
+       "text": "line 8",
+       "code": [
+        [
+         "",
+         "line 8"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 9,
+       "new": 9,
+       "text": "line 9",
+       "code": [
+        [
+         "",
+         "line 9"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 10,
+       "new": 10,
+       "text": "line 10",
+       "code": [
+        [
+         "",
+         "line 10"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 11,
+       "new": 11,
+       "text": "line 11",
+       "code": [
+        [
+         "",
+         "line 11"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "rows",
+     "header": "@@ -12,8 +12,8 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 12,
+       "new": 12,
+       "text": "line 12",
+       "code": [
+        [
+         "",
+         "line 12"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 13,
+       "new": 13,
+       "text": "line 13",
+       "code": [
+        [
+         "",
+         "line 13"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 14,
+       "new": 14,
+       "text": "line 14",
+       "code": [
+        [
+         "",
+         "line 14"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 15,
+       "new": null,
+       "text": "line 15",
+       "code": [
+        [
+         "",
+         "line 15"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 15,
+       "text": "line fifteen",
+       "code": [
+        [
+         "",
+         "line fifteen"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 16,
+       "new": 16,
+       "text": "line 16",
+       "code": [
+        [
+         "",
+         "line 16"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 17,
+       "new": 17,
+       "text": "line 17",
+       "code": [
+        [
+         "",
+         "line 17"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 18,
+       "new": 18,
+       "text": "line 18",
+       "code": [
+        [
+         "",
+         "line 18"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 19,
+       "new": 19,
+       "text": "line 19",
+       "code": [
+        [
+         "",
+         "line 19"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "more",
+     "header": "11",
+     "rows": []
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d2\" data-copy=\"--- a/f.txt\n+++ b/f.txt\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">f.txt</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+1 added, -1 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of f.txt, unified\" tabindex=\"0\"><details class=\"vd-diff-fold\"><summary class=\"vd-diff-fold-row\"><span class=\"vd-diff-fold-closed\">11 unchanged lines hidden (lines 1-11)</span><span class=\"vd-diff-fold-open\">Hide 11 unchanged lines</span></summary><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 1</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 2</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 3</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 4</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 5</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 6</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 7</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 8</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 9</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 10</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 11</td></tr></tbody></table></details><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -12,8 +12,8 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 12</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 13</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 14</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">line 15</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">line fifteen</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 16</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 17</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 18</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 19</td></tr></tbody></table><p class=\"vd-diff-more\">11 more lines not shown</p></div></figure>"
+ },
+ {
+  "name": "language",
+  "input": {
+   "language": "python",
+   "filename": "m.py",
+   "before": "def f():\n    return 1\n",
+   "after": "def f():\n    return 2  # c\n"
+  },
+  "props": {
+   "name": "m.py",
+   "language": "python",
+   "uid": "dae54d42",
+   "digits": 1,
+   "split": false,
+   "change": "modified",
+   "was": "",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/m.py\n+++ b/m.py\n@@ -1,2 +1,2 @@\n def f():\n-    return 1\n+    return 2  # c",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,2 +1,2 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "def f():",
+       "code": [
+        [
+         "k",
+         "def"
+        ],
+        [
+         "",
+         " f():"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 2,
+       "new": null,
+       "text": "    return 1",
+       "code": [
+        [
+         "",
+         "    "
+        ],
+        [
+         "k",
+         "return"
+        ],
+        [
+         "",
+         " "
+        ],
+        [
+         "n",
+         "1"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "    return 2  # c",
+       "code": [
+        [
+         "",
+         "    "
+        ],
+        [
+         "k",
+         "return"
+        ],
+        [
+         "",
+         " "
+        ],
+        [
+         "n",
+         "2"
+        ],
+        [
+         "",
+         "  "
+        ],
+        [
+         "c",
+         "# c"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/m.py\n+++ b/m.py\n@@ -1,2 +1,2 @@\n def f():\n-    return 1\n+    return 2  # c\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">m.py</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+1 added, -1 removed</span><span class=\"vd-diff-lang\">python</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of m.py, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,2 +1,2 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\"><span class=\"vd-code-k\">def</span> f():</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">    <span class=\"vd-code-k\">return</span> <span class=\"vd-code-n\">1</span></td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">    <span class=\"vd-code-k\">return</span> <span class=\"vd-code-n\">2</span>  <span class=\"vd-code-c\"># c</span></td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "patch",
+  "input": {
+   "language": "python",
+   "patch": "--- a/old.py\n+++ b/new.py\n@@ -1,4 +1,4 @@\n a = 1\n-b = 2\n+b = 3\n c = 4\n d = 5\n@@ -20,3 +20,4 @@\n x\n+y\n z\n w\n"
+  },
+  "props": {
+   "name": "new.py",
+   "language": "python",
+   "uid": "0c21ae78",
+   "digits": 2,
+   "split": false,
+   "change": "renamed",
+   "was": "old.py",
+   "count": "+2 added, -1 removed",
+   "copy": "--- a/old.py\n+++ b/new.py\n@@ -1,4 +1,4 @@\n a = 1\n-b = 2\n+b = 3\n c = 4\n d = 5\n@@ -20,3 +20,4 @@\n x\n+y\n z\n w",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,4 +1,4 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "a = 1",
+       "code": [
+        [
+         "",
+         "a = "
+        ],
+        [
+         "n",
+         "1"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 2,
+       "new": null,
+       "text": "b = 2",
+       "code": [
+        [
+         "",
+         "b = "
+        ],
+        [
+         "n",
+         "2"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "b = 3",
+       "code": [
+        [
+         "",
+         "b = "
+        ],
+        [
+         "n",
+         "3"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 3,
+       "new": 3,
+       "text": "c = 4",
+       "code": [
+        [
+         "",
+         "c = "
+        ],
+        [
+         "n",
+         "4"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 4,
+       "new": 4,
+       "text": "d = 5",
+       "code": [
+        [
+         "",
+         "d = "
+        ],
+        [
+         "n",
+         "5"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "gap",
+     "header": "",
+     "rows": [
+      {
+       "kind": "gap",
+       "old": null,
+       "new": null,
+       "text": "15",
+       "code": [
+        [
+         "",
+         "d = "
+        ],
+        [
+         "n",
+         "5"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "rows",
+     "header": "@@ -20,3 +20,4 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 20,
+       "new": 20,
+       "text": "x",
+       "code": [
+        [
+         "",
+         "x"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 21,
+       "text": "y",
+       "code": [
+        [
+         "",
+         "y"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 21,
+       "new": 22,
+       "text": "z",
+       "code": [
+        [
+         "",
+         "z"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 22,
+       "new": 23,
+       "text": "w",
+       "code": [
+        [
+         "",
+         "w"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d2\" data-copy=\"--- a/old.py\n+++ b/new.py\n@@ -1,4 +1,4 @@\n a = 1\n-b = 2\n+b = 3\n c = 4\n d = 5\n@@ -20,3 +20,4 @@\n x\n+y\n z\n w\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-old\">old.py</span> &rarr; <span class=\"vd-change-name\">new.py</span></span><span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span><span class=\"vd-diff-count\">+2 added, -1 removed</span><span class=\"vd-diff-lang\">python</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of new.py, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,4 +1,4 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">a = <span class=\"vd-code-n\">1</span></td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">b = <span class=\"vd-code-n\">2</span></td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">b = <span class=\"vd-code-n\">3</span></td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">c = <span class=\"vd-code-n\">4</span></td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">d = <span class=\"vd-code-n\">5</span></td></tr></tbody></table><p class=\"vd-diff-gap\">15 unchanged lines not in the patch</p><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -20,3 +20,4 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">20</td><td class=\"vd-diff-num\">20</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">x</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">21</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">y</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">21</td><td class=\"vd-diff-num\">22</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">z</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">22</td><td class=\"vd-diff-num\">23</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">w</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "renamed-patch",
+  "input": {
+   "patch": "--- a/old.py\n+++ b/new.py\n@@ -1,2 +1,2 @@\n a\n-b\n+c\n"
+  },
+  "props": {
+   "name": "new.py",
+   "language": "",
+   "uid": "421f7110",
+   "digits": 1,
+   "split": false,
+   "change": "renamed",
+   "was": "old.py",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/old.py\n+++ b/new.py\n@@ -1,2 +1,2 @@\n a\n-b\n+c",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,2 +1,2 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "a",
+       "code": [
+        [
+         "",
+         "a"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 2,
+       "new": null,
+       "text": "b",
+       "code": [
+        [
+         "",
+         "b"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "c",
+       "code": [
+        [
+         "",
+         "c"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/old.py\n+++ b/new.py\n@@ -1,2 +1,2 @@\n a\n-b\n+c\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-old\">old.py</span> &rarr; <span class=\"vd-change-name\">new.py</span></span><span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span><span class=\"vd-diff-count\">+1 added, -1 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of new.py, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,2 +1,2 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">a</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">b</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">c</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "notes",
+  "input": {
+   "before": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+   "after": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline fifteen\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+   "notes": [
+    {
+     "side": "after",
+     "lines": 15,
+     "note": "Why `fifteen`"
+    },
+    {
+     "side": "before",
+     "lines": "15-16",
+     "note": "gone"
+    }
+   ]
+  },
+  "props": {
+   "name": "diff",
+   "language": "",
+   "uid": "c622f715",
+   "digits": 2,
+   "split": false,
+   "change": "modified",
+   "was": "",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18",
+   "blocks": [
+    {
+     "kind": "fold",
+     "header": "",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "line 1",
+       "code": [
+        [
+         "",
+         "line 1"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 2,
+       "new": 2,
+       "text": "line 2",
+       "code": [
+        [
+         "",
+         "line 2"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 3,
+       "new": 3,
+       "text": "line 3",
+       "code": [
+        [
+         "",
+         "line 3"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 4,
+       "new": 4,
+       "text": "line 4",
+       "code": [
+        [
+         "",
+         "line 4"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 5,
+       "new": 5,
+       "text": "line 5",
+       "code": [
+        [
+         "",
+         "line 5"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 6,
+       "new": 6,
+       "text": "line 6",
+       "code": [
+        [
+         "",
+         "line 6"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 7,
+       "new": 7,
+       "text": "line 7",
+       "code": [
+        [
+         "",
+         "line 7"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 8,
+       "new": 8,
+       "text": "line 8",
+       "code": [
+        [
+         "",
+         "line 8"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 9,
+       "new": 9,
+       "text": "line 9",
+       "code": [
+        [
+         "",
+         "line 9"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 10,
+       "new": 10,
+       "text": "line 10",
+       "code": [
+        [
+         "",
+         "line 10"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 11,
+       "new": 11,
+       "text": "line 11",
+       "code": [
+        [
+         "",
+         "line 11"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "rows",
+     "header": "@@ -12,8 +12,8 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 12,
+       "new": 12,
+       "text": "line 12",
+       "code": [
+        [
+         "",
+         "line 12"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 13,
+       "new": 13,
+       "text": "line 13",
+       "code": [
+        [
+         "",
+         "line 13"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 14,
+       "new": 14,
+       "text": "line 14",
+       "code": [
+        [
+         "",
+         "line 14"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 15,
+       "new": null,
+       "text": "line 15",
+       "code": [
+        [
+         "",
+         "line 15"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 15,
+       "text": "line fifteen",
+       "code": [
+        [
+         "",
+         "line fifteen"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 16,
+       "new": 16,
+       "text": "line 16",
+       "code": [
+        [
+         "",
+         "line 16"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 17,
+       "new": 17,
+       "text": "line 17",
+       "code": [
+        [
+         "",
+         "line 17"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 18,
+       "new": 18,
+       "text": "line 18",
+       "code": [
+        [
+         "",
+         "line 18"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 19,
+       "new": 19,
+       "text": "line 19",
+       "code": [
+        [
+         "",
+         "line 19"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "more",
+     "header": "11",
+     "rows": []
+    }
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "side": "after",
+     "start": 15,
+     "where": "after line 15",
+     "text": "Why `fifteen`"
+    },
+    {
+     "number": 2,
+     "side": "before",
+     "start": 15,
+     "where": "before lines 15-16",
+     "text": "gone"
+    }
+   ]
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d2\" data-copy=\"--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">diff</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+1 added, -1 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of diff, unified\" tabindex=\"0\"><details class=\"vd-diff-fold\"><summary class=\"vd-diff-fold-row\"><span class=\"vd-diff-fold-closed\">11 unchanged lines hidden (lines 1-11)</span><span class=\"vd-diff-fold-open\">Hide 11 unchanged lines</span></summary><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 1</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 2</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 3</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 4</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 5</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 6</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 7</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 8</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 9</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 10</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 11</td></tr></tbody></table></details><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -12,8 +12,8 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 12</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 13</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 14</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\"><span class=\"vd-diff-pins\"><a class=\"vd-diff-pin\" href=\"#note-c622f715-2\" aria-label=\"Note 2, before lines 15-16\">2</a></span>line 15</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\"><span class=\"vd-diff-pins\"><a class=\"vd-diff-pin\" href=\"#note-c622f715-1\" aria-label=\"Note 1, after line 15\">1</a></span>line fifteen</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 16</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 17</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 18</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 19</td></tr></tbody></table><p class=\"vd-diff-more\">11 more lines not shown</p></div><ol class=\"vd-diff-notes\" aria-label=\"Notes on diff\"><li class=\"vd-diff-note\" id=\"note-c622f715-1\" tabindex=\"-1\"><span class=\"vd-diff-note-n\">1</span><div class=\"vd-diff-note-body\"><p class=\"vd-diff-note-meta\">after line 15</p><p class=\"vd-diff-note-text\">Why <code>fifteen</code></p></div></li><li class=\"vd-diff-note\" id=\"note-c622f715-2\" tabindex=\"-1\"><span class=\"vd-diff-note-n\">2</span><div class=\"vd-diff-note-body\"><p class=\"vd-diff-note-meta\">before lines 15-16</p><p class=\"vd-diff-note-text\">gone</p></div></li></ol></figure>"
+ },
+ {
+  "name": "split",
+  "input": {
+   "before": "a\nb\n",
+   "after": "a\nB\nC\n",
+   "mode": "split"
+  },
+  "props": {
+   "name": "diff",
+   "language": "",
+   "uid": "8ef60c7a",
+   "digits": 1,
+   "split": true,
+   "change": "modified",
+   "was": "",
+   "count": "+2 added, -1 removed",
+   "copy": "--- a/diff\n+++ b/diff\n@@ -1,2 +1,3 @@\n a\n-b\n+B\n+C",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1,2 +1,3 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "a",
+       "code": [
+        [
+         "",
+         "a"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 2,
+       "new": null,
+       "text": "b",
+       "code": [
+        [
+         "",
+         "b"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "B",
+       "code": [
+        [
+         "",
+         "B"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 3,
+       "text": "C",
+       "code": [
+        [
+         "",
+         "C"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1 vd-diff-split-mode\" data-copy=\"--- a/diff\n+++ b/diff\n@@ -1,2 +1,3 @@\n a\n-b\n+B\n+C\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">diff</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+2 added, -1 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of diff, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1,2 +1,3 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">a</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">b</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">B</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">C</td></tr></tbody></table></div><div class=\"vd-diff-view vd-diff-sbs\" role=\"region\" aria-label=\"Diff of diff, side by side\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"6\">@@ -1,2 +1,3 @@</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">1</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">a</td><td class=\"vd-diff-num vd-diff-same\">1</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">a</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-del\">2</td><td class=\"vd-diff-mark vd-diff-del\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text vd-diff-del\">b</td><td class=\"vd-diff-num vd-diff-add\">2</td><td class=\"vd-diff-mark vd-diff-add\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text vd-diff-add\">B</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-empty\"></td><td class=\"vd-diff-mark vd-diff-empty\"></td><td class=\"vd-diff-text vd-diff-empty\"></td><td class=\"vd-diff-num vd-diff-add\">3</td><td class=\"vd-diff-mark vd-diff-add\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text vd-diff-add\">C</td></tr></tbody></table></div></figure>"
+ },
+ {
+  "name": "split-fold-notes",
+  "input": {
+   "before": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline 15\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+   "after": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\nline fifteen\nline 16\nline 17\nline 18\nline 19\nline 20\nline 21\nline 22\nline 23\nline 24\nline 25\nline 26\nline 27\nline 28\nline 29\nline 30\n",
+   "mode": "split",
+   "notes": [
+    {
+     "side": "after",
+     "lines": 15,
+     "note": "n"
+    }
+   ]
+  },
+  "props": {
+   "name": "diff",
+   "language": "",
+   "uid": "2dbc2eab",
+   "digits": 2,
+   "split": true,
+   "change": "modified",
+   "was": "",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18",
+   "blocks": [
+    {
+     "kind": "fold",
+     "header": "",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 1,
+       "new": 1,
+       "text": "line 1",
+       "code": [
+        [
+         "",
+         "line 1"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 2,
+       "new": 2,
+       "text": "line 2",
+       "code": [
+        [
+         "",
+         "line 2"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 3,
+       "new": 3,
+       "text": "line 3",
+       "code": [
+        [
+         "",
+         "line 3"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 4,
+       "new": 4,
+       "text": "line 4",
+       "code": [
+        [
+         "",
+         "line 4"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 5,
+       "new": 5,
+       "text": "line 5",
+       "code": [
+        [
+         "",
+         "line 5"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 6,
+       "new": 6,
+       "text": "line 6",
+       "code": [
+        [
+         "",
+         "line 6"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 7,
+       "new": 7,
+       "text": "line 7",
+       "code": [
+        [
+         "",
+         "line 7"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 8,
+       "new": 8,
+       "text": "line 8",
+       "code": [
+        [
+         "",
+         "line 8"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 9,
+       "new": 9,
+       "text": "line 9",
+       "code": [
+        [
+         "",
+         "line 9"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 10,
+       "new": 10,
+       "text": "line 10",
+       "code": [
+        [
+         "",
+         "line 10"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 11,
+       "new": 11,
+       "text": "line 11",
+       "code": [
+        [
+         "",
+         "line 11"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "rows",
+     "header": "@@ -12,8 +12,8 @@",
+     "rows": [
+      {
+       "kind": "same",
+       "old": 12,
+       "new": 12,
+       "text": "line 12",
+       "code": [
+        [
+         "",
+         "line 12"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 13,
+       "new": 13,
+       "text": "line 13",
+       "code": [
+        [
+         "",
+         "line 13"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 14,
+       "new": 14,
+       "text": "line 14",
+       "code": [
+        [
+         "",
+         "line 14"
+        ]
+       ]
+      },
+      {
+       "kind": "del",
+       "old": 15,
+       "new": null,
+       "text": "line 15",
+       "code": [
+        [
+         "",
+         "line 15"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 15,
+       "text": "line fifteen",
+       "code": [
+        [
+         "",
+         "line fifteen"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 16,
+       "new": 16,
+       "text": "line 16",
+       "code": [
+        [
+         "",
+         "line 16"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 17,
+       "new": 17,
+       "text": "line 17",
+       "code": [
+        [
+         "",
+         "line 17"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 18,
+       "new": 18,
+       "text": "line 18",
+       "code": [
+        [
+         "",
+         "line 18"
+        ]
+       ]
+      },
+      {
+       "kind": "same",
+       "old": 19,
+       "new": 19,
+       "text": "line 19",
+       "code": [
+        [
+         "",
+         "line 19"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "more",
+     "header": "11",
+     "rows": []
+    }
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "side": "after",
+     "start": 15,
+     "where": "after line 15",
+     "text": "n"
+    }
+   ]
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d2 vd-diff-split-mode\" data-copy=\"--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">diff</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+1 added, -1 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of diff, unified\" tabindex=\"0\"><details class=\"vd-diff-fold\"><summary class=\"vd-diff-fold-row\"><span class=\"vd-diff-fold-closed\">11 unchanged lines hidden (lines 1-11)</span><span class=\"vd-diff-fold-open\">Hide 11 unchanged lines</span></summary><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 1</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 2</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 3</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 4</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 5</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 6</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 7</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 8</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 9</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 10</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 11</td></tr></tbody></table></details><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -12,8 +12,8 @@</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 12</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 13</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 14</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">line 15</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\"><span class=\"vd-diff-pins\"><a class=\"vd-diff-pin\" href=\"#note-2dbc2eab-1\" aria-label=\"Note 1, after line 15\">1</a></span>line fifteen</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 16</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 17</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 18</td></tr><tr class=\"vd-diff-row vd-diff-same\"><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-mark\"></td><td class=\"vd-diff-text\">line 19</td></tr></tbody></table><p class=\"vd-diff-more\">11 more lines not shown</p></div><div class=\"vd-diff-view vd-diff-sbs\" role=\"region\" aria-label=\"Diff of diff, side by side\" tabindex=\"0\"><details class=\"vd-diff-fold\"><summary class=\"vd-diff-fold-row\"><span class=\"vd-diff-fold-closed\">11 unchanged lines hidden (lines 1-11)</span><span class=\"vd-diff-fold-open\">Hide 11 unchanged lines</span></summary><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">1</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 1</td><td class=\"vd-diff-num vd-diff-same\">1</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 1</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">2</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 2</td><td class=\"vd-diff-num vd-diff-same\">2</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 2</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">3</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 3</td><td class=\"vd-diff-num vd-diff-same\">3</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 3</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">4</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 4</td><td class=\"vd-diff-num vd-diff-same\">4</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 4</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">5</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 5</td><td class=\"vd-diff-num vd-diff-same\">5</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 5</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">6</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 6</td><td class=\"vd-diff-num vd-diff-same\">6</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 6</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">7</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 7</td><td class=\"vd-diff-num vd-diff-same\">7</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 7</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">8</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 8</td><td class=\"vd-diff-num vd-diff-same\">8</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 8</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">9</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 9</td><td class=\"vd-diff-num vd-diff-same\">9</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 9</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">10</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 10</td><td class=\"vd-diff-num vd-diff-same\">10</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 10</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">11</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 11</td><td class=\"vd-diff-num vd-diff-same\">11</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 11</td></tr></tbody></table></details><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"6\">@@ -12,8 +12,8 @@</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">12</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 12</td><td class=\"vd-diff-num vd-diff-same\">12</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 12</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">13</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 13</td><td class=\"vd-diff-num vd-diff-same\">13</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 13</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">14</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 14</td><td class=\"vd-diff-num vd-diff-same\">14</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 14</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-del\">15</td><td class=\"vd-diff-mark vd-diff-del\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text vd-diff-del\">line 15</td><td class=\"vd-diff-num vd-diff-add\">15</td><td class=\"vd-diff-mark vd-diff-add\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text vd-diff-add\"><span class=\"vd-diff-pins\"><a class=\"vd-diff-pin\" href=\"#note-2dbc2eab-1\" aria-label=\"Note 1, after line 15\">1</a></span>line fifteen</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">16</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 16</td><td class=\"vd-diff-num vd-diff-same\">16</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 16</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">17</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 17</td><td class=\"vd-diff-num vd-diff-same\">17</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 17</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">18</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 18</td><td class=\"vd-diff-num vd-diff-same\">18</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 18</td></tr><tr class=\"vd-diff-row\"><td class=\"vd-diff-num vd-diff-same\">19</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 19</td><td class=\"vd-diff-num vd-diff-same\">19</td><td class=\"vd-diff-mark vd-diff-same\"></td><td class=\"vd-diff-text vd-diff-same\">line 19</td></tr></tbody></table><p class=\"vd-diff-more\">11 more lines not shown</p></div><ol class=\"vd-diff-notes\" aria-label=\"Notes on diff\"><li class=\"vd-diff-note\" id=\"note-2dbc2eab-1\" tabindex=\"-1\"><span class=\"vd-diff-note-n\">1</span><div class=\"vd-diff-note-body\"><p class=\"vd-diff-note-meta\">after line 15</p><p class=\"vd-diff-note-text\">n</p></div></li></ol></figure>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "filename": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "language": "js",
+   "before": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n",
+   "after": "x <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n",
+   "notes": [
+    {
+     "side": "after",
+     "lines": 1,
+     "note": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+    }
+   ]
+  },
+  "props": {
+   "name": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "language": "js",
+   "uid": "39b236b6",
+   "digits": 1,
+   "split": false,
+   "change": "modified",
+   "was": "",
+   "count": "+1 added, -1 removed",
+   "copy": "--- a/<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n+++ b/<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n@@ -1 +1 @@\n-<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n+x <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -1 +1 @@",
+     "rows": [
+      {
+       "kind": "del",
+       "old": 1,
+       "new": null,
+       "text": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+       "code": [
+        [
+         "",
+         "<img src=x onerror=alert("
+        ],
+        [
+         "n",
+         "1"
+        ],
+        [
+         "",
+         ")> "
+        ],
+        [
+         "s",
+         "\"q\""
+        ],
+        [
+         "",
+         " &amp; <script>alert("
+        ],
+        [
+         "n",
+         "1"
+        ],
+        [
+         "",
+         ")</script> "
+        ],
+        [
+         "s",
+         "'s'"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 1,
+       "text": "x <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+       "code": [
+        [
+         "",
+         "x <img src=x onerror=alert("
+        ],
+        [
+         "n",
+         "1"
+        ],
+        [
+         "",
+         ")> "
+        ],
+        [
+         "s",
+         "\"q\""
+        ],
+        [
+         "",
+         " &amp; <script>alert("
+        ],
+        [
+         "n",
+         "1"
+        ],
+        [
+         "",
+         ")</script> "
+        ],
+        [
+         "s",
+         "'s'"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "side": "after",
+     "start": 1,
+     "where": "after line 1",
+     "text": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+    }
+   ]
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d1\" data-copy=\"--- a/&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\n+++ b/&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\n@@ -1 +1 @@\n-&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\n+x &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</span></span><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span><span class=\"vd-diff-count\">+1 added, -1 removed</span><span class=\"vd-diff-lang\">js</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -1 +1 @@</td></tr><tr class=\"vd-diff-row vd-diff-del\"><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-num\"></td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">-</span><span class=\"vd-diff-sr\">removed</span></td><td class=\"vd-diff-text\">&lt;img src=x onerror=alert(<span class=\"vd-code-n\">1</span>)&gt; <span class=\"vd-code-s\">&quot;q&quot;</span> &amp;amp; &lt;script&gt;alert(<span class=\"vd-code-n\">1</span>)&lt;/script&gt; <span class=\"vd-code-s\">&#x27;s&#x27;</span></td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\"><span class=\"vd-diff-pins\"><a class=\"vd-diff-pin\" href=\"#note-39b236b6-1\" aria-label=\"Note 1, after line 1\">1</a></span>x &lt;img src=x onerror=alert(<span class=\"vd-code-n\">1</span>)&gt; <span class=\"vd-code-s\">&quot;q&quot;</span> &amp;amp; &lt;script&gt;alert(<span class=\"vd-code-n\">1</span>)&lt;/script&gt; <span class=\"vd-code-s\">&#x27;s&#x27;</span></td></tr></tbody></table></div><ol class=\"vd-diff-notes\" aria-label=\"Notes on &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\"><li class=\"vd-diff-note\" id=\"note-39b236b6-1\" tabindex=\"-1\"><span class=\"vd-diff-note-n\">1</span><div class=\"vd-diff-note-body\"><p class=\"vd-diff-note-meta\">after line 1</p><p class=\"vd-diff-note-text\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</p></div></li></ol></figure>"
+ },
+ {
+  "name": "big",
+  "input": {
+   "before": "",
+   "after": "row 0\nrow 1\nrow 2\nrow 3\nrow 4\nrow 5\nrow 6\nrow 7\nrow 8\nrow 9\nrow 10\nrow 11\nrow 12\nrow 13\nrow 14\nrow 15\nrow 16\nrow 17\nrow 18\nrow 19\nrow 20\nrow 21\nrow 22\nrow 23\nrow 24\nrow 25\nrow 26\nrow 27\nrow 28\nrow 29\n"
+  },
+  "props": {
+   "name": "diff",
+   "language": "",
+   "uid": "52e96242",
+   "digits": 2,
+   "split": false,
+   "change": "added",
+   "was": "",
+   "count": "+30 added, -0 removed",
+   "copy": "--- a/diff\n+++ b/diff\n@@ -0,0 +1,30 @@\n+row 0\n+row 1\n+row 2\n+row 3\n+row 4\n+row 5\n+row 6\n+row 7\n+row 8\n+row 9\n+row 10\n+row 11\n+row 12\n+row 13\n+row 14\n+row 15\n+row 16\n+row 17\n+row 18\n+row 19\n+row 20\n+row 21\n+row 22\n+row 23\n+row 24\n+row 25\n+row 26\n+row 27\n+row 28\n+row 29",
+   "blocks": [
+    {
+     "kind": "rows",
+     "header": "@@ -0,0 +1,20 @@",
+     "rows": [
+      {
+       "kind": "add",
+       "old": null,
+       "new": 1,
+       "text": "row 0",
+       "code": [
+        [
+         "",
+         "row 0"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 2,
+       "text": "row 1",
+       "code": [
+        [
+         "",
+         "row 1"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 3,
+       "text": "row 2",
+       "code": [
+        [
+         "",
+         "row 2"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 4,
+       "text": "row 3",
+       "code": [
+        [
+         "",
+         "row 3"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 5,
+       "text": "row 4",
+       "code": [
+        [
+         "",
+         "row 4"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 6,
+       "text": "row 5",
+       "code": [
+        [
+         "",
+         "row 5"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 7,
+       "text": "row 6",
+       "code": [
+        [
+         "",
+         "row 6"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 8,
+       "text": "row 7",
+       "code": [
+        [
+         "",
+         "row 7"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 9,
+       "text": "row 8",
+       "code": [
+        [
+         "",
+         "row 8"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 10,
+       "text": "row 9",
+       "code": [
+        [
+         "",
+         "row 9"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 11,
+       "text": "row 10",
+       "code": [
+        [
+         "",
+         "row 10"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 12,
+       "text": "row 11",
+       "code": [
+        [
+         "",
+         "row 11"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 13,
+       "text": "row 12",
+       "code": [
+        [
+         "",
+         "row 12"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 14,
+       "text": "row 13",
+       "code": [
+        [
+         "",
+         "row 13"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 15,
+       "text": "row 14",
+       "code": [
+        [
+         "",
+         "row 14"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 16,
+       "text": "row 15",
+       "code": [
+        [
+         "",
+         "row 15"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 17,
+       "text": "row 16",
+       "code": [
+        [
+         "",
+         "row 16"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 18,
+       "text": "row 17",
+       "code": [
+        [
+         "",
+         "row 17"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 19,
+       "text": "row 18",
+       "code": [
+        [
+         "",
+         "row 18"
+        ]
+       ]
+      },
+      {
+       "kind": "add",
+       "old": null,
+       "new": 20,
+       "text": "row 19",
+       "code": [
+        [
+         "",
+         "row 19"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "more",
+     "header": "10",
+     "rows": []
+    }
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb diff vd-code-panel vd-diff vd-diff-d2\" data-copy=\"--- a/diff\n+++ b/diff\n@@ -0,0 +1,30 @@\n+row 0\n+row 1\n+row 2\n+row 3\n+row 4\n+row 5\n+row 6\n+row 7\n+row 8\n+row 9\n+row 10\n+row 11\n+row 12\n+row 13\n+row 14\n+row 15\n+row 16\n+row 17\n+row 18\n+row 19\n+row 20\n+row 21\n+row 22\n+row 23\n+row 24\n+row 25\n+row 26\n+row 27\n+row 28\n+row 29\"><figcaption class=\"vd-code-head vd-diff-head\"><span class=\"vd-diff-name\"><span class=\"vd-change-name\">diff</span></span><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span><span class=\"vd-diff-count\">+30 added, -0 removed</span></figcaption><div class=\"vd-diff-view vd-diff-unified\" role=\"region\" aria-label=\"Diff of diff, unified\" tabindex=\"0\"><table class=\"vd-diff-table\"><colgroup><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-num\"><col class=\"vd-diff-c-mark\"><col></colgroup><tbody><tr class=\"vd-diff-hunk\"><td colspan=\"4\">@@ -0,0 +1,20 @@</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">1</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 0</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">2</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 1</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">3</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 2</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">4</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 3</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">5</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 4</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">6</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 5</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">7</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 6</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">8</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 7</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">9</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 8</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">10</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 9</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">11</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 10</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">12</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 11</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">13</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 12</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">14</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 13</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">15</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 14</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">16</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 15</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">17</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 16</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">18</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 17</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">19</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 18</td></tr><tr class=\"vd-diff-row vd-diff-add\"><td class=\"vd-diff-num\"></td><td class=\"vd-diff-num\">20</td><td class=\"vd-diff-mark\"><span aria-hidden=\"true\">+</span><span class=\"vd-diff-sr\">added</span></td><td class=\"vd-diff-text\">row 19</td></tr></tbody></table><p class=\"vd-diff-more\">10 more lines not shown</p></div></figure>"
+ }
+]

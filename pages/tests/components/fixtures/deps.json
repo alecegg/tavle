@@ -1,0 +1,640 @@
+[
+ {
+  "name": "chain",
+  "input": {
+   "a": [],
+   "b": [
+    "a"
+   ],
+   "c": [
+    "a",
+    "b"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 132,
+   "height": 190,
+   "truncated": false,
+   "edges": [
+    {
+     "d": "M66 40C66 60 66 60 66 80",
+     "back": false
+    },
+    {
+     "d": "M66 40C66 95 66 95 66 150",
+     "back": false
+    },
+    {
+     "d": "M66 110C66 130 66 130 66 150",
+     "back": false
+    }
+   ],
+   "nodes": [
+    {
+     "known": true,
+     "title": "a",
+     "label": "a",
+     "x": "10",
+     "y": "10",
+     "tx": "66",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "b",
+     "label": "b",
+     "x": "10",
+     "y": "80",
+     "tx": "66",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "c",
+     "label": "c",
+     "x": "10",
+     "y": "150",
+     "tx": "66",
+     "ty": "169",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 132 190\" role=\"img\" aria-label=\"Task dependency graph\" width=\"132\" height=\"190\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M66 40C66 60 66 60 66 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M66 40C66 95 66 95 66 150\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M66 110C66 130 66 130 66 150\" marker-end=\"url(#dep-arrow)\"/><g class=\"node\"><title>a</title><rect x=\"10\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"29\" text-anchor=\"middle\">a</text></g><g class=\"node\"><title>b</title><rect x=\"10\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"99\" text-anchor=\"middle\">b</text></g><g class=\"node\"><title>c</title><rect x=\"10\" y=\"150\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"169\" text-anchor=\"middle\">c</text></g></svg></div>"
+ },
+ {
+  "name": "cycle",
+  "input": {
+   "a": [
+    "b"
+   ],
+   "b": [
+    "a"
+   ],
+   "c": [
+    "c"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 260,
+   "height": 120,
+   "truncated": false,
+   "edges": [
+    {
+     "d": "M66 40C66 60 130 60 130 80",
+     "back": false
+    },
+    {
+     "d": "M130 95C130 60 66 60 66 25",
+     "back": true
+    }
+   ],
+   "nodes": [
+    {
+     "known": true,
+     "title": "b",
+     "label": "b",
+     "x": "10",
+     "y": "10",
+     "tx": "66",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "a",
+     "label": "a",
+     "x": "74",
+     "y": "80",
+     "tx": "130",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "c",
+     "label": "c",
+     "x": "138",
+     "y": "10",
+     "tx": "194",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 260 120\" role=\"img\" aria-label=\"Task dependency graph\" width=\"260\" height=\"120\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M66 40C66 60 130 60 130 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge back\" d=\"M130 95C130 60 66 60 66 25\" marker-end=\"url(#dep-arrow)\"/><g class=\"node\"><title>b</title><rect x=\"10\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"29\" text-anchor=\"middle\">b</text></g><g class=\"node\"><title>a</title><rect x=\"74\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"130\" y=\"99\" text-anchor=\"middle\">a</text></g><g class=\"node\"><title>c</title><rect x=\"138\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"194\" y=\"29\" text-anchor=\"middle\">c</text></g></svg></div>"
+ },
+ {
+  "name": "unknown",
+  "input": {
+   "a": [
+    "ghost"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 132,
+   "height": 120,
+   "truncated": false,
+   "edges": [
+    {
+     "d": "M66 40C66 60 66 60 66 80",
+     "back": false
+    }
+   ],
+   "nodes": [
+    {
+     "known": false,
+     "title": "ghost (not defined)",
+     "label": "ghost",
+     "x": "10",
+     "y": "10",
+     "tx": "66",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "a",
+     "label": "a",
+     "x": "10",
+     "y": "80",
+     "tx": "66",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 132 120\" role=\"img\" aria-label=\"Task dependency graph\" width=\"132\" height=\"120\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M66 40C66 60 66 60 66 80\" marker-end=\"url(#dep-arrow)\"/><g class=\"node missing\"><title>ghost (not defined)</title><rect x=\"10\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"29\" text-anchor=\"middle\">ghost</text></g><g class=\"node\"><title>a</title><rect x=\"10\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"99\" text-anchor=\"middle\">a</text></g></svg></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "x\"><script>alert(1)</script>": [
+    "<img onerror=1>",
+    "b"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 260,
+   "height": 120,
+   "truncated": false,
+   "edges": [
+    {
+     "d": "M66 40C66 60 130 60 130 80",
+     "back": false
+    },
+    {
+     "d": "M194 40C194 60 130 60 130 80",
+     "back": false
+    }
+   ],
+   "nodes": [
+    {
+     "known": false,
+     "title": "<img onerror=1> (not defined)",
+     "label": "<img onerror=1>",
+     "x": "10",
+     "y": "10",
+     "tx": "66",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "b (not defined)",
+     "label": "b",
+     "x": "138",
+     "y": "10",
+     "tx": "194",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "x\"><script>alert(1)</script>",
+     "label": "x\"><script>aler…",
+     "x": "74",
+     "y": "80",
+     "tx": "130",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 260 120\" role=\"img\" aria-label=\"Task dependency graph\" width=\"260\" height=\"120\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M66 40C66 60 130 60 130 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M194 40C194 60 130 60 130 80\" marker-end=\"url(#dep-arrow)\"/><g class=\"node missing\"><title>&lt;img onerror=1&gt; (not defined)</title><rect x=\"10\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"29\" text-anchor=\"middle\">&lt;img onerror=1&gt;</text></g><g class=\"node missing\"><title>b (not defined)</title><rect x=\"138\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"194\" y=\"29\" text-anchor=\"middle\">b</text></g><g class=\"node\"><title>x&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</title><rect x=\"74\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"130\" y=\"99\" text-anchor=\"middle\">x&quot;&gt;&lt;script&gt;aler…</text></g></svg></div>"
+ },
+ {
+  "name": "empty",
+  "input": {},
+  "props": {
+   "empty": true
+  },
+  "html": "<p class=\"graph-empty\">No dependencies listed.</p>"
+ },
+ {
+  "name": "wide",
+  "input": {
+   "t0": [],
+   "t1": [
+    "t0"
+   ],
+   "t2": [
+    "t0"
+   ],
+   "t3": [
+    "t0"
+   ],
+   "t4": [
+    "t0"
+   ],
+   "t5": [
+    "t0"
+   ],
+   "t6": [
+    "t0"
+   ],
+   "t7": [
+    "t0"
+   ],
+   "t8": [
+    "t0"
+   ],
+   "longtasknamethatistruncated": [
+    "t1"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 1028,
+   "height": 190,
+   "truncated": false,
+   "edges": [
+    {
+     "d": "M514 40C514 60 66 60 66 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 194 60 194 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 322 60 322 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 450 60 450 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 578 60 578 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 706 60 706 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 834 60 834 80",
+     "back": false
+    },
+    {
+     "d": "M514 40C514 60 962 60 962 80",
+     "back": false
+    },
+    {
+     "d": "M66 110C66 130 514 130 514 150",
+     "back": false
+    }
+   ],
+   "nodes": [
+    {
+     "known": true,
+     "title": "t0",
+     "label": "t0",
+     "x": "458",
+     "y": "10",
+     "tx": "514",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t1",
+     "label": "t1",
+     "x": "10",
+     "y": "80",
+     "tx": "66",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t2",
+     "label": "t2",
+     "x": "138",
+     "y": "80",
+     "tx": "194",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t3",
+     "label": "t3",
+     "x": "266",
+     "y": "80",
+     "tx": "322",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t4",
+     "label": "t4",
+     "x": "394",
+     "y": "80",
+     "tx": "450",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t5",
+     "label": "t5",
+     "x": "522",
+     "y": "80",
+     "tx": "578",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t6",
+     "label": "t6",
+     "x": "650",
+     "y": "80",
+     "tx": "706",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t7",
+     "label": "t7",
+     "x": "778",
+     "y": "80",
+     "tx": "834",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "t8",
+     "label": "t8",
+     "x": "906",
+     "y": "80",
+     "tx": "962",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "longtasknamethatistruncated",
+     "label": "longtasknametha…",
+     "x": "458",
+     "y": "150",
+     "tx": "514",
+     "ty": "169",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 1028 190\" role=\"img\" aria-label=\"Task dependency graph\" width=\"1028\" height=\"190\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M514 40C514 60 66 60 66 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 194 60 194 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 322 60 322 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 450 60 450 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 578 60 578 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 706 60 706 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 834 60 834 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M514 40C514 60 962 60 962 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M66 110C66 130 514 130 514 150\" marker-end=\"url(#dep-arrow)\"/><g class=\"node\"><title>t0</title><rect x=\"458\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"514\" y=\"29\" text-anchor=\"middle\">t0</text></g><g class=\"node\"><title>t1</title><rect x=\"10\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"99\" text-anchor=\"middle\">t1</text></g><g class=\"node\"><title>t2</title><rect x=\"138\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"194\" y=\"99\" text-anchor=\"middle\">t2</text></g><g class=\"node\"><title>t3</title><rect x=\"266\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"322\" y=\"99\" text-anchor=\"middle\">t3</text></g><g class=\"node\"><title>t4</title><rect x=\"394\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"450\" y=\"99\" text-anchor=\"middle\">t4</text></g><g class=\"node\"><title>t5</title><rect x=\"522\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"578\" y=\"99\" text-anchor=\"middle\">t5</text></g><g class=\"node\"><title>t6</title><rect x=\"650\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"706\" y=\"99\" text-anchor=\"middle\">t6</text></g><g class=\"node\"><title>t7</title><rect x=\"778\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"834\" y=\"99\" text-anchor=\"middle\">t7</text></g><g class=\"node\"><title>t8</title><rect x=\"906\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"962\" y=\"99\" text-anchor=\"middle\">t8</text></g><g class=\"node\"><title>longtasknamethatistruncated</title><rect x=\"458\" y=\"150\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"514\" y=\"169\" text-anchor=\"middle\">longtasknametha…</text></g></svg></div>"
+ },
+ {
+  "name": "truncated",
+  "input": {
+   "a": [
+    "d0",
+    "d1",
+    "d2",
+    "d3",
+    "d4",
+    "d5",
+    "d6",
+    "d7",
+    "d8",
+    "d9",
+    "d10",
+    "d11",
+    "d12",
+    "d13",
+    "d14",
+    "d15",
+    "d16",
+    "d17",
+    "d18",
+    "d19"
+   ]
+  },
+  "props": {
+   "empty": false,
+   "width": 1284,
+   "height": 120,
+   "truncated": true,
+   "edges": [
+    {
+     "d": "M66 40C66 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M194 40C194 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M322 40C322 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M450 40C450 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M578 40C578 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M706 40C706 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M834 40C834 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M962 40C962 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M1090 40C1090 60 642 60 642 80",
+     "back": false
+    },
+    {
+     "d": "M1218 40C1218 60 642 60 642 80",
+     "back": false
+    }
+   ],
+   "nodes": [
+    {
+     "known": false,
+     "title": "d0 (not defined)",
+     "label": "d0",
+     "x": "10",
+     "y": "10",
+     "tx": "66",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d1 (not defined)",
+     "label": "d1",
+     "x": "138",
+     "y": "10",
+     "tx": "194",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d2 (not defined)",
+     "label": "d2",
+     "x": "266",
+     "y": "10",
+     "tx": "322",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d3 (not defined)",
+     "label": "d3",
+     "x": "394",
+     "y": "10",
+     "tx": "450",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d4 (not defined)",
+     "label": "d4",
+     "x": "522",
+     "y": "10",
+     "tx": "578",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d5 (not defined)",
+     "label": "d5",
+     "x": "650",
+     "y": "10",
+     "tx": "706",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d6 (not defined)",
+     "label": "d6",
+     "x": "778",
+     "y": "10",
+     "tx": "834",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d7 (not defined)",
+     "label": "d7",
+     "x": "906",
+     "y": "10",
+     "tx": "962",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d8 (not defined)",
+     "label": "d8",
+     "x": "1034",
+     "y": "10",
+     "tx": "1090",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": false,
+     "title": "d9 (not defined)",
+     "label": "d9",
+     "x": "1162",
+     "y": "10",
+     "tx": "1218",
+     "ty": "29",
+     "w": 112,
+     "h": 30
+    },
+    {
+     "known": true,
+     "title": "a",
+     "label": "a",
+     "x": "586",
+     "y": "80",
+     "tx": "642",
+     "ty": "99",
+     "w": 112,
+     "h": 30
+    }
+   ]
+  },
+  "html": "<div class=\"scroll\"><svg class=\"dep-graph\" viewBox=\"0 0 1284 120\" role=\"img\" aria-label=\"Task dependency graph\" width=\"1284\" height=\"120\" preserveAspectRatio=\"xMidYMin meet\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"dep-arrow\" viewBox=\"0 0 8 8\" refX=\"7\" refY=\"4\" markerWidth=\"8\" markerHeight=\"8\" orient=\"auto\"><path class=\"arrow\" d=\"M0 0L8 4L0 8z\"/></marker></defs><path class=\"edge\" d=\"M66 40C66 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M194 40C194 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M322 40C322 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M450 40C450 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M578 40C578 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M706 40C706 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M834 40C834 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M962 40C962 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M1090 40C1090 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><path class=\"edge\" d=\"M1218 40C1218 60 642 60 642 80\" marker-end=\"url(#dep-arrow)\"/><g class=\"node missing\"><title>d0 (not defined)</title><rect x=\"10\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"66\" y=\"29\" text-anchor=\"middle\">d0</text></g><g class=\"node missing\"><title>d1 (not defined)</title><rect x=\"138\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"194\" y=\"29\" text-anchor=\"middle\">d1</text></g><g class=\"node missing\"><title>d2 (not defined)</title><rect x=\"266\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"322\" y=\"29\" text-anchor=\"middle\">d2</text></g><g class=\"node missing\"><title>d3 (not defined)</title><rect x=\"394\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"450\" y=\"29\" text-anchor=\"middle\">d3</text></g><g class=\"node missing\"><title>d4 (not defined)</title><rect x=\"522\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"578\" y=\"29\" text-anchor=\"middle\">d4</text></g><g class=\"node missing\"><title>d5 (not defined)</title><rect x=\"650\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"706\" y=\"29\" text-anchor=\"middle\">d5</text></g><g class=\"node missing\"><title>d6 (not defined)</title><rect x=\"778\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"834\" y=\"29\" text-anchor=\"middle\">d6</text></g><g class=\"node missing\"><title>d7 (not defined)</title><rect x=\"906\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"962\" y=\"29\" text-anchor=\"middle\">d7</text></g><g class=\"node missing\"><title>d8 (not defined)</title><rect x=\"1034\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"1090\" y=\"29\" text-anchor=\"middle\">d8</text></g><g class=\"node missing\"><title>d9 (not defined)</title><rect x=\"1162\" y=\"10\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"1218\" y=\"29\" text-anchor=\"middle\">d9</text></g><g class=\"node\"><title>a</title><rect x=\"586\" y=\"80\" width=\"112\" height=\"30\" rx=\"4\"/><text x=\"642\" y=\"99\" text-anchor=\"middle\">a</text></g></svg></div><p class=\"graph-note\">Graph truncated: too many tasks or dependencies.</p>"
+ }
+]

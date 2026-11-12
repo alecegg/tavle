@@ -1,0 +1,242 @@
+[
+ {
+  "name": "single",
+  "input": {
+   "question": "Which?",
+   "options": [
+    "a",
+    {
+     "label": "B",
+     "detail": "second",
+     "value": "b"
+    }
+   ]
+  },
+  "props": {
+   "question": "Which?",
+   "options": [
+    {
+     "label": "a",
+     "value": "a",
+     "detail": "",
+     "recommended": false
+    },
+    {
+     "label": "B",
+     "value": "b",
+     "detail": "second",
+     "recommended": false
+    }
+   ],
+   "multiple": false,
+   "comment": false,
+   "maxNote": 8000
+  },
+  "id": "pick",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: false, &quot;comment&quot;: false}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"pick\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-pick\"><legend class=\"choice-question\">Which?</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"radio\" name=\"choice-pick\" value=\"a\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">a</span></span></label><label class=\"choice-option\"><input type=\"radio\" name=\"choice-pick\" value=\"b\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">B</span><span class=\"choice-detail\">second</span></span></label></div></div></fieldset><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-pick\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "multiple-comment",
+  "input": {
+   "question": "Pick `many`",
+   "options": [
+    "x",
+    "y",
+    "z"
+   ],
+   "multiple": true,
+   "comment": true
+  },
+  "props": {
+   "question": "Pick `many`",
+   "options": [
+    {
+     "label": "x",
+     "value": "x",
+     "detail": "",
+     "recommended": false
+    },
+    {
+     "label": "y",
+     "value": "y",
+     "detail": "",
+     "recommended": false
+    },
+    {
+     "label": "z",
+     "value": "z",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": true,
+   "comment": true,
+   "maxNote": 8000
+  },
+  "id": "many",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: true, &quot;comment&quot;: true}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"many\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-many\"><legend class=\"choice-question\">Pick `many`</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"checkbox\" name=\"choice-many\" value=\"x\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">x</span></span></label><label class=\"choice-option\"><input type=\"checkbox\" name=\"choice-many\" value=\"y\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">y</span></span></label><label class=\"choice-option\"><input type=\"checkbox\" name=\"choice-many\" value=\"z\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">z</span></span></label></div></div></fieldset><label class=\"choice-note\"><span>Comment</span><textarea class=\"choice-text\" rows=\"3\" maxlength=\"8000\"></textarea></label><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-many\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "recommended",
+  "input": {
+   "question": "Which?",
+   "options": [
+    {
+     "label": "A"
+    },
+    {
+     "label": "B",
+     "recommended": true,
+     "detail": "best"
+    },
+    "C"
+   ]
+  },
+  "props": {
+   "question": "Which?",
+   "options": [
+    {
+     "label": "A",
+     "value": "A",
+     "detail": "",
+     "recommended": false
+    },
+    {
+     "label": "B",
+     "value": "B",
+     "detail": "best",
+     "recommended": true
+    },
+    {
+     "label": "C",
+     "value": "C",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": false,
+   "comment": false,
+   "maxNote": 8000
+  },
+  "id": "rec",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: false, &quot;comment&quot;: false}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"rec\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-rec\"><legend class=\"choice-question\">Which?</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"radio\" name=\"choice-rec\" value=\"A\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">A</span></span></label><label class=\"choice-option\"><input type=\"radio\" name=\"choice-rec\" value=\"B\" aria-required=\"true\" aria-describedby=\"choice-rec-rec-2\"><span class=\"choice-body\"><span class=\"choice-label\">B</span><span class=\"choice-rec\" id=\"choice-rec-rec-2\">Recommended</span><span class=\"choice-detail\">best</span></span></label><label class=\"choice-option\"><input type=\"radio\" name=\"choice-rec\" value=\"C\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">C</span></span></label></div></div></fieldset><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-rec\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "question": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "options": [
+    {
+     "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "detail": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "value": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'"
+    },
+    "ok"
+   ],
+   "multiple": true
+  },
+  "props": {
+   "question": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "options": [
+    {
+     "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "value": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "detail": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "recommended": false
+    },
+    {
+     "label": "ok",
+     "value": "ok",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": true,
+   "comment": false,
+   "maxNote": 8000
+  },
+  "id": "h1",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: true, &quot;comment&quot;: false}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"h1\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-h1\"><legend class=\"choice-question\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"checkbox\" name=\"choice-h1\" value=\"&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</span><span class=\"choice-detail\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</span></span></label><label class=\"choice-option\"><input type=\"checkbox\" name=\"choice-h1\" value=\"ok\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">ok</span></span></label></div></div></fieldset><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-h1\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "flags-off",
+  "input": {
+   "question": "Q",
+   "options": [
+    "a"
+   ],
+   "multiple": false,
+   "comment": false
+  },
+  "props": {
+   "question": "Q",
+   "options": [
+    {
+     "label": "a",
+     "value": "a",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": false,
+   "comment": false,
+   "maxNote": 8000
+  },
+  "id": "w",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: false, &quot;comment&quot;: false}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"w\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-w\"><legend class=\"choice-question\">Q</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"radio\" name=\"choice-w\" value=\"a\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">a</span></span></label></div></div></fieldset><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-w\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "no-id",
+  "input": {
+   "question": "Q",
+   "options": [
+    "a"
+   ],
+   "comment": true
+  },
+  "props": {
+   "question": "Q",
+   "options": [
+    {
+     "label": "a",
+     "value": "a",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": false,
+   "comment": true,
+   "maxNote": 8000
+  },
+  "id": null,
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: false, &quot;comment&quot;: true}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"None\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-None\"><legend class=\"choice-question\">Q</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"radio\" name=\"choice-\" value=\"a\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">a</span></span></label></div></div></fieldset><label class=\"choice-note\"><span>Comment</span><textarea class=\"choice-text\" rows=\"3\" maxlength=\"8000\"></textarea></label><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-None\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "value-on",
+  "input": {
+   "question": "Q",
+   "options": [
+    {
+     "label": "On",
+     "value": "on"
+    }
+   ]
+  },
+  "props": {
+   "question": "Q",
+   "options": [
+    {
+     "label": "On",
+     "value": "on",
+     "detail": "",
+     "recommended": false
+    }
+   ],
+   "multiple": false,
+   "comment": false,
+   "maxNote": 8000
+  },
+  "id": "on1",
+  "html": "<div class=\"vb choice\" data-component=\"choice\" data-props=\"{&quot;multiple&quot;: false, &quot;comment&quot;: false}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Choice</h4><form class=\"choice-item\" data-item=\"on1\" novalidate><fieldset class=\"choice-group\" aria-describedby=\"choice-error-on1\"><legend class=\"choice-question\">Q</legend><div class=\"choice-options\"><div class=\"choice-grid\"><label class=\"choice-option\"><input type=\"radio\" name=\"choice-on1\" value=\"on\" aria-required=\"true\"><span class=\"choice-body\"><span class=\"choice-label\">On</span></span></label></div></div></fieldset><button type=\"submit\" class=\"choice-send\">Send</button><span class=\"choice-state\" aria-live=\"polite\"></span><p class=\"choice-error\" id=\"choice-error-on1\" role=\"alert\"></p></form></section></div>"
+ }
+]

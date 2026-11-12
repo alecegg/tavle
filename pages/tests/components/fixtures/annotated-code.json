@@ -1,0 +1,2860 @@
+[
+ {
+  "name": "no-notes",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": []
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [],
+   "note": "",
+   "uid": "bf3d4d4c",
+   "columns": 1,
+   "folds": [
+    [
+     1,
+     40
+    ]
+   ],
+   "notes": []
+  },
+  "html": "<figure class=\"vb annotated-code vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line\" data-line=\"5\">l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\">l6 = <span class=\"vd-code-n\">6</span>\n</span><span class=\"vd-code-line\" data-line=\"7\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line\" data-line=\"20\">l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line\" data-line=\"30\">l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line\" data-line=\"39\">l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\">l40 = <span class=\"vd-code-n\">40</span>\n</span></code></pre></div></figure>"
+ },
+ {
+  "name": "one-note",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": [
+    {
+     "lines": 20,
+     "note": "Use `queue` here."
+    }
+   ]
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 20: Use `queue` here.",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [
+    20
+   ],
+   "note": "Marked line 20",
+   "uid": "966260a6",
+   "columns": 1,
+   "folds": [
+    [
+     1,
+     16
+    ],
+    [
+     24,
+     40
+    ]
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "start": 20,
+     "end": 20,
+     "label": "",
+     "text": "Use `queue` here.",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "line 20"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c1\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 20: Use `queue` here.\"><figure class=\"vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span><span class=\"vd-code-marks\">Marked line 20</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">16 lines hidden (lines 1-16)</span><span class=\"vd-annotated-fold-open\">Hide lines 1-16</span></summary><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line\" data-line=\"5\">l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\">l6 = <span class=\"vd-code-n\">6</span>\n</span><span class=\"vd-code-line\" data-line=\"7\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span></details><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"20\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-966260a6-1\" href=\"#note-966260a6-1\" aria-label=\"Note 1, info, line 20\">1</a></span>l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">17 lines hidden (lines 24-40)</span><span class=\"vd-annotated-fold-open\">Hide lines 24-40</span></summary><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line\" data-line=\"30\">l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line\" data-line=\"39\">l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\">l40 = <span class=\"vd-code-n\">40</span>\n</span></details></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on f.py\"><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-966260a6-1\" tabindex=\"-1\" data-from=\"20\" data-to=\"20\"><a class=\"vd-annotated-back\" href=\"#pin-966260a6-1\" aria-label=\"Note 1: back to line 20\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · line 20</p><p class=\"vd-annotated-text\">Use <code>queue</code> here.</p></div></li></ol></div>"
+ },
+ {
+  "name": "range-and-kinds",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": [
+    {
+     "lines": "5-7",
+     "label": "Setup",
+     "note": "n1",
+     "kind": "warn"
+    },
+    {
+     "lines": 20,
+     "note": "n2",
+     "kind": "change"
+    },
+    {
+     "lines": "30-31",
+     "note": "n3"
+    }
+   ]
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 5-7: Setup: n1\n2. line 20: n2\n3. lines 30-31: n3",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [
+    5,
+    6,
+    7,
+    20,
+    30,
+    31
+   ],
+   "note": "Marked lines 5-7, 20, 30-31",
+   "uid": "d111aff1",
+   "columns": 1,
+   "folds": [
+    [
+     11,
+     16
+    ],
+    [
+     35,
+     40
+    ]
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "start": 5,
+     "end": 7,
+     "label": "Setup",
+     "text": "n1",
+     "kind": "warn",
+     "glyph": "!",
+     "word": "Warning",
+     "tone": "warning",
+     "where": "lines 5-7"
+    },
+    {
+     "number": 2,
+     "start": 20,
+     "end": 20,
+     "label": "",
+     "text": "n2",
+     "kind": "change",
+     "glyph": "Δ",
+     "word": "Change",
+     "tone": "decision",
+     "where": "line 20"
+    },
+    {
+     "number": 3,
+     "start": 30,
+     "end": 31,
+     "label": "",
+     "text": "n3",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "lines 30-31"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c1\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 5-7: Setup: n1\n2. line 20: n2\n3. lines 30-31: n3\"><figure class=\"vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span><span class=\"vd-code-marks\">Marked lines 5-7, 20, 30-31</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"5\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-warn\" id=\"pin-d111aff1-1\" href=\"#note-d111aff1-1\" aria-label=\"Note 1, warning, lines 5-7\">1</a></span>l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\" data-mark=\"1\">l6 = <span class=\"vd-code-n\">6</span>\n</span><span class=\"vd-code-line\" data-line=\"7\" data-mark=\"1\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">6 lines hidden (lines 11-16)</span><span class=\"vd-annotated-fold-open\">Hide lines 11-16</span></summary><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span></details><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"20\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-change\" id=\"pin-d111aff1-2\" href=\"#note-d111aff1-2\" aria-label=\"Note 2, change, line 20\">2</a></span>l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"30\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-d111aff1-3\" href=\"#note-d111aff1-3\" aria-label=\"Note 3, info, lines 30-31\">3</a></span>l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\" data-mark=\"1\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">6 lines hidden (lines 35-40)</span><span class=\"vd-annotated-fold-open\">Hide lines 35-40</span></summary><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line\" data-line=\"39\">l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\">l40 = <span class=\"vd-code-n\">40</span>\n</span></details></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on f.py\"><li class=\"vd-annotated-note vd-annotated-t-warning\" id=\"note-d111aff1-1\" tabindex=\"-1\" data-from=\"5\" data-to=\"7\"><a class=\"vd-annotated-back\" href=\"#pin-d111aff1-1\" aria-label=\"Note 1: back to lines 5-7\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">!</span> Warning · lines 5-7</p><span class=\"vd-annotated-label\">Setup</span><p class=\"vd-annotated-text\">n1</p></div></li><li class=\"vd-annotated-note vd-annotated-t-decision\" id=\"note-d111aff1-2\" tabindex=\"-1\" data-from=\"20\" data-to=\"20\"><a class=\"vd-annotated-back\" href=\"#pin-d111aff1-2\" aria-label=\"Note 2: back to line 20\">2</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">Δ</span> Change · line 20</p><p class=\"vd-annotated-text\">n2</p></div></li><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-d111aff1-3\" tabindex=\"-1\" data-from=\"30\" data-to=\"31\"><a class=\"vd-annotated-back\" href=\"#pin-d111aff1-3\" aria-label=\"Note 3: back to lines 30-31\">3</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · lines 30-31</p><p class=\"vd-annotated-text\">n3</p></div></li></ol></div>"
+ },
+ {
+  "name": "same-line-pins",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": [
+    {
+     "lines": 2,
+     "note": "a"
+    },
+    {
+     "lines": 2,
+     "note": "b"
+    },
+    {
+     "lines": "2-3",
+     "note": "c"
+    }
+   ]
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 2: a\n2. line 2: b\n3. lines 2-3: c",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [
+    2,
+    3
+   ],
+   "note": "Marked lines 2-3",
+   "uid": "628ecc81",
+   "columns": 3,
+   "folds": [
+    [
+     7,
+     40
+    ]
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "start": 2,
+     "end": 2,
+     "label": "",
+     "text": "a",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "line 2"
+    },
+    {
+     "number": 2,
+     "start": 2,
+     "end": 2,
+     "label": "",
+     "text": "b",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "line 2"
+    },
+    {
+     "number": 3,
+     "start": 2,
+     "end": 3,
+     "label": "",
+     "text": "c",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "lines 2-3"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c3\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 2: a\n2. line 2: b\n3. lines 2-3: c\"><figure class=\"vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span><span class=\"vd-code-marks\">Marked lines 2-3</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"2\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-628ecc81-1\" href=\"#note-628ecc81-1\" aria-label=\"Note 1, info, line 2\">1</a><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-628ecc81-2\" href=\"#note-628ecc81-2\" aria-label=\"Note 2, info, line 2\">2</a><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-628ecc81-3\" href=\"#note-628ecc81-3\" aria-label=\"Note 3, info, lines 2-3\">3</a></span>l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\" data-mark=\"1\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line\" data-line=\"5\">l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\">l6 = <span class=\"vd-code-n\">6</span>\n</span><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">34 lines hidden (lines 7-40)</span><span class=\"vd-annotated-fold-open\">Hide lines 7-40</span></summary><span class=\"vd-code-line\" data-line=\"7\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line\" data-line=\"20\">l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line\" data-line=\"30\">l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line\" data-line=\"39\">l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\">l40 = <span class=\"vd-code-n\">40</span>\n</span></details></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on f.py\"><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-628ecc81-1\" tabindex=\"-1\" data-from=\"2\" data-to=\"2\"><a class=\"vd-annotated-back\" href=\"#pin-628ecc81-1\" aria-label=\"Note 1: back to line 2\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · line 2</p><p class=\"vd-annotated-text\">a</p></div></li><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-628ecc81-2\" tabindex=\"-1\" data-from=\"2\" data-to=\"2\"><a class=\"vd-annotated-back\" href=\"#pin-628ecc81-2\" aria-label=\"Note 2: back to line 2\">2</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · line 2</p><p class=\"vd-annotated-text\">b</p></div></li><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-628ecc81-3\" tabindex=\"-1\" data-from=\"2\" data-to=\"3\"><a class=\"vd-annotated-back\" href=\"#pin-628ecc81-3\" aria-label=\"Note 3: back to lines 2-3\">3</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · lines 2-3</p><p class=\"vd-annotated-text\">c</p></div></li></ol></div>"
+ },
+ {
+  "name": "no-collapse",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": [
+    {
+     "lines": 20,
+     "note": "n"
+    }
+   ],
+   "collapse": false
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 20: n",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [
+    20
+   ],
+   "note": "Marked line 20",
+   "uid": "84bafa08",
+   "columns": 1,
+   "folds": [],
+   "notes": [
+    {
+     "number": 1,
+     "start": 20,
+     "end": 20,
+     "label": "",
+     "text": "n",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "line 20"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c1\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. line 20: n\"><figure class=\"vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span><span class=\"vd-code-marks\">Marked line 20</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line\" data-line=\"5\">l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\">l6 = <span class=\"vd-code-n\">6</span>\n</span><span class=\"vd-code-line\" data-line=\"7\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"20\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-84bafa08-1\" href=\"#note-84bafa08-1\" aria-label=\"Note 1, info, line 20\">1</a></span>l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line\" data-line=\"30\">l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line\" data-line=\"39\">l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\">l40 = <span class=\"vd-code-n\">40</span>\n</span></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on f.py\"><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-84bafa08-1\" tabindex=\"-1\" data-from=\"20\" data-to=\"20\"><a class=\"vd-annotated-back\" href=\"#pin-84bafa08-1\" aria-label=\"Note 1: back to line 20\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · line 20</p><p class=\"vd-annotated-text\">n</p></div></li></ol></div>"
+ },
+ {
+  "name": "clamped",
+  "input": {
+   "filename": "f.py",
+   "language": "python",
+   "source": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n",
+   "notes": [
+    {
+     "lines": "39-90",
+     "note": "n"
+    }
+   ]
+  },
+  "props": {
+   "copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 39-40: n",
+   "title": "f.py",
+   "language": "python",
+   "langClass": "python",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "l1 = "
+     ],
+     [
+      "n",
+      "1"
+     ]
+    ],
+    [
+     [
+      "",
+      "l2 = "
+     ],
+     [
+      "n",
+      "2"
+     ]
+    ],
+    [
+     [
+      "",
+      "l3 = "
+     ],
+     [
+      "n",
+      "3"
+     ]
+    ],
+    [
+     [
+      "",
+      "l4 = "
+     ],
+     [
+      "n",
+      "4"
+     ]
+    ],
+    [
+     [
+      "",
+      "l5 = "
+     ],
+     [
+      "n",
+      "5"
+     ]
+    ],
+    [
+     [
+      "",
+      "l6 = "
+     ],
+     [
+      "n",
+      "6"
+     ]
+    ],
+    [
+     [
+      "",
+      "l7 = "
+     ],
+     [
+      "n",
+      "7"
+     ]
+    ],
+    [
+     [
+      "",
+      "l8 = "
+     ],
+     [
+      "n",
+      "8"
+     ]
+    ],
+    [
+     [
+      "",
+      "l9 = "
+     ],
+     [
+      "n",
+      "9"
+     ]
+    ],
+    [
+     [
+      "",
+      "l10 = "
+     ],
+     [
+      "n",
+      "10"
+     ]
+    ],
+    [
+     [
+      "",
+      "l11 = "
+     ],
+     [
+      "n",
+      "11"
+     ]
+    ],
+    [
+     [
+      "",
+      "l12 = "
+     ],
+     [
+      "n",
+      "12"
+     ]
+    ],
+    [
+     [
+      "",
+      "l13 = "
+     ],
+     [
+      "n",
+      "13"
+     ]
+    ],
+    [
+     [
+      "",
+      "l14 = "
+     ],
+     [
+      "n",
+      "14"
+     ]
+    ],
+    [
+     [
+      "",
+      "l15 = "
+     ],
+     [
+      "n",
+      "15"
+     ]
+    ],
+    [
+     [
+      "",
+      "l16 = "
+     ],
+     [
+      "n",
+      "16"
+     ]
+    ],
+    [
+     [
+      "",
+      "l17 = "
+     ],
+     [
+      "n",
+      "17"
+     ]
+    ],
+    [
+     [
+      "",
+      "l18 = "
+     ],
+     [
+      "n",
+      "18"
+     ]
+    ],
+    [
+     [
+      "",
+      "l19 = "
+     ],
+     [
+      "n",
+      "19"
+     ]
+    ],
+    [
+     [
+      "",
+      "l20 = "
+     ],
+     [
+      "n",
+      "20"
+     ]
+    ],
+    [
+     [
+      "",
+      "l21 = "
+     ],
+     [
+      "n",
+      "21"
+     ]
+    ],
+    [
+     [
+      "",
+      "l22 = "
+     ],
+     [
+      "n",
+      "22"
+     ]
+    ],
+    [
+     [
+      "",
+      "l23 = "
+     ],
+     [
+      "n",
+      "23"
+     ]
+    ],
+    [
+     [
+      "",
+      "l24 = "
+     ],
+     [
+      "n",
+      "24"
+     ]
+    ],
+    [
+     [
+      "",
+      "l25 = "
+     ],
+     [
+      "n",
+      "25"
+     ]
+    ],
+    [
+     [
+      "",
+      "l26 = "
+     ],
+     [
+      "n",
+      "26"
+     ]
+    ],
+    [
+     [
+      "",
+      "l27 = "
+     ],
+     [
+      "n",
+      "27"
+     ]
+    ],
+    [
+     [
+      "",
+      "l28 = "
+     ],
+     [
+      "n",
+      "28"
+     ]
+    ],
+    [
+     [
+      "",
+      "l29 = "
+     ],
+     [
+      "n",
+      "29"
+     ]
+    ],
+    [
+     [
+      "",
+      "l30 = "
+     ],
+     [
+      "n",
+      "30"
+     ]
+    ],
+    [
+     [
+      "",
+      "l31 = "
+     ],
+     [
+      "n",
+      "31"
+     ]
+    ],
+    [
+     [
+      "",
+      "l32 = "
+     ],
+     [
+      "n",
+      "32"
+     ]
+    ],
+    [
+     [
+      "",
+      "l33 = "
+     ],
+     [
+      "n",
+      "33"
+     ]
+    ],
+    [
+     [
+      "",
+      "l34 = "
+     ],
+     [
+      "n",
+      "34"
+     ]
+    ],
+    [
+     [
+      "",
+      "l35 = "
+     ],
+     [
+      "n",
+      "35"
+     ]
+    ],
+    [
+     [
+      "",
+      "l36 = "
+     ],
+     [
+      "n",
+      "36"
+     ]
+    ],
+    [
+     [
+      "",
+      "l37 = "
+     ],
+     [
+      "n",
+      "37"
+     ]
+    ],
+    [
+     [
+      "",
+      "l38 = "
+     ],
+     [
+      "n",
+      "38"
+     ]
+    ],
+    [
+     [
+      "",
+      "l39 = "
+     ],
+     [
+      "n",
+      "39"
+     ]
+    ],
+    [
+     [
+      "",
+      "l40 = "
+     ],
+     [
+      "n",
+      "40"
+     ]
+    ]
+   ],
+   "marked": [
+    39,
+    40
+   ],
+   "note": "Marked lines 39-40",
+   "uid": "f43f6a5b",
+   "columns": 1,
+   "folds": [
+    [
+     1,
+     35
+    ]
+   ],
+   "notes": [
+    {
+     "number": 1,
+     "start": 39,
+     "end": 40,
+     "label": "",
+     "text": "n",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "lines 39-40"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c1\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 39-40: n\"><figure class=\"vd-code-panel vd-code vd-code-d2 vd-code-wrap\" data-copy=\"l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">f.py</span><span class=\"vd-code-lang\">python</span><span class=\"vd-code-marks\">Marked lines 39-40</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"f.py, python, lines 1 to 40\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-python\"><details class=\"vd-annotated-fold\"><summary class=\"vd-annotated-fold-row\"><span class=\"vd-annotated-fold-closed\">35 lines hidden (lines 1-35)</span><span class=\"vd-annotated-fold-open\">Hide lines 1-35</span></summary><span class=\"vd-code-line\" data-line=\"1\">l1 = <span class=\"vd-code-n\">1</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">l2 = <span class=\"vd-code-n\">2</span>\n</span><span class=\"vd-code-line\" data-line=\"3\">l3 = <span class=\"vd-code-n\">3</span>\n</span><span class=\"vd-code-line\" data-line=\"4\">l4 = <span class=\"vd-code-n\">4</span>\n</span><span class=\"vd-code-line\" data-line=\"5\">l5 = <span class=\"vd-code-n\">5</span>\n</span><span class=\"vd-code-line\" data-line=\"6\">l6 = <span class=\"vd-code-n\">6</span>\n</span><span class=\"vd-code-line\" data-line=\"7\">l7 = <span class=\"vd-code-n\">7</span>\n</span><span class=\"vd-code-line\" data-line=\"8\">l8 = <span class=\"vd-code-n\">8</span>\n</span><span class=\"vd-code-line\" data-line=\"9\">l9 = <span class=\"vd-code-n\">9</span>\n</span><span class=\"vd-code-line\" data-line=\"10\">l10 = <span class=\"vd-code-n\">10</span>\n</span><span class=\"vd-code-line\" data-line=\"11\">l11 = <span class=\"vd-code-n\">11</span>\n</span><span class=\"vd-code-line\" data-line=\"12\">l12 = <span class=\"vd-code-n\">12</span>\n</span><span class=\"vd-code-line\" data-line=\"13\">l13 = <span class=\"vd-code-n\">13</span>\n</span><span class=\"vd-code-line\" data-line=\"14\">l14 = <span class=\"vd-code-n\">14</span>\n</span><span class=\"vd-code-line\" data-line=\"15\">l15 = <span class=\"vd-code-n\">15</span>\n</span><span class=\"vd-code-line\" data-line=\"16\">l16 = <span class=\"vd-code-n\">16</span>\n</span><span class=\"vd-code-line\" data-line=\"17\">l17 = <span class=\"vd-code-n\">17</span>\n</span><span class=\"vd-code-line\" data-line=\"18\">l18 = <span class=\"vd-code-n\">18</span>\n</span><span class=\"vd-code-line\" data-line=\"19\">l19 = <span class=\"vd-code-n\">19</span>\n</span><span class=\"vd-code-line\" data-line=\"20\">l20 = <span class=\"vd-code-n\">20</span>\n</span><span class=\"vd-code-line\" data-line=\"21\">l21 = <span class=\"vd-code-n\">21</span>\n</span><span class=\"vd-code-line\" data-line=\"22\">l22 = <span class=\"vd-code-n\">22</span>\n</span><span class=\"vd-code-line\" data-line=\"23\">l23 = <span class=\"vd-code-n\">23</span>\n</span><span class=\"vd-code-line\" data-line=\"24\">l24 = <span class=\"vd-code-n\">24</span>\n</span><span class=\"vd-code-line\" data-line=\"25\">l25 = <span class=\"vd-code-n\">25</span>\n</span><span class=\"vd-code-line\" data-line=\"26\">l26 = <span class=\"vd-code-n\">26</span>\n</span><span class=\"vd-code-line\" data-line=\"27\">l27 = <span class=\"vd-code-n\">27</span>\n</span><span class=\"vd-code-line\" data-line=\"28\">l28 = <span class=\"vd-code-n\">28</span>\n</span><span class=\"vd-code-line\" data-line=\"29\">l29 = <span class=\"vd-code-n\">29</span>\n</span><span class=\"vd-code-line\" data-line=\"30\">l30 = <span class=\"vd-code-n\">30</span>\n</span><span class=\"vd-code-line\" data-line=\"31\">l31 = <span class=\"vd-code-n\">31</span>\n</span><span class=\"vd-code-line\" data-line=\"32\">l32 = <span class=\"vd-code-n\">32</span>\n</span><span class=\"vd-code-line\" data-line=\"33\">l33 = <span class=\"vd-code-n\">33</span>\n</span><span class=\"vd-code-line\" data-line=\"34\">l34 = <span class=\"vd-code-n\">34</span>\n</span><span class=\"vd-code-line\" data-line=\"35\">l35 = <span class=\"vd-code-n\">35</span>\n</span></details><span class=\"vd-code-line\" data-line=\"36\">l36 = <span class=\"vd-code-n\">36</span>\n</span><span class=\"vd-code-line\" data-line=\"37\">l37 = <span class=\"vd-code-n\">37</span>\n</span><span class=\"vd-code-line\" data-line=\"38\">l38 = <span class=\"vd-code-n\">38</span>\n</span><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"39\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-f43f6a5b-1\" href=\"#note-f43f6a5b-1\" aria-label=\"Note 1, info, lines 39-40\">1</a></span>l39 = <span class=\"vd-code-n\">39</span>\n</span><span class=\"vd-code-line\" data-line=\"40\" data-mark=\"1\">l40 = <span class=\"vd-code-n\">40</span>\n</span></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on f.py\"><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-f43f6a5b-1\" tabindex=\"-1\" data-from=\"39\" data-to=\"40\"><a class=\"vd-annotated-back\" href=\"#pin-f43f6a5b-1\" aria-label=\"Note 1: back to lines 39-40\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · lines 39-40</p><p class=\"vd-annotated-text\">n</p></div></li></ol></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "filename": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "language": "js",
+   "source": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\nx\n",
+   "notes": [
+    {
+     "lines": 1,
+     "label": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+     "note": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's' `<i>`"
+    }
+   ]
+  },
+  "props": {
+   "copy": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\nx\n\n1. line 1: <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's': <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's' `<i>`",
+   "title": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "language": "js",
+   "langClass": "js",
+   "wrap": true,
+   "numbers": true,
+   "first": 1,
+   "lines": [
+    [
+     [
+      "",
+      "<img src=x onerror=alert("
+     ],
+     [
+      "n",
+      "1"
+     ],
+     [
+      "",
+      ")> "
+     ],
+     [
+      "s",
+      "\"q\""
+     ],
+     [
+      "",
+      " &amp; <script>alert("
+     ],
+     [
+      "n",
+      "1"
+     ],
+     [
+      "",
+      ")</script> "
+     ],
+     [
+      "s",
+      "'s'"
+     ]
+    ],
+    [
+     [
+      "",
+      "x"
+     ]
+    ]
+   ],
+   "marked": [
+    1
+   ],
+   "note": "Marked line 1",
+   "uid": "1c153f63",
+   "columns": 1,
+   "folds": [],
+   "notes": [
+    {
+     "number": 1,
+     "start": 1,
+     "end": 1,
+     "label": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+     "text": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's' `<i>`",
+     "kind": "info",
+     "glyph": "i",
+     "word": "Info",
+     "tone": "info",
+     "where": "line 1"
+    }
+   ]
+  },
+  "html": "<div class=\"vb annotated-code vd-annotated-code vd-annotated-c1\" data-copy=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\nx\n\n1. line 1: &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;: &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27; `&lt;i&gt;`\"><figure class=\"vd-code-panel vd-code vd-code-d1 vd-code-wrap\" data-copy=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\nx\"><figcaption class=\"vd-code-head\"><span class=\"vd-code-title\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</span><span class=\"vd-code-lang\">js</span><span class=\"vd-code-marks\">Marked line 1</span></figcaption><div class=\"vd-code-scroll\" role=\"region\" aria-label=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;, js, lines 1 to 2\" tabindex=\"0\"><pre class=\"vd-code-pre\"><code class=\"language-js\"><span class=\"vd-code-line vd-annotated-pinned\" data-line=\"1\" data-mark=\"1\"><span class=\"vd-annotated-pins\"><a class=\"vd-annotated-pin vd-annotated-k-info\" id=\"pin-1c153f63-1\" href=\"#note-1c153f63-1\" aria-label=\"Note 1, info, line 1\">1</a></span>&lt;img src=x onerror=alert(<span class=\"vd-code-n\">1</span>)&gt; <span class=\"vd-code-s\">&quot;q&quot;</span> &amp;amp; &lt;script&gt;alert(<span class=\"vd-code-n\">1</span>)&lt;/script&gt; <span class=\"vd-code-s\">&#x27;s&#x27;</span>\n</span><span class=\"vd-code-line\" data-line=\"2\">x\n</span></code></pre></div></figure><ol class=\"vd-annotated-notes\" aria-label=\"Notes on &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\"><li class=\"vd-annotated-note vd-annotated-t-info\" id=\"note-1c153f63-1\" tabindex=\"-1\" data-from=\"1\" data-to=\"1\"><a class=\"vd-annotated-back\" href=\"#pin-1c153f63-1\" aria-label=\"Note 1: back to line 1\">1</a><div class=\"vd-annotated-body\"><p class=\"vd-annotated-meta\"><span class=\"vd-annotated-glyph\" aria-hidden=\"true\">i</span> Info · line 1</p><span class=\"vd-annotated-label\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</span><p class=\"vd-annotated-text\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27; <code>&lt;i&gt;</code></p></div></li></ol></div>"
+ }
+]

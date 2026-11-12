@@ -1,0 +1,207 @@
+[
+ {
+  "name": "ends",
+  "input": {
+   "label": "Confidence",
+   "min": 0,
+   "max": 10,
+   "step": 2,
+   "labels": [
+    "Low",
+    "High"
+   ]
+  },
+  "props": {
+   "label": "Confidence",
+   "min": 0,
+   "max": 10,
+   "step": 2,
+   "minText": "0",
+   "maxText": "10",
+   "stepText": "2",
+   "ends": [
+    "Low",
+    "High"
+   ],
+   "ticks": 6
+  },
+  "id": "conf",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 10, &quot;step&quot;: 2}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"conf\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">Confidence</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-conf\" aria-label=\"Confidence\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"10\" step=\"2\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">Low</span><span class=\"slider-end\">High</span></div><output class=\"slider-value\" for=\"slider-input-conf\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-conf\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "fraction",
+  "input": {
+   "label": "Share",
+   "min": 0,
+   "max": 1,
+   "step": 0.1
+  },
+  "props": {
+   "label": "Share",
+   "min": 0,
+   "max": 1,
+   "step": 0.1,
+   "minText": "0",
+   "maxText": "1",
+   "stepText": "0.1",
+   "ends": [
+    "0",
+    "1"
+   ],
+   "ticks": 11
+  },
+  "id": "frac",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 1, &quot;step&quot;: 0.1}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"frac\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">Share</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-frac\" aria-label=\"Share\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"1\" step=\"0.1\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">0</span><span class=\"slider-end\">1</span></div><output class=\"slider-value\" for=\"slider-input-frac\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-frac\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "plain-negative",
+  "input": {
+   "label": "Plain",
+   "min": -5,
+   "max": 5
+  },
+  "props": {
+   "label": "Plain",
+   "min": -5,
+   "max": 5,
+   "step": 1,
+   "minText": "-5",
+   "maxText": "5",
+   "stepText": "1",
+   "ends": [
+    "-5",
+    "5"
+   ],
+   "ticks": 11
+  },
+  "id": "plain",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: -5, &quot;max&quot;: 5, &quot;step&quot;: 1}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"plain\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">Plain</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-plain\" aria-label=\"Plain\" aria-valuetext=\"Not chosen yet\" min=\"-5\" max=\"5\" step=\"1\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">-5</span><span class=\"slider-end\">5</span></div><output class=\"slider-value\" for=\"slider-input-plain\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-plain\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "floats",
+  "input": {
+   "label": "F",
+   "min": 0.0,
+   "max": 3.0,
+   "step": 1.0
+  },
+  "props": {
+   "label": "F",
+   "min": 0.0,
+   "max": 3.0,
+   "step": 1.0,
+   "minText": "0.0",
+   "maxText": "3.0",
+   "stepText": "1.0",
+   "ends": [
+    "0.0",
+    "3.0"
+   ],
+   "ticks": 4
+  },
+  "id": "fl",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0.0, &quot;max&quot;: 3.0, &quot;step&quot;: 1.0}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"fl\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">F</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-fl\" aria-label=\"F\" aria-valuetext=\"Not chosen yet\" min=\"0.0\" max=\"3.0\" step=\"1.0\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">0.0</span><span class=\"slider-end\">3.0</span></div><output class=\"slider-value\" for=\"slider-input-fl\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-fl\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "many-steps",
+  "input": {
+   "label": "M",
+   "min": 0,
+   "max": 100
+  },
+  "props": {
+   "label": "M",
+   "min": 0,
+   "max": 100,
+   "step": 1,
+   "minText": "0",
+   "maxText": "100",
+   "stepText": "1",
+   "ends": [
+    "0",
+    "100"
+   ],
+   "ticks": 0
+  },
+  "id": "many",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 100, &quot;step&quot;: 1}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"many\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">M</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-many\" aria-label=\"M\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"100\" step=\"1\"></div><div class=\"slider-ends\"><span class=\"slider-end\">0</span><span class=\"slider-end\">100</span></div><output class=\"slider-value\" for=\"slider-input-many\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-many\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "irregular",
+  "input": {
+   "label": "I",
+   "min": 0,
+   "max": 1,
+   "step": 0.3
+  },
+  "props": {
+   "label": "I",
+   "min": 0,
+   "max": 1,
+   "step": 0.3,
+   "minText": "0",
+   "maxText": "1",
+   "stepText": "0.3",
+   "ends": [
+    "0",
+    "1"
+   ],
+   "ticks": 0
+  },
+  "id": "irr",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 1, &quot;step&quot;: 0.3}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"irr\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">I</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-irr\" aria-label=\"I\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"1\" step=\"0.3\"></div><div class=\"slider-ends\"><span class=\"slider-end\">0</span><span class=\"slider-end\">1</span></div><output class=\"slider-value\" for=\"slider-input-irr\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-irr\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "min": 0,
+   "max": 10,
+   "step": 2,
+   "labels": [
+    "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+    "H"
+   ]
+  },
+  "props": {
+   "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "min": 0,
+   "max": 10,
+   "step": 2,
+   "minText": "0",
+   "maxText": "10",
+   "stepText": "2",
+   "ends": [
+    "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+    "H"
+   ],
+   "ticks": 6
+  },
+  "id": "hs",
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 10, &quot;step&quot;: 2}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"hs\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-hs\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"10\" step=\"2\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</span><span class=\"slider-end\">H</span></div><output class=\"slider-value\" for=\"slider-input-hs\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-hs\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "no-id",
+  "input": {
+   "label": "L",
+   "min": 0,
+   "max": 3
+  },
+  "props": {
+   "label": "L",
+   "min": 0,
+   "max": 3,
+   "step": 1,
+   "minText": "0",
+   "maxText": "3",
+   "stepText": "1",
+   "ends": [
+    "0",
+    "3"
+   ],
+   "ticks": 4
+  },
+  "id": null,
+  "html": "<div class=\"vb slider\" data-component=\"slider\" data-props=\"{&quot;min&quot;: 0, &quot;max&quot;: 3, &quot;step&quot;: 1}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Slider</h4><form class=\"slider-item\" data-item=\"None\" novalidate><fieldset class=\"slider-group\"><legend class=\"slider-label\">L</legend><div class=\"slider-track\"><input type=\"range\" class=\"slider-input\" id=\"slider-input-None\" aria-label=\"L\" aria-valuetext=\"Not chosen yet\" min=\"0\" max=\"3\" step=\"1\"><div class=\"slider-ticks\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></div></div><div class=\"slider-ends\"><span class=\"slider-end\">0</span><span class=\"slider-end\">3</span></div><output class=\"slider-value\" for=\"slider-input-None\">Not chosen yet</output></fieldset><button type=\"submit\" class=\"slider-send\">Send</button><span class=\"slider-state\" aria-live=\"polite\"></span><p class=\"slider-error\" id=\"slider-error-None\" role=\"alert\"></p></form></section></div>"
+ }
+]

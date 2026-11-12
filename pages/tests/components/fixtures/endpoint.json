@@ -1,0 +1,259 @@
+[
+ {
+  "name": "minimal",
+  "input": {
+   "method": "GET",
+   "path": "/x",
+   "auth": "none",
+   "responses": [
+    {
+     "status": 200
+    }
+   ]
+  },
+  "props": {
+   "method": "GET",
+   "path": "/x",
+   "auth": "none",
+   "change": "",
+   "was": "",
+   "note": null,
+   "request": null,
+   "responses": [
+    {
+     "status": "200",
+     "body": "",
+     "change": "",
+     "was": ""
+    }
+   ],
+   "summary": "GET /x: auth none, 1 response",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb endpoint\"><p class=\"vb-alt\">GET /x: auth none, 1 response</p><section class=\"vb-card\"><h4 class=\"vb-title\"><span class=\"vb-badge vb-method\">GET</span> <code>/x</code> <span class=\"vb-badge vb-auth-none\">auth: none</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Responses\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>status</th><th>body</th></tr></thead><tbody><tr><td><span class=\"vb-badge vb-status\">200</span></td><td></td></tr></tbody></table></div></section></div>"
+ },
+ {
+  "name": "full",
+  "input": {
+   "method": "POST",
+   "path": "/orders",
+   "auth": "bearer",
+   "summary": "Create <one>",
+   "request": {
+    "q": "text",
+    "n": "int"
+   },
+   "responses": [
+    {
+     "status": 201,
+     "body": "created"
+    },
+    {
+     "status": 400,
+     "body": "bad"
+    }
+   ]
+  },
+  "props": {
+   "method": "POST",
+   "path": "/orders",
+   "auth": "bearer",
+   "change": "",
+   "was": "",
+   "note": "Create <one>",
+   "request": [
+    {
+     "name": "q",
+     "type": "text",
+     "change": "",
+     "was": "",
+     "key": false
+    },
+    {
+     "name": "n",
+     "type": "int",
+     "change": "",
+     "was": "",
+     "key": false
+    }
+   ],
+   "responses": [
+    {
+     "status": "201",
+     "body": "created",
+     "change": "",
+     "was": ""
+    },
+    {
+     "status": "400",
+     "body": "bad",
+     "change": "",
+     "was": ""
+    }
+   ],
+   "summary": "POST /orders: auth bearer, 2 responses",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb endpoint\"><p class=\"vb-alt\">POST /orders: auth bearer, 2 responses</p><section class=\"vb-card\"><h4 class=\"vb-title\"><span class=\"vb-badge vb-method\">POST</span> <code>/orders</code> <span class=\"vb-badge vb-auth\">auth: bearer</span></h4><p>Create &lt;one&gt;</p><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Request\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>request</th><th>type</th></tr></thead><tbody><tr><td>q</td><td>text</td></tr><tr><td>n</td><td>int</td></tr></tbody></table></div><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Responses\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>status</th><th>body</th></tr></thead><tbody><tr><td><span class=\"vb-badge vb-status\">201</span></td><td>created</td></tr><tr><td><span class=\"vb-badge vb-status\">400</span></td><td>bad</td></tr></tbody></table></div></section></div>"
+ },
+ {
+  "name": "changes",
+  "input": {
+   "method": "PUT",
+   "path": "/v2/x",
+   "auth": "bearer",
+   "change": "renamed",
+   "was": "/x",
+   "request": {
+    "a": {
+     "type": "int",
+     "change": "added"
+    },
+    "b": {
+     "type": "text",
+     "change": "modified",
+     "was": "int"
+    }
+   },
+   "responses": [
+    {
+     "status": 200,
+     "body": "ok",
+     "change": "modified",
+     "was": "old"
+    },
+    {
+     "status": 404,
+     "change": "removed"
+    }
+   ]
+  },
+  "props": {
+   "method": "PUT",
+   "path": "/v2/x",
+   "auth": "bearer",
+   "change": "renamed",
+   "was": "/x",
+   "note": null,
+   "request": [
+    {
+     "name": "a",
+     "type": "int",
+     "change": "added",
+     "was": "",
+     "key": false
+    },
+    {
+     "name": "b",
+     "type": "text",
+     "change": "modified",
+     "was": "int",
+     "key": false
+    }
+   ],
+   "responses": [
+    {
+     "status": "200",
+     "body": "ok",
+     "change": "modified",
+     "was": "old"
+    },
+    {
+     "status": "404",
+     "body": "",
+     "change": "removed",
+     "was": ""
+    }
+   ],
+   "summary": "PUT /v2/x: auth bearer, 2 responses",
+   "legend": "Changes: 1 added, 2 modified, 1 removed, 1 renamed",
+   "copy": "renamed PUT /v2/x (was /x)\nadded request.a\nmodified request.b (was int)\nmodified response 200 (was old)\nremoved response 404"
+  },
+  "html": "<div class=\"vb endpoint\" data-copy=\"renamed PUT /v2/x (was /x)\nadded request.a\nmodified request.b (was int)\nmodified response 200 (was old)\nremoved response 404\"><p class=\"vb-alt\">PUT /v2/x: auth bearer, 2 responses</p><section class=\"vb-card vd-change-card vd-change-renamed\"><h4 class=\"vb-title\"><span class=\"vb-badge vb-method\">PUT</span> <span class=\"vd-change-old\">/x</span> &rarr; <span class=\"vd-change-name\"><code>/v2/x</code></span> <span class=\"vb-badge vb-auth\">auth: bearer</span> <span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Request\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>request</th><th>type</th><th>change</th></tr></thead><tbody><tr class=\"vd-change-row vd-change-added\" aria-label=\"added a\"><td><span class=\"vd-change-name\">a</span></td><td>int</td><td><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span></td></tr><tr class=\"vd-change-row vd-change-modified\" aria-label=\"modified b\"><td><span class=\"vd-change-name\">b</span></td><td>text</td><td><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-was\">was int</span></td></tr></tbody></table></div><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Responses\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>status</th><th>body</th><th>change</th></tr></thead><tbody><tr class=\"vd-change-row vd-change-modified\" aria-label=\"modified response 200\"><td><span class=\"vb-badge vb-status\">200</span></td><td>ok</td><td><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-was\">was old</span></td></tr><tr class=\"vd-change-row vd-change-removed\" aria-label=\"removed response 404\"><td><span class=\"vb-badge vb-status\">404</span></td><td></td><td><span class=\"vd-change-badge vd-change-removed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-</span> removed</span></td></tr></tbody></table></div></section><p class=\"vb-alt vd-change-legend\">Changes: 1 added, 2 modified, 1 removed, 1 renamed</p></div>"
+ },
+ {
+  "name": "modified",
+  "input": {
+   "method": "GET",
+   "path": "/y",
+   "auth": "none",
+   "change": "modified",
+   "was": "<b>",
+   "responses": [
+    {
+     "status": 200
+    }
+   ]
+  },
+  "props": {
+   "method": "GET",
+   "path": "/y",
+   "auth": "none",
+   "change": "modified",
+   "was": "<b>",
+   "note": null,
+   "request": null,
+   "responses": [
+    {
+     "status": "200",
+     "body": "",
+     "change": "",
+     "was": ""
+    }
+   ],
+   "summary": "GET /y: auth none, 1 response",
+   "legend": "Changes: 1 modified",
+   "copy": "modified GET /y (was <b>)"
+  },
+  "html": "<div class=\"vb endpoint\" data-copy=\"modified GET /y (was &lt;b&gt;)\"><p class=\"vb-alt\">GET /y: auth none, 1 response</p><section class=\"vb-card vd-change-card vd-change-modified\"><h4 class=\"vb-title\"><span class=\"vb-badge vb-method\">GET</span> <span class=\"vd-change-name\"><code>/y</code></span> <span class=\"vb-badge vb-auth-none\">auth: none</span> <span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-was\">was &lt;b&gt;</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Responses\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>status</th><th>body</th></tr></thead><tbody><tr><td><span class=\"vb-badge vb-status\">200</span></td><td></td></tr></tbody></table></div></section><p class=\"vb-alt vd-change-legend\">Changes: 1 modified</p></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "method": "GET",
+   "path": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "auth": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "summary": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "request": {
+    "<img src=x onerror=alert(1)> \"q\" &amp;": "<img src=x onerror=alert(1)> \"q\" &amp;"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "body": "<img src=x onerror=alert(1)> \"q\" &amp;"
+    }
+   ]
+  },
+  "props": {
+   "method": "GET",
+   "path": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "auth": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "change": "",
+   "was": "",
+   "note": "<img src=x onerror=alert(1)> \"q\" &amp;",
+   "request": [
+    {
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "type": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "change": "",
+     "was": "",
+     "key": false
+    }
+   ],
+   "responses": [
+    {
+     "status": "200",
+     "body": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "change": "",
+     "was": ""
+    }
+   ],
+   "summary": "GET <img src=x onerror=alert(1)> \"q\" &amp;: auth <img src=x onerror=alert(1)> \"q\" &amp;, 1 response",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb endpoint\"><p class=\"vb-alt\">GET &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;: auth &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;, 1 response</p><section class=\"vb-card\"><h4 class=\"vb-title\"><span class=\"vb-badge vb-method\">GET</span> <code>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</code> <span class=\"vb-badge vb-auth\">auth: &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</span></h4><p>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</p><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Request\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>request</th><th>type</th></tr></thead><tbody><tr><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td></tr></tbody></table></div><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"Responses\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>status</th><th>body</th></tr></thead><tbody><tr><td><span class=\"vb-badge vb-status\">200</span></td><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td></tr></tbody></table></div></section></div>"
+ }
+]

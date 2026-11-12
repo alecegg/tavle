@@ -1,0 +1,139 @@
+[
+ {
+  "name": "details",
+  "input": {
+   "question": "Urgency?",
+   "items": [
+    "a",
+    {
+     "label": "B",
+     "detail": "second",
+     "value": "b"
+    },
+    "c"
+   ]
+  },
+  "props": {
+   "question": "Urgency?",
+   "items": [
+    {
+     "label": "a",
+     "value": "a",
+     "detail": "",
+     "name": "a"
+    },
+    {
+     "label": "B",
+     "value": "b",
+     "detail": "second",
+     "name": "B (b)"
+    },
+    {
+     "label": "c",
+     "value": "c",
+     "detail": "",
+     "name": "c"
+    }
+   ]
+  },
+  "id": "order",
+  "html": "<div class=\"vb ranking\" data-component=\"ranking\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Ranking</h4><form class=\"ranking-item\" data-item=\"order\" novalidate><fieldset class=\"ranking-group\"><legend class=\"ranking-question\">Urgency?</legend><p class=\"ranking-hint\" id=\"ranking-hint-order\">The list starts in the order given. Use an item's up and down buttons, or drag it with a mouse.</p><ol class=\"ranking-list\" role=\"list\" aria-describedby=\"ranking-hint-order\"><li class=\"ranking-row\" data-id=\"a\" data-label=\"a\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">a</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move a up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move a down\">&#8595;</button></span></div></li><li class=\"ranking-row\" data-id=\"b\" data-label=\"B\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">B</span><span class=\"choice-detail\">second</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move B (b) up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move B (b) down\">&#8595;</button></span></div></li><li class=\"ranking-row\" data-id=\"c\" data-label=\"c\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">c</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move c up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move c down\">&#8595;</button></span></div></li></ol></fieldset><span class=\"ranking-live\" role=\"status\" aria-live=\"polite\"></span><button type=\"submit\" class=\"ranking-send\">Send</button><span class=\"ranking-state\" aria-live=\"polite\"></span><p class=\"ranking-error\" id=\"ranking-error-order\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "twins",
+  "input": {
+   "question": "Q",
+   "items": [
+    {
+     "label": "Same",
+     "value": "x"
+    },
+    {
+     "label": "Same",
+     "value": "y"
+    }
+   ]
+  },
+  "props": {
+   "question": "Q",
+   "items": [
+    {
+     "label": "Same",
+     "value": "x",
+     "detail": "",
+     "name": "Same (x)"
+    },
+    {
+     "label": "Same",
+     "value": "y",
+     "detail": "",
+     "name": "Same (y)"
+    }
+   ]
+  },
+  "id": "w",
+  "html": "<div class=\"vb ranking\" data-component=\"ranking\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Ranking</h4><form class=\"ranking-item\" data-item=\"w\" novalidate><fieldset class=\"ranking-group\"><legend class=\"ranking-question\">Q</legend><p class=\"ranking-hint\" id=\"ranking-hint-w\">The list starts in the order given. Use an item's up and down buttons, or drag it with a mouse.</p><ol class=\"ranking-list\" role=\"list\" aria-describedby=\"ranking-hint-w\"><li class=\"ranking-row\" data-id=\"x\" data-label=\"Same\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">Same</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move Same (x) up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move Same (x) down\">&#8595;</button></span></div></li><li class=\"ranking-row\" data-id=\"y\" data-label=\"Same\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">Same</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move Same (y) up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move Same (y) down\">&#8595;</button></span></div></li></ol></fieldset><span class=\"ranking-live\" role=\"status\" aria-live=\"polite\"></span><button type=\"submit\" class=\"ranking-send\">Send</button><span class=\"ranking-state\" aria-live=\"polite\"></span><p class=\"ranking-error\" id=\"ranking-error-w\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "question": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "items": [
+    {
+     "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "detail": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "value": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'"
+    },
+    "b"
+   ]
+  },
+  "props": {
+   "question": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+   "items": [
+    {
+     "label": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "value": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "detail": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'",
+     "name": "<script>alert(1)</script>\"><img src=x onerror=alert(1)> & 'q'"
+    },
+    {
+     "label": "b",
+     "value": "b",
+     "detail": "",
+     "name": "b"
+    }
+   ]
+  },
+  "id": "h",
+  "html": "<div class=\"vb ranking\" data-component=\"ranking\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Ranking</h4><form class=\"ranking-item\" data-item=\"h\" novalidate><fieldset class=\"ranking-group\"><legend class=\"ranking-question\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</legend><p class=\"ranking-hint\" id=\"ranking-hint-h\">The list starts in the order given. Use an item's up and down buttons, or drag it with a mouse.</p><ol class=\"ranking-list\" role=\"list\" aria-describedby=\"ranking-hint-h\"><li class=\"ranking-row\" data-id=\"&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;\" data-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</span><span class=\"choice-detail\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move &lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27; up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move &lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27; down\">&#8595;</button></span></div></li><li class=\"ranking-row\" data-id=\"b\" data-label=\"b\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">b</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move b up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move b down\">&#8595;</button></span></div></li></ol></fieldset><span class=\"ranking-live\" role=\"status\" aria-live=\"polite\"></span><button type=\"submit\" class=\"ranking-send\">Send</button><span class=\"ranking-state\" aria-live=\"polite\"></span><p class=\"ranking-error\" id=\"ranking-error-h\" role=\"alert\"></p></form></section></div>"
+ },
+ {
+  "name": "no-id",
+  "input": {
+   "question": "Q",
+   "items": [
+    "a",
+    "b"
+   ]
+  },
+  "props": {
+   "question": "Q",
+   "items": [
+    {
+     "label": "a",
+     "value": "a",
+     "detail": "",
+     "name": "a"
+    },
+    {
+     "label": "b",
+     "value": "b",
+     "detail": "",
+     "name": "b"
+    }
+   ]
+  },
+  "id": null,
+  "html": "<div class=\"vb ranking\" data-component=\"ranking\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Ranking</h4><form class=\"ranking-item\" data-item=\"None\" novalidate><fieldset class=\"ranking-group\"><legend class=\"ranking-question\">Q</legend><p class=\"ranking-hint\" id=\"ranking-hint-None\">The list starts in the order given. Use an item's up and down buttons, or drag it with a mouse.</p><ol class=\"ranking-list\" role=\"list\" aria-describedby=\"ranking-hint-None\"><li class=\"ranking-row\" data-id=\"a\" data-label=\"a\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">a</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move a up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move a down\">&#8595;</button></span></div></li><li class=\"ranking-row\" data-id=\"b\" data-label=\"b\"><div class=\"ranking-line\"><span class=\"ranking-grip\" aria-hidden=\"true\"></span><span class=\"ranking-text\"><span class=\"choice-label\">b</span></span><span class=\"ranking-buttons\"><button type=\"button\" class=\"ranking-move\" data-dir=\"-1\" aria-label=\"Move b up\">&#8593;</button><button type=\"button\" class=\"ranking-move\" data-dir=\"1\" aria-label=\"Move b down\">&#8595;</button></span></div></li></ol></fieldset><span class=\"ranking-live\" role=\"status\" aria-live=\"polite\"></span><button type=\"submit\" class=\"ranking-send\">Send</button><span class=\"ranking-state\" aria-live=\"polite\"></span><p class=\"ranking-error\" id=\"ranking-error-None\" role=\"alert\"></p></form></section></div>"
+ }
+]

@@ -1,0 +1,1794 @@
+[
+ {
+  "name": "plain-list",
+  "input": {
+   "entity": [
+    {
+     "name": "order",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "total": "cents"
+     },
+     "relations": [
+      {
+       "to": "customer",
+       "kind": "many-to-one"
+      }
+     ]
+    },
+    {
+     "name": "customer",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "name": "text"
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "list",
+   "entities": [
+    {
+     "name": "order",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      },
+      {
+       "name": "total",
+       "type": "cents",
+       "change": "",
+       "was": "",
+       "key": false
+      }
+     ],
+     "relations": [
+      {
+       "to": "customer",
+       "kind": "many-to-one"
+      }
+     ]
+    },
+    {
+     "name": "customer",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      },
+      {
+       "name": "name",
+       "type": "text",
+       "change": "",
+       "was": "",
+       "key": false
+      }
+     ],
+     "relations": []
+    }
+   ],
+   "summary": "2 entities, 1 relation",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb data-model\"><p class=\"vb-alt\">2 entities, 1 relation</p><div class=\"vb-grid\"><section class=\"vb-card\"><h4 class=\"vb-title\">order</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"order fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>total</td><td>cents</td><td></td></tr></tbody></table></div><ul class=\"vb-relations\"><li>&rarr; <strong>customer</strong> <span class=\"vb-badge vb-rel\">many-to-one</span></li></ul></section><section class=\"vb-card\"><h4 class=\"vb-title\">customer</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"customer fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>name</td><td>text</td><td></td></tr></tbody></table></div></section></div></div>"
+ },
+ {
+  "name": "no-relations",
+  "input": {
+   "entity": [
+    {
+     "name": "a",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "list",
+   "entities": [
+    {
+     "name": "a",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      }
+     ],
+     "relations": []
+    }
+   ],
+   "summary": "1 entity, 0 relations",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb data-model\"><p class=\"vb-alt\">1 entity, 0 relations</p><div class=\"vb-grid\"><section class=\"vb-card\"><h4 class=\"vb-title\">a</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"a fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "entity": [
+    {
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "<img src=x onerror=alert(1)> \"q\" &amp;": "<img src=x onerror=alert(1)> \"q\" &amp;"
+     },
+     "relations": [
+      {
+       "to": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "kind": "one-to-one"
+      }
+     ]
+    }
+   ]
+  },
+  "props": {
+   "layout": "list",
+   "entities": [
+    {
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      },
+      {
+       "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "type": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "change": "",
+       "was": "",
+       "key": false
+      }
+     ],
+     "relations": [
+      {
+       "to": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "kind": "one-to-one"
+      }
+     ]
+    }
+   ],
+   "summary": "1 entity, 1 relation",
+   "legend": "",
+   "copy": null
+  },
+  "html": "<div class=\"vb data-model\"><p class=\"vb-alt\">1 entity, 1 relation</p><div class=\"vb-grid\"><section class=\"vb-card\"><h4 class=\"vb-title\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td><td></td></tr></tbody></table></div><ul class=\"vb-relations\"><li>&rarr; <strong>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</strong> <span class=\"vb-badge vb-rel\">one-to-one</span></li></ul></section></div></div>"
+ },
+ {
+  "name": "changes",
+  "input": {
+   "entity": [
+    {
+     "name": "order",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "total": {
+       "type": "cents",
+       "change": "modified",
+       "was": "int"
+      },
+      "note": {
+       "type": "text",
+       "change": "added"
+      },
+      "old": {
+       "type": "text",
+       "change": "removed"
+      }
+     },
+     "change": "renamed",
+     "was": "purchase"
+    },
+    {
+     "name": "line",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     },
+     "change": "added"
+    },
+    {
+     "name": "x",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "renamed": {
+       "type": "text",
+       "change": "renamed",
+       "was": "nm"
+      }
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "list",
+   "entities": [
+    {
+     "name": "order",
+     "change": "renamed",
+     "was": "purchase",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      },
+      {
+       "name": "total",
+       "type": "cents",
+       "change": "modified",
+       "was": "int",
+       "key": false
+      },
+      {
+       "name": "note",
+       "type": "text",
+       "change": "added",
+       "was": "",
+       "key": false
+      },
+      {
+       "name": "old",
+       "type": "text",
+       "change": "removed",
+       "was": "",
+       "key": false
+      }
+     ],
+     "relations": []
+    },
+    {
+     "name": "line",
+     "change": "added",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      }
+     ],
+     "relations": []
+    },
+    {
+     "name": "x",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true
+      },
+      {
+       "name": "renamed",
+       "type": "text",
+       "change": "renamed",
+       "was": "nm",
+       "key": false
+      }
+     ],
+     "relations": []
+    }
+   ],
+   "summary": "3 entities, 0 relations",
+   "legend": "Changes: 2 added, 1 modified, 1 removed, 2 renamed",
+   "copy": "renamed order (was purchase)\nmodified order.total (was int)\nadded order.note\nremoved order.old\nadded line\nrenamed x.renamed (was nm)"
+  },
+  "html": "<div class=\"vb data-model\" data-copy=\"renamed order (was purchase)\nmodified order.total (was int)\nadded order.note\nremoved order.old\nadded line\nrenamed x.renamed (was nm)\"><p class=\"vb-alt\">3 entities, 0 relations</p><div class=\"vb-grid\"><section class=\"vb-card vd-change-card vd-change-renamed\"><h4 class=\"vb-title\"><span class=\"vd-change-old\">purchase</span> &rarr; <span class=\"vd-change-name\">order</span> <span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"order fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th><th>change</th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td><td></td></tr><tr class=\"vd-change-row vd-change-modified\" aria-label=\"modified total\"><td><span class=\"vd-change-name\">total</span></td><td>cents</td><td></td><td><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-was\">was int</span></td></tr><tr class=\"vd-change-row vd-change-added\" aria-label=\"added note\"><td><span class=\"vd-change-name\">note</span></td><td>text</td><td></td><td><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span></td></tr><tr class=\"vd-change-row vd-change-removed\" aria-label=\"removed old\"><td><span class=\"vd-change-name\">old</span></td><td>text</td><td></td><td><span class=\"vd-change-badge vd-change-removed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-</span> removed</span></td></tr></tbody></table></div></section><section class=\"vb-card vd-change-card vd-change-added\"><h4 class=\"vb-title\"><span class=\"vd-change-name\">line</span> <span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"line fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section><section class=\"vb-card\"><h4 class=\"vb-title\">x</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"x fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th><th>change</th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td><td></td></tr><tr class=\"vd-change-row vd-change-renamed\" aria-label=\"renamed renamed\"><td><span class=\"vd-change-old\">nm</span> &rarr; <span class=\"vd-change-name\">renamed</span></td><td>text</td><td></td><td><span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span></td></tr></tbody></table></div></section></div><p class=\"vb-alt vd-change-legend\">Changes: 2 added, 1 modified, 1 removed, 2 renamed</p></div>"
+ },
+ {
+  "name": "graph-basic",
+  "input": {
+   "layout": "graph",
+   "entity": [
+    {
+     "name": "order",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "customer_id": "uuid"
+     },
+     "relations": [
+      {
+       "to": "customer",
+       "kind": "many-to-one"
+      }
+     ]
+    },
+    {
+     "name": "customer",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "name": "text"
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "graph",
+   "digest": "3808b9b4",
+   "summary": "2 entities, 1 relation",
+   "legend": "",
+   "copy": "order (key id): id, customer_id\ncustomer (key id): id, name\norder n to 1 customer",
+   "drawing": {
+    "box": "0 0 584 164",
+    "width": "584",
+    "height": "164",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-er-edge",
+       "data-ends": "0 1"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-er-line",
+         "d": "M260 53.4 L324 53.4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "272",
+         "y": "62.4"
+        },
+        "n"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "312",
+         "y": "44.4"
+        },
+        "1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "76"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "64"
+        },
+        "order"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "105.5"
+        },
+        "customer_id: uuid"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "76"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "334",
+         "y": "64"
+        },
+        "customer"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "334",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "334",
+         "y": "105.5"
+        },
+        "name: text"
+       ]
+      ]
+     ]
+    ]
+   },
+   "relations": [
+    {
+     "text": "order n to 1 customer",
+     "ends": "0 1"
+    }
+   ],
+   "entities": [
+    {
+     "index": 0,
+     "name": "order",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "customer_id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": {
+        "target": 1,
+        "name": "customer"
+       }
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "customer",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "name",
+       "type": "text",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      }
+     ]
+    }
+   ]
+  },
+  "html": "<div class=\"vb data-model vd-er\" data-copy=\"order (key id): id, customer_id\ncustomer (key id): id, name\norder n to 1 customer\"><p class=\"vb-alt\">2 entities, 1 relation</p><div class=\"vd-er-view\" role=\"region\" tabindex=\"0\" aria-label=\"Entity relationship drawing; the relation list below has the same facts\"><svg class=\"vd-er-svg\" viewBox=\"0 0 584 164\" width=\"584\" height=\"164\" aria-hidden=\"true\" focusable=\"false\"><g class=\"vd-er-edge\" data-ends=\"0 1\"><path class=\"vd-er-line\" d=\"M260 53.4 L324 53.4\"/><text class=\"vd-er-end\" x=\"272\" y=\"62.4\">n</text><text class=\"vd-er-end\" x=\"312\" y=\"44.4\">1</text></g><g class=\"vd-er-node\" data-entity=\"0\"><rect class=\"vd-er-box\" x=\"40\" y=\"44\" width=\"220\" height=\"76\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"64\">order</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field\" x=\"50\" y=\"105.5\">customer_id: uuid</text></g><g class=\"vd-er-node\" data-entity=\"1\"><rect class=\"vd-er-box\" x=\"324\" y=\"44\" width=\"220\" height=\"76\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"324\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"334\" y=\"64\">customer</text><text class=\"vd-er-field vd-er-keyed\" x=\"334\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field\" x=\"334\" y=\"105.5\">name: text</text></g></svg></div><ul class=\"vd-er-relations\" aria-label=\"Relations\"><li class=\"vd-er-rel\" data-ends=\"0 1\">order n to 1 customer</li></ul><div class=\"vd-er-cards\"><div class=\"vd-er-card\" id=\"vd-er-3808b9b4-0\" data-entity=\"0\"><section class=\"vb-card\"><h4 class=\"vb-title\">order</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"order fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td><a class=\"vd-er-fk\" href=\"#vd-er-3808b9b4-1\">customer_id &rarr; customer</a></td><td>uuid</td><td></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-3808b9b4-1\" data-entity=\"1\"><section class=\"vb-card\"><h4 class=\"vb-title\">customer</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"customer fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>name</td><td>text</td><td></td></tr></tbody></table></div></section></div></div></div>"
+ },
+ {
+  "name": "graph-inferred-many",
+  "input": {
+   "layout": "graph",
+   "entity": [
+    {
+     "name": "user",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "a": "t",
+      "b": "t",
+      "c": "t",
+      "d": "t",
+      "e": "t",
+      "f": "t",
+      "g": "t"
+     }
+    },
+    {
+     "name": "post",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "user_id": "uuid",
+      "body": "text"
+     }
+    },
+    {
+     "name": "tag",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     },
+     "relations": [
+      {
+       "to": "tag",
+       "kind": "many-to-many"
+      }
+     ]
+    },
+    {
+     "name": "e4",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     }
+    },
+    {
+     "name": "e5",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "graph",
+   "digest": "5609451c",
+   "summary": "5 entities, 2 relations",
+   "legend": "",
+   "copy": "user (key id): id, a, b, c, d, e, f, g\npost (key id): id, user_id, body\ntag (key id): id\ne4 (key id): id\ne5 (key id): id\ntag n to n tag\npost n to 1 user (inferred from field user_id)",
+   "drawing": {
+    "box": "0 0 868 368",
+    "width": "868",
+    "height": "368",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-er-edge",
+       "data-ends": "2 2"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-er-line",
+         "d": "M828 52 L844 52 L844 66 L828 66"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "840",
+         "y": "61"
+        },
+        "n"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "840",
+         "y": "75"
+        },
+        "n"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-edge",
+       "data-ends": "1 0"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-er-line vd-er-inferred",
+         "d": "M324 57.4 L260 57.4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "312",
+         "y": "48.4"
+        },
+        "n"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "272",
+         "y": "66.4"
+        },
+        "1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "166"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "64"
+        },
+        "user"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "105.5"
+        },
+        "a: t"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "123.5"
+        },
+        "b: t"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "141.5"
+        },
+        "c: t"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "159.5"
+        },
+        "d: t"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "177.5"
+        },
+        "e: t"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-more",
+         "x": "50",
+         "y": "195.5"
+        },
+        "+2 more"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "94"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "334",
+         "y": "64"
+        },
+        "post"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "334",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "334",
+         "y": "105.5"
+        },
+        "user_id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "334",
+         "y": "123.5"
+        },
+        "body: text"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "2"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "608",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "608",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "618",
+         "y": "64"
+        },
+        "tag"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "618",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "3"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "40",
+         "y": "266",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "266",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "286"
+        },
+        "e4"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "309.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "4"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "324",
+         "y": "266",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "324",
+         "y": "266",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "334",
+         "y": "286"
+        },
+        "e5"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "334",
+         "y": "309.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ]
+    ]
+   },
+   "relations": [
+    {
+     "text": "tag n to n tag",
+     "ends": "2 2"
+    },
+    {
+     "text": "post n to 1 user (inferred from field user_id)",
+     "ends": "1 0"
+    }
+   ],
+   "entities": [
+    {
+     "index": 0,
+     "name": "user",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "a",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "b",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "c",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "d",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "e",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "f",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      },
+      {
+       "name": "g",
+       "type": "t",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "post",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "user_id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": {
+        "target": 0,
+        "name": "user"
+       }
+      },
+      {
+       "name": "body",
+       "type": "text",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 2,
+     "name": "tag",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 3,
+     "name": "e4",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 4,
+     "name": "e5",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    }
+   ]
+  },
+  "html": "<div class=\"vb data-model vd-er\" data-copy=\"user (key id): id, a, b, c, d, e, f, g\npost (key id): id, user_id, body\ntag (key id): id\ne4 (key id): id\ne5 (key id): id\ntag n to n tag\npost n to 1 user (inferred from field user_id)\"><p class=\"vb-alt\">5 entities, 2 relations</p><div class=\"vd-er-view\" role=\"region\" tabindex=\"0\" aria-label=\"Entity relationship drawing; the relation list below has the same facts\"><svg class=\"vd-er-svg\" viewBox=\"0 0 868 368\" width=\"868\" height=\"368\" aria-hidden=\"true\" focusable=\"false\"><g class=\"vd-er-edge\" data-ends=\"2 2\"><path class=\"vd-er-line\" d=\"M828 52 L844 52 L844 66 L828 66\"/><text class=\"vd-er-end\" x=\"840\" y=\"61\">n</text><text class=\"vd-er-end\" x=\"840\" y=\"75\">n</text></g><g class=\"vd-er-edge\" data-ends=\"1 0\"><path class=\"vd-er-line vd-er-inferred\" d=\"M324 57.4 L260 57.4\"/><text class=\"vd-er-end\" x=\"312\" y=\"48.4\">n</text><text class=\"vd-er-end\" x=\"272\" y=\"66.4\">1</text></g><g class=\"vd-er-node\" data-entity=\"0\"><rect class=\"vd-er-box\" x=\"40\" y=\"44\" width=\"220\" height=\"166\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"64\">user</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field\" x=\"50\" y=\"105.5\">a: t</text><text class=\"vd-er-field\" x=\"50\" y=\"123.5\">b: t</text><text class=\"vd-er-field\" x=\"50\" y=\"141.5\">c: t</text><text class=\"vd-er-field\" x=\"50\" y=\"159.5\">d: t</text><text class=\"vd-er-field\" x=\"50\" y=\"177.5\">e: t</text><text class=\"vd-er-more\" x=\"50\" y=\"195.5\">+2 more</text></g><g class=\"vd-er-node\" data-entity=\"1\"><rect class=\"vd-er-box\" x=\"324\" y=\"44\" width=\"220\" height=\"94\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"324\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"334\" y=\"64\">post</text><text class=\"vd-er-field vd-er-keyed\" x=\"334\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field\" x=\"334\" y=\"105.5\">user_id: uuid</text><text class=\"vd-er-field\" x=\"334\" y=\"123.5\">body: text</text></g><g class=\"vd-er-node\" data-entity=\"2\"><rect class=\"vd-er-box\" x=\"608\" y=\"44\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"608\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"618\" y=\"64\">tag</text><text class=\"vd-er-field vd-er-keyed\" x=\"618\" y=\"87.5\">* id: uuid</text></g><g class=\"vd-er-node\" data-entity=\"3\"><rect class=\"vd-er-box\" x=\"40\" y=\"266\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"266\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"286\">e4</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"309.5\">* id: uuid</text></g><g class=\"vd-er-node\" data-entity=\"4\"><rect class=\"vd-er-box\" x=\"324\" y=\"266\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"324\" y=\"266\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"334\" y=\"286\">e5</text><text class=\"vd-er-field vd-er-keyed\" x=\"334\" y=\"309.5\">* id: uuid</text></g></svg></div><ul class=\"vd-er-relations\" aria-label=\"Relations\"><li class=\"vd-er-rel\" data-ends=\"2 2\">tag n to n tag</li><li class=\"vd-er-rel\" data-ends=\"1 0\">post n to 1 user (inferred from field user_id)</li></ul><div class=\"vd-er-cards\"><div class=\"vd-er-card\" id=\"vd-er-5609451c-0\" data-entity=\"0\"><section class=\"vb-card\"><h4 class=\"vb-title\">user</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"user fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>a</td><td>t</td><td></td></tr><tr><td>b</td><td>t</td><td></td></tr><tr><td>c</td><td>t</td><td></td></tr><tr><td>d</td><td>t</td><td></td></tr><tr><td>e</td><td>t</td><td></td></tr><tr><td>f</td><td>t</td><td></td></tr><tr><td>g</td><td>t</td><td></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-5609451c-1\" data-entity=\"1\"><section class=\"vb-card\"><h4 class=\"vb-title\">post</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"post fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td><a class=\"vd-er-fk\" href=\"#vd-er-5609451c-0\">user_id &rarr; user</a></td><td>uuid</td><td></td></tr><tr><td>body</td><td>text</td><td></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-5609451c-2\" data-entity=\"2\"><section class=\"vb-card\"><h4 class=\"vb-title\">tag</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"tag fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-5609451c-3\" data-entity=\"3\"><section class=\"vb-card\"><h4 class=\"vb-title\">e4</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"e4 fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-5609451c-4\" data-entity=\"4\"><section class=\"vb-card\"><h4 class=\"vb-title\">e5</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"e5 fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div></div></div>"
+ },
+ {
+  "name": "graph-no-relations",
+  "input": {
+   "layout": "graph",
+   "entity": [
+    {
+     "name": "solo",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     }
+    }
+   ]
+  },
+  "props": {
+   "layout": "graph",
+   "digest": "49f25741",
+   "summary": "1 entity, 0 relations",
+   "legend": "",
+   "copy": "solo (key id): id",
+   "drawing": {
+    "box": "0 0 300 146",
+    "width": "300",
+    "height": "146",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "64"
+        },
+        "solo"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ]
+    ]
+   },
+   "relations": [],
+   "entities": [
+    {
+     "index": 0,
+     "name": "solo",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    }
+   ]
+  },
+  "html": "<div class=\"vb data-model vd-er\" data-copy=\"solo (key id): id\"><p class=\"vb-alt\">1 entity, 0 relations</p><div class=\"vd-er-view\" role=\"region\" tabindex=\"0\" aria-label=\"Entity relationship drawing; the relation list below has the same facts\"><svg class=\"vd-er-svg\" viewBox=\"0 0 300 146\" width=\"300\" height=\"146\" aria-hidden=\"true\" focusable=\"false\"><g class=\"vd-er-node\" data-entity=\"0\"><rect class=\"vd-er-box\" x=\"40\" y=\"44\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"64\">solo</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"87.5\">* id: uuid</text></g></svg></div><p class=\"vb-alt vd-er-none\">No relations.</p><div class=\"vd-er-cards\"><div class=\"vd-er-card\" id=\"vd-er-49f25741-0\" data-entity=\"0\"><section class=\"vb-card\"><h4 class=\"vb-title\">solo</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"solo fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div></div></div>"
+ },
+ {
+  "name": "graph-changes",
+  "input": {
+   "layout": "graph",
+   "entity": [
+    {
+     "name": "order",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "total": {
+       "type": "cents",
+       "change": "modified",
+       "was": "int"
+      }
+     },
+     "relations": [
+      {
+       "to": "customer",
+       "kind": "one-to-many"
+      }
+     ],
+     "change": "added"
+    },
+    {
+     "name": "customer",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     },
+     "change": "renamed",
+     "was": "client"
+    }
+   ]
+  },
+  "props": {
+   "layout": "graph",
+   "digest": "3808b9b4",
+   "summary": "2 entities, 1 relation",
+   "legend": "Changes: 1 added, 1 modified, 1 renamed",
+   "copy": "order (key id): id, total [added entity]\ncustomer (key id): id [renamed entity (was client)]\norder 1 to n customer",
+   "drawing": {
+    "box": "0 0 584 164",
+    "width": "584",
+    "height": "164",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-er-edge",
+       "data-ends": "0 1"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-er-line",
+         "d": "M260 53.4 L324 53.4"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "272",
+         "y": "62.4"
+        },
+        "1"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "312",
+         "y": "44.4"
+        },
+        "n"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box vd-change-added",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "76"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "64"
+        },
+        "+ order"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-change-modified",
+         "x": "50",
+         "y": "105.5"
+        },
+        "~ total: cents"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box vd-change-renamed",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "334",
+         "y": "64"
+        },
+        "-> customer"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "334",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ]
+    ]
+   },
+   "relations": [
+    {
+     "text": "order 1 to n customer",
+     "ends": "0 1"
+    }
+   ],
+   "entities": [
+    {
+     "index": 0,
+     "name": "order",
+     "change": "added",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "total",
+       "type": "cents",
+       "change": "modified",
+       "was": "int",
+       "key": false,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "customer",
+     "change": "renamed",
+     "was": "client",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    }
+   ]
+  },
+  "html": "<div class=\"vb data-model vd-er\" data-copy=\"order (key id): id, total [added entity]\ncustomer (key id): id [renamed entity (was client)]\norder 1 to n customer\"><p class=\"vb-alt\">2 entities, 1 relation</p><div class=\"vd-er-view\" role=\"region\" tabindex=\"0\" aria-label=\"Entity relationship drawing; the relation list below has the same facts\"><svg class=\"vd-er-svg\" viewBox=\"0 0 584 164\" width=\"584\" height=\"164\" aria-hidden=\"true\" focusable=\"false\"><g class=\"vd-er-edge\" data-ends=\"0 1\"><path class=\"vd-er-line\" d=\"M260 53.4 L324 53.4\"/><text class=\"vd-er-end\" x=\"272\" y=\"62.4\">1</text><text class=\"vd-er-end\" x=\"312\" y=\"44.4\">n</text></g><g class=\"vd-er-node\" data-entity=\"0\"><rect class=\"vd-er-box vd-change-added\" x=\"40\" y=\"44\" width=\"220\" height=\"76\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"64\">+ order</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field vd-change-modified\" x=\"50\" y=\"105.5\">~ total: cents</text></g><g class=\"vd-er-node\" data-entity=\"1\"><rect class=\"vd-er-box vd-change-renamed\" x=\"324\" y=\"44\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"324\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"334\" y=\"64\">-&gt; customer</text><text class=\"vd-er-field vd-er-keyed\" x=\"334\" y=\"87.5\">* id: uuid</text></g></svg></div><ul class=\"vd-er-relations\" aria-label=\"Relations\"><li class=\"vd-er-rel\" data-ends=\"0 1\">order 1 to n customer</li></ul><div class=\"vd-er-cards\"><div class=\"vd-er-card\" id=\"vd-er-3808b9b4-0\" data-entity=\"0\"><section class=\"vb-card vd-change-card vd-change-added\"><h4 class=\"vb-title\"><span class=\"vd-change-name\">order</span> <span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"order fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th><th>change</th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td><td></td></tr><tr class=\"vd-change-row vd-change-modified\" aria-label=\"modified total\"><td><span class=\"vd-change-name\">total</span></td><td>cents</td><td></td><td><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-was\">was int</span></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-3808b9b4-1\" data-entity=\"1\"><section class=\"vb-card vd-change-card vd-change-renamed\"><h4 class=\"vb-title\"><span class=\"vd-change-old\">client</span> &rarr; <span class=\"vd-change-name\">customer</span> <span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span></h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"customer fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div></div><p class=\"vb-alt vd-change-legend\">Changes: 1 added, 1 modified, 1 renamed</p></div>"
+ },
+ {
+  "name": "graph-hostile",
+  "input": {
+   "layout": "graph",
+   "entity": [
+    {
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "key": "id",
+     "fields": {
+      "id": "uuid",
+      "<img src=x onerror=alert(1)> \"q\" &amp;": "<img src=x onerror=alert(1)> \"q\" &amp;"
+     }
+    },
+    {
+     "name": "b",
+     "key": "id",
+     "fields": {
+      "id": "uuid"
+     },
+     "relations": [
+      {
+       "to": "b",
+       "kind": "one-to-one"
+      }
+     ]
+    }
+   ]
+  },
+  "props": {
+   "layout": "graph",
+   "digest": "99df5506",
+   "summary": "2 entities, 1 relation",
+   "legend": "",
+   "copy": "<img src=x onerror=alert(1)> \"q\" &amp; (key id): id, <img src=x onerror=alert(1)> \"q\" &amp;\nb (key id): id\nb 1 to 1 b",
+   "drawing": {
+    "box": "0 0 584 164",
+    "width": "584",
+    "height": "164",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-er-edge",
+       "data-ends": "1 1"
+      },
+      [
+       [
+        "path",
+        {
+         "class": "vd-er-line",
+         "d": "M544 52 L560 52 L560 66 L544 66"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "556",
+         "y": "61"
+        },
+        "1"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-end",
+         "x": "556",
+         "y": "75"
+        },
+        "1"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "0"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "76"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "40",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "50",
+         "y": "64"
+        },
+        "<img src=x onerror=alert(1)> …"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "50",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field",
+         "x": "50",
+         "y": "105.5"
+        },
+        "<img src=x onerror=alert(1)> …"
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-er-node",
+       "data-entity": "1"
+      },
+      [
+       [
+        "rect",
+        {
+         "class": "vd-er-box",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "58"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-er-head",
+         "x": "324",
+         "y": "44",
+         "width": "220",
+         "rx": "6",
+         "height": "30"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-name",
+         "x": "334",
+         "y": "64"
+        },
+        "b"
+       ],
+       [
+        "text",
+        {
+         "class": "vd-er-field vd-er-keyed",
+         "x": "334",
+         "y": "87.5"
+        },
+        "* id: uuid"
+       ]
+      ]
+     ]
+    ]
+   },
+   "relations": [
+    {
+     "text": "b 1 to 1 b",
+     "ends": "1 1"
+    }
+   ],
+   "entities": [
+    {
+     "index": 0,
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      },
+      {
+       "name": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "type": "<img src=x onerror=alert(1)> \"q\" &amp;",
+       "change": "",
+       "was": "",
+       "key": false,
+       "fk": null
+      }
+     ]
+    },
+    {
+     "index": 1,
+     "name": "b",
+     "change": "",
+     "was": "",
+     "fields": [
+      {
+       "name": "id",
+       "type": "uuid",
+       "change": "",
+       "was": "",
+       "key": true,
+       "fk": null
+      }
+     ]
+    }
+   ]
+  },
+  "html": "<div class=\"vb data-model vd-er\" data-copy=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; (key id): id, &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;\nb (key id): id\nb 1 to 1 b\"><p class=\"vb-alt\">2 entities, 1 relation</p><div class=\"vd-er-view\" role=\"region\" tabindex=\"0\" aria-label=\"Entity relationship drawing; the relation list below has the same facts\"><svg class=\"vd-er-svg\" viewBox=\"0 0 584 164\" width=\"584\" height=\"164\" aria-hidden=\"true\" focusable=\"false\"><g class=\"vd-er-edge\" data-ends=\"1 1\"><path class=\"vd-er-line\" d=\"M544 52 L560 52 L560 66 L544 66\"/><text class=\"vd-er-end\" x=\"556\" y=\"61\">1</text><text class=\"vd-er-end\" x=\"556\" y=\"75\">1</text></g><g class=\"vd-er-node\" data-entity=\"0\"><rect class=\"vd-er-box\" x=\"40\" y=\"44\" width=\"220\" height=\"76\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"40\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"50\" y=\"64\">&lt;img src=x onerror=alert(1)&gt; …</text><text class=\"vd-er-field vd-er-keyed\" x=\"50\" y=\"87.5\">* id: uuid</text><text class=\"vd-er-field\" x=\"50\" y=\"105.5\">&lt;img src=x onerror=alert(1)&gt; …</text></g><g class=\"vd-er-node\" data-entity=\"1\"><rect class=\"vd-er-box\" x=\"324\" y=\"44\" width=\"220\" height=\"58\" rx=\"6\"/><rect class=\"vd-er-head\" x=\"324\" y=\"44\" width=\"220\" height=\"30\" rx=\"6\"/><text class=\"vd-er-name\" x=\"334\" y=\"64\">b</text><text class=\"vd-er-field vd-er-keyed\" x=\"334\" y=\"87.5\">* id: uuid</text></g></svg></div><ul class=\"vd-er-relations\" aria-label=\"Relations\"><li class=\"vd-er-rel\" data-ends=\"1 1\">b 1 to 1 b</li></ul><div class=\"vd-er-cards\"><div class=\"vd-er-card\" id=\"vd-er-99df5506-0\" data-entity=\"0\"><section class=\"vb-card\"><h4 class=\"vb-title\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr><tr><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td><td>&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp;</td><td></td></tr></tbody></table></div></section></div><div class=\"vd-er-card\" id=\"vd-er-99df5506-1\" data-entity=\"1\"><section class=\"vb-card\"><h4 class=\"vb-title\">b</h4><div class=\"vb-fields-scroll\" role=\"region\" aria-label=\"b fields\" tabindex=\"0\"><table class=\"vb-fields\"><thead><tr><th>field</th><th>type</th><th><span class=\"vb-sr\">flags</span></th></tr></thead><tbody><tr><td>id</td><td>uuid</td><td><span class=\"vb-badge vb-badge-key\">key</span></td></tr></tbody></table></div></section></div></div></div>"
+ }
+]

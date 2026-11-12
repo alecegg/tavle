@@ -1,0 +1,5502 @@
+[
+ {
+  "name": "rich-state-stress:h1",
+  "input": {
+   "title": "<b>Hostile</b> states, 320px worst case",
+   "desc": "Long unbroken strings, bidi, markup text, loops and many items.",
+   "states": [
+    {
+     "id": "a0",
+     "label": "<script>alert(1)</script>",
+     "kind": "initial",
+     "note": "<img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "id": "a1",
+     "label": "שלום עולם ארוכה מאוד",
+     "note": "<img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "id": "a2",
+     "label": "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "note": "<img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "id": "a3",
+     "label": "bidi ‮evil‬ label text here",
+     "kind": "error",
+     "note": "<img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "id": "a4",
+     "label": "<b>Four</b> `<i>c</i>`",
+     "kind": "final",
+     "note": "<img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
+    },
+    {
+     "id": "lost",
+     "label": "Unreachable state"
+    }
+   ],
+   "transitions": [
+    {
+     "from": "a0",
+     "to": "a1",
+     "label": "go <img src=x onerror=alert(1)>",
+     "guard": "guard > 0 && x < 1"
+    },
+    {
+     "from": "a1",
+     "to": "a2",
+     "label": "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+    },
+    {
+     "from": "a2",
+     "to": "a3",
+     "label": "שלום עולם",
+     "guard": "אם"
+    },
+    {
+     "from": "a3",
+     "to": "a0",
+     "label": "quote \" and ' and & and </svg><script>alert(2)</script>"
+    },
+    {
+     "from": "a1",
+     "to": "a1",
+     "label": "self loop label with several words in it to wrap",
+     "guard": "g"
+    },
+    {
+     "from": "a1",
+     "to": "a1",
+     "label": "a second self loop on the same state"
+    },
+    {
+     "from": "a2",
+     "to": "a2",
+     "label": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+    },
+    {
+     "from": "a2",
+     "to": "a4",
+     "label": "finish"
+    },
+    {
+     "from": "a3",
+     "to": "a3",
+     "guard": "only a guard"
+    }
+   ]
+  },
+  "props": {
+   "title": "<b>Hostile</b> states, 320px worst case",
+   "name": "<b>Hostile</b> states, 320px worst case",
+   "desc": "Long unbroken strings, bidi, markup text, loops and many items.",
+   "counts": "6 states, 9 transitions",
+   "drawing": {
+    "box": "0 0 417.6 728",
+    "width": "417.6",
+    "height": "728",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to <script>alert(1)</script>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M124.3 48.0 L211.8 168.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "211.8,168.0 201.9,162.9 209.9,157.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script> to שלום עולם ארוכה מאוד on go <img src=x onerror=alert(1)> [guard > 0 && x < 1]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M211.8 218.0 L131.2 322.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "131.2,322.0 133.4,311.0 141.3,317.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "122.7",
+         "y": "247.0",
+         "width": "97.6",
+         "height": "46.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "171.5",
+           "y": "256.0"
+          },
+          "go <img src=x"
+         ],
+         [
+          "tspan",
+          {
+           "x": "171.5",
+           "y": "270.0"
+          },
+          "onerror=alert("
+         ],
+         [
+          "tspan",
+          {
+           "x": "171.5",
+           "y": "284.0"
+          },
+          "1)> [guard …"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M131.2 372.0 L128.0 476.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "128.0,476.0 123.3,465.9 133.3,466.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "80.8",
+         "y": "401.0",
+         "width": "97.6",
+         "height": "46.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "129.6",
+           "y": "410.0"
+          },
+          "yyyyyyyyyyyyyy"
+         ],
+         [
+          "tspan",
+          {
+           "x": "129.6",
+           "y": "424.0"
+          },
+          "yyyyyyyyyyyyyy"
+         ],
+         [
+          "tspan",
+          {
+           "x": "129.6",
+           "y": "438.0"
+          },
+          "yyyyyyyyyyy…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M128.0 558.0 L215.5 662.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "215.5,662.0 205.2,657.6 212.9,651.1"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "122.9",
+         "y": "601.0",
+         "width": "97.6",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "171.8",
+           "y": "610.0"
+          },
+          "שלום עולם [אם]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "bidi ‮evil‬ label text here to <script>alert(1)</script> on quote \" and ' and & and </svg><script>alert(2)</script>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M215.5 662.0 L365.6 558.0 L365.6 476.0 L351.9 372.0 L351.9 322.0 L211.8 218.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "211.8,218.0 222.8,219.9 216.8,228.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "233.1",
+         "y": "240.0",
+         "width": "97.6",
+         "height": "60.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "281.9",
+           "y": "249.0"
+          },
+          "quote \" and '"
+         ],
+         [
+          "tspan",
+          {
+           "x": "281.9",
+           "y": "263.0"
+          },
+          "and & and"
+         ],
+         [
+          "tspan",
+          {
+           "x": "281.9",
+           "y": "277.0"
+          },
+          "</svg><script>"
+         ],
+         [
+          "tspan",
+          {
+           "x": "281.9",
+           "y": "291.0"
+          },
+          "a…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to <b>Four</b> `<i>c</i>` on finish"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M128.0 558.0 L68.5 662.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "68.5,662.0 69.1,650.8 77.8,655.8"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "75.0",
+         "y": "601.0",
+         "width": "46.4",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "98.2",
+           "y": "610.0"
+          },
+          "finish"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g] / שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M197.7 337.0 L215.7 337.0 L215.7 357.0 L197.7 357.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "197.7,357.0 207.7,352.0 207.7,362.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "219.7",
+         "y": "317.0",
+         "width": "91.2",
+         "height": "60.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "265.3",
+           "y": "326.0"
+          },
+          "self loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "265.3",
+           "y": "340.0"
+          },
+          "label with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "265.3",
+           "y": "354.0"
+          },
+          "several words"
+         ],
+         [
+          "tspan",
+          {
+           "x": "265.3",
+           "y": "368.0"
+          },
+          "in i…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M205.0 500.6 L223.0 500.6 L223.0 533.4 L205.0 533.4"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "205.0,533.4 215.0,528.4 215.0,538.4"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "227.0",
+         "y": "494.0",
+         "width": "97.6",
+         "height": "46.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "275.8",
+           "y": "503.0"
+          },
+          "zzzzzzzzzzzzzz"
+         ],
+         [
+          "tspan",
+          {
+           "x": "275.8",
+           "y": "517.0"
+          },
+          "zzzzzzzzzzzzzz"
+         ],
+         [
+          "tspan",
+          {
+           "x": "275.8",
+           "y": "531.0"
+          },
+          "zzzzzzzzzzz…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M282.0 677.0 L300.0 677.0 L300.0 697.0 L282.0 697.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "282.0,697.0 292.0,692.0 292.0,702.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "304.0",
+         "y": "678.0",
+         "width": "97.6",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "352.8",
+           "y": "687.0"
+          },
+          "[only a guard]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(92.3 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(134.8 168.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script>, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "154.0",
+         "height": "50.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "<script>alert(1)</"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "script>"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(64.7 322.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "שלום עולם ארוכה מאוד, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "133.0",
+         "height": "50.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "17.0"
+          },
+          "שלום עולם ארוכה"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "33.0"
+          },
+          "מאוד"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(51.0 476.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Averyveryverylongl"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "abelwithnobreaksat"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "allxxxxxxxxxxxxxxx"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "xxxxx…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-error",
+       "transform": "translate(149.0 662.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "bidi ‮evil‬ label text here, error state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "133.0",
+         "height": "50.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "17.0"
+          },
+          "✕ bidi ‮evil‬"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "33.0"
+          },
+          "label text here"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-final",
+       "transform": "translate(16.0 662.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "<b>Four</b> `<i>c</i>`, final state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "105.0",
+         "height": "50.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-ring",
+         "x": "4",
+         "y": "4",
+         "width": "97.0",
+         "height": "42.0",
+         "rx": "7"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "52.5",
+           "y": "17.0"
+          },
+          "<b>Four</b>"
+         ],
+         [
+          "tspan",
+          {
+           "x": "52.5",
+           "y": "33.0"
+          },
+          "`<i>c</i>`"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal vd-state-unreachable",
+       "transform": "translate(184.3 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Unreachable state, state, unreachable"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "147.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "24.0"
+          },
+          "Unreachable state"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "<script>alert(1)</script> (initial state): <img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+    "שלום עולם ארוכה מאוד (state): <img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+    "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (state): <img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+    "bidi ‮evil‬ label text here (error state): <img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+    "<b>Four</b> `<i>c</i>` (final state): <img src=x onerror=alert(1)> note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+    "Unreachable state (state, unreachable from the initial state)"
+   ],
+   "moves": [
+    "<script>alert(1)</script> to שלום עולם ארוכה מאוד on go <img src=x onerror=alert(1)> [guard > 0 && x < 1]",
+    "שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
+    "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]",
+    "bidi ‮evil‬ label text here to <script>alert(1)</script> on quote \" and ' and & and </svg><script>alert(2)</script>",
+    "שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g]",
+    "שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state",
+    "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+    "Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to <b>Four</b> `<i>c</i>` on finish",
+    "bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]"
+   ],
+   "copy": "<b>Hostile</b> states, 320px worst case (6 states, 9 transitions)\nStates:\n- <script>alert(1)</script> (initial state)\n- שלום עולם ארוכה מאוד (state)\n- Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (state)\n- bidi ‮evil‬ label text here (error state)\n- <b>Four</b> `<i>c</i>` (final state)\n- Unreachable state (state)\nTransitions:\n1. <script>alert(1)</script> to שלום עולם ארוכה מאוד on go <img src=x onerror=alert(1)> [guard > 0 && x < 1]\n2. שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\n3. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]\n4. bidi ‮evil‬ label text here to <script>alert(1)</script> on quote \" and ' and & and </svg><script>alert(2)</script>\n5. שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g]\n6. שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state\n7. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n8. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to <b>Four</b> `<i>c</i>` on finish\n9. bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"&lt;b&gt;Hostile&lt;/b&gt; states, 320px worst case (6 states, 9 transitions)\nStates:\n- &lt;script&gt;alert(1)&lt;/script&gt; (initial state)\n- שלום עולם ארוכה מאוד (state)\n- Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (state)\n- bidi ‮evil‬ label text here (error state)\n- &lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;` (final state)\n- Unreachable state (state)\nTransitions:\n1. &lt;script&gt;alert(1)&lt;/script&gt; to שלום עולם ארוכה מאוד on go &lt;img src=x onerror=alert(1)&gt; [guard &gt; 0 &amp;&amp; x &lt; 1]\n2. שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy\n3. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]\n4. bidi ‮evil‬ label text here to &lt;script&gt;alert(1)&lt;/script&gt; on quote &quot; and &#x27; and &amp; and &lt;/svg&gt;&lt;script&gt;alert(2)&lt;/script&gt;\n5. שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g]\n6. שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state\n7. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\n8. Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to &lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;` on finish\n9. bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]\"><h4 class=\"vb-title vd-state-title\">&lt;b&gt;Hostile&lt;/b&gt; states, 320px worst case</h4><p class=\"vb-alt vd-state-summary\">Long unbroken strings, bidi, markup text, loops and many items. (6 states, 9 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"&lt;b&gt;Hostile&lt;/b&gt; states, 320px worst case (scrollable)\"><svg width=\"417.6\" height=\"728\" class=\"vd-state-svg\" viewBox=\"0 0 417.6 728\" role=\"img\" aria-label=\"&lt;b&gt;Hostile&lt;/b&gt; states, 320px worst case\"><title>&lt;b&gt;Hostile&lt;/b&gt; states, 320px worst case</title><desc>Long unbroken strings, bidi, markup text, loops and many items.</desc><g class=\"vd-state-edge\"><title>initial state marker to &lt;script&gt;alert(1)&lt;/script&gt;</title><path class=\"vd-state-line\" d=\"M124.3 48.0 L211.8 168.0\"/><polygon class=\"vd-state-head\" points=\"211.8,168.0 201.9,162.9 209.9,157.0\"/></g><g class=\"vd-state-edge\"><title>&lt;script&gt;alert(1)&lt;/script&gt; to שלום עולם ארוכה מאוד on go &lt;img src=x onerror=alert(1)&gt; [guard &gt; 0 &amp;&amp; x &lt; 1]</title><path class=\"vd-state-line\" d=\"M211.8 218.0 L131.2 322.0\"/><polygon class=\"vd-state-head\" points=\"131.2,322.0 133.4,311.0 141.3,317.2\"/><rect class=\"vd-state-label-bg\" x=\"122.7\" y=\"247.0\" width=\"97.6\" height=\"46.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"171.5\" y=\"256.0\">go &lt;img src=x</tspan><tspan x=\"171.5\" y=\"270.0\">onerror=alert(</tspan><tspan x=\"171.5\" y=\"284.0\">1)&gt; [guard …</tspan></text></g><g class=\"vd-state-edge\"><title>שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</title><path class=\"vd-state-line\" d=\"M131.2 372.0 L128.0 476.0\"/><polygon class=\"vd-state-head\" points=\"128.0,476.0 123.3,465.9 133.3,466.2\"/><rect class=\"vd-state-label-bg\" x=\"80.8\" y=\"401.0\" width=\"97.6\" height=\"46.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"129.6\" y=\"410.0\">yyyyyyyyyyyyyy</tspan><tspan x=\"129.6\" y=\"424.0\">yyyyyyyyyyyyyy</tspan><tspan x=\"129.6\" y=\"438.0\">yyyyyyyyyyy…</tspan></text></g><g class=\"vd-state-edge\"><title>Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]</title><path class=\"vd-state-line\" d=\"M128.0 558.0 L215.5 662.0\"/><polygon class=\"vd-state-head\" points=\"215.5,662.0 205.2,657.6 212.9,651.1\"/><rect class=\"vd-state-label-bg\" x=\"122.9\" y=\"601.0\" width=\"97.6\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"171.8\" y=\"610.0\">שלום עולם [אם]</tspan></text></g><g class=\"vd-state-edge\"><title>bidi ‮evil‬ label text here to &lt;script&gt;alert(1)&lt;/script&gt; on quote &quot; and &#x27; and &amp; and &lt;/svg&gt;&lt;script&gt;alert(2)&lt;/script&gt;</title><path class=\"vd-state-line\" d=\"M215.5 662.0 L365.6 558.0 L365.6 476.0 L351.9 372.0 L351.9 322.0 L211.8 218.0\"/><polygon class=\"vd-state-head\" points=\"211.8,218.0 222.8,219.9 216.8,228.0\"/><rect class=\"vd-state-label-bg\" x=\"233.1\" y=\"240.0\" width=\"97.6\" height=\"60.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"281.9\" y=\"249.0\">quote &quot; and &#x27;</tspan><tspan x=\"281.9\" y=\"263.0\">and &amp; and</tspan><tspan x=\"281.9\" y=\"277.0\">&lt;/svg&gt;&lt;script&gt;</tspan><tspan x=\"281.9\" y=\"291.0\">a…</tspan></text></g><g class=\"vd-state-edge\"><title>Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to &lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;` on finish</title><path class=\"vd-state-line\" d=\"M128.0 558.0 L68.5 662.0\"/><polygon class=\"vd-state-head\" points=\"68.5,662.0 69.1,650.8 77.8,655.8\"/><rect class=\"vd-state-label-bg\" x=\"75.0\" y=\"601.0\" width=\"46.4\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"98.2\" y=\"610.0\">finish</tspan></text></g><g class=\"vd-state-edge\"><title>שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g] / שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state</title><path class=\"vd-state-line\" d=\"M197.7 337.0 L215.7 337.0 L215.7 357.0 L197.7 357.0\"/><polygon class=\"vd-state-head\" points=\"197.7,357.0 207.7,352.0 207.7,362.0\"/><rect class=\"vd-state-label-bg\" x=\"219.7\" y=\"317.0\" width=\"91.2\" height=\"60.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"265.3\" y=\"326.0\">self loop</tspan><tspan x=\"265.3\" y=\"340.0\">label with</tspan><tspan x=\"265.3\" y=\"354.0\">several words</tspan><tspan x=\"265.3\" y=\"368.0\">in i…</tspan></text></g><g class=\"vd-state-edge\"><title>Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</title><path class=\"vd-state-line\" d=\"M205.0 500.6 L223.0 500.6 L223.0 533.4 L205.0 533.4\"/><polygon class=\"vd-state-head\" points=\"205.0,533.4 215.0,528.4 215.0,538.4\"/><rect class=\"vd-state-label-bg\" x=\"227.0\" y=\"494.0\" width=\"97.6\" height=\"46.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"275.8\" y=\"503.0\">zzzzzzzzzzzzzz</tspan><tspan x=\"275.8\" y=\"517.0\">zzzzzzzzzzzzzz</tspan><tspan x=\"275.8\" y=\"531.0\">zzzzzzzzzzz…</tspan></text></g><g class=\"vd-state-edge\"><title>bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]</title><path class=\"vd-state-line\" d=\"M282.0 677.0 L300.0 677.0 L300.0 697.0 L282.0 697.0\"/><polygon class=\"vd-state-head\" points=\"282.0,697.0 292.0,692.0 292.0,702.0\"/><rect class=\"vd-state-label-bg\" x=\"304.0\" y=\"678.0\" width=\"97.6\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"352.8\" y=\"687.0\">[only a guard]</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(92.3 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(134.8 168.0)\"><title>&lt;script&gt;alert(1)&lt;/script&gt;, initial state</title><rect class=\"vd-state-shape\" width=\"154.0\" height=\"50.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">&lt;script&gt;alert(1)&lt;/</tspan><tspan x=\"77.0\" y=\"33.0\">script&gt;</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(64.7 322.0)\"><title>שלום עולם ארוכה מאוד, state</title><rect class=\"vd-state-shape\" width=\"133.0\" height=\"50.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"66.5\" y=\"17.0\">שלום עולם ארוכה</tspan><tspan x=\"66.5\" y=\"33.0\">מאוד</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(51.0 476.0)\"><title>Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, state</title><rect class=\"vd-state-shape\" width=\"154.0\" height=\"82.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Averyveryverylongl</tspan><tspan x=\"77.0\" y=\"33.0\">abelwithnobreaksat</tspan><tspan x=\"77.0\" y=\"49.0\">allxxxxxxxxxxxxxxx</tspan><tspan x=\"77.0\" y=\"65.0\">xxxxx…</tspan></text></g><g class=\"vd-state-node vd-state-error\" transform=\"translate(149.0 662.0)\"><title>bidi ‮evil‬ label text here, error state</title><rect class=\"vd-state-shape\" width=\"133.0\" height=\"50.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"66.5\" y=\"17.0\">✕ bidi ‮evil‬</tspan><tspan x=\"66.5\" y=\"33.0\">label text here</tspan></text></g><g class=\"vd-state-node vd-state-final\" transform=\"translate(16.0 662.0)\"><title>&lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;`, final state</title><rect class=\"vd-state-shape\" width=\"105.0\" height=\"50.0\" rx=\"10\"/><rect class=\"vd-state-ring\" x=\"4\" y=\"4\" width=\"97.0\" height=\"42.0\" rx=\"7\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"52.5\" y=\"17.0\">&lt;b&gt;Four&lt;/b&gt;</tspan><tspan x=\"52.5\" y=\"33.0\">`&lt;i&gt;c&lt;/i&gt;`</tspan></text></g><g class=\"vd-state-node vd-state-normal vd-state-unreachable\" transform=\"translate(184.3 16.0)\"><title>Unreachable state, state, unreachable</title><rect class=\"vd-state-shape\" width=\"147.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"24.0\">Unreachable state</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">&lt;script&gt;alert(1)&lt;/script&gt; (initial state): &lt;img src=x onerror=alert(1)&gt; note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</li><li class=\"vd-state-item\">שלום עולם ארוכה מאוד (state): &lt;img src=x onerror=alert(1)&gt; note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</li><li class=\"vd-state-item\">Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (state): &lt;img src=x onerror=alert(1)&gt; note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</li><li class=\"vd-state-item\">bidi ‮evil‬ label text here (error state): &lt;img src=x onerror=alert(1)&gt; note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</li><li class=\"vd-state-item\">&lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;` (final state): &lt;img src=x onerror=alert(1)&gt; note nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</li><li class=\"vd-state-item\">Unreachable state (state, unreachable from the initial state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">&lt;script&gt;alert(1)&lt;/script&gt; to שלום עולם ארוכה מאוד on go &lt;img src=x onerror=alert(1)&gt; [guard &gt; 0 &amp;&amp; x &lt; 1]</li><li class=\"vd-state-item\">שלום עולם ארוכה מאוד to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</li><li class=\"vd-state-item\">Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to bidi ‮evil‬ label text here on שלום עולם [אם]</li><li class=\"vd-state-item\">bidi ‮evil‬ label text here to &lt;script&gt;alert(1)&lt;/script&gt; on quote &quot; and &#x27; and &amp; and &lt;/svg&gt;&lt;script&gt;alert(2)&lt;/script&gt;</li><li class=\"vd-state-item\">שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on self loop label with several words in it to wrap [g]</li><li class=\"vd-state-item\">שלום עולם ארוכה מאוד to שלום עולם ארוכה מאוד on a second self loop on the same state</li><li class=\"vd-state-item\">Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx on zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</li><li class=\"vd-state-item\">Averyveryverylonglabelwithnobreaksatallxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to &lt;b&gt;Four&lt;/b&gt; `&lt;i&gt;c&lt;/i&gt;` on finish</li><li class=\"vd-state-item\">bidi ‮evil‬ label text here to bidi ‮evil‬ label text here [only a guard]</li></ol></div>"
+ },
+ {
+  "name": "rich-state:s1",
+  "input": {
+   "title": "Job lifecycle",
+   "desc": "A job waits, runs, and ends done or failed; failed jobs retry up to three times.",
+   "states": [
+    {
+     "id": "idle",
+     "label": "Idle",
+     "kind": "initial",
+     "note": "Waiting in the queue."
+    },
+    {
+     "id": "run",
+     "label": "Running"
+    },
+    {
+     "id": "wait",
+     "label": "Waiting for a worker"
+    },
+    {
+     "id": "done",
+     "label": "Done",
+     "kind": "final"
+    },
+    {
+     "id": "bad",
+     "label": "Failed",
+     "kind": "error"
+    },
+    {
+     "id": "orphan",
+     "label": "Orphaned"
+    }
+   ],
+   "transitions": [
+    {
+     "from": "idle",
+     "to": "wait",
+     "label": "enqueue"
+    },
+    {
+     "from": "wait",
+     "to": "run",
+     "label": "start"
+    },
+    {
+     "from": "run",
+     "to": "done",
+     "label": "finish"
+    },
+    {
+     "from": "run",
+     "to": "bad",
+     "label": "crash"
+    },
+    {
+     "from": "bad",
+     "to": "run",
+     "label": "retry",
+     "guard": "attempts < 3"
+    },
+    {
+     "from": "run",
+     "to": "run",
+     "label": "heartbeat"
+    },
+    {
+     "from": "run",
+     "to": "run",
+     "label": "checkpoint"
+    },
+    {
+     "from": "orphan",
+     "to": "idle",
+     "label": "adopt"
+    }
+   ]
+  },
+  "props": {
+   "title": "Job lifecycle",
+   "name": "Job lifecycle",
+   "desc": "A job waits, runs, and ends done or failed; failed jobs retry up to three times.",
+   "counts": "6 states, 8 transitions",
+   "drawing": {
+    "box": "0 0 234.7 578",
+    "width": "234.7",
+    "height": "578",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Idle"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M48.5 48.0 L104.5 140.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.5,140.0 95.0,134.1 103.6,128.9"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle to Waiting for a worker on enqueue"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.5 188.0 L104.5 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.5,264.0 99.5,254.0 109.5,254.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "78.1",
+         "y": "217.0",
+         "width": "52.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "104.5",
+           "y": "226.0"
+          },
+          "enqueue"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Waiting for a worker to Running on start"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.5 314.0 L54.5 390.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "54.5,390.0 55.8,378.9 64.2,384.4"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "59.5",
+         "y": "343.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "79.5",
+           "y": "352.0"
+          },
+          "start"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Done on finish"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M54.5 438.0 L48.5 514.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.5,514.0 44.3,503.6 54.3,504.4"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "28.3",
+         "y": "467.0",
+         "width": "46.4",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "51.5",
+           "y": "476.0"
+          },
+          "finish"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Failed on crash"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M49.5 438.0 L145.5 514.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "145.5,514.0 134.6,511.7 140.8,503.9"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "77.5",
+         "y": "467.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "97.5",
+           "y": "476.0"
+          },
+          "crash"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed to Running on retry [attempts < 3]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M155.5 514.0 L59.5 438.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "59.5,438.0 70.4,440.3 64.2,448.1"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "121.1",
+         "y": "467.6",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "169.9",
+           "y": "476.6"
+          },
+          "retry"
+         ],
+         [
+          "tspan",
+          {
+           "x": "169.9",
+           "y": "490.6"
+          },
+          "[attempts < 3]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Orphaned to Idle on adopt"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M150.5 64.0 L104.5 140.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.5,140.0 105.4,128.9 114.0,134.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "107.5",
+         "y": "93.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "127.5",
+           "y": "102.0"
+          },
+          "adopt"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Running on heartbeat / Running to Running on checkpoint"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M93.0 404.4 L111.0 404.4 L111.0 423.6 L93.0 423.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "93.0,423.6 103.0,418.6 103.0,428.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "115.0",
+         "y": "398.0",
+         "width": "72.0",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "151.0",
+           "y": "407.0"
+          },
+          "heartbeat;"
+         ],
+         [
+          "tspan",
+          {
+           "x": "151.0",
+           "y": "421.0"
+          },
+          "checkpoint"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(16.5 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(72.5 140.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Idle"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(16.0 390.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "77.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "38.5",
+           "y": "24.0"
+          },
+          "Running"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(45.0 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Waiting for a worker, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "119.0",
+         "height": "50.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "59.5",
+           "y": "17.0"
+          },
+          "Waiting for a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "59.5",
+           "y": "33.0"
+          },
+          "worker"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-final",
+       "transform": "translate(16.5 514.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Done, final state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-ring",
+         "x": "4",
+         "y": "4",
+         "width": "56.0",
+         "height": "40.0",
+         "rx": "7"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Done"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-error",
+       "transform": "translate(108.5 514.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed, error state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "84.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "42.0",
+           "y": "24.0"
+          },
+          "✕ Failed"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal vd-state-unreachable",
+       "transform": "translate(108.5 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Orphaned, state, unreachable"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "84.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "42.0",
+           "y": "24.0"
+          },
+          "Orphaned"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Idle (initial state): Waiting in the queue.",
+    "Running (state)",
+    "Waiting for a worker (state)",
+    "Done (final state)",
+    "Failed (error state)",
+    "Orphaned (state, unreachable from the initial state)"
+   ],
+   "moves": [
+    "Idle to Waiting for a worker on enqueue",
+    "Waiting for a worker to Running on start",
+    "Running to Done on finish",
+    "Running to Failed on crash",
+    "Failed to Running on retry [attempts < 3]",
+    "Running to Running on heartbeat",
+    "Running to Running on checkpoint",
+    "Orphaned to Idle on adopt"
+   ],
+   "copy": "Job lifecycle (6 states, 8 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Waiting for a worker (state)\n- Done (final state)\n- Failed (error state)\n- Orphaned (state)\nTransitions:\n1. Idle to Waiting for a worker on enqueue\n2. Waiting for a worker to Running on start\n3. Running to Done on finish\n4. Running to Failed on crash\n5. Failed to Running on retry [attempts < 3]\n6. Running to Running on heartbeat\n7. Running to Running on checkpoint\n8. Orphaned to Idle on adopt"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"Job lifecycle (6 states, 8 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Waiting for a worker (state)\n- Done (final state)\n- Failed (error state)\n- Orphaned (state)\nTransitions:\n1. Idle to Waiting for a worker on enqueue\n2. Waiting for a worker to Running on start\n3. Running to Done on finish\n4. Running to Failed on crash\n5. Failed to Running on retry [attempts &lt; 3]\n6. Running to Running on heartbeat\n7. Running to Running on checkpoint\n8. Orphaned to Idle on adopt\"><h4 class=\"vb-title vd-state-title\">Job lifecycle</h4><p class=\"vb-alt vd-state-summary\">A job waits, runs, and ends done or failed; failed jobs retry up to three times. (6 states, 8 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"Job lifecycle (scrollable)\"><svg width=\"234.7\" height=\"578\" class=\"vd-state-svg\" viewBox=\"0 0 234.7 578\" role=\"img\" aria-label=\"Job lifecycle\"><title>Job lifecycle</title><desc>A job waits, runs, and ends done or failed; failed jobs retry up to three times.</desc><g class=\"vd-state-edge\"><title>initial state marker to Idle</title><path class=\"vd-state-line\" d=\"M48.5 48.0 L104.5 140.0\"/><polygon class=\"vd-state-head\" points=\"104.5,140.0 95.0,134.1 103.6,128.9\"/></g><g class=\"vd-state-edge\"><title>Idle to Waiting for a worker on enqueue</title><path class=\"vd-state-line\" d=\"M104.5 188.0 L104.5 264.0\"/><polygon class=\"vd-state-head\" points=\"104.5,264.0 99.5,254.0 109.5,254.0\"/><rect class=\"vd-state-label-bg\" x=\"78.1\" y=\"217.0\" width=\"52.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"104.5\" y=\"226.0\">enqueue</tspan></text></g><g class=\"vd-state-edge\"><title>Waiting for a worker to Running on start</title><path class=\"vd-state-line\" d=\"M104.5 314.0 L54.5 390.0\"/><polygon class=\"vd-state-head\" points=\"54.5,390.0 55.8,378.9 64.2,384.4\"/><rect class=\"vd-state-label-bg\" x=\"59.5\" y=\"343.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"79.5\" y=\"352.0\">start</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Done on finish</title><path class=\"vd-state-line\" d=\"M54.5 438.0 L48.5 514.0\"/><polygon class=\"vd-state-head\" points=\"48.5,514.0 44.3,503.6 54.3,504.4\"/><rect class=\"vd-state-label-bg\" x=\"28.3\" y=\"467.0\" width=\"46.4\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"51.5\" y=\"476.0\">finish</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Failed on crash</title><path class=\"vd-state-line\" d=\"M49.5 438.0 L145.5 514.0\"/><polygon class=\"vd-state-head\" points=\"145.5,514.0 134.6,511.7 140.8,503.9\"/><rect class=\"vd-state-label-bg\" x=\"77.5\" y=\"467.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"97.5\" y=\"476.0\">crash</tspan></text></g><g class=\"vd-state-edge\"><title>Failed to Running on retry [attempts &lt; 3]</title><path class=\"vd-state-line\" d=\"M155.5 514.0 L59.5 438.0\"/><polygon class=\"vd-state-head\" points=\"59.5,438.0 70.4,440.3 64.2,448.1\"/><rect class=\"vd-state-label-bg\" x=\"121.1\" y=\"467.6\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"169.9\" y=\"476.6\">retry</tspan><tspan x=\"169.9\" y=\"490.6\">[attempts &lt; 3]</tspan></text></g><g class=\"vd-state-edge\"><title>Orphaned to Idle on adopt</title><path class=\"vd-state-line\" d=\"M150.5 64.0 L104.5 140.0\"/><polygon class=\"vd-state-head\" points=\"104.5,140.0 105.4,128.9 114.0,134.0\"/><rect class=\"vd-state-label-bg\" x=\"107.5\" y=\"93.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"127.5\" y=\"102.0\">adopt</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Running on heartbeat / Running to Running on checkpoint</title><path class=\"vd-state-line\" d=\"M93.0 404.4 L111.0 404.4 L111.0 423.6 L93.0 423.6\"/><polygon class=\"vd-state-head\" points=\"93.0,423.6 103.0,418.6 103.0,428.6\"/><rect class=\"vd-state-label-bg\" x=\"115.0\" y=\"398.0\" width=\"72.0\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"151.0\" y=\"407.0\">heartbeat;</tspan><tspan x=\"151.0\" y=\"421.0\">checkpoint</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(16.5 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(72.5 140.0)\"><title>Idle, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Idle</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(16.0 390.0)\"><title>Running, state</title><rect class=\"vd-state-shape\" width=\"77.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"38.5\" y=\"24.0\">Running</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(45.0 264.0)\"><title>Waiting for a worker, state</title><rect class=\"vd-state-shape\" width=\"119.0\" height=\"50.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"59.5\" y=\"17.0\">Waiting for a</tspan><tspan x=\"59.5\" y=\"33.0\">worker</tspan></text></g><g class=\"vd-state-node vd-state-final\" transform=\"translate(16.5 514.0)\"><title>Done, final state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><rect class=\"vd-state-ring\" x=\"4\" y=\"4\" width=\"56.0\" height=\"40.0\" rx=\"7\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Done</tspan></text></g><g class=\"vd-state-node vd-state-error\" transform=\"translate(108.5 514.0)\"><title>Failed, error state</title><rect class=\"vd-state-shape\" width=\"84.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"42.0\" y=\"24.0\">✕ Failed</tspan></text></g><g class=\"vd-state-node vd-state-normal vd-state-unreachable\" transform=\"translate(108.5 16.0)\"><title>Orphaned, state, unreachable</title><rect class=\"vd-state-shape\" width=\"84.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"42.0\" y=\"24.0\">Orphaned</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Idle (initial state): Waiting in the queue.</li><li class=\"vd-state-item\">Running (state)</li><li class=\"vd-state-item\">Waiting for a worker (state)</li><li class=\"vd-state-item\">Done (final state)</li><li class=\"vd-state-item\">Failed (error state)</li><li class=\"vd-state-item\">Orphaned (state, unreachable from the initial state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">Idle to Waiting for a worker on enqueue</li><li class=\"vd-state-item\">Waiting for a worker to Running on start</li><li class=\"vd-state-item\">Running to Done on finish</li><li class=\"vd-state-item\">Running to Failed on crash</li><li class=\"vd-state-item\">Failed to Running on retry [attempts &lt; 3]</li><li class=\"vd-state-item\">Running to Running on heartbeat</li><li class=\"vd-state-item\">Running to Running on checkpoint</li><li class=\"vd-state-item\">Orphaned to Idle on adopt</li></ol></div>"
+ },
+ {
+  "name": "rich-state:s2",
+  "input": {
+   "desc": "One state with no transitions.",
+   "states": [
+    {
+     "id": "only",
+     "label": "Only",
+     "kind": "initial"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "One state with no transitions.",
+   "counts": "1 state, 0 transitions",
+   "drawing": {
+    "box": "0 0 96 172",
+    "width": "96",
+    "height": "172",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Only"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M48.0 48.0 L48.0 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.0,108.0 43.0,98.0 53.0,98.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(16.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(16.0 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Only, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Only"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Only (initial state)"
+   ],
+   "moves": [],
+   "copy": "State machine (1 state, 0 transitions)\nStates:\n- Only (initial state)"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (1 state, 0 transitions)\nStates:\n- Only (initial state)\"><p class=\"vb-alt vd-state-summary\">One state with no transitions. (1 state, 0 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"96\" height=\"172\" class=\"vd-state-svg\" viewBox=\"0 0 96 172\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>One state with no transitions.</desc><g class=\"vd-state-edge\"><title>initial state marker to Only</title><path class=\"vd-state-line\" d=\"M48.0 48.0 L48.0 108.0\"/><polygon class=\"vd-state-head\" points=\"48.0,108.0 43.0,98.0 53.0,98.0\"/></g><g class=\"vd-state-start\" transform=\"translate(16.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(16.0 108.0)\"><title>Only, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Only</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Only (initial state)</li></ul></div>"
+ },
+ {
+  "name": "unit-0",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "idle",
+     "kind": "initial",
+     "label": "Idle"
+    },
+    {
+     "id": "run",
+     "label": "Running"
+    },
+    {
+     "id": "done",
+     "kind": "final",
+     "label": "Done"
+    },
+    {
+     "id": "bad",
+     "kind": "error",
+     "label": "Failed"
+    }
+   ],
+   "transitions": [
+    {
+     "from": "idle",
+     "label": "start",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "guard": "ok",
+     "label": "finish",
+     "to": "done"
+    },
+    {
+     "from": "run",
+     "label": "crash",
+     "to": "bad"
+    },
+    {
+     "from": "bad",
+     "label": "retry",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "label": "beat",
+     "to": "run"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "d",
+   "counts": "4 states, 5 transitions",
+   "drawing": {
+    "box": "0 0 208.28 410",
+    "width": "208.28",
+    "height": "410",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Idle"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.0 48.0 L104.0 126.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.0,126.0 99.0,116.0 109.0,116.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle to Running on start"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.0 174.0 L73.2 236.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "73.2,236.0 73.2,224.8 82.1,229.3"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "68.6",
+         "y": "196.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "88.6",
+           "y": "205.0"
+          },
+          "start"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Done on finish [ok]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M73.2 284.0 L48.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.0,346.0 47.1,334.9 56.4,338.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "21.4",
+         "y": "306.0",
+         "width": "78.4",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "60.6",
+           "y": "315.0"
+          },
+          "finish [ok]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Failed on crash"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M68.2 284.0 L145.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "145.0,346.0 134.1,343.6 140.4,335.8"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "110.6",
+         "y": "306.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "130.6",
+           "y": "315.0"
+          },
+          "crash"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed to Running on retry"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M155.0 346.0 L78.2 284.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "78.2,284.0 89.1,286.4 82.8,294.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "152.3",
+         "y": "312.2",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "172.3",
+           "y": "321.2"
+          },
+          "retry"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Running on beat"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "111.7,269.6 121.7,264.6 121.7,274.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "133.7",
+         "y": "251.0",
+         "width": "33.6",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "150.5",
+           "y": "260.0"
+          },
+          "beat"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(72.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(72.0 126.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Idle"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(34.7 236.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "77.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "38.5",
+           "y": "24.0"
+          },
+          "Running"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-final",
+       "transform": "translate(16.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Done, final state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-ring",
+         "x": "4",
+         "y": "4",
+         "width": "56.0",
+         "height": "40.0",
+         "rx": "7"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Done"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-error",
+       "transform": "translate(108.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed, error state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "84.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "42.0",
+           "y": "24.0"
+          },
+          "✕ Failed"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Idle (initial state)",
+    "Running (state)",
+    "Done (final state)",
+    "Failed (error state)"
+   ],
+   "moves": [
+    "Idle to Running on start",
+    "Running to Done on finish [ok]",
+    "Running to Failed on crash",
+    "Failed to Running on retry",
+    "Running to Running on beat"
+   ],
+   "copy": "State machine (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat\"><p class=\"vb-alt vd-state-summary\">d (4 states, 5 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"208.28\" height=\"410\" class=\"vd-state-svg\" viewBox=\"0 0 208.28 410\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>d</desc><g class=\"vd-state-edge\"><title>initial state marker to Idle</title><path class=\"vd-state-line\" d=\"M104.0 48.0 L104.0 126.0\"/><polygon class=\"vd-state-head\" points=\"104.0,126.0 99.0,116.0 109.0,116.0\"/></g><g class=\"vd-state-edge\"><title>Idle to Running on start</title><path class=\"vd-state-line\" d=\"M104.0 174.0 L73.2 236.0\"/><polygon class=\"vd-state-head\" points=\"73.2,236.0 73.2,224.8 82.1,229.3\"/><rect class=\"vd-state-label-bg\" x=\"68.6\" y=\"196.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"88.6\" y=\"205.0\">start</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Done on finish [ok]</title><path class=\"vd-state-line\" d=\"M73.2 284.0 L48.0 346.0\"/><polygon class=\"vd-state-head\" points=\"48.0,346.0 47.1,334.9 56.4,338.6\"/><rect class=\"vd-state-label-bg\" x=\"21.4\" y=\"306.0\" width=\"78.4\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"60.6\" y=\"315.0\">finish [ok]</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Failed on crash</title><path class=\"vd-state-line\" d=\"M68.2 284.0 L145.0 346.0\"/><polygon class=\"vd-state-head\" points=\"145.0,346.0 134.1,343.6 140.4,335.8\"/><rect class=\"vd-state-label-bg\" x=\"110.6\" y=\"306.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"130.6\" y=\"315.0\">crash</tspan></text></g><g class=\"vd-state-edge\"><title>Failed to Running on retry</title><path class=\"vd-state-line\" d=\"M155.0 346.0 L78.2 284.0\"/><polygon class=\"vd-state-head\" points=\"78.2,284.0 89.1,286.4 82.8,294.2\"/><rect class=\"vd-state-label-bg\" x=\"152.3\" y=\"312.2\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"172.3\" y=\"321.2\">retry</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Running on beat</title><path class=\"vd-state-line\" d=\"M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6\"/><polygon class=\"vd-state-head\" points=\"111.7,269.6 121.7,264.6 121.7,274.6\"/><rect class=\"vd-state-label-bg\" x=\"133.7\" y=\"251.0\" width=\"33.6\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"150.5\" y=\"260.0\">beat</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(72.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(72.0 126.0)\"><title>Idle, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Idle</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(34.7 236.0)\"><title>Running, state</title><rect class=\"vd-state-shape\" width=\"77.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"38.5\" y=\"24.0\">Running</tspan></text></g><g class=\"vd-state-node vd-state-final\" transform=\"translate(16.0 346.0)\"><title>Done, final state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><rect class=\"vd-state-ring\" x=\"4\" y=\"4\" width=\"56.0\" height=\"40.0\" rx=\"7\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Done</tspan></text></g><g class=\"vd-state-node vd-state-error\" transform=\"translate(108.0 346.0)\"><title>Failed, error state</title><rect class=\"vd-state-shape\" width=\"84.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"42.0\" y=\"24.0\">✕ Failed</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Idle (initial state)</li><li class=\"vd-state-item\">Running (state)</li><li class=\"vd-state-item\">Done (final state)</li><li class=\"vd-state-item\">Failed (error state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">Idle to Running on start</li><li class=\"vd-state-item\">Running to Done on finish [ok]</li><li class=\"vd-state-item\">Running to Failed on crash</li><li class=\"vd-state-item\">Failed to Running on retry</li><li class=\"vd-state-item\">Running to Running on beat</li></ol></div>"
+ },
+ {
+  "name": "unit-1",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "w0",
+     "kind": "initial",
+     "label": "Wide state 0"
+    },
+    {
+     "id": "w1",
+     "label": "Wide state 1"
+    },
+    {
+     "id": "w2",
+     "label": "Wide state 2"
+    },
+    {
+     "id": "w3",
+     "label": "Wide state 3"
+    },
+    {
+     "id": "w4",
+     "label": "Wide state 4"
+    },
+    {
+     "id": "w5",
+     "label": "Wide state 5"
+    }
+   ],
+   "transitions": [
+    {
+     "from": "w0",
+     "label": "go",
+     "to": "w1"
+    },
+    {
+     "from": "w0",
+     "label": "go",
+     "to": "w2"
+    },
+    {
+     "from": "w0",
+     "label": "go",
+     "to": "w3"
+    },
+    {
+     "from": "w0",
+     "label": "go",
+     "to": "w4"
+    },
+    {
+     "from": "w0",
+     "label": "go",
+     "to": "w5"
+    },
+    {
+     "from": "w0",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w0"
+    },
+    {
+     "from": "w1",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w1"
+    },
+    {
+     "from": "w2",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w2"
+    },
+    {
+     "from": "w3",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w3"
+    },
+    {
+     "from": "w4",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w4"
+    },
+    {
+     "from": "w5",
+     "label": "loop loop loop loop loop loop ",
+     "to": "w5"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "d",
+   "counts": "6 states, 11 transitions",
+   "drawing": {
+    "box": "0 0 1326 328",
+    "width": "1326",
+    "height": "328",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Wide state 0"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M666.0 48.0 L603.2 140.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "603.2,140.0 604.7,128.9 613.0,134.6"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 1 on go"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M603.2 188.0 L72.0 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "72.0,264.0 81.2,257.6 82.6,267.5"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "327.2",
+         "y": "217.0",
+         "width": "20.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "337.6",
+           "y": "226.0"
+          },
+          "go"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 2 on go"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M603.2 188.0 L337.6 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "337.6,264.0 345.8,256.4 348.6,266.1"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "460.0",
+         "y": "217.0",
+         "width": "20.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "470.4",
+           "y": "226.0"
+          },
+          "go"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 3 on go"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M603.2 188.0 L603.2 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "603.2,264.0 598.2,254.0 608.2,254.0"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "592.8",
+         "y": "217.0",
+         "width": "20.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "603.2",
+           "y": "226.0"
+          },
+          "go"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 4 on go"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M603.2 188.0 L868.8 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "868.8,264.0 857.8,266.1 860.6,256.4"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "725.6",
+         "y": "217.0",
+         "width": "20.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "736.0",
+           "y": "226.0"
+          },
+          "go"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 5 on go"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M603.2 188.0 L1134.4 264.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "1134.4,264.0 1123.8,267.5 1125.2,257.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "858.4",
+         "y": "217.0",
+         "width": "20.8",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "868.8",
+           "y": "226.0"
+          },
+          "go"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0 to Wide state 0 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M659.2 154.4 L677.2 154.4 L677.2 173.6 L659.2 173.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "659.2,173.6 669.2,168.6 669.2,178.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "681.2",
+         "y": "148.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "730.0",
+           "y": "157.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "730.0",
+           "y": "171.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 1 to Wide state 1 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M128.0 278.4 L146.0 278.4 L146.0 297.6 L128.0 297.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "128.0,297.6 138.0,292.6 138.0,302.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "150.0",
+         "y": "272.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "198.8",
+           "y": "281.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "198.8",
+           "y": "295.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 2 to Wide state 2 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M393.6 278.4 L411.6 278.4 L411.6 297.6 L393.6 297.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "393.6,297.6 403.6,292.6 403.6,302.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "415.6",
+         "y": "272.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "464.4",
+           "y": "281.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "464.4",
+           "y": "295.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 3 to Wide state 3 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M659.2 278.4 L677.2 278.4 L677.2 297.6 L659.2 297.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "659.2,297.6 669.2,292.6 669.2,302.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "681.2",
+         "y": "272.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "730.0",
+           "y": "281.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "730.0",
+           "y": "295.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 4 to Wide state 4 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M924.8 278.4 L942.8 278.4 L942.8 297.6 L924.8 297.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "924.8,297.6 934.8,292.6 934.8,302.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "946.8",
+         "y": "272.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "995.6",
+           "y": "281.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "995.6",
+           "y": "295.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 5 to Wide state 5 on loop loop loop loop loop loop "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M1190.4 278.4 L1208.4 278.4 L1208.4 297.6 L1190.4 297.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "1190.4,297.6 1200.4,292.6 1200.4,302.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "1212.4",
+         "y": "272.0",
+         "width": "97.6",
+         "height": "32.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "1261.2",
+           "y": "281.0"
+          },
+          "loop loop loop"
+         ],
+         [
+          "tspan",
+          {
+           "x": "1261.2",
+           "y": "295.0"
+          },
+          "loop loop loop"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(634.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(547.2 140.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 0, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 0"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(16.0 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 1, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 1"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(281.6 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 2, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 2"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(547.2 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 3, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 3"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(812.8 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 4, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 4"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(1078.4 264.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Wide state 5, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Wide state 5"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Wide state 0 (initial state)",
+    "Wide state 1 (state)",
+    "Wide state 2 (state)",
+    "Wide state 3 (state)",
+    "Wide state 4 (state)",
+    "Wide state 5 (state)"
+   ],
+   "moves": [
+    "Wide state 0 to Wide state 1 on go",
+    "Wide state 0 to Wide state 2 on go",
+    "Wide state 0 to Wide state 3 on go",
+    "Wide state 0 to Wide state 4 on go",
+    "Wide state 0 to Wide state 5 on go",
+    "Wide state 0 to Wide state 0 on loop loop loop loop loop loop ",
+    "Wide state 1 to Wide state 1 on loop loop loop loop loop loop ",
+    "Wide state 2 to Wide state 2 on loop loop loop loop loop loop ",
+    "Wide state 3 to Wide state 3 on loop loop loop loop loop loop ",
+    "Wide state 4 to Wide state 4 on loop loop loop loop loop loop ",
+    "Wide state 5 to Wide state 5 on loop loop loop loop loop loop "
+   ],
+   "copy": "State machine (6 states, 11 transitions)\nStates:\n- Wide state 0 (initial state)\n- Wide state 1 (state)\n- Wide state 2 (state)\n- Wide state 3 (state)\n- Wide state 4 (state)\n- Wide state 5 (state)\nTransitions:\n1. Wide state 0 to Wide state 1 on go\n2. Wide state 0 to Wide state 2 on go\n3. Wide state 0 to Wide state 3 on go\n4. Wide state 0 to Wide state 4 on go\n5. Wide state 0 to Wide state 5 on go\n6. Wide state 0 to Wide state 0 on loop loop loop loop loop loop \n7. Wide state 1 to Wide state 1 on loop loop loop loop loop loop \n8. Wide state 2 to Wide state 2 on loop loop loop loop loop loop \n9. Wide state 3 to Wide state 3 on loop loop loop loop loop loop \n10. Wide state 4 to Wide state 4 on loop loop loop loop loop loop \n11. Wide state 5 to Wide state 5 on loop loop loop loop loop loop "
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (6 states, 11 transitions)\nStates:\n- Wide state 0 (initial state)\n- Wide state 1 (state)\n- Wide state 2 (state)\n- Wide state 3 (state)\n- Wide state 4 (state)\n- Wide state 5 (state)\nTransitions:\n1. Wide state 0 to Wide state 1 on go\n2. Wide state 0 to Wide state 2 on go\n3. Wide state 0 to Wide state 3 on go\n4. Wide state 0 to Wide state 4 on go\n5. Wide state 0 to Wide state 5 on go\n6. Wide state 0 to Wide state 0 on loop loop loop loop loop loop \n7. Wide state 1 to Wide state 1 on loop loop loop loop loop loop \n8. Wide state 2 to Wide state 2 on loop loop loop loop loop loop \n9. Wide state 3 to Wide state 3 on loop loop loop loop loop loop \n10. Wide state 4 to Wide state 4 on loop loop loop loop loop loop \n11. Wide state 5 to Wide state 5 on loop loop loop loop loop loop \"><p class=\"vb-alt vd-state-summary\">d (6 states, 11 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"1326\" height=\"328\" class=\"vd-state-svg\" viewBox=\"0 0 1326 328\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>d</desc><g class=\"vd-state-edge\"><title>initial state marker to Wide state 0</title><path class=\"vd-state-line\" d=\"M666.0 48.0 L603.2 140.0\"/><polygon class=\"vd-state-head\" points=\"603.2,140.0 604.7,128.9 613.0,134.6\"/></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 1 on go</title><path class=\"vd-state-line\" d=\"M603.2 188.0 L72.0 264.0\"/><polygon class=\"vd-state-head\" points=\"72.0,264.0 81.2,257.6 82.6,267.5\"/><rect class=\"vd-state-label-bg\" x=\"327.2\" y=\"217.0\" width=\"20.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"337.6\" y=\"226.0\">go</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 2 on go</title><path class=\"vd-state-line\" d=\"M603.2 188.0 L337.6 264.0\"/><polygon class=\"vd-state-head\" points=\"337.6,264.0 345.8,256.4 348.6,266.1\"/><rect class=\"vd-state-label-bg\" x=\"460.0\" y=\"217.0\" width=\"20.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"470.4\" y=\"226.0\">go</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 3 on go</title><path class=\"vd-state-line\" d=\"M603.2 188.0 L603.2 264.0\"/><polygon class=\"vd-state-head\" points=\"603.2,264.0 598.2,254.0 608.2,254.0\"/><rect class=\"vd-state-label-bg\" x=\"592.8\" y=\"217.0\" width=\"20.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"603.2\" y=\"226.0\">go</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 4 on go</title><path class=\"vd-state-line\" d=\"M603.2 188.0 L868.8 264.0\"/><polygon class=\"vd-state-head\" points=\"868.8,264.0 857.8,266.1 860.6,256.4\"/><rect class=\"vd-state-label-bg\" x=\"725.6\" y=\"217.0\" width=\"20.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"736.0\" y=\"226.0\">go</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 5 on go</title><path class=\"vd-state-line\" d=\"M603.2 188.0 L1134.4 264.0\"/><polygon class=\"vd-state-head\" points=\"1134.4,264.0 1123.8,267.5 1125.2,257.6\"/><rect class=\"vd-state-label-bg\" x=\"858.4\" y=\"217.0\" width=\"20.8\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"868.8\" y=\"226.0\">go</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 0 to Wide state 0 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M659.2 154.4 L677.2 154.4 L677.2 173.6 L659.2 173.6\"/><polygon class=\"vd-state-head\" points=\"659.2,173.6 669.2,168.6 669.2,178.6\"/><rect class=\"vd-state-label-bg\" x=\"681.2\" y=\"148.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"730.0\" y=\"157.0\">loop loop loop</tspan><tspan x=\"730.0\" y=\"171.0\">loop loop loop</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 1 to Wide state 1 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M128.0 278.4 L146.0 278.4 L146.0 297.6 L128.0 297.6\"/><polygon class=\"vd-state-head\" points=\"128.0,297.6 138.0,292.6 138.0,302.6\"/><rect class=\"vd-state-label-bg\" x=\"150.0\" y=\"272.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"198.8\" y=\"281.0\">loop loop loop</tspan><tspan x=\"198.8\" y=\"295.0\">loop loop loop</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 2 to Wide state 2 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M393.6 278.4 L411.6 278.4 L411.6 297.6 L393.6 297.6\"/><polygon class=\"vd-state-head\" points=\"393.6,297.6 403.6,292.6 403.6,302.6\"/><rect class=\"vd-state-label-bg\" x=\"415.6\" y=\"272.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"464.4\" y=\"281.0\">loop loop loop</tspan><tspan x=\"464.4\" y=\"295.0\">loop loop loop</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 3 to Wide state 3 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M659.2 278.4 L677.2 278.4 L677.2 297.6 L659.2 297.6\"/><polygon class=\"vd-state-head\" points=\"659.2,297.6 669.2,292.6 669.2,302.6\"/><rect class=\"vd-state-label-bg\" x=\"681.2\" y=\"272.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"730.0\" y=\"281.0\">loop loop loop</tspan><tspan x=\"730.0\" y=\"295.0\">loop loop loop</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 4 to Wide state 4 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M924.8 278.4 L942.8 278.4 L942.8 297.6 L924.8 297.6\"/><polygon class=\"vd-state-head\" points=\"924.8,297.6 934.8,292.6 934.8,302.6\"/><rect class=\"vd-state-label-bg\" x=\"946.8\" y=\"272.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"995.6\" y=\"281.0\">loop loop loop</tspan><tspan x=\"995.6\" y=\"295.0\">loop loop loop</tspan></text></g><g class=\"vd-state-edge\"><title>Wide state 5 to Wide state 5 on loop loop loop loop loop loop </title><path class=\"vd-state-line\" d=\"M1190.4 278.4 L1208.4 278.4 L1208.4 297.6 L1190.4 297.6\"/><polygon class=\"vd-state-head\" points=\"1190.4,297.6 1200.4,292.6 1200.4,302.6\"/><rect class=\"vd-state-label-bg\" x=\"1212.4\" y=\"272.0\" width=\"97.6\" height=\"32.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"1261.2\" y=\"281.0\">loop loop loop</tspan><tspan x=\"1261.2\" y=\"295.0\">loop loop loop</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(634.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(547.2 140.0)\"><title>Wide state 0, initial state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 0</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(16.0 264.0)\"><title>Wide state 1, state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 1</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(281.6 264.0)\"><title>Wide state 2, state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 2</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(547.2 264.0)\"><title>Wide state 3, state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 3</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(812.8 264.0)\"><title>Wide state 4, state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 4</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(1078.4 264.0)\"><title>Wide state 5, state</title><rect class=\"vd-state-shape\" width=\"112.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Wide state 5</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Wide state 0 (initial state)</li><li class=\"vd-state-item\">Wide state 1 (state)</li><li class=\"vd-state-item\">Wide state 2 (state)</li><li class=\"vd-state-item\">Wide state 3 (state)</li><li class=\"vd-state-item\">Wide state 4 (state)</li><li class=\"vd-state-item\">Wide state 5 (state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">Wide state 0 to Wide state 1 on go</li><li class=\"vd-state-item\">Wide state 0 to Wide state 2 on go</li><li class=\"vd-state-item\">Wide state 0 to Wide state 3 on go</li><li class=\"vd-state-item\">Wide state 0 to Wide state 4 on go</li><li class=\"vd-state-item\">Wide state 0 to Wide state 5 on go</li><li class=\"vd-state-item\">Wide state 0 to Wide state 0 on loop loop loop loop loop loop </li><li class=\"vd-state-item\">Wide state 1 to Wide state 1 on loop loop loop loop loop loop </li><li class=\"vd-state-item\">Wide state 2 to Wide state 2 on loop loop loop loop loop loop </li><li class=\"vd-state-item\">Wide state 3 to Wide state 3 on loop loop loop loop loop loop </li><li class=\"vd-state-item\">Wide state 4 to Wide state 4 on loop loop loop loop loop loop </li><li class=\"vd-state-item\">Wide state 5 to Wide state 5 on loop loop loop loop loop loop </li></ol></div>"
+ },
+ {
+  "name": "unit-2",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "idle",
+     "kind": "initial",
+     "label": "Idle"
+    },
+    {
+     "id": "run",
+     "label": "Running"
+    },
+    {
+     "id": "done",
+     "kind": "final",
+     "label": "Done"
+    },
+    {
+     "id": "bad",
+     "kind": "error",
+     "label": "Failed"
+    },
+    {
+     "id": "x",
+     "label": "Lost"
+    }
+   ],
+   "transitions": [
+    {
+     "from": "idle",
+     "label": "start",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "guard": "ok",
+     "label": "finish",
+     "to": "done"
+    },
+    {
+     "from": "run",
+     "label": "crash",
+     "to": "bad"
+    },
+    {
+     "from": "bad",
+     "label": "retry",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "label": "beat",
+     "to": "run"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "d",
+   "counts": "5 states, 5 transitions",
+   "drawing": {
+    "box": "0 0 208.28 410",
+    "width": "208.28",
+    "height": "410",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Idle"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M58.0 48.0 L104.0 126.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.0,126.0 94.6,119.9 103.2,114.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle to Running on start"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.0 174.0 L73.2 236.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "73.2,236.0 73.2,224.8 82.1,229.3"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "68.6",
+         "y": "196.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "88.6",
+           "y": "205.0"
+          },
+          "start"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Done on finish [ok]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M73.2 284.0 L48.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.0,346.0 47.1,334.9 56.4,338.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "21.4",
+         "y": "306.0",
+         "width": "78.4",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "60.6",
+           "y": "315.0"
+          },
+          "finish [ok]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Failed on crash"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M68.2 284.0 L145.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "145.0,346.0 134.1,343.6 140.4,335.8"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "110.6",
+         "y": "306.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "130.6",
+           "y": "315.0"
+          },
+          "crash"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed to Running on retry"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M155.0 346.0 L78.2 284.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "78.2,284.0 89.1,286.4 82.8,294.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "152.3",
+         "y": "312.2",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "172.3",
+           "y": "321.2"
+          },
+          "retry"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Running on beat"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "111.7,269.6 121.7,264.6 121.7,274.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "133.7",
+         "y": "251.0",
+         "width": "33.6",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "150.5",
+           "y": "260.0"
+          },
+          "beat"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(26.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(72.0 126.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Idle"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(34.7 236.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "77.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "38.5",
+           "y": "24.0"
+          },
+          "Running"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-final",
+       "transform": "translate(16.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Done, final state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-ring",
+         "x": "4",
+         "y": "4",
+         "width": "56.0",
+         "height": "40.0",
+         "rx": "7"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Done"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-error",
+       "transform": "translate(108.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed, error state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "84.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "42.0",
+           "y": "24.0"
+          },
+          "✕ Failed"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal vd-state-unreachable",
+       "transform": "translate(118.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Lost, state, unreachable"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Lost"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Idle (initial state)",
+    "Running (state)",
+    "Done (final state)",
+    "Failed (error state)",
+    "Lost (state, unreachable from the initial state)"
+   ],
+   "moves": [
+    "Idle to Running on start",
+    "Running to Done on finish [ok]",
+    "Running to Failed on crash",
+    "Failed to Running on retry",
+    "Running to Running on beat"
+   ],
+   "copy": "State machine (5 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\n- Lost (state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (5 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\n- Lost (state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat\"><p class=\"vb-alt vd-state-summary\">d (5 states, 5 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"208.28\" height=\"410\" class=\"vd-state-svg\" viewBox=\"0 0 208.28 410\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>d</desc><g class=\"vd-state-edge\"><title>initial state marker to Idle</title><path class=\"vd-state-line\" d=\"M58.0 48.0 L104.0 126.0\"/><polygon class=\"vd-state-head\" points=\"104.0,126.0 94.6,119.9 103.2,114.8\"/></g><g class=\"vd-state-edge\"><title>Idle to Running on start</title><path class=\"vd-state-line\" d=\"M104.0 174.0 L73.2 236.0\"/><polygon class=\"vd-state-head\" points=\"73.2,236.0 73.2,224.8 82.1,229.3\"/><rect class=\"vd-state-label-bg\" x=\"68.6\" y=\"196.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"88.6\" y=\"205.0\">start</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Done on finish [ok]</title><path class=\"vd-state-line\" d=\"M73.2 284.0 L48.0 346.0\"/><polygon class=\"vd-state-head\" points=\"48.0,346.0 47.1,334.9 56.4,338.6\"/><rect class=\"vd-state-label-bg\" x=\"21.4\" y=\"306.0\" width=\"78.4\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"60.6\" y=\"315.0\">finish [ok]</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Failed on crash</title><path class=\"vd-state-line\" d=\"M68.2 284.0 L145.0 346.0\"/><polygon class=\"vd-state-head\" points=\"145.0,346.0 134.1,343.6 140.4,335.8\"/><rect class=\"vd-state-label-bg\" x=\"110.6\" y=\"306.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"130.6\" y=\"315.0\">crash</tspan></text></g><g class=\"vd-state-edge\"><title>Failed to Running on retry</title><path class=\"vd-state-line\" d=\"M155.0 346.0 L78.2 284.0\"/><polygon class=\"vd-state-head\" points=\"78.2,284.0 89.1,286.4 82.8,294.2\"/><rect class=\"vd-state-label-bg\" x=\"152.3\" y=\"312.2\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"172.3\" y=\"321.2\">retry</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Running on beat</title><path class=\"vd-state-line\" d=\"M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6\"/><polygon class=\"vd-state-head\" points=\"111.7,269.6 121.7,264.6 121.7,274.6\"/><rect class=\"vd-state-label-bg\" x=\"133.7\" y=\"251.0\" width=\"33.6\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"150.5\" y=\"260.0\">beat</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(26.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(72.0 126.0)\"><title>Idle, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Idle</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(34.7 236.0)\"><title>Running, state</title><rect class=\"vd-state-shape\" width=\"77.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"38.5\" y=\"24.0\">Running</tspan></text></g><g class=\"vd-state-node vd-state-final\" transform=\"translate(16.0 346.0)\"><title>Done, final state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><rect class=\"vd-state-ring\" x=\"4\" y=\"4\" width=\"56.0\" height=\"40.0\" rx=\"7\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Done</tspan></text></g><g class=\"vd-state-node vd-state-error\" transform=\"translate(108.0 346.0)\"><title>Failed, error state</title><rect class=\"vd-state-shape\" width=\"84.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"42.0\" y=\"24.0\">✕ Failed</tspan></text></g><g class=\"vd-state-node vd-state-normal vd-state-unreachable\" transform=\"translate(118.0 16.0)\"><title>Lost, state, unreachable</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Lost</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Idle (initial state)</li><li class=\"vd-state-item\">Running (state)</li><li class=\"vd-state-item\">Done (final state)</li><li class=\"vd-state-item\">Failed (error state)</li><li class=\"vd-state-item\">Lost (state, unreachable from the initial state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">Idle to Running on start</li><li class=\"vd-state-item\">Running to Done on finish [ok]</li><li class=\"vd-state-item\">Running to Failed on crash</li><li class=\"vd-state-item\">Failed to Running on retry</li><li class=\"vd-state-item\">Running to Running on beat</li></ol></div>"
+ },
+ {
+  "name": "unit-3",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "a",
+     "kind": "initial",
+     "label": "A"
+    }
+   ]
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "d",
+   "counts": "1 state, 0 transitions",
+   "drawing": {
+    "box": "0 0 96 172",
+    "width": "96",
+    "height": "172",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to A"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M48.0 48.0 L48.0 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.0,108.0 43.0,98.0 53.0,98.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(16.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(16.0 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "A, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "A"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "A (initial state)"
+   ],
+   "moves": [],
+   "copy": "State machine (1 state, 0 transitions)\nStates:\n- A (initial state)"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (1 state, 0 transitions)\nStates:\n- A (initial state)\"><p class=\"vb-alt vd-state-summary\">d (1 state, 0 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"96\" height=\"172\" class=\"vd-state-svg\" viewBox=\"0 0 96 172\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>d</desc><g class=\"vd-state-edge\"><title>initial state marker to A</title><path class=\"vd-state-line\" d=\"M48.0 48.0 L48.0 108.0\"/><polygon class=\"vd-state-head\" points=\"48.0,108.0 43.0,98.0 53.0,98.0\"/></g><g class=\"vd-state-start\" transform=\"translate(16.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(16.0 108.0)\"><title>A, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">A</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">A (initial state)</li></ul></div>"
+ },
+ {
+  "name": "unit-4",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "idle",
+     "kind": "initial",
+     "label": "Idle"
+    },
+    {
+     "id": "run",
+     "label": "Running"
+    },
+    {
+     "id": "done",
+     "kind": "final",
+     "label": "Done"
+    },
+    {
+     "id": "bad",
+     "kind": "error",
+     "label": "Failed"
+    }
+   ],
+   "title": "T",
+   "transitions": [
+    {
+     "from": "idle",
+     "label": "start",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "guard": "ok",
+     "label": "finish",
+     "to": "done"
+    },
+    {
+     "from": "run",
+     "label": "crash",
+     "to": "bad"
+    },
+    {
+     "from": "bad",
+     "label": "retry",
+     "to": "run"
+    },
+    {
+     "from": "run",
+     "label": "beat",
+     "to": "run"
+    }
+   ]
+  },
+  "props": {
+   "title": "T",
+   "name": "T",
+   "desc": "d",
+   "counts": "4 states, 5 transitions",
+   "drawing": {
+    "box": "0 0 208.28 410",
+    "width": "208.28",
+    "height": "410",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to Idle"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.0 48.0 L104.0 126.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "104.0,126.0 99.0,116.0 109.0,116.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle to Running on start"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M104.0 174.0 L73.2 236.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "73.2,236.0 73.2,224.8 82.1,229.3"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "68.6",
+         "y": "196.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "88.6",
+           "y": "205.0"
+          },
+          "start"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Done on finish [ok]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M73.2 284.0 L48.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "48.0,346.0 47.1,334.9 56.4,338.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "21.4",
+         "y": "306.0",
+         "width": "78.4",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "60.6",
+           "y": "315.0"
+          },
+          "finish [ok]"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Failed on crash"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M68.2 284.0 L145.0 346.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "145.0,346.0 134.1,343.6 140.4,335.8"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "110.6",
+         "y": "306.0",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "130.6",
+           "y": "315.0"
+          },
+          "crash"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed to Running on retry"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M155.0 346.0 L78.2 284.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "78.2,284.0 89.1,286.4 82.8,294.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "152.3",
+         "y": "312.2",
+         "width": "40.0",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "172.3",
+           "y": "321.2"
+          },
+          "retry"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running to Running on beat"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "111.7,269.6 121.7,264.6 121.7,274.6"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "133.7",
+         "y": "251.0",
+         "width": "33.6",
+         "height": "18.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "150.5",
+           "y": "260.0"
+          },
+          "beat"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(72.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(72.0 126.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Idle, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Idle"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(34.7 236.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Running, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "77.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "38.5",
+           "y": "24.0"
+          },
+          "Running"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-final",
+       "transform": "translate(16.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Done, final state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-ring",
+         "x": "4",
+         "y": "4",
+         "width": "56.0",
+         "height": "40.0",
+         "rx": "7"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Done"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-error",
+       "transform": "translate(108.0 346.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Failed, error state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "84.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "42.0",
+           "y": "24.0"
+          },
+          "✕ Failed"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "Idle (initial state)",
+    "Running (state)",
+    "Done (final state)",
+    "Failed (error state)"
+   ],
+   "moves": [
+    "Idle to Running on start",
+    "Running to Done on finish [ok]",
+    "Running to Failed on crash",
+    "Failed to Running on retry",
+    "Running to Running on beat"
+   ],
+   "copy": "T (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"T (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish [ok]\n3. Running to Failed on crash\n4. Failed to Running on retry\n5. Running to Running on beat\"><h4 class=\"vb-title vd-state-title\">T</h4><p class=\"vb-alt vd-state-summary\">d (4 states, 5 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"T (scrollable)\"><svg width=\"208.28\" height=\"410\" class=\"vd-state-svg\" viewBox=\"0 0 208.28 410\" role=\"img\" aria-label=\"T\"><title>T</title><desc>d</desc><g class=\"vd-state-edge\"><title>initial state marker to Idle</title><path class=\"vd-state-line\" d=\"M104.0 48.0 L104.0 126.0\"/><polygon class=\"vd-state-head\" points=\"104.0,126.0 99.0,116.0 109.0,116.0\"/></g><g class=\"vd-state-edge\"><title>Idle to Running on start</title><path class=\"vd-state-line\" d=\"M104.0 174.0 L73.2 236.0\"/><polygon class=\"vd-state-head\" points=\"73.2,236.0 73.2,224.8 82.1,229.3\"/><rect class=\"vd-state-label-bg\" x=\"68.6\" y=\"196.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"88.6\" y=\"205.0\">start</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Done on finish [ok]</title><path class=\"vd-state-line\" d=\"M73.2 284.0 L48.0 346.0\"/><polygon class=\"vd-state-head\" points=\"48.0,346.0 47.1,334.9 56.4,338.6\"/><rect class=\"vd-state-label-bg\" x=\"21.4\" y=\"306.0\" width=\"78.4\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"60.6\" y=\"315.0\">finish [ok]</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Failed on crash</title><path class=\"vd-state-line\" d=\"M68.2 284.0 L145.0 346.0\"/><polygon class=\"vd-state-head\" points=\"145.0,346.0 134.1,343.6 140.4,335.8\"/><rect class=\"vd-state-label-bg\" x=\"110.6\" y=\"306.0\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"130.6\" y=\"315.0\">crash</tspan></text></g><g class=\"vd-state-edge\"><title>Failed to Running on retry</title><path class=\"vd-state-line\" d=\"M155.0 346.0 L78.2 284.0\"/><polygon class=\"vd-state-head\" points=\"78.2,284.0 89.1,286.4 82.8,294.2\"/><rect class=\"vd-state-label-bg\" x=\"152.3\" y=\"312.2\" width=\"40.0\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"172.3\" y=\"321.2\">retry</tspan></text></g><g class=\"vd-state-edge\"><title>Running to Running on beat</title><path class=\"vd-state-line\" d=\"M111.7 250.4 L129.7 250.4 L129.7 269.6 L111.7 269.6\"/><polygon class=\"vd-state-head\" points=\"111.7,269.6 121.7,264.6 121.7,274.6\"/><rect class=\"vd-state-label-bg\" x=\"133.7\" y=\"251.0\" width=\"33.6\" height=\"18.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"150.5\" y=\"260.0\">beat</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(72.0 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(72.0 126.0)\"><title>Idle, initial state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Idle</tspan></text></g><g class=\"vd-state-node vd-state-normal\" transform=\"translate(34.7 236.0)\"><title>Running, state</title><rect class=\"vd-state-shape\" width=\"77.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"38.5\" y=\"24.0\">Running</tspan></text></g><g class=\"vd-state-node vd-state-final\" transform=\"translate(16.0 346.0)\"><title>Done, final state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><rect class=\"vd-state-ring\" x=\"4\" y=\"4\" width=\"56.0\" height=\"40.0\" rx=\"7\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Done</tspan></text></g><g class=\"vd-state-node vd-state-error\" transform=\"translate(108.0 346.0)\"><title>Failed, error state</title><rect class=\"vd-state-shape\" width=\"84.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"42.0\" y=\"24.0\">✕ Failed</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">Idle (initial state)</li><li class=\"vd-state-item\">Running (state)</li><li class=\"vd-state-item\">Done (final state)</li><li class=\"vd-state-item\">Failed (error state)</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">Idle to Running on start</li><li class=\"vd-state-item\">Running to Done on finish [ok]</li><li class=\"vd-state-item\">Running to Failed on crash</li><li class=\"vd-state-item\">Failed to Running on retry</li><li class=\"vd-state-item\">Running to Running on beat</li></ol></div>"
+ },
+ {
+  "name": "unit-6",
+  "input": {
+   "desc": "<script>alert(1)</script><img src=x onerror=1>",
+   "states": [
+    {
+     "id": "idle",
+     "kind": "initial",
+     "label": "<script>alert(1)</script><img src=x onerror=1>",
+     "note": "<script>alert(1)</script><img src=x onerror=1>"
+    }
+   ],
+   "title": "<script>alert(1)</script><img src=x onerror=1>",
+   "transitions": [
+    {
+     "from": "idle",
+     "guard": "<script>alert(1)</script><img src=x onerror=1>",
+     "label": "<script>alert(1)</script><img src=x onerror=1>",
+     "to": "idle"
+    }
+   ]
+  },
+  "props": {
+   "title": "<script>alert(1)</script><img src=x onerror=1>",
+   "name": "<script>alert(1)</script><img src=x onerror=1>",
+   "desc": "<script>alert(1)</script><img src=x onerror=1>",
+   "counts": "1 state, 1 transition",
+   "drawing": {
+    "box": "0 0 305.6 236",
+    "width": "305.6",
+    "height": "236",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker to <script>alert(1)</script><img src=x onerror=1>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M155.8 48.0 L93.0 154.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "93.0,154.0 93.8,142.8 102.4,147.9"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-edge"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script><img src=x onerror=1> to <script>alert(1)</script><img src=x onerror=1> on <script>alert(1)</script><img src=x onerror=1> [<script>alert(1)</script><img src=x onerror=1>]"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-state-line",
+         "d": "M170.0 173.8 L188.0 173.8 L188.0 200.2 L170.0 200.2"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-state-head",
+         "points": "170.0,200.2 180.0,195.2 180.0,205.2"
+        },
+        null
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-label-bg",
+         "x": "192.0",
+         "y": "164.0",
+         "width": "97.6",
+         "height": "46.0",
+         "rx": "3"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-edge-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "240.8",
+           "y": "173.0"
+          },
+          "<script>alert("
+         ],
+         [
+          "tspan",
+          {
+           "x": "240.8",
+           "y": "187.0"
+          },
+          "1)</script><im"
+         ],
+         [
+          "tspan",
+          {
+           "x": "240.8",
+           "y": "201.0"
+          },
+          "g src=x one…"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-start",
+       "transform": "translate(123.8 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "initial state marker"
+       ],
+       [
+        "circle",
+        {
+         "class": "vd-state-dot",
+         "cx": "32.0",
+         "cy": "24.0",
+         "r": "8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-initial",
+       "transform": "translate(16.0 154.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script><img src=x onerror=1>, initial state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "<script>alert(1)</"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "script><img src=x"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "onerror=1>"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "<script>alert(1)</script><img src=x onerror=1> (initial state): <script>alert(1)</script><img src=x onerror=1>"
+   ],
+   "moves": [
+    "<script>alert(1)</script><img src=x onerror=1> to <script>alert(1)</script><img src=x onerror=1> on <script>alert(1)</script><img src=x onerror=1> [<script>alert(1)</script><img src=x onerror=1>]"
+   ],
+   "copy": "<script>alert(1)</script><img src=x onerror=1> (1 state, 1 transition)\nStates:\n- <script>alert(1)</script><img src=x onerror=1> (initial state)\nTransitions:\n1. <script>alert(1)</script><img src=x onerror=1> to <script>alert(1)</script><img src=x onerror=1> on <script>alert(1)</script><img src=x onerror=1> [<script>alert(1)</script><img src=x onerror=1>]"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (1 state, 1 transition)\nStates:\n- &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (initial state)\nTransitions:\n1. &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; to &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; on &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; [&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;]\"><h4 class=\"vb-title vd-state-title\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</h4><p class=\"vb-alt vd-state-summary\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (1 state, 1 transition)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (scrollable)\"><svg width=\"305.6\" height=\"236\" class=\"vd-state-svg\" viewBox=\"0 0 305.6 236\" role=\"img\" aria-label=\"&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;\"><title>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</title><desc>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</desc><g class=\"vd-state-edge\"><title>initial state marker to &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</title><path class=\"vd-state-line\" d=\"M155.8 48.0 L93.0 154.0\"/><polygon class=\"vd-state-head\" points=\"93.0,154.0 93.8,142.8 102.4,147.9\"/></g><g class=\"vd-state-edge\"><title>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; to &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; on &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; [&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;]</title><path class=\"vd-state-line\" d=\"M170.0 173.8 L188.0 173.8 L188.0 200.2 L170.0 200.2\"/><polygon class=\"vd-state-head\" points=\"170.0,200.2 180.0,195.2 180.0,205.2\"/><rect class=\"vd-state-label-bg\" x=\"192.0\" y=\"164.0\" width=\"97.6\" height=\"46.0\" rx=\"3\"/><text class=\"vd-state-edge-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"240.8\" y=\"173.0\">&lt;script&gt;alert(</tspan><tspan x=\"240.8\" y=\"187.0\">1)&lt;/script&gt;&lt;im</tspan><tspan x=\"240.8\" y=\"201.0\">g src=x one…</tspan></text></g><g class=\"vd-state-start\" transform=\"translate(123.8 16.0)\"><title>initial state marker</title><circle class=\"vd-state-dot\" cx=\"32.0\" cy=\"24.0\" r=\"8\"/></g><g class=\"vd-state-node vd-state-initial\" transform=\"translate(16.0 154.0)\"><title>&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;, initial state</title><rect class=\"vd-state-shape\" width=\"154.0\" height=\"66.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">&lt;script&gt;alert(1)&lt;/</tspan><tspan x=\"77.0\" y=\"33.0\">script&gt;&lt;img src=x</tspan><tspan x=\"77.0\" y=\"49.0\">onerror=1&gt;</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; (initial state): &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;</li></ul><ol class=\"vd-state-moves\" aria-label=\"Transitions\"><li class=\"vd-state-item\">&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; to &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; on &lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt; [&lt;script&gt;alert(1)&lt;/script&gt;&lt;img src=x onerror=1&gt;]</li></ol></div>"
+ },
+ {
+  "name": "unit-7",
+  "input": {
+   "desc": "d",
+   "states": [
+    {
+     "id": "a",
+     "label": "A"
+    }
+   ],
+   "transitions": []
+  },
+  "props": {
+   "title": "",
+   "name": "State machine",
+   "desc": "d",
+   "counts": "1 state, 0 transitions",
+   "drawing": {
+    "box": "0 0 96 80",
+    "width": "96",
+    "height": "80",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-state-node vd-state-normal",
+       "transform": "translate(16.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "A, state"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-state-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "10"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-state-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "A"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "states": [
+    "A (state)"
+   ],
+   "moves": [],
+   "copy": "State machine (1 state, 0 transitions)\nStates:\n- A (state)"
+  },
+  "html": "<div class=\"vb state vd-state\" data-copy=\"State machine (1 state, 0 transitions)\nStates:\n- A (state)\"><p class=\"vb-alt vd-state-summary\">d (1 state, 0 transitions)</p><div class=\"vd-state-view\" role=\"region\" tabindex=\"0\" aria-label=\"State machine (scrollable)\"><svg width=\"96\" height=\"80\" class=\"vd-state-svg\" viewBox=\"0 0 96 80\" role=\"img\" aria-label=\"State machine\"><title>State machine</title><desc>d</desc><g class=\"vd-state-node vd-state-normal\" transform=\"translate(16.0 16.0)\"><title>A, state</title><rect class=\"vd-state-shape\" width=\"64.0\" height=\"48.0\" rx=\"10\"/><text class=\"vd-state-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">A</tspan></text></g></svg></div><ul class=\"vd-state-states\" aria-label=\"States\"><li class=\"vd-state-item\">A (state)</li></ul></div>"
+ }
+]

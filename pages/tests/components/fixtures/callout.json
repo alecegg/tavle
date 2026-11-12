@@ -1,0 +1,86 @@
+[
+ {
+  "name": "tones-info",
+  "props": {
+   "tone": "info",
+   "text": "Plain note."
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Plain note.\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">i</span> Info</p><p class=\"vd-callout-text\">Plain note.</p></aside>"
+ },
+ {
+  "name": "tones-decision",
+  "props": {
+   "tone": "decision",
+   "title": "Storage",
+   "text": "Use SQLite."
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-decision\" data-copy=\"Storage\nUse SQLite.\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">◆</span> Decision</p><p class=\"vd-callout-title\">Storage</p><p class=\"vd-callout-text\">Use SQLite.</p></aside>"
+ },
+ {
+  "name": "tones-risk",
+  "props": {
+   "tone": "risk",
+   "text": "One\n\nTwo"
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"One\n\nTwo\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">▲</span> Risk</p><p class=\"vd-callout-text\">One</p><p class=\"vd-callout-text\">Two</p></aside>"
+ },
+ {
+  "name": "tones-warning",
+  "props": {
+   "tone": "warning",
+   "text": "Careful."
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-warning\" data-copy=\"Careful.\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">!</span> Warning</p><p class=\"vd-callout-text\">Careful.</p></aside>"
+ },
+ {
+  "name": "tones-success",
+  "props": {
+   "tone": "success",
+   "title": "Done",
+   "text": "All green."
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"Done\nAll green.\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">✓</span> Success</p><p class=\"vd-callout-title\">Done</p><p class=\"vd-callout-text\">All green.</p></aside>"
+ },
+ {
+  "name": "inline-code",
+  "props": {
+   "tone": "info",
+   "text": "Use `queue` and `a<b` here, `x` twice `y`."
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Use `queue` and `a&lt;b` here, `x` twice `y`.\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">i</span> Info</p><p class=\"vd-callout-text\">Use <code>queue</code> and <code>a&lt;b</code> here, <code>x</code> twice <code>y</code>.</p></aside>"
+ },
+ {
+  "name": "escaping",
+  "props": {
+   "tone": "risk",
+   "title": "<b>&\"'",
+   "text": "<script>alert(1)</script> & \"q\" 'a'"
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"&lt;b&gt;&amp;&quot;&#x27;\n&lt;script&gt;alert(1)&lt;/script&gt; &amp; &quot;q&quot; &#x27;a&#x27;\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">▲</span> Risk</p><p class=\"vd-callout-title\">&lt;b&gt;&amp;&quot;&#x27;</p><p class=\"vd-callout-text\">&lt;script&gt;alert(1)&lt;/script&gt; &amp; &quot;q&quot; &#x27;a&#x27;</p></aside>"
+ },
+ {
+  "name": "paragraphs",
+  "props": {
+   "tone": "info",
+   "text": "\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n"
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">i</span> Info</p><p class=\"vd-callout-text\">first</p><p class=\"vd-callout-text\">second</p><p class=\"vd-callout-text\">third</p></aside>"
+ },
+ {
+  "name": "empty-title",
+  "props": {
+   "tone": "info",
+   "title": "",
+   "text": "Body"
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Body\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">i</span> Info</p><p class=\"vd-callout-title\"></p><p class=\"vd-callout-text\">Body</p></aside>"
+ },
+ {
+  "name": "unicode",
+  "props": {
+   "tone": "success",
+   "text": "café ✓ ◆"
+  },
+  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"café ✓ ◆\"><p class=\"vd-callout-label\"><span class=\"vd-callout-glyph\" aria-hidden=\"true\">✓</span> Success</p><p class=\"vd-callout-text\">café ✓ ◆</p></aside>"
+ }
+]

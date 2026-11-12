@@ -1,0 +1,202 @@
+[
+ {
+  "name": "link",
+  "input": {
+   "src": "a.png",
+   "alt": "A swatch"
+  },
+  "media": {
+   "src": "a.png",
+   "mime": "image/png",
+   "width": 30,
+   "height": 20,
+   "size": 99,
+   "data_url": ""
+  },
+  "export": false,
+  "props": {
+   "alt": "A swatch",
+   "caption": "",
+   "narrow": false,
+   "picture": {
+    "kind": "link",
+    "src": "/media/a.png",
+    "href": "/media/a.png",
+    "label": "A swatch (open full size)",
+    "width": "30",
+    "height": "20"
+   },
+   "summary": "Image: A swatch (30 x 20 px)",
+   "copy": "A swatch"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\"A swatch\"><a class=\"vd-image-link\" href=\"/media/a.png\" aria-label=\"A swatch (open full size)\"><img class=\"vd-image-img\" src=\"/media/a.png\" alt=\"A swatch\" width=\"30\" height=\"20\" loading=\"lazy\" decoding=\"async\"></a><p class=\"vb-alt vd-image-alt\">Image: A swatch (30 x 20 px)</p></figure>"
+ },
+ {
+  "name": "link-caption-narrow",
+  "input": {
+   "src": "a.png",
+   "alt": "A <b>swatch</b>",
+   "caption": "Cap & co",
+   "width": "narrow"
+  },
+  "media": {
+   "src": "dir/a b.png",
+   "mime": "image/png",
+   "width": 30,
+   "height": 20,
+   "size": 99,
+   "data_url": ""
+  },
+  "export": false,
+  "props": {
+   "alt": "A <b>swatch</b>",
+   "caption": "Cap & co",
+   "narrow": true,
+   "picture": {
+    "kind": "link",
+    "src": "/media/dir/a%20b.png",
+    "href": "/media/dir/a%20b.png",
+    "label": "A <b>swatch</b> (open full size)",
+    "width": "30",
+    "height": "20"
+   },
+   "summary": "Image: A <b>swatch</b> (30 x 20 px)",
+   "copy": "A <b>swatch</b>\nCap & co"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-narrow\" data-copy=\"A &lt;b&gt;swatch&lt;/b&gt;\nCap &amp; co\"><a class=\"vd-image-link\" href=\"/media/dir/a%20b.png\" aria-label=\"A &lt;b&gt;swatch&lt;/b&gt; (open full size)\"><img class=\"vd-image-img\" src=\"/media/dir/a%20b.png\" alt=\"A &lt;b&gt;swatch&lt;/b&gt;\" width=\"30\" height=\"20\" loading=\"lazy\" decoding=\"async\"></a><figcaption class=\"vd-image-caption\">Cap &amp; co</figcaption><p class=\"vb-alt vd-image-alt\">Image: A &lt;b&gt;swatch&lt;/b&gt; (30 x 20 px)</p></figure>"
+ },
+ {
+  "name": "link-empty-alt",
+  "input": {
+   "src": "a.png",
+   "alt": " "
+  },
+  "media": {
+   "src": "a.png",
+   "mime": "image/png",
+   "width": 30,
+   "height": 20,
+   "size": 99,
+   "data_url": ""
+  },
+  "export": false,
+  "props": {
+   "alt": " ",
+   "caption": "",
+   "narrow": false,
+   "picture": {
+    "kind": "link",
+    "src": "/media/a.png",
+    "href": "/media/a.png",
+    "label": "Open image full size",
+    "width": "30",
+    "height": "20"
+   },
+   "summary": "Image:   (30 x 20 px)",
+   "copy": " "
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\" \"><a class=\"vd-image-link\" href=\"/media/a.png\" aria-label=\"Open image full size\"><img class=\"vd-image-img\" src=\"/media/a.png\" alt=\" \" width=\"30\" height=\"20\" loading=\"lazy\" decoding=\"async\"></a><p class=\"vb-alt vd-image-alt\">Image:   (30 x 20 px)</p></figure>"
+ },
+ {
+  "name": "export-inline",
+  "input": {
+   "src": "a.png",
+   "alt": "x",
+   "caption": "c"
+  },
+  "media": {
+   "src": "a.png",
+   "mime": "image/png",
+   "width": 30,
+   "height": 20,
+   "size": 99,
+   "data_url": "data:image/png;base64,AAAA"
+  },
+  "export": true,
+  "props": {
+   "alt": "x",
+   "caption": "c",
+   "narrow": false,
+   "picture": {
+    "kind": "inline",
+    "src": "data:image/png;base64,AAAA",
+    "width": "30",
+    "height": "20"
+   },
+   "summary": "Image: x (30 x 20 px)",
+   "copy": "x\nc"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\"x\nc\"><img class=\"vd-image-img\" src=\"data:image/png;base64,AAAA\" alt=\"x\" width=\"30\" height=\"20\" loading=\"lazy\" decoding=\"async\"><figcaption class=\"vd-image-caption\">c</figcaption><p class=\"vb-alt vd-image-alt\">Image: x (30 x 20 px)</p></figure>"
+ },
+ {
+  "name": "export-missing",
+  "input": {
+   "src": "a.png",
+   "alt": "x"
+  },
+  "media": {
+   "src": "a.png",
+   "mime": "image/png",
+   "width": 30,
+   "height": 20,
+   "size": 99,
+   "data_url": ""
+  },
+  "export": true,
+  "props": {
+   "alt": "x",
+   "caption": "",
+   "narrow": false,
+   "picture": {
+    "kind": "missing",
+    "note": "Image not embedded in this export."
+   },
+   "summary": "Image: x (30 x 20 px)",
+   "copy": "x"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\"x\"><p class=\"vd-image-missing\"><span aria-hidden=\"true\">&#9888; </span>Image not embedded in this export.</p><p class=\"vb-alt vd-image-alt\">Image: x (30 x 20 px)</p></figure>"
+ },
+ {
+  "name": "unresolved",
+  "input": {
+   "src": "a.png",
+   "alt": "x<y",
+   "caption": "c"
+  },
+  "media": null,
+  "export": false,
+  "props": {
+   "alt": "x<y",
+   "caption": "c",
+   "narrow": false,
+   "picture": {
+    "kind": "missing",
+    "note": "Image not shown: this page cannot read the file here."
+   },
+   "summary": "Image: x<y",
+   "copy": "x<y\nc"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\"x&lt;y\nc\"><p class=\"vd-image-missing\"><span aria-hidden=\"true\">&#9888; </span>Image not shown: this page cannot read the file here.</p><figcaption class=\"vd-image-caption\">c</figcaption><p class=\"vb-alt vd-image-alt\">Image: x&lt;y</p></figure>"
+ },
+ {
+  "name": "unresolved-plain",
+  "input": {
+   "src": "a.png",
+   "alt": "x"
+  },
+  "media": null,
+  "export": false,
+  "props": {
+   "alt": "x",
+   "caption": "",
+   "narrow": false,
+   "picture": {
+    "kind": "missing",
+    "note": "Image not shown: this page cannot read the file here."
+   },
+   "summary": "Image: x",
+   "copy": "x"
+  },
+  "html": "<figure class=\"vb image vd-image vd-image-full\" data-copy=\"x\"><p class=\"vd-image-missing\"><span aria-hidden=\"true\">&#9888; </span>Image not shown: this page cannot read the file here.</p><p class=\"vb-alt vd-image-alt\">Image: x</p></figure>"
+ }
+]

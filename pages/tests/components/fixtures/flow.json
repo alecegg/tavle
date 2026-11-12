@@ -1,0 +1,6009 @@
+[
+ {
+  "name": "rich-flow-stress:s1",
+  "input": {
+   "title": "Forty steps with branches, back edges and long titles",
+   "step": [
+    {
+     "id": "s0",
+     "text": "<script>alert(1)</script> \"><img src=x onerror=1>",
+     "next": [
+      "s1"
+     ]
+    },
+    {
+     "id": "s1",
+     "text": "שלום עולם, זו תווית ארוכה בעברית",
+     "next": [
+      "s2"
+     ]
+    },
+    {
+     "id": "s2",
+     "text": "مرحبا بالعالم هذا نص عربي طويل",
+     "next": [
+      "s3"
+     ]
+    },
+    {
+     "id": "s3",
+     "text": "Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "next": [
+      "s4",
+      "s6"
+     ]
+    },
+    {
+     "id": "s4",
+     "text": "Step 4 word word word word with a rather long title that wraps",
+     "next": [
+      "s5"
+     ]
+    },
+    {
+     "id": "s5",
+     "text": "Step 5 with a rather long title that wraps",
+     "next": [
+      "s6"
+     ]
+    },
+    {
+     "id": "s6",
+     "text": "Step 6 word with a rather long title that wraps",
+     "next": [
+      "s7"
+     ]
+    },
+    {
+     "id": "s7",
+     "text": "Step 7 word word with a rather long title that wraps",
+     "next": [
+      "s8"
+     ]
+    },
+    {
+     "id": "s8",
+     "text": "Step 8 word word word with a rather long title that wraps",
+     "next": [
+      "s9"
+     ]
+    },
+    {
+     "id": "s9",
+     "text": "Step 9 word word word word with a rather long title that wraps",
+     "next": [
+      "s10"
+     ]
+    },
+    {
+     "id": "s10",
+     "text": "Step 10 with a rather long title that wraps",
+     "next": [
+      "s11",
+      "s13",
+      "s6"
+     ]
+    },
+    {
+     "id": "s11",
+     "text": "Step 11 word with a rather long title that wraps",
+     "next": [
+      "s12"
+     ]
+    },
+    {
+     "id": "s12",
+     "text": "Step 12 word word with a rather long title that wraps",
+     "next": [
+      "s13"
+     ]
+    },
+    {
+     "id": "s13",
+     "text": "Step 13 word word word with a rather long title that wraps",
+     "next": [
+      "s14"
+     ]
+    },
+    {
+     "id": "s14",
+     "text": "Step 14 word word word word with a rather long title that wraps",
+     "next": [
+      "s15"
+     ]
+    },
+    {
+     "id": "s15",
+     "text": "Step 15 with a rather long title that wraps",
+     "next": [
+      "s16"
+     ]
+    },
+    {
+     "id": "s16",
+     "text": "Step 16 word with a rather long title that wraps",
+     "next": [
+      "s17"
+     ]
+    },
+    {
+     "id": "s17",
+     "text": "Step 17 word word with a rather long title that wraps",
+     "next": [
+      "s18",
+      "s20"
+     ]
+    },
+    {
+     "id": "s18",
+     "text": "Step 18 word word word with a rather long title that wraps",
+     "next": [
+      "s19"
+     ]
+    },
+    {
+     "id": "s19",
+     "text": "Step 19 word word word word with a rather long title that wraps",
+     "next": [
+      "s20"
+     ]
+    },
+    {
+     "id": "s20",
+     "text": "Step 20 with a rather long title that wraps",
+     "next": [
+      "s21"
+     ]
+    },
+    {
+     "id": "s21",
+     "text": "Step 21 word with a rather long title that wraps",
+     "next": [
+      "s22",
+      "s17"
+     ]
+    },
+    {
+     "id": "s22",
+     "text": "Step 22 word word with a rather long title that wraps",
+     "next": [
+      "s23"
+     ]
+    },
+    {
+     "id": "s23",
+     "text": "Step 23 word word word with a rather long title that wraps",
+     "next": [
+      "s24"
+     ]
+    },
+    {
+     "id": "s24",
+     "text": "Step 24 word word word word with a rather long title that wraps",
+     "next": [
+      "s25",
+      "s27"
+     ]
+    },
+    {
+     "id": "s25",
+     "text": "Step 25 with a rather long title that wraps",
+     "next": [
+      "s26"
+     ]
+    },
+    {
+     "id": "s26",
+     "text": "Step 26 word with a rather long title that wraps",
+     "next": [
+      "s27"
+     ]
+    },
+    {
+     "id": "s27",
+     "text": "Step 27 word word with a rather long title that wraps",
+     "next": [
+      "s28"
+     ]
+    },
+    {
+     "id": "s28",
+     "text": "Step 28 word word word with a rather long title that wraps",
+     "next": [
+      "s29"
+     ]
+    },
+    {
+     "id": "s29",
+     "text": "Step 29 word word word word with a rather long title that wraps",
+     "next": [
+      "s30"
+     ]
+    },
+    {
+     "id": "s30",
+     "text": "Step 30 with a rather long title that wraps",
+     "next": [
+      "s31"
+     ]
+    },
+    {
+     "id": "s31",
+     "text": "Step 31 word with a rather long title that wraps",
+     "next": [
+      "s32",
+      "s34"
+     ]
+    },
+    {
+     "id": "s32",
+     "text": "Step 32 word word with a rather long title that wraps",
+     "next": [
+      "s33",
+      "s28"
+     ]
+    },
+    {
+     "id": "s33",
+     "text": "Step 33 word word word with a rather long title that wraps",
+     "next": [
+      "s34"
+     ]
+    },
+    {
+     "id": "s34",
+     "text": "Step 34 word word word word with a rather long title that wraps",
+     "next": [
+      "s35"
+     ]
+    },
+    {
+     "id": "s35",
+     "text": "Step 35 with a rather long title that wraps",
+     "next": [
+      "s36"
+     ]
+    },
+    {
+     "id": "s36",
+     "text": "Step 36 word with a rather long title that wraps",
+     "next": [
+      "s37"
+     ]
+    },
+    {
+     "id": "s37",
+     "text": "Step 37 word word with a rather long title that wraps",
+     "next": [
+      "s38"
+     ]
+    },
+    {
+     "id": "s38",
+     "text": "Step 38 word word word with a rather long title that wraps",
+     "next": [
+      "s39"
+     ]
+    },
+    {
+     "id": "s39",
+     "text": "Step 39 word word word word with a rather long title that wraps"
+    }
+   ]
+  },
+  "props": {
+   "heading": "Forty steps with branches, back edges and long titles",
+   "alt": {
+    "summary": "flow of 40 steps",
+    "steps": [
+     {
+      "id": "s0",
+      "text": "<script>alert(1)</script> \"><img src=x onerror=1>",
+      "next": [
+       "s1"
+      ]
+     },
+     {
+      "id": "s1",
+      "text": "שלום עולם, זו תווית ארוכה בעברית",
+      "next": [
+       "s2"
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "مرحبا بالعالم هذا نص عربي طويل",
+      "next": [
+       "s3"
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "next": [
+       "s4",
+       "s6"
+      ]
+     },
+     {
+      "id": "s4",
+      "text": "Step 4 word word word word with a rather long title that wraps",
+      "next": [
+       "s5"
+      ]
+     },
+     {
+      "id": "s5",
+      "text": "Step 5 with a rather long title that wraps",
+      "next": [
+       "s6"
+      ]
+     },
+     {
+      "id": "s6",
+      "text": "Step 6 word with a rather long title that wraps",
+      "next": [
+       "s7"
+      ]
+     },
+     {
+      "id": "s7",
+      "text": "Step 7 word word with a rather long title that wraps",
+      "next": [
+       "s8"
+      ]
+     },
+     {
+      "id": "s8",
+      "text": "Step 8 word word word with a rather long title that wraps",
+      "next": [
+       "s9"
+      ]
+     },
+     {
+      "id": "s9",
+      "text": "Step 9 word word word word with a rather long title that wraps",
+      "next": [
+       "s10"
+      ]
+     },
+     {
+      "id": "s10",
+      "text": "Step 10 with a rather long title that wraps",
+      "next": [
+       "s11",
+       "s13",
+       "s6"
+      ]
+     },
+     {
+      "id": "s11",
+      "text": "Step 11 word with a rather long title that wraps",
+      "next": [
+       "s12"
+      ]
+     },
+     {
+      "id": "s12",
+      "text": "Step 12 word word with a rather long title that wraps",
+      "next": [
+       "s13"
+      ]
+     },
+     {
+      "id": "s13",
+      "text": "Step 13 word word word with a rather long title that wraps",
+      "next": [
+       "s14"
+      ]
+     },
+     {
+      "id": "s14",
+      "text": "Step 14 word word word word with a rather long title that wraps",
+      "next": [
+       "s15"
+      ]
+     },
+     {
+      "id": "s15",
+      "text": "Step 15 with a rather long title that wraps",
+      "next": [
+       "s16"
+      ]
+     },
+     {
+      "id": "s16",
+      "text": "Step 16 word with a rather long title that wraps",
+      "next": [
+       "s17"
+      ]
+     },
+     {
+      "id": "s17",
+      "text": "Step 17 word word with a rather long title that wraps",
+      "next": [
+       "s18",
+       "s20"
+      ]
+     },
+     {
+      "id": "s18",
+      "text": "Step 18 word word word with a rather long title that wraps",
+      "next": [
+       "s19"
+      ]
+     },
+     {
+      "id": "s19",
+      "text": "Step 19 word word word word with a rather long title that wraps",
+      "next": [
+       "s20"
+      ]
+     },
+     {
+      "id": "s20",
+      "text": "Step 20 with a rather long title that wraps",
+      "next": [
+       "s21"
+      ]
+     },
+     {
+      "id": "s21",
+      "text": "Step 21 word with a rather long title that wraps",
+      "next": [
+       "s22",
+       "s17"
+      ]
+     },
+     {
+      "id": "s22",
+      "text": "Step 22 word word with a rather long title that wraps",
+      "next": [
+       "s23"
+      ]
+     },
+     {
+      "id": "s23",
+      "text": "Step 23 word word word with a rather long title that wraps",
+      "next": [
+       "s24"
+      ]
+     },
+     {
+      "id": "s24",
+      "text": "Step 24 word word word word with a rather long title that wraps",
+      "next": [
+       "s25",
+       "s27"
+      ]
+     },
+     {
+      "id": "s25",
+      "text": "Step 25 with a rather long title that wraps",
+      "next": [
+       "s26"
+      ]
+     },
+     {
+      "id": "s26",
+      "text": "Step 26 word with a rather long title that wraps",
+      "next": [
+       "s27"
+      ]
+     },
+     {
+      "id": "s27",
+      "text": "Step 27 word word with a rather long title that wraps",
+      "next": [
+       "s28"
+      ]
+     },
+     {
+      "id": "s28",
+      "text": "Step 28 word word word with a rather long title that wraps",
+      "next": [
+       "s29"
+      ]
+     },
+     {
+      "id": "s29",
+      "text": "Step 29 word word word word with a rather long title that wraps",
+      "next": [
+       "s30"
+      ]
+     },
+     {
+      "id": "s30",
+      "text": "Step 30 with a rather long title that wraps",
+      "next": [
+       "s31"
+      ]
+     },
+     {
+      "id": "s31",
+      "text": "Step 31 word with a rather long title that wraps",
+      "next": [
+       "s32",
+       "s34"
+      ]
+     },
+     {
+      "id": "s32",
+      "text": "Step 32 word word with a rather long title that wraps",
+      "next": [
+       "s33",
+       "s28"
+      ]
+     },
+     {
+      "id": "s33",
+      "text": "Step 33 word word word with a rather long title that wraps",
+      "next": [
+       "s34"
+      ]
+     },
+     {
+      "id": "s34",
+      "text": "Step 34 word word word word with a rather long title that wraps",
+      "next": [
+       "s35"
+      ]
+     },
+     {
+      "id": "s35",
+      "text": "Step 35 with a rather long title that wraps",
+      "next": [
+       "s36"
+      ]
+     },
+     {
+      "id": "s36",
+      "text": "Step 36 word with a rather long title that wraps",
+      "next": [
+       "s37"
+      ]
+     },
+     {
+      "id": "s37",
+      "text": "Step 37 word word with a rather long title that wraps",
+      "next": [
+       "s38"
+      ]
+     },
+     {
+      "id": "s38",
+      "text": "Step 38 word word word with a rather long title that wraps",
+      "next": [
+       "s39"
+      ]
+     },
+     {
+      "id": "s39",
+      "text": "Step 39 word word word word with a rather long title that wraps",
+      "next": []
+     }
+    ]
+   },
+   "title": "Forty steps with branches, back edges and long titles",
+   "desc": "flow of 40 steps, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 263 4628",
+    "width": "263",
+    "height": "4628",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s0",
+       "data-to": "s1"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script> \"><img src=x onerror=1> to שלום עולם, זו תווית ארוכה בעברית"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 82.0 L135.0 126.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,126.0 130.0,116.0 140.0,116.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s1",
+       "data-to": "s2"
+      },
+      [
+       [
+        "title",
+        {},
+        "שלום עולם, זו תווית ארוכה בעברית to مرحبا بالعالم هذا نص عربي طويل"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 176.0 L135.0 220.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,220.0 130.0,210.0 140.0,210.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s2",
+       "data-to": "s3"
+      },
+      [
+       [
+        "title",
+        {},
+        "مرحبا بالعالم هذا نص عربي طويل to Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 270.0 L135.0 314.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,314.0 130.0,304.0 140.0,304.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s3",
+       "data-to": "s4"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Step 4 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 412.0 L114.0 456.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,456.0 113.8,444.8 122.8,449.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s3",
+       "data-to": "s6"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Step 6 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 412.0 L222.5 456.0 L222.5 538.0 L222.5 582.0 L222.5 648.0 L135.0 692.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,692.0 141.7,683.0 146.2,692.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s4",
+       "data-to": "s5"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 4 word word word word with a rather long title that wraps to Step 5 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 538.0 L114.0 582.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,582.0 109.0,572.0 119.0,572.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s5",
+       "data-to": "s6"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 5 with a rather long title that wraps to Step 6 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 648.0 L135.0 692.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,692.0 126.2,685.1 135.2,680.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s6",
+       "data-to": "s7"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 6 word with a rather long title that wraps to Step 7 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 758.0 L114.0 802.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,802.0 113.8,790.8 122.8,795.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s7",
+       "data-to": "s8"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 7 word word with a rather long title that wraps to Step 8 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 868.0 L114.0 912.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,912.0 109.0,902.0 119.0,902.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s8",
+       "data-to": "s9"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 8 word word word with a rather long title that wraps to Step 9 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 994.0 L114.0 1038.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,1038.0 109.0,1028.0 119.0,1028.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s9",
+       "data-to": "s10"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 9 word word word word with a rather long title that wraps to Step 10 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 1120.0 L135.0 1164.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1164.0 126.2,1157.1 135.2,1152.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s10",
+       "data-to": "s11"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 10 with a rather long title that wraps to Step 11 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1230.0 L114.0 1274.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,1274.0 113.8,1262.8 122.8,1267.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s10",
+       "data-to": "s13"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 10 with a rather long title that wraps to Step 13 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1230.0 L222.5 1274.0 L222.5 1340.0 L226.0 1384.0 L226.0 1450.0 L135.0 1494.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1494.0 141.8,1485.1 146.2,1494.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s10",
+       "data-to": "s6"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 10 with a rather long title that wraps to Step 6 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1164.0 L222.5 1120.0 L222.5 1038.0 L226.0 994.0 L226.0 912.0 L226.0 868.0 L226.0 802.0 L135.0 758.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,758.0 146.2,757.9 141.8,766.9"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s11",
+       "data-to": "s12"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 11 word with a rather long title that wraps to Step 12 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 1340.0 L114.0 1384.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,1384.0 109.0,1374.0 119.0,1374.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s12",
+       "data-to": "s13"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 12 word word with a rather long title that wraps to Step 13 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 1450.0 L135.0 1494.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1494.0 126.2,1487.1 135.2,1482.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s13",
+       "data-to": "s14"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 13 word word word with a rather long title that wraps to Step 14 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1576.0 L135.0 1620.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1620.0 130.0,1610.0 140.0,1610.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s14",
+       "data-to": "s15"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 14 word word word word with a rather long title that wraps to Step 15 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1702.0 L135.0 1746.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1746.0 130.0,1736.0 140.0,1736.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s15",
+       "data-to": "s16"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 15 with a rather long title that wraps to Step 16 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1812.0 L135.0 1856.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1856.0 130.0,1846.0 140.0,1846.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s16",
+       "data-to": "s17"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 16 word with a rather long title that wraps to Step 17 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 1922.0 L135.0 1966.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,1966.0 130.0,1956.0 140.0,1956.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s17",
+       "data-to": "s18"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 17 word word with a rather long title that wraps to Step 18 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2032.0 L93.0 2076.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "93.0,2076.0 96.3,2065.3 103.5,2072.2"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s17",
+       "data-to": "s20"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 17 word word with a rather long title that wraps to Step 20 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2032.0 L205.0 2076.0 L205.0 2158.0 L201.5 2202.0 L201.5 2284.0 L114.0 2328.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,2328.0 120.7,2319.0 125.2,2328.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s18",
+       "data-to": "s19"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 18 word word word with a rather long title that wraps to Step 19 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M93.0 2158.0 L93.0 2202.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "93.0,2202.0 88.0,2192.0 98.0,2192.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s19",
+       "data-to": "s20"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 19 word word word word with a rather long title that wraps to Step 20 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M93.0 2284.0 L114.0 2328.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,2328.0 105.2,2321.1 114.2,2316.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s20",
+       "data-to": "s21"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 20 with a rather long title that wraps to Step 21 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 2394.0 L135.0 2438.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,2438.0 126.2,2431.1 135.2,2426.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s21",
+       "data-to": "s22"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 21 word with a rather long title that wraps to Step 22 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2504.0 L135.0 2548.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,2548.0 130.0,2538.0 140.0,2538.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s21",
+       "data-to": "s17"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 21 word with a rather long title that wraps to Step 17 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2438.0 L222.5 2394.0 L222.5 2328.0 L243.5 2284.0 L243.5 2202.0 L247.0 2158.0 L247.0 2076.0 L135.0 2032.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,2032.0 146.1,2031.0 142.5,2040.3"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s22",
+       "data-to": "s23"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 22 word word with a rather long title that wraps to Step 23 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2614.0 L135.0 2658.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,2658.0 130.0,2648.0 140.0,2648.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s23",
+       "data-to": "s24"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 23 word word word with a rather long title that wraps to Step 24 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2740.0 L135.0 2784.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,2784.0 130.0,2774.0 140.0,2774.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s24",
+       "data-to": "s25"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 24 word word word word with a rather long title that wraps to Step 25 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2866.0 L114.0 2910.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,2910.0 113.8,2898.8 122.8,2903.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s24",
+       "data-to": "s27"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 24 word word word word with a rather long title that wraps to Step 27 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 2866.0 L222.5 2910.0 L222.5 2976.0 L222.5 3020.0 L222.5 3086.0 L135.0 3130.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3130.0 141.7,3121.0 146.2,3130.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s25",
+       "data-to": "s26"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 25 with a rather long title that wraps to Step 26 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 2976.0 L114.0 3020.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,3020.0 109.0,3010.0 119.0,3010.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s26",
+       "data-to": "s27"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 26 word with a rather long title that wraps to Step 27 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 3086.0 L135.0 3130.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3130.0 126.2,3123.1 135.2,3118.8"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s27",
+       "data-to": "s28"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 27 word word with a rather long title that wraps to Step 28 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 3196.0 L135.0 3240.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3240.0 130.0,3230.0 140.0,3230.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s28",
+       "data-to": "s29"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 28 word word word with a rather long title that wraps to Step 29 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 3322.0 L114.0 3366.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,3366.0 113.8,3354.8 122.8,3359.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s29",
+       "data-to": "s30"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 29 word word word word with a rather long title that wraps to Step 30 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 3448.0 L114.0 3492.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,3492.0 109.0,3482.0 119.0,3482.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s30",
+       "data-to": "s31"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 30 with a rather long title that wraps to Step 31 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 3558.0 L114.0 3602.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "114.0,3602.0 109.0,3592.0 119.0,3592.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s31",
+       "data-to": "s32"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 31 word with a rather long title that wraps to Step 32 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 3668.0 L156.0 3712.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "156.0,3712.0 145.5,3708.2 152.7,3701.3"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s31",
+       "data-to": "s34"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 31 word with a rather long title that wraps to Step 34 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M114.0 3668.0 L44.0 3712.0 L44.0 3778.0 L44.0 3822.0 L44.0 3904.0 L135.0 3948.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3948.0 123.8,3948.1 128.2,3939.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s32",
+       "data-to": "s33"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 32 word word with a rather long title that wraps to Step 33 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M156.0 3778.0 L156.0 3822.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "156.0,3822.0 151.0,3812.0 161.0,3812.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s32",
+       "data-to": "s28"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 32 word word with a rather long title that wraps to Step 28 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M156.0 3712.0 L222.5 3668.0 L222.5 3602.0 L222.5 3558.0 L222.5 3492.0 L222.5 3448.0 L222.5 3366.0 L135.0 3322.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3322.0 146.2,3322.0 141.7,3331.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s33",
+       "data-to": "s34"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 33 word word word with a rather long title that wraps to Step 34 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M156.0 3904.0 L135.0 3948.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,3948.0 134.8,3936.8 143.8,3941.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s34",
+       "data-to": "s35"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 34 word word word word with a rather long title that wraps to Step 35 with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 4030.0 L135.0 4074.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,4074.0 130.0,4064.0 140.0,4064.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s35",
+       "data-to": "s36"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 35 with a rather long title that wraps to Step 36 word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 4140.0 L135.0 4184.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,4184.0 130.0,4174.0 140.0,4174.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s36",
+       "data-to": "s37"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 36 word with a rather long title that wraps to Step 37 word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 4250.0 L135.0 4294.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,4294.0 130.0,4284.0 140.0,4284.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s37",
+       "data-to": "s38"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 37 word word with a rather long title that wraps to Step 38 word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 4360.0 L135.0 4404.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,4404.0 130.0,4394.0 140.0,4394.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "s38",
+       "data-to": "s39"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 38 word word word with a rather long title that wraps to Step 39 word word word word with a rather long title that wraps"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M135.0 4486.0 L135.0 4530.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "135.0,4530.0 130.0,4520.0 140.0,4520.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s0",
+       "transform": "translate(58.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "<script>alert(1)</script> \"><img src=x onerror=1>"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "<script>alert(1)</"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "script> \"><img"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "src=x onerror=1>"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s1",
+       "transform": "translate(58.0 126.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "שלום עולם, זו תווית ארוכה בעברית"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "50.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "שלום עולם, זו"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "תווית ארוכה בעברית"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s2",
+       "transform": "translate(61.5 220.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "مرحبا بالعالم هذا نص عربي طويل"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "50.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "مرحبا بالعالم هذا"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "نص عربي طويل"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s3",
+       "transform": "translate(58.0 314.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "98.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 3"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "xxxxxxxxxxxxxxxxxx"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "xxxxxxxxxxxxxxxxxx"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "xxxxxxxxxxxxxxxxxx"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "81.0"
+          },
+          "xxxxxx"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s4",
+       "transform": "translate(40.5 456.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 4 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 4 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s5",
+       "transform": "translate(40.5 582.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 5 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 5 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s6",
+       "transform": "translate(58.0 692.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 6 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 6 word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s7",
+       "transform": "translate(37.0 802.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 7 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 7 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s8",
+       "transform": "translate(37.0 912.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 8 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 8 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s9",
+       "transform": "translate(40.5 1038.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 9 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 9 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s10",
+       "transform": "translate(61.5 1164.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 10 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 10 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s11",
+       "transform": "translate(40.5 1274.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 11 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 11 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s12",
+       "transform": "translate(37.0 1384.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 12 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 12 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s13",
+       "transform": "translate(58.0 1494.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 13 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 13 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s14",
+       "transform": "translate(61.5 1620.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 14 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 14 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s15",
+       "transform": "translate(61.5 1746.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 15 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 15 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s16",
+       "transform": "translate(61.5 1856.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 16 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 16 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s17",
+       "transform": "translate(58.0 1966.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 17 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 17 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s18",
+       "transform": "translate(16.0 2076.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 18 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 18 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s19",
+       "transform": "translate(19.5 2202.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 19 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 19 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s20",
+       "transform": "translate(40.5 2328.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 20 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 20 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s21",
+       "transform": "translate(61.5 2438.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 21 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 21 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s22",
+       "transform": "translate(58.0 2548.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 22 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 22 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s23",
+       "transform": "translate(58.0 2658.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 23 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 23 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s24",
+       "transform": "translate(61.5 2784.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 24 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 24 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s25",
+       "transform": "translate(40.5 2910.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 25 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 25 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s26",
+       "transform": "translate(40.5 3020.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 26 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 26 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s27",
+       "transform": "translate(58.0 3130.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 27 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 27 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s28",
+       "transform": "translate(58.0 3240.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 28 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 28 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s29",
+       "transform": "translate(40.5 3366.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 29 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 29 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s30",
+       "transform": "translate(40.5 3492.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 30 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 30 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s31",
+       "transform": "translate(40.5 3602.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 31 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 31 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s32",
+       "transform": "translate(79.0 3712.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 32 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 32 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s33",
+       "transform": "translate(79.0 3822.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 33 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 33 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s34",
+       "transform": "translate(61.5 3948.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 34 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 34 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s35",
+       "transform": "translate(61.5 4074.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 35 with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 35 with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s36",
+       "transform": "translate(61.5 4184.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 36 word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 36 word with"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s37",
+       "transform": "translate(58.0 4294.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 37 word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "66.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 37 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "with a rather long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "title that wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "s38",
+       "transform": "translate(58.0 4404.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 38 word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "82.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Step 38 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "word with a rather"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "49.0"
+          },
+          "long title that"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "65.0"
+          },
+          "wraps"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-rounded",
+       "data-id": "s39",
+       "transform": "translate(61.5 4530.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Step 39 word word word word with a rather long title that wraps"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "82.0",
+         "rx": "18.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Step 39 word word"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "word word with a"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "49.0"
+          },
+          "rather long title"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "65.0"
+          },
+          "that wraps"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "Forty steps with branches, back edges and long titles (flow of 40 steps)\n1. s0: <script>alert(1)</script> \"><img src=x onerror=1> -> s1\n2. s1: שלום עולם, זו תווית ארוכה בעברית -> s2\n3. s2: مرحبا بالعالم هذا نص عربي طويل -> s3\n4. s3: Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -> s4, s6\n5. s4: Step 4 word word word word with a rather long title that wraps -> s5\n6. s5: Step 5 with a rather long title that wraps -> s6\n7. s6: Step 6 word with a rather long title that wraps -> s7\n8. s7: Step 7 word word with a rather long title that wraps -> s8\n9. s8: Step 8 word word word with a rather long title that wraps -> s9\n10. s9: Step 9 word word word word with a rather long title that wraps -> s10\n11. s10: Step 10 with a rather long title that wraps -> s11, s13, s6\n12. s11: Step 11 word with a rather long title that wraps -> s12\n13. s12: Step 12 word word with a rather long title that wraps -> s13\n14. s13: Step 13 word word word with a rather long title that wraps -> s14\n15. s14: Step 14 word word word word with a rather long title that wraps -> s15\n16. s15: Step 15 with a rather long title that wraps -> s16\n17. s16: Step 16 word with a rather long title that wraps -> s17\n18. s17: Step 17 word word with a rather long title that wraps -> s18, s20\n19. s18: Step 18 word word word with a rather long title that wraps -> s19\n20. s19: Step 19 word word word word with a rather long title that wraps -> s20\n21. s20: Step 20 with a rather long title that wraps -> s21\n22. s21: Step 21 word with a rather long title that wraps -> s22, s17\n23. s22: Step 22 word word with a rather long title that wraps -> s23\n24. s23: Step 23 word word word with a rather long title that wraps -> s24\n25. s24: Step 24 word word word word with a rather long title that wraps -> s25, s27\n26. s25: Step 25 with a rather long title that wraps -> s26\n27. s26: Step 26 word with a rather long title that wraps -> s27\n28. s27: Step 27 word word with a rather long title that wraps -> s28\n29. s28: Step 28 word word word with a rather long title that wraps -> s29\n30. s29: Step 29 word word word word with a rather long title that wraps -> s30\n31. s30: Step 30 with a rather long title that wraps -> s31\n32. s31: Step 31 word with a rather long title that wraps -> s32, s34\n33. s32: Step 32 word word with a rather long title that wraps -> s33, s28\n34. s33: Step 33 word word word with a rather long title that wraps -> s34\n35. s34: Step 34 word word word word with a rather long title that wraps -> s35\n36. s35: Step 35 with a rather long title that wraps -> s36\n37. s36: Step 36 word with a rather long title that wraps -> s37\n38. s37: Step 37 word word with a rather long title that wraps -> s38\n39. s38: Step 38 word word word with a rather long title that wraps -> s39\n40. s39: Step 39 word word word word with a rather long title that wraps"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"Forty steps with branches, back edges and long titles (flow of 40 steps)\n1. s0: &lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; -&gt; s1\n2. s1: שלום עולם, זו תווית ארוכה בעברית -&gt; s2\n3. s2: مرحبا بالعالم هذا نص عربي طويل -&gt; s3\n4. s3: Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -&gt; s4, s6\n5. s4: Step 4 word word word word with a rather long title that wraps -&gt; s5\n6. s5: Step 5 with a rather long title that wraps -&gt; s6\n7. s6: Step 6 word with a rather long title that wraps -&gt; s7\n8. s7: Step 7 word word with a rather long title that wraps -&gt; s8\n9. s8: Step 8 word word word with a rather long title that wraps -&gt; s9\n10. s9: Step 9 word word word word with a rather long title that wraps -&gt; s10\n11. s10: Step 10 with a rather long title that wraps -&gt; s11, s13, s6\n12. s11: Step 11 word with a rather long title that wraps -&gt; s12\n13. s12: Step 12 word word with a rather long title that wraps -&gt; s13\n14. s13: Step 13 word word word with a rather long title that wraps -&gt; s14\n15. s14: Step 14 word word word word with a rather long title that wraps -&gt; s15\n16. s15: Step 15 with a rather long title that wraps -&gt; s16\n17. s16: Step 16 word with a rather long title that wraps -&gt; s17\n18. s17: Step 17 word word with a rather long title that wraps -&gt; s18, s20\n19. s18: Step 18 word word word with a rather long title that wraps -&gt; s19\n20. s19: Step 19 word word word word with a rather long title that wraps -&gt; s20\n21. s20: Step 20 with a rather long title that wraps -&gt; s21\n22. s21: Step 21 word with a rather long title that wraps -&gt; s22, s17\n23. s22: Step 22 word word with a rather long title that wraps -&gt; s23\n24. s23: Step 23 word word word with a rather long title that wraps -&gt; s24\n25. s24: Step 24 word word word word with a rather long title that wraps -&gt; s25, s27\n26. s25: Step 25 with a rather long title that wraps -&gt; s26\n27. s26: Step 26 word with a rather long title that wraps -&gt; s27\n28. s27: Step 27 word word with a rather long title that wraps -&gt; s28\n29. s28: Step 28 word word word with a rather long title that wraps -&gt; s29\n30. s29: Step 29 word word word word with a rather long title that wraps -&gt; s30\n31. s30: Step 30 with a rather long title that wraps -&gt; s31\n32. s31: Step 31 word with a rather long title that wraps -&gt; s32, s34\n33. s32: Step 32 word word with a rather long title that wraps -&gt; s33, s28\n34. s33: Step 33 word word word with a rather long title that wraps -&gt; s34\n35. s34: Step 34 word word word word with a rather long title that wraps -&gt; s35\n36. s35: Step 35 with a rather long title that wraps -&gt; s36\n37. s36: Step 36 word with a rather long title that wraps -&gt; s37\n38. s37: Step 37 word word with a rather long title that wraps -&gt; s38\n39. s38: Step 38 word word word with a rather long title that wraps -&gt; s39\n40. s39: Step 39 word word word word with a rather long title that wraps\"><section class=\"vb-card\"><h4 class=\"vb-title\">Forty steps with branches, back edges and long titles</h4><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"Forty steps with branches, back edges and long titles (scrollable)\"><svg width=\"263\" height=\"4628\" class=\"vd-svg\" viewBox=\"0 0 263 4628\" role=\"img\" aria-label=\"Forty steps with branches, back edges and long titles\"><title>Forty steps with branches, back edges and long titles</title><desc>flow of 40 steps, top to bottom</desc><g class=\"vd-edge vd-solid\" data-from=\"s0\" data-to=\"s1\"><title>&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt; to שלום עולם, זו תווית ארוכה בעברית</title><path class=\"vd-line\" d=\"M135.0 82.0 L135.0 126.0\"/><polygon class=\"vd-head\" points=\"135.0,126.0 130.0,116.0 140.0,116.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s1\" data-to=\"s2\"><title>שלום עולם, זו תווית ארוכה בעברית to مرحبا بالعالم هذا نص عربي طويل</title><path class=\"vd-line\" d=\"M135.0 176.0 L135.0 220.0\"/><polygon class=\"vd-head\" points=\"135.0,220.0 130.0,210.0 140.0,210.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s2\" data-to=\"s3\"><title>مرحبا بالعالم هذا نص عربي طويل to Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</title><path class=\"vd-line\" d=\"M135.0 270.0 L135.0 314.0\"/><polygon class=\"vd-head\" points=\"135.0,314.0 130.0,304.0 140.0,304.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s3\" data-to=\"s4\"><title>Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Step 4 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 412.0 L114.0 456.0\"/><polygon class=\"vd-head\" points=\"114.0,456.0 113.8,444.8 122.8,449.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s3\" data-to=\"s6\"><title>Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx to Step 6 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 412.0 L222.5 456.0 L222.5 538.0 L222.5 582.0 L222.5 648.0 L135.0 692.0\"/><polygon class=\"vd-head\" points=\"135.0,692.0 141.7,683.0 146.2,692.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s4\" data-to=\"s5\"><title>Step 4 word word word word with a rather long title that wraps to Step 5 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 538.0 L114.0 582.0\"/><polygon class=\"vd-head\" points=\"114.0,582.0 109.0,572.0 119.0,572.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s5\" data-to=\"s6\"><title>Step 5 with a rather long title that wraps to Step 6 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 648.0 L135.0 692.0\"/><polygon class=\"vd-head\" points=\"135.0,692.0 126.2,685.1 135.2,680.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s6\" data-to=\"s7\"><title>Step 6 word with a rather long title that wraps to Step 7 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 758.0 L114.0 802.0\"/><polygon class=\"vd-head\" points=\"114.0,802.0 113.8,790.8 122.8,795.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s7\" data-to=\"s8\"><title>Step 7 word word with a rather long title that wraps to Step 8 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 868.0 L114.0 912.0\"/><polygon class=\"vd-head\" points=\"114.0,912.0 109.0,902.0 119.0,902.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s8\" data-to=\"s9\"><title>Step 8 word word word with a rather long title that wraps to Step 9 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 994.0 L114.0 1038.0\"/><polygon class=\"vd-head\" points=\"114.0,1038.0 109.0,1028.0 119.0,1028.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s9\" data-to=\"s10\"><title>Step 9 word word word word with a rather long title that wraps to Step 10 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 1120.0 L135.0 1164.0\"/><polygon class=\"vd-head\" points=\"135.0,1164.0 126.2,1157.1 135.2,1152.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s10\" data-to=\"s11\"><title>Step 10 with a rather long title that wraps to Step 11 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1230.0 L114.0 1274.0\"/><polygon class=\"vd-head\" points=\"114.0,1274.0 113.8,1262.8 122.8,1267.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s10\" data-to=\"s13\"><title>Step 10 with a rather long title that wraps to Step 13 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1230.0 L222.5 1274.0 L222.5 1340.0 L226.0 1384.0 L226.0 1450.0 L135.0 1494.0\"/><polygon class=\"vd-head\" points=\"135.0,1494.0 141.8,1485.1 146.2,1494.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s10\" data-to=\"s6\"><title>Step 10 with a rather long title that wraps to Step 6 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1164.0 L222.5 1120.0 L222.5 1038.0 L226.0 994.0 L226.0 912.0 L226.0 868.0 L226.0 802.0 L135.0 758.0\"/><polygon class=\"vd-head\" points=\"135.0,758.0 146.2,757.9 141.8,766.9\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s11\" data-to=\"s12\"><title>Step 11 word with a rather long title that wraps to Step 12 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 1340.0 L114.0 1384.0\"/><polygon class=\"vd-head\" points=\"114.0,1384.0 109.0,1374.0 119.0,1374.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s12\" data-to=\"s13\"><title>Step 12 word word with a rather long title that wraps to Step 13 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 1450.0 L135.0 1494.0\"/><polygon class=\"vd-head\" points=\"135.0,1494.0 126.2,1487.1 135.2,1482.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s13\" data-to=\"s14\"><title>Step 13 word word word with a rather long title that wraps to Step 14 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1576.0 L135.0 1620.0\"/><polygon class=\"vd-head\" points=\"135.0,1620.0 130.0,1610.0 140.0,1610.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s14\" data-to=\"s15\"><title>Step 14 word word word word with a rather long title that wraps to Step 15 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1702.0 L135.0 1746.0\"/><polygon class=\"vd-head\" points=\"135.0,1746.0 130.0,1736.0 140.0,1736.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s15\" data-to=\"s16\"><title>Step 15 with a rather long title that wraps to Step 16 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1812.0 L135.0 1856.0\"/><polygon class=\"vd-head\" points=\"135.0,1856.0 130.0,1846.0 140.0,1846.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s16\" data-to=\"s17\"><title>Step 16 word with a rather long title that wraps to Step 17 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 1922.0 L135.0 1966.0\"/><polygon class=\"vd-head\" points=\"135.0,1966.0 130.0,1956.0 140.0,1956.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s17\" data-to=\"s18\"><title>Step 17 word word with a rather long title that wraps to Step 18 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2032.0 L93.0 2076.0\"/><polygon class=\"vd-head\" points=\"93.0,2076.0 96.3,2065.3 103.5,2072.2\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s17\" data-to=\"s20\"><title>Step 17 word word with a rather long title that wraps to Step 20 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2032.0 L205.0 2076.0 L205.0 2158.0 L201.5 2202.0 L201.5 2284.0 L114.0 2328.0\"/><polygon class=\"vd-head\" points=\"114.0,2328.0 120.7,2319.0 125.2,2328.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s18\" data-to=\"s19\"><title>Step 18 word word word with a rather long title that wraps to Step 19 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M93.0 2158.0 L93.0 2202.0\"/><polygon class=\"vd-head\" points=\"93.0,2202.0 88.0,2192.0 98.0,2192.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s19\" data-to=\"s20\"><title>Step 19 word word word word with a rather long title that wraps to Step 20 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M93.0 2284.0 L114.0 2328.0\"/><polygon class=\"vd-head\" points=\"114.0,2328.0 105.2,2321.1 114.2,2316.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s20\" data-to=\"s21\"><title>Step 20 with a rather long title that wraps to Step 21 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 2394.0 L135.0 2438.0\"/><polygon class=\"vd-head\" points=\"135.0,2438.0 126.2,2431.1 135.2,2426.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s21\" data-to=\"s22\"><title>Step 21 word with a rather long title that wraps to Step 22 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2504.0 L135.0 2548.0\"/><polygon class=\"vd-head\" points=\"135.0,2548.0 130.0,2538.0 140.0,2538.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s21\" data-to=\"s17\"><title>Step 21 word with a rather long title that wraps to Step 17 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2438.0 L222.5 2394.0 L222.5 2328.0 L243.5 2284.0 L243.5 2202.0 L247.0 2158.0 L247.0 2076.0 L135.0 2032.0\"/><polygon class=\"vd-head\" points=\"135.0,2032.0 146.1,2031.0 142.5,2040.3\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s22\" data-to=\"s23\"><title>Step 22 word word with a rather long title that wraps to Step 23 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2614.0 L135.0 2658.0\"/><polygon class=\"vd-head\" points=\"135.0,2658.0 130.0,2648.0 140.0,2648.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s23\" data-to=\"s24\"><title>Step 23 word word word with a rather long title that wraps to Step 24 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2740.0 L135.0 2784.0\"/><polygon class=\"vd-head\" points=\"135.0,2784.0 130.0,2774.0 140.0,2774.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s24\" data-to=\"s25\"><title>Step 24 word word word word with a rather long title that wraps to Step 25 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2866.0 L114.0 2910.0\"/><polygon class=\"vd-head\" points=\"114.0,2910.0 113.8,2898.8 122.8,2903.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s24\" data-to=\"s27\"><title>Step 24 word word word word with a rather long title that wraps to Step 27 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 2866.0 L222.5 2910.0 L222.5 2976.0 L222.5 3020.0 L222.5 3086.0 L135.0 3130.0\"/><polygon class=\"vd-head\" points=\"135.0,3130.0 141.7,3121.0 146.2,3130.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s25\" data-to=\"s26\"><title>Step 25 with a rather long title that wraps to Step 26 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 2976.0 L114.0 3020.0\"/><polygon class=\"vd-head\" points=\"114.0,3020.0 109.0,3010.0 119.0,3010.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s26\" data-to=\"s27\"><title>Step 26 word with a rather long title that wraps to Step 27 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 3086.0 L135.0 3130.0\"/><polygon class=\"vd-head\" points=\"135.0,3130.0 126.2,3123.1 135.2,3118.8\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s27\" data-to=\"s28\"><title>Step 27 word word with a rather long title that wraps to Step 28 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 3196.0 L135.0 3240.0\"/><polygon class=\"vd-head\" points=\"135.0,3240.0 130.0,3230.0 140.0,3230.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s28\" data-to=\"s29\"><title>Step 28 word word word with a rather long title that wraps to Step 29 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 3322.0 L114.0 3366.0\"/><polygon class=\"vd-head\" points=\"114.0,3366.0 113.8,3354.8 122.8,3359.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s29\" data-to=\"s30\"><title>Step 29 word word word word with a rather long title that wraps to Step 30 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 3448.0 L114.0 3492.0\"/><polygon class=\"vd-head\" points=\"114.0,3492.0 109.0,3482.0 119.0,3482.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s30\" data-to=\"s31\"><title>Step 30 with a rather long title that wraps to Step 31 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 3558.0 L114.0 3602.0\"/><polygon class=\"vd-head\" points=\"114.0,3602.0 109.0,3592.0 119.0,3592.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s31\" data-to=\"s32\"><title>Step 31 word with a rather long title that wraps to Step 32 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 3668.0 L156.0 3712.0\"/><polygon class=\"vd-head\" points=\"156.0,3712.0 145.5,3708.2 152.7,3701.3\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s31\" data-to=\"s34\"><title>Step 31 word with a rather long title that wraps to Step 34 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M114.0 3668.0 L44.0 3712.0 L44.0 3778.0 L44.0 3822.0 L44.0 3904.0 L135.0 3948.0\"/><polygon class=\"vd-head\" points=\"135.0,3948.0 123.8,3948.1 128.2,3939.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s32\" data-to=\"s33\"><title>Step 32 word word with a rather long title that wraps to Step 33 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M156.0 3778.0 L156.0 3822.0\"/><polygon class=\"vd-head\" points=\"156.0,3822.0 151.0,3812.0 161.0,3812.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s32\" data-to=\"s28\"><title>Step 32 word word with a rather long title that wraps to Step 28 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M156.0 3712.0 L222.5 3668.0 L222.5 3602.0 L222.5 3558.0 L222.5 3492.0 L222.5 3448.0 L222.5 3366.0 L135.0 3322.0\"/><polygon class=\"vd-head\" points=\"135.0,3322.0 146.2,3322.0 141.7,3331.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s33\" data-to=\"s34\"><title>Step 33 word word word with a rather long title that wraps to Step 34 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M156.0 3904.0 L135.0 3948.0\"/><polygon class=\"vd-head\" points=\"135.0,3948.0 134.8,3936.8 143.8,3941.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s34\" data-to=\"s35\"><title>Step 34 word word word word with a rather long title that wraps to Step 35 with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 4030.0 L135.0 4074.0\"/><polygon class=\"vd-head\" points=\"135.0,4074.0 130.0,4064.0 140.0,4064.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s35\" data-to=\"s36\"><title>Step 35 with a rather long title that wraps to Step 36 word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 4140.0 L135.0 4184.0\"/><polygon class=\"vd-head\" points=\"135.0,4184.0 130.0,4174.0 140.0,4174.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s36\" data-to=\"s37\"><title>Step 36 word with a rather long title that wraps to Step 37 word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 4250.0 L135.0 4294.0\"/><polygon class=\"vd-head\" points=\"135.0,4294.0 130.0,4284.0 140.0,4284.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s37\" data-to=\"s38\"><title>Step 37 word word with a rather long title that wraps to Step 38 word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 4360.0 L135.0 4404.0\"/><polygon class=\"vd-head\" points=\"135.0,4404.0 130.0,4394.0 140.0,4394.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"s38\" data-to=\"s39\"><title>Step 38 word word word with a rather long title that wraps to Step 39 word word word word with a rather long title that wraps</title><path class=\"vd-line\" d=\"M135.0 4486.0 L135.0 4530.0\"/><polygon class=\"vd-head\" points=\"135.0,4530.0 130.0,4520.0 140.0,4520.0\"/></g><g class=\"vd-node vd-box\" data-id=\"s0\" transform=\"translate(58.0 16.0)\"><title>&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">&lt;script&gt;alert(1)&lt;/</tspan><tspan x=\"77.0\" y=\"33.0\">script&gt; &quot;&gt;&lt;img</tspan><tspan x=\"77.0\" y=\"49.0\">src=x onerror=1&gt;</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s1\" transform=\"translate(58.0 126.0)\"><title>שלום עולם, זו תווית ארוכה בעברית</title><rect class=\"vd-shape\" width=\"154.0\" height=\"50.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">שלום עולם, זו</tspan><tspan x=\"77.0\" y=\"33.0\">תווית ארוכה בעברית</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s2\" transform=\"translate(61.5 220.0)\"><title>مرحبا بالعالم هذا نص عربي طويل</title><rect class=\"vd-shape\" width=\"147.0\" height=\"50.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">مرحبا بالعالم هذا</tspan><tspan x=\"73.5\" y=\"33.0\">نص عربي طويل</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s3\" transform=\"translate(58.0 314.0)\"><title>Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</title><rect class=\"vd-shape\" width=\"154.0\" height=\"98.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 3</tspan><tspan x=\"77.0\" y=\"33.0\">xxxxxxxxxxxxxxxxxx</tspan><tspan x=\"77.0\" y=\"49.0\">xxxxxxxxxxxxxxxxxx</tspan><tspan x=\"77.0\" y=\"65.0\">xxxxxxxxxxxxxxxxxx</tspan><tspan x=\"77.0\" y=\"81.0\">xxxxxx</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s4\" transform=\"translate(40.5 456.0)\"><title>Step 4 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 4 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s5\" transform=\"translate(40.5 582.0)\"><title>Step 5 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 5 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s6\" transform=\"translate(58.0 692.0)\"><title>Step 6 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 6 word with a</tspan><tspan x=\"77.0\" y=\"33.0\">rather long title</tspan><tspan x=\"77.0\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s7\" transform=\"translate(37.0 802.0)\"><title>Step 7 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 7 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s8\" transform=\"translate(37.0 912.0)\"><title>Step 8 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 8 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s9\" transform=\"translate(40.5 1038.0)\"><title>Step 9 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 9 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s10\" transform=\"translate(61.5 1164.0)\"><title>Step 10 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 10 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s11\" transform=\"translate(40.5 1274.0)\"><title>Step 11 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 11 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s12\" transform=\"translate(37.0 1384.0)\"><title>Step 12 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 12 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s13\" transform=\"translate(58.0 1494.0)\"><title>Step 13 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 13 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s14\" transform=\"translate(61.5 1620.0)\"><title>Step 14 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 14 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s15\" transform=\"translate(61.5 1746.0)\"><title>Step 15 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 15 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s16\" transform=\"translate(61.5 1856.0)\"><title>Step 16 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 16 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s17\" transform=\"translate(58.0 1966.0)\"><title>Step 17 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 17 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s18\" transform=\"translate(16.0 2076.0)\"><title>Step 18 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 18 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s19\" transform=\"translate(19.5 2202.0)\"><title>Step 19 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 19 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s20\" transform=\"translate(40.5 2328.0)\"><title>Step 20 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 20 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s21\" transform=\"translate(61.5 2438.0)\"><title>Step 21 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 21 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s22\" transform=\"translate(58.0 2548.0)\"><title>Step 22 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 22 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s23\" transform=\"translate(58.0 2658.0)\"><title>Step 23 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 23 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s24\" transform=\"translate(61.5 2784.0)\"><title>Step 24 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 24 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s25\" transform=\"translate(40.5 2910.0)\"><title>Step 25 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 25 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s26\" transform=\"translate(40.5 3020.0)\"><title>Step 26 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 26 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s27\" transform=\"translate(58.0 3130.0)\"><title>Step 27 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 27 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s28\" transform=\"translate(58.0 3240.0)\"><title>Step 28 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 28 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s29\" transform=\"translate(40.5 3366.0)\"><title>Step 29 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 29 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s30\" transform=\"translate(40.5 3492.0)\"><title>Step 30 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 30 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s31\" transform=\"translate(40.5 3602.0)\"><title>Step 31 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 31 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s32\" transform=\"translate(79.0 3712.0)\"><title>Step 32 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 32 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s33\" transform=\"translate(79.0 3822.0)\"><title>Step 33 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 33 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s34\" transform=\"translate(61.5 3948.0)\"><title>Step 34 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 34 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s35\" transform=\"translate(61.5 4074.0)\"><title>Step 35 with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 35 with a</tspan><tspan x=\"73.5\" y=\"33.0\">rather long title</tspan><tspan x=\"73.5\" y=\"49.0\">that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s36\" transform=\"translate(61.5 4184.0)\"><title>Step 36 word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 36 word with</tspan><tspan x=\"73.5\" y=\"33.0\">a rather long</tspan><tspan x=\"73.5\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s37\" transform=\"translate(58.0 4294.0)\"><title>Step 37 word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"66.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 37 word word</tspan><tspan x=\"77.0\" y=\"33.0\">with a rather long</tspan><tspan x=\"77.0\" y=\"49.0\">title that wraps</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"s38\" transform=\"translate(58.0 4404.0)\"><title>Step 38 word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"154.0\" height=\"82.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Step 38 word word</tspan><tspan x=\"77.0\" y=\"33.0\">word with a rather</tspan><tspan x=\"77.0\" y=\"49.0\">long title that</tspan><tspan x=\"77.0\" y=\"65.0\">wraps</tspan></text></g><g class=\"vd-node vd-rounded\" data-id=\"s39\" transform=\"translate(61.5 4530.0)\"><title>Step 39 word word word word with a rather long title that wraps</title><rect class=\"vd-shape\" width=\"147.0\" height=\"82.0\" rx=\"18.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Step 39 word word</tspan><tspan x=\"73.5\" y=\"33.0\">word word with a</tspan><tspan x=\"73.5\" y=\"49.0\">rather long title</tspan><tspan x=\"73.5\" y=\"65.0\">that wraps</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 40 steps</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"s0\"><code class=\"vb-step-id\">s0</code> <span class=\"vd-detail-text\">&lt;script&gt;alert(1)&lt;/script&gt; &quot;&gt;&lt;img src=x onerror=1&gt;</span><div class=\"vb-next\">then <code>s1</code></div></li><li class=\"vb-step\" data-node=\"s1\"><code class=\"vb-step-id\">s1</code> <span class=\"vd-detail-text\">שלום עולם, זו תווית ארוכה בעברית</span><div class=\"vb-next\">then <code>s2</code></div></li><li class=\"vb-step\" data-node=\"s2\"><code class=\"vb-step-id\">s2</code> <span class=\"vd-detail-text\">مرحبا بالعالم هذا نص عربي طويل</span><div class=\"vb-next\">then <code>s3</code></div></li><li class=\"vb-step\" data-node=\"s3\"><code class=\"vb-step-id\">s3</code> <span class=\"vd-detail-text\">Step 3 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s4</code>, <code>s6</code></div></li><li class=\"vb-step\" data-node=\"s4\"><code class=\"vb-step-id\">s4</code> <span class=\"vd-detail-text\">Step 4 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s5</code></div></li><li class=\"vb-step\" data-node=\"s5\"><code class=\"vb-step-id\">s5</code> <span class=\"vd-detail-text\">Step 5 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s6</code></div></li><li class=\"vb-step\" data-node=\"s6\"><code class=\"vb-step-id\">s6</code> <span class=\"vd-detail-text\">Step 6 word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s7</code></div></li><li class=\"vb-step\" data-node=\"s7\"><code class=\"vb-step-id\">s7</code> <span class=\"vd-detail-text\">Step 7 word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s8</code></div></li><li class=\"vb-step\" data-node=\"s8\"><code class=\"vb-step-id\">s8</code> <span class=\"vd-detail-text\">Step 8 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s9</code></div></li><li class=\"vb-step\" data-node=\"s9\"><code class=\"vb-step-id\">s9</code> <span class=\"vd-detail-text\">Step 9 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s10</code></div></li><li class=\"vb-step\" data-node=\"s10\"><code class=\"vb-step-id\">s10</code> <span class=\"vd-detail-text\">Step 10 with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s11</code>, <code>s13</code>, <code>s6</code></div></li><li class=\"vb-step\" data-node=\"s11\"><code class=\"vb-step-id\">s11</code> <span class=\"vd-detail-text\">Step 11 word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s12</code></div></li><li class=\"vb-step\" data-node=\"s12\"><code class=\"vb-step-id\">s12</code> <span class=\"vd-detail-text\">Step 12 word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s13</code></div></li><li class=\"vb-step\" data-node=\"s13\"><code class=\"vb-step-id\">s13</code> <span class=\"vd-detail-text\">Step 13 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s14</code></div></li><li class=\"vb-step\" data-node=\"s14\"><code class=\"vb-step-id\">s14</code> <span class=\"vd-detail-text\">Step 14 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s15</code></div></li><li class=\"vb-step\" data-node=\"s15\"><code class=\"vb-step-id\">s15</code> <span class=\"vd-detail-text\">Step 15 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s16</code></div></li><li class=\"vb-step\" data-node=\"s16\"><code class=\"vb-step-id\">s16</code> <span class=\"vd-detail-text\">Step 16 word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s17</code></div></li><li class=\"vb-step\" data-node=\"s17\"><code class=\"vb-step-id\">s17</code> <span class=\"vd-detail-text\">Step 17 word word with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s18</code>, <code>s20</code></div></li><li class=\"vb-step\" data-node=\"s18\"><code class=\"vb-step-id\">s18</code> <span class=\"vd-detail-text\">Step 18 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s19</code></div></li><li class=\"vb-step\" data-node=\"s19\"><code class=\"vb-step-id\">s19</code> <span class=\"vd-detail-text\">Step 19 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s20</code></div></li><li class=\"vb-step\" data-node=\"s20\"><code class=\"vb-step-id\">s20</code> <span class=\"vd-detail-text\">Step 20 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s21</code></div></li><li class=\"vb-step\" data-node=\"s21\"><code class=\"vb-step-id\">s21</code> <span class=\"vd-detail-text\">Step 21 word with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s22</code>, <code>s17</code></div></li><li class=\"vb-step\" data-node=\"s22\"><code class=\"vb-step-id\">s22</code> <span class=\"vd-detail-text\">Step 22 word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s23</code></div></li><li class=\"vb-step\" data-node=\"s23\"><code class=\"vb-step-id\">s23</code> <span class=\"vd-detail-text\">Step 23 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s24</code></div></li><li class=\"vb-step\" data-node=\"s24\"><code class=\"vb-step-id\">s24</code> <span class=\"vd-detail-text\">Step 24 word word word word with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s25</code>, <code>s27</code></div></li><li class=\"vb-step\" data-node=\"s25\"><code class=\"vb-step-id\">s25</code> <span class=\"vd-detail-text\">Step 25 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s26</code></div></li><li class=\"vb-step\" data-node=\"s26\"><code class=\"vb-step-id\">s26</code> <span class=\"vd-detail-text\">Step 26 word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s27</code></div></li><li class=\"vb-step\" data-node=\"s27\"><code class=\"vb-step-id\">s27</code> <span class=\"vd-detail-text\">Step 27 word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s28</code></div></li><li class=\"vb-step\" data-node=\"s28\"><code class=\"vb-step-id\">s28</code> <span class=\"vd-detail-text\">Step 28 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s29</code></div></li><li class=\"vb-step\" data-node=\"s29\"><code class=\"vb-step-id\">s29</code> <span class=\"vd-detail-text\">Step 29 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s30</code></div></li><li class=\"vb-step\" data-node=\"s30\"><code class=\"vb-step-id\">s30</code> <span class=\"vd-detail-text\">Step 30 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s31</code></div></li><li class=\"vb-step\" data-node=\"s31\"><code class=\"vb-step-id\">s31</code> <span class=\"vd-detail-text\">Step 31 word with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s32</code>, <code>s34</code></div></li><li class=\"vb-step\" data-node=\"s32\"><code class=\"vb-step-id\">s32</code> <span class=\"vd-detail-text\">Step 32 word word with a rather long title that wraps</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>s33</code>, <code>s28</code></div></li><li class=\"vb-step\" data-node=\"s33\"><code class=\"vb-step-id\">s33</code> <span class=\"vd-detail-text\">Step 33 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s34</code></div></li><li class=\"vb-step\" data-node=\"s34\"><code class=\"vb-step-id\">s34</code> <span class=\"vd-detail-text\">Step 34 word word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s35</code></div></li><li class=\"vb-step\" data-node=\"s35\"><code class=\"vb-step-id\">s35</code> <span class=\"vd-detail-text\">Step 35 with a rather long title that wraps</span><div class=\"vb-next\">then <code>s36</code></div></li><li class=\"vb-step\" data-node=\"s36\"><code class=\"vb-step-id\">s36</code> <span class=\"vd-detail-text\">Step 36 word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s37</code></div></li><li class=\"vb-step\" data-node=\"s37\"><code class=\"vb-step-id\">s37</code> <span class=\"vd-detail-text\">Step 37 word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s38</code></div></li><li class=\"vb-step\" data-node=\"s38\"><code class=\"vb-step-id\">s38</code> <span class=\"vd-detail-text\">Step 38 word word word with a rather long title that wraps</span><div class=\"vb-next\">then <code>s39</code></div></li><li class=\"vb-step\" data-node=\"s39\"><code class=\"vb-step-id\">s39</code> <span class=\"vd-detail-text\">Step 39 word word word word with a rather long title that wraps</span></li></ol></details></section></div>"
+ },
+ {
+  "name": "rich-flow-stress:s2",
+  "input": {
+   "title": "One step",
+   "step": [
+    {
+     "id": "only",
+     "text": "Only step",
+     "next": [
+      "only"
+     ]
+    }
+   ]
+  },
+  "props": {
+   "heading": "One step",
+   "alt": {
+    "summary": "flow of 1 step",
+    "steps": [
+     {
+      "id": "only",
+      "text": "Only step",
+      "next": [
+       "only"
+      ]
+     }
+    ]
+   },
+   "title": "One step",
+   "desc": "flow of 1 step, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 141 80",
+    "width": "141",
+    "height": "80",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "only",
+       "data-to": "only"
+      },
+      [
+       [
+        "title",
+        {},
+        "Only step to Only step"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M107.0 30.4 L125.0 30.4 L125.0 49.6 L107.0 49.6"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "107.0,49.6 117.0,44.6 117.0,54.6"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "only",
+       "transform": "translate(16.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Only step"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "91.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "45.5",
+           "y": "24.0"
+          },
+          "Only step"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "One step (flow of 1 step)\n1. only: Only step -> only"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"One step (flow of 1 step)\n1. only: Only step -&gt; only\"><section class=\"vb-card\"><h4 class=\"vb-title\">One step</h4><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"One step (scrollable)\"><svg width=\"141\" height=\"80\" class=\"vd-svg\" viewBox=\"0 0 141 80\" role=\"img\" aria-label=\"One step\"><title>One step</title><desc>flow of 1 step, top to bottom</desc><g class=\"vd-edge vd-solid\" data-from=\"only\" data-to=\"only\"><title>Only step to Only step</title><path class=\"vd-line\" d=\"M107.0 30.4 L125.0 30.4 L125.0 49.6 L107.0 49.6\"/><polygon class=\"vd-head\" points=\"107.0,49.6 117.0,44.6 117.0,54.6\"/></g><g class=\"vd-node vd-box\" data-id=\"only\" transform=\"translate(16.0 16.0)\"><title>Only step</title><rect class=\"vd-shape\" width=\"91.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"45.5\" y=\"24.0\">Only step</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 1 step</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"only\"><code class=\"vb-step-id\">only</code> <span class=\"vd-detail-text\">Only step</span><div class=\"vb-next\">then <code>only</code></div></li></ol></details></section></div>"
+ },
+ {
+  "name": "rich-flow:f1",
+  "input": {
+   "title": "Checkout",
+   "step": [
+    {
+     "id": "cart",
+     "text": "Review cart",
+     "next": [
+      "pay"
+     ]
+    },
+    {
+     "id": "pay",
+     "text": "Pay with a saved card or a new one",
+     "next": [
+      "done",
+      "failed"
+     ]
+    },
+    {
+     "id": "done",
+     "text": "Show receipt"
+    },
+    {
+     "id": "failed",
+     "text": "Show error and offer another card",
+     "next": [
+      "pay"
+     ]
+    }
+   ]
+  },
+  "props": {
+   "heading": "Checkout",
+   "alt": {
+    "summary": "flow of 4 steps",
+    "steps": [
+     {
+      "id": "cart",
+      "text": "Review cart",
+      "next": [
+       "pay"
+      ]
+     },
+     {
+      "id": "pay",
+      "text": "Pay with a saved card or a new one",
+      "next": [
+       "done",
+       "failed"
+      ]
+     },
+     {
+      "id": "done",
+      "text": "Show receipt",
+      "next": []
+     },
+     {
+      "id": "failed",
+      "text": "Show error and offer another card",
+      "next": [
+       "pay"
+      ]
+     }
+    ]
+   },
+   "title": "Checkout",
+   "desc": "flow of 4 steps, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 326 268",
+    "width": "326",
+    "height": "268",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "cart",
+       "data-to": "pay"
+      },
+      [
+       [
+        "title",
+        {},
+        "Review cart to Pay with a saved card or a new one"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M163.0 64.0 L163.0 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "163.0,108.0 158.0,98.0 168.0,98.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "pay",
+       "data-to": "done"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay with a saved card or a new one to Show receipt"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M163.0 158.0 L72.0 202.0 L72.0 203.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "72.0,203.0 67.0,193.0 77.0,193.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "pay",
+       "data-to": "failed"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay with a saved card or a new one to Show error and offer another card"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M158.0 158.0 L228.0 202.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "228.0,202.0 216.9,200.9 222.2,192.4"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "failed",
+       "data-to": "pay"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show error and offer another card to Pay with a saved card or a new one"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M238.0 202.0 L168.0 158.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "168.0,158.0 179.1,159.1 173.8,167.6"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "cart",
+       "transform": "translate(110.5 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Review cart"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "105.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "52.5",
+           "y": "24.0"
+          },
+          "Review cart"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "pay",
+       "transform": "translate(89.5 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay with a saved card or a new one"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "147.0",
+         "height": "50.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "17.0"
+          },
+          "Pay with a saved"
+         ],
+         [
+          "tspan",
+          {
+           "x": "73.5",
+           "y": "33.0"
+          },
+          "card or a new one"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-rounded",
+       "data-id": "done",
+       "transform": "translate(16.0 203.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show receipt"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "18.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Show receipt"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "failed",
+       "transform": "translate(156.0 202.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show error and offer another card"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "154.0",
+         "height": "50.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "17.0"
+          },
+          "Show error and"
+         ],
+         [
+          "tspan",
+          {
+           "x": "77.0",
+           "y": "33.0"
+          },
+          "offer another card"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "Checkout (flow of 4 steps)\n1. cart: Review cart -> pay\n2. pay: Pay with a saved card or a new one -> done, failed\n3. done: Show receipt\n4. failed: Show error and offer another card -> pay"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"Checkout (flow of 4 steps)\n1. cart: Review cart -&gt; pay\n2. pay: Pay with a saved card or a new one -&gt; done, failed\n3. done: Show receipt\n4. failed: Show error and offer another card -&gt; pay\"><section class=\"vb-card\"><h4 class=\"vb-title\">Checkout</h4><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"Checkout (scrollable)\"><svg width=\"326\" height=\"268\" class=\"vd-svg\" viewBox=\"0 0 326 268\" role=\"img\" aria-label=\"Checkout\"><title>Checkout</title><desc>flow of 4 steps, top to bottom</desc><g class=\"vd-edge vd-solid\" data-from=\"cart\" data-to=\"pay\"><title>Review cart to Pay with a saved card or a new one</title><path class=\"vd-line\" d=\"M163.0 64.0 L163.0 108.0\"/><polygon class=\"vd-head\" points=\"163.0,108.0 158.0,98.0 168.0,98.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"pay\" data-to=\"done\"><title>Pay with a saved card or a new one to Show receipt</title><path class=\"vd-line\" d=\"M163.0 158.0 L72.0 202.0 L72.0 203.0\"/><polygon class=\"vd-head\" points=\"72.0,203.0 67.0,193.0 77.0,193.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"pay\" data-to=\"failed\"><title>Pay with a saved card or a new one to Show error and offer another card</title><path class=\"vd-line\" d=\"M158.0 158.0 L228.0 202.0\"/><polygon class=\"vd-head\" points=\"228.0,202.0 216.9,200.9 222.2,192.4\"/></g><g class=\"vd-edge vd-solid\" data-from=\"failed\" data-to=\"pay\"><title>Show error and offer another card to Pay with a saved card or a new one</title><path class=\"vd-line\" d=\"M238.0 202.0 L168.0 158.0\"/><polygon class=\"vd-head\" points=\"168.0,158.0 179.1,159.1 173.8,167.6\"/></g><g class=\"vd-node vd-box\" data-id=\"cart\" transform=\"translate(110.5 16.0)\"><title>Review cart</title><rect class=\"vd-shape\" width=\"105.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"52.5\" y=\"24.0\">Review cart</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"pay\" transform=\"translate(89.5 108.0)\"><title>Pay with a saved card or a new one</title><rect class=\"vd-shape\" width=\"147.0\" height=\"50.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"73.5\" y=\"17.0\">Pay with a saved</tspan><tspan x=\"73.5\" y=\"33.0\">card or a new one</tspan></text></g><g class=\"vd-node vd-rounded\" data-id=\"done\" transform=\"translate(16.0 203.0)\"><title>Show receipt</title><rect class=\"vd-shape\" width=\"112.0\" height=\"48.0\" rx=\"18.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Show receipt</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"failed\" transform=\"translate(156.0 202.0)\"><title>Show error and offer another card</title><rect class=\"vd-shape\" width=\"154.0\" height=\"50.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"77.0\" y=\"17.0\">Show error and</tspan><tspan x=\"77.0\" y=\"33.0\">offer another card</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 4 steps</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"cart\"><code class=\"vb-step-id\">cart</code> <span class=\"vd-detail-text\">Review cart</span><div class=\"vb-next\">then <code>pay</code></div></li><li class=\"vb-step\" data-node=\"pay\"><code class=\"vb-step-id\">pay</code> <span class=\"vd-detail-text\">Pay with a saved card or a new one</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>done</code>, <code>failed</code></div></li><li class=\"vb-step\" data-node=\"done\"><code class=\"vb-step-id\">done</code> <span class=\"vd-detail-text\">Show receipt</span></li><li class=\"vb-step\" data-node=\"failed\"><code class=\"vb-step-id\">failed</code> <span class=\"vd-detail-text\">Show error and offer another card</span><div class=\"vb-next\">then <code>pay</code></div></li></ol></details></section></div>"
+ },
+ {
+  "name": "rich-flow:f2",
+  "input": {
+   "title": "Deploy",
+   "step": [
+    {
+     "id": "build",
+     "text": "Build",
+     "next": [
+      "test",
+      "lint"
+     ]
+    },
+    {
+     "id": "test",
+     "text": "Run tests",
+     "next": [
+      "ship"
+     ]
+    },
+    {
+     "id": "lint",
+     "text": "Lint",
+     "next": [
+      "ship"
+     ]
+    },
+    {
+     "id": "ship",
+     "text": "Ship to staging",
+     "next": [
+      "verify"
+     ]
+    },
+    {
+     "id": "verify",
+     "text": "Verify"
+    }
+   ]
+  },
+  "props": {
+   "heading": "Deploy",
+   "alt": {
+    "summary": "flow of 5 steps",
+    "steps": [
+     {
+      "id": "build",
+      "text": "Build",
+      "next": [
+       "test",
+       "lint"
+      ]
+     },
+     {
+      "id": "test",
+      "text": "Run tests",
+      "next": [
+       "ship"
+      ]
+     },
+     {
+      "id": "lint",
+      "text": "Lint",
+      "next": [
+       "ship"
+      ]
+     },
+     {
+      "id": "ship",
+      "text": "Ship to staging",
+      "next": [
+       "verify"
+      ]
+     },
+     {
+      "id": "verify",
+      "text": "Verify",
+      "next": []
+     }
+    ]
+   },
+   "title": "Deploy",
+   "desc": "flow of 5 steps, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 215 356",
+    "width": "215",
+    "height": "356",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "build",
+       "data-to": "test"
+      },
+      [
+       [
+        "title",
+        {},
+        "Build to Run tests"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M107.5 64.0 L61.5 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "61.5,108.0 65.3,97.5 72.2,104.7"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "build",
+       "data-to": "lint"
+      },
+      [
+       [
+        "title",
+        {},
+        "Build to Lint"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M107.5 64.0 L167.0 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "167.0,108.0 156.0,106.1 161.9,98.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "test",
+       "data-to": "ship"
+      },
+      [
+       [
+        "title",
+        {},
+        "Run tests to Ship to staging"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M61.5 156.0 L107.5 200.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "107.5,200.0 96.8,196.7 103.7,189.5"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "lint",
+       "data-to": "ship"
+      },
+      [
+       [
+        "title",
+        {},
+        "Lint to Ship to staging"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M167.0 156.0 L107.5 200.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "107.5,200.0 112.6,190.0 118.5,198.1"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "ship",
+       "data-to": "verify"
+      },
+      [
+       [
+        "title",
+        {},
+        "Ship to staging to Verify"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M107.5 248.0 L107.5 292.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "107.5,292.0 102.5,282.0 112.5,282.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "build",
+       "transform": "translate(75.5 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Build"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Build"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "test",
+       "transform": "translate(16.0 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Run tests"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "91.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "45.5",
+           "y": "24.0"
+          },
+          "Run tests"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "lint",
+       "transform": "translate(135.0 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Lint"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "Lint"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "ship",
+       "transform": "translate(41.0 200.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Ship to staging"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "133.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "24.0"
+          },
+          "Ship to staging"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-rounded",
+       "data-id": "verify",
+       "transform": "translate(72.5 292.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Verify"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "70.0",
+         "height": "48.0",
+         "rx": "18.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "35.0",
+           "y": "24.0"
+          },
+          "Verify"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "Deploy (flow of 5 steps)\n1. build: Build -> test, lint\n2. test: Run tests -> ship\n3. lint: Lint -> ship\n4. ship: Ship to staging -> verify\n5. verify: Verify"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"Deploy (flow of 5 steps)\n1. build: Build -&gt; test, lint\n2. test: Run tests -&gt; ship\n3. lint: Lint -&gt; ship\n4. ship: Ship to staging -&gt; verify\n5. verify: Verify\"><section class=\"vb-card\"><h4 class=\"vb-title\">Deploy</h4><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"Deploy (scrollable)\"><svg width=\"215\" height=\"356\" class=\"vd-svg\" viewBox=\"0 0 215 356\" role=\"img\" aria-label=\"Deploy\"><title>Deploy</title><desc>flow of 5 steps, top to bottom</desc><g class=\"vd-edge vd-solid\" data-from=\"build\" data-to=\"test\"><title>Build to Run tests</title><path class=\"vd-line\" d=\"M107.5 64.0 L61.5 108.0\"/><polygon class=\"vd-head\" points=\"61.5,108.0 65.3,97.5 72.2,104.7\"/></g><g class=\"vd-edge vd-solid\" data-from=\"build\" data-to=\"lint\"><title>Build to Lint</title><path class=\"vd-line\" d=\"M107.5 64.0 L167.0 108.0\"/><polygon class=\"vd-head\" points=\"167.0,108.0 156.0,106.1 161.9,98.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"test\" data-to=\"ship\"><title>Run tests to Ship to staging</title><path class=\"vd-line\" d=\"M61.5 156.0 L107.5 200.0\"/><polygon class=\"vd-head\" points=\"107.5,200.0 96.8,196.7 103.7,189.5\"/></g><g class=\"vd-edge vd-solid\" data-from=\"lint\" data-to=\"ship\"><title>Lint to Ship to staging</title><path class=\"vd-line\" d=\"M167.0 156.0 L107.5 200.0\"/><polygon class=\"vd-head\" points=\"107.5,200.0 112.6,190.0 118.5,198.1\"/></g><g class=\"vd-edge vd-solid\" data-from=\"ship\" data-to=\"verify\"><title>Ship to staging to Verify</title><path class=\"vd-line\" d=\"M107.5 248.0 L107.5 292.0\"/><polygon class=\"vd-head\" points=\"107.5,292.0 102.5,282.0 112.5,282.0\"/></g><g class=\"vd-node vd-box\" data-id=\"build\" transform=\"translate(75.5 16.0)\"><title>Build</title><rect class=\"vd-shape\" width=\"64.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Build</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"test\" transform=\"translate(16.0 108.0)\"><title>Run tests</title><rect class=\"vd-shape\" width=\"91.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"45.5\" y=\"24.0\">Run tests</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"lint\" transform=\"translate(135.0 108.0)\"><title>Lint</title><rect class=\"vd-shape\" width=\"64.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">Lint</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"ship\" transform=\"translate(41.0 200.0)\"><title>Ship to staging</title><rect class=\"vd-shape\" width=\"133.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"66.5\" y=\"24.0\">Ship to staging</tspan></text></g><g class=\"vd-node vd-rounded\" data-id=\"verify\" transform=\"translate(72.5 292.0)\"><title>Verify</title><rect class=\"vd-shape\" width=\"70.0\" height=\"48.0\" rx=\"18.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"35.0\" y=\"24.0\">Verify</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 5 steps</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"build\"><code class=\"vb-step-id\">build</code> <span class=\"vd-detail-text\">Build</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>test</code>, <code>lint</code></div></li><li class=\"vb-step\" data-node=\"test\"><code class=\"vb-step-id\">test</code> <span class=\"vd-detail-text\">Run tests</span><div class=\"vb-next\">then <code>ship</code></div></li><li class=\"vb-step\" data-node=\"lint\"><code class=\"vb-step-id\">lint</code> <span class=\"vd-detail-text\">Lint</span><div class=\"vb-next\">then <code>ship</code></div></li><li class=\"vb-step\" data-node=\"ship\"><code class=\"vb-step-id\">ship</code> <span class=\"vd-detail-text\">Ship to staging</span><div class=\"vb-next\">then <code>verify</code></div></li><li class=\"vb-step\" data-node=\"verify\"><code class=\"vb-step-id\">verify</code> <span class=\"vd-detail-text\">Verify</span></li></ol></details></section></div>"
+ },
+ {
+  "name": "unit-0",
+  "input": {
+   "step": [
+    {
+     "id": "cart",
+     "next": [
+      "pay"
+     ],
+     "text": "Review cart"
+    },
+    {
+     "id": "pay",
+     "next": [
+      "done",
+      "failed"
+     ],
+     "text": "Pay <b>now</b>"
+    },
+    {
+     "id": "done",
+     "text": "Show receipt"
+    },
+    {
+     "id": "failed",
+     "next": [
+      "pay"
+     ],
+     "text": "Show error long long long long long long long long long long long long "
+    }
+   ],
+   "title": "Checkout"
+  },
+  "props": {
+   "heading": "Checkout",
+   "alt": {
+    "summary": "flow of 4 steps",
+    "steps": [
+     {
+      "id": "cart",
+      "text": "Review cart",
+      "next": [
+       "pay"
+      ]
+     },
+     {
+      "id": "pay",
+      "text": "Pay <b>now</b>",
+      "next": [
+       "done",
+       "failed"
+      ]
+     },
+     {
+      "id": "done",
+      "text": "Show receipt",
+      "next": []
+     },
+     {
+      "id": "failed",
+      "text": "Show error long long long long long long long long long long long long ",
+      "next": [
+       "pay"
+      ]
+     }
+    ]
+   },
+   "title": "Checkout",
+   "desc": "flow of 4 steps, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 305 314",
+    "width": "305",
+    "height": "314",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "cart",
+       "data-to": "pay"
+      },
+      [
+       [
+        "title",
+        {},
+        "Review cart to Pay <b>now</b>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M152.5 64.0 L152.5 108.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "152.5,108.0 147.5,98.0 157.5,98.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "pay",
+       "data-to": "done"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay <b>now</b> to Show receipt"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M152.5 156.0 L72.0 200.0 L72.0 225.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "72.0,225.0 67.0,215.0 77.0,215.0"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "pay",
+       "data-to": "failed"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay <b>now</b> to Show error long long long long long long long long long long long long "
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M147.5 156.0 L217.5 200.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "217.5,200.0 206.4,198.9 211.7,190.4"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-edge vd-solid",
+       "data-from": "failed",
+       "data-to": "pay"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show error long long long long long long long long long long long long  to Pay <b>now</b>"
+       ],
+       [
+        "path",
+        {
+         "class": "vd-line",
+         "d": "M227.5 200.0 L157.5 156.0"
+        },
+        null
+       ],
+       [
+        "polygon",
+        {
+         "class": "vd-head",
+         "points": "157.5,156.0 168.6,157.1 163.3,165.6"
+        },
+        null
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "cart",
+       "transform": "translate(100.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Review cart"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "105.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "52.5",
+           "y": "24.0"
+          },
+          "Review cart"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "pay",
+       "transform": "translate(89.5 108.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Pay <b>now</b>"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "126.0",
+         "height": "48.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "63.0",
+           "y": "24.0"
+          },
+          "Pay <b>now</b>"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-rounded",
+       "data-id": "done",
+       "transform": "translate(16.0 225.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show receipt"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "112.0",
+         "height": "48.0",
+         "rx": "18.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "56.0",
+           "y": "24.0"
+          },
+          "Show receipt"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "g",
+      {
+       "class": "vd-node vd-box",
+       "data-id": "failed",
+       "transform": "translate(156.0 200.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "Show error long long long long long long long long long long long long "
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "133.0",
+         "height": "98.0",
+         "rx": "3.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "17.0"
+          },
+          "Show error long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "33.0"
+          },
+          "long long long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "49.0"
+          },
+          "long long long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "65.0"
+          },
+          "long long long"
+         ],
+         [
+          "tspan",
+          {
+           "x": "66.5",
+           "y": "81.0"
+          },
+          "long long"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "Checkout (flow of 4 steps)\n1. cart: Review cart -> pay\n2. pay: Pay <b>now</b> -> done, failed\n3. done: Show receipt\n4. failed: Show error long long long long long long long long long long long long  -> pay"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"Checkout (flow of 4 steps)\n1. cart: Review cart -&gt; pay\n2. pay: Pay &lt;b&gt;now&lt;/b&gt; -&gt; done, failed\n3. done: Show receipt\n4. failed: Show error long long long long long long long long long long long long  -&gt; pay\"><section class=\"vb-card\"><h4 class=\"vb-title\">Checkout</h4><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"Checkout (scrollable)\"><svg width=\"305\" height=\"314\" class=\"vd-svg\" viewBox=\"0 0 305 314\" role=\"img\" aria-label=\"Checkout\"><title>Checkout</title><desc>flow of 4 steps, top to bottom</desc><g class=\"vd-edge vd-solid\" data-from=\"cart\" data-to=\"pay\"><title>Review cart to Pay &lt;b&gt;now&lt;/b&gt;</title><path class=\"vd-line\" d=\"M152.5 64.0 L152.5 108.0\"/><polygon class=\"vd-head\" points=\"152.5,108.0 147.5,98.0 157.5,98.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"pay\" data-to=\"done\"><title>Pay &lt;b&gt;now&lt;/b&gt; to Show receipt</title><path class=\"vd-line\" d=\"M152.5 156.0 L72.0 200.0 L72.0 225.0\"/><polygon class=\"vd-head\" points=\"72.0,225.0 67.0,215.0 77.0,215.0\"/></g><g class=\"vd-edge vd-solid\" data-from=\"pay\" data-to=\"failed\"><title>Pay &lt;b&gt;now&lt;/b&gt; to Show error long long long long long long long long long long long long </title><path class=\"vd-line\" d=\"M147.5 156.0 L217.5 200.0\"/><polygon class=\"vd-head\" points=\"217.5,200.0 206.4,198.9 211.7,190.4\"/></g><g class=\"vd-edge vd-solid\" data-from=\"failed\" data-to=\"pay\"><title>Show error long long long long long long long long long long long long  to Pay &lt;b&gt;now&lt;/b&gt;</title><path class=\"vd-line\" d=\"M227.5 200.0 L157.5 156.0\"/><polygon class=\"vd-head\" points=\"157.5,156.0 168.6,157.1 163.3,165.6\"/></g><g class=\"vd-node vd-box\" data-id=\"cart\" transform=\"translate(100.0 16.0)\"><title>Review cart</title><rect class=\"vd-shape\" width=\"105.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"52.5\" y=\"24.0\">Review cart</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"pay\" transform=\"translate(89.5 108.0)\"><title>Pay &lt;b&gt;now&lt;/b&gt;</title><rect class=\"vd-shape\" width=\"126.0\" height=\"48.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"63.0\" y=\"24.0\">Pay &lt;b&gt;now&lt;/b&gt;</tspan></text></g><g class=\"vd-node vd-rounded\" data-id=\"done\" transform=\"translate(16.0 225.0)\"><title>Show receipt</title><rect class=\"vd-shape\" width=\"112.0\" height=\"48.0\" rx=\"18.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"56.0\" y=\"24.0\">Show receipt</tspan></text></g><g class=\"vd-node vd-box\" data-id=\"failed\" transform=\"translate(156.0 200.0)\"><title>Show error long long long long long long long long long long long long </title><rect class=\"vd-shape\" width=\"133.0\" height=\"98.0\" rx=\"3.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"66.5\" y=\"17.0\">Show error long</tspan><tspan x=\"66.5\" y=\"33.0\">long long long</tspan><tspan x=\"66.5\" y=\"49.0\">long long long</tspan><tspan x=\"66.5\" y=\"65.0\">long long long</tspan><tspan x=\"66.5\" y=\"81.0\">long long</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 4 steps</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"cart\"><code class=\"vb-step-id\">cart</code> <span class=\"vd-detail-text\">Review cart</span><div class=\"vb-next\">then <code>pay</code></div></li><li class=\"vb-step\" data-node=\"pay\"><code class=\"vb-step-id\">pay</code> <span class=\"vd-detail-text\">Pay &lt;b&gt;now&lt;/b&gt;</span><div class=\"vb-next\"><span class=\"vb-badge vb-branch\">branch</span> then <code>done</code>, <code>failed</code></div></li><li class=\"vb-step\" data-node=\"done\"><code class=\"vb-step-id\">done</code> <span class=\"vd-detail-text\">Show receipt</span></li><li class=\"vb-step\" data-node=\"failed\"><code class=\"vb-step-id\">failed</code> <span class=\"vd-detail-text\">Show error long long long long long long long long long long long long </span><div class=\"vb-next\">then <code>pay</code></div></li></ol></details></section></div>"
+ },
+ {
+  "name": "unit-1",
+  "input": {
+   "step": [
+    {
+     "id": "a",
+     "next": [
+      "zzz"
+     ],
+     "text": "A"
+    }
+   ]
+  },
+  "props": {
+   "heading": "",
+   "alt": {
+    "summary": "flow of 1 step",
+    "steps": [
+     {
+      "id": "a",
+      "text": "A",
+      "next": []
+     }
+    ]
+   },
+   "title": "Flow",
+   "desc": "flow of 1 step, top to bottom",
+   "unit": "48",
+   "view": {
+    "mask": 0,
+    "box": "0 0 96 80",
+    "width": "96",
+    "height": "80",
+    "shapes": [
+     [
+      "g",
+      {
+       "class": "vd-node vd-rounded",
+       "data-id": "a",
+       "transform": "translate(16.0 16.0)"
+      },
+      [
+       [
+        "title",
+        {},
+        "A"
+       ],
+       [
+        "rect",
+        {
+         "class": "vd-shape",
+         "width": "64.0",
+         "height": "48.0",
+         "rx": "18.0"
+        },
+        null
+       ],
+       [
+        "text",
+        {
+         "class": "vd-label",
+         "text-anchor": "middle",
+         "dominant-baseline": "central"
+        },
+        [
+         [
+          "tspan",
+          {
+           "x": "32.0",
+           "y": "24.0"
+          },
+          "A"
+         ]
+        ]
+       ]
+      ]
+     ]
+    ]
+   },
+   "copy": "Flow (flow of 1 step)\n1. a: A"
+  },
+  "html": "<div class=\"vb flow\" data-copy=\"Flow (flow of 1 step)\n1. a: A\"><section class=\"vb-card\"><div class=\"vd-views\" data-min-unit=\"48\"><div class=\"vd-view\" data-mask=\"0\" role=\"region\" tabindex=\"0\" aria-label=\"Flow (scrollable)\"><svg width=\"96\" height=\"80\" class=\"vd-svg\" viewBox=\"0 0 96 80\" role=\"img\" aria-label=\"Flow\"><title>Flow</title><desc>flow of 1 step, top to bottom</desc><g class=\"vd-node vd-rounded\" data-id=\"a\" transform=\"translate(16.0 16.0)\"><title>A</title><rect class=\"vd-shape\" width=\"64.0\" height=\"48.0\" rx=\"18.0\"/><text class=\"vd-label\" text-anchor=\"middle\" dominant-baseline=\"central\"><tspan x=\"32.0\" y=\"24.0\">A</tspan></text></g></svg></div></div><details class=\"vb-data\"><summary>Steps as text</summary><p class=\"vb-alt\">flow of 1 step</p><ol class=\"vb-flow\"><li class=\"vb-step\" data-node=\"a\"><code class=\"vb-step-id\">a</code> <span class=\"vd-detail-text\">A</span></li></ol></details></section></div>"
+ }
+]

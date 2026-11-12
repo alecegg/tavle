@@ -1,0 +1,678 @@
+[
+ {
+  "name": "plain",
+  "input": {
+   "entries": [
+    {
+     "path": "src/a.py"
+    },
+    {
+     "path": "src/b/c.py"
+    },
+    {
+     "path": "README.md"
+    }
+   ]
+  },
+  "titles": {},
+  "props": {
+   "title": "",
+   "summary": "3 files: 3 unchanged",
+   "collapse": null,
+   "copy": "3 files: 3 unchanged\nsrc/\n  b/\n    c.py\n  a.py\nREADME.md",
+   "folders": [
+    {
+     "name": "src",
+     "path": "src",
+     "count": 2,
+     "folders": [
+      {
+       "name": "b",
+       "path": "src/b",
+       "count": 1,
+       "folders": [],
+       "files": [
+        {
+         "name": "c.py",
+         "path": "src/b/c.py",
+         "change": "",
+         "was": "",
+         "role": "",
+         "note": "",
+         "label": "src/b/c.py"
+        }
+       ]
+      }
+     ],
+     "files": [
+      {
+       "name": "a.py",
+       "path": "src/a.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "src/a.py"
+      }
+     ]
+    }
+   ],
+   "files": [
+    {
+     "name": "README.md",
+     "path": "README.md",
+     "change": "",
+     "was": "",
+     "role": "",
+     "note": "",
+     "label": "README.md"
+    }
+   ]
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"3 files: 3 unchanged\nsrc/\n  b/\n    c.py\n  a.py\nREADME.md\"><p class=\"vb-alt vd-file-tree-summary\">3 files: 3 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder src, 2 files\"><span class=\"vd-file-tree-dir\">src/</span> <span class=\"vd-file-tree-count\">2 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder src/b, 1 file\"><span class=\"vd-file-tree-dir\">b/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"src/b/c.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">c.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"src/a.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">a.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"README.md\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">README.md</span></span></li></ul></div>"
+ },
+ {
+  "name": "changes",
+  "input": {
+   "entries": [
+    {
+     "path": "src/new.py",
+     "change": "added",
+     "note": "n"
+    },
+    {
+     "path": "src/old.py",
+     "change": "removed"
+    },
+    {
+     "path": "src/ren.py",
+     "change": "renamed",
+     "was": "src/was.py"
+    },
+    {
+     "path": "src/mod.py",
+     "change": "modified",
+     "role": "entry"
+    },
+    {
+     "path": "docs/x.md"
+    }
+   ]
+  },
+  "titles": {},
+  "props": {
+   "title": "",
+   "summary": "5 files: 1 added, 1 modified, 1 removed, 1 renamed, 1 unchanged",
+   "collapse": null,
+   "copy": "5 files: 1 added, 1 modified, 1 removed, 1 renamed, 1 unchanged\ndocs/\n  x.md\nsrc/\n  ~ mod.py\n  + new.py\n  - old.py\n  -> ren.py (was src/was.py)",
+   "folders": [
+    {
+     "name": "docs",
+     "path": "docs",
+     "count": 1,
+     "folders": [],
+     "files": [
+      {
+       "name": "x.md",
+       "path": "docs/x.md",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "docs/x.md"
+      }
+     ]
+    },
+    {
+     "name": "src",
+     "path": "src",
+     "count": 4,
+     "folders": [],
+     "files": [
+      {
+       "name": "mod.py",
+       "path": "src/mod.py",
+       "change": "modified",
+       "was": "",
+       "role": "entry",
+       "note": "",
+       "label": "modified src/mod.py (entry)"
+      },
+      {
+       "name": "new.py",
+       "path": "src/new.py",
+       "change": "added",
+       "was": "",
+       "role": "",
+       "note": "n",
+       "label": "added src/new.py: n"
+      },
+      {
+       "name": "old.py",
+       "path": "src/old.py",
+       "change": "removed",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "removed src/old.py"
+      },
+      {
+       "name": "ren.py",
+       "path": "src/ren.py",
+       "change": "renamed",
+       "was": "src/was.py",
+       "role": "",
+       "note": "",
+       "label": "renamed src/ren.py (was src/was.py)"
+      }
+     ]
+    }
+   ],
+   "files": []
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"5 files: 1 added, 1 modified, 1 removed, 1 renamed, 1 unchanged\ndocs/\n  x.md\nsrc/\n  ~ mod.py\n  + new.py\n  - old.py\n  -&gt; ren.py (was src/was.py)\"><p class=\"vb-alt vd-file-tree-summary\">5 files: 1 added, 1 modified, 1 removed, 1 renamed, 1 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder docs, 1 file\"><span class=\"vd-file-tree-dir\">docs/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"docs/x.md\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">x.md</span></span></li></ul></details></li><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder src, 4 files\"><span class=\"vd-file-tree-dir\">src/</span> <span class=\"vd-file-tree-count\">4 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file vd-change-row vd-change-modified\" role=\"treeitem\" aria-label=\"modified src/mod.py (entry)\"><span class=\"vd-file-tree-row\"><span class=\"vd-change-badge vd-change-modified\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">~</span> modified</span> <span class=\"vd-change-name\"><span class=\"vd-file-tree-leaf\">mod.py</span></span> <span class=\"vd-file-tree-role\">entry</span></span></li><li class=\"vd-file-tree-file vd-change-row vd-change-added\" role=\"treeitem\" aria-label=\"added src/new.py: n\"><span class=\"vd-file-tree-row\"><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span> <span class=\"vd-change-name\"><span class=\"vd-file-tree-leaf\">new.py</span></span> <span class=\"vd-file-tree-note\">n</span></span></li><li class=\"vd-file-tree-file vd-change-row vd-change-removed\" role=\"treeitem\" aria-label=\"removed src/old.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-change-badge vd-change-removed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-</span> removed</span> <span class=\"vd-change-name\"><span class=\"vd-file-tree-leaf\">old.py</span></span></span></li><li class=\"vd-file-tree-file vd-change-row vd-change-renamed\" role=\"treeitem\" aria-label=\"renamed src/ren.py (was src/was.py)\"><span class=\"vd-file-tree-row\"><span class=\"vd-change-badge vd-change-renamed\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">-&gt;</span> renamed</span> <span class=\"vd-change-old\">src/was.py</span> &rarr; <span class=\"vd-change-name\"><span class=\"vd-file-tree-leaf\">ren.py</span></span></span></li></ul></details></li></ul></div>"
+ },
+ {
+  "name": "chain",
+  "input": {
+   "entries": [
+    {
+     "path": "a/b/c/d.py"
+    },
+    {
+     "path": "a/b/c/e.py"
+    }
+   ]
+  },
+  "titles": {},
+  "props": {
+   "title": "",
+   "summary": "2 files: 2 unchanged",
+   "collapse": null,
+   "copy": "2 files: 2 unchanged\na/\n  b/\n    c/\n      d.py\n      e.py",
+   "folders": [
+    {
+     "name": "a/b/c",
+     "path": "a/b/c",
+     "count": 2,
+     "folders": [],
+     "files": [
+      {
+       "name": "d.py",
+       "path": "a/b/c/d.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "a/b/c/d.py"
+      },
+      {
+       "name": "e.py",
+       "path": "a/b/c/e.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "a/b/c/e.py"
+      }
+     ]
+    }
+   ],
+   "files": []
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"2 files: 2 unchanged\na/\n  b/\n    c/\n      d.py\n      e.py\"><p class=\"vb-alt vd-file-tree-summary\">2 files: 2 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder a/b/c, 2 files\"><span class=\"vd-file-tree-dir\">a/b/c/</span> <span class=\"vd-file-tree-count\">2 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"a/b/c/d.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">d.py</span></span></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"a/b/c/e.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">e.py</span></span></li></ul></details></li></ul></div>"
+ },
+ {
+  "name": "collapse",
+  "input": {
+   "entries": [
+    {
+     "path": "a/b/c/d/e/f/g/h0.py"
+    },
+    {
+     "path": "a/b/c/d/e/f/g/h1.py"
+    },
+    {
+     "path": "z/y.py"
+    }
+   ],
+   "collapse": 1,
+   "title": "Files"
+  },
+  "titles": {},
+  "props": {
+   "title": "Files",
+   "summary": "3 files: 3 unchanged",
+   "collapse": 1,
+   "copy": "Files\n3 files: 3 unchanged\na/\n  b/\n    c/\n      d/\n        e/\n          f/\n            g/\n              h0.py\n              h1.py\nz/\n  y.py",
+   "folders": [
+    {
+     "name": "a/b/c/d/e/f/g",
+     "path": "a/b/c/d/e/f/g",
+     "count": 2,
+     "folders": [],
+     "files": [
+      {
+       "name": "h0.py",
+       "path": "a/b/c/d/e/f/g/h0.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "a/b/c/d/e/f/g/h0.py"
+      },
+      {
+       "name": "h1.py",
+       "path": "a/b/c/d/e/f/g/h1.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "a/b/c/d/e/f/g/h1.py"
+      }
+     ]
+    },
+    {
+     "name": "z",
+     "path": "z",
+     "count": 1,
+     "folders": [],
+     "files": [
+      {
+       "name": "y.py",
+       "path": "z/y.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "z/y.py"
+      }
+     ]
+    }
+   ],
+   "files": []
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"Files\n3 files: 3 unchanged\na/\n  b/\n    c/\n      d/\n        e/\n          f/\n            g/\n              h0.py\n              h1.py\nz/\n  y.py\"><p class=\"vd-file-tree-title\">Files</p><p class=\"vb-alt vd-file-tree-summary\">3 files: 3 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder a/b/c/d/e/f/g, 2 files\"><span class=\"vd-file-tree-dir\">a/b/c/d/e/f/g/</span> <span class=\"vd-file-tree-count\">2 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"a/b/c/d/e/f/g/h0.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">h0.py</span></span></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"a/b/c/d/e/f/g/h1.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">h1.py</span></span></li></ul></details></li><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder z, 1 file\"><span class=\"vd-file-tree-dir\">z/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"z/y.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">y.py</span></span></li></ul></details></li></ul></div>"
+ },
+ {
+  "name": "deep",
+  "input": {
+   "entries": [
+    {
+     "path": "1/2/3/4/5/6/7/x.py"
+    },
+    {
+     "path": "1/2/3/4/5/6/7/a/b.py"
+    },
+    {
+     "path": "1/q.py"
+    },
+    {
+     "path": "1/2/w.py"
+    },
+    {
+     "path": "1/2/3/e.py"
+    },
+    {
+     "path": "1/2/3/4/r.py"
+    },
+    {
+     "path": "1/2/3/4/5/t.py"
+    },
+    {
+     "path": "1/2/3/4/5/6/u.py"
+    }
+   ]
+  },
+  "titles": {},
+  "props": {
+   "title": "",
+   "summary": "8 files: 8 unchanged",
+   "collapse": null,
+   "copy": "8 files: 8 unchanged\n1/\n  2/\n    3/\n      4/\n        5/\n          6/\n            7/\n              a/\n                b.py\n              x.py\n            u.py\n          t.py\n        r.py\n      e.py\n    w.py\n  q.py",
+   "folders": [
+    {
+     "name": "1",
+     "path": "1",
+     "count": 8,
+     "folders": [
+      {
+       "name": "2",
+       "path": "1/2",
+       "count": 7,
+       "folders": [
+        {
+         "name": "3",
+         "path": "1/2/3",
+         "count": 6,
+         "folders": [
+          {
+           "name": "4",
+           "path": "1/2/3/4",
+           "count": 5,
+           "folders": [
+            {
+             "name": "5",
+             "path": "1/2/3/4/5",
+             "count": 4,
+             "folders": [
+              {
+               "name": "6",
+               "path": "1/2/3/4/5/6",
+               "count": 3,
+               "folders": [
+                {
+                 "name": "7",
+                 "path": "1/2/3/4/5/6/7",
+                 "count": 2,
+                 "folders": [
+                  {
+                   "name": "a",
+                   "path": "1/2/3/4/5/6/7/a",
+                   "count": 1,
+                   "folders": [],
+                   "files": [
+                    {
+                     "name": "b.py",
+                     "path": "1/2/3/4/5/6/7/a/b.py",
+                     "change": "",
+                     "was": "",
+                     "role": "",
+                     "note": "",
+                     "label": "1/2/3/4/5/6/7/a/b.py"
+                    }
+                   ]
+                  }
+                 ],
+                 "files": [
+                  {
+                   "name": "x.py",
+                   "path": "1/2/3/4/5/6/7/x.py",
+                   "change": "",
+                   "was": "",
+                   "role": "",
+                   "note": "",
+                   "label": "1/2/3/4/5/6/7/x.py"
+                  }
+                 ]
+                }
+               ],
+               "files": [
+                {
+                 "name": "u.py",
+                 "path": "1/2/3/4/5/6/u.py",
+                 "change": "",
+                 "was": "",
+                 "role": "",
+                 "note": "",
+                 "label": "1/2/3/4/5/6/u.py"
+                }
+               ]
+              }
+             ],
+             "files": [
+              {
+               "name": "t.py",
+               "path": "1/2/3/4/5/t.py",
+               "change": "",
+               "was": "",
+               "role": "",
+               "note": "",
+               "label": "1/2/3/4/5/t.py"
+              }
+             ]
+            }
+           ],
+           "files": [
+            {
+             "name": "r.py",
+             "path": "1/2/3/4/r.py",
+             "change": "",
+             "was": "",
+             "role": "",
+             "note": "",
+             "label": "1/2/3/4/r.py"
+            }
+           ]
+          }
+         ],
+         "files": [
+          {
+           "name": "e.py",
+           "path": "1/2/3/e.py",
+           "change": "",
+           "was": "",
+           "role": "",
+           "note": "",
+           "label": "1/2/3/e.py"
+          }
+         ]
+        }
+       ],
+       "files": [
+        {
+         "name": "w.py",
+         "path": "1/2/w.py",
+         "change": "",
+         "was": "",
+         "role": "",
+         "note": "",
+         "label": "1/2/w.py"
+        }
+       ]
+      }
+     ],
+     "files": [
+      {
+       "name": "q.py",
+       "path": "1/q.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "1/q.py"
+      }
+     ]
+    }
+   ],
+   "files": []
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"8 files: 8 unchanged\n1/\n  2/\n    3/\n      4/\n        5/\n          6/\n            7/\n              a/\n                b.py\n              x.py\n            u.py\n          t.py\n        r.py\n      e.py\n    w.py\n  q.py\"><p class=\"vb-alt vd-file-tree-summary\">8 files: 8 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1, 8 files\"><span class=\"vd-file-tree-dir\">1/</span> <span class=\"vd-file-tree-count\">8 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2, 7 files\"><span class=\"vd-file-tree-dir\">2/</span> <span class=\"vd-file-tree-count\">7 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3, 6 files\"><span class=\"vd-file-tree-dir\">3/</span> <span class=\"vd-file-tree-count\">6 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3/4, 5 files\"><span class=\"vd-file-tree-dir\">4/</span> <span class=\"vd-file-tree-count\">5 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3/4/5, 4 files\"><span class=\"vd-file-tree-dir\">5/</span> <span class=\"vd-file-tree-count\">4 files</span></summary><ul class=\"vd-file-tree-list vd-file-tree-flat\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3/4/5/6, 3 files\"><span class=\"vd-file-tree-dir\">6/</span> <span class=\"vd-file-tree-count\">3 files</span></summary><ul class=\"vd-file-tree-list vd-file-tree-flat\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3/4/5/6/7, 2 files\"><span class=\"vd-file-tree-dir\">7/</span> <span class=\"vd-file-tree-count\">2 files</span></summary><ul class=\"vd-file-tree-list vd-file-tree-flat\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder 1/2/3/4/5/6/7/a, 1 file\"><span class=\"vd-file-tree-dir\">a/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list vd-file-tree-flat\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/4/5/6/7/a/b.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">b.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/4/5/6/7/x.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">x.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/4/5/6/u.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">u.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/4/5/t.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">t.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/4/r.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">r.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/3/e.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">e.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/2/w.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">w.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"1/q.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">q.py</span></span></li></ul></details></li></ul></div>"
+ },
+ {
+  "name": "casefold",
+  "input": {
+   "entries": [
+    {
+     "path": "B.py"
+    },
+    {
+     "path": "a.py"
+    },
+    {
+     "path": "A.py"
+    },
+    {
+     "path": "b/x.py"
+    }
+   ]
+  },
+  "titles": {},
+  "props": {
+   "title": "",
+   "summary": "4 files: 4 unchanged",
+   "collapse": null,
+   "copy": "4 files: 4 unchanged\nb/\n  x.py\nA.py\na.py\nB.py",
+   "folders": [
+    {
+     "name": "b",
+     "path": "b",
+     "count": 1,
+     "folders": [],
+     "files": [
+      {
+       "name": "x.py",
+       "path": "b/x.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "b/x.py"
+      }
+     ]
+    }
+   ],
+   "files": [
+    {
+     "name": "A.py",
+     "path": "A.py",
+     "change": "",
+     "was": "",
+     "role": "",
+     "note": "",
+     "label": "A.py"
+    },
+    {
+     "name": "a.py",
+     "path": "a.py",
+     "change": "",
+     "was": "",
+     "role": "",
+     "note": "",
+     "label": "a.py"
+    },
+    {
+     "name": "B.py",
+     "path": "B.py",
+     "change": "",
+     "was": "",
+     "role": "",
+     "note": "",
+     "label": "B.py"
+    }
+   ]
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"4 files: 4 unchanged\nb/\n  x.py\nA.py\na.py\nB.py\"><p class=\"vb-alt vd-file-tree-summary\">4 files: 4 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder b, 1 file\"><span class=\"vd-file-tree-dir\">b/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"b/x.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">x.py</span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"A.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">A.py</span></span></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"a.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">a.py</span></span></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"B.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">B.py</span></span></li></ul></div>"
+ },
+ {
+  "name": "links",
+  "input": {
+   "entries": [
+    {
+     "path": "src/pkg/mod.py",
+     "change": "added"
+    },
+    {
+     "path": "other.py"
+    },
+    {
+     "path": "src/x.py"
+    }
+   ]
+  },
+  "titles": {
+   "mod.py": "s/1",
+   "src/x.py": "my-id"
+  },
+  "props": {
+   "title": "",
+   "summary": "3 files: 1 added, 2 unchanged",
+   "collapse": null,
+   "copy": "3 files: 1 added, 2 unchanged\nsrc/\n  pkg/\n    + mod.py\n  x.py\nother.py",
+   "folders": [
+    {
+     "name": "src",
+     "path": "src",
+     "count": 2,
+     "folders": [
+      {
+       "name": "pkg",
+       "path": "src/pkg",
+       "count": 1,
+       "folders": [],
+       "files": [
+        {
+         "name": "mod.py",
+         "path": "src/pkg/mod.py",
+         "change": "added",
+         "was": "",
+         "role": "",
+         "note": "",
+         "label": "added src/pkg/mod.py"
+        }
+       ]
+      }
+     ],
+     "files": [
+      {
+       "name": "x.py",
+       "path": "src/x.py",
+       "change": "",
+       "was": "",
+       "role": "",
+       "note": "",
+       "label": "src/x.py"
+      }
+     ]
+    }
+   ],
+   "files": [
+    {
+     "name": "other.py",
+     "path": "other.py",
+     "change": "",
+     "was": "",
+     "role": "",
+     "note": "",
+     "label": "other.py"
+    }
+   ],
+   "links": {
+    "src/pkg/mod.py": "blk-s/1",
+    "src/x.py": "blk-my-id"
+   }
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"3 files: 1 added, 2 unchanged\nsrc/\n  pkg/\n    + mod.py\n  x.py\nother.py\"><p class=\"vb-alt vd-file-tree-summary\">3 files: 1 added, 2 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"Changed files\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder src, 2 files\"><span class=\"vd-file-tree-dir\">src/</span> <span class=\"vd-file-tree-count\">2 files</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder src/pkg, 1 file\"><span class=\"vd-file-tree-dir\">pkg/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file vd-change-row vd-change-added\" role=\"treeitem\" aria-label=\"added src/pkg/mod.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-change-badge vd-change-added\"><span class=\"vd-change-glyph\" aria-hidden=\"true\">+</span> added</span> <span class=\"vd-change-name\"><a class=\"vd-file-tree-link\" href=\"#blk-s/1\">mod.py</a></span></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"src/x.py\"><span class=\"vd-file-tree-row\"><a class=\"vd-file-tree-link\" href=\"#blk-my-id\">x.py</a></span></li></ul></details></li><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"other.py\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">other.py</span></span></li></ul></div>"
+ },
+ {
+  "name": "hostile",
+  "input": {
+   "entries": [
+    {
+     "path": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'/f.py",
+     "note": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+     "role": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+    }
+   ],
+   "title": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+  },
+  "titles": {},
+  "props": {
+   "title": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+   "summary": "1 file: 1 unchanged",
+   "collapse": null,
+   "copy": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'\n1 file: 1 unchanged\n<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'/\n  f.py",
+   "folders": [
+    {
+     "name": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'",
+     "path": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'",
+     "count": 1,
+     "folders": [],
+     "files": [
+      {
+       "name": "f.py",
+       "path": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'/f.py",
+       "change": "",
+       "was": "",
+       "role": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+       "note": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'",
+       "label": "<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)<_script> 's'/f.py (<img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'): <img src=x onerror=alert(1)> \"q\" &amp; <script>alert(1)</script> 's'"
+      }
+     ]
+    }
+   ],
+   "files": []
+  },
+  "html": "<div class=\"vb file-tree vd-file-tree\" data-copy=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\n1 file: 1 unchanged\n&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;_script&gt; &#x27;s&#x27;/\n  f.py\"><p class=\"vd-file-tree-title\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</p><p class=\"vb-alt vd-file-tree-summary\">1 file: 1 unchanged</p><ul class=\"vd-file-tree-list\" role=\"tree\" aria-label=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\"><li class=\"vd-file-tree-folder\" role=\"treeitem\"><details open><summary class=\"vd-file-tree-sum\" aria-label=\"folder &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;_script&gt; &#x27;s&#x27;, 1 file\"><span class=\"vd-file-tree-dir\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;_script&gt; &#x27;s&#x27;/</span> <span class=\"vd-file-tree-count\">1 file</span></summary><ul class=\"vd-file-tree-list\" role=\"group\"><li class=\"vd-file-tree-file\" role=\"treeitem\" aria-label=\"&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;_script&gt; &#x27;s&#x27;/f.py (&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;): &lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;\"><span class=\"vd-file-tree-row\"><span class=\"vd-file-tree-leaf\">f.py</span> <span class=\"vd-file-tree-role\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</span> <span class=\"vd-file-tree-note\">&lt;img src=x onerror=alert(1)&gt; &quot;q&quot; &amp;amp; &lt;script&gt;alert(1)&lt;/script&gt; &#x27;s&#x27;</span></span></li></ul></details></li></ul></div>"
+ }
+]

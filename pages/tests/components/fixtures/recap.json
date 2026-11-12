@@ -1,0 +1,238 @@
+[
+ {
+  "name": "full",
+  "props": {
+   "base": "main",
+   "head": "HEAD",
+   "plan": "demo",
+   "rows": [
+    {
+     "file": "src/<script>alert(1)</script>\"><img src=x onerror=alert(1)>.py",
+     "old_file": null,
+     "status": "M",
+     "binary": false,
+     "tasks": [
+      "t1-api"
+     ],
+     "shared": false,
+     "blocks": [
+      "api"
+     ],
+     "added": [
+      [
+       3,
+       5
+      ]
+     ],
+     "removed": [
+      [
+       3,
+       4
+      ]
+     ],
+     "hunk": "@@ -3,2 +3,3 @@\n-<script>alert(1)</script>\"><img src=x onerror=alert(1)>\n+<script>alert(1)</script>\"><img src=x onerror=alert(1)>",
+     "truncated": false,
+     "drift": []
+    },
+    {
+     "file": "stray.txt",
+     "old_file": null,
+     "status": "A",
+     "binary": false,
+     "tasks": [],
+     "shared": false,
+     "blocks": [],
+     "added": [
+      [
+       1,
+       1
+      ]
+     ],
+     "removed": [],
+     "hunk": "@@ -0,0 +1 @@\n+x",
+     "truncated": false,
+     "drift": [
+      "unplanned"
+     ]
+    }
+   ],
+   "untouched": [
+    {
+     "task": "t2-model",
+     "owns": "src/model.py"
+    }
+   ],
+   "unverified": [
+    "model"
+   ],
+   "summary": {
+    "files": 2,
+    "unplanned": 1,
+    "untouched": 1,
+    "unverified": 1
+   }
+  },
+  "id": "rc",
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\">demo main..HEAD</h4><p>files 2, unplanned 1, untouched 1, unverified 1</p><h5>Plan blocks to changes</h5><table class=\"vb-table\"><thead><tr><th>Plan block</th><th>Changed files</th></tr></thead><tbody><tr><td>api</td><td><a href=\"#recap-rc-f0\">src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py</a></td></tr><tr><td>model</td><td>no changed file</td></tr></tbody></table><h5>Drift</h5><ul class=\"recap-drift\"><li class=\"recap-item\" data-item=\"unplanned:stray.txt\">unplanned change: stray.txt <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"untouched:t2-model:src/model.py\">untouched: t2-model owns src/model.py <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"unverified:model\">unverified block: model <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li></ul><p class=\"recap-error\" role=\"alert\"></p><h5>Files</h5><details class=\"recap-file\" id=\"recap-rc-f0\"><summary>src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py (M; t1-api)</summary><p class=\"recap-ranges\"><a class=\"recap-range\" id=\"recap-rc-f0-a3-5\" href=\"#recap-rc-f0-a3-5\">+3-5</a> <a class=\"recap-range\" id=\"recap-rc-f0-r3-4\" href=\"#recap-rc-f0-r3-4\">-3-4</a></p><pre><code>@@ -3,2 +3,3 @@\n-&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;\n+&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;</code></pre></details><details class=\"recap-file\" id=\"recap-rc-f1\"><summary>stray.txt (A; unplanned; unplanned)</summary><p class=\"recap-ranges\"><a class=\"recap-range\" id=\"recap-rc-f1-a1-1\" href=\"#recap-rc-f1-a1-1\">+1-1</a></p><pre><code>@@ -0,0 +1 @@\n+x</code></pre></details></section></div>"
+ },
+ {
+  "name": "many",
+  "props": {
+   "base": "main",
+   "head": "HEAD",
+   "plan": "demo",
+   "rows": [
+    {
+     "file": "src/<script>alert(1)</script>\"><img src=x onerror=alert(1)>.py",
+     "old_file": null,
+     "status": "M",
+     "binary": false,
+     "tasks": [
+      "a",
+      "b"
+     ],
+     "shared": false,
+     "blocks": [
+      "api"
+     ],
+     "added": [
+      [
+       3,
+       5
+      ]
+     ],
+     "removed": [
+      [
+       3,
+       4
+      ]
+     ],
+     "hunk": "@@ -3,2 +3,3 @@\n-<script>alert(1)</script>\"><img src=x onerror=alert(1)>\n+<script>alert(1)</script>\"><img src=x onerror=alert(1)>",
+     "truncated": true,
+     "drift": [
+      "unplanned",
+      "x"
+     ]
+    },
+    {
+     "file": "stray.txt",
+     "old_file": null,
+     "status": "A",
+     "binary": true,
+     "tasks": [],
+     "shared": true,
+     "blocks": [],
+     "added": [],
+     "removed": [
+      [
+       1,
+       2
+      ],
+      "bad"
+     ],
+     "hunk": "@@ -0,0 +1 @@\n+x",
+     "truncated": false,
+     "drift": [
+      "unplanned"
+     ]
+    }
+   ],
+   "untouched": [
+    {
+     "task": "t<2>",
+     "owns": "a&b"
+    }
+   ],
+   "unverified": [
+    "x\" onmouseover=\"alert(1)",
+    "api"
+   ],
+   "summary": {
+    "files": 2,
+    "unplanned": 1,
+    "untouched": 1,
+    "unverified": 1
+   }
+  },
+  "id": "r<1>",
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\">demo main..HEAD</h4><p>files 2, unplanned 1, untouched 1, unverified 1</p><h5>Plan blocks to changes</h5><table class=\"vb-table\"><thead><tr><th>Plan block</th><th>Changed files</th></tr></thead><tbody><tr><td>api</td><td><a href=\"#recap-r<1>-f0\">src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py</a></td></tr><tr><td>x&quot; onmouseover=&quot;alert(1)</td><td>no changed file</td></tr></tbody></table><h5>Drift</h5><ul class=\"recap-drift\"><li class=\"recap-item\" data-item=\"unplanned:src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py\">unplanned change: src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"unplanned:stray.txt\">unplanned change: stray.txt <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"untouched:t&lt;2&gt;:a&amp;b\">untouched: t&lt;2&gt; owns a&amp;b <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"unverified:x&quot; onmouseover=&quot;alert(1)\">unverified block: x&quot; onmouseover=&quot;alert(1) <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li><li class=\"recap-item\" data-item=\"unverified:api\">unverified block: api <span class=\"recap-buttons\"><button type=\"button\" class=\"recap-verdict\" data-verdict=\"accepted\">Accept</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"rejected\">Reject</button><button type=\"button\" class=\"recap-verdict\" data-verdict=\"open\">Open</button></span><span class=\"recap-state\" aria-live=\"polite\"></span></li></ul><p class=\"recap-error\" role=\"alert\"></p><h5>Files</h5><details class=\"recap-file\" id=\"recap-r<1>-f0\"><summary>src/&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;.py (M; a, b; unplanned x) (truncated)</summary><p class=\"recap-ranges\"><a class=\"recap-range\" id=\"recap-r&lt;1&gt;-f0-a3-5\" href=\"#recap-r&lt;1&gt;-f0-a3-5\">+3-5</a> <a class=\"recap-range\" id=\"recap-r&lt;1&gt;-f0-r3-4\" href=\"#recap-r&lt;1&gt;-f0-r3-4\">-3-4</a></p><pre><code>@@ -3,2 +3,3 @@\n-&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;\n+&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt;</code></pre></details><details class=\"recap-file\" id=\"recap-r<1>-f1\"><summary>stray.txt (A; shared; unplanned)</summary><p class=\"recap-ranges\"><a class=\"recap-range\" id=\"recap-r&lt;1&gt;-f1-r1-2\" href=\"#recap-r&lt;1&gt;-f1-r1-2\">-1-2</a></p><pre><code>binary file</code></pre></details></section></div>"
+ },
+ {
+  "name": "empty",
+  "props": {
+   "rows": []
+  },
+  "id": "e",
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\"> ..</h4><p></p><h5>Plan blocks to changes</h5><p>No plan block is linked to a change.</p><h5>Drift</h5><p>No drift flagged.</p><h5>Files</h5></section></div>"
+ },
+ {
+  "name": "nodrift",
+  "props": {
+   "plan": "p",
+   "rows": [
+    {
+     "file": "a.py",
+     "status": "M",
+     "hunk": "h",
+     "tasks": [
+      "t"
+     ],
+     "blocks": [
+      "b1"
+     ]
+    }
+   ],
+   "summary": {
+    "files": 1,
+    "n<": 2
+   }
+  },
+  "id": "n1",
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\">p ..</h4><p>files 1, n&lt; 2</p><h5>Plan blocks to changes</h5><table class=\"vb-table\"><thead><tr><th>Plan block</th><th>Changed files</th></tr></thead><tbody><tr><td>b1</td><td><a href=\"#recap-n1-f0\">a.py</a></td></tr></tbody></table><h5>Drift</h5><p>No drift flagged.</p><h5>Files</h5><details class=\"recap-file\" id=\"recap-n1-f0\"><summary>a.py (M; t)</summary><p class=\"recap-ranges\"></p><pre><code>h</code></pre></details></section></div>"
+ },
+ {
+  "name": "blocks",
+  "props": {
+   "rows": [
+    {
+     "file": "z",
+     "status": "A",
+     "hunk": "x",
+     "blocks": [
+      "q",
+      "q"
+     ]
+    }
+   ],
+   "base": "main",
+   "head": "w"
+  },
+  "id": "x",
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\"> main..w</h4><p></p><h5>Plan blocks to changes</h5><table class=\"vb-table\"><thead><tr><th>Plan block</th><th>Changed files</th></tr></thead><tbody><tr><td>q</td><td><a href=\"#recap-x-f0\">z</a>, <a href=\"#recap-x-f0\">z</a></td></tr></tbody></table><h5>Drift</h5><p>No drift flagged.</p><h5>Files</h5><details class=\"recap-file\" id=\"recap-x-f0\"><summary>z (A; unplanned)</summary><p class=\"recap-ranges\"></p><pre><code>x</code></pre></details></section></div>"
+ },
+ {
+  "name": "noid",
+  "props": {
+   "plan": "p",
+   "rows": [
+    {
+     "file": "a.py",
+     "status": "M",
+     "hunk": "h",
+     "tasks": [
+      "t"
+     ],
+     "blocks": [
+      "b1"
+     ]
+    }
+   ],
+   "summary": {
+    "files": 1,
+    "n<": 2
+   }
+  },
+  "id": null,
+  "html": "<div class=\"vb recap\"><section class=\"vb-card\"><h4 class=\"vb-title\">p ..</h4><p>files 1, n&lt; 2</p><h5>Plan blocks to changes</h5><table class=\"vb-table\"><thead><tr><th>Plan block</th><th>Changed files</th></tr></thead><tbody><tr><td>b1</td><td><a href=\"#recap-f0\">a.py</a></td></tr></tbody></table><h5>Drift</h5><p>No drift flagged.</p><h5>Files</h5><details class=\"recap-file\" id=\"recap-f0\"><summary>a.py (M; t)</summary><p class=\"recap-ranges\"></p><pre><code>h</code></pre></details></section></div>"
+ }
+]
