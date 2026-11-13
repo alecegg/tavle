@@ -102,7 +102,9 @@ def append_comment(  # noqa: PLR0913, PLR0917 - one row's fields plus its log
     return row
 
 
-def mark_applied(doc: Path, comment_id: str, actor: str) -> None:
+def mark_applied(
+    doc: Path, comment_id: str, actor: str, comments_file: Path | None = None
+) -> None:
     """Resolve a suggestion and record who applied it."""
     row = {
         "id": comment_id,
@@ -110,7 +112,7 @@ def mark_applied(doc: Path, comment_id: str, actor: str) -> None:
         "state": "resolved",
         "applied_by": actor,
     }
-    _append_row(comments_path(doc), row)
+    _append_row(comments_path(doc, comments_file), row)
 
 
 def append_reply(

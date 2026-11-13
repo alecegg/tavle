@@ -38,6 +38,7 @@ from varde_pages.netbind import (
     classify_host,
     is_loopback,
 )
+from varde_pages.plan_comments import plan_page_comments
 from varde_pages.template import (
     BUNDLE_SCRIPT,
     TOKENS_CSS,
@@ -267,6 +268,7 @@ class PageServer(ThreadingHTTPServer):
         allow_edit: bool = False,
     ) -> None:
         self.doc = doc
+        self.comments_file = plan_page_comments(doc)
         self.host = classify_host(host)
         self.remote = not is_loopback(self.host)  # tests may override
         self.allow_edit = allow_edit
@@ -290,7 +292,9 @@ class PageServer(ThreadingHTTPServer):
 
     def _watch_files(self) -> None:
         def current() -> tuple[object, object]:
-            return _signature(self.doc), _signature(comments_path(self.doc))
+            return _signature(self.doc), _signature(
+                comments_path(self.doc, self.comments_file)
+            )
 
         seen = current()
         while not self._halt.wait(POLL_SECONDS):
@@ -510,7 +514,11 @@ class PageHandler(BaseHTTPRequestHandler):
         try:
             sources = sources_for(self.app.doc, raw)
             row = store_comment(
-                self.app.doc, raw, decisions_open=decisions_open, sources=sources
+                self.app.doc,
+                raw,
+                decisions_open=decisions_open,
+                sources=sources,
+                comments_file=self.app.comments_file,
             )
         except DecisionDenied:
             self._reject(HTTPStatus.FORBIDDEN, EDIT_OFF)
@@ -537,7 +545,11 @@ class PageHandler(BaseHTTPRequestHandler):
     def _accept_suggestion(self, raw: bytes) -> None:
         try:
             comment_id, base_hash = parse_accept_body(raw)
-            found = [c for c in fold(read_rows(self.app.doc)) if c["id"] == comment_id]
+            found = [
+                c
+                for c in fold(read_rows(self.app.doc, self.app.comments_file))
+                if c["id"] == comment_id
+            ]
             suggestion = found[0] if found else None
             if suggestion is None or suggestion.get("kind") != "suggestion":
                 self._reject(HTTPStatus.NOT_FOUND, "unknown suggestion")
@@ -551,7 +563,9 @@ class PageHandler(BaseHTTPRequestHandler):
                 suggestion["anchor"],
                 base_hash,
                 (suggestion.get("quote", ""), suggestion.get("replacement", "")),
-                lambda: mark_applied(self.app.doc, comment_id, ACTOR),
+                lambda: mark_applied(
+                    self.app.doc, comment_id, ACTOR, self.app.comments_file
+                ),
             )
         except ValueError as error:
             self._reject(HTTPStatus.BAD_REQUEST, str(error))
