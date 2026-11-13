@@ -7,9 +7,6 @@ import textwrap
 from collections.abc import Callable, Collection, Mapping
 from dataclasses import dataclass, field, replace
 
-from varde_data.plan_blocks import FENCE as _FENCE
-from varde_data.plan_blocks import HEADING as _HEADING
-from varde_data.plan_blocks import fence_closes, slugify
 from varde_data.ui_lines import ParseError, Statement, parse_lines
 
 from varde_pages.actions import component_block_type
@@ -35,6 +32,9 @@ from varde_pages.blocks_render.file_tree import (
 )
 from varde_pages.blocks_render.image import image_props, render_refused
 from varde_pages.header import count_words, header_html
+from varde_pages.markdown_syntax import FENCE as _FENCE
+from varde_pages.markdown_syntax import HEADING as _HEADING
+from varde_pages.markdown_syntax import fence_closes, slugify
 from varde_pages.media import Media, Problem
 from varde_pages.toc import toc_entries, toc_html
 
