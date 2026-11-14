@@ -71,7 +71,7 @@ def body(**fields: Any) -> bytes:
 
 
 def post(doc: Path, root: Path, raw: bytes, *, open_: bool = True) -> dict[str, Any]:
-    sources = sources_for(doc, raw, root / "none")
+    sources = sources_for(doc, raw)
     return store_comment(doc, raw, decisions_open=open_, sources=sources)
 
 
@@ -133,7 +133,7 @@ def test_comment_shows_on_every_page_that_includes_the_part(
 ) -> None:
     row = post(doc, root, body())
     second = make_page(root, inc("b", "src.md", "heading:beta-id"), name="two.md")
-    found = fold_with_sources(second, include_sources(second.read_text(), root, root))
+    found = fold_with_sources(second, include_sources(second.read_text(), root))
     assert [(c["id"], c["part"]) for c in found] == [(row["id"], "b")]
     on_source = fold(read_rows(root / "src.md"))
     assert [c["id"] for c in on_source] == [row["id"]]
@@ -144,7 +144,7 @@ def test_comment_on_another_part_of_the_source_is_not_shown(
 ) -> None:
     post(doc, root, body(part="alpha", anchor="alpha/1"))
     second = make_page(root, inc("b", "src.md", "heading:beta-id"), name="two.md")
-    sources = include_sources(second.read_text(), root, root)
+    sources = include_sources(second.read_text(), root)
     assert fold_with_sources(second, sources) == []
 
 
@@ -152,7 +152,7 @@ def test_anchor_stable_when_the_source_changes_elsewhere(root: Path, doc: Path) 
     row = post(doc, root, body())
     changed = SOURCE.replace("Intro.", "Intro.\n\nAdded paragraph.\n\nAnother.")
     (root / "src.md").write_text(changed, encoding="utf-8")
-    found = fold_with_sources(doc, include_sources(doc.read_text(), root, root))
+    found = fold_with_sources(doc, include_sources(doc.read_text(), root))
     assert [(c["id"], c.get("orphaned")) for c in found] == [(row["id"], None)]
 
 
@@ -162,7 +162,7 @@ def test_orphaned_when_the_anchor_no_longer_resolves(root: Path, doc: Path) -> N
         SOURCE.replace("Last.\n", ""),
         encoding="utf-8",
     )
-    found = fold_with_sources(doc, include_sources(doc.read_text(), root, root))
+    found = fold_with_sources(doc, include_sources(doc.read_text(), root))
     # With no region left to match, every include of that source reports the orphan.
     assert {(c["id"], c.get("orphaned")) for c in found} == {(row["id"], True)}
     assert {c["part"] for c in found} == {"beta", "alpha"}
@@ -287,7 +287,7 @@ def test_symlink_page_sidecar_is_refused_by_the_append(
 def test_source_swapped_for_a_symlink_after_page_load_is_refused(
     root: Path, doc: Path, tmp_path: Path
 ) -> None:
-    sources = sources_for(doc, body(), root / "none")
+    sources = sources_for(doc, body())
     outside = tmp_path / "away"
     outside.mkdir()
     (outside / "x.md").write_text(SOURCE, encoding="utf-8")
@@ -298,7 +298,7 @@ def test_source_swapped_for_a_symlink_after_page_load_is_refused(
     assert list(outside.iterdir()) == [outside / "x.md"]
     # and a fresh resolution refuses the new target as well
     with pytest.raises(ValueError, match="outside the allowed roots"):
-        sources_for(doc, body(), root / "none")
+        sources_for(doc, body())
 
 
 def test_unreadable_include_is_a_400_not_a_fallback_to_the_page(
@@ -379,7 +379,7 @@ for i in range(20):
     raw = json.dumps({"anchor": "beta-id/1", "part": "beta",
                       "text": f"p{number}-{i} " + "y" * 4000}).encode()
     store_comment(doc, raw, decisions_open=True,
-                  sources=sources_for(doc, raw, root / "none"))
+                  sources=sources_for(doc, raw))
 """
 
 
@@ -430,12 +430,12 @@ def test_source_page_state_rows_never_reach_an_including_page(
     own = append_comment(
         doc, "own", "", "mine", extra={"kind": "answer", "item": "ship", "value": "x"}
     )
-    found = fold_with_sources(doc, include_sources(doc.read_text(), root, root))
+    found = fold_with_sources(doc, include_sources(doc.read_text(), root))
     assert [c["id"] for c in found] == [own["id"]]
     [latest] = [c for c in mark_latest_decisions(found) if c["id"] == own["id"]]
     assert latest["latest"] is True
     kept = post(doc, root, body())
-    found = fold_with_sources(doc, include_sources(doc.read_text(), root, root))
+    found = fold_with_sources(doc, include_sources(doc.read_text(), root))
     assert {c["id"] for c in found} == {own["id"], kept["id"]}
 
 

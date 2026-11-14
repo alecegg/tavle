@@ -43,9 +43,7 @@ def _part_of(data: dict[str, Any]) -> str | None:
     return part
 
 
-def sources_for(
-    doc: Path, raw: bytes, store: Path | None = None
-) -> Mapping[str, IncludeSource] | None:
+def sources_for(doc: Path, raw: bytes) -> Mapping[str, IncludeSource] | None:
     """The page's include sources when the body names a `part`, else None.
 
     Resolved on every call, so a source swapped after page load is re-checked
@@ -55,7 +53,7 @@ def sources_for(
     if _part_of(parse_json_object(raw)) is None:
         return None
     try:
-        return include_sources(read_markdown(doc), doc.parent, store)
+        return include_sources(read_markdown(doc), doc.parent)
     except IncludeError as error:
         raise ValueError(str(error)) from error
 
