@@ -2,7 +2,7 @@
 
 `<id> = include(source: "<path>", select: "<selector>", title: "<text>")` in a
 `ui` fence names a `.md` file and a selector (see `select`). Allowed roots are
-the page's own directory and the plan store (`<working>/plans/`). A source must
+the page's own directory. A source must
 resolve (symlinks followed) to a regular `.md` file inside a root; `..`
 segments, dotfiles and secret-like names are refused. The text is rendered by
 the escape-first renderer, never inserted raw.
@@ -16,7 +16,6 @@ import os
 import stat
 from collections.abc import Iterator
 from dataclasses import dataclass
-from functools import lru_cache
 from pathlib import Path
 
 from varde_data.ui_lines import Statement, parse_lines
@@ -106,17 +105,8 @@ def find_includes(text: str) -> list[IncludeRef]:
 # --- confinement ------------------------------------------------------------
 
 
-@lru_cache(maxsize=8)
-def default_plan_store(start: Path) -> Path:
-    """`<working>/plans/` for the project holding `start`, resolved once per run."""
-    from varde_core.memory_dirs import resolve_project_dir
-
-    return resolve_project_dir(start, "working") / "plans"
-
-
-def _roots(root: Path, store: Path | None) -> tuple[Path, ...]:
-    plans = store if store is not None else default_plan_store(root.resolve())
-    return (root.resolve(), plans.resolve())
+def _roots(root: Path) -> tuple[Path, ...]:
+    return (root.resolve(),)
 
 
 def _refused_name(name: str) -> bool:
@@ -208,9 +198,9 @@ def _resolve_one(
 
 
 def _resolve_all(
-    text: str, root: Path, store: Path | None
+    text: str, root: Path
 ) -> list[tuple[IncludeRef, Path, list[SourceBlock], str]]:
-    roots = _roots(root, store)
+    roots = _roots(root)
     seen: set[tuple[Path, str]] = set()
     out = []
     for ref in find_includes(text):
@@ -223,12 +213,10 @@ def _resolve_all(
     return out
 
 
-def include_sources(
-    page_text: str, root: Path, store: Path | None = None
-) -> dict[str, IncludeSource]:
+def include_sources(page_text: str, root: Path) -> dict[str, IncludeSource]:
     """Include id to its confined source and selected lines; raises IncludeError."""
     sources = {}
-    for ref, path, blocks, _ in _resolve_all(page_text, root, store):
+    for ref, path, blocks, _ in _resolve_all(page_text, root):
         start, end = region(blocks)
         sources[ref.id] = IncludeSource(path, start, end)
     return sources
@@ -253,12 +241,10 @@ def _part_html(ref: IncludeRef, blocks: list[SourceBlock]) -> str:
     return "".join(out)
 
 
-def resolve_includes(
-    text: str, root: Path, store: Path | None = None
-) -> dict[str, IncludedPart]:
+def resolve_includes(text: str, root: Path) -> dict[str, IncludedPart]:
     """Render each include; blocks carry their source anchor and the part id."""
     parts = {}
-    for ref, path, blocks, markdown in _resolve_all(text, root, store):
+    for ref, path, blocks, markdown in _resolve_all(text, root):
         start, end = region(blocks)
         lines = read_source(markdown).lines
         nested = tuple(b.start + 1 for b in blocks if b.nested_include)
@@ -273,9 +259,7 @@ def resolve_includes(
     return parts
 
 
-def include_errors(
-    text: str, root: Path | None = None, store: Path | None = None
-) -> list[tuple[int, str, str]]:
+def include_errors(text: str, root: Path | None = None) -> list[tuple[int, str, str]]:
     """`(line, rule, message)` for the page's includes.
 
     Without `root` only statements are checked; with it each source and
@@ -289,7 +273,7 @@ def include_errors(
     if errors or root is None:
         return errors
     try:
-        parts = resolve_includes(text, root, store)
+        parts = resolve_includes(text, root)
     except IncludeError as error:
         return [(error.line, "include", error.reason)]
     lines = {ref.id: ref.line for ref in find_includes(text)}

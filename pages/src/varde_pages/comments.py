@@ -32,9 +32,9 @@ def one_line(value: object) -> str:
     return " ".join(CONTROLS.sub(" ", str(value)).split())
 
 
-def comments_path(doc: Path, comments_file: Path | None = None) -> Path:
-    """The comments log of `doc`: `comments_file` when given, else beside it."""
-    return comments_file or doc.with_name(doc.name + ".comments.jsonl")
+def comments_path(doc: Path) -> Path:
+    """The comments log of `doc`, beside it."""
+    return doc.with_name(doc.name + ".comments.jsonl")
 
 
 def parse_interval(text: str) -> float:
@@ -74,14 +74,13 @@ def _append_row(path: Path, row: dict[str, Any]) -> None:
         os.close(descriptor)
 
 
-def append_comment(  # noqa: PLR0913, PLR0917 - one row's fields plus its log
+def append_comment(
     doc: Path,
     anchor: str,
     quote: str,
     text: str,
     actor: str = "user",
     extra: dict[str, Any] | None = None,
-    comments_file: Path | None = None,
 ) -> dict[str, Any]:
     """Append a comment row; `extra` carries kind, replacement, item, verdict."""
     if _ANCHOR.fullmatch(anchor) is None:
@@ -98,13 +97,11 @@ def append_comment(  # noqa: PLR0913, PLR0917 - one row's fields plus its log
         "actor": actor,
         **(extra or {}),
     }
-    _append_row(comments_path(doc, comments_file), row)
+    _append_row(comments_path(doc), row)
     return row
 
 
-def mark_applied(
-    doc: Path, comment_id: str, actor: str, comments_file: Path | None = None
-) -> None:
+def mark_applied(doc: Path, comment_id: str, actor: str) -> None:
     """Resolve a suggestion and record who applied it."""
     row = {
         "id": comment_id,
@@ -112,7 +109,7 @@ def mark_applied(
         "state": "resolved",
         "applied_by": actor,
     }
-    _append_row(comments_path(doc, comments_file), row)
+    _append_row(comments_path(doc), row)
 
 
 def append_reply(
@@ -120,9 +117,8 @@ def append_reply(
     comment_id: str,
     text: str,
     actor: str = "agent",
-    comments_file: Path | None = None,
 ) -> dict[str, Any]:
-    if not any(c["id"] == comment_id for c in fold(read_rows(doc, comments_file))):
+    if not any(c["id"] == comment_id for c in fold(read_rows(doc))):
         raise ValueError(f"unknown comment id {comment_id!r}")
     row = {
         "id": "r" + secrets.token_hex(4),
@@ -131,7 +127,7 @@ def append_reply(
         "text": text,
         "actor": actor,
     }
-    path = comments_path(doc, comments_file)
+    path = comments_path(doc)
     _append_row(path, row)
     resolved = {"id": comment_id, "ts": row["ts"], "state": "resolved"}
     _append_row(path, resolved)
@@ -152,10 +148,10 @@ def mark_latest_decisions(comments: list[dict[str, Any]]) -> list[dict[str, Any]
     ]
 
 
-def read_rows(doc: Path, comments_file: Path | None = None) -> list[dict[str, Any]]:
+def read_rows(doc: Path) -> list[dict[str, Any]]:
     """Parse the log, skipping bad lines; a missing log is empty."""
     try:
-        text = comments_path(doc, comments_file).read_text(encoding="utf-8")
+        text = comments_path(doc).read_text(encoding="utf-8")
     except OSError, UnicodeError:
         return []
     rows = []

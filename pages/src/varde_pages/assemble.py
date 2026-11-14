@@ -8,7 +8,6 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
-from varde_data.plan_blocks import fence_closes
 from varde_data.ui_lines import parse_lines
 
 from varde_pages.blocks_render.containers import fill_containers
@@ -24,6 +23,7 @@ from varde_pages.include import (
     find_includes,
     resolve_includes,
 )
+from varde_pages.markdown_syntax import fence_closes
 from varde_pages.media import page_media
 from varde_pages.render import (
     _FENCE,
@@ -196,16 +196,12 @@ class AssembledPage:
     parts: dict[str, Path] = field(default_factory=dict)
 
 
-def _served_main(
-    doc: Path, comments_file: Path | None = None
-) -> tuple[str, dict[str, Path]]:
+def _served_main(doc: Path) -> tuple[str, dict[str, Path]]:
     """The served page's `main` element, and the paths of its includes."""
     text = read_markdown(doc)
     ctx, sources = include_ctx(text, doc)
     page = parse_page_stream(text, doc.name, ctx)
-    threads = render_threads(
-        page, mark_latest_decisions(fold(read_rows(doc, comments_file)))
-    )
+    threads = render_threads(page, mark_latest_decisions(fold(read_rows(doc))))
     return f'<main data-role="page">{page.body}{threads}</main>', sources
 
 
@@ -214,12 +210,9 @@ def assemble(doc: Path, *, token: str, api_base: str = "") -> AssembledPage:
     return AssembledPage(page_shell(doc.name, main, token, api_base), sources)
 
 
-def assemble_main(doc: Path, comments_file: Path | None = None) -> str:
-    """Only the `main` element of the served page, for a host page that mounts it.
-
-    `comments_file` overrides the log beside `doc` (a plan page's sidecar log).
-    """
-    return _served_main(doc, comments_file)[0]
+def assemble_main(doc: Path) -> str:
+    """Only the `main` element of the served page, for a host page that mounts it."""
+    return _served_main(doc)[0]
 
 
 def assemble_page(doc: Path, *, token: str, api_base: str = "") -> str:

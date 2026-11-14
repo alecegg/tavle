@@ -3,7 +3,7 @@
 import re
 from dataclasses import dataclass
 
-from varde_data.plan_blocks import FENCE as _FENCE
+from varde_pages.markdown_syntax import FENCE as _FENCE
 
 _ID_WORD = re.compile(r"^id=(.*)$")
 

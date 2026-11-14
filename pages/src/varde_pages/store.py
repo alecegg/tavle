@@ -43,9 +43,7 @@ def _part_of(data: dict[str, Any]) -> str | None:
     return part
 
 
-def sources_for(
-    doc: Path, raw: bytes, store: Path | None = None
-) -> Mapping[str, IncludeSource] | None:
+def sources_for(doc: Path, raw: bytes) -> Mapping[str, IncludeSource] | None:
     """The page's include sources when the body names a `part`, else None.
 
     Resolved on every call, so a source swapped after page load is re-checked
@@ -55,7 +53,7 @@ def sources_for(
     if _part_of(parse_json_object(raw)) is None:
         return None
     try:
-        return include_sources(read_markdown(doc), doc.parent, store)
+        return include_sources(read_markdown(doc), doc.parent)
     except IncludeError as error:
         raise ValueError(str(error)) from error
 
@@ -99,7 +97,6 @@ def _store_answer(
     anchor: str,
     kind: str,
     decisions_open: bool,
-    comments_file: Path | None,
 ) -> dict[str, Any]:
     if not decisions_open:
         raise DecisionDenied
@@ -111,9 +108,7 @@ def _store_answer(
         extra = {"kind": kind, "item": item, "verdict": value}
     else:
         extra = {"kind": kind, "item": item, "value": value}
-    return append_comment(
-        doc, anchor, "", text, extra=extra, comments_file=comments_file
-    )
+    return append_comment(doc, anchor, "", text, extra=extra)
 
 
 def _comment_extra(
@@ -150,12 +145,8 @@ def store_comment(
     *,
     decisions_open: bool,
     sources: Mapping[str, IncludeSource] | None = None,
-    comments_file: Path | None = None,
 ) -> dict[str, Any]:
     """Append the comment in a JSON body; raise ValueError or DecisionDenied.
-
-    `comments_file` overrides the log beside `doc` (a plan page keeps its log in
-    the sidecar).
 
     An answer is stored only when `decisions_open` is true; the caller decides,
     because the gate differs between `pages serve` and the daemon. Only a
@@ -169,12 +160,10 @@ def store_comment(
     if part is not None and kind != "comment":
         raise ValueError("only a comment may name a part")
     if kind in ANSWER_KINDS:
-        return _store_answer(doc, data, anchor, kind, decisions_open, comments_file)
+        return _store_answer(doc, data, anchor, kind, decisions_open)
     if part is None:
         check_kind_allowed(doc, anchor, kind)
     extra, text = _comment_extra(data, kind, replacement, text)
     if part is None:
-        return append_comment(
-            doc, anchor, quote, text, extra=extra, comments_file=comments_file
-        )
+        return append_comment(doc, anchor, quote, text, extra=extra)
     return _store_part_comment(sources, part, (anchor, quote, text))
