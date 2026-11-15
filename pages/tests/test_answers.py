@@ -297,7 +297,7 @@ def test_comment_line_replaces_terminal_controls() -> None:
 
 
 def test_cli_comment_text_uses_the_same_cleaning() -> None:
-    from varde_pages.cli import comment_text
+    from varde_pages.operations import comment_text
 
     out = comment_text(
         {

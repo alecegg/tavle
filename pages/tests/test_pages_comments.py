@@ -191,7 +191,7 @@ def test_watch_ignores_comment_resolved_before_first_sight_and_reopen(
 
 
 def test_watch_and_comment_text_print_the_kind(tmp_path):
-    from varde_pages.cli import comment_text
+    from varde_pages.operations import comment_text
     from varde_pages.watch import comment_line
 
     doc = tmp_path / "plan.md"
