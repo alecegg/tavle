@@ -23,6 +23,9 @@ from varde_pages.components import mount_block
 
 _COPY = re.compile(r' data-copy="([^"]*)"')
 _TAG = re.compile(r"<[^>]*>")
+# Page-check rules the render does not apply: a block that is placed (an include's
+# error card too) is held; only absent ones show the missing note.
+_CHECK_ONLY = {"container-unknown", "container-include"}
 
 
 @dataclass(frozen=True)
@@ -149,7 +152,7 @@ def fill_containers(
         for _, own, held, fault in held_faults(
             [s for s in statements if s[2] not in invalid], INPUT_COMPONENTS
         )
-        if fault.rule != "container-unknown"  # `placed` decides what is missing
+        if fault.rule not in _CHECK_ONLY  # `placed` decides; any placed block is held
     }
     taken: set[str] = set()
     filled: dict[str, Filled] = {}
