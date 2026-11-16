@@ -21,7 +21,6 @@ from varde_pages.blocks.change_summary import EMPTY, UNCOUNTED
 from varde_pages.blocks_render.annotated_code import annotated_props
 from varde_pages.blocks_render.change_summary import change_summary_props
 from varde_pages.blocks_render.code import Panel, code_block_props, code_props, tokenize
-from varde_pages.blocks_render.containers import fill_containers
 from varde_pages.blocks_render.diff import diff_props
 from varde_pages.blocks_render.file_tree import (
     code_titles,
@@ -398,6 +397,6 @@ def test_a_container_copies_the_held_codes_raw_text() -> None:
         't = tabs(tab: [{"label": "Code", "blocks": ["c"]}])\n'
         "```\n"
     )
-    body = fill_containers(render_page(doc, "t.md").body)
+    body = render_page(doc, "t.md").body
     found = re.search(r'<div data-mithril="tabs"[^>]*data-copy="([^"]*)"', body)
     assert found and html.unescape(found[1]) == "Code\n\nqueue.append(x)"

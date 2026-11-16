@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 import html
-from dataclasses import dataclass, field, replace
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from varde_data.ui_lines import parse_lines
 
-from varde_pages.blocks_render.containers import fill_containers
 from varde_pages.comments import (
     ANSWER_KINDS,
     fold,
@@ -108,14 +107,9 @@ def read_markdown(doc: Path) -> str:
         return f"# Unreadable\n\n{doc.name} could not be read."
 
 
-def fill_page(page: RenderedPage) -> RenderedPage:
-    """The page with each container's held blocks moved into its panels."""
-    return replace(page, body=fill_containers(page.body))
-
-
 def parse_page(text: str, doc_name: str, ctx: PageCtx | None = None) -> RenderedPage:
     """The strict parse entry point for served and exported pages."""
-    return fill_page(render_page(text, doc_name, ctx))
+    return render_page(text, doc_name, ctx)
 
 
 def _indent(line: str) -> int:
@@ -152,7 +146,7 @@ def parse_page_stream(
     text: str, doc_name: str, ctx: PageCtx | None = None
 ) -> RenderedPage:
     """Parse a half-written page: an unfinished `ui` statement renders as nothing."""
-    return fill_page(render_page(drop_pending_tail(text), doc_name, ctx))
+    return render_page(drop_pending_tail(text), doc_name, ctx)
 
 
 def include_ctx(

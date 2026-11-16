@@ -11,10 +11,8 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from varde_data.ui_lines import parse_lines
-
 from varde_pages.blocks.check import check_props
-from varde_pages.blocks.fences import find_fences
+from varde_pages.blocks.fences import ui_statements
 from varde_pages.blocks.inputs import (
     MAX_VALUE_JSON,
     allowed_value,
@@ -41,10 +39,8 @@ def answer_fields(data: dict[str, Any]) -> tuple[str, object, str]:
 
 
 def _statement_props(doc_text: str, item: str) -> tuple[str, dict[str, object]] | None:
-    for fence in find_fences(doc_text, frozenset({"ui"})):
-        for statement in parse_lines(fence.body).statements:
-            if statement.id != item:
-                continue
+    for _, statement in ui_statements(doc_text):
+        if statement.id == item:
             faults = check_props(statement.component, statement.props, 0)
             return None if faults else (statement.component, statement.props)
     return None

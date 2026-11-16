@@ -1,7 +1,10 @@
 """Find typed block fences in markdown text. Pure; no TOML here."""
 
 import re
+from collections.abc import Iterator
 from dataclasses import dataclass
+
+from varde_data.ui_lines import ParseResult, Statement, parse_lines
 
 from varde_pages.markdown_syntax import FENCE, FenceScanner
 
@@ -82,3 +85,16 @@ def find_fences(text: str, langs: frozenset[str]) -> list[Fence]:
         for span in scan_fences(lines)
         if span.lang in langs
     ]
+
+
+def ui_results(text: str) -> Iterator[tuple[int, ParseResult]]:
+    """`(document line of the fence, parse result)` for each `ui` fence, in order."""
+    for fence in find_fences(text, frozenset({"ui"})):
+        yield fence.line, parse_lines(fence.body)
+
+
+def ui_statements(text: str) -> Iterator[tuple[int, Statement]]:
+    """Each `ui` statement of the page with its 1-based document line."""
+    for fence_line, result in ui_results(text):
+        for statement in result.statements:
+            yield fence_line + statement.line, statement

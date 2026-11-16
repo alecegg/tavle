@@ -18,9 +18,9 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde_data.ui_lines import Statement, parse_lines
+from varde_data.ui_lines import Statement
 
-from varde_pages.blocks.fences import find_fences
+from varde_pages.blocks.fences import ui_statements
 from varde_pages.blocks.include import include_faults
 from varde_pages.select import (
     Selector,
@@ -77,10 +77,11 @@ class IncludedPart:
 
 def _include_statements(text: str) -> Iterator[tuple[int, Statement]]:
     """Each `include` statement in the page's `ui` fences with its document line."""
-    for fence in find_fences(text, frozenset({"ui"})):
-        for statement in parse_lines(fence.body, partial=True).statements:
-            if statement.component == "include":
-                yield fence.line + statement.line, statement
+    return (
+        (line, statement)
+        for line, statement in ui_statements(text)
+        if statement.component == "include"
+    )
 
 
 def find_includes(text: str) -> list[IncludeRef]:
@@ -166,19 +167,22 @@ def _selector(ref: IncludeRef) -> Selector:
         raise IncludeError(ref.line, str(error)) from error
 
 
-def _read(path: Path, line: int) -> str:
-    """Open once without following a final symlink; cap the bytes read."""
+def read_source_text(path: Path) -> str:
+    """Open once without following a final symlink; cap the bytes read.
+
+    Raises ValueError naming the file when it cannot be read.
+    """
     name = path.name
     try:
         fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
     except OSError as error:
-        raise IncludeError(line, f"include source '{name}' is unreadable") from error
+        raise ValueError(f"include source '{name}' is unreadable") from error
     with os.fdopen(fd, "rb") as handle:
         if not stat.S_ISREG(os.fstat(handle.fileno()).st_mode):
-            raise IncludeError(line, f"include source '{name}' is not a .md file")
+            raise ValueError(f"include source '{name}' is not a regular file")
         data = handle.read(MAX_SOURCE_BYTES + 1)
     if len(data) > MAX_SOURCE_BYTES:
-        raise IncludeError(line, f"include source '{name}' is too large")
+        raise ValueError(f"include source '{name}' is too large")
     return data.decode("utf-8", errors="replace")
 
 
@@ -189,7 +193,10 @@ def _resolve_one(
     ref: IncludeRef, root: Path, roots: tuple[Path, ...]
 ) -> tuple[Path, list[SourceBlock], str]:
     path = _locate(ref, root, roots)
-    markdown = _read(path, ref.line)
+    try:
+        markdown = read_source_text(path)
+    except ValueError as error:
+        raise IncludeError(ref.line, str(error)) from error
     try:
         blocks = select_blocks(read_source(markdown), _selector(ref))
     except SelectorError as error:

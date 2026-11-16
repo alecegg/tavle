@@ -6,16 +6,14 @@ import json
 import os
 import re
 import secrets
-import stat
 from collections.abc import Mapping
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
+from varde_pages.include import IncludeSource, read_source_text
+from varde_pages.select import read_source
 from varde_pages.validation import CONTROLS
-
-if TYPE_CHECKING:
-    from varde_pages.include import IncludeSource
 
 _KEPT_KEYS = (
     "id", "ts", "anchor", "quote", "text", "state", "actor",
@@ -204,32 +202,13 @@ def fold(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 # --- comments on included parts ------------------------------------------------
 
 
-def read_source_markdown(path: Path, limit: int) -> str:
-    """Read at most `limit` bytes of a regular file without following a symlink."""
-    try:
-        descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
-    except OSError as error:
-        raise ValueError(f"include source '{path.name}' is unreadable") from error
-    with os.fdopen(descriptor, "rb") as handle:
-        if not stat.S_ISREG(os.fstat(handle.fileno()).st_mode):
-            raise ValueError(f"include source '{path.name}' is not a regular file")
-        data = handle.read(limit + 1)
-    if len(data) > limit:
-        raise ValueError(f"include source '{path.name}' is too large")
-    return data.decode("utf-8", errors="replace")
-
-
 def source_anchors(source: IncludeSource) -> tuple[frozenset[str], frozenset[str]]:
     """Anchors inside the include's selected region, and every anchor of the source.
 
     The source is re-read and re-parsed, so a comment can only land on a block
     that exists now; raises ValueError when the source cannot be read.
     """
-    # Lazy: `select` imports the page renderer, which imports this module.
-    from varde_pages.include import MAX_SOURCE_BYTES
-    from varde_pages.select import read_source
-
-    blocks = read_source(read_source_markdown(source.path, MAX_SOURCE_BYTES)).blocks
+    blocks = read_source(read_source_text(source.path)).blocks
     inside = frozenset(
         b.anchor for b in blocks if b.start >= source.start and b.end <= source.end
     )

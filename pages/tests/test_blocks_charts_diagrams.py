@@ -15,7 +15,6 @@ from typing import Any
 
 import pytest
 from varde_pages.blocks_render.charts import chart_props
-from varde_pages.blocks_render.containers import fill_containers
 from varde_pages.blocks_render.diagrams import diagram_props
 from varde_pages.blocks_render.flow import flow_props
 from varde_pages.blocks_render.image import image_props
@@ -119,6 +118,6 @@ def test_a_container_copies_a_held_client_block_from_its_host() -> None:
         "```\n\n"
         '```ui id=t\nt = tabs(tab: [{"label": "One", "blocks": ["c"]}])\n```\n'
     )
-    body = fill_containers(render_page(doc, "t.md").body)
+    body = render_page(doc, "t.md").body
     assert "vb-error" not in body
     assert 'data-copy="One\n\nlabel,s\na,1"' in body  # the tab, then the chart's copy

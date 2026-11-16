@@ -25,6 +25,7 @@ from varde_pages.blocks_render import (
 )
 from varde_pages.blocks_render.change_summary import change_summary_props
 from varde_pages.blocks_render.code import code_props
+from varde_pages.blocks_render.containers import Filled, Placed, fill_containers
 from varde_pages.blocks_render.file_tree import (
     code_titles,
     link_file_trees,
@@ -725,11 +726,71 @@ def _place_part(
     return anchor, part.html, "block", section, count
 
 
+@dataclass(frozen=True)
+class _Laid:
+    """A part with its anchor, hash and inner HTML, before it is wrapped."""
+
+    part: PagePart
+    anchor: str
+    digest: str
+    inner: str
+    cls: str
+
+    def wrapped(self) -> str:
+        return _wrap(
+            self.anchor, self.digest, self.inner, self.part.block_type, self.cls
+        )
+
+    def filled(self, host: Filled) -> str:
+        return _wrap(
+            self.anchor, host.digest, host.host, self.part.block_type, self.cls
+        )
+
+
+def _body_pieces(items: list[_Laid | str], titles: dict[str, str]) -> list[str]:
+    """The wrapped pieces: file links added, held blocks moved into their containers."""
+    linked = {
+        item.anchor: link_file_trees(item.wrapped(), titles)
+        for item in items
+        if isinstance(item, _Laid)
+    }
+    laid = [item for item in items if isinstance(item, _Laid)]
+    statements = [
+        (0, item.part.component, item.part.block_id or "", dict(item.part.props))
+        for item in laid
+        if item.part.component
+    ]
+    placed = {
+        item.part.block_id: Placed(
+            item.part.component,
+            item.part.props,
+            item.part.source,
+            item.digest,
+            linked[item.anchor],
+        )
+        for item in laid
+        if item.part.component and item.part.block_id
+    }
+    filled, taken = fill_containers(statements, placed)
+    pieces: list[str] = []
+    for item in items:
+        if isinstance(item, str):
+            pieces.append(link_file_trees(item, titles))
+            continue
+        ident = item.part.block_id
+        if item.part.component and ident in taken:
+            pieces.append("")  # a held block leaves an empty line where it stood
+            continue
+        host = filled.get(ident or "")
+        pieces.append(item.filled(host) if host else linked[item.anchor])
+    return pieces
+
+
 def assemble_parts(
     parts: list[PagePart], header: str, status: str, base: int = 0
 ) -> RenderedPage:
     """The page body for parsed parts: anchors, wrappers, contents and file links."""
-    pieces = [header]
+    items: list[_Laid | str] = []  # a raw part's HTML stays a string
     blocks: list[PageBlock] = []
     titles: dict[str, str] = {}  # code block title -> anchor, for file-tree links
     section, count = "top", 0
@@ -739,7 +800,7 @@ def assemble_parts(
     anchors = AnchorState(reserved)
     for part in parts:
         if part.kind == "raw":
-            pieces.append(part.html)
+            items.append(part.html)
             count += bool(part.block_id)  # an include counts as it does unresolved
             continue
         digest = block_hash(part.source)
@@ -748,15 +809,15 @@ def assemble_parts(
         )
         for file_title in code_titles(part.html):
             titles.setdefault(file_title, anchor)
-        pieces.append(_wrap(anchor, digest, inner, part.block_type, cls))
+        items.append(_Laid(part, anchor, digest, inner, cls))
         first, last = base + part.start, base + part.end
         blocks.append(
             PageBlock(
                 anchor, digest, plain_text(part.html), part.block_type, first, last
             )
         )
+    pieces = [header, *_body_pieces(items, titles)]
     toc = toc_html(toc_entries(headings))
     if toc:
         pieces.insert(1, toc)
-    pieces = [link_file_trees(p, titles) for p in pieces]
     return RenderedPage("\n".join(pieces), status, tuple(blocks))
