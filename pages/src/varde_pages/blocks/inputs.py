@@ -15,7 +15,7 @@ from varde_pages.blocks.rules import (
     str_field,
 )
 from varde_pages.blocks.spec import BlockSpec
-from varde_pages.comments import CONTROLS
+from varde_pages.validation import CONTROLS, MAX_ITEM
 
 MAX_OPTIONS = 50
 MAX_FIELDS = 30
@@ -31,6 +31,28 @@ _TYPE_KEYS = {
     "select": {"options"},
     "checkbox": set(),
 }
+
+
+MAX_LIST = 100
+
+
+def _members_ok(kind: str, members: object) -> bool:
+    if not isinstance(members, list) or len(members) > MAX_LIST:
+        return False
+    if kind != "list":
+        return True
+    return bool(members) and len(set(map(str, members))) == len(
+        members
+    )  # a picked set: each once
+
+
+def allowed_value(kind: str, value: object, allowed: tuple[str, ...]) -> bool:
+    members = value if kind == "list" else [value]
+    if not _members_ok(kind, members):
+        return False
+    if not allowed:
+        return all(isinstance(m, str) and len(m) <= MAX_ITEM for m in members)  # type: ignore[union-attr]
+    return all(isinstance(m, str) and m in allowed for m in members)  # type: ignore[union-attr]
 
 
 def finite(value: object) -> bool:

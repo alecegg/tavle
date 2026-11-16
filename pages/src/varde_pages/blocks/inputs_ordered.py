@@ -10,6 +10,7 @@ from varde_pages.blocks.inputs import (
     MAX_LABEL,
     MAX_OPTIONS,
     MAX_VALUE_JSON,
+    allowed_value,
     finite,
     option_faults,
     option_label_value,
@@ -98,6 +99,11 @@ def validate_slider(data: dict[str, object]) -> list[Fault]:
     faults = check_keys(data, {"label", "min", "max"}, {"step", "labels"}, "slider")
     faults += str_field(data, "label", "slider")
     return faults + _bound_faults(data) + _labels_faults(data)
+
+
+def ranking_value(value: object, allowed: tuple[str, ...]) -> bool:
+    """A permutation of the declared items: each exactly once."""
+    return allowed_value("list", value, allowed) and len(value) == len(allowed)  # type: ignore[arg-type]
 
 
 def check_slider_value(bounds: tuple[float, float, float], value: object) -> None:
