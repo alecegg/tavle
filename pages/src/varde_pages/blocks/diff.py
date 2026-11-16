@@ -118,4 +118,5 @@ DIFF = BlockSpec(
 )
 """,
     validate_diff,
+    block_type="code",
 )

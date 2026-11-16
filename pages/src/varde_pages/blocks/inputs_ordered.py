@@ -137,6 +137,7 @@ RANKING = BlockSpec(
 )
 """,
     validate_ranking,
+    block_type="widget",
 )
 
 SLIDER = BlockSpec(
@@ -158,4 +159,5 @@ SLIDER = BlockSpec(
 )
 """,
     validate_slider,
+    block_type="widget",
 )

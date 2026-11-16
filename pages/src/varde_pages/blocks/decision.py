@@ -70,4 +70,5 @@ DECISION = BlockSpec(
 )
 """,
     validate_decision,
+    block_type="decision",
 )

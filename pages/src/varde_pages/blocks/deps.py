@@ -42,4 +42,5 @@ DEPS = BlockSpec(
 )
 """,
     validate_deps,
+    block_type="status",
 )

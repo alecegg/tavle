@@ -13,6 +13,15 @@ class BlockSpec:
     fields: tuple[str, ...]  # one help line per field
     example: str  # one `ui` statement that validates; its id is the type name
     validate: Callable[[dict[str, object]], list[Fault]]
+    # The page block type the component renders as (`data-block-type`): `widget`
+    # and `decision` take an answer, `status` has no text to copy, `part` is
+    # expanded to the parts it names.
+    block_type: str = "visual"
+
+
+WIDGET = "widget"
+DECISION = "decision"
+INPUT_BLOCK_TYPES = frozenset({WIDGET, DECISION})
 
 
 @dataclass(frozen=True)

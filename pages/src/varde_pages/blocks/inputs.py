@@ -342,6 +342,7 @@ CHOICE = BlockSpec(
 )
 """,
     validate_choice,
+    block_type="widget",
 )
 
 FORM = BlockSpec(
@@ -369,6 +370,7 @@ FORM = BlockSpec(
 )
 """,
     validate_form,
+    block_type="widget",
 )
 
 COMMENT = BlockSpec(
@@ -384,4 +386,5 @@ COMMENT = BlockSpec(
 )
 """,
     validate_comment,
+    block_type="widget",
 )

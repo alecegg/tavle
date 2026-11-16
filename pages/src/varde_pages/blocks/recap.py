@@ -37,4 +37,5 @@ RECAP = BlockSpec(
 )
 """,
     validate_recap,
+    block_type="status",
 )

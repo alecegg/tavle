@@ -80,4 +80,5 @@ CODE = BlockSpec(
 )
 """,
     validate_code,
+    block_type="code",
 )

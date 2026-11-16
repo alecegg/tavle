@@ -32,7 +32,7 @@ from varde_pages.blocks.rules import Fault
 from varde_pages.blocks.screen_flow import SCREEN_FLOW
 from varde_pages.blocks.screens import UI_STATES, WIREFRAME
 from varde_pages.blocks.sequence import SEQUENCE
-from varde_pages.blocks.spec import BlockSpec
+from varde_pages.blocks.spec import INPUT_BLOCK_TYPES, WIDGET, BlockSpec
 from varde_pages.blocks.state import STATE
 from varde_pages.blocks.stats import STATS
 from varde_pages.blocks.tables import TABLE
@@ -72,6 +72,14 @@ COMPONENT_SPECS: dict[str, BlockSpec] = {
     "image": IMAGE,
     "change-summary": CHANGE_SUMMARY,
 }
+# Components whose inputs must stay visible, so a tab cannot hide them.
+INPUT_COMPONENTS = frozenset(
+    name for name, s in COMPONENT_SPECS.items() if s.block_type in INPUT_BLOCK_TYPES
+)
+# Inputs that ask an open question (all but the decision block).
+OPEN_CHOICES = frozenset(
+    name for name, s in COMPONENT_SPECS.items() if s.block_type == WIDGET
+)
 CUSTOM_REMOVED = (
     "the `custom` block was removed; use `ui` components (`varde pages blocks`)"
 )
@@ -101,7 +109,9 @@ def _covers_faults(data: dict[str, object]) -> list[Fault]:
 
 # Fence languages that held page data before the line syntax: the TOML typed
 # fences and the JSON `recap` and plain-text `deps` fences.
-OLD_FENCES = frozenset({*SPECS, "recap", "deps"})
+OLD_FENCES = frozenset(
+    {*SPECS, *(n for n, s in COMPONENT_SPECS.items() if s.block_type == "status")}
+)
 TOML_FENCE_REMOVED = (
     "typed fences were replaced by `ui` statements; "
     "rewrite this one as a statement (`varde pages blocks <type>`) "
@@ -150,7 +160,7 @@ def _ui_errors(doc_text: str, root: Path | None) -> list[BlockError]:
             errors += _duplicate_id(statement.id, line, first_seen)
             errors += check_props(statement.component, statement.props, line)
             held.append((line, statement.component, statement.id, statement.props))
-    errors += [BlockError(*found) for found in container_errors(held)]
+    errors += [BlockError(*found) for found in container_errors(held, INPUT_COMPONENTS)]
     found = include_errors(doc_text, root) + heading_id_errors(doc_text)
     errors += [BlockError(line, rule, message) for line, rule, message in found]
     return list(dict.fromkeys(errors))  # include faults arrive from both validators

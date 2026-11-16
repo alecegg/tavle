@@ -15,10 +15,6 @@ MAX_PANELS = {"tabs": 12, "columns": 4}
 MAX_HELD = 200
 HOLD_KEYS = {"tabs": "tab", "columns": "col"}
 CONTAINERS = frozenset(HOLD_KEYS)
-# Components whose inputs must stay visible, so a tab cannot hide them.
-INPUT_COMPONENTS = frozenset(
-    {"choice", "form", "comment", "ranking", "slider", "decision"}
-)
 HELD_ID = re.compile(r"^[a-z][a-z0-9-]{0,47}$")
 
 
@@ -108,7 +104,9 @@ def _chain_back(start: str, target: str, holds: dict[str, list[str]]) -> bool:
     return False
 
 
-def _held_fault(kind: str, own: str, held: str, component: str | None) -> Fault | None:
+def _held_fault(
+    kind: str, own: str, held: str, component: str | None, inputs: frozenset[str]
+) -> Fault | None:
     if component is None:
         return Fault(
             "container-unknown",
@@ -119,7 +117,7 @@ def _held_fault(kind: str, own: str, held: str, component: str | None) -> Fault 
             "container-include",
             f"{kind} '{own}' cannot hold include '{held}'",
         )
-    if kind == "tabs" and component in INPUT_COMPONENTS:
+    if kind == "tabs" and component in inputs:
         return Fault(
             "container-input",
             f"tabs '{own}' cannot hold input '{held}'; "
@@ -134,8 +132,13 @@ def _nest_fault(kind: str, own: str, held: str, holds: dict[str, list[str]]) -> 
     return Fault(rule, message)
 
 
-def container_errors(statements: Statements) -> list[tuple[int, str, str]]:
-    """`(line, rule, message)` for the ids containers hold across the whole page."""
+def container_errors(
+    statements: Statements, inputs: frozenset[str]
+) -> list[tuple[int, str, str]]:
+    """`(line, rule, message)` for the ids containers hold across the whole page.
+
+    `inputs` names the components a tab may not hold.
+    """
     components = {ident: component for _, component, ident, _ in statements}
     holds = {i: held_ids(c, p) for _, c, i, p in statements if c in CONTAINERS}
     taken: dict[str, str] = {}
@@ -143,7 +146,7 @@ def container_errors(statements: Statements) -> list[tuple[int, str, str]]:
     for line, kind, own, _ in statements:
         for held in holds.get(own, []):
             found = components.get(held)
-            fault = _held_fault(kind, own, held, found)
+            fault = _held_fault(kind, own, held, found, inputs)
             if found in CONTAINERS:
                 fault = _nest_fault(kind, own, held, holds)
             elif held in taken:

@@ -14,6 +14,7 @@ import html
 import re
 
 from varde_pages.blocks.containers import HOLD_KEYS
+from varde_pages.blocks.spec import INPUT_BLOCK_TYPES
 from varde_pages.blocks_render.common import as_dict, as_list, esc
 from varde_pages.components import host_props
 
@@ -31,7 +32,6 @@ _COPY = re.compile(r' data-copy="([^"]*)"')
 _TAG = re.compile(r"<[^>]*>")
 _HASH = re.compile(r'data-hash="([0-9a-f]+)"')
 _SENTINEL = "\x00container\x00"
-_INPUT_TYPES = frozenset({"widget", "decision"})
 
 
 def container_props(kind: str, props: dict[str, object]) -> dict[str, object]:
@@ -94,7 +94,7 @@ def _take(body: str, held: str, kind: str, taken: set[str]) -> tuple[str, str, s
             "",
         )
     if kind == "tabs" and any(
-        f'data-block-type="{t}"' in block[:300] for t in _INPUT_TYPES
+        f'data-block-type="{t}"' in block[:300] for t in INPUT_BLOCK_TYPES
     ):
         return body, _note(f"Input '{held}' cannot be held in tabs."), ""
     taken.add(held)
