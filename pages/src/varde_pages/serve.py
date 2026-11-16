@@ -17,7 +17,6 @@ from varde_pages.assemble import (
     assemble_page,
 )
 from varde_pages.comments import (
-    KINDS,
     comments_path,
     fold,
     mark_applied,
@@ -38,12 +37,14 @@ from varde_pages.netbind import (
     classify_host,
     is_loopback,
 )
+from varde_pages.store import EDIT_OFF, DecisionDenied, sources_for, store_comment
 from varde_pages.template import (
     BUNDLE_SCRIPT,
     TOKENS_CSS,
     static_css,
     static_scripts,
 )
+from varde_pages.validation import parse_json_object, strings
 
 STATIC_DIR = Path(__file__).parent / "static"
 # `app.css` without the tokens: the host page that mounts a page owns them
@@ -67,10 +68,7 @@ STATIC_TYPES = {
     INLINE_CSS: "text/css; charset=utf-8",
 }
 ACTOR = "user"  # the page user; recorded as the actor that applied a suggestion
-EDIT_OFF = "editing is off; serve with --allow-edit"
 MAX_BODY = 64 * 1024
-MAX_TEXT = 8000
-MAX_QUOTE = 200
 POLL_SECONDS = 0.5
 HEARTBEAT_SECONDS = 15
 MAX_STREAMS = 16
@@ -98,115 +96,16 @@ def is_json_type(content_type: str | None) -> bool:
     return params.strip().lower() in {"", "charset=utf-8"}
 
 
-def parse_json_object(raw: bytes) -> dict[str, Any]:
-    try:
-        data = json.loads(raw)
-    except (json.JSONDecodeError, UnicodeDecodeError) as error:
-        raise ValueError("body is not valid JSON") from error
-    if not isinstance(data, dict):
-        raise ValueError("body must be a JSON object")  # noqa: TRY004
-    return data
-
-
-def _strings(data: dict[str, Any], *names: str) -> list[str]:
-    values = [data.get(name) for name in names]
-    if not all(isinstance(value, str) for value in values):
-        raise ValueError(f"{' and '.join(names)} must be strings")
-    return cast("list[str]", values)
-
-
-def parse_comment_body(raw: bytes) -> tuple[str, str, str]:
-    """Return (anchor, quote, text) or raise ValueError with a short reason."""
-    anchor, quote, text, _, _ = parse_comment_fields(raw)
-    return anchor, quote, text
-
-
-def parse_comment_fields(raw: bytes) -> tuple[str, str, str, str, str]:
-    """Return (anchor, quote, text, kind, replacement); raise ValueError."""
-    return comment_fields(parse_json_object(raw))
-
-
-def _quote_of(data: dict[str, Any]) -> str:
-    quote = data.get("quote")
-    if quote is None:
-        return ""
-    if not isinstance(quote, str):
-        raise ValueError("quote must be a string")  # noqa: TRY004
-    return quote
-
-
-def _kind_of(data: dict[str, Any]) -> str:
-    kind = data.get("kind", "comment")
-    if kind not in KINDS:
-        raise ValueError("kind must be comment, suggestion, drift, decision or answer")
-    return kind
-
-
-def _replacement_of(data: dict[str, Any]) -> str:
-    replacement = data.get("replacement", "")
-    if not isinstance(replacement, str):
-        raise ValueError("replacement must be a string")  # noqa: TRY004
-    return replacement
-
-
-def comment_fields(data: dict[str, Any]) -> tuple[str, str, str, str, str]:
-    """`parse_comment_fields` for a body that is already parsed."""
-    if data.get("kind") in {"suggestion", "drift", "decision", "answer"}:
-        data = {"text": "", **data}
-    anchor, text = _strings(data, "anchor", "text")
-    quote = _quote_of(data)
-    kind = _kind_of(data)
-    replacement = _replacement_of(data)
-    if max(len(text), len(replacement)) > MAX_TEXT:
-        raise ValueError(f"text longer than {MAX_TEXT} characters")
-    if kind == "suggestion" and not (quote and len(quote) <= MAX_QUOTE):
-        raise ValueError(f"suggestion needs a quote of 1-{MAX_QUOTE} characters")
-    return (
-        anchor,
-        (quote if kind == "suggestion" else quote[:MAX_QUOTE]),
-        text,
-        kind,
-        replacement,
-    )
-
-
-DRIFT_VERDICTS = ("accepted", "rejected", "open")
-MAX_ITEM = 600
-
-
-def parse_drift_fields(raw: bytes) -> tuple[str, str]:
-    """Return (item, verdict) of a drift judgment or raise ValueError."""
-    return drift_fields(parse_json_object(raw))
-
-
-def drift_fields(data: dict[str, Any]) -> tuple[str, str]:
-    """`parse_drift_fields` for a body that is already parsed."""
-    item, verdict = _strings(data, "item", "verdict")
-    if not item or len(item) > MAX_ITEM:
-        raise ValueError(f"drift item needs 1-{MAX_ITEM} characters")
-    if verdict not in DRIFT_VERDICTS:
-        raise ValueError("verdict must be accepted, rejected or open")
-    return item, verdict
-
-
-def parse_decision_fields(raw: bytes) -> tuple[str, str]:
-    """Return (item, verdict) of a decision answer or raise ValueError."""
-    item, verdict = _strings(parse_json_object(raw), "item", "verdict")
-    if not item or len(item) > MAX_ITEM:
-        raise ValueError(f"decision item needs 1-{MAX_ITEM} characters")
-    return item, verdict
-
-
 def parse_edit_body(raw: bytes) -> tuple[str, str, str]:
     """Return (anchor, base_hash, new_source) or raise ValueError."""
     data = parse_json_object(raw)
-    anchor, base_hash, new_source = _strings(data, "anchor", "base_hash", "new_source")
+    anchor, base_hash, new_source = strings(data, "anchor", "base_hash", "new_source")
     return anchor, base_hash, new_source
 
 
 def parse_accept_body(raw: bytes) -> tuple[str, str]:
     """Return (comment_id, base_hash) or raise ValueError."""
-    comment_id, base_hash = _strings(parse_json_object(raw), "comment_id", "base_hash")
+    comment_id, base_hash = strings(parse_json_object(raw), "comment_id", "base_hash")
     return comment_id, base_hash
 
 
@@ -499,12 +398,6 @@ class PageHandler(BaseHTTPRequestHandler):
         return self.rfile.read(int(length))
 
     def _store_comment(self, raw: bytes) -> None:
-        from varde_pages.store import (
-            DecisionDenied,
-            sources_for,
-            store_comment,
-        )
-
         # An answer is gated like a page edit.
         decisions_open = not edit_denied("/edit", self.app.remote, self.app.allow_edit)
         try:

@@ -9,22 +9,35 @@ Pure functions; no I/O.
 from __future__ import annotations
 
 import json
-import math
+from typing import Any
 
 from varde_data.ui_lines import parse_lines
 
 from varde_pages.blocks.check import check_props
 from varde_pages.blocks.fences import find_fences
-from varde_pages.blocks.inputs import MAX_VALUE_JSON, check_form_value
-from varde_pages.blocks.inputs_ordered import check_slider_value
+from varde_pages.blocks.inputs import (
+    MAX_VALUE_JSON,
+    allowed_value,
+    check_form_value,
+    finite,
+)
+from varde_pages.blocks.inputs_ordered import check_slider_value, ranking_value
 from varde_pages.blocks.spec import AnswerSchema
 from varde_pages.blocks_render.registry import COMPONENTS
-from varde_pages.comments import CONTROLS
+from varde_pages.validation import CONTROLS, MAX_ITEM, MAX_TEXT
 
-MAX_ANSWER_TEXT = 8000
-MAX_ANSWER_ITEM = 600
-MAX_LIST = 100
 _TEXT_REQUIRED = {"commented"}  # a verdict that is only meaningful with a reason
+
+
+def answer_fields(data: dict[str, Any]) -> tuple[str, object, str]:
+    item, text = data.get("item"), data.get("text", "")
+    if not isinstance(item, str) or not isinstance(text, str):
+        raise ValueError("item and text must be strings")  # noqa: TRY004
+    if "value" in data:
+        return item, data["value"], text
+    if data.get("kind") == "decision" and "verdict" in data:
+        return item, data["verdict"], text
+    raise ValueError("an answer needs a value")
 
 
 def _statement_props(doc_text: str, item: str) -> tuple[str, dict[str, object]] | None:
@@ -48,53 +61,20 @@ def answer_schema(doc_text: str, item: str) -> AnswerSchema | None:
     return component.answer_schema(found[1])
 
 
-def _members_ok(kind: str, members: object) -> bool:
-    if not isinstance(members, list) or len(members) > MAX_LIST:
-        return False
-    if kind != "list":
-        return True
-    return bool(members) and len(set(map(str, members))) == len(
-        members
-    )  # a picked set: each once
-
-
-def _allowed_ok(kind: str, value: object, allowed: tuple[str, ...]) -> bool:
-    members = value if kind == "list" else [value]
-    if not _members_ok(kind, members):
-        return False
-    if not allowed:
-        return all(isinstance(m, str) and len(m) <= MAX_ANSWER_ITEM for m in members)  # type: ignore[union-attr]
-    return all(isinstance(m, str) and m in allowed for m in members)  # type: ignore[union-attr]
-
-
-def _number_ok(value: object) -> bool:
-    if isinstance(value, bool) or not isinstance(value, int | float):
-        return False
-    try:
-        return math.isfinite(value)
-    except OverflowError:
-        return False
-
-
-def _ranking_ok(value: object, allowed: tuple[str, ...]) -> bool:
-    """A permutation of the declared items: each exactly once."""
-    return _allowed_ok("list", value, allowed) and len(value) == len(allowed)  # type: ignore[arg-type]
-
-
 def _kind_ok(schema: AnswerSchema, value: object) -> bool:
     kind = schema.kind
     if kind == "form":
         check_form_value(schema.shape, value)
         return True
     if kind == "number":
-        ok = _number_ok(value)
+        ok = finite(value)
         if ok and schema.bounds is not None:
             check_slider_value(schema.bounds, value)  # names the range or step
         return ok
     if kind == "ranking":
-        return _ranking_ok(value, schema.allowed)
+        return ranking_value(value, schema.allowed)
     if kind in {"verdict", "string", "list"}:
-        return _allowed_ok(kind, value, schema.allowed)
+        return allowed_value(kind, value, schema.allowed)
     raise ValueError(f"answer kind {kind!r} is not supported")
 
 
@@ -114,10 +94,10 @@ def _check_value(schema: AnswerSchema, value: object) -> None:
 
 
 def _check_answer_text(item: str, text: str) -> None:
-    if not item or len(item) > MAX_ANSWER_ITEM:
-        raise ValueError(f"answer item needs 1-{MAX_ANSWER_ITEM} characters")
-    if len(text) > MAX_ANSWER_TEXT:
-        raise ValueError(f"text longer than {MAX_ANSWER_TEXT} characters")
+    if not item or len(item) > MAX_ITEM:
+        raise ValueError(f"answer item needs 1-{MAX_ITEM} characters")
+    if len(text) > MAX_TEXT:
+        raise ValueError(f"text longer than {MAX_TEXT} characters")
     if CONTROLS.search(text) or CONTROLS.search(item):
         raise ValueError("text holds control characters")
 

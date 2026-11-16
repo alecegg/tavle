@@ -12,6 +12,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+from varde_pages.validation import CONTROLS
+
 if TYPE_CHECKING:
     from varde_pages.include import IncludeSource
 
@@ -23,8 +25,6 @@ KINDS = ("comment", "suggestion", "drift", "decision", "answer")
 ANSWER_KINDS = ("decision", "answer")  # a `decision` row is read as an answer
 _ANCHOR = re.compile(r"[a-z0-9-]+(/[0-9]+)?")
 _INTERVAL = re.compile(r"(\d+)([sm])")
-# C0 and C1 controls (tab, newline, return allowed), NUL, bidi overrides and isolates.
-CONTROLS = re.compile("[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\u202a-\u202e\u2066-\u2069]")
 
 
 def one_line(value: object) -> str:

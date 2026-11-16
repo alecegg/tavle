@@ -8,22 +8,82 @@ from pathlib import Path
 from typing import Any
 
 from varde_pages.actions import kind_allowed
-from varde_pages.answers import validate_answer
+from varde_pages.answers import answer_fields, validate_answer
 from varde_pages.assemble import read_markdown
 from varde_pages.comments import (
     ANSWER_KINDS,
+    KINDS,
     append_comment,
     append_part_comment,
 )
 from varde_pages.include import IncludeError, IncludeSource, include_sources
 from varde_pages.render import render_page
-from varde_pages.serve import (
-    EDIT_OFF,
+from varde_pages.validation import (
     MAX_ITEM,
-    comment_fields,
-    drift_fields,
+    MAX_QUOTE,
+    MAX_TEXT,
     parse_json_object,
+    strings,
 )
+
+EDIT_OFF = "editing is off; serve with --allow-edit"
+
+
+def _quote_of(data: dict[str, Any]) -> str:
+    quote = data.get("quote")
+    if quote is None:
+        return ""
+    if not isinstance(quote, str):
+        raise ValueError("quote must be a string")  # noqa: TRY004
+    return quote
+
+
+def _kind_of(data: dict[str, Any]) -> str:
+    kind = data.get("kind", "comment")
+    if kind not in KINDS:
+        raise ValueError("kind must be comment, suggestion, drift, decision or answer")
+    return kind
+
+
+def _replacement_of(data: dict[str, Any]) -> str:
+    replacement = data.get("replacement", "")
+    if not isinstance(replacement, str):
+        raise ValueError("replacement must be a string")  # noqa: TRY004
+    return replacement
+
+
+def comment_fields(data: dict[str, Any]) -> tuple[str, str, str, str, str]:
+    """Validate comment fields in a parsed body."""
+    if data.get("kind") in {"suggestion", "drift", "decision", "answer"}:
+        data = {"text": "", **data}
+    anchor, text = strings(data, "anchor", "text")
+    quote = _quote_of(data)
+    kind = _kind_of(data)
+    replacement = _replacement_of(data)
+    if max(len(text), len(replacement)) > MAX_TEXT:
+        raise ValueError(f"text longer than {MAX_TEXT} characters")
+    if kind == "suggestion" and not (quote and len(quote) <= MAX_QUOTE):
+        raise ValueError(f"suggestion needs a quote of 1-{MAX_QUOTE} characters")
+    return (
+        anchor,
+        (quote if kind == "suggestion" else quote[:MAX_QUOTE]),
+        text,
+        kind,
+        replacement,
+    )
+
+
+DRIFT_VERDICTS = ("accepted", "rejected", "open")
+
+
+def drift_fields(data: dict[str, Any]) -> tuple[str, str]:
+    """Validate the fields of a drift judgment."""
+    item, verdict = strings(data, "item", "verdict")
+    if not item or len(item) > MAX_ITEM:
+        raise ValueError(f"drift item needs 1-{MAX_ITEM} characters")
+    if verdict not in DRIFT_VERDICTS:
+        raise ValueError("verdict must be accepted, rejected or open")
+    return item, verdict
 
 
 class DecisionDenied(PermissionError):
@@ -75,17 +135,6 @@ def check_kind_allowed(doc: Path, anchor: str, kind: str) -> None:
         raise ValueError(f"{kind} is not allowed on {block_type}")
 
 
-def _answer_fields(data: dict[str, Any]) -> tuple[str, object, str]:
-    item, text = data.get("item"), data.get("text", "")
-    if not isinstance(item, str) or not isinstance(text, str):
-        raise ValueError("item and text must be strings")  # noqa: TRY004
-    if "value" in data:
-        return item, data["value"], text
-    if data.get("kind") == "decision" and "verdict" in data:
-        return item, data["verdict"], text
-    raise ValueError("an answer needs a value")
-
-
 def _answer_text(value: object, item: str, text: str) -> str:
     shown = value if isinstance(value, str) else json.dumps(value)
     return text.strip() or f"{shown}: {item}"[:200]
@@ -101,7 +150,7 @@ def _store_answer(
     if not decisions_open:
         raise DecisionDenied
     check_kind_allowed(doc, anchor, kind)
-    item, value, text = _answer_fields(data)
+    item, value, text = answer_fields(data)
     validate_answer(read_markdown(doc), item, value, text)
     text = _answer_text(value, item, text)
     if kind == "decision":  # the old wire row, kept for pages served before `answer`
