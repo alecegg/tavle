@@ -73,12 +73,14 @@ def mount_block(
     fallback: str,
     block_id: str | None = None,
     copy: str | None = None,
+    held: str = "",
 ) -> str:
     """Host for component `name`; `fallback` is the text shown with no script.
 
     `copy` is the block's plain text for a container or the action menu to read
     before the component has mounted (`data-copy`, as the drawn block carries it);
-    a block with no copy text of its own copies its `fallback` source.
+    a block with no copy text of its own copies its `fallback` source. `held` is
+    markup placed inside the host after its props (a container's held blocks).
     """
     payload = _payload(props)
     owner = "" if block_id is None else f' data-block-id="{html.escape(block_id)}"'
@@ -87,7 +89,7 @@ def mount_block(
         f'<div {HOST_ATTR}="{html.escape(name)}"{owner}>'
         f'<noscript><pre class="vd-noscript">{html.escape(fallback)}</pre></noscript>'
         f'<script type="application/json">{payload}</script>'
-        "</div>"
+        f"{held}</div>"
     )
 
 

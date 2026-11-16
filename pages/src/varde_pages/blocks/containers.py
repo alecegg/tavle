@@ -6,7 +6,7 @@ document-level `container_errors` checks the ids against the whole page.
 """
 
 import re
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 
 from varde_pages.blocks.rules import Fault, check_keys, str_field, tables
 from varde_pages.blocks.spec import BlockSpec
@@ -132,17 +132,16 @@ def _nest_fault(kind: str, own: str, held: str, holds: dict[str, list[str]]) -> 
     return Fault(rule, message)
 
 
-def container_errors(
+def held_faults(
     statements: Statements, inputs: frozenset[str]
-) -> list[tuple[int, str, str]]:
-    """`(line, rule, message)` for the ids containers hold across the whole page.
+) -> Iterator[tuple[int, str, str, Fault]]:
+    """`(line, container id, held id, fault)` for each held id the page rules refuse.
 
     `inputs` names the components a tab may not hold.
     """
     components = {ident: component for _, component, ident, _ in statements}
     holds = {i: held_ids(c, p) for _, c, i, p in statements if c in CONTAINERS}
     taken: dict[str, str] = {}
-    errors: list[tuple[int, str, str]] = []
     for line, kind, own, _ in statements:
         for held in holds.get(own, []):
             found = components.get(held)
@@ -155,8 +154,17 @@ def container_errors(
                 )
             taken.setdefault(held, own)
             if fault:
-                errors.append((line, fault.rule, fault.message))
-    return errors
+                yield line, own, held, fault
+
+
+def container_errors(
+    statements: Statements, inputs: frozenset[str]
+) -> list[tuple[int, str, str]]:
+    """`(line, rule, message)` for the ids containers hold across the whole page."""
+    return [
+        (line, fault.rule, fault.message)
+        for line, _, _, fault in held_faults(statements, inputs)
+    ]
 
 
 TABS = BlockSpec(

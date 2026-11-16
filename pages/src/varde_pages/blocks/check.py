@@ -3,7 +3,6 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde_data.ui_lines import parse_lines
 from varde_data.ui_lines.parse import ID_RULE
 
 from varde_pages.blocks.annotated_code import ANNOTATED_CODE
@@ -18,7 +17,7 @@ from varde_pages.blocks.decision import DECISION
 from varde_pages.blocks.deps import DEPS
 from varde_pages.blocks.diagrams import DIAGRAM
 from varde_pages.blocks.diff import DIFF
-from varde_pages.blocks.fences import find_fences
+from varde_pages.blocks.fences import find_fences, ui_results
 from varde_pages.blocks.file_tree import FILE_TREE
 from varde_pages.blocks.flow import FLOW
 from varde_pages.blocks.image import IMAGE
@@ -150,13 +149,12 @@ def _ui_errors(doc_text: str, root: Path | None) -> list[BlockError]:
     errors: list[BlockError] = []
     first_seen: dict[str, int] = {}
     held: list[tuple[int, str, str, dict[str, object]]] = []
-    for fence in find_fences(doc_text, frozenset({"ui"})):
-        result = parse_lines(fence.body)
+    for fence_line, result in ui_results(doc_text):
         errors += [
-            BlockError(fence.line + e.line, e.rule, e.message) for e in result.errors
+            BlockError(fence_line + e.line, e.rule, e.message) for e in result.errors
         ]
         for statement in result.statements:
-            line = fence.line + statement.line
+            line = fence_line + statement.line
             errors += _duplicate_id(statement.id, line, first_seen)
             errors += check_props(statement.component, statement.props, line)
             held.append((line, statement.component, statement.id, statement.props))

@@ -8,14 +8,11 @@ magic bytes that match its extension. This is the only module that reads image f
 from __future__ import annotations
 
 import base64
-from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 from posixpath import splitext
 
-from varde_data.ui_lines import Statement, parse_lines
-
-from varde_pages.blocks.fences import find_fences
+from varde_pages.blocks.fences import ui_statements
 from varde_pages.blocks.image import src_fault
 from varde_pages.blocks.image_header import EXTENSIONS, MIME, read_header
 
@@ -86,20 +83,13 @@ def probe(src: str, root: Path, *, embed: bool = False) -> Media | Problem:
     return Media(src, mime, size[0], size[1], len(data), url)
 
 
-def _image_statements(text: str) -> Iterator[Statement]:
-    for fence in find_fences(text, frozenset({"ui"})):
-        for statement in parse_lines(fence.body, partial=True).statements:
-            if statement.component == "image":
-                yield statement
-
-
 def page_media(
     text: str, doc: Path, *, embed: bool = False
 ) -> dict[str, Media | Problem]:
     """Probe every distinct, well-formed `src` of the page's image statements."""
     found: dict[str, Media | Problem] = {}
-    for statement in _image_statements(text):
+    for _, statement in ui_statements(text):
         src = statement.props.get("src")
-        if isinstance(src, str) and src not in found:
+        if statement.component == "image" and isinstance(src, str) and src not in found:
             found[src] = probe(src, doc.parent, embed=embed)
     return found

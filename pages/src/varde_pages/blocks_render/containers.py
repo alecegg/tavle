@@ -1,37 +1,47 @@
 """tabs and columns: panel props for the browser, and filling the held blocks in.
 
 A container renders as a host (`static/components/tabs.js`, `columns.js`) that names
-each panel's held block ids. `fill_containers` is page assembly, not drawing: it
-moves the already-rendered held blocks into the container's host as
-`<div class="vd-containers-slot" data-hold="id">` children, so a held block is
-rendered once and keeps its own id, host and action menu. Mounting lifts those
-children out and each panel slot adopts them. Every panel shows by default (headings
-label them); `containers.js` turns tab panels into a tablist.
+each panel's held block ids. `fill_containers` is page assembly, not drawing: given
+the page's wrapped statement blocks, it returns each container's host with the held
+blocks as `<div class="vd-containers-slot" data-hold="id">` children, so a held
+block is rendered once and keeps its own id, host and action menu. Mounting lifts
+those children out and each panel slot adopts them. Every panel shows by default
+(headings label them); `containers.js` turns tab panels into a tablist. Which ids a
+container may hold is decided by `blocks.containers.held_faults`.
 """
 
 import hashlib
 import html
 import re
+from collections.abc import Mapping
+from dataclasses import dataclass
 
-from varde_pages.blocks.containers import HOLD_KEYS
-from varde_pages.blocks.spec import INPUT_BLOCK_TYPES
+from varde_pages.blocks.check import INPUT_COMPONENTS, check_props
+from varde_pages.blocks.containers import CONTAINERS, HOLD_KEYS, Statements, held_faults
 from varde_pages.blocks_render.common import as_dict, as_list, esc
-from varde_pages.components import host_props
+from varde_pages.components import mount_block
 
-_ROOT = re.compile(
-    r'<div class="block" id="blk-([a-z0-9-]+)" data-anchor="[^"]*" '
-    r'data-hash="([0-9a-f]+)" data-block-type="visual">'
-    r'<div data-mithril="(tabs|columns)" data-block-id="[^"]*" data-copy="">'
-)
-_CONTAINER_HEAD = re.compile(
-    r'^<div class="block"[^>]*><div data-mithril="(tabs|columns)"'
-)
-_HOST_TAIL = "</div></div>"  # the host and its block wrapper close the root
-_DIV = re.compile(r"<div\b|</div>")
 _COPY = re.compile(r' data-copy="([^"]*)"')
 _TAG = re.compile(r"<[^>]*>")
-_HASH = re.compile(r'data-hash="([0-9a-f]+)"')
-_SENTINEL = "\x00container\x00"
+
+
+@dataclass(frozen=True)
+class Placed:
+    """A statement's block as the page wraps it, which a container may hold."""
+
+    component: str
+    props: Mapping[str, object]
+    source: str
+    digest: str
+    html: str  # the wrapped block
+
+
+@dataclass(frozen=True)
+class Filled:
+    """A container's host with its held blocks inside, and its new hash."""
+
+    host: str
+    digest: str
 
 
 def container_props(kind: str, props: dict[str, object]) -> dict[str, object]:
@@ -49,20 +59,6 @@ def container_props(kind: str, props: dict[str, object]) -> dict[str, object]:
 # --- filling ----------------------------------------------------------------
 
 
-def _block_start(body: str, ident: str) -> int:
-    return body.find(f'<div class="block" id="blk-{ident}" ')
-
-
-def _block_end(body: str, start: int) -> int:
-    """Index after the `</div>` closing the block that opens at `start`."""
-    depth = 0
-    for tag in _DIV.finditer(body, start):
-        depth += 1 if tag.group().startswith("<div") else -1
-        if depth == 0:
-            return tag.end()
-    return len(body)
-
-
 def _copy_of(block: str) -> str:
     marked = _COPY.search(block)
     if marked:
@@ -74,77 +70,69 @@ def _note(text: str) -> str:
     return f'<p class="vd-containers-note">{esc(text)}</p>'
 
 
-def _take(body: str, held: str, kind: str, taken: set[str]) -> tuple[str, str, str]:
-    """(body without the held block, its HTML or a note, its copy text)."""
-    start = _block_start(body, held)
-    if start >= 0 and held in taken:
-        start = -1
-    if start < 0:
-        return (
-            body,
-            _note(f"Block '{held}' is missing, held elsewhere, or is this container."),
-            "",
-        )
-    end = _block_end(body, start)
-    block = body[start:end]
-    if _CONTAINER_HEAD.match(block):
-        return (
-            body,
-            _note(f"Block '{held}' is a container; containers do not nest."),
-            "",
-        )
-    if kind == "tabs" and any(
-        f'data-block-type="{t}"' in block[:300] for t in INPUT_BLOCK_TYPES
-    ):
-        return body, _note(f"Input '{held}' cannot be held in tabs."), ""
-    taken.add(held)
-    return body[:start] + body[end:], block, _copy_of(block)
+def _slot(held: str, content: str) -> str:
+    return f'<div class="vd-containers-slot" data-hold="{esc(held)}">{content}</div>'
 
 
-def _fill_root(
-    body: str, root: str, kind: str, taken: set[str]
-) -> tuple[str, str, str, list[str]]:
-    """(body, filled HTML, copy text, held hashes) with the held blocks moved in."""
-    panels = as_list(host_props(root, kind)[0]["panels"])
+def _fill_one(
+    ident: str,
+    block: Placed,
+    placed: Mapping[str, Placed],
+    refused: Mapping[tuple[str, str], str],
+    taken: set[str],
+) -> Filled:
+    shown = container_props(block.component, dict(block.props))
     slots: list[str] = []
     copies: list[str] = []
     hashes: list[str] = []
-    for panel in panels:
+    for panel in as_list(shown["panels"]):
         label = panel["label"]
         copies += [label] if label else []
         for held in panel["blocks"]:
-            body, block, copy = _take(body, held, kind, taken)
-            slots.append(
-                f'<div class="vd-containers-slot" data-hold="{esc(held)}">{block}</div>'
-            )
+            if (ident, held) in refused:
+                slots.append(_slot(held, _note(refused[ident, held])))
+                continue
+            taken.add(held)
+            slots.append(_slot(held, placed[held].html))
+            copy = _copy_of(placed[held].html)
             copies += [copy] if copy else []
-            hashes += _HASH.findall(block[:300])
-    filled = root.removesuffix(_HOST_TAIL) + "".join(slots) + _HOST_TAIL
-    return body, filled, "\n\n".join(copies), hashes
+            hashes.append(placed[held].digest)
+    host = mount_block(
+        block.component,
+        shown,
+        block.source,
+        ident,
+        "\n\n".join(copies),
+        "".join(slots),
+    )
+    return Filled(host, _held_digest(block.digest, hashes))
 
 
-def _stamp(filled: str, copy: str, hashes: list[str]) -> str:
-    """Give the container the copy text and a hash that changes with its held blocks."""
-    filled = filled.replace(' data-copy=""', f' data-copy="{esc(copy)}"', 1)
-    own = _HASH.search(filled)
-    if own is None or not hashes:
-        return filled
-    digest = hashlib.sha256((own.group(1) + "".join(hashes)).encode()).hexdigest()[:12]
-    return filled.replace(own.group(0), f'data-hash="{digest}"', 1)
+def _held_digest(own: str, hashes: list[str]) -> str:
+    """The container's hash, changed by its held blocks' hashes."""
+    if not hashes:
+        return own
+    return hashlib.sha256((own + "".join(hashes)).encode()).hexdigest()[:12]
 
 
-def _fill_one(body: str, ident: str, kind: str, taken: set[str]) -> str:
-    start = _block_start(body, ident)
-    end = _block_end(body, start)
-    root = body[start:end]
-    body = body[:start] + _SENTINEL + body[end:]
-    body, filled, copy, hashes = _fill_root(body, root, kind, taken)
-    return body.replace(_SENTINEL, _stamp(filled, copy, hashes), 1)
+def fill_containers(
+    statements: Statements, placed: Mapping[str, Placed]
+) -> tuple[dict[str, Filled], set[str]]:
+    """Each container's filled host by id, and the ids of the blocks moved into them.
 
-
-def fill_containers(body: str) -> str:
-    """Move each container's held blocks into its host (hash and copy included)."""
+    `statements` is every statement of the page; `placed` holds those drawn as blocks,
+    by id, in page order. A container whose props are invalid is an error card: it
+    holds nothing.
+    """
+    refused = {
+        (own, held): fault.message
+        for _, own, held, fault in held_faults(statements, INPUT_COMPONENTS)
+    }
     taken: set[str] = set()
-    for found in list(_ROOT.finditer(body)):
-        body = _fill_one(body, found.group(1), found.group(3), taken)
-    return body
+    filled: dict[str, Filled] = {}
+    for ident, block in placed.items():
+        if block.component in CONTAINERS and not check_props(
+            block.component, dict(block.props), 0
+        ):
+            filled[ident] = _fill_one(ident, block, placed, refused, taken)
+    return filled, taken
