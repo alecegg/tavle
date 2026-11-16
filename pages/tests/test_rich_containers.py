@@ -340,3 +340,27 @@ def test_held_invalid_container_moves_in_as_an_error_card(tmp_path: Path) -> Non
     assert "do not nest" not in html
     assert block_ids(html).count("u") == 1
     assert "vb-error" in slot_of(html, "u")
+
+
+@pytest.mark.parametrize("held_in", ["tabs", "columns"])
+@pytest.mark.parametrize(
+    "include",
+    [
+        'inc = include(source: "src.md", select: "bogus")',
+        'inc = include(source: "missing.md")',
+        'inc = include(select: "x")',
+    ],
+)
+def test_held_include_error_card_moves_into_its_slot(
+    tmp_path: Path, include: str, held_in: str
+) -> None:
+    (tmp_path / "src.md").write_text("# S\n\nhello\n", encoding="utf-8")
+    holder = (
+        tabs(panel("A", "inc"))
+        if held_in == "tabs"
+        else 't = columns(col: [{"blocks": ["inc"]}])'
+    )
+    html = render(tmp_path, statements(include, holder))
+    assert block_ids(html).count("inc") == 1
+    assert "vb-error" in slot_of(html, "inc")
+    assert "is missing" not in html
