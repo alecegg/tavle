@@ -119,3 +119,12 @@ def test_hash_and_anchor_unchanged_by_types() -> None:
         ("t", 0, 1),
         ("t/1", 2, 3),
     ]
+
+
+def test_ui_statements_give_document_lines() -> None:
+    from varde_pages.blocks.fences import ui_statements
+
+    one = 'a = callout(tone: "info", text: "A")'
+    two = 'b = callout(tone: "info", text: "B")'
+    text = f"# T\n\n```ui\n{one}\n```\n\n```ui\n\n{two}\n```\n"
+    assert [(line, s.id) for line, s in ui_statements(text)] == [(4, "a"), (9, "b")]

@@ -8,9 +8,10 @@ import json
 import re
 from pathlib import Path
 
-from varde_pages.assemble import include_ctx, parse_page
+from varde_pages.assemble import include_ctx
 from varde_pages.blocks import COMPONENT_SPECS
 from varde_pages.components import export_page, mount_block
+from varde_pages.render import render_page
 from varde_pages.template import make_read_only
 
 from .test_components_contract import CALLOUTS, FIXTURES, check_fixture
@@ -57,7 +58,7 @@ def every_block_page(root: Path) -> str:
     doc = root / "all.md"
     doc.write_text("# Every block\n\n" + "\n".join(fences), encoding="utf-8")
     text = doc.read_text(encoding="utf-8")
-    page = parse_page(text, doc.name, include_ctx(text, doc, export=True)[0])
+    page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
     return make_read_only(page.body)
 
 

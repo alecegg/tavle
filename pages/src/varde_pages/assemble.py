@@ -107,11 +107,6 @@ def read_markdown(doc: Path) -> str:
         return f"# Unreadable\n\n{doc.name} could not be read."
 
 
-def parse_page(text: str, doc_name: str, ctx: PageCtx | None = None) -> RenderedPage:
-    """The strict parse entry point for served and exported pages."""
-    return render_page(text, doc_name, ctx)
-
-
 def _indent(line: str) -> int:
     return len(line) - len(line.lstrip())
 
@@ -206,6 +201,6 @@ def assemble_static(doc: Path) -> str:
     The only script is the component bundle, inlined when a block needs it.
     """
     text = read_markdown(doc)
-    page = parse_page(text, doc.name, include_ctx(text, doc, export=True)[0])
+    page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
     main = f'<main data-role="page">{make_read_only(page.body)}</main>'
     return export_page(doc.name, main)

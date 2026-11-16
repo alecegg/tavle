@@ -314,3 +314,29 @@ def test_interact_held_blocks_keep_one_menu_each(open_page: Any) -> None:
     assert page.locator("#blk-code1 > .menu-btn").count() == 1
     assert page.locator("#blk-tabs1 > .menu-btn").count() == 1
     assert page.locator("#blk-tabs1 .menu-btn").count() >= 2
+
+
+def slot_of(html: str, held: str) -> str:
+    found = re.search(
+        rf'<div class="vd-containers-slot" data-hold="{held}">(.*?)</div></div>', html
+    )
+    assert found, held
+    return found.group(1)
+
+
+def test_held_error_card_moves_into_its_slot(tmp_path: Path) -> None:
+    page = statements(CALL, "bad = callout(tone: 5)", tabs(panel("A", "bad", "a")))
+    html = render(tmp_path, page)
+    assert block_ids(html).count("bad") == 1
+    assert "vb-error" in slot_of(html, "bad")
+    assert 'id="blk-bad"' in slot_of(html, "bad")
+
+
+def test_held_invalid_container_moves_in_as_an_error_card(tmp_path: Path) -> None:
+    page = statements(
+        CALL, "u = tabs(tab: [])", 't = columns(col: [{"blocks": ["u", "a"]}])'
+    )
+    html = render(tmp_path, page)
+    assert "do not nest" not in html
+    assert block_ids(html).count("u") == 1
+    assert "vb-error" in slot_of(html, "u")
