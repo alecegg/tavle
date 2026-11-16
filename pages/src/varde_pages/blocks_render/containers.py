@@ -70,6 +70,15 @@ def _note(text: str) -> str:
     return f'<p class="vd-containers-note">{esc(text)}</p>'
 
 
+def _refusal_note(rule: str, own: str, held: str) -> str:
+    """The note a refused held id shows in its slot."""
+    if rule == "container-input":
+        return f"Input '{held}' cannot be held in tabs."
+    if rule in {"container-nested", "container-cycle"} and held != own:
+        return f"Block '{held}' is a container; containers do not nest."
+    return f"Block '{held}' is missing, held elsewhere, or is this container."
+
+
 def _slot(held: str, content: str) -> str:
     return f'<div class="vd-containers-slot" data-hold="{esc(held)}">{content}</div>'
 
@@ -89,8 +98,12 @@ def _fill_one(
         label = panel["label"]
         copies += [label] if label else []
         for held in panel["blocks"]:
-            if (ident, held) in refused:
-                slots.append(_slot(held, _note(refused[ident, held])))
+            rule = refused.get((ident, held))
+            if rule == "container-double" and held not in taken:
+                rule = None  # the earlier holder was itself refused
+            if rule or held not in placed or held in taken:
+                note = _refusal_note(rule or "container-unknown", ident, held)
+                slots.append(_slot(held, _note(note)))
                 continue
             taken.add(held)
             slots.append(_slot(held, placed[held].html))
@@ -125,7 +138,7 @@ def fill_containers(
     holds nothing.
     """
     refused = {
-        (own, held): fault.message
+        (own, held): fault.rule
         for _, own, held, fault in held_faults(statements, INPUT_COMPONENTS)
     }
     taken: set[str] = set()
