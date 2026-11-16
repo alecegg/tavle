@@ -165,13 +165,13 @@ def test_hash_changes_when_a_held_block_changes(tmp_path: Path) -> None:
 def test_faults_render_a_note_not_a_crash(tmp_path: Path) -> None:
     page = statements(CALL, INPUT, tabs(panel("A", "zzz", "q", "a")))
     html = render(tmp_path, page)
-    assert "names no statement of this page" in html
-    assert "cannot hold input" in html
+    assert "is missing" in html
+    assert "cannot be held in tabs" in html
     assert 'id="blk-q"' in html and 'id="blk-a"' in html
     again = statements(CALL, tabs(panel("A", "a")), tabs(panel("B", "a"), ident="u"))
-    assert "is already held by" in render(tmp_path, again)
+    assert "held elsewhere" in render(tmp_path, again)
     self_hold = statements(tabs(panel("A", "t")))
-    assert "do not nest" in render(tmp_path, self_hold)
+    assert "is this container" in render(tmp_path, self_hold)
     inner = statements(tabs(panel("A", "u")), tabs(panel("B", "t"), ident="u"))
     assert "do not nest" in render(tmp_path, inner)
 

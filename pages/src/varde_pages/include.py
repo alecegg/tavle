@@ -167,6 +167,10 @@ def _selector(ref: IncludeRef) -> Selector:
         raise IncludeError(ref.line, str(error)) from error
 
 
+class NotRegularFile(ValueError):
+    """The include source is not a regular file."""
+
+
 def read_source_text(path: Path) -> str:
     """Open once without following a final symlink; cap the bytes read.
 
@@ -179,7 +183,7 @@ def read_source_text(path: Path) -> str:
         raise ValueError(f"include source '{name}' is unreadable") from error
     with os.fdopen(fd, "rb") as handle:
         if not stat.S_ISREG(os.fstat(handle.fileno()).st_mode):
-            raise ValueError(f"include source '{name}' is not a regular file")
+            raise NotRegularFile(f"include source '{name}' is not a regular file")
         data = handle.read(MAX_SOURCE_BYTES + 1)
     if len(data) > MAX_SOURCE_BYTES:
         raise ValueError(f"include source '{name}' is too large")
@@ -195,6 +199,9 @@ def _resolve_one(
     path = _locate(ref, root, roots)
     try:
         markdown = read_source_text(path)
+    except NotRegularFile as error:
+        shown = f"include source '{path.name}' is not a .md file"
+        raise IncludeError(ref.line, shown) from error
     except ValueError as error:
         raise IncludeError(ref.line, str(error)) from error
     try:
