@@ -137,15 +137,23 @@ def fill_containers(
     by id, in page order. A container whose props are invalid is an error card: it
     holds nothing.
     """
+    invalid = {
+        ident
+        for ident, block in placed.items()
+        if block.component in CONTAINERS
+        and check_props(block.component, dict(block.props), 0)
+    }
+    # An invalid container is an error card: it holds nothing and may be held.
     refused = {
         (own, held): fault.rule
-        for _, own, held, fault in held_faults(statements, INPUT_COMPONENTS)
+        for _, own, held, fault in held_faults(
+            [s for s in statements if s[2] not in invalid], INPUT_COMPONENTS
+        )
+        if fault.rule != "container-unknown"  # `placed` decides what is missing
     }
     taken: set[str] = set()
     filled: dict[str, Filled] = {}
     for ident, block in placed.items():
-        if block.component in CONTAINERS and not check_props(
-            block.component, dict(block.props), 0
-        ):
+        if block.component in CONTAINERS and ident not in invalid:
             filled[ident] = _fill_one(ident, block, placed, refused, taken)
     return filled, taken
