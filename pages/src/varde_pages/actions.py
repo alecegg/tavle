@@ -17,6 +17,7 @@ included part) and `error`.
 
 from collections.abc import Mapping
 
+from varde_pages.blocks.spec import INPUT_BLOCK_TYPES
 from varde_pages.blocks_render.registry import COMPONENTS
 
 BLOCK_TYPES: tuple[str, ...] = (
@@ -52,10 +53,9 @@ ALLOWED_KINDS: Mapping[str, frozenset[str]] = {
 }
 
 # Types whose block has nothing to copy (no `data-copy`, no text of its own).
-_NO_COPY = frozenset({"widget", "decision", "status"})
+_NO_COPY = INPUT_BLOCK_TYPES | {"status"}
 # Types the source owns, so a direct edit of this document is not offered.
 _NO_EDIT = frozenset({"part"})
-_DECISION = "decision"
 
 
 def kind_allowed(block_type: str, kind: str) -> bool:
@@ -79,17 +79,7 @@ def menu_entries(
 
 def component_block_type(component: str) -> str:
     """The block type of a `ui` component name (`include` renders as parts)."""
-    if component == "include":
-        return "part"
-    if component in ("code", "diff"):
-        return "code"
     entry = COMPONENTS.get(component)
     if entry is None:
         return "error"
-    if component == "decision":
-        return _DECISION
-    if entry.answer_schema is not None:
-        return "widget"
-    if component in ("recap", "deps"):
-        return "status"
-    return "visual"
+    return entry.spec.block_type

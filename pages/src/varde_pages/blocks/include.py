@@ -76,4 +76,5 @@ INCLUDE = BlockSpec(
 )
 """,
     include_faults,
+    block_type="part",
 )

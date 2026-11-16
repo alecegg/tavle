@@ -10,7 +10,7 @@ from dataclasses import dataclass
 
 from varde_data.ui_lines import parse_lines
 
-from varde_pages.blocks.check import BlockError
+from varde_pages.blocks.check import OPEN_CHOICES, BlockError
 from varde_pages.blocks.fences import FenceSpan, dedent_lines, scan_fences
 from varde_pages.markdown_syntax import HEADING as _HEADING
 from varde_pages.markdown_syntax import slugify
@@ -26,7 +26,6 @@ STALE_PHRASES = (
     "as mentioned earlier",
     "as noted earlier",
 )
-OPEN_CHOICES = frozenset({"choice", "ranking", "slider", "form", "comment"})
 MAX_BARE_RUN = 3  # N: more consecutive non-prose blocks than this on a recap warns
 
 _EXPLICIT_ID = re.compile(r"\s*\{#([a-z0-9-]+)\}\s*$")
