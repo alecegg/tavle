@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import html
-import re
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
@@ -23,10 +22,9 @@ from varde_pages.include import (
     find_includes,
     resolve_includes,
 )
-from varde_pages.markdown_syntax import fence_closes
+from varde_pages.markdown_syntax import FenceScanner
 from varde_pages.media import page_media
 from varde_pages.render import (
-    _FENCE,
     PageCtx,
     RenderedPage,
     render_page,
@@ -120,21 +118,6 @@ def parse_page(text: str, doc_name: str, ctx: PageCtx | None = None) -> Rendered
     return fill_page(render_page(text, doc_name, ctx))
 
 
-def _open_fence(lines: list[str]) -> tuple[int, re.Match[str]] | None:
-    """The unclosed fence at the end of `lines`, by the renderer's fence rules."""
-    opener: tuple[int, re.Match[str]] | None = None
-    for i, line in enumerate(lines):
-        match = _FENCE.match(line)
-        if match is None:
-            continue
-        if opener is None:
-            opener = (i, match)
-            continue
-        if fence_closes(line, opener[1]):
-            opener = None
-    return opener
-
-
 def _indent(line: str) -> int:
     return len(line) - len(line.lstrip())
 
@@ -146,10 +129,13 @@ def drop_pending_tail(text: str) -> str:
     renderer's own line view (tabs expanded, comments stripped, `\\n` ends).
     """
     lines = strip_comments(text.expandtabs(4).splitlines())
-    found = _open_fence(lines)
-    if found is None or found[1].group(3) != "ui":
+    scanner = FenceScanner()
+    for i, line in enumerate(lines):
+        scanner.feed(line, i)
+    opening = scanner.opening
+    if opening is None or opening.group(3) != "ui":
         return text
-    at, opening = found
+    at = scanner.start
     indent = len(opening.group(1))
     body = [
         line[min(indent, len(line) - len(line.lstrip())) :] for line in lines[at + 1 :]

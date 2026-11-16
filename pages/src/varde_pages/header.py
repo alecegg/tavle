@@ -13,6 +13,7 @@ import re
 from urllib.parse import urlsplit
 
 from varde_pages.blocks_render.common import dated_html
+from varde_pages.markdown_syntax import FenceScanner
 
 STRIP_KEYS = ("status", "plan", "commit", "links")
 _META_KEYS = ("type", "risk", "status_at")
@@ -24,7 +25,6 @@ _PAGE_NAME = re.compile(
     r"^[A-Za-z0-9_][A-Za-z0-9._-]*(/[A-Za-z0-9_][A-Za-z0-9._-]*)*\.md$"
 )
 _WORD = re.compile(r"[^\W_]", re.UNICODE)
-_FENCE = re.compile(r"^\s*(`{3,}|~{3,})")
 
 # status word -> (tone, glyph); tones are the five ds-tokens triples
 _STATUS: dict[str, tuple[str, str]] = {
@@ -65,17 +65,10 @@ def status_tone(status: str) -> tuple[str, str]:
 
 def count_words(lines: list[str]) -> int:
     """Words of prose and table text; fenced blocks (code and `ui`) are skipped."""
-    words, fence = 0, ""
+    words = 0
+    scanner = FenceScanner("words")
     for line in lines:
-        marker = _FENCE.match(line)
-        if marker:
-            token = marker.group(1)
-            if not fence:
-                fence = token[0]
-            elif token[0] == fence:
-                fence = ""
-            continue
-        if fence:
+        if scanner.feed(line) or scanner.opening:
             continue
         words += sum(1 for token in line.split() if _WORD.search(token))
     return words

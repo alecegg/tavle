@@ -1,15 +1,15 @@
 """Escape-first markdown subset to sanitized HTML. Pure functions, stdlib only."""
 
-import hashlib
 import html
 import re
 import textwrap
-from collections.abc import Callable, Collection, Mapping
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field, replace
 
 from varde_data.ui_lines import ParseError, Statement, parse_lines
 
 from varde_pages.actions import component_block_type
+from varde_pages.anchors import AnchorState, block_hash
 from varde_pages.blocks import CUSTOM_REMOVED
 from varde_pages.blocks.change_summary import Marker, collect_markers
 from varde_pages.blocks.check import (
@@ -34,7 +34,7 @@ from varde_pages.blocks_render.image import image_props, render_refused
 from varde_pages.header import count_words, header_html
 from varde_pages.markdown_syntax import FENCE as _FENCE
 from varde_pages.markdown_syntax import HEADING as _HEADING
-from varde_pages.markdown_syntax import fence_closes, slugify
+from varde_pages.markdown_syntax import FenceScanner, fence_closes
 from varde_pages.media import Media, Problem
 from varde_pages.toc import toc_entries, toc_html
 
@@ -216,21 +216,12 @@ def _restore(text: str, stash: list[str]) -> str:
 def strip_comments(lines: list[str]) -> list[str]:
     """Drop HTML comments outside fenced code."""
     out: list[str] = []
-    fence = ""
+    scanner = FenceScanner("markers")
     in_comment = False
     for line in lines:
-        match = _FENCE.match(line)
-        if fence:
-            fence = (
-                ""
-                if match
-                and match.group(2)[0] == fence[0]
-                and len(match.group(2)) >= len(fence)
-                else fence
-            )
-            out.append(line)
-        elif match and not in_comment:
-            fence = match.group(2)
+        inside = scanner.opening is not None
+        marker = scanner.feed(line, allow_open=not in_comment)
+        if inside or (marker and not in_comment):
             out.append(line)
         else:
             stripped, in_comment = _strip_line(line, in_comment)
@@ -674,10 +665,6 @@ def plain_text(fragment: str, limit: int = 80) -> str:
     return " ".join(text.split())[:limit]
 
 
-def _block_hash(source: str) -> str:
-    return hashlib.sha256(source.encode("utf-8")).hexdigest()[:12]
-
-
 def _wrap(
     anchor: str, digest: str, inner: str, block_type: str, cls: str = "block"
 ) -> str:
@@ -686,27 +673,6 @@ def _wrap(
         f'data-hash="{digest}" data-block-type="{html.escape(block_type)}"'
     )
     return f'<div class="{cls}" {attrs}>{inner}</div>'
-
-
-def _unique_anchor(slug: str, seen: dict[str, int], taken: set[str]) -> str:
-    """Return slug, or slug-N for the first unused N, and record it as used."""
-    candidate = slug
-    while candidate in seen or candidate in taken:
-        seen[slug] = seen.get(slug, 1) + 1
-        candidate = f"{slug}-{seen[slug]}"
-    seen.setdefault(candidate, 1)
-    return candidate
-
-
-def _unique_id_anchor(
-    block_id: str, taken: set[str], reserved: Collection[str] = ()
-) -> str:
-    """The id, or id-N for the first N used by no anchor and no other statement id."""
-    candidate, n = block_id, 1
-    while candidate in taken or (n > 1 and candidate in reserved):
-        n += 1
-        candidate = f"{block_id}-{n}"
-    return candidate
 
 
 def _summary_host(part: PagePart, markers: list[Marker]) -> str:
@@ -745,20 +711,17 @@ def _place_part(
     part: PagePart,
     section: str,
     count: int,
-    names: tuple[dict[str, int], set[str], Collection[str]],
+    anchors: AnchorState,
     headings: list[tuple[int, str, str]],
 ) -> tuple[str, str, str, str, int]:
     """Anchor, inner html and css class of a part, with the new section and count."""
-    seen, taken, reserved = names
+    anchor, section, count = anchors.place(
+        part.kind, part.text, part.block_id, section, count
+    )
     if part.kind == "heading":
-        section = _unique_anchor(slugify(part.text), seen, taken | set(reserved))
         headings.append((part.level, plain_text(part.html, 120), section))
         inner = part.html.replace(">", f' id="h-{section}">', 1)
         return section, inner, "block heading", section, 0
-    count += 1
-    anchor = f"{section}/{count}"
-    if part.block_id:
-        anchor = _unique_id_anchor(part.block_id, taken, reserved)
     return anchor, part.html, "block", section, count
 
 
@@ -768,23 +731,21 @@ def assemble_parts(
     """The page body for parsed parts: anchors, wrappers, contents and file links."""
     pieces = [header]
     blocks: list[PageBlock] = []
-    seen: dict[str, int] = {}
-    taken: set[str] = set()
     titles: dict[str, str] = {}  # code block title -> anchor, for file-tree links
     section, count = "top", 0
     headings: list[tuple[int, str, str]] = []
     parts = _fill_change_summaries(parts)
     reserved = {part.block_id for part in parts if part.block_id}
+    anchors = AnchorState(reserved)
     for part in parts:
         if part.kind == "raw":
             pieces.append(part.html)
             count += bool(part.block_id)  # an include counts as it does unresolved
             continue
-        digest = _block_hash(part.source)
+        digest = block_hash(part.source)
         anchor, inner, cls, section, count = _place_part(
-            part, section, count, (seen, taken, reserved), headings
+            part, section, count, anchors, headings
         )
-        taken.add(anchor)
         for file_title in code_titles(part.html):
             titles.setdefault(file_title, anchor)
         pieces.append(_wrap(anchor, digest, inner, part.block_type, cls))

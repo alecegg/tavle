@@ -12,9 +12,9 @@ from varde_data.ui_lines import parse_lines
 
 from varde_pages.blocks.check import BlockError
 from varde_pages.blocks.fences import FenceSpan, dedent_lines, scan_fences
+from varde_pages.markdown_syntax import HEADING as _HEADING
+from varde_pages.markdown_syntax import slugify
 from varde_pages.render import (
-    _HEADING,
-    slugify,
     split_frontmatter,
     strip_comments,
 )

@@ -3,7 +3,7 @@
 import re
 from dataclasses import dataclass
 
-from varde_pages.markdown_syntax import FENCE as _FENCE
+from varde_pages.markdown_syntax import FENCE, FenceScanner
 
 _ID_WORD = re.compile(r"^id=(.*)$")
 
@@ -22,17 +22,6 @@ def _id_text(info_rest: str) -> str | None:
         if match:
             return match.group(1)
     return None
-
-
-def _is_closing(line: str, fence: str) -> bool:
-    closing = _FENCE.match(line)
-    return bool(
-        closing
-        and closing.group(2)[0] == fence[0]
-        and len(closing.group(2)) >= len(fence)
-        and not closing.group(3)
-        and not closing.group(4).strip()
-    )
 
 
 @dataclass(frozen=True)
@@ -56,13 +45,18 @@ def scan_fences(lines: list[str]) -> list[FenceSpan]:
     spans: list[FenceSpan] = []
     i = 0
     while i < len(lines):
-        opening = _FENCE.match(lines[i])
+        opening = FENCE.match(lines[i])
         if opening is None:
             i += 1
             continue
         indent, marker, lang = len(opening.group(1)), opening.group(2), opening.group(3)
         j = i + 1
-        while j < len(lines) and not _is_closing(lines[j], marker):
+        scanner = FenceScanner("strict")
+        scanner.feed(lines[i])
+        while j < len(lines):
+            scanner.feed(lines[j])
+            if scanner.opening is None:
+                break
             j += 1
         end = j if j < len(lines) else None
         info = opening.group(4)

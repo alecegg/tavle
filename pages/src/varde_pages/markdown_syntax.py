@@ -26,3 +26,36 @@ def fence_closes(line: str, opening: re.Match[str]) -> bool:
         and len(closing.group(2)) >= len(opening.group(2))
         and not closing.group(3)
     )
+
+
+class FenceScanner:
+    """Track fence lines using the calling parser's established closing policy."""
+
+    def __init__(self, policy: str = "render") -> None:
+        self.policy = policy
+        self.opening: re.Match[str] | None = None
+        self.start = 0
+
+    def feed(self, line: str, number: int = 0, *, allow_open: bool = True) -> bool:
+        """Return whether this line is a fence marker, updating the open fence."""
+        match = FENCE.match(line)
+        if match is None:
+            return False
+        if self.opening is None:
+            if allow_open:
+                self.opening, self.start = match, number
+        else:
+            opening = self.opening.group(2)
+            marker = match.group(2)
+            same = marker[0] == opening[0]
+            if self.policy == "words":
+                closes = same
+            elif self.policy == "markers":
+                closes = same and len(marker) >= len(opening)
+            else:
+                closes = fence_closes(line, self.opening)
+                if self.policy == "strict":
+                    closes = closes and not match.group(4).strip()
+            if closes:
+                self.opening = None
+        return True

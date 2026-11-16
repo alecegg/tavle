@@ -143,3 +143,16 @@ def test_iso_dates_are_wrapped_so_they_cannot_split_at_a_hyphen() -> None:
         Path(__file__).parents[1] / "src/varde_pages/static/css/50-blocks.css"
     ).read_text()
     assert ".vd-date { white-space: nowrap; }" in css
+
+
+def test_fence_consumers_keep_their_closing_rules():
+    from varde_pages.blocks.fences import scan_fences
+    from varde_pages.header import count_words
+    from varde_pages.render import strip_comments
+    from varde_pages.select import heading_id_errors
+
+    lines = ["````code", "``` info", "<!-- hidden -->", "```` tail", "# Title {#Bad}"]
+    assert count_words(lines) == 1
+    assert strip_comments(lines)[2] == "<!-- hidden -->"
+    assert heading_id_errors("\n".join(lines))[0][1] == "heading-id-invalid"
+    assert scan_fences(lines)[0].end is None

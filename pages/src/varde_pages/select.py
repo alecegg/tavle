@@ -17,23 +17,21 @@ import html
 import re
 from dataclasses import dataclass
 
+from varde_pages.anchors import AnchorState, block_hash
 from varde_pages.blocks.include import (
     Selector,
     SelectorError,
     parse_selector,
 )
+from varde_pages.markdown_syntax import FENCE as _FENCE
+from varde_pages.markdown_syntax import HEADING as _HEADING
+from varde_pages.markdown_syntax import FenceScanner
 from varde_pages.render import (
-    _FENCE,
-    _HEADING,
     PageCtx,
     PagePart,
     RenderScope,
-    _block_hash,
-    _unique_anchor,
-    _unique_id_anchor,
     parse_blocks,
     render_inline,
-    slugify,
     split_frontmatter,
     strip_comments,
 )
@@ -109,42 +107,25 @@ def _block_html(part: PagePart, explicit: bool) -> tuple[str, bool]:
     return part.html, False
 
 
-def _source_anchor(
-    part: PagePart,
-    explicit: re.Match[str] | None,
-    place: tuple[str, int],
-    names: tuple[dict[str, int], set[str], set[str]],
-) -> tuple[str, str, int]:
-    """Anchor of a part, with the section and in-section count after it."""
-    section, count = place
-    seen, taken, reserved = names
-    if part.kind == "heading":
-        if explicit:
-            section = _unique_id_anchor(explicit.group(2), taken)
-        else:
-            section = _unique_anchor(slugify(part.text), seen, taken | reserved)
-        return section, section, 0
-    count += 1
-    if part.block_id:
-        return _unique_id_anchor(part.block_id, taken), section, count
-    return f"{section}/{count}", section, count
-
-
 def read_source(markdown: str) -> SourceView:
     lines = strip_comments(markdown.expandtabs(4).splitlines())
     _, content = split_frontmatter(lines)
     base = len(lines) - len(content)
     scope = RenderScope(base, PageCtx("include"))
     parts = parse_blocks(content, scope=scope)
-    seen: dict[str, int] = {}
-    taken: set[str] = set()
-    names = (seen, taken, _explicit_ids(parts))
+    anchors = AnchorState(_explicit_ids(parts), reserve_ids=False)
     section, count = "top", 0
     blocks: list[SourceBlock] = []
     for part in parts:
         explicit = _EXPLICIT.match(part.text) if part.kind == "heading" else None
-        anchor, section, count = _source_anchor(part, explicit, (section, count), names)
-        taken.add(anchor)
+        anchor, section, count = anchors.place(
+            part.kind,
+            part.text,
+            part.block_id,
+            section,
+            count,
+            explicit.group(2) if explicit else None,
+        )
         inner, nested = _block_html(part, explicit is not None)
         blocks.append(
             SourceBlock(
@@ -153,7 +134,7 @@ def read_source(markdown: str) -> SourceView:
                 part.level,
                 base + part.start,
                 base + part.end,
-                _block_hash(part.source),
+                block_hash(part.source),
                 inner,
                 nested,
             )
@@ -165,7 +146,7 @@ def _frontmatter_block(view: SourceView) -> SourceBlock:
     if not view.frontmatter_end:
         raise SelectorError("source has no frontmatter")
     text = "\n".join(view.lines[: view.frontmatter_end])
-    digest = _block_hash(text)
+    digest = block_hash(text)
     return SourceBlock(
         "top/0", "frontmatter", 0, 0, view.frontmatter_end, digest,
         _inert_html(text, "yaml"),
@@ -244,15 +225,6 @@ def select(markdown: str, selector: str) -> str:
     return "\n".join(view.lines[start:end])
 
 
-def _fence_after(fence: str, marker: str) -> str:
-    """The open fence marker once a fence line `marker` is read; empty when closed."""
-    if not fence:
-        return marker
-    if marker[0] == fence[0] and len(marker) >= len(fence):
-        return ""
-    return fence
-
-
 def _id_error(
     ident: str, number: int, first_seen: dict[str, int]
 ) -> tuple[int, str, str] | None:
@@ -270,13 +242,15 @@ def heading_id_errors(markdown: str) -> list[tuple[int, str, str]]:
     """`(line, rule, message)` for explicit heading ids that are invalid or repeated."""
     errors: list[tuple[int, str, str]] = []
     first_seen: dict[str, int] = {}
-    fence = ""
+    scanner = FenceScanner("markers")
     for number, line in enumerate(markdown.expandtabs(4).splitlines(), 1):
-        match = _FENCE.match(line)
-        if match:
-            fence = _fence_after(fence, match.group(2))
+        if scanner.feed(line):
             continue
-        mark = _ID_MARK.search(line) if not fence and _HEADING.match(line) else None
+        mark = (
+            _ID_MARK.search(line)
+            if not scanner.opening and _HEADING.match(line)
+            else None
+        )
         if mark is None:
             continue
         error = _id_error(mark.group(1), number, first_seen)
