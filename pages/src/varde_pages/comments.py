@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import fcntl
 import json
 import os
 import re
@@ -51,7 +52,8 @@ def _append_row(path: Path, row: dict[str, Any]) -> None:
     """One `O_APPEND` write of one line; refuses a symlinked log.
 
     A log whose last byte is not a newline (a torn earlier write) gets a leading
-    newline inside the same write, decided from the descriptor itself.
+    newline inside the same write, decided from the descriptor itself under an
+    exclusive `flock`, so a concurrent writer's partial append is never read.
     """
     encoded = (
         json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n"
@@ -63,6 +65,7 @@ def _append_row(path: Path, row: dict[str, Any]) -> None:
     except OSError as error:
         raise ValueError(f"cannot write {path.name}: not a regular file") from error
     try:
+        fcntl.flock(descriptor, fcntl.LOCK_EX)  # released on close
         size = os.fstat(descriptor).st_size
         if size and os.pread(descriptor, 1, size - 1) != b"\n":
             encoded = b"\n" + encoded
