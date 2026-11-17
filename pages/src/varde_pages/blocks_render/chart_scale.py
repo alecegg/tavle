@@ -28,10 +28,6 @@ def compact(value: float, decimals: int | None = None) -> str:
     return fmt(value, decimals)
 
 
-def ellipsize(text: str, limit: int) -> str:
-    return text if len(text) <= limit else text[: max(limit - 1, 1)] + "…"
-
-
 def _step_for(span: float, target: int) -> float:
     raw_step = span / max(target, 1)
     magnitude = 10 ** math.floor(math.log10(raw_step))

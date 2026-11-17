@@ -28,11 +28,10 @@ from varde_pages.blocks_render.screen_flow_layout import (
     Plan,
     Screen,
     Tile,
-    clip_lines,
     plan_flow,
 )
 from varde_pages.blocks_render.screens import _notes, _used, frame_shape, frame_size
-from varde_pages.blocks_render.svg import Shape, el, f1, view_box
+from varde_pages.blocks_render.svg import Shape, clip_lines, el, f1, view_box
 
 Props = Mapping[str, Any]
 SCALE = 1.0

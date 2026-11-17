@@ -14,9 +14,9 @@ from varde_pages.blocks_render.chart_model import (
     Model,
     where,
 )
-from varde_pages.blocks_render.chart_scale import CHAR, ellipsize
+from varde_pages.blocks_render.chart_scale import CHAR
 from varde_pages.blocks_render.common import count_noun
-from varde_pages.blocks_render.svg import Shape, el, f1
+from varde_pages.blocks_render.svg import Shape, el, ellipsize, f1
 
 ROW = 28.0
 PIN = 22.0  # pin width; its height is 20 (square) or 22 (circle)

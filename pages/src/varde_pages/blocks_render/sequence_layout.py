@@ -8,7 +8,7 @@ row whose height follows its wrapped text; groups are frames over runs of rows.
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from varde_pages.blocks_render.svg import wrap_text
+from varde_pages.blocks_render.svg import clip_lines
 
 Props = Mapping[str, object]
 
@@ -75,14 +75,9 @@ class Geometry:
     frames: tuple[Frame, ...]
 
 
-def clip_lines(text: str, chars: int, limit: int) -> tuple[str, ...]:
-    """Wrap to `chars`, keep `limit` lines, mark a cut with an ellipsis."""
-    lines = wrap_text(text, chars) or [""]
-    if len(lines) <= limit:
-        return tuple(lines)
-    kept = lines[:limit]
-    kept[-1] = kept[-1][: max(chars - 1, 1)] + "…"
-    return tuple(kept)
+def text_lines(text: str, chars: int, limit: int) -> tuple[str, ...]:
+    """`clip_lines`, with one empty line for empty text."""
+    return clip_lines(text, chars, limit) or ("",)
 
 
 def _box_width(lines: Sequence[str]) -> int:
@@ -91,7 +86,7 @@ def _box_width(lines: Sequence[str]) -> int:
 
 
 def place_actors(actors: Sequence[Props]) -> tuple[Actor, ...]:
-    wrapped = [clip_lines(str(a["label"]), LABEL_CHARS, LABEL_LINES) for a in actors]
+    wrapped = [text_lines(str(a["label"]), LABEL_CHARS, LABEL_LINES) for a in actors]
     widest = max((_box_width(lines) for lines in wrapped), default=MIN_BOX)
     gap = max(MIN_GAP, widest + 20)
     return tuple(
@@ -114,7 +109,7 @@ def _gap(actors: tuple[Actor, ...]) -> int:
 
 def _arrow_row(index: int, kind: str, text: str, a: int, b: int, y: int) -> Row:
     chars = max((abs(b - a) - 24) // CHAR_W, 6)
-    lines = clip_lines(text, chars, TEXT_LINES)
+    lines = text_lines(text, chars, TEXT_LINES)
     arrow_y = y + LINE_H * len(lines) + 14
     return Row(
         index, kind, lines, a, b, y, max(ROW_MIN, arrow_y - y + 14), arrow_y,
@@ -123,7 +118,7 @@ def _arrow_row(index: int, kind: str, text: str, a: int, b: int, y: int) -> Row:
 
 
 def _self_row(index: int, kind: str, text: str, x: int, gap: int, y: int) -> Row:
-    lines = clip_lines(text, max((gap - 56) // CHAR_W, 6), TEXT_LINES)
+    lines = text_lines(text, max((gap - 56) // CHAR_W, 6), TEXT_LINES)
     h = max(ROW_MIN, LINE_H * len(lines) + 16)
     return Row(
         index, kind, lines, x, x, y, h, y + 12, True, x + LOOP_W + 8, "start"
@@ -136,7 +131,7 @@ def _note_row(index: int, text: str, a: int, b: int, gap: int, y: int) -> Row:
         left, right = left - (gap - 20) // 2, right + (gap - 20) // 2
     else:
         left, right = left - NOTE_PAD, right + NOTE_PAD
-    lines = clip_lines(text, max((right - left - 16) // CHAR_W, 6), TEXT_LINES)
+    lines = text_lines(text, max((right - left - 16) // CHAR_W, 6), TEXT_LINES)
     h = max(ROW_MIN, LINE_H * len(lines) + 24)
     return Row(
         index, "note", lines, left, right, y, h, y + h // 2, False,

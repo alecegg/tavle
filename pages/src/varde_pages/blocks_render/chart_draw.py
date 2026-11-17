@@ -25,12 +25,11 @@ from varde_pages.blocks_render.chart_model import (
 from varde_pages.blocks_render.chart_scale import (
     CHAR,
     compact,
-    ellipsize,
     nice_ticks,
     thin_step,
     tick_decimals,
 )
-from varde_pages.blocks_render.svg import Shape, el, f1
+from varde_pages.blocks_render.svg import Shape, el, ellipsize, f1
 
 W, H = 360.0, 220.0
 SPARK_W, SPARK_H = 160.0, 44.0

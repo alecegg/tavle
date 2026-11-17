@@ -65,6 +65,21 @@ def wrap_text(text: str, width: int) -> list[str]:
     return lines
 
 
+def ellipsize(text: str, limit: int) -> str:
+    """The text cut to `limit` characters, a cut marked with an ellipsis."""
+    return text if len(text) <= limit else text[: max(limit - 1, 1)] + "…"
+
+
+def clip_lines(text: str, chars: int, limit: int) -> tuple[str, ...]:
+    """Wrap to `chars`, keep `limit` lines, mark a cut with an ellipsis."""
+    lines = wrap_text(text, chars)
+    if len(lines) <= limit:
+        return tuple(lines)
+    kept = lines[:limit]
+    kept[-1] = kept[-1][: max(chars - 1, 1)] + "…"
+    return tuple(kept)
+
+
 def copy_attr(text: str) -> str:
     """The `data-copy` attribute the action menu's Copy entry reads."""
     return f' data-copy="{esc(text)}"'

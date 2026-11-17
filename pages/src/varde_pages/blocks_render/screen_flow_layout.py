@@ -11,7 +11,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 
 from varde_pages.blocks_render.diagram_layout import Box, assign_layers
-from varde_pages.blocks_render.svg import wrap_text
+from varde_pages.blocks_render.svg import clip_lines
 
 Size = tuple[float, float]
 Point = tuple[float, float]
@@ -66,16 +66,6 @@ class Plan:
     tiles: tuple[Tile, ...]  # in reading order: lane, then rank, then document order
     links: tuple[Link, ...]
     bands: tuple[Band, ...]  # empty when the lanes are not titled
-
-
-def clip_lines(text: str, chars: int, count: int) -> tuple[str, ...]:
-    """The text wrapped to `chars` columns, at most `count` lines, a cut marked `…`."""
-    lines = wrap_text(text, chars)
-    if len(lines) <= count:
-        return tuple(lines)
-    kept = lines[:count]
-    kept[-1] = kept[-1][: max(chars - 1, 1)] + "…"
-    return tuple(kept)
 
 
 def tile_size(thumb: Size) -> Size:

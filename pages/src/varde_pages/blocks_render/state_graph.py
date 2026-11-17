@@ -13,6 +13,7 @@ from varde_pages.blocks_render.diagram_layout import (
     EdgeSpec,
     NodeSpec,
 )
+from varde_pages.blocks_render.svg import ellipsize
 
 Props = Mapping[str, object]
 KIND_WORDS = {
@@ -24,11 +25,6 @@ KIND_WORDS = {
 NODE_CLIP = 60
 LABEL_CLIP = 40
 ERROR_GLYPH = "✕ "
-
-
-def clip(text: str, limit: int) -> str:
-    """The text cut to `limit` characters, a cut marked with an ellipsis."""
-    return text if len(text) <= limit else text[: limit - 1] + "…"
 
 
 def states_of(data: Props) -> list[Props]:
@@ -86,7 +82,7 @@ def unreachable_ids(states: Sequence[Props], moves: Sequence[Props]) -> set[str]
 
 def node_label(state: Props) -> str:
     glyph = ERROR_GLYPH if kind_of(state) == "error" else ""
-    return glyph + clip(str(state["label"]), NODE_CLIP)
+    return glyph + ellipsize(str(state["label"]), NODE_CLIP)
 
 
 def free_id(taken: set[str]) -> str:
@@ -103,7 +99,7 @@ def loop_labels(moves: Sequence[Props]) -> dict[str, str]:
     for move in moves:
         if move["from"] == move["to"]:
             merged.setdefault(str(move["from"]), []).append(edge_label(move))
-    return {k: clip("; ".join(v), LABEL_CLIP) for k, v in merged.items()}
+    return {k: ellipsize("; ".join(v), LABEL_CLIP) for k, v in merged.items()}
 
 
 def graph_specs(
@@ -117,7 +113,7 @@ def graph_specs(
     first = next((s for s in states if kind_of(s) == "initial"), None)
     nodes = [NodeSpec(str(s["id"]), node_label(s)) for s in states]
     edges = [
-        EdgeSpec(str(m["from"]), str(m["to"]), clip(edge_label(m), LABEL_CLIP))
+        EdgeSpec(str(m["from"]), str(m["to"]), ellipsize(edge_label(m), LABEL_CLIP))
         for m in moves
         if m["from"] != m["to"]
     ]

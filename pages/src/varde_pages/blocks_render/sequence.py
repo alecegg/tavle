@@ -20,8 +20,8 @@ from varde_pages.blocks_render.sequence_layout import (
     Frame,
     Geometry,
     Row,
-    clip_lines,
     layout,
+    text_lines,
 )
 from varde_pages.blocks_render.svg import Shape, el
 
@@ -136,7 +136,7 @@ def _actor(actor: Actor, bottom: int) -> Shape:
 
 def _frame(frame: Frame, width: int) -> Shape:
     chars = max((width - PAD - 16) // CHAR_W, 4)
-    label = clip_lines(frame.label, chars, 1)[0]
+    label = text_lines(frame.label, chars, 1)[0]
     cut = [el("title", {}, frame.label)] if label != frame.label else []
     box = el(
         "rect",
