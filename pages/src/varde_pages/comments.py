@@ -33,6 +33,7 @@ _TARGET_FIELDS = {
     "report": (),
 }
 _ANCHOR = re.compile(r"[a-z0-9-]+(/[0-9]+)?")
+_SHA = re.compile(r"[0-9a-fA-F]{7,64}")
 _INTERVAL = re.compile(r"(\d+)([sm])")
 
 
@@ -96,6 +97,8 @@ def _check_target(target: object) -> None:
     line = target.get("line")
     if target["kind"] == "line" and not isinstance(line, int):
         raise ValueError("target 'line' needs an integer 'line'")
+    if target["kind"] == "line" and _SHA.fullmatch(str(target["sha"])) is None:
+        raise ValueError("target 'line' needs a 7-64 character hex 'sha'")
 
 
 def target_anchor(target: dict[str, Any]) -> str:

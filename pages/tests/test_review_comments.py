@@ -112,3 +112,12 @@ def test_working_does_not_resolve(tmp_path: Path) -> None:
     append_status(doc, cid, "working")
     [comment] = fold(read_rows(doc))
     assert comment["state"] == "open"
+
+
+def test_line_target_sha_must_be_hex(tmp_path: Path) -> None:
+    doc = tmp_path / "r.json"
+    for sha in ("--output=x", "--outpu", "zzzzzzz", "abc123"):
+        bad = {**LINE, "sha": sha}
+        with pytest.raises(ValueError):
+            append_comment(doc, "line-abcdef1-12", "q", "t", extra={"target": bad})
+    assert not comments_path(doc).exists()
