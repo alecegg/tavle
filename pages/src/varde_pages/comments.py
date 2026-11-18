@@ -101,6 +101,11 @@ def _check_target(target: object) -> None:
         raise ValueError("target 'line' needs a 7-64 character hex 'sha'")
 
 
+def anchor_slug(value: object) -> str:
+    """Lower-case `value`; every character outside `[a-z0-9-]` becomes `-`."""
+    return re.sub(r"[^a-z0-9-]", "-", str(value).lower())
+
+
 def target_anchor(target: dict[str, Any]) -> str:
     """The slug anchor of a valid target; it always matches `_ANCHOR`."""
     _check_target(target)
@@ -112,8 +117,7 @@ def target_anchor(target: dict[str, Any]) -> str:
         return f"candidate-{digest[:12]}"
     if kind == "report":
         return "report"
-    slug = re.sub(r"[^a-z0-9-]", "-", str(target["id"]).lower())
-    return f"{kind}-{slug}"
+    return f"{kind}-{anchor_slug(target['id'])}"
 
 
 def _check_extra(extra: dict[str, Any]) -> None:
