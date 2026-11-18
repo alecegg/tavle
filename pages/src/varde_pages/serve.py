@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import hmac
 import json
-import secrets
 import threading
 from collections.abc import Callable
 from http import HTTPStatus
@@ -37,6 +35,17 @@ from varde_pages.netbind import (
     classify_host,
     is_loopback,
 )
+from varde_pages.server_parts import (
+    SECURITY_HEADERS,
+    STATIC_DIR,
+    TOKEN_HEADER,
+    Broadcaster,
+    host_allowed,
+    new_token,
+    origin_allowed,
+    token_matches,
+    watch_files,
+)
 from varde_pages.store import EDIT_OFF, DecisionDenied, sources_for, store_comment
 from varde_pages.template import (
     BUNDLE_SCRIPT,
@@ -46,7 +55,6 @@ from varde_pages.template import (
 )
 from varde_pages.validation import parse_json_object, strings
 
-STATIC_DIR = Path(__file__).parent / "static"
 # `app.css` without the tokens: the host page that mounts a page owns them
 INLINE_CSS = "app-inline.css"
 
@@ -69,22 +77,9 @@ STATIC_TYPES = {
 }
 ACTOR = "user"  # the page user; recorded as the actor that applied a suggestion
 MAX_BODY = 64 * 1024
-POLL_SECONDS = 0.5
 HEARTBEAT_SECONDS = 15
 MAX_STREAMS = 16
 READ_TIMEOUT = 10
-# A header name, not a credential.
-TOKEN_HEADER = "X-Varde-Token"  # mollify: ignore[hardcoded-secret]  # noqa: S105
-SECURITY_HEADERS = {
-    "Content-Security-Policy": (
-        "default-src 'none'; style-src 'self'; script-src 'self'; "
-        "connect-src 'self'; img-src 'self' data:; base-uri 'none'; "
-        "form-action 'none'; frame-ancestors 'none'"
-    ),
-    "Referrer-Policy": "no-referrer",
-    "Cache-Control": "no-store",
-    "X-Content-Type-Options": "nosniff",
-}
 
 
 def is_json_type(content_type: str | None) -> bool:
@@ -113,44 +108,6 @@ def render_document(doc: Path, token: str, api_base: str = "") -> str:
     return assemble_page(doc, token=token, api_base=api_base)
 
 
-class Broadcaster:
-    """Version counter that SSE handlers wait on; stop wakes them all."""
-
-    def __init__(self) -> None:
-        self._cond = threading.Condition()
-        self._version = 0
-        self._stopped = False
-
-    @property
-    def version(self) -> int:
-        with self._cond:
-            return self._version
-
-    def publish(self) -> None:
-        with self._cond:
-            self._version += 1
-            self._cond.notify_all()
-
-    def stop(self) -> None:
-        with self._cond:
-            self._stopped = True
-            self._cond.notify_all()
-
-    def wait(self, seen: int, timeout: float) -> tuple[int, bool]:
-        """Wait for a version past `seen`; return (version, stopped)."""
-        with self._cond:
-            self._cond.wait_for(lambda: self._stopped or self._version != seen, timeout)
-            return self._version, self._stopped
-
-
-def _signature(path: Path) -> tuple[int, int] | None:
-    try:
-        stat = path.stat()
-    except OSError:
-        return None
-    return stat.st_mtime_ns, stat.st_size
-
-
 class PageServer(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
@@ -169,7 +126,7 @@ class PageServer(ThreadingHTTPServer):
         self.host = classify_host(host)
         self.remote = not is_loopback(self.host)  # tests may override
         self.allow_edit = allow_edit
-        self.token = secrets.token_urlsafe(24)
+        self.token = new_token()
         self.broadcaster = Broadcaster()
         self._poller: threading.Thread | None = None
         self._halt = threading.Event()
@@ -187,19 +144,16 @@ class PageServer(ThreadingHTTPServer):
     def url(self) -> str:
         return f"http://{self.host}:{self.port}/"
 
-    def _watch_files(self) -> None:
-        def current() -> tuple[object, object]:
-            return _signature(self.doc), _signature(comments_path(self.doc))
-
-        seen = current()
-        while not self._halt.wait(POLL_SECONDS):
-            latest = current()
-            if latest != seen:
-                seen = latest
-                self.broadcaster.publish()
-
     def serve_forever(self, poll_interval: float = 0.5) -> None:
-        self._poller = threading.Thread(target=self._watch_files, daemon=True)
+        self._poller = threading.Thread(
+            target=watch_files,
+            args=(
+                (self.doc, comments_path(self.doc)),
+                self.broadcaster,
+                self._halt,
+            ),
+            daemon=True,
+        )
         self._poller.start()
         try:
             super().serve_forever(poll_interval)
@@ -262,8 +216,7 @@ class PageHandler(BaseHTTPRequestHandler):
         self._reply(status, reason.encode(), "text/plain; charset=utf-8")
 
     def _host_ok(self) -> bool:
-        host = (self.headers.get("Host") or "").lower()
-        if host in self.app.hosts:
+        if host_allowed(self.headers.get("Host"), self.app.hosts):
             return True
         self._reject(HTTPStatus.FORBIDDEN, "bad host")
         return False
@@ -361,14 +314,13 @@ class PageHandler(BaseHTTPRequestHandler):
         if handler is None:
             self._reject(HTTPStatus.NOT_FOUND, "not found")
             return
-        if self.headers.get("Origin") not in self.app.origins:
+        if not origin_allowed(self.headers.get("Origin"), self.app.origins):
             self._reject(HTTPStatus.FORBIDDEN, "bad origin")
             return
         if not is_json_type(self.headers.get("Content-Type")):
             self._reject(HTTPStatus.UNSUPPORTED_MEDIA_TYPE, "json required")
             return
-        sent = self.headers.get(TOKEN_HEADER) or ""
-        if not hmac.compare_digest(sent.encode(), self.app.token.encode()):
+        if not token_matches(self.headers.get(TOKEN_HEADER), self.app.token):
             self._reject(HTTPStatus.FORBIDDEN, "bad token")
             return
         if edit_denied(path, self.app.remote, self.app.allow_edit):
