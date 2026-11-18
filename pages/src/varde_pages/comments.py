@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import json
 import os
 import re
@@ -18,10 +19,19 @@ from varde_pages.validation import CONTROLS
 
 _KEPT_KEYS = (
     "id", "ts", "anchor", "quote", "text", "state", "actor",
-    "replacement", "item", "verdict", "value",
+    "replacement", "item", "verdict", "value", "target", "review_kind", "status",
 )  # fmt: skip
 KINDS = ("comment", "suggestion", "drift", "decision", "answer")
 ANSWER_KINDS = ("decision", "answer")  # a `decision` row is read as an answer
+REVIEW_KINDS = ("fix", "question", "nit", "decide")
+STATUSES = ("working", "fixed", "answered", "wontfix", "noted")
+_TARGET_FIELDS = {
+    "line": ("file", "line", "side", "sha"),
+    "finding": ("id",),
+    "candidate": ("key",),
+    "section": ("id",),
+    "report": (),
+}
 _ANCHOR = re.compile(r"[a-z0-9-]+(/[0-9]+)?")
 _INTERVAL = re.compile(r"(\d+)([sm])")
 
@@ -75,6 +85,40 @@ def _append_row(path: Path, row: dict[str, Any]) -> None:
         os.close(descriptor)
 
 
+def _check_target(target: object) -> None:
+    """Raise ValueError unless `target` is a known kind with its fields."""
+    if not isinstance(target, dict) or target.get("kind") not in _TARGET_FIELDS:
+        raise ValueError(f"bad target {target!r}")
+    for field in _TARGET_FIELDS[target["kind"]]:
+        value = target.get(field)
+        if value in (None, "") or isinstance(value, bool):
+            raise ValueError(f"target {target['kind']!r} needs {field!r}")
+    line = target.get("line")
+    if target["kind"] == "line" and not isinstance(line, int):
+        raise ValueError("target 'line' needs an integer 'line'")
+
+
+def target_anchor(target: dict[str, Any]) -> str:
+    """The slug anchor of a valid target; it always matches `_ANCHOR`."""
+    _check_target(target)
+    kind = target["kind"]
+    if kind == "line":
+        return f"line-{str(target['sha'])[:7].lower()}-{target['line']}"
+    if kind == "candidate":
+        digest = hashlib.sha1(str(target["key"]).encode()).hexdigest()  # noqa: S324
+        return f"candidate-{digest[:12]}"
+    if kind == "report":
+        return "report"
+    return f"{kind}-{target['id']}"
+
+
+def _check_extra(extra: dict[str, Any]) -> None:
+    if "target" in extra:
+        _check_target(extra["target"])
+    if "review_kind" in extra and extra["review_kind"] not in REVIEW_KINDS:
+        raise ValueError(f"bad review_kind {extra['review_kind']!r}")
+
+
 def append_comment(
     doc: Path,
     anchor: str,
@@ -88,6 +132,7 @@ def append_comment(
         raise ValueError(f"bad anchor {anchor!r}")
     if not text.strip():
         raise ValueError("empty comment text")
+    _check_extra(extra or {})
     row = {
         "id": "c" + secrets.token_hex(8),
         "ts": _now(),
@@ -135,6 +180,30 @@ def append_reply(
     return row
 
 
+def append_status(
+    doc: Path,
+    comment_id: str,
+    status: str,
+    note: str = "",
+    actor: str = "agent",
+) -> dict[str, Any]:
+    """Append a status reply; the parent stays as it is (not resolved)."""
+    if status not in STATUSES:
+        raise ValueError(f"bad status {status!r}: use one of {', '.join(STATUSES)}")
+    if not any(c["id"] == comment_id for c in fold(read_rows(doc))):
+        raise ValueError(f"unknown comment id {comment_id!r}")
+    row = {
+        "id": "r" + secrets.token_hex(4),
+        "reply_to": comment_id,
+        "ts": _now(),
+        "text": note.strip() or status,
+        "status": status,
+        "actor": actor,
+    }
+    _append_row(comments_path(doc), row)
+    return row
+
+
 def mark_latest_decisions(comments: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Copy answer rows, flagging `latest` on the newest answer per block id."""
     newest: dict[str, str] = {}
@@ -169,7 +238,7 @@ def read_rows(doc: Path) -> list[dict[str, Any]]:
 
 
 def _reply_entry(row: dict[str, Any]) -> dict[str, Any]:
-    return {k: row[k] for k in ("id", "ts", "text", "actor") if k in row}
+    return {k: row[k] for k in ("id", "ts", "text", "actor", "status") if k in row}
 
 
 def _new_comment(row: dict[str, Any]) -> dict[str, Any]:
@@ -186,6 +255,8 @@ def _fold_row(comments: dict[str, dict[str, Any]], row: dict[str, Any]) -> None:
     if isinstance(parent, str):
         if parent in comments and isinstance(row.get("text"), str):
             comments[parent]["replies"].append(_reply_entry(row))
+            if row.get("status") in STATUSES:
+                comments[parent]["status"] = row["status"]
     elif row.get("state") in {"open", "resolved"} and cid in comments:
         comments[cid]["state"] = row["state"]
         if isinstance(row.get("applied_by"), str):
