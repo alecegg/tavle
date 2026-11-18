@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 from varde_pages import serve as serve_mod
+from varde_pages import server_parts
 from varde_pages.comments import append_reply, comments_path, fold, read_rows
 from varde_pages.serve import PageServer
 
@@ -260,7 +261,7 @@ def test_sse_event_on_file_change_and_reply(running: Running) -> None:
 
 
 def test_heartbeat_sent(running: Running, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(serve_mod, "HEARTBEAT_SECONDS", 0.2)
+    monkeypatch.setattr(server_parts, "HEARTBEAT_SECONDS", 0.2)
     sock = open_sse(running)
     assert b": ping" in read_until(sock, b": ping")
     sock.close()

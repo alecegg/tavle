@@ -45,6 +45,7 @@ from varde_pages.server_parts import (
     origin_allowed,
     token_matches,
     watch_files,
+    write_event_stream,
 )
 from varde_pages.store import EDIT_OFF, DecisionDenied, sources_for, store_comment
 from varde_pages.template import (
@@ -77,7 +78,6 @@ STATIC_TYPES = {
 }
 ACTOR = "user"  # the page user; recorded as the actor that applied a suggestion
 MAX_BODY = 64 * 1024
-HEARTBEAT_SECONDS = 15
 MAX_STREAMS = 16
 READ_TIMEOUT = 10
 
@@ -287,23 +287,7 @@ class PageHandler(BaseHTTPRequestHandler):
         self.send_header("Connection", "close")
         self.end_headers()
         self.close_connection = True
-        broadcaster = self.app.broadcaster
-        seen = broadcaster.version
-        try:
-            self.wfile.write(b": connected\n\n")
-            self.wfile.flush()
-            while True:
-                version, stopped = broadcaster.wait(seen, HEARTBEAT_SECONDS)
-                if stopped:
-                    return
-                message = (
-                    b"event: update\ndata: {}\n\n" if version != seen else b": ping\n\n"
-                )
-                seen = version
-                self.wfile.write(message)
-                self.wfile.flush()
-        except OSError:
-            return
+        write_event_stream(self.wfile, self.app.broadcaster)
 
     def do_POST(self) -> None:
         self._record()

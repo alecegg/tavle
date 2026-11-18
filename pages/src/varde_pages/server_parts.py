@@ -6,11 +6,13 @@ import hmac
 import secrets
 import threading
 from collections.abc import Collection, Sequence
+from io import BufferedIOBase
 from pathlib import Path
 
 STATIC_DIR = Path(__file__).parent / "static"
 VENDOR_ASSETS = frozenset({"mithril.js"})
 POLL_SECONDS = 0.5
+HEARTBEAT_SECONDS = 15
 # A header name, not a credential.
 TOKEN_HEADER = "X-Varde-Token"  # mollify: ignore[hardcoded-secret]  # noqa: S105
 SECURITY_HEADERS = {
@@ -80,6 +82,24 @@ class Broadcaster:
         with self._cond:
             self._cond.wait_for(lambda: self._stopped or self._version != seen, timeout)
             return self._version, self._stopped
+
+
+def write_event_stream(wfile: BufferedIOBase, broadcaster: Broadcaster) -> None:
+    """Send `update` events on each publish and a ping each heartbeat until stopped."""
+    seen = broadcaster.version
+    try:
+        wfile.write(b": connected\n\n")
+        wfile.flush()
+        while True:
+            version, stopped = broadcaster.wait(seen, HEARTBEAT_SECONDS)
+            if stopped:
+                return
+            changed = version != seen
+            seen = version
+            wfile.write(b"event: update\ndata: {}\n\n" if changed else b": ping\n\n")
+            wfile.flush()
+    except OSError:
+        return
 
 
 def file_signature(path: Path) -> tuple[int, int] | None:
