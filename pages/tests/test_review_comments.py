@@ -128,3 +128,19 @@ def test_target_anchor_slugs_ids_with_capitals_and_keeps_the_stored_target():
     anchor = target_anchor(target)
     assert anchor == "finding-r2"
     assert target_anchor({"kind": "section", "id": "A b_C"}) == "section-a-b-c"
+
+
+def test_block_target_is_stored_and_anchors_like_a_section(tmp_path: Path) -> None:
+    doc = tmp_path / "r.json"
+    target = {"kind": "block", "id": "checkout-flow"}
+    assert target_anchor(target) == "block-checkout-flow"
+    assert target_anchor({"kind": "block", "id": "A b_C"}) == "block-a-b-c"
+    append_comment(doc, "block-checkout-flow", "q", "t", extra={"target": target})
+    assert '"kind":"block"' in comments_path(doc).read_text()
+
+
+def test_block_target_requires_an_id(tmp_path: Path) -> None:
+    doc = tmp_path / "r.json"
+    with pytest.raises(ValueError):
+        append_comment(doc, "block-x", "q", "t", extra={"target": {"kind": "block"}})
+    assert not comments_path(doc).exists()

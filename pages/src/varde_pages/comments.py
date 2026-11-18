@@ -30,6 +30,7 @@ _TARGET_FIELDS = {
     "finding": ("id",),
     "candidate": ("key",),
     "section": ("id",),
+    "block": ("id",),
     "report": (),
 }
 _ANCHOR = re.compile(r"[a-z0-9-]+(/[0-9]+)?")
