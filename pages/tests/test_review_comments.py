@@ -121,3 +121,10 @@ def test_line_target_sha_must_be_hex(tmp_path: Path) -> None:
         with pytest.raises(ValueError):
             append_comment(doc, "line-abcdef1-12", "q", "t", extra={"target": bad})
     assert not comments_path(doc).exists()
+
+
+def test_target_anchor_slugs_ids_with_capitals_and_keeps_the_stored_target():
+    target = {"kind": "finding", "id": "R2"}
+    anchor = target_anchor(target)
+    assert anchor == "finding-r2"
+    assert target_anchor({"kind": "section", "id": "A b_C"}) == "section-a-b-c"

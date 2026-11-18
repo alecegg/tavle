@@ -112,7 +112,8 @@ def target_anchor(target: dict[str, Any]) -> str:
         return f"candidate-{digest[:12]}"
     if kind == "report":
         return "report"
-    return f"{kind}-{target['id']}"
+    slug = re.sub(r"[^a-z0-9-]", "-", str(target["id"]).lower())
+    return f"{kind}-{slug}"
 
 
 def _check_extra(extra: dict[str, Any]) -> None:
