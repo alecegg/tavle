@@ -36,11 +36,15 @@ from varde_pages.netbind import (
     is_loopback,
 )
 from varde_pages.server_parts import (
+    MAX_BODY,
+    MAX_STREAMS,
+    READ_TIMEOUT,
     SECURITY_HEADERS,
     STATIC_DIR,
     TOKEN_HEADER,
     Broadcaster,
     host_allowed,
+    is_json_type,
     new_token,
     origin_allowed,
     token_matches,
@@ -77,18 +81,6 @@ STATIC_TYPES = {
     INLINE_CSS: "text/css; charset=utf-8",
 }
 ACTOR = "user"  # the page user; recorded as the actor that applied a suggestion
-MAX_BODY = 64 * 1024
-MAX_STREAMS = 16
-READ_TIMEOUT = 10
-
-
-def is_json_type(content_type: str | None) -> bool:
-    if content_type is None:
-        return False
-    media, _, params = content_type.partition(";")
-    if media.strip().lower() != "application/json":
-        return False
-    return params.strip().lower() in {"", "charset=utf-8"}
 
 
 def parse_edit_body(raw: bytes) -> tuple[str, str, str]:

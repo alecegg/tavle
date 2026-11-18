@@ -11,6 +11,9 @@ from pathlib import Path
 
 STATIC_DIR = Path(__file__).parent / "static"
 VENDOR_ASSETS = frozenset({"mithril.js"})
+MAX_BODY = 64 * 1024
+MAX_STREAMS = 16
+READ_TIMEOUT = 10
 POLL_SECONDS = 0.5
 HEARTBEAT_SECONDS = 15
 # A header name, not a credential.
@@ -41,6 +44,15 @@ def origin_allowed(origin: str | None, origins: Collection[str]) -> bool:
 
 def host_allowed(host: str | None, hosts: Collection[str]) -> bool:
     return (host or "").lower() in hosts
+
+
+def is_json_type(content_type: str | None) -> bool:
+    if content_type is None:
+        return False
+    media, _, params = content_type.partition(";")
+    if media.strip().lower() != "application/json":
+        return False
+    return params.strip().lower() in {"", "charset=utf-8"}
 
 
 def vendor_asset(name: str) -> bytes:
