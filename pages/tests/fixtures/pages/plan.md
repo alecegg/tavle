@@ -133,10 +133,10 @@ n/a — no open questions
       When layer rules run
       Then `doc` imports only `varde_core` and no runner code
       (assert: `bash -c 'source core/scripts/test-env.sh; uv run pytest core/tests/test_dependency_rules.py core/tests/test_layer_couplings.py'` → pass)
-- [ ] Given a planner or orchestrator reads varde-plan
+- [ ] Given a planner or orchestrator reads varde-writing
       When it wants user feedback on a draft
       Then the skill points to serving the plan and running `varde pages watch` under the monitor
-      (assert: `uv run varde learn check` and `uv run varde learn check` on varde-plan → pass; retrieve: a varde-agent-doc-authoring review of the edited skill → no blocking finding)
+      (assert: `uv run varde learn check` and `uv run varde learn check` on varde-writing → pass; retrieve: a varde-agent-doc-authoring review of the edited skill → no blocking finding)
 
 ## Progress
 
