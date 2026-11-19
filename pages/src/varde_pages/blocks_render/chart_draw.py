@@ -32,6 +32,7 @@ from varde_pages.blocks_render.chart_scale import (
 from varde_pages.blocks_render.svg import Shape, el, ellipsize, f1
 
 W, H = 360.0, 220.0
+GLYPH_SPREAD = 1.1  # wide glyphs make real labels up to this much wider than CHAR says
 SPARK_W, SPARK_H = 160.0, 44.0
 BOTTOM, NOTE_ROW = 34.0, 17.0
 DENSE_POINTS = 24
@@ -423,7 +424,8 @@ def _category_labels(model: Model, frame: Frame, slot: float) -> list[Shape]:
     reach = 0.0  # right edge of the last label drawn
     for i in range(0, len(shown), step):
         half = len(shown[i]) * CHAR / 2
-        x = min(max(frame.x0 + slot * (i + 0.5), half), W - half)  # stay inside the SVG
+        edge = half * GLYPH_SPREAD
+        x = min(max(frame.x0 + slot * (i + 0.5), edge), W - edge)  # stay inside the SVG
         if x - half < reach + 4 and out:
             continue  # clamping must not push a label onto its neighbour
         reach = x + half
@@ -554,7 +556,7 @@ def horizontal_bars(model: Model) -> Drawing:
     spans = _spans(model)
     low, high = _extent(model.series, spans)
     shown = [ellipsize(label, 14) for label in model.labels]
-    left = max(len(label) for label in shown) * CHAR + 12
+    left = max(len(label) for label in shown) * CHAR * GLYPH_SPREAD + 12
     frame = Frame(left, W - 14, 8.0, height - BOTTOM)
     axis = make_axis(low, high, frame.x0, frame.x1, True, model.decimals)
     slot = (frame.y1 - frame.y0) / max(count, 1)
