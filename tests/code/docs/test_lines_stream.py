@@ -1,6 +1,7 @@
 """Streaming: complete-statement prefix is stable at every cut offset."""
 
 import pytest
+
 from varde.base.ui_lines import parse_lines
 from varde.base.ui_lines.grammar import EXAMPLES
 

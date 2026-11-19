@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-PAGES = Path(__file__).resolve().parents[1] / "src/varde.pages"
+PAGES = Path(__file__).resolve().parents[2] / "src/varde/pages"
 CSS = (PAGES / "static/css/23-decision.css").read_text()
 
 

@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from varde.base.ui_lines.parse import ID_RULE
-
 from varde.pages.blocks.annotated_code import ANNOTATED_CODE
 from varde.pages.blocks.backend import DATA_MODEL, ENDPOINT
 from varde.pages.blocks.callout import CALLOUT

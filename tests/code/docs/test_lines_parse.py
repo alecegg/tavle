@@ -1,6 +1,7 @@
 """Line syntax parser: valid cases, every error class, partial input."""
 
 import pytest
+
 from varde.base.ui_lines import Ref, parse_lines
 from varde.base.ui_lines.grammar import EXAMPLES
 

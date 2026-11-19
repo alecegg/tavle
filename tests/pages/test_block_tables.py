@@ -6,7 +6,7 @@ from varde.pages.blocks import COMPONENT_SPECS
 from varde.pages.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.pages.components import component_bundle
 
-COMPONENT_FILES = Path(__file__).parents[1] / "src/varde/pages/static/components"
+COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"
 
 
 def test_component_registry_matches_the_specs() -> None:

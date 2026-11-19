@@ -1,6 +1,7 @@
 """Contrast math: thresholds, compositing, and parity with reference ratios."""
 
 import pytest
+
 from varde.design.contrast import (
     composite,
     contrast_ratio,

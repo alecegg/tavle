@@ -1,6 +1,7 @@
 """Contrast math: exact channel values, error text, clamps and the failure margin."""
 
 import pytest
+
 from varde.design.contrast import (
     FAIL_MARGIN,
     composite,
