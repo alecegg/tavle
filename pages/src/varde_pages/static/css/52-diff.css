@@ -19,7 +19,7 @@
 .vd-diff-num { padding-inline-end: var(--vd-space-2); text-align: end; color: var(--vd-text); user-select: none; -webkit-user-select: none; }
 .vd-diff-same.vd-diff-num, .vd-diff-same > .vd-diff-num { color: var(--vd-text-secondary); }
 .vd-diff-mark { position: relative; text-align: center; font-weight: 700; color: var(--vd-text); user-select: none; -webkit-user-select: none; }
-.vd-diff-text { padding-inline: var(--vd-space-2) var(--vd-space-3); white-space: pre-wrap; overflow-wrap: anywhere; min-inline-size: 0; color: var(--vd-text); }
+.vd-diff-text { padding-inline: var(--vd-space-2) var(--vd-space-3); white-space: break-spaces; overflow-wrap: anywhere; min-inline-size: 0; color: var(--vd-text); }
 .vd-diff-add { --vd-diff-edge: var(--vd-tone-success-edge); --vd-diff-tint: var(--vd-tone-success-tint); }
 .vd-diff-del { --vd-diff-edge: var(--vd-tone-risk-edge); --vd-diff-tint: var(--vd-tone-risk-tint); }
 tr.vd-diff-add > td, tr.vd-diff-del > td, td.vd-diff-add, td.vd-diff-del { background: var(--vd-diff-tint); }
