@@ -1,6 +1,6 @@
 """Input blocks render client-side: registration, props, hosts, read-only, validation.
 
-The component DOM is checked in `pages/tests/components/inputs.test.js` against
+The component DOM is checked in `tests/pages/components/inputs.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the statements render hosts whose no-script fallback is their
@@ -16,6 +16,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from ui_fence import block_host
+
 from varde.pages.blocks_render.inputs import choice_props, form_props
 from varde.pages.blocks_render.inputs_ordered import ranking_props, slider_props
 from varde.pages.blocks_render.registry import COMPONENTS
@@ -23,8 +25,6 @@ from varde.pages.components import component_bundle
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 from varde.pages.template import make_read_only
-
-from .ui_fence import block_host
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")

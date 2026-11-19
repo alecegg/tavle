@@ -9,6 +9,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+
 from varde.pages.answers import answer_value, validate_answer
 from varde.pages.comments import comments_path, fold, read_rows
 from varde.pages.serve import PageServer

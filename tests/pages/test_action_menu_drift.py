@@ -5,6 +5,7 @@ import re
 from importlib.resources import files
 
 import pytest
+
 from varde.pages.actions import BLOCK_TYPES, menu_entries
 from varde.pages.template import page_scripts, static_scripts
 

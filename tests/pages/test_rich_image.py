@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages import media
 from varde.pages.assemble import assemble_page, assemble_static
 from varde.pages.blocks import check, check_props

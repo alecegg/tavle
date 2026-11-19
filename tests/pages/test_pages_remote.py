@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.serve import PageServer, edit_denied
 
 DOC = "# Plan\n\nBody text.\n\n```html\n<p>hi</p>\n```\n"

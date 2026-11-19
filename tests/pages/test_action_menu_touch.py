@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.serve import PageServer
 
 pytestmark = pytest.mark.slow

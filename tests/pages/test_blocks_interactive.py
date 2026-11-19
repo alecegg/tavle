@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 

@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import shapes_html
+
 from varde.pages.blocks import check, check_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.blocks_render.sequence import (
@@ -25,8 +27,6 @@ from varde.pages.blocks_render.sequence_layout import (
     place_actors,
 )
 from varde.pages.render import render_page
-
-from .scene_html import shapes_html
 
 
 def sequence_props(data: dict[str, Any]) -> Any:

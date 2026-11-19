@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import shapes_html
+
 from varde.pages.blocks import check, check_props
 from varde.pages.blocks_render.diagram_layout import (
     EdgeSpec,
@@ -28,8 +30,6 @@ from varde.pages.blocks_render.state_graph import (
     unreachable_ids,
 )
 from varde.pages.render import render_page
-
-from .scene_html import shapes_html
 
 
 def state_props(data: dict[str, Any]) -> Any:

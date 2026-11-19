@@ -9,14 +9,14 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import shapes_html
+
 from varde.pages.blocks import check_props
 from varde.pages.blocks_render.flow import copy_text
 from varde.pages.blocks_render.flow import flow_props as _flow_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
-
-from .scene_html import shapes_html
 
 
 def flow_props(data: dict[str, Any]) -> Any:

@@ -9,6 +9,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+
 from varde.pages.comments import (
     append_comment,
     comments_path,

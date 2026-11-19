@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks import check_props
 from varde.pages.blocks.tables import numeric
 from varde.pages.serve import PageServer

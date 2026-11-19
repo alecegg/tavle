@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.assemble import assemble_static
 from varde.pages.blocks.statement import statement_text
 from varde.pages.components import component_bundle
@@ -20,7 +21,7 @@ from varde.pages.serve import PageServer
 VECTORS = json.loads(
     (Path(__file__).parent / "fixtures/url-vectors.json").read_text(encoding="utf-8")
 )
-STATIC = Path(__file__).parents[1] / "src/varde/pages/static"
+STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 JS_URL = "javascript:alert(1)"
 DECISION = statement_text(

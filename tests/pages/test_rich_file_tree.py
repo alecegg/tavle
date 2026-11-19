@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks_render.file_tree import (
     compact,

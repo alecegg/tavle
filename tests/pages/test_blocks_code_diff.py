@@ -1,6 +1,6 @@
 """Code and diff blocks render client-side: registration, props, hosts, page links.
 
-The component DOM is checked in `pages/tests/components/code_diff.test.js` against
+The component DOM is checked in `tests/pages/components/code_diff.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts, and the server-side logic (lexer,
@@ -17,6 +17,7 @@ import urllib.request
 from pathlib import Path
 
 import pytest
+
 from varde.pages.blocks.change_summary import EMPTY, UNCOUNTED
 from varde.pages.blocks_render.annotated_code import annotated_props
 from varde.pages.blocks_render.change_summary import change_summary_props

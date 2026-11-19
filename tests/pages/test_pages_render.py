@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 import pytest
+
 from varde.pages import render
 from varde.pages.render import render_inline, render_page
 

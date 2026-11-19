@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.actions import menu_entries
 from varde.pages.serve import PageServer
 

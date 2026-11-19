@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import svg_html
+
 from varde.base.ui_lines import parse_lines
 from varde.pages.blocks import check_props
 from varde.pages.blocks.charts import CHART, MAX_SERIES
@@ -24,8 +26,6 @@ from varde.pages.blocks_render.chart_scale import (
 from varde.pages.blocks_render.charts import chart_props as _chart_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.serve import PageServer
-
-from .scene_html import svg_html
 
 
 def chart_props(data: dict[str, Any]) -> Any:
@@ -264,7 +264,7 @@ def test_two_hundred_points_and_twelve_series_render_fast_and_thin_labels() -> N
 def test_text_is_never_below_11px_at_the_narrowest_chart() -> None:
     from varde.pages.blocks_render.chart_draw import W
 
-    css = Path(__file__).parents[1].joinpath("src/varde/pages/static/css/41-chart.css")
+    css = Path(__file__).parents[2].joinpath("src/varde/pages/static/css/41-chart.css")
     assert "font: 15px" in css.read_text()
     assert 15 * (264 / W) >= 11
 

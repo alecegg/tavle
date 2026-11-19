@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks import type_text
 from varde.pages.blocks.backend import validate_data_model
 from varde.pages.blocks_render import render_block

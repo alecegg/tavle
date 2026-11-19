@@ -10,6 +10,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+
 from varde.pages import serve as serve_mod
 from varde.pages import server_parts
 from varde.pages.comments import append_reply, comments_path, fold, read_rows

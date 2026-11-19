@@ -4,8 +4,8 @@ status: todo
 status_at:
 depends_on: []
 owns:
-  - learn/src/varde_learn/docs/pages/__init__.py
-  - learn/src/varde_learn/docs/pages/render.py
+  - src/varde/learn/docs/pages/__init__.py
+  - src/varde/learn/docs/pages/render.py
   - doc/tests/test_pages_render.py
   - doc/tests/fixtures/pages/
 risk: high

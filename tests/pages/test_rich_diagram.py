@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import shapes_html
+
 from varde.base.ui_lines import parse_lines
 from varde.pages.blocks import check_props
 from varde.pages.blocks.diagrams import DIAGRAM, MAX_EDGES, MAX_NODES
@@ -29,8 +31,6 @@ from varde.pages.blocks_render.diagrams import (
 )
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.serve import PageServer
-
-from .scene_html import shapes_html
 
 
 def diagram_props(data: dict[str, Any]) -> Any:

@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any
 
 from varde.base.ui_lines import parse_lines
-
 from varde.pages.comments import (
     ANSWER_KINDS,
     fold,

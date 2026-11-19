@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from varde.pages import blocks
+from ui_fence import example_fence, ui_fence
 
-from .ui_fence import example_fence, ui_fence
+from varde.pages import blocks
 
 VALID = 'question = "Ship it?"\n'
 

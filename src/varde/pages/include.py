@@ -19,7 +19,6 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from varde.base.ui_lines import Statement
-
 from varde.pages.blocks.fences import ui_statements
 from varde.pages.blocks.include import include_faults
 from varde.pages.select import (

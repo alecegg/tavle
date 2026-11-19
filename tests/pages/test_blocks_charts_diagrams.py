@@ -1,6 +1,6 @@
 """Chart, diagram and image blocks render client-side: registration, props, hosts, copy.
 
-The component DOM is checked in `pages/tests/components/charts_diagrams.test.js` against
+The component DOM is checked in `tests/pages/components/charts_diagrams.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts with their source as the no-script
@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks_render.charts import chart_props
 from varde.pages.blocks_render.diagrams import diagram_props
 from varde.pages.blocks_render.flow import flow_props

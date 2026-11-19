@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 import pytest
+
 from varde.pages.actions import component_block_type
 from varde.pages.render import render_page
 

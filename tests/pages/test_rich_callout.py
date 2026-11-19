@@ -1,7 +1,7 @@
 """The callout block: spec, registration and its client-side host.
 
 Tones, escaping, Copy text and paragraphs are checked in
-`pages/tests/components/callout.test.js` against the former Python renderer's HTML.
+`tests/pages/components/callout.test.js` against the former Python renderer's HTML.
 """
 
 from __future__ import annotations

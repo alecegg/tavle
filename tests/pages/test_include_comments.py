@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.comments import (
     comments_path,
     fold,

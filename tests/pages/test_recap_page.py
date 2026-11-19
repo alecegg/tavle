@@ -9,6 +9,7 @@ from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
+
 from varde.pages.blocks.statement import statement_text
 from varde.pages.comments import fold, read_rows
 from varde.pages.render import render_page

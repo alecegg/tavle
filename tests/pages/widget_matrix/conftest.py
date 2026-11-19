@@ -6,6 +6,7 @@ from collections.abc import Callable, Iterator
 from typing import Any
 
 import pytest
+
 from varde.base.browser_args import BROWSER_ARGS
 
 from .driver import Matrix

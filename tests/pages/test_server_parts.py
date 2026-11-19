@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+
 from varde.pages.server_parts import (
     SECURITY_HEADERS,
     Broadcaster,

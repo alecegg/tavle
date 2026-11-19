@@ -8,10 +8,10 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from test_recap_page import recap_data, recap_fence
+
 from varde.pages.comments import fold, read_rows
 from varde.pages.serve import PageServer
-
-from .test_recap_page import recap_data, recap_fence
 
 pytestmark = pytest.mark.slow
 

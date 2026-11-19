@@ -9,8 +9,8 @@ shared:
   - pyproject.toml
   - uv.lock
   - docs/sandbox-permissions.md   # t4 adds loopback note, then t7 adds Chromium cache note
-  - learn/src/varde_learn/docs/help/
-  - learn/src/varde_learn/docs/cli.py
+  - src/varde/learn/docs/help/
+  - src/varde/learn/docs/cli.py
 gate: []
 reviewed_commit: "8cad65bb69a1ff8394b1b966e4f52800f2f1109f"
 reviewed_on: "2026-10-30"
@@ -42,7 +42,7 @@ Plans, reviews, explainers, docs and agent-doc reviews are plain markdown with n
 
 ### Tech choices
 
-- Module: `doc` (`learn/src/varde_learn/docs/pages/`) — level 1, already owns the `varde learn docs` CLI and depends only on `core`; a new module would add layers.toml, preset and install cost for no gain.
+- Module: `doc` (`src/varde/learn/docs/pages/`) — level 1, already owns the `varde learn docs` CLI and depends only on `core`; a new module would add layers.toml, preset and install cost for no gain.
 - Command group `varde learn docs` (not `varde learn docss`) — `varde learn docs` is the existing CLI; `docs` would be a second group.
 - Renderer: escape-first markdown subset to HTML — mirrors the runner's `markdown.ts` approach, but is a new Python implementation.
 - Block vocabulary (in): headings, paragraphs, nested lists, list items with indented continuation lines, task lists, tables, blockquote, horizontal rule, fenced code, inline code/bold/emphasis, links, fenced `deps` graph block, frontmatter as a status line. Out: raw HTML (shown escaped), HTML comments (dropped), images, footnotes.
@@ -132,7 +132,7 @@ n/a — no open questions
 - [ ] Given the new code
       When layer rules run
       Then `doc` imports only `varde_core` and no runner code
-      (assert: `bash -c 'source core/scripts/test-env.sh; uv run pytest core/tests/test_dependency_rules.py core/tests/test_layer_couplings.py'` → pass)
+      (assert: `bash -c 'source scripts/test-env.sh; uv run pytest tests/base/test_dependency_rules.py tests/base/test_layer_couplings.py'` → pass)
 - [ ] Given a planner or orchestrator reads varde-writing
       When it wants user feedback on a draft
       Then the skill points to serving the plan and running `varde pages watch` under the monitor

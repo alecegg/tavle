@@ -1,6 +1,6 @@
 """Text and reference blocks render client-side: registration, hosts, fixtures.
 
-The component DOM is checked in `pages/tests/components/blocks_text.test.js`
+The component DOM is checked in `tests/pages/components/blocks_text.test.js`
 against `components/fixtures/<block>.json`, the HTML the former Python renderers
 produced. These tests keep the Python side of that contract: the fixtures hold
 valid props, the blocks render as hosts, and the facts the components copy from
@@ -14,6 +14,7 @@ import re
 from pathlib import Path
 
 import pytest
+
 from varde.pages.blocks import check_props
 from varde.pages.blocks.decision import OPTIONS
 from varde.pages.blocks.option_matrix import FIRST_COLUMN, SCALES
@@ -24,7 +25,7 @@ from varde.pages.render import classify_url, render_page
 
 TESTS = Path(__file__).parent
 FIXTURES = TESTS / "components" / "fixtures"
-STATIC = TESTS.parent / "src" / "varde.pages" / "static" / "components"
+STATIC = TESTS.parents[1] / "src" / "varde" / "pages" / "static" / "components"
 TEXT_BLOCKS = (
     "checklist",
     "decision",

@@ -1,4 +1,5 @@
 import pytest
+
 from varde.pages.actions import (
     ALLOWED_KINDS,
     BLOCK_TYPES,

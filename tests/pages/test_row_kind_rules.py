@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 import pytest
+
 from varde.pages.actions import BLOCK_TYPES, kind_allowed
 from varde.pages.comments import comments_path, fold, read_rows
 from varde.pages.render import render_page

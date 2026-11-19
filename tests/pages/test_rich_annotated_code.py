@@ -8,12 +8,13 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks import check_props
 from varde.pages.blocks_render.annotated_code import (
     read_notes,
 )
 
-PAGES = Path(__file__).parents[1] / "src" / "varde.pages"
+PAGES = Path(__file__).parents[2] / "src" / "varde" / "pages"
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SOURCE = "".join(f"l{i} = {i}\n" for i in range(1, 41))
 

@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.blocks import check, check_props, type_text
 from varde.pages.blocks.diff_rows import (
     diff_rows,

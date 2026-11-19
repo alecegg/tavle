@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+
 from varde.pages.blocks import check, check_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.render import render_page

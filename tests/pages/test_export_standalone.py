@@ -1,6 +1,6 @@
 """A standalone export of component blocks has all code inline, no remote reference.
 
-The browser run of this export is `pages/tests/components/callout.test.js`.
+The browser run of this export is `tests/pages/components/callout.test.js`.
 """
 
 import base64
@@ -8,13 +8,13 @@ import json
 import re
 from pathlib import Path
 
+from test_components_contract import CALLOUTS, FIXTURES, check_fixture
+
 from varde.pages.assemble import include_ctx
 from varde.pages.blocks import COMPONENT_SPECS
 from varde.pages.components import export_page, mount_block
 from varde.pages.render import render_page
 from varde.pages.template import make_read_only
-
-from .test_components_contract import CALLOUTS, FIXTURES, check_fixture
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
 CODE_DIFF_CASES = {

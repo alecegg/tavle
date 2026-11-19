@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.assemble import assemble, parse_page_stream
 from varde.pages.blocks import check
 from varde.pages.comments import fold, read_rows

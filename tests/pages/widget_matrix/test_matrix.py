@@ -1,6 +1,6 @@
 """Widget verification matrix (slow tier; needs Playwright Chromium).
 
-Run: `uv run pytest pages/tests/widget_matrix -m slow -k <family>`, e.g.
+Run: `uv run pytest tests/pages/widget_matrix -m slow -k <family>`, e.g.
 `-k choice`, `-k chrome` or `-k "slider and stress"`. Cell ids read
 `<family>-<fixture>-w<width>-<scheme>-<mode>`, so a failing id names its width,
 scheme and mode. Axes: widths 320 375 768 1024 1440; light and dark; modes
@@ -10,7 +10,7 @@ print, nojs (JavaScript disabled) and rtl (`dir=rtl` on the page).
 Each page load is audited once for every family in its fixture (`audit.py` collects,
 `checks.py` decides). Full-page PNGs go to a temp dir, or to `$VARDE_WIDGET_SHOTS`
 when set (one file per fixture, mode, scheme and width). Fixtures live in
-`pages/tests/fixtures/widgets/`: `normal.md`, `stress.md`, and `rich-<kind>.md`
+`tests/pages/fixtures/widgets/`: `normal.md`, `stress.md`, and `rich-<kind>.md`
 plus `rich-<kind>-stress.md` added by the rich-block tasks (picked up by glob).
 Pending families (`pending.py`) are `xfail(raises=AssertionError)` until the
 widget task removes the line.

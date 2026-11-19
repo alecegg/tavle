@@ -7,7 +7,6 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field, replace
 
 from varde.base.ui_lines import ParseError, Statement, parse_lines
-
 from varde.pages.actions import component_block_type
 from varde.pages.anchors import AnchorState, block_hash
 from varde.pages.blocks import CUSTOM_REMOVED

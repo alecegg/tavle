@@ -7,6 +7,7 @@ import threading
 from pathlib import Path
 
 import pytest
+
 from varde.pages.comments import (
     append_comment,
     append_reply,

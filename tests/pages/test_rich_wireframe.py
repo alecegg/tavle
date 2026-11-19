@@ -11,6 +11,8 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from scene_html import shapes_html
+
 from varde.pages import blocks
 from varde.pages.blocks import check_props
 from varde.pages.blocks.screens import KINDS, SURFACES
@@ -27,8 +29,6 @@ from varde.pages.blocks_render.screens import (
 )
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
-
-from .scene_html import shapes_html
 
 
 def wireframe_props(data: dict[str, Any]) -> Any:

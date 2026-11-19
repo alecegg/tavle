@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-STATIC = Path(__file__).parents[1] / "src/varde/pages/static"
+STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
 NODE = shutil.which("node")
 
 

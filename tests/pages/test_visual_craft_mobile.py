@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+
 from varde.pages.assemble import assemble_static
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

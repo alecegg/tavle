@@ -7,6 +7,7 @@ from importlib.resources import files
 from pathlib import Path
 
 import pytest
+
 from varde.pages.template import page_shell, static_css
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
