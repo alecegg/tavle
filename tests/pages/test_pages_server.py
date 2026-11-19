@@ -309,8 +309,6 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
             "build",
             "--offline",
             "--wheel",
-            "--package",
-            "varde-pages",
             "--out-dir",
             str(out),
         ],
@@ -321,7 +319,7 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
         timeout=300,
     )
     assert result.returncode == 0, result.stderr
-    wheel = next(out.glob("varde.pages-*.whl"))
+    wheel = next(out.glob("varde-*.whl"))
     names = zipfile.ZipFile(wheel).namelist()
     for asset in ("app.js", "css/00-tokens.css", "css/50-blocks.css"):
         assert f"varde/pages/static/{asset}" in names
