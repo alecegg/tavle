@@ -28,7 +28,7 @@
 .vd-code-line[data-mark] { background: var(--vd-tone-warning-tint); border-inline-start-color: var(--vd-tone-warning-edge); }
 .vd-code-line[data-mark]::before { content: "\25B8\00a0" attr(data-line); color: var(--vd-text); font-weight: 700; }
 .vd-code-nonum .vd-code-line[data-mark]::before { content: "\25B8\00a0"; inline-size: auto; }
-.vd-code-wrap .vd-code-pre { inline-size: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vd-code-wrap .vd-code-pre { inline-size: auto; white-space: break-spaces; overflow-wrap: anywhere; }
 .vd-code-pre { white-space: pre; }
 .vd-code-k { color: var(--vd-tone-decision-text); font-weight: 600; }
 .vd-code-s { color: var(--vd-tone-success-text); }
@@ -44,7 +44,7 @@
 @media print {
   .vd-code { break-inside: auto; }
   .vd-code-scroll { overflow: visible; max-block-size: none; }
-  .vd-code .vd-code-pre { inline-size: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .vd-code .vd-code-pre { inline-size: auto; white-space: break-spaces; overflow-wrap: anywhere; }
   .vd-code-copy, .vd-code-status { display: none; }
   .vd-code-line[data-mark] { background: none; border-inline-start-color: CanvasText; }
 }

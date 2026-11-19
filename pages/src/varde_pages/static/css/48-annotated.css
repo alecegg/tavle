@@ -50,7 +50,7 @@
 @media print {
   .vd-annotated-code { display: block; }
   .vd-annotated-code > .vd-code { margin-block-end: var(--vd-space-3); }
-  .vd-annotated-code .vd-code:not(.vd-code-nonum) .vd-code-line { padding-inline-start: calc(var(--vd-code-gutter) + var(--vd-space-3) * 2); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .vd-annotated-code .vd-code:not(.vd-code-nonum) .vd-code-line { padding-inline-start: calc(var(--vd-code-gutter) + var(--vd-space-3) * 2); white-space: break-spaces; overflow-wrap: anywhere; }
   .vd-annotated-pins { position: static; display: flex; flex-wrap: wrap; max-inline-size: 100%; }
   .vd-annotated-note { break-inside: avoid; background: none; border-color: CanvasText; }
   .vd-annotated-fold::details-content { content-visibility: visible; display: block; }
