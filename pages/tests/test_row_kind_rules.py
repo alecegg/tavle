@@ -9,7 +9,7 @@ import pytest
 from varde_pages.actions import BLOCK_TYPES, kind_allowed
 from varde_pages.comments import comments_path, fold, read_rows
 from varde_pages.render import render_page
-from varde_pages.store import DecisionDenied, store_comment
+from varde_pages.store import store_comment
 
 DOC = """# Title
 
@@ -92,21 +92,21 @@ def test_every_type_and_kind_cell(doc: Path, block_type: str, kind: str) -> None
     allowed = kind_allowed(block_type, row_kind)
     raw = body(ANCHORS[block_type], kind)
     if allowed:
-        row = store_comment(doc, raw, decisions_open=True)
+        row = store_comment(doc, raw)
         assert row["anchor"] == ANCHORS[block_type]
         assert len(read_rows(doc)) == 1
         return
     with pytest.raises(ValueError, match=f"{kind} is not allowed on {block_type}"):
-        store_comment(doc, raw, decisions_open=True)
+        store_comment(doc, raw)
     assert sidecar(doc) == ""
 
 
 @pytest.mark.parametrize("kind", ["suggestion", "answer", "decision", "drift"])
 def test_unresolved_anchor_takes_only_a_comment(doc: Path, kind: str) -> None:
     with pytest.raises(ValueError, match="no longer exists"):
-        store_comment(doc, body("gone/1", kind), decisions_open=True)
+        store_comment(doc, body("gone/1", kind))
     assert sidecar(doc) == ""
-    assert store_comment(doc, body("gone/1", "comment"), decisions_open=True)["id"]
+    assert store_comment(doc, body("gone/1", "comment"))["id"]
 
 
 def test_forged_suggestion_on_code_is_refused(doc: Path) -> None:
@@ -120,13 +120,8 @@ def test_forged_suggestion_on_code_is_refused(doc: Path) -> None:
         }
     ).encode()
     with pytest.raises(ValueError, match="suggestion is not allowed on code"):
-        store_comment(doc, raw, decisions_open=False)
+        store_comment(doc, raw)
     assert sidecar(doc) == ""
-
-
-def test_closed_decisions_still_deny_before_the_kind_check(doc: Path) -> None:
-    with pytest.raises(DecisionDenied):
-        store_comment(doc, body("title/1", "answer"), decisions_open=False)
 
 
 def test_old_suggestion_row_on_a_code_block_still_reads(doc: Path) -> None:

@@ -17,7 +17,7 @@ from varde_pages.comments import (
     read_rows,
 )
 from varde_pages.include import include_sources
-from varde_pages.store import DecisionDenied, sources_for, store_comment
+from varde_pages.store import sources_for, store_comment
 from varde_pages.watch import comment_line, new_open_comments
 
 SOURCE = """\
@@ -70,9 +70,9 @@ def body(**fields: Any) -> bytes:
     return json.dumps({k: v for k, v in data.items() if v is not None}).encode()
 
 
-def post(doc: Path, root: Path, raw: bytes, *, open_: bool = True) -> dict[str, Any]:
+def post(doc: Path, root: Path, raw: bytes) -> dict[str, Any]:
     sources = sources_for(doc, raw)
-    return store_comment(doc, raw, decisions_open=open_, sources=sources)
+    return store_comment(doc, raw, sources=sources)
 
 
 @pytest.fixture
@@ -294,7 +294,7 @@ def test_source_swapped_for_a_symlink_after_page_load_is_refused(
     (root / "src.md").unlink()
     (root / "src.md").symlink_to(outside / "x.md")
     with pytest.raises(ValueError, match="not writable"):
-        store_comment(doc, body(), decisions_open=True, sources=sources)
+        store_comment(doc, body(), sources=sources)
     assert list(outside.iterdir()) == [outside / "x.md"]
     # and a fresh resolution refuses the new target as well
     with pytest.raises(ValueError, match="outside the allowed roots"):
@@ -315,20 +315,13 @@ def test_part_comment_needs_text(root: Path, doc: Path) -> None:
 
 def test_part_without_sources_is_rejected(root: Path, doc: Path) -> None:
     with pytest.raises(ValueError, match="unknown part"):
-        store_comment(doc, body(), decisions_open=True, sources=None)
+        store_comment(doc, body(), sources=None)
     assert listing(root) == ["other.md", "page.md", "src.md"]
 
 
-def test_answer_with_part_is_rejected_even_when_closed(root: Path, doc: Path) -> None:
+def test_answer_with_part_is_rejected(root: Path, doc: Path) -> None:
     with pytest.raises(ValueError, match="only a comment"):
-        post(doc, root, body(kind="answer", value="x"), open_=False)
-    with pytest.raises(DecisionDenied):
-        post(
-            doc,
-            root,
-            body(part=None, kind="answer", value="x", item="beta"),
-            open_=False,
-        )
+        post(doc, root, body(kind="answer", value="x"))
 
 
 # --- append primitive -----------------------------------------------------------
@@ -378,7 +371,7 @@ doc, root, number = Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3]
 for i in range(20):
     raw = json.dumps({"anchor": "beta-id/1", "part": "beta",
                       "text": f"p{number}-{i} " + "y" * 4000}).encode()
-    store_comment(doc, raw, decisions_open=True,
+    store_comment(doc, raw,
                   sources=sources_for(doc, raw))
 """
 

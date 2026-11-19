@@ -51,7 +51,7 @@ from varde_pages.server_parts import (
     watch_files,
     write_event_stream,
 )
-from varde_pages.store import EDIT_OFF, DecisionDenied, sources_for, store_comment
+from varde_pages.store import EDIT_OFF, sources_for, store_comment
 from varde_pages.template import (
     BUNDLE_SCRIPT,
     TOKENS_CSS,
@@ -326,19 +326,10 @@ class PageHandler(BaseHTTPRequestHandler):
         return self.rfile.read(int(length))
 
     def _store_comment(self, raw: bytes) -> None:
-        # An answer is gated like a page edit.
-        decisions_open = not edit_denied("/edit", self.app.remote, self.app.allow_edit)
+        # An answer is a comment row, open on any bind (user, 2026-11-19).
         try:
             sources = sources_for(self.app.doc, raw)
-            row = store_comment(
-                self.app.doc,
-                raw,
-                decisions_open=decisions_open,
-                sources=sources,
-            )
-        except DecisionDenied:
-            self._reject(HTTPStatus.FORBIDDEN, EDIT_OFF)
-            return
+            row = store_comment(self.app.doc, raw, sources=sources)
         except ValueError as error:
             self._reject(HTTPStatus.BAD_REQUEST, str(error))
             return

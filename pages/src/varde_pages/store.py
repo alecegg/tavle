@@ -86,13 +86,6 @@ def drift_fields(data: dict[str, Any]) -> tuple[str, str]:
     return item, verdict
 
 
-class DecisionDenied(PermissionError):
-    """An answer was posted while editing is off."""
-
-    def __init__(self) -> None:
-        super().__init__(EDIT_OFF)
-
-
 def _part_of(data: dict[str, Any]) -> str | None:
     """The `part` a comment body names, or None; ValueError for a non-string."""
     part = data.get("part")
@@ -145,10 +138,7 @@ def _store_answer(
     data: dict[str, Any],
     anchor: str,
     kind: str,
-    decisions_open: bool,
 ) -> dict[str, Any]:
-    if not decisions_open:
-        raise DecisionDenied
     check_kind_allowed(doc, anchor, kind)
     item, value, text = answer_fields(data)
     validate_answer(read_markdown(doc), item, value, text)
@@ -192,15 +182,12 @@ def store_comment(
     doc: Path,
     raw: bytes,
     *,
-    decisions_open: bool,
     sources: Mapping[str, IncludeSource] | None = None,
 ) -> dict[str, Any]:
-    """Append the comment in a JSON body; raise ValueError or DecisionDenied.
+    """Append the comment in a JSON body; raise ValueError.
 
-    An answer is stored only when `decisions_open` is true; the caller decides,
-    because the gate differs between `pages serve` and the daemon. Only a
-    `comment` may carry `part`; it is appended to the sidecar of the included
-    source `sources[part]`. Answers, suggestions and drift rows belong to the
+    Only a `comment` may carry `part`; it is appended to the sidecar of the
+    included source `sources[part]`. Answers, suggestions and drift rows belong to the
     page and always go to its own sidecar.
     """
     data = parse_json_object(raw)
@@ -209,7 +196,7 @@ def store_comment(
     if part is not None and kind != "comment":
         raise ValueError("only a comment may name a part")
     if kind in ANSWER_KINDS:
-        return _store_answer(doc, data, anchor, kind, decisions_open)
+        return _store_answer(doc, data, anchor, kind)
     if part is None:
         check_kind_allowed(doc, anchor, kind)
     extra, text = _comment_extra(data, kind, replacement, text)

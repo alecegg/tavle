@@ -12,7 +12,7 @@ import pytest
 from varde_pages.answers import answer_value, validate_answer
 from varde_pages.comments import comments_path, fold, read_rows
 from varde_pages.serve import PageServer
-from varde_pages.store import DecisionDenied, store_comment
+from varde_pages.store import store_comment
 
 DOC = (
     "# Plan\n\nBody.\n\n"
@@ -85,7 +85,7 @@ def test_answer_value_reads_old_decision_rows_as_answers() -> None:
 
 
 def test_store_answer_row_shape(doc: Path) -> None:
-    stored = store_comment(doc, row("ship", "approved"), decisions_open=True)
+    stored = store_comment(doc, row("ship", "approved"))
     [found] = fold(read_rows(doc))
     assert found["id"] == stored["id"]
     assert (found["kind"], found["item"], found["value"], found["actor"]) == (
@@ -101,15 +101,9 @@ def test_store_old_decision_row_is_still_accepted(doc: Path) -> None:
     raw = json.dumps(
         {"anchor": "ship", "kind": "decision", "item": "ship", "verdict": "denied"}
     ).encode()
-    store_comment(doc, raw, decisions_open=True)
+    store_comment(doc, raw)
     [found] = fold(read_rows(doc))
     assert (found["kind"], answer_value(found)) == ("decision", "denied")
-
-
-def test_store_answer_needs_decisions_open_and_writes_nothing(doc: Path) -> None:
-    with pytest.raises(DecisionDenied):
-        store_comment(doc, row("ship", "approved"), decisions_open=False)
-    assert not comments_path(doc).exists()
 
 
 @pytest.mark.parametrize(
@@ -139,7 +133,7 @@ def test_store_answer_needs_decisions_open_and_writes_nothing(doc: Path) -> None
 )
 def test_store_rejects_and_writes_nothing(doc: Path, raw: bytes) -> None:
     with pytest.raises(ValueError):
-        store_comment(doc, raw, decisions_open=True)
+        store_comment(doc, raw)
     assert not comments_path(doc).exists()
 
 
@@ -154,7 +148,7 @@ def test_answer_rows_are_never_routed_to_a_source(doc: Path, tmp_path: Path) -> 
         }
     ).encode()
     with pytest.raises(ValueError, match="only a comment"):
-        store_comment(doc, raw, decisions_open=True)
+        store_comment(doc, raw)
     assert not comments_path(doc).exists()
 
 
@@ -213,7 +207,7 @@ def test_served_invalid_answer_is_400_and_writes_nothing(
     assert not comments_path(server.doc).exists()
 
 
-def test_served_answer_with_edit_off_is_403_and_writes_nothing(
+def test_served_answer_with_edit_off_is_stored_on_a_remote_bind(
     doc: Path, tmp_path: Path
 ) -> None:
     closed = PageServer(doc, 0, "127.0.0.1", False)
@@ -221,12 +215,12 @@ def test_served_answer_with_edit_off_is_403_and_writes_nothing(
     thread = threading.Thread(target=closed.serve_forever, daemon=True)
     thread.start()
     try:
-        assert http_post(closed, row("ship", "approved")) == 403
+        assert http_post(closed, row("ship", "approved")) == 201
     finally:
         closed.shutdown()
         closed.server_close()
         thread.join(5)
-    assert not comments_path(doc).exists()
+    assert comments_path(doc).exists()
 
 
 def test_comment_line_for_answer_rows() -> None:

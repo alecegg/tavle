@@ -138,11 +138,11 @@ def test_pages_decision_changes_only_the_log(running):
     assert {k: v for k, v in after.items() if k in before} == before
 
 
-def test_pages_decision_remote_without_allow_edit_is_403(tmp_path):
+def test_pages_decision_remote_without_allow_edit_is_accepted(tmp_path):
     server, doc, thread = start(tmp_path, remote_policy=True)
     try:
-        assert post(server, answer("approved")) == 403
-        assert read_rows(doc) == []
+        assert post(server, answer("approved")) == 201
+        assert len(read_rows(doc)) == 1
     finally:
         stop(server, thread)
 
