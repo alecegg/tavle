@@ -63,7 +63,7 @@ button.danger:active:not(:disabled), button.destructive:active:not(:disabled) { 
 .thread .meta { color: var(--vd-text-secondary); font-size: var(--vd-text-xs); margin: 0; }
 .thread .text, .reply .text { white-space: pre-wrap; margin-block: var(--vd-space-1); }
 .reply { margin-inline-start: var(--vd-space-4); padding-block-start: var(--vd-space-2); border-block-start: 1px dashed var(--vd-border-interactive); }
-.suggestion { white-space: pre-wrap; margin-block: var(--vd-space-1); padding: var(--vd-space-2) var(--vd-space-3); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); background: var(--vd-surface); font-family: var(--vd-font-mono); }
+.suggestion { white-space: break-spaces; margin-block: var(--vd-space-1); padding: var(--vd-space-2) var(--vd-space-3); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); background: var(--vd-surface); font-family: var(--vd-font-mono); }
 .suggestion del { background: var(--vd-danger-subtle); text-decoration: line-through; }
 .suggestion ins { background: var(--vd-success-subtle); text-decoration: underline; }
 .orphans { margin-block-start: var(--vd-space-7); }
@@ -81,7 +81,7 @@ button { scroll-margin-block: var(--vd-space-2); }
 
 /* print: nothing scrolls, so nothing is cut off */
 @media print {
-  pre { white-space: pre-wrap; overflow: visible; }
+  pre { white-space: break-spaces; overflow: visible; }
   .scroll { overflow: visible; padding: 0; }
   table { display: table; inline-size: 100%; overflow: visible; table-layout: fixed; }
   .vb-card { overflow: visible; }
