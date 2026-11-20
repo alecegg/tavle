@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from ui_fence import statement_text
 
 from varde.pages.assemble import assemble_static
-from varde.pages.blocks.statement import statement_text
 from varde.pages.components import component_bundle
 from varde.pages.render import classify_url, render_page
 from varde.pages.serve import PageServer
