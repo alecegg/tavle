@@ -1651,10 +1651,10 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 }
 @media print {
   .vd-matrix .vb-table td:not(:first-child), .vd-matrix .vb-table thead th:not(:first-child) { min-inline-size: 0; padding-inline: 0.125rem; }
-  .vd-matrix .vb-table .vb-status { gap: 0; font-size: 0.75em; }
+  .vd-matrix .vb-table .vb-status { display: inline; gap: 0; font-size: 0.75em; }
   .vd-matrix, .vd-matrix .vb-card, .vd-matrix .vb-scroll, .vd-matrix-notes { overflow: visible; min-inline-size: 0; }
-  .vd-matrix .vb-status, .vd-matrix-notes li { white-space: normal; min-inline-size: 0; }
-  .vd-matrix .vb-table th.vd-matrix-rec::after { white-space: normal; background: none; color: var(--vd-text); }
+  .vd-matrix .vb-status, .vd-matrix-notes li { white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; }
+  .vd-matrix .vb-table th.vd-matrix-rec::after { white-space: normal; overflow-wrap: anywhere; background: none; color: var(--vd-text); }
 }
 
 /* Sequence block: a 1:1 scale SVG in a scroll region, then the same steps as an ordered text list. Colours come only from --vd-* tokens. */

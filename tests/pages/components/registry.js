@@ -2,7 +2,7 @@
 // except mount.js, each as an object of its exports.
 import { loadMithril } from './load-mithril.js';
 
-const files = import.meta.glob('../../src/varde_pages/static/components/*.js', { eager: true });
+const files = import.meta.glob('@varde/pages-static/components/*.js', { eager: true });
 
 export function loadComponents() {
   const registry = {};
