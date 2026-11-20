@@ -314,7 +314,15 @@ let obscuredBy = '';
 for (const n of document.querySelectorAll('*')) {
   const p = getComputedStyle(n).position;
   if ((p !== 'fixed' && p !== 'sticky') || n.contains(el) || el.contains(n) || !visible(n)) continue;
-  const a = n.getBoundingClientRect();
+  // Only the part an overflow ancestor leaves visible can cover the element.
+  let a = n.getBoundingClientRect();
+  for (let c = n.parentElement; c && c !== document.documentElement; c = c.parentElement) {
+    if (c.contains(el)) continue;
+    const o = getComputedStyle(c);
+    if (o.overflowX === 'visible' && o.overflowY === 'visible') continue;
+    const k = c.getBoundingClientRect();
+    a = {left: Math.max(a.left, k.left), right: Math.min(a.right, k.right), top: Math.max(a.top, k.top), bottom: Math.min(a.bottom, k.bottom)};
+  }
   if (Math.min(a.right, r.right) - Math.max(a.left, r.left) > 1 && Math.min(a.bottom, r.bottom) - Math.max(a.top, r.top) > 1) { obscuredBy = pathOf(n); break; }
 }
 const inside = bgLayers(el), outside = bgLayers(el.parentElement || el);
