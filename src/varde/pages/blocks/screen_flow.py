@@ -1,103 +1,82 @@
 """Block type for a multi-screen wireframe flow: screens, steps and optional lanes."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    list_of,
-    str_field,
-    tables,
-    tables_fault,
-)
-from varde.pages.blocks.screens import SURFACES, _frame_faults
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.screens import FRAME_PROPERTIES, SURFACE, frame_faults
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 MAX_SCREENS = 12
 MAX_STEPS = 20
-SCREEN_KEYS = {"id", "title", "grid", "regions"}
-SCREEN_OPTIONAL = {"surface", "kinds", "notes"}
 WHERE = "screen-flow"
 
 
-def _screen_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
-    faults = tables_fault(data, "screens", WHERE)
+def _ids(data: dict[str, object]) -> list[str] | None:
+    """Screen ids; None unless screens is a list of tables that each name an id."""
+    screens = data.get("screens")
+    if not isinstance(screens, list) or not screens:
+        return None
+    ids = [s.get("id") for s in screens if isinstance(s, dict)]
+    if len(ids) < len(screens) or not all(isinstance(i, str) for i in ids):
+        return None
+    return [i for i in ids if isinstance(i, str)]
+
+
+def _screen_faults(data: dict[str, object]) -> list[Fault]:
     entries = tables(data, "screens", WHERE)
     ids = [i for s in entries if isinstance(i := s.get("id"), str)]
-    faults += [
+    faults = [
         Fault("screen-duplicate", f"{WHERE}: screen id '{name}' is used twice")
         for name in duplicates(ids)
     ]
     if len(entries) > MAX_SCREENS:
         faults.append(Fault("too-many", f"{WHERE}: at most {MAX_SCREENS} screens"))
     for n, screen in enumerate(entries, 1):
-        where = f"screens[{n}]"
-        faults += check_keys(screen, SCREEN_KEYS, SCREEN_OPTIONAL, where)
-        faults += str_field(screen, "id", where) + str_field(screen, "title", where)
-        if "surface" in screen and screen["surface"] not in SURFACES:
-            faults.append(
-                Fault(
-                    "surface", f"{where}.surface must be one of {', '.join(SURFACES)}"
-                )
-            )
-        faults += _frame_faults(screen, where)
-    return faults, ids
+        faults += frame_faults(screen, f"screens[{n}]")
+    return faults
 
 
 def _end_fault(step: dict[str, object], key: str, ids: list[str], where: str):
     end = step.get(key)
-    if key not in step:
-        return []
-    if not isinstance(end, str):
-        return [Fault("type", f"{where}.{key} must be a string")]
-    if end not in ids:
+    if isinstance(end, str) and end not in ids:
         return [Fault("step-screen", f"{where}: {key} '{end}' is not a screen id")]
     return []
 
 
 def _step_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
-    faults = tables_fault(data, "steps", WHERE)
     steps = tables(data, "steps", WHERE)
+    faults: list[Fault] = []
     if len(steps) > MAX_STEPS:
         faults.append(Fault("too-many", f"{WHERE}: at most {MAX_STEPS} steps"))
     for n, step in enumerate(steps, 1):
         where = f"steps[{n}]"
-        faults += check_keys(step, {"from", "to"}, {"label"}, where)
         faults += _end_fault(step, "from", ids, where)
         faults += _end_fault(step, "to", ids, where)
-        faults += str_field(step, "label", where)
     return faults
 
 
-def _one_lane_faults(
-    lane: dict[str, object], where: str, ids: list[str]
-) -> tuple[list[Fault], list[str]]:
-    """Faults of one lane and the screen ids it names."""
-    faults = check_keys(lane, {"title", "screens"}, set(), where)
-    faults += str_field(lane, "title", where)
-    if "screens" in lane:
-        faults += list_of(lane["screens"], f"{where}.screens")
-    members = lane.get("screens")
-    names = (
-        [m for m in members if isinstance(m, str)] if isinstance(members, list) else []
-    )
-    faults += [
-        Fault("lane-screen", f"{where}: '{name}' is not a screen id")
-        for name in names
-        if name not in ids
-    ]
-    return faults, names
+def _members(lane: object) -> list[str] | None:
+    """The screen ids a lane names; None unless it holds a non-empty list of strings."""
+    members = lane.get("screens") if isinstance(lane, dict) else None
+    if (
+        isinstance(members, list)
+        and members
+        and all(isinstance(m, str) for m in members)
+    ):
+        return members
+    return None
 
 
 def _lane_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
-    faults = tables_fault(data, "lanes", WHERE)
     lanes = tables(data, "lanes", WHERE)
-    placed: list[str] = []
-    for n, lane in enumerate(lanes, 1):
-        found, names = _one_lane_faults(lane, f"lanes[{n}]", ids)
-        faults += found
-        placed += names
-    if not lanes:
+    named = [_members(lane) for lane in lanes]
+    faults = [
+        Fault("lane-screen", f"lanes[{n}]: '{name}' is not a screen id")
+        for n, names in enumerate(named, 1)
+        for name in names or []
+        if name not in ids
+    ]
+    if not lanes or None in named:
         return faults
+    placed = [name for names in named for name in names or []]
     faults += [
         Fault("lane-duplicate", f"{WHERE}: screen '{name}' is in more than one lane")
         for name in duplicates(placed)
@@ -107,6 +86,20 @@ def _lane_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
         for name in ids
         if name not in placed
     ]
+
+
+def _links_well_formed(data: dict[str, object]) -> bool:
+    """Every step names two ids and every lane lists ids, so a layout exists."""
+    steps, lanes = data.get("steps", []), data.get("lanes", [])
+    if not isinstance(steps, list) or not isinstance(lanes, list):
+        return False
+    steps_named = all(
+        isinstance(s, dict)
+        and isinstance(s.get("from"), str)
+        and isinstance(s.get("to"), str)
+        for s in steps
+    )
+    return steps_named and all(_members(lane) is not None for lane in lanes)
 
 
 def _lane_of(data: dict[str, object]) -> dict[str, int]:
@@ -201,11 +194,12 @@ def _cell_faults(
 
 
 def validate_screen_flow(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"screens"}, {"title", "desc", "steps", "lanes"}, WHERE)
-    faults += str_field(data, "title", WHERE) + str_field(data, "desc", WHERE)
-    screen_faults, ids = _screen_faults(data)
-    faults += screen_faults + _step_faults(data, ids) + _lane_faults(data, ids)
-    if faults:
+    faults = _screen_faults(data)
+    ids = _ids(data)
+    if ids is None:
+        return faults
+    faults += _step_faults(data, ids) + _lane_faults(data, ids)
+    if faults or not _links_well_formed(data):
         return faults
     return _flow_faults(data, ids)
 
@@ -248,4 +242,44 @@ SCREEN_FLOW = BlockSpec(
 )
 """,
     validate_screen_flow,
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec("desc", "string", nonempty=True),
+        PropertySpec(
+            "screens",
+            "list",
+            required=True,
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("title", "string", required=True, nonempty=True),
+                SURFACE,
+                *FRAME_PROPERTIES,
+            ),
+        ),
+        PropertySpec(
+            "steps",
+            "list",
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("from", "string", required=True),
+                PropertySpec("to", "string", required=True),
+                PropertySpec("label", "string", nonempty=True),
+            ),
+        ),
+        PropertySpec(
+            "lanes",
+            "list",
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("title", "string", required=True, nonempty=True),
+                PropertySpec(
+                    "screens", "list", required=True, items="string", nonempty=True
+                ),
+            ),
+        ),
+    ),
 )

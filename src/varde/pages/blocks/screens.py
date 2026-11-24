@@ -1,68 +1,89 @@
 """Block types for screens: wireframe, ui-states."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    list_of,
-    str_field,
-    str_map,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, str_map
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 _REQUIRED_STATES = ("empty", "loading", "error")
 _BLANK = " ."
 SURFACES = ("browser", "phone", "tablet")
 KINDS = ("nav", "text", "media", "input", "action", "list")
 LAYOUTS = ("tabs", "grid")
-_FRAME_OPTIONAL = {"kinds", "notes"}
+
+SURFACE = PropertySpec("surface", "string", enum=SURFACES)
+# The frame fields wireframe, its compare frame and each screen-flow screen share.
+FRAME_PROPERTIES = (
+    PropertySpec("grid", "list", required=True, items="string", nonempty=True),
+    PropertySpec("regions", "object", required=True),
+    PropertySpec("kinds", "object"),
+    PropertySpec(
+        "notes",
+        "list",
+        items="object",
+        nonempty=True,
+        fields=(
+            PropertySpec("region", "string", required=True),
+            PropertySpec("text", "string", required=True, nonempty=True),
+        ),
+    ),
+)
+
+
+def _usable_rows(data: dict[str, object]) -> list[str] | None:
+    grid = data.get("grid")
+    if isinstance(grid, list) and grid and all(isinstance(r, str) for r in grid):
+        return grid
+    return None
+
+
+def _usable_regions(data: dict[str, object]) -> dict[str, object] | None:
+    regions = data.get("regions")
+    return regions if isinstance(regions, dict) and regions else None
 
 
 def _region_faults(regions: dict, rows: list[str], where: str) -> list[Fault]:
-    faults = [
-        Fault("type", f"{where}.regions key '{k}' must be one character")
-        for k in sorted(regions)
-        if len(k) != 1 or k in _BLANK
-    ]
     used = {c for r in rows for c in r if c not in _BLANK}
-    faults += [
+    faults = [
         Fault("region-undeclared", f"{where}.grid uses '{c}' with no entry in regions")
         for c in sorted(used - regions.keys())
     ]
-    faults += [
+    return faults + [
         Fault("region-unused", f"{where}.regions '{k}' does not appear in the grid")
         for k in sorted(regions.keys() - used)
         if len(k) == 1
     ]
-    return faults
 
 
 def _grid_faults(data: dict[str, object], where: str) -> list[Fault]:
-    faults = list_of(data.get("grid"), f"{where}.grid") if "grid" in data else []
-    if "regions" in data:
-        faults += str_map(data["regions"], f"{where}.regions")
-    grid = data.get("grid")
-    rows = [r for r in grid if isinstance(r, str)] if isinstance(grid, list) else []
-    if len({len(r) for r in rows}) > 1:
-        faults.append(Fault("grid-width", f"{where}.grid rows must have equal width"))
+    rows = _usable_rows(data)
     regions = data.get("regions")
-    if not isinstance(regions, dict):
+    faults = str_map(regions, f"{where}.regions") if isinstance(regions, dict) else []
+    if rows is not None and len({len(r) for r in rows}) > 1:
+        faults.append(Fault("grid-width", f"{where}.grid rows must have equal width"))
+    declared = _usable_regions(data)
+    if declared is None:
         return faults
-    return faults + _region_faults(regions, rows, where)
+    faults += [
+        Fault("type", f"{where}.regions key '{k}' must be one character")
+        for k in sorted(declared)
+        if len(k) != 1 or k in _BLANK
+    ]
+    return faults + (_region_faults(declared, rows, where) if rows else [])
 
 
 def _kind_faults(data: dict[str, object], where: str) -> list[Fault]:
     kinds = data.get("kinds")
-    if "kinds" not in data:
+    if not isinstance(kinds, dict):
         return []
-    if not isinstance(kinds, dict) or not kinds:
+    if not kinds:
         return [Fault("type", f"{where}.kinds must be a non-empty table of kinds")]
-    regions = data.get("regions")
-    declared = regions if isinstance(regions, dict) else {}
+    declared = _usable_regions(data)
     faults = [
         Fault("kind-unknown", f"{where}.kinds '{k}' is not one of {', '.join(KINDS)}")
         for k, v in sorted(kinds.items())
         if v not in KINDS
     ]
+    if declared is None:
+        return faults
     return faults + [
         Fault("kind-region", f"{where}.kinds '{k}' is not a declared region")
         for k in sorted(kinds)
@@ -72,29 +93,23 @@ def _kind_faults(data: dict[str, object], where: str) -> list[Fault]:
 
 def _note_faults(data: dict[str, object], where: str) -> list[Fault]:
     notes = data.get("notes")
-    if "notes" not in data:
+    declared = _usable_regions(data)
+    if not isinstance(notes, list) or declared is None:
         return []
-    if not isinstance(notes, list) or not notes:
-        return [Fault("type", f"{where}.notes must be a non-empty list of tables")]
-    regions = data.get("regions")
-    declared = regions if isinstance(regions, dict) else {}
-    faults: list[Fault] = []
-    for n, note in enumerate(notes, 1):
-        at = f"{where}.notes[{n}]"
-        if not isinstance(note, dict):
-            faults.append(Fault("type", f"{at} must be a table with region and text"))
-            continue
-        faults += check_keys(note, {"region", "text"}, set(), at)
-        faults += str_field(note, "text", at)
-        region = note.get("region")
-        if "region" in note and region not in declared:
-            faults.append(
-                Fault("note-region", f"{at}: region '{region}' is not declared")
-            )
-    return faults
+    return [
+        Fault(
+            "note-region",
+            f"{where}.notes[{n}]: region '{note['region']}' is not declared",
+        )
+        for n, note in enumerate(notes, 1)
+        if isinstance(note, dict)
+        and isinstance(note.get("region"), str)
+        and note["region"] not in declared
+    ]
 
 
-def _frame_faults(data: dict[str, object], where: str) -> list[Fault]:
+def frame_faults(data: dict[str, object], where: str) -> list[Fault]:
+    """Value rules of one frame (grid, regions, kinds, notes) the properties lack."""
     return (
         _grid_faults(data, where)
         + _kind_faults(data, where)
@@ -103,39 +118,17 @@ def _frame_faults(data: dict[str, object], where: str) -> list[Fault]:
 
 
 def validate_wireframe(data: dict[str, object]) -> list[Fault]:
-    optional = {"title", "surface", "compare"} | _FRAME_OPTIONAL
-    faults = check_keys(data, {"grid", "regions"}, optional, "wireframe")
-    faults += str_field(data, "title", "wireframe")
-    if "surface" in data and data["surface"] not in SURFACES:
-        faults.append(
-            Fault("surface", f"wireframe.surface must be one of {', '.join(SURFACES)}")
-        )
-    faults += _frame_faults(data, "wireframe")
+    faults = frame_faults(data, "wireframe")
     after = data.get("compare")
-    if "compare" not in data:
-        return faults
     if not isinstance(after, dict):
-        return faults + [Fault("type", "wireframe.compare must be a table")]
-    faults += check_keys(
-        after, {"grid", "regions"}, _FRAME_OPTIONAL, "wireframe.compare"
-    )
-    return faults + _frame_faults(after, "wireframe.compare")
+        return faults
+    return faults + frame_faults(after, "wireframe.compare")
 
 
-def _state_faults(name: str, state: object) -> list[Fault]:
-    where = f"ui-states.{name}"
-    if not isinstance(state, dict):
-        return [Fault("type", f"{where} must be a table with shows or na")]
-    faults = check_keys(state, set(), {"shows", "na"}, where)
+def _state_faults(name: str, state: dict[str, object]) -> list[Fault]:
     if ("shows" in state) == ("na" in state):
-        faults.append(Fault("state-form", f"{where}: give exactly one of shows or na"))
-    return faults + str_field(state, "shows", where) + str_field(state, "na", where)
-
-
-def _layout_faults(data: dict[str, object]) -> list[Fault]:
-    if isinstance(data.get("layout"), str) and data["layout"] not in LAYOUTS:
         return [
-            Fault("layout", f"ui-states.layout must be one of {', '.join(LAYOUTS)}")
+            Fault("state-form", f"ui-states.{name}: give exactly one of shows or na")
         ]
     return []
 
@@ -153,12 +146,9 @@ def _missing_state_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_ui_states(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, set(), {"screen", "layout"}, "ui-states")
-    faults = [f for f in faults if f.rule != "unknown-key" or "'" not in f.message]
-    faults += str_field(data, "screen", "ui-states")
-    faults += _layout_faults(data) + _missing_state_faults(data)
+    faults = _missing_state_faults(data)
     for name, state in data.items():
-        if name != "screen" and not (name == "layout" and isinstance(state, str)):
+        if name not in ("screen", "layout") and isinstance(state, dict):
             faults += _state_faults(name, state)
     return faults
 
@@ -187,6 +177,12 @@ WIREFRAME = BlockSpec(
 )
 """,
     validate_wireframe,
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        SURFACE,
+        *FRAME_PROPERTIES,
+        PropertySpec("compare", "object", fields=FRAME_PROPERTIES),
+    ),
 )
 
 UI_STATES = BlockSpec(
@@ -208,4 +204,16 @@ UI_STATES = BlockSpec(
 )
 """,
     validate_ui_states,
+    properties=(
+        PropertySpec("screen", "string", nonempty=True),
+        PropertySpec("layout", "string", enum=LAYOUTS),
+    ),
+    extra_keys=PropertySpec(
+        "state",
+        "object",
+        fields=(
+            PropertySpec("shows", "string", nonempty=True),
+            PropertySpec("na", "string", nonempty=True),
+        ),
+    ),
 )
