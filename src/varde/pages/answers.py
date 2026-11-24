@@ -22,7 +22,7 @@ from varde.pages.blocks.inputs_ordered import check_slider_value, ranking_value
 from varde.pages.blocks.spec import AnswerSchema
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.fences import ui_statements
-from varde.pages.validation import CONTROLS, MAX_ITEM, MAX_TEXT
+from varde.ui.limits import CONTROLS, MAX_ITEM, MAX_TEXT
 
 _TEXT_REQUIRED = {"commented"}  # a verdict that is only meaningful with a reason
 

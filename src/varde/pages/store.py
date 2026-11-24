@@ -19,12 +19,11 @@ from varde.pages.comments import (
 from varde.pages.include import IncludeError, IncludeSource, include_sources
 from varde.pages.render import render_page
 from varde.pages.validation import (
-    MAX_ITEM,
     MAX_QUOTE,
-    MAX_TEXT,
     parse_json_object,
     strings,
 )
+from varde.ui.limits import MAX_ITEM, MAX_TEXT
 
 EDIT_OFF = "editing is off; serve with --allow-edit"
 
