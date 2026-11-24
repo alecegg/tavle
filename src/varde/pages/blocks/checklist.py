@@ -1,11 +1,10 @@
 """Block type for a static checklist with progress: checklist."""
 
-from varde.pages.blocks.rules import Fault, check_keys, str_field, tables
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 STATUSES = ("done", "open", "blocked")
 MAX_ITEMS = 500
-ITEM_OPTIONAL = {"id", "checked", "note", "status"}
 
 
 def _agree_faults(item: dict[str, object], where: str) -> list[Fault]:
@@ -18,33 +17,18 @@ def _agree_faults(item: dict[str, object], where: str) -> list[Fault]:
     return [Fault("conflict", f"{where}: checked and status disagree")]
 
 
-def _item_faults(item: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(item, {"label"}, ITEM_OPTIONAL, where)
-    for key in ("label", "id", "note"):
-        faults += str_field(item, key, where)
-    if "checked" in item and not isinstance(item["checked"], bool):
-        faults.append(Fault("type", f"{where}: 'checked' must be true or false"))
-    if "status" in item and item["status"] not in STATUSES:
-        faults.append(Fault("type", f"{where}: status must be done, open or blocked"))
-    return faults + _agree_faults(item, where)
-
-
-def _items_faults(data: dict[str, object]) -> list[Fault]:
-    items = data["items"]
-    if not isinstance(items, list) or not all(isinstance(i, dict) for i in items):
-        return [Fault("type", "checklist: 'items' must be a list of tables")]
-    faults: list[Fault] = []
-    if len(items) > MAX_ITEMS:
-        faults.append(Fault("limit", f"checklist: at most {MAX_ITEMS} items"))
-    for n, item in enumerate(tables(data, "items", "checklist"), 1):
-        faults += _item_faults(item, f"checklist: items[{n}]")
-    return faults
-
-
 def validate_checklist(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"items"}, {"title"}, "checklist")
-    faults += str_field(data, "title", "checklist")
-    return faults + (_items_faults(data) if "items" in data else [])
+    items = data.get("items")
+    if not isinstance(items, list):
+        return []
+    faults = (
+        [Fault("limit", f"checklist: at most {MAX_ITEMS} items")]
+        if len(items) > MAX_ITEMS
+        else []
+    )
+    for n, item in enumerate(tables(data, "items", "checklist"), 1):
+        faults += _agree_faults(item, f"checklist: items[{n}]")
+    return faults
 
 
 CHECKLIST = BlockSpec(
@@ -68,4 +52,20 @@ CHECKLIST = BlockSpec(
 )
 """,
     validate_checklist,
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec(
+            "items",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("label", "string", required=True, nonempty=True),
+                PropertySpec("id", "string", nonempty=True),
+                PropertySpec("checked", "boolean"),
+                PropertySpec("note", "string", nonempty=True),
+                PropertySpec("status", "string", enum=STATUSES),
+            ),
+        ),
+    ),
 )

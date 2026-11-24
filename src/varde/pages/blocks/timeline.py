@@ -1,29 +1,12 @@
 """Block type for phases and milestones: timeline."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    str_field,
-    tables,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 ORIENTATIONS = ("vertical", "horizontal")
 STATUSES = ("done", "active", "planned", "blocked")
 MAX_VERTICAL = 200
 MAX_HORIZONTAL = 24
-ITEM_OPTIONAL = {"note", "owner"}
-
-
-def _item_faults(item: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(item, {"when", "label", "status"}, ITEM_OPTIONAL, where)
-    for key in ("when", "label", "note", "owner"):
-        faults += str_field(item, key, where)
-    if "status" in item and item["status"] not in STATUSES:
-        faults.append(
-            Fault("type", f"{where}: status must be one of {', '.join(STATUSES)}")
-        )
-    return faults
 
 
 def _limit_fault(count: int, horizontal: bool) -> list[Fault]:
@@ -34,28 +17,11 @@ def _limit_fault(count: int, horizontal: bool) -> list[Fault]:
     return [Fault("limit", f"timeline: at most {cap} items when {layout}; split it")]
 
 
-def _orientation_faults(data: dict[str, object]) -> list[Fault]:
-    if "orientation" not in data or data["orientation"] in ORIENTATIONS:
-        return []
-    return [Fault("type", "timeline: orientation must be vertical or horizontal")]
-
-
-def _items_faults(data: dict[str, object]) -> list[Fault]:
-    items = data["item"]
-    if not isinstance(items, list) or not items:
-        return [Fault("type", "timeline: 'item' must be a non-empty list of tables")]
-    if not all(isinstance(i, dict) for i in items):
-        return [Fault("type", "timeline: 'item' must be a list of tables")]
-    faults = _limit_fault(len(items), data.get("orientation") == "horizontal")
-    for n, item in enumerate(tables(data, "item", "timeline"), 1):
-        faults += _item_faults(item, f"timeline: item[{n}]")
-    return faults
-
-
 def validate_timeline(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"item"}, {"title", "orientation"}, "timeline")
-    faults += str_field(data, "title", "timeline") + _orientation_faults(data)
-    return faults + (_items_faults(data) if "item" in data else [])
+    items = data.get("item")
+    if not isinstance(items, list):
+        return []
+    return _limit_fault(len(items), data.get("orientation") == "horizontal")
 
 
 TIMELINE = BlockSpec(
@@ -83,4 +49,22 @@ TIMELINE = BlockSpec(
 )
 """,
     validate_timeline,
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec("orientation", "string", enum=ORIENTATIONS),
+        PropertySpec(
+            "item",
+            "list",
+            required=True,
+            nonempty=True,
+            items="object",
+            fields=(
+                PropertySpec("when", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
+                PropertySpec("status", "string", required=True, enum=STATUSES),
+                PropertySpec("note", "string", nonempty=True),
+                PropertySpec("owner", "string", nonempty=True),
+            ),
+        ),
+    ),
 )
