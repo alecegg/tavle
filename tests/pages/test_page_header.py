@@ -174,7 +174,7 @@ def test_iso_dates_are_wrapped_so_they_cannot_split_at_a_hyphen() -> None:
 
 
 def test_fence_consumers_keep_their_closing_rules():
-    from varde.pages.blocks.fences import scan_fences
+    from varde.pages.fences import scan_fences
     from varde.pages.header import count_words
     from varde.pages.render import strip_comments
     from varde.pages.select import heading_id_errors

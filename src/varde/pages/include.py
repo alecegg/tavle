@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from varde.pages.blocks import check_props
-from varde.pages.blocks.fences import ui_statements
+from varde.pages.fences import ui_statements
 from varde.pages.select import (
     Selector,
     SelectorError,

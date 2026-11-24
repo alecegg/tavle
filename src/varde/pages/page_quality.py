@@ -9,7 +9,7 @@ from collections.abc import Collection
 from dataclasses import dataclass
 
 from varde.pages.blocks.check import OPEN_CHOICES, BlockError
-from varde.pages.blocks.fences import FenceSpan, dedent_lines, scan_fences
+from varde.pages.fences import FenceSpan, dedent_lines, scan_fences
 from varde.pages.markdown_syntax import HEADING as _HEADING
 from varde.pages.markdown_syntax import slugify
 from varde.pages.render import (

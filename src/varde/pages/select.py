@@ -18,7 +18,7 @@ import re
 from dataclasses import dataclass
 
 from varde.pages.anchors import AnchorState, block_hash
-from varde.pages.blocks.include import (
+from varde.pages.include_statement import (
     Selector,
     SelectorError,
     parse_selector,

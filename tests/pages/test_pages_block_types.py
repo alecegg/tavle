@@ -123,7 +123,7 @@ def test_hash_and_anchor_unchanged_by_types() -> None:
 
 
 def test_ui_statements_give_document_lines() -> None:
-    from varde.pages.blocks.fences import ui_statements
+    from varde.pages.fences import ui_statements
 
     one = 'a = callout(tone: "info", text: "A")'
     two = 'b = callout(tone: "info", text: "B")'
