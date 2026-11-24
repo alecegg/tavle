@@ -13,7 +13,6 @@ from typing import Any
 import pytest
 from scene_html import svg_html
 
-from varde.base.ui_lines import parse_lines
 from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks.charts import CHART, MAX_SERIES
 from varde.pages.blocks_render.chart_model import build_model, copy_text
@@ -26,6 +25,7 @@ from varde.pages.blocks_render.chart_scale import (
 from varde.pages.blocks_render.charts import chart_props as _chart_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.serve import PageServer
+from varde.ui.lines import parse_lines
 
 
 def chart_props(data: dict[str, Any]) -> Any:

@@ -7,7 +7,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from varde.base.ui_lines import parse_lines
 from varde.pages.comments import (
     ANSWER_KINDS,
     fold,
@@ -30,6 +29,7 @@ from varde.pages.render import (
 )
 from varde.pages.template import make_read_only, page_shell
 from varde.pages.theme.page import page_theme, require_theme
+from varde.ui.lines import parse_lines
 
 
 def answer_attrs(comment: dict[str, Any]) -> str:

@@ -16,7 +16,6 @@ from typing import Any
 
 import pytest
 
-from varde.base.ui_lines.parse import parse_lines
 from varde.pages.blocks import COMPONENT_SPECS, check_props
 from varde.pages.blocks_render.charts import chart_props
 from varde.pages.blocks_render.diagrams import diagram_props
@@ -30,6 +29,7 @@ from varde.pages.blocks_render.state import state_props
 from varde.pages.components import component_bundle, mount_block
 from varde.pages.media import Media
 from varde.pages.render import render_page
+from varde.ui.lines.parse import parse_lines
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 PROPS = {

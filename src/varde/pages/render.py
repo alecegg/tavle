@@ -6,7 +6,6 @@ import textwrap
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field, replace
 
-from varde.base.ui_lines import ParseError, Statement, parse_lines
 from varde.pages.actions import component_block_type
 from varde.pages.anchors import AnchorState, block_hash
 from varde.pages.blocks import CUSTOM_REMOVED
@@ -42,6 +41,7 @@ from varde.pages.markdown_syntax import HEADING as _HEADING
 from varde.pages.markdown_syntax import FenceScanner, fence_closes
 from varde.pages.media import Media, Problem
 from varde.pages.toc import toc_entries, toc_html
+from varde.ui.lines import ParseError, Statement, parse_lines
 
 
 @dataclass(frozen=True)
