@@ -215,7 +215,10 @@ c = chart(
   kind: "line",
   title: "Trend",
   labels: ["A", "B", "C", "D"],
-  series: [{"name": "first", "values": [1, 2, 3, 4]}],
+  series: [
+    {"name": "first", "values": [1, 2, 3, 4]},
+    {"name": "second", "values": [4, 3, 2, 1]},
+  ],
   notes: [
     {"from": "B", "to": "C", "label": "rollout", "tone": "warning"},
     {"x": "D", "label": "fix", "tone": "success"},
@@ -282,7 +285,8 @@ def test_interact_focus_and_hover_show_tooltip_and_live_readout(open_page: Any) 
     assert page.locator('svg [data-event="1"].vb-on').count() >= 1
     buttons.nth(1).hover()
     assert "fix" in readout(page) and "marker, at D" in readout(page)
-    page.locator(".vb-ev-pin").first.hover()
+    # the pin's own middle can fall in the gap before its label, so aim at its number
+    page.locator(".vb-ev-pin .vb-ev-no").first.hover()
     assert "rollout" in readout(page)
     page.locator(".vb-ev-pin").nth(1).tap()
     assert "fix" in readout(page)

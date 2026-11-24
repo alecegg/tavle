@@ -261,12 +261,110 @@ def test_two_hundred_points_and_twelve_series_render_fast_and_thin_labels() -> N
     assert len(chart_props(data)["table"]["rows"]) == 200
 
 
-def test_text_is_never_below_11px_at_the_narrowest_chart() -> None:
+CSS = Path(__file__).parents[2].joinpath("src/varde/pages/static/css/41-chart.css")
+FONT_SIZE = r"font-size: calc\(var\(--vd-text-(?:xs|md)\) \* var\(--vb-k\)\)"
+
+
+def test_label_text_is_small_and_scaled_to_a_fixed_rendered_size() -> None:
     from varde.pages.blocks_render.chart_draw import W
 
-    css = Path(__file__).parents[2].joinpath("src/varde/pages/static/css/41-chart.css")
-    assert "font: 15px" in css.read_text()
-    assert 15 * (264 / W) >= 11
+    css = CSS.read_text()
+    for name in ("vb-tick", "vb-end", "vb-pct", "vb-note-label", "vb-ev-no"):
+        assert re.search(rf"\.{name}\b[^{{]*\{{[^}}]*{FONT_SIZE}", css), name
+    assert f"--vb-w: {W:g}px" in css  # the viewBox width the scale divides by
+
+
+def test_the_plot_has_no_width_cap() -> None:
+    plot = re.search(r"\n\.vb-plot \{[^}]*\}", CSS.read_text())
+    assert plot and "max-inline-size" not in plot.group(0)
+
+
+CHARTS = """# Charts
+
+```ui id=two
+two = chart(
+  kind: "line",
+  title: "Two series",
+  labels: ["A", "B", "C", "D"],
+  series: [
+    {"name": "first", "values": [1, 2, 3, 4]},
+    {"name": "second", "values": [4, 3, 2, 1]},
+  ],
+)
+```
+
+```ui id=one
+one = chart(
+  kind: "bar",
+  title: "One series",
+  labels: ["A", "B", "C"],
+  series: [
+    {"name": "only", "values": [3, 5, 2]},
+  ],
+)
+```
+"""
+
+MEASURE = """() => [...document.querySelectorAll('.chart')].map((chart) => {
+  const card = chart.querySelector('.vb-card');
+  const plot = chart.querySelector('.vb-plot');
+  const svg = plot.querySelector('svg');
+  const tick = svg.querySelector('.vb-tick');
+  const cs = getComputedStyle(card);
+  const inner = card.getBoundingClientRect().width
+    - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
+    - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth);
+  return {
+    legend: chart.querySelectorAll('.vb-legend li').length,
+    inner,
+    plot: plot.getBoundingClientRect().width,
+    svg: svg.getBoundingClientRect().width,
+    tickPx: parseFloat(getComputedStyle(tick).fontSize)
+      * svg.getBoundingClientRect().width / svg.viewBox.baseVal.width,
+    bodyPx: parseFloat(getComputedStyle(document.body).fontSize),
+    titleInCard: !!card.querySelector('.vb-title') && card.contains(plot),
+    border: parseFloat(cs.borderTopWidth),
+  };
+})"""
+
+
+@pytest.fixture
+def open_charts(tmp_path: Path, shared_page: Any) -> Iterator[Any]:
+    doc = tmp_path / "charts.md"
+    doc.write_text(CHARTS, encoding="utf-8")
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    shared_page.goto(f"http://127.0.0.1:{server.port}/")
+    shared_page.wait_for_selector(".chart .vb-plot svg")
+    shared_page.wait_for_timeout(600)  # the live refresh rebuilds widgets once
+    shared_page.wait_for_selector(".chart .vb-plot svg")
+    yield shared_page
+    shared_page.set_viewport_size({"width": 900, "height": 700})
+    shared_page.goto("about:blank")
+    server.shutdown()
+    server.server_close()
+    thread.join(5)
+
+
+@pytest.mark.slow
+def test_legend_shows_for_two_series_and_not_for_one(open_charts: Any) -> None:
+    two, one = open_charts.evaluate(MEASURE)
+    assert two["legend"] == 2 and one["legend"] == 0
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("width", [1280, 390])
+def test_plot_fills_the_block_and_labels_stay_small(
+    open_charts: Any, width: int
+) -> None:
+    open_charts.set_viewport_size({"width": width, "height": 900})
+    open_charts.wait_for_timeout(200)
+    for chart in open_charts.evaluate(MEASURE):
+        assert abs(chart["plot"] - chart["inner"]) <= 1, chart
+        assert abs(chart["svg"] - chart["plot"]) <= 1, chart
+        assert 11 <= chart["tickPx"] < chart["bodyPx"], chart
+        assert chart["titleInCard"] and chart["border"] > 0, chart
 
 
 def test_every_prop_text_is_escaped() -> None:
