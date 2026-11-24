@@ -215,3 +215,49 @@ def test_toc_is_a_collapsed_block_by_default_and_a_rail_from_64rem() -> None:
     inside, _ = _body(base, start)
     assert "display: block" in inside and "position: sticky" in inside
     assert "var(--vd-toc-width)" in inside
+
+
+def _root_tokens() -> dict[str, str]:
+    css = _css("00-tokens")
+    return _decls(_body(css, css.index(":root"))[0])
+
+
+def _families(stack: str) -> list[str]:
+    return [f.strip().strip("\"'") for f in stack.split(",")]
+
+
+def test_body_stack_is_proportional_system_fonts_that_never_fall_back_to_mono() -> None:
+    families = _families(_root_tokens()["--vd-font-body"])
+    assert families[-1] == "sans-serif"
+    assert "system-ui" in families and "Arial" in families
+    assert not {"monospace", "ui-monospace", "Liberation Mono"} & set(families)
+    # a host whose system-ui alias is monospace must still reach a named sans family
+    assert families.index("Arial") < families.index("system-ui")
+    assert "@font-face" not in _css("00-tokens") + _css("01-base") + _css("10-chrome")
+
+
+def test_mono_stack_is_monospace_and_used_for_code() -> None:
+    assert _families(_root_tokens()["--vd-font-mono"])[-1] == "monospace"
+    assert re.search(
+        r"code,\s*pre\s*\{[^}]*font-family:\s*var\(--vd-font-mono\)", _css("01-base")
+    )
+
+
+def test_headings_use_their_font_token_and_are_bolder_than_body() -> None:
+    chrome = _css("10-chrome")
+    heading = re.search(r"\nh1, h2, h3, h4, h5, h6 \{([^}]*)\}", "\n" + chrome)
+    assert heading
+    assert "font-family: var(--vd-font-heading)" in heading.group(1)
+    assert re.search(r"font-weight:\s*(\d+)", heading.group(1)).group(1) == "700"  # type: ignore[union-attr]
+    assert _families(_root_tokens()["--vd-font-heading"]) == ["var(--vd-font-body)"]
+    assert re.search(r"\.doc-name \{[^}]*font-family: var\(--vd-font-heading\)", chrome)
+
+
+def test_prose_blocks_are_limited_to_the_reading_measure() -> None:
+    measure = _root_tokens()["--vd-measure"]
+    assert 70 <= int(re.fullmatch(r"(\d+)ch", measure).group(1)) <= 80  # type: ignore[union-attr]
+    assert re.search(
+        r"main > \.block > :is\(p, ul, ol, blockquote\) \{"
+        r"[^}]*max-inline-size: var\(--vd-measure\)",
+        _css("10-chrome"),
+    )
