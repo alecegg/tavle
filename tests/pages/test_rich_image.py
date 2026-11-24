@@ -131,9 +131,9 @@ def test_image_metadata_rejects_shape_errors() -> None:
         ({**valid, "alt": 3}, "'alt' must be string"),
         ({**valid, "caption": 3}, "'caption' must be string"),
         ({**valid, "width": "huge"}, "'width' must be one of narrow, full"),
-        ({**valid, "alt": "  "}, "'alt' must be a non-empty string"),
-        ({**valid, "caption": ""}, "'caption' must be a non-empty string"),
-        ({**valid, "src": ""}, "'src' must be a non-empty string"),
+        ({**valid, "alt": "  "}, "'alt' must not be empty"),
+        ({**valid, "caption": ""}, "'caption' must not be empty"),
+        ({**valid, "src": ""}, "'src' must not be empty"),
         ({**valid, "src": "../a.png"}, "'..'"),
     ]
     for props, text in cases:

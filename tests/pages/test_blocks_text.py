@@ -151,3 +151,18 @@ def test_change_summary_metadata_rejects_shape_errors() -> None:
         errors = check_props("change-summary", props, 1)
         assert len(errors) == 1
         assert field in errors[0].message
+
+
+@pytest.mark.parametrize(
+    "name,props,path",
+    [
+        ("callout", {"tone": "info", "text": " "}, "text"),
+        ("callout", {"tone": "info", "text": "t", "title": ""}, "title"),
+        ("change-summary", {"title": ""}, "title"),
+    ],
+)
+def test_blank_text_faults_once(name: str, props: dict[str, object], path: str) -> None:
+    errors = check_props(name, props, 1)
+    assert [(e.rule, e.message) for e in errors] == [
+        ("type", f"'{path}' must not be empty")
+    ]

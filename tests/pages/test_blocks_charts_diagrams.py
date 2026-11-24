@@ -274,3 +274,56 @@ def test_family_shape_mistake_gets_one_fault_naming_the_field(
     errors = check_props(block, props, 1)
     assert len(errors) == 1, errors
     assert message in errors[0].message
+
+
+_EMPTY_VALUES: list[tuple[str, dict[str, object], str]] = [
+    ("chart", {**_CHART, "labels": []}, "labels"),
+    ("chart", {**_CHART, "title": " "}, "title"),
+    ("chart", {**_CHART, "unit": ""}, "unit"),
+    ("chart", {**_CHART, "desc": ""}, "desc"),
+    ("chart", {**_CHART, "right_unit": ""}, "right_unit"),
+    ("chart", {**_CHART, "series": []}, "series"),
+    ("chart", {**_CHART, "series": [{"name": "", "values": [1, 2]}]}, "series[0].name"),
+    ("chart", {**_CHART, "series": [{"name": "s", "values": []}]}, "series[0].values"),
+    ("chart", {**_CHART, "notes": [{**_CHART_NOTE, "label": ""}]}, "notes[0].label"),
+    ("diagram", {**_DIAGRAM, "title": ""}, "title"),
+    ("diagram", {**_DIAGRAM, "edges": []}, "edges"),
+    ("diagram", {**_DIAGRAM, "groups": []}, "groups"),
+    (
+        "diagram",
+        {"kind": "graph", "nodes": [{"id": "a", "label": ""}]},
+        "nodes[0].label",
+    ),
+    (
+        "diagram",
+        {**_DIAGRAM, "edges": [{"from": "a", "to": "a", "label": " "}]},
+        "edges[0].label",
+    ),
+    ("flow", {**_FLOW, "title": ""}, "title"),
+    ("flow", {"step": [{"id": "a", "text": ""}]}, "step[0].text"),
+    ("flow", {"step": [{"id": "a", "text": "A", "next": []}]}, "step[0].next"),
+    ("state", {**_STATE, "desc": " "}, "desc"),
+    ("state", {**_STATE, "transitions": []}, "transitions"),
+    (
+        "state",
+        {**_STATE, "transitions": [{"from": "a", "to": "a", "guard": ""}]},
+        "transitions[0].guard",
+    ),
+    ("sequence", {**_SEQUENCE, "desc": ""}, "desc"),
+    ("sequence", {**_SEQUENCE, "actors": []}, "actors"),
+    (
+        "sequence",
+        {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": "t", "group": ""}]},
+        "steps[0].group",
+    ),
+]
+
+
+@pytest.mark.parametrize(("block", "props", "path"), _EMPTY_VALUES)
+def test_blank_text_and_empty_lists_fault_once(
+    block: str, props: dict[str, object], path: str
+) -> None:
+    errors = check_props(block, props, 1)
+    assert [(e.rule, e.message) for e in errors] == [
+        ("type", f"'{path}' must not be empty")
+    ]

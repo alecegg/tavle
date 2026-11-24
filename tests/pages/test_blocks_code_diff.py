@@ -479,3 +479,67 @@ def test_a_container_copies_the_held_codes_raw_text() -> None:
     body = render_page(doc, "t.md").body
     found = re.search(r'<div data-mithril="tabs"[^>]*data-copy="([^"]*)"', body)
     assert found and html.unescape(found[1]) == "Code\n\nqueue.append(x)"
+
+
+_ENTRY = {"path": "a.py"}
+
+
+@pytest.mark.parametrize(
+    "name,props,path",
+    [
+        ("code", {"language": "py", "source": ""}, "source"),
+        ("code", {"language": " ", "source": "x"}, "language"),
+        ("code", {"language": "py", "source": "x", "title": ""}, "title"),
+        (
+            "annotated-code",
+            {"filename": "", "language": "py", "source": "x", "notes": []},
+            "filename",
+        ),
+        (
+            "annotated-code",
+            {
+                "filename": "f",
+                "language": "py",
+                "source": "x",
+                "notes": [{"lines": 1, "note": " "}],
+            },
+            "notes[0].note",
+        ),
+        (
+            "annotated-code",
+            {
+                "filename": "f",
+                "language": "py",
+                "source": "x",
+                "notes": [{"lines": 1, "note": "n", "label": ""}],
+            },
+            "notes[0].label",
+        ),
+        ("diff", {"before": "a", "after": "b", "filename": ""}, "filename"),
+        (
+            "diff",
+            {
+                "before": "a",
+                "after": "b",
+                "notes": [{"side": "after", "lines": 1, "note": ""}],
+            },
+            "notes[0].note",
+        ),
+        ("file-tree", {"entries": []}, "entries"),
+        ("file-tree", {"entries": [_ENTRY], "title": ""}, "title"),
+        ("file-tree", {"entries": [{"path": ""}]}, "entries[0].path"),
+        ("file-tree", {"entries": [{**_ENTRY, "note": " "}]}, "entries[0].note"),
+        (
+            "file-tree",
+            {"entries": [{**_ENTRY, "change": "modified", "was": ""}]},
+            "entries[0].was",
+        ),
+    ],
+)
+def test_blank_text_and_empty_lists_fault_once(
+    name: str, props: dict[str, object], path: str
+) -> None:
+    errors = check_props(name, props, 1)
+    assert [(e.rule, e.message) for e in errors] == [
+        ("type", f"'{path}' must not be empty")
+    ]
