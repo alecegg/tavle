@@ -12,6 +12,7 @@
 .vd-stats-body > dd { margin: 0; min-inline-size: 0; }
 .vd-stats-label { color: var(--vd-text-secondary); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; overflow-wrap: anywhere; }
 .vd-stats-value { margin-block: var(--vd-space-1); font-size: var(--vd-text-2xl); font-weight: 650; line-height: var(--vd-leading-heading); overflow-wrap: anywhere; }
+.vd-stats-long { font-size: var(--vd-text-md); font-weight: 600; }
 .vd-stats-delta { color: var(--vd-stats-text); font-size: var(--vd-text-sm); font-weight: 600; overflow-wrap: anywhere; }
 .vd-stats-mark { white-space: nowrap; overflow-wrap: normal; }
 .vd-stats-glyph { font-family: var(--vd-font-mono); }

@@ -2,6 +2,7 @@
 const ARROWS = { up: '▲', down: '▼', flat: '▬' };
 const SIGNS = ['+', '-', '−'];
 const GOOD_TONE = { true: 'success', false: 'risk' };
+const LONG_VALUE_CHARS = 16;
 
 export function deltaDirection(item) {
   if (typeof item.direction === 'string') return item.direction;
@@ -53,12 +54,18 @@ function delta(m, c, item) {
   ]);
 }
 
+// CSS cannot test text length, so a sentence value gets a class that sizes it down.
+function valueCell(m, c, item) {
+  const isLong = typeof item.value === 'string' && item.value.length > LONG_VALUE_CHARS;
+  return m(isLong ? 'dd.vd-stats-value.vd-stats-long' : 'dd.vd-stats-value', valueText(c, item));
+}
+
 function card(m, c, item) {
   const tone = itemTone(item, deltaDirection(item));
   return m(`div.vd-stats-card.vd-stats-${tone}`, { role: 'group', 'aria-label': cardName(c, item) }, [
     m('dl.vd-stats-body', [
       m('dt.vd-stats-label', item.label),
-      m('dd.vd-stats-value', valueText(c, item)),
+      valueCell(m, c, item),
       delta(m, c, item),
       'note' in item ? m('dd.vd-stats-note', c.shared.inline(m, String(item.note))) : null
     ])
