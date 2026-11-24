@@ -1,0 +1,10 @@
+{
+  "invalid": [
+    {
+      "name": "empty",
+      "props": {},
+      "rule": "missing-key",
+      "path": "question"
+    }
+  ]
+}
