@@ -43,7 +43,8 @@ def test_page_with_duplicate_headings_links_unique_ids() -> None:
     page = render_page("# T\n\n## Same\n\n## Same\n\n### Sub\n", "d.md").body
     assert page.count('<a href="#h-same">') == 1
     assert '<a href="#h-same-2">' in page and '<a href="#h-sub">' in page
-    assert page.index('class="doc-toc"') > page.index("</header>")
+    assert "doc-header" not in page  # the page's own H1 is its title
+    assert page.index('class="doc-toc"') < page.index('class="block heading"')
 
 
 def test_page_without_two_headings_has_no_nav() -> None:

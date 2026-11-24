@@ -706,9 +706,10 @@ def render_page(
     lines = strip_comments(markdown.expandtabs(4).splitlines())
     fields, content = split_frontmatter(lines)
     status = status_line(fields)
-    header = header_html(fields, doc_name, count_words(content))
     scope = RenderScope(len(lines) - len(content), ctx or PageCtx(doc_name))
     parts = parse_blocks(content, scope=scope)
+    titled = any(part.kind == "heading" and part.level == 1 for part in parts)
+    header = header_html(fields, doc_name, count_words(content), titled=titled)
     return assemble_parts(parts, header, status, scope.base)
 
 

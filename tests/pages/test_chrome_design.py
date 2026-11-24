@@ -101,3 +101,12 @@ def test_button_targets_use_the_control_height_token() -> None:
     assert button
     assert "min-block-size: var(--vd-control-height)" in button.group(1)
     assert "min-inline-size: var(--vd-control-height)" in button.group(1)
+
+
+def test_flow_tokens_own_the_gaps_the_action_menu_once_reserved() -> None:
+    base, menu = _text("01-base.css"), _text("30-menu.css")
+    # the menu button is the last child, so the last content child is found before it
+    assert ":has(+ .menu-btn:last-child)" in base
+    assert ".block.has-menu { padding-block-start: var(--vd-space-1); }" in menu
+    assert "padding-block-start: var(--vd-control-height)" not in menu
+    assert "min-block-size: var(--vd-control-height)" not in menu

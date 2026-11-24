@@ -275,7 +275,9 @@
   function syncOthers(fresh) {
     const header = root().querySelector(':scope > .doc-header');
     const incomingHeader = fresh.querySelector(':scope > .doc-header');
-    if (header && incomingHeader && signature(header) !== signature(incomingHeader)) {
+    if (header && !incomingHeader) header.remove();
+    else if (!header && incomingHeader) root().prepend(document.importNode(incomingHeader, true));
+    else if (header && signature(header) !== signature(incomingHeader)) {
       header.replaceWith(document.importNode(incomingHeader, true));
     }
     const incoming = Array.from(fresh.querySelectorAll(':scope > .thread, :scope > .orphans'));

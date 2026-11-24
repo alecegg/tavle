@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 import threading
 from collections.abc import Iterator
+from contextlib import contextmanager
 from importlib.resources import files
 from pathlib import Path
 from typing import Any
@@ -168,6 +169,13 @@ def _open(page: Any, server: PageServer, width: int = 1024) -> None:
     page.wait_for_selector(".vb-filterbar")
 
 
+def _open_page(page: Any, server: PageServer) -> None:
+    page.set_viewport_size({"width": 1024, "height": 700})
+    page.route("**/events", lambda route: route.abort())
+    page.goto(f"http://127.0.0.1:{server.port}/")
+    page.wait_for_selector(".vb-scroll")
+
+
 def _first_column(page: Any) -> list[str]:
     return page.locator("tbody tr:visible th:first-child").all_text_contents()
 
@@ -297,17 +305,31 @@ def test_interact_short_table_shows_every_row_with_no_toggle(
 
 
 @pytest.mark.slow
-def test_interact_wrap_toggle_by_keyboard(shared_page: Any, site: PageServer) -> None:
+def test_interact_wrap_toggle_by_keyboard(shared_page: Any, tmp_path: Path) -> None:
     page = shared_page
-    _open(page, site)
-    button = page.locator(".vb-wrap-toggle")
-    assert button.get_attribute("aria-pressed") == "true"
-    button.focus()
-    page.keyboard.press("Enter")
-    assert button.get_attribute("aria-pressed") == "false"
-    assert "vb-nowrap" in page.locator(".vb-scroll").get_attribute("class")
-    page.keyboard.press("Space")
-    assert "vb-nowrap" not in page.locator(".vb-scroll").get_attribute("class")
+    with _serving(tmp_path, WIDE) as server:
+        _open(page, server, width=320)
+        button = page.locator(".vb-wrap-toggle")
+        assert button.is_visible()
+        assert button.get_attribute("aria-pressed") == "true"
+        button.focus()
+        page.keyboard.press("Enter")
+        assert button.get_attribute("aria-pressed") == "false"
+        assert "vb-nowrap" in page.locator(".vb-scroll").get_attribute("class")
+        page.keyboard.press("Space")
+        assert "vb-nowrap" not in page.locator(".vb-scroll").get_attribute("class")
+
+
+@pytest.mark.slow
+def test_interact_wrap_toggle_shows_only_when_the_table_overflows(
+    shared_page: Any, tmp_path: Path
+) -> None:
+    page = shared_page
+    with _serving(tmp_path, WIDE) as server:
+        _open(page, server, width=320)
+        assert page.locator(".vb-wrap-toggle").is_visible()
+        page.set_viewport_size({"width": 1800, "height": 700})
+        page.wait_for_function("() => document.querySelector('.vb-wrap-toggle').hidden")
 
 
 @pytest.mark.slow
@@ -354,17 +376,81 @@ def test_interact_phone_sorts_through_the_select_not_hidden_buttons(
     assert not page.locator(".vb-sortselect").is_visible()
 
 
-WIDE = """# Wide
+WIDE_ROW = (
+    '["a-long-service-name", "team owning it", 1, 2, "ok", "https://example.com"]'
+)
+WIDE = f"""# Wide
 
 ```ui id=wide
 wide = table(
   columns: ["service", "owner", "latency ms", "load", "state", "docs"],
-  types: {"latency ms": "number", "load": "number"},
-  rows: [["a-long-service-name", "team owning it", 1, 2, "ok", "https://example.com"]],
+  types: {{"latency ms": "number", "load": "number"}},
+  rows: [{", ".join([WIDE_ROW] * 5)}],
   sticky_column: true,
 )
 ```
 """
+
+SMALL = """# Small
+
+```ui id=small
+small = table(
+  columns: ["item", "detail"],
+  rows: [["a", "one"], ["b", "two"]],
+)
+```
+"""
+
+
+@contextmanager
+def _serving(tmp_path: Path, text: str) -> Iterator[PageServer]:
+    doc = tmp_path / "doc.md"
+    doc.write_text(text)
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield server
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)
+
+
+def _visible(page: Any, selector: str) -> bool:
+    return (
+        page.locator(selector).count() > 0 and page.locator(selector).first.is_visible()
+    )
+
+
+@pytest.mark.slow
+def test_interact_small_table_shows_no_chrome(shared_page: Any, tmp_path: Path) -> None:
+    page = shared_page
+    with _serving(tmp_path, SMALL) as server:
+        _open_page(page, server)
+        assert (
+            page.locator(".vb-sort, .vb-filter, .vb-wrap-toggle").evaluate_all(
+                "nodes => nodes.filter(n => n.offsetParent !== null)"
+            )
+            == []
+        )
+        assert not _visible(page, ".vb-filterbar")
+        assert (
+            page.locator(".vb-foot").bounding_box()["width"] <= 1
+        )  # screen readers only
+        assert page.locator(".vb-foot").inner_text() == "2 rows, 2 columns"
+        assert "2 rows, 2 columns" in page.locator("table").get_attribute("aria-label")
+
+
+@pytest.mark.slow
+def test_interact_long_table_shows_filter_sort_and_the_count(
+    shared_page: Any, site: PageServer
+) -> None:
+    page = shared_page
+    _open(page, site)
+    assert page.locator(".vb-filter").is_visible()
+    assert page.locator("thead .vb-sort").count() == 3
+    assert page.locator(".vb-foot").bounding_box()["width"] > 100
 
 
 @pytest.mark.slow

@@ -1,9 +1,9 @@
 /* 30-menu: per-block action menu. Tokens only; logical properties. */
 /* The button is hidden at rest and shown for one block at a time: pointer hover, focus inside, or a tap (.menu-active, set by menu.js). It stays in the tab order and the accessibility tree (opacity, never display or visibility). */
-/* With a mouse, text-flow blocks reserve a side gutter and wide blocks (visual, widget, code, table...) a top row so the revealed button covers nothing. On touch nothing is reserved: the revealed button floats over the block's corner, so text keeps its full width. */
+/* No top row is reserved, so the flow tokens own the gap under each heading: the revealed button floats over the block's corner. With a mouse, text-flow blocks reserve a side gutter so the button covers no text; on touch nothing is reserved, so text keeps its full width. */
+.block.has-menu { padding-block-start: var(--vd-space-1); }
 @media (hover: hover) {
-  .block.has-menu { padding-block-start: var(--vd-control-height); min-block-size: var(--vd-control-height); }
-  .block.has-menu:is([data-block-type="prose"], [data-block-type="heading"], [data-block-type="list"], :not([data-block-type])) { padding-block-start: var(--vd-space-1); padding-inline-end: var(--vd-control-height); }
+  .block.has-menu:is([data-block-type="prose"], [data-block-type="heading"], [data-block-type="list"], :not([data-block-type])) { padding-inline-end: var(--vd-control-height); }
 }
 .menu-btn { position: absolute; inset-block-start: 0; inset-inline-end: 0; inline-size: var(--vd-control-height); block-size: var(--vd-control-height); box-sizing: border-box; min-inline-size: 44px; min-block-size: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font-size: var(--vd-text-lg); font-weight: 700; line-height: 1; opacity: 0; z-index: 2; }
 @media (hover: none) { .menu-btn { pointer-events: none; box-shadow: var(--vd-shadow-3); } }

@@ -20,7 +20,10 @@ DOC = """# Plan
 opts = table(
   caption: "Options",
   columns: ["option", "cost"],
-  rows: [["queue", "30"], ["cache", "5"], ["batch", "100"], ["stream", "7"]],
+  rows: [
+    ["queue", "30"], ["cache", "5"], ["batch", "100"], ["stream", "7"],
+    ["d1", "1000"], ["d2", "2000"], ["d3", "3000"], ["d4", "4000"],
+  ],
 )
 ```
 
@@ -187,6 +190,9 @@ def open_page(tmp_path: Path, shared_page: Any) -> Iterator[Any]:
     thread.join(5)
 
 
+LONG_TAIL = ["d1", "d2", "d3", "d4"]
+
+
 def first_column(page: Any) -> list[str]:
     return (
         page.locator(".vb-table")
@@ -200,15 +206,21 @@ def test_table_sorts_and_filters(open_page: Any) -> None:
     page = open_page
     sort = page.locator(".vb-table").first.locator("th .vb-sort").nth(1)
     sort.click()
-    assert first_column(page) == ["cache", "stream", "queue", "batch"]
+    assert first_column(page) == ["cache", "stream", "queue", "batch", *LONG_TAIL]
     sort.click()
-    assert first_column(page) == ["batch", "queue", "stream", "cache"]
+    assert first_column(page) == [
+        *reversed(LONG_TAIL),
+        "batch",
+        "queue",
+        "stream",
+        "cache",
+    ]
     sort.click()
-    assert first_column(page) == ["queue", "cache", "batch", "stream"]
+    assert first_column(page) == ["queue", "cache", "batch", "stream", *LONG_TAIL]
     page.locator(".vb-filter").first.fill("ca")
     assert first_column(page) == ["cache"]
     page.locator(".vb-filter").first.fill("")
-    assert len(first_column(page)) == 4
+    assert len(first_column(page)) == 8
     toggle = page.locator(".vb-toggle")
     toggle.click()
     assert not page.locator(".vb-relations").is_visible()

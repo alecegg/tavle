@@ -2,7 +2,7 @@
 
 Pure functions. `header_html` builds the whole `<header class="doc-header">`; a page
 with none of the strip keys (`status`, `plan`, `commit`, `links`) keeps the plain
-name and status line it always had.
+status line. The file name shows only on a page with no H1 of its own.
 """
 
 from __future__ import annotations
@@ -158,13 +158,16 @@ def plain_status(fields: dict[str, str]) -> str:
     return " · ".join(f"{key}: {fields[key]}" for key in keys if fields.get(key))
 
 
-def header_html(fields: dict[str, str], doc_name: str, words: int) -> str:
-    """The page `<header>`: name, then the strip (or today's plain status line)."""
-    header = (
-        f'<header class="doc-header"><p class="doc-name">{html.escape(doc_name)}</p>'
-    )
+def header_html(
+    fields: dict[str, str], doc_name: str, words: int, *, titled: bool
+) -> str:
+    """The page `<header>`: the file name (unless the page has its own H1), then the
+    strip (or today's plain status line). Empty when none of them has content."""
+    parts = [] if titled else [f'<p class="doc-name">{html.escape(doc_name)}</p>']
     if any(fields.get(key) for key in STRIP_KEYS):
-        header += strip_html(fields, doc_name, words)
+        parts.append(strip_html(fields, doc_name, words))
     elif plain_status(fields):
-        header += f'<p class="status">{html.escape(plain_status(fields))}</p>'
-    return header + "</header>"
+        parts.append(f'<p class="status">{html.escape(plain_status(fields))}</p>')
+    if not parts:
+        return ""
+    return f'<header class="doc-header">{"".join(parts)}</header>'

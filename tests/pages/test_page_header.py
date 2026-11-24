@@ -47,7 +47,6 @@ def test_missing_keys_keep_todays_header() -> None:
     assert '<p class="status">type: task · risk: high</p>' in head
     assert "vd-hdr" not in head
     plain = render_page("# T\n", "p.md")
-    assert plain.body.count('class="doc-header"') == 1
     assert 'class="status"' not in plain.body
 
 
@@ -125,9 +124,34 @@ def test_reading_time_shown_in_strip() -> None:
 
 
 def test_header_html_is_pure_and_closed() -> None:
-    out = header_html({"status": "done"}, "n", 10)
+    out = header_html({"status": "done"}, "n", 10, titled=False)
     assert out.startswith('<header class="doc-header"><p class="doc-name">n</p>')
     assert out.endswith("</header>")
+
+
+def test_file_name_shows_only_on_a_page_without_an_h1() -> None:
+    untitled = render_page("text only\n\n## Part\n", "p.md").body
+    assert (
+        '<header class="doc-header"><p class="doc-name">p.md</p></header>' in untitled
+    )
+    titled = render_page("# Own title\n\ntext\n", "p.md").body
+    assert "doc-header" not in titled
+    assert "doc-name" not in titled
+
+
+def test_h1_inside_a_code_fence_does_not_count_as_a_title() -> None:
+    body = render_page("```\n# not a heading\n```\n", "p.md").body
+    assert '<p class="doc-name">p.md</p>' in body
+
+
+def test_titled_page_keeps_its_status_line_and_strip_without_the_name() -> None:
+    plain = render_page("---\ntype: task\n---\n\n# T\n", "p.md").body
+    assert (
+        '<header class="doc-header"><p class="status">type: task</p></header>' in plain
+    )
+    strip = _header("status: done")
+    assert "doc-name" not in strip
+    assert "vd-hdr-chip" in strip
 
 
 def test_fixtures_render_strip() -> None:
