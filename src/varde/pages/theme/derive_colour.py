@@ -5,7 +5,7 @@ from __future__ import annotations
 import colorsys
 from collections.abc import Mapping
 
-from varde.base.contrast import RGBA, contrast_ratio
+from varde.base.contrast import RGBA, composite, contrast_ratio
 
 
 def _rgba(value: str, alpha: float = 1) -> RGBA:
@@ -147,11 +147,27 @@ def derive_colour(
         result[f"--vd-tone-{tone}"] = (
             f"{h * 360:.3f} {s * 100:.3f}% {lightness * 100:.3f}%"
         )
+        # Tone text can sit on a tinted badge inside a tinted row: two tints.
+        tint = (*colour[:3], tint_strength)
+        backgrounds = tuple(
+            composite(tint, composite(tint, bg))
+            for bg in (surface, _rgba(tokens["card"]), sunk)
+        )
+        tone_text = colour
+        for step in range(101):
+            candidate_lightness = (
+                lightness + (1 - lightness) * step / 100
+                if dark
+                else lightness * (1 - step / 100)
+            )
+            tone_text = _rgba(_hex(h, candidate_lightness, s))
+            if all(contrast_ratio(tone_text, bg) >= 4.5 for bg in backgrounds):
+                break
+        put(f"tone-{tone}-text", tone_text)
         for suffix, alpha in (
             ("edge", 1),
             ("tint", tint_strength),
             ("tint-2", tint_strength / 4),
-            ("text", 1),
         ):
             put(f"tone-{tone}-{suffix}", (*colour[:3], alpha))
     return result

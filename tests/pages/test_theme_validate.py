@@ -34,3 +34,17 @@ def test_failures_are_reported_together():
     assert "page: [light] accent #aaaaaa on card is 2.3:1, needs 4.5:1" in message
     assert "success and warning hues differ" in message
     assert len(message.splitlines()) > 2
+
+
+def test_unreachable_dark_tone_tint_names_text_token():
+    preset = load_preset("varde")
+    preset.dark["surface"] = "#ffffff"
+    with pytest.raises(
+        ThemeError, match="tone-warning-text.*tone-warning-tint layers over card"
+    ):
+        validate_theme(
+            cast("dict[str, str]", preset.light),
+            cast("dict[str, str]", preset.dark),
+            preset.shared,
+            "page",
+        )

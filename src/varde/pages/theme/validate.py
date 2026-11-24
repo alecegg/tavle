@@ -51,6 +51,22 @@ def validate_theme(
             value = palette["--vd-" + key]
             return cast("RGBA", value)
 
+        for tone in ("info", "decision", "risk", "warning", "success"):
+            fg = colour(f"tone-{tone}-text")
+            tint = cast("RGBA", palette[f"--vd-tone-{tone}-tint"])
+            for background in ("surface", "card", "surface-sunk"):
+                # Two tints: a tinted badge inside a tinted row.
+                stacked = composite(tint, composite(tint, colour(background)))
+                ratio = contrast_ratio(fg, stacked)
+                if ratio < 4.5:
+                    hex_value = "#" + "".join(f"{round(c):02x}" for c in fg[:3])
+                    failures.append(
+                        f"{layer}: [{scheme}] tone-{tone}-text {hex_value} on "
+                        f"two tone-{tone}-tint layers over {background} "
+                        f"is {ratio:.1f}:1, "
+                        "needs 4.5:1"
+                    )
+
         for foreground, background, required in PAIRS:
             fg = (
                 colour(foreground)
@@ -69,7 +85,7 @@ def validate_theme(
                 *(
                     c / 255
                     for c in colour(
-                        "tone-" + first.replace("danger", "risk") + "-text"
+                        "tone-" + first.replace("danger", "risk") + "-edge"
                     )[:3]
                 )
             )
@@ -77,7 +93,7 @@ def validate_theme(
                 *(
                     c / 255
                     for c in colour(
-                        "tone-" + second.replace("danger", "risk") + "-text"
+                        "tone-" + second.replace("danger", "risk") + "-edge"
                     )[:3]
                 )
             )
