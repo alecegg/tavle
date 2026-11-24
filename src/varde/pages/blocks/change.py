@@ -32,15 +32,3 @@ def change_rule_faults(data: dict[str, object], where: str) -> list[Fault]:
     if change in ("added", "removed") and has_was:
         faults.append(Fault("change", f"{where}: {change} cannot have was"))
     return faults
-
-
-def change_faults(data: dict[str, object], where: str) -> list[Fault]:
-    """All faults for the optional `change` and `was` keys of a table with no
-    property metadata (`backend` until it declares them)."""
-    faults: list[Fault] = []
-    if "change" in data and data["change"] not in CHANGES:
-        faults.append(Fault("change", f"{where}: change must be one of {_ALLOWED}"))
-    was = data.get("was")
-    if "was" in data and not (isinstance(was, str) and was.strip()):
-        faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
-    return faults + change_rule_faults(data, where)

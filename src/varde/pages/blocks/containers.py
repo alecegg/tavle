@@ -5,63 +5,26 @@ statement of the same document. The per-statement validators check shape; the
 document-level `container_errors` checks the ids against the whole page.
 """
 
-import re
 from collections.abc import Iterator, Sequence
 
-from varde.pages.blocks.rules import Fault, check_keys, str_field, tables
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 MAX_PANELS = {"tabs": 12, "columns": 4}
 MAX_HELD = 200
 HOLD_KEYS = {"tabs": "tab", "columns": "col"}
 CONTAINERS = frozenset(HOLD_KEYS)
-HELD_ID = re.compile(r"^[a-z][a-z0-9-]{0,47}$")
-
-
-def _panel_faults(
-    panel: dict[str, object], where: str, label_needed: bool
-) -> list[Fault]:
-    faults = check_keys(
-        panel, {"blocks"} | ({"label"} if label_needed else set()), {"label"}, where
-    )
-    faults += str_field(panel, "label", where)
-    held = panel.get("blocks")
-    if "blocks" not in panel:
-        return faults
-    if not isinstance(held, list) or not held:
-        return faults + [
-            Fault("type", f"{where}: 'blocks' must be a non-empty list of ids")
-        ]
-    bad = [h for h in held if not (isinstance(h, str) and HELD_ID.match(h))]
-    if bad:
-        faults.append(
-            Fault("type", f"{where}: block ids are lowercase words like 'my-block'")
-        )
-    return faults
 
 
 def _validate(data: dict[str, object], kind: str) -> list[Fault]:
-    key = HOLD_KEYS[kind]
-    faults = check_keys(data, {key}, set(), kind)
-    if key not in data:
-        return faults
-    panels = data[key]
-    if (
-        not isinstance(panels, list)
-        or not panels
-        or not all(isinstance(p, dict) for p in panels)
-    ):
-        return faults + [
-            Fault("type", f"{kind}: '{key}' must be a non-empty list of tables")
-        ]
+    """The panel and held-id limits; the properties own every shape rule."""
+    panels = data.get(HOLD_KEYS[kind])
+    if not isinstance(panels, list):
+        return []
+    faults: list[Fault] = []
     if len(panels) > MAX_PANELS[kind]:
         faults.append(Fault("limit", f"{kind}: at most {MAX_PANELS[kind]} entries"))
-    total = 0
-    for n, panel in enumerate(tables(data, key, kind), 1):
-        faults += _panel_faults(panel, f"{kind}: {key}[{n}]", kind == "tabs")
-        held = panel.get("blocks")
-        total += len(held) if isinstance(held, list) else 0
-    if total > MAX_HELD:
+    if len(held_ids(kind, data)) > MAX_HELD:
         faults.append(Fault("limit", f"{kind}: at most {MAX_HELD} held blocks"))
     return faults
 
@@ -72,6 +35,23 @@ def validate_tabs(data: dict[str, object]) -> list[Fault]:
 
 def validate_columns(data: dict[str, object]) -> list[Fault]:
     return _validate(data, "columns")
+
+
+def _panel_properties(kind: str, label_needed: bool) -> tuple[PropertySpec, ...]:
+    panel = (
+        PropertySpec("label", "string", required=label_needed, nonempty=True),
+        PropertySpec("blocks", "list", required=True, nonempty=True, items="id"),
+    )
+    return (
+        PropertySpec(
+            HOLD_KEYS[kind],
+            "list",
+            required=True,
+            nonempty=True,
+            items="object",
+            fields=panel,
+        ),
+    )
 
 
 def held_ids(kind: str, props: dict[str, object]) -> list[str]:
@@ -186,6 +166,7 @@ TABS = BlockSpec(
 )
 """,
     validate_tabs,
+    properties=_panel_properties("tabs", label_needed=True),
 )
 
 COLUMNS = BlockSpec(
@@ -205,4 +186,5 @@ COLUMNS = BlockSpec(
 )
 """,
     validate_columns,
+    properties=_panel_properties("columns", label_needed=False),
 )
