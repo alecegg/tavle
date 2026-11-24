@@ -1,9 +1,21 @@
 """The shape of one block type's definition."""
 
+from __future__ import annotations
+
 from collections.abc import Callable
 from dataclasses import dataclass
 
 from varde.pages.blocks.rules import Fault
+
+
+@dataclass(frozen=True)
+class PropertySpec:
+    name: str
+    type: str
+    required: bool = False
+    enum: tuple[str, ...] = ()
+    child: str | None = None
+    answer_schema: AnswerSchema | None = None
 
 
 @dataclass(frozen=True)
@@ -17,6 +29,7 @@ class BlockSpec:
     # and `decision` take an answer, `status` has no text to copy, `part` is
     # expanded to the parts it names.
     block_type: str = "visual"
+    properties: tuple[PropertySpec, ...] = ()
 
 
 WIDGET = "widget"
