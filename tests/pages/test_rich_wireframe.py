@@ -191,7 +191,7 @@ def test_old_props_render_as_before_and_validate() -> None:
 
 def test_schema_checks_surface_kinds_notes_and_compare() -> None:
     assert rules(PROPS) == []
-    assert rules({**PROPS, "surface": "watch"}) == ["surface"]
+    assert rules({**PROPS, "surface": "watch"}) == ["type"]
     assert rules({**PROPS, "kinds": {"H": "blob"}}) == ["kind-unknown"]
     assert rules({**PROPS, "kinds": {"Z": "nav"}}) == ["kind-region"]
     assert rules({**PROPS, "notes": [{"region": "Z", "text": "x"}]}) == ["note-region"]
@@ -199,6 +199,66 @@ def test_schema_checks_surface_kinds_notes_and_compare() -> None:
     assert rules({**PROPS, "compare": "x"}) == ["type"]
     bad = {"grid": ["AB"], "regions": {"A": "a"}}
     assert rules({**PROPS, "compare": bad}) == ["region-undeclared"]
+
+
+MISSING_EMPTY = (
+    "ui-states: state 'empty' is missing; describe it or mark it na with a reason"
+)
+ONE_REGION: dict[str, Any] = {"grid": ["HH"], "regions": {"H": "head"}}
+
+
+def messages(component: str, props: dict[str, Any]) -> list[str]:
+    return [f.message for f in blocks.check_props(component, props, 1)]
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        ({"extra": 1}, "unknown key 'extra'"),
+        ({"grid": None}, "missing required key 'grid'"),
+        ({"regions": None}, "missing required key 'regions'"),
+        ({"title": 3}, "'title' must be string"),
+        ({"title": " "}, "'title' must not be empty"),
+        ({"grid": "AB"}, "'grid' must be list"),
+        ({"grid": []}, "'grid' must not be empty"),
+        ({"grid": [5]}, "'grid[0]' must be string"),
+        ({"regions": "x"}, "'regions' must be object"),
+        ({"regions": {}}, "wireframe.regions must be a non-empty table of strings"),
+        ({"regions": {"H": 5}}, "wireframe.regions.H must be a string"),
+        ({"kinds": []}, "'kinds' must be object"),
+        ({"kinds": {}}, "wireframe.kinds must be a non-empty table of kinds"),
+        ({"notes": {}}, "'notes' must be list"),
+        ({"notes": []}, "'notes' must not be empty"),
+        ({"notes": ["x"]}, "'notes[0]' must be object"),
+        (
+            {"notes": [{"region": "H", "text": "t", "x": 1}]},
+            "unknown key 'notes[0].x'",
+        ),
+        ({"notes": [{"region": 5, "text": "x"}]}, "'notes[0].region' must be string"),
+        ({"notes": [{"region": "H", "text": ""}]}, "'notes[0].text' must not be empty"),
+        ({"compare": {"grid": ["A"]}}, "missing required key 'compare.regions'"),
+        (
+            {"compare": {"grid": ["A"], "regions": {"A": "a"}, "title": "t"}},
+            "unknown key 'compare.title'",
+        ),
+        (
+            {"compare": {"grid": ["A"], "regions": {"A": "a"}, "kinds": {}}},
+            "wireframe.compare.kinds must be a non-empty table of kinds",
+        ),
+    ],
+)
+def test_one_mistake_gives_one_fault_naming_the_field(
+    change: dict[str, Any], message: str
+) -> None:
+    props = {k: v for k, v in {**ONE_REGION, **change}.items() if v is not None}
+    assert messages("wireframe", props) == [message]
+
+
+def test_a_broken_frame_does_not_cascade_into_cross_field_faults() -> None:
+    # An unusable regions table or grid must not also flag every note, kind or letter.
+    assert len(messages("wireframe", {**PROPS, "regions": {}})) == 1
+    assert len(messages("wireframe", {**PROPS, "regions": "x"})) == 1
+    assert len(messages("wireframe", {**PROPS, "grid": ["AB", 5]})) == 1
 
 
 def test_wireframe_is_registered() -> None:
@@ -220,7 +280,42 @@ def test_ui_states_layout_is_validated_and_marked() -> None:
     assert 'data-layout="grid"' in render_ui_states(grid)
     assert "data-layout" not in render_ui_states(STATES)
     bad = check_props("ui-states", {**STATES, "layout": "wall"}, 1)
-    assert [f.rule for f in bad] == ["layout"]
+    assert [f.message for f in bad] == ["'layout' must be one of tabs, grid"]
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        ({"extra": "x"}, "'extra' must be object"),
+        (
+            {"empty": None},
+            MISSING_EMPTY,
+        ),
+        ({"screen": 3}, "'screen' must be string"),
+        ({"screen": " "}, "'screen' must not be empty"),
+        ({"layout": 3}, "'layout' must be string"),
+        ({"empty": "x"}, "'empty' must be object"),
+        ({"empty": {"shows": "x", "extra": 1}}, "unknown key 'empty.extra'"),
+        ({"empty": {"shows": 3}}, "'empty.shows' must be string"),
+        ({"empty": {"shows": " "}}, "'empty.shows' must not be empty"),
+        ({"empty": {"na": ""}}, "'empty.na' must not be empty"),
+        ({"empty": {}}, "ui-states.empty: give exactly one of shows or na"),
+        (
+            {"empty": {"shows": "a", "na": "b"}},
+            "ui-states.empty: give exactly one of shows or na",
+        ),
+    ],
+)
+def test_ui_states_one_mistake_gives_one_fault(
+    change: dict[str, Any], message: str
+) -> None:
+    props = {k: v for k, v in {**STATES, **change}.items() if v is not None}
+    assert messages("ui-states", props) == [message]
+
+
+def test_ui_states_takes_any_extra_state_name() -> None:
+    props = {**STATES, "offline": {"shows": "Cached rows"}}
+    assert check_props("ui-states", props, 1) == []
 
 
 def test_ui_states_copy_text_lists_each_state() -> None:

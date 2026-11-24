@@ -198,7 +198,7 @@ def test_valid_sample_and_defaults() -> None:
         ({"steps": []}, "type"),
         ({"extra": 1}, "unknown-key"),
         ({"screens": [{"id": "a", "title": "A"}]}, "missing-key"),
-        ({"screens": [screen("a", surface="watch")], "steps": []}, "surface"),
+        ({"screens": [screen("a", surface="watch")], "steps": []}, "type"),
         (
             {
                 "screens": [screen("a", notes=[{"region": "Z", "text": "x"}])],
@@ -211,6 +211,98 @@ def test_valid_sample_and_defaults() -> None:
 )
 def test_spec_faults(change: dict[str, Any], rule: str) -> None:
     assert rule in rules(sample(**change))
+
+
+def screen_without(key: str) -> dict[str, Any]:
+    return {k: v for k, v in screen("a").items() if k != key}
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        ({"extra": 1}, "unknown key 'extra'"),
+        ({"screens": None}, "missing required key 'screens'"),
+        ({"title": 3}, "'title' must be string"),
+        ({"title": " "}, "'title' must not be empty"),
+        ({"desc": ""}, "'desc' must not be empty"),
+        ({"screens": "a"}, "'screens' must be list"),
+        ({"screens": []}, "'screens' must not be empty"),
+        ({"screens": ["a"]}, "'screens[0]' must be object"),
+        ({"screens": [screen_without("id")]}, "missing required key 'screens[0].id'"),
+        (
+            {"screens": [screen_without("grid")]},
+            "missing required key 'screens[0].grid'",
+        ),
+        (
+            {"screens": [screen("a", surface="watch")]},
+            "'screens[0].surface' must be one of browser, phone, tablet",
+        ),
+        ({"screens": [{**screen("a"), "x": 1}]}, "unknown key 'screens[0].x'"),
+        ({"screens": [{**screen("a"), "id": 3}]}, "'screens[0].id' must be string"),
+        (
+            {"screens": [{**screen("a"), "title": " "}]},
+            "'screens[0].title' must not be empty",
+        ),
+        (
+            {"screens": [{**screen("a"), "grid": []}]},
+            "'screens[0].grid' must not be empty",
+        ),
+        (
+            {"screens": [{**screen("a"), "regions": {}}]},
+            "screens[1].regions must be a non-empty table of strings",
+        ),
+        (
+            {"screens": [{**screen("a"), "kinds": {"H": "blob"}}]},
+            "screens[1].kinds 'H' is not one of nav, text, media, input, action, list",
+        ),
+        (
+            {"screens": [{**screen("a"), "notes": [{"region": "H"}]}]},
+            "missing required key 'screens[0].notes[0].text'",
+        ),
+        ({"steps": {}}, "'steps' must be list"),
+        ({"steps": ["a"]}, "'steps[0]' must be object"),
+        ({"steps": [{"from": "a"}]}, "missing required key 'steps[0].to'"),
+        ({"steps": [{"from": 3, "to": "b"}]}, "'steps[0].from' must be string"),
+        (
+            {"steps": [{"from": "a", "to": "b", "x": 1}, {"from": "b", "to": "c"}]},
+            "unknown key 'steps[0].x'",
+        ),
+        (
+            {
+                "steps": [
+                    {"from": "a", "to": "b", "label": ""},
+                    {"from": "b", "to": "c"},
+                ]
+            },
+            "'steps[0].label' must not be empty",
+        ),
+        ({"lanes": []}, "'lanes' must not be empty"),
+        ({"lanes": ["a"]}, "'lanes[0]' must be object"),
+        (
+            {"lanes": [{"screens": ["a", "b", "c"]}]},
+            "missing required key 'lanes[0].title'",
+        ),
+        ({"lanes": [{"title": "T"}]}, "missing required key 'lanes[0].screens'"),
+        (
+            {"lanes": [{"title": " ", "screens": ["a", "b", "c"]}]},
+            "'lanes[0].title' must not be empty",
+        ),
+        (
+            {"lanes": [{"title": "T", "screens": ["a", "b", 3]}]},
+            "'lanes[0].screens[2]' must be string",
+        ),
+        (
+            {"lanes": [{"title": "T", "screens": []}]},
+            "'lanes[0].screens' must not be empty",
+        ),
+    ],
+)
+def test_one_mistake_gives_one_fault_naming_the_field(
+    change: dict[str, Any], message: str
+) -> None:
+    base = {"screens": [screen("a")]} if "screens" in change else sample()
+    data = {k: v for k, v in {**base, **change}.items() if v is not None}
+    assert [e.message for e in check_props("screen-flow", data, 1)] == [message]
 
 
 def test_a_step_across_lanes_is_a_fault_with_advice() -> None:
