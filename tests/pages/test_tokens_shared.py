@@ -37,3 +37,13 @@ def test_os_dark_theme_skips_a_page_forced_light() -> None:
     media = _body("@media (prefers-color-scheme: dark)")
     assert ':root:not([data-theme="light"])' in media
     assert "color-scheme: light" in _body(':root[data-theme="light"]')
+
+
+def test_flow_tokens_are_declared_once_for_both_schemes() -> None:
+    """Spacing is scheme-independent: the dark blocks must not redeclare it."""
+    for block in (
+        _body("@media (prefers-color-scheme: dark)"),
+        _body(':root[data-theme="dark"]'),
+    ):
+        assert "--vd-flow-" not in block
+    assert CSS.count("--vd-flow-block:") == 1

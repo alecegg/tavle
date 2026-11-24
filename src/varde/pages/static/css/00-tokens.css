@@ -97,6 +97,11 @@
   --vd-space-8: 2.5rem;
   --vd-space-9: 3rem;
 
+  /* page flow rhythm: one gap between blocks, more room before a heading than after it so it binds to what it introduces */
+  --vd-flow-block: var(--vd-space-4);
+  --vd-flow-before-heading: var(--vd-space-8);
+  --vd-flow-after-heading: var(--vd-space-2);
+
   /* radii */
   --vd-radius-s: 4px;
   --vd-radius-m: 6px;
