@@ -8,7 +8,11 @@ from typing import Literal
 
 from varde.pages.blocks.rules import Fault
 
-PropertyType = Literal["string", "integer", "number", "boolean", "list", "object", "id"]
+# `any` checks presence only; the widget's own validator checks a value that may
+# take more than one shape (for example a line given as n or "a-b").
+PropertyType = Literal[
+    "string", "integer", "number", "boolean", "list", "object", "id", "any"
+]
 
 
 @dataclass(frozen=True)

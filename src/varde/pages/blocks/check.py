@@ -216,6 +216,7 @@ def _value_faults(
         "list": lambda: isinstance(value, list),
         "object": lambda: isinstance(value, dict),
         "id": lambda: isinstance(value, str) and bool(ID_RULE.fullmatch(value)),
+        "any": lambda: True,
     }
     if not valid[kind]():
         return [Fault("type", f"'{path}' must be {kind}")]
