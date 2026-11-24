@@ -54,6 +54,7 @@ def test_block_scripts_are_es_modules_imported_by_blocks_js() -> None:
         "components.js",
         "app.js",
         "blocks.js",
+        "inputs_runtime.js",
         "recap.js",
         "inputs_ordered.js",
     )
@@ -74,3 +75,12 @@ def test_include_property_faults_are_single_and_name_the_field() -> None:
         faults = props_errors(INCLUDE, data, 1)
         assert len(faults) == 1, (data, faults)
         assert field in faults[0].message
+
+
+def test_static_script_names_are_unique():
+    from varde.pages.template import _HOST_STATIC
+    from varde.ui.shell import UI_STATIC
+
+    host = {p.name for p in _HOST_STATIC.iterdir() if p.name.endswith(".js")}
+    ui = {p.name for p in UI_STATIC.iterdir() if p.name.endswith(".js")}
+    assert host.isdisjoint(ui)

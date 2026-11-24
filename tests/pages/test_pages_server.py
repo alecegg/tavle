@@ -114,7 +114,7 @@ def test_page_has_headers_token_and_first_party_assets(running: Running) -> None
     assert '<script src="/static/app.js" defer></script>' in text
     assert '<script src="/static/blocks.js" defer></script>' in text
     assert '<script src="/static/recap.js" defer></script>' in text
-    assert text.count("<script") == 5 and " style=" not in text
+    assert text.count("<script") == 6 and " style=" not in text
     assert "Hello <strong>world</strong>" in text
 
 
@@ -123,6 +123,7 @@ def test_static_assets_and_headers(running: Running) -> None:
         ("app.js", "javascript"),
         ("blocks.js", "javascript"),
         ("recap.js", "javascript"),
+        ("inputs_runtime.js", "javascript"),
         ("app.css", "css"),
     ):
         status, headers, body = running.request("GET", f"/static/{name}")

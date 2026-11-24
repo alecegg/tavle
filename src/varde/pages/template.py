@@ -16,6 +16,7 @@ from varde.ui.shell import UI_STATIC, css_files, join_css
 _SCRIPT_ORDER = (
     "app.js",
     "blocks.js",
+    "inputs_runtime.js",
     "recap.js",
     "inputs_ordered.js",
 )

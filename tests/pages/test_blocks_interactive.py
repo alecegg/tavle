@@ -116,7 +116,7 @@ def test_shell_has_script_tag_and_no_inline_script(running: Running) -> None:
     text = body.decode()
     assert '<script src="/static/blocks.js" defer></script>' in text
     assert '<script src="/static/recap.js" defer></script>' in text
-    assert len(re.findall(r"<script\b[^>]*\bsrc=", text)) == 5
+    assert len(re.findall(r"<script\b[^>]*\bsrc=", text)) == 6
     # the only scripts without a src are blocks' JSON props, never code
     inline = re.findall(r"<script\b(?![^>]*\bsrc=)([^>]*)>", text)
     assert inline and set(inline) == {' type="application/json"'}
