@@ -89,6 +89,7 @@
   --vd-measure: 72ch;
   --vd-leading-body: 1.55;
   --vd-leading-heading: 1.25;
+  --vd-title-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
   --vd-heading-1: clamp(1.375rem, 1.1rem + 1.2vw, 1.5rem);
   --vd-heading-2: clamp(1.25rem, 1.05rem + 0.9vw, 1.375rem);
   --vd-heading-3: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
@@ -442,14 +443,16 @@ svg { max-inline-size: 100%; block-size: auto; }
 main { padding-block: var(--vd-space-6) var(--vd-space-9); padding-inline-start: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-left)); padding-inline-end: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-right)); }
 
 /* header and status line */
-.doc-header { border-block-end: 1px solid var(--vd-border); margin-block-end: var(--vd-space-5); padding-block-end: var(--vd-space-2); }
-.doc-name { font-family: var(--vd-font-heading); font-size: var(--vd-text-xl); font-weight: 700; line-height: var(--vd-leading-heading); margin: 0; }
+/* title band: the file-name header, or the page's own leading H1 when it has one */
+.doc-header, main > .block:first-of-type > h1:first-child { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); margin-block-end: var(--vd-space-5); padding: var(--vd-space-4); }
+.doc-name { font-family: var(--vd-font-heading); font-size: var(--vd-title-size); font-weight: 750; letter-spacing: -0.02em; line-height: var(--vd-leading-heading); margin: 0; }
 .status { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); margin-block: var(--vd-space-1) 0; }
 .task.done { color: var(--vd-text-secondary); }
 
 /* markdown typography */
 h1, h2, h3, h4, h5, h6 { font-family: var(--vd-font-heading); font-weight: 700; letter-spacing: -0.01em; margin-block: var(--vd-space-7) var(--vd-space-2); }
 h4, h5, h6 { font-size: var(--vd-text-md); }
+main > .block:first-of-type > h1:first-child { font-size: var(--vd-title-size); font-weight: 750; letter-spacing: -0.02em; }
 h1:first-child, h2:first-child { margin-block-start: 0; }
 p, ul, ol, blockquote, pre, table { margin-block: var(--vd-space-3); }
 ul, ol { padding-inline-start: var(--vd-space-6); }
