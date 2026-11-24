@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+git diff --cached --name-only --diff-filter=d -z -- '*.py' | xargs -0 -r uv run --locked ruff check --force-exclude
+git diff --cached --name-only --diff-filter=d -z -- '*.py' | xargs -0 -r uv run --locked ruff format --check --force-exclude

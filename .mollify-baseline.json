@@ -1,0 +1,23 @@
+{
+  "schema": "mollify-baseline/1",
+  "fingerprints": [
+    "circular-dependency:d292181e51e424b3",
+    "high-complexity:035e13eb77b5f1ae",
+    "high-complexity:03c74d486e5d031d",
+    "high-complexity:0f6a634d0c580420",
+    "high-complexity:306ac302ca7cffb2",
+    "high-complexity:34357e139eed8563",
+    "high-complexity:3bc3fad538bc62a9",
+    "high-complexity:3ee5e7417bb4fb9c",
+    "high-complexity:4bc5a3103ed3c5b9",
+    "high-complexity:6a0c060785105704",
+    "high-complexity:8b93d87c2d068247",
+    "high-complexity:93ee0b72dcd7fc1c",
+    "high-complexity:9420500996479d4b",
+    "high-complexity:9f3290bc34bc97d7",
+    "high-complexity:cdfecedb17e9e5d7",
+    "high-complexity:d06c65e3d5b89e0a",
+    "high-complexity:de3a65e3fc409a4e",
+    "high-complexity:f55d865e76c81237"
+  ]
+}

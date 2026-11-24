@@ -1,0 +1,42 @@
+{
+  "max_cyclomatic": 10,
+  "max_cognitive": 10,
+  "ignore": [
+    "/tests/",
+    "/fixtures/",
+    "/bench/",
+    "/samples/",
+    "/corpus/",
+    "/e2e/"
+  ],
+  "exclude_dirs": [
+    "node_modules",
+    ".venv",
+    ".varde",
+    "__pycache__",
+    "openspec"
+  ],
+  "severity": {
+    "high-complexity": "error",
+    "circular-dependency": "error",
+    "private-type-leak": "error",
+    "hardcoded-secret": "error",
+    "weak-hash": "error",
+    "subprocess-shell-true": "error",
+    "commented-code": "error",
+    "unused-variable": "error",
+    "try-except-pass": "error",
+    "missing-dependency": "error",
+    "duplication": "off",
+    "untyped-function": "off",
+    "unused-export": "off",
+    "unused-file": "off",
+    "unused-parameter": "off",
+    "unused-method": "off",
+    "unused-enum-member": "off",
+    "transitive-dependency": "off",
+    "low-cohesion": "off",
+    "hotspot": "off",
+    "sql-injection": "off"
+  }
+}

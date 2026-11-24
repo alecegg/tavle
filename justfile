@@ -1,11 +1,22 @@
 set shell := ["bash", "-cu"]
 
+lint:
+    uv run --locked ruff check
+    uv run --locked ruff format --check
+    scripts/check-ruff-baseline.sh
+    uv run --locked pyright --warnings
+    scripts/check-mollify.sh
+    npx fallow dead-code --fail-on-issues
+    npx fallow health --fail-on-issues
+    npx fallow architecture --fail-on-issues
+
 test:
-    #!/usr/bin/env bash
-    status=0
-    uv run pytest -q || status=1
-    npx vitest run || status=1
-    uv run pyright || status=1
-    uv run ruff check || status=1
-    uv run ruff format --check || status=1
-    exit "$status"
+    just lint
+    uv run --locked pytest -q
+    npx vitest run
+
+hooks:
+    .githooks/install
+
+mutate *args:
+    python3 scripts/mutate.py {{args}}

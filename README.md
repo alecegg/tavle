@@ -10,7 +10,13 @@ Tavle is a UI component library for standalone pages and app surfaces. Its Pytho
 - `src/tavle/theme`: theme tokens, presets, derivation and CSS.
 - `src/tavle/static`: Mithril views, interaction scripts, styles and vendored Mithril.
 
-Run `just test` to check Python and JavaScript tests, types and lint.
+## Checks
+
+Run `just test` for lint, Python tests and JavaScript tests. `just lint` checks Ruff, Pyright, Mollify and Fallow; `just hooks` installs the Git hooks. Mollify and Ruff use checked-in baselines for existing findings.
+
+Run `just mutate --only 'tavle.theme.merge.*'` to run mutmut over `src/tavle` in a throwaway copy under `$TMPDIR`; add `--fresh` to discard the cached results, and see `scripts/mutate.py` for the other options.
+
+Varde's import-linter checks its own package layers, which Tavle does not have. Its shell, skill, reference, license, PEX and deployment checks cover Varde-specific assets or executables.
 
 ## Rename
 

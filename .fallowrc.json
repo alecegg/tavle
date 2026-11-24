@@ -1,0 +1,25 @@
+{
+  "entry": [
+    "src/tavle/static/**/*.js",
+    "tests/**/*.test.js"
+  ],
+  "health": {
+    "maxCyclomatic": 10,
+    "maxCognitive": 10,
+    "maxUnitSize": 40,
+    "maxFileLines": 300,
+    "maxCrap": 100000,
+    "ignore": [
+      "tests/**/fixtures/**"
+    ]
+  },
+  "minimumVersion": "3.41.0",
+  "ignorePatterns": [
+    "**/*.css",
+    "**/vendor/**",
+    "tests/**/fixtures/**"
+  ],
+  "ignoreUnresolvedImports": [
+    "/static/**"
+  ]
+}
