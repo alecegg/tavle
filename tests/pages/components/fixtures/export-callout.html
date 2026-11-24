@@ -4334,8 +4334,9 @@ components["table"] = (() => {
 // Table block as a component: a scroll region around a typed, groupable table.
 // `tableView` also draws the matrix block, which passes `extras`.
 const GOOD = ['ok', 'pass', 'passed', 'done', 'success', 'healthy', 'yes', 'complete'];
-const WARN = ['warn', 'warning', 'partial', 'pending', 'slow', 'degraded', 'at risk'];
+const WARN = ['warn', 'warning', 'partial', 'pending', 'in progress', 'slow', 'degraded', 'at risk'];
 const BAD = ['fail', 'failed', 'error', 'blocked', 'no', 'down', 'broken'];
+const STATUS_HEADERS = ['status', 'state', 'health', 'result'];
 const BAR_WIDTH = 100;
 const BAR_HEIGHT = 8;
 const SAFE_URL = /^(https?:\/\/[A-Za-z0-9\-._~:/?#[\]@!$&()*+,;=%]+|#[A-Za-z0-9\-._~:/?#%]*)$/;
@@ -4494,11 +4495,22 @@ function columnTops(rows, kinds) {
   return kinds.map((kind, i) => (kind === 'bar' ? Math.max(0, ...rows.map((r) => Number(String(r[i])))) : 0));
 }
 
+// An untyped column is a status column when its header names a status or every value is a status word.
+function inferredKind(col, values) {
+  const namedStatus = STATUS_HEADERS.includes(String(col).trim().toLowerCase());
+  const allStatusWords = values.length > 0 && values.every((value) => statusKind(value) !== 'neutral');
+  return namedStatus || allStatusWords ? 'status' : 'text';
+}
+
 function tableView(m, props, c, extras) {
   const columns = asList(props.columns);
   const rows = asList(props.rows).map(asList);
   const types = props.types || {};
-  const kinds = columns.map((col) => (Object.hasOwn(types, String(col)) ? String(types[String(col)]) : 'text'));
+  const kinds = columns.map((col, index) => {
+    if (Object.hasOwn(types, String(col))) return String(types[String(col)]);
+    const values = rows.map((row) => c.shared.pyStr(row[index] ?? '').trim()).filter(Boolean);
+    return inferredKind(col, values);
+  });
   const labels = groupLabels(props, rows.length);
   const sticky = props.sticky_column === true;
   const name = String(props.caption ?? 'Table');
