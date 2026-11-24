@@ -50,7 +50,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
   .vd-diff-split-mode > .vd-diff-unified { display: none; }
 }
 @container vd-doc (min-width: 64rem) {
-  main > .vd-diff-split-mode { max-inline-size: min(1560px, calc(100cqw - var(--vd-toc-width) - var(--vd-toc-gap))); }
+  main:has(> .doc-toc) > .vd-diff-split-mode { max-inline-size: min(1560px, calc(100cqw - var(--vd-toc-width) - var(--vd-toc-gap))); }
 }
 @media (forced-colors: active) {
   .vd-diff { border: 1px solid CanvasText; }
