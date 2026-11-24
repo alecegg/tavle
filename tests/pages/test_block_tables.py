@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.blocks import COMPONENT_SPECS, check_props
-from varde.pages.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
-from varde.pages.components import component_bundle
+from varde.ui.blocks import COMPONENT_SPECS, check_props
+from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
+from varde.ui.components import component_bundle
 
 COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"
 
