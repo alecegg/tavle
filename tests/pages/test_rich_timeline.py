@@ -52,3 +52,12 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
     assert "<img" not in body and "<script>alert" not in body
     assert "style=" not in body and "vb-error" not in body
     assert body.count('data-mithril="timeline"') >= 4
+
+
+def test_status_has_no_inline_start_border() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/59-timeline.css"
+    ).read_text()
+    rules = [part.split("}", 1)[0] for part in css.split(".vd-timeline-body {")[1:]]
+    assert rules
+    assert all("border-inline-start" not in rule for rule in rules)

@@ -54,3 +54,12 @@ def test_registered_and_fixtures_render() -> None:
 @pytest.mark.parametrize("name", ["rich-checklist", "rich-checklist-stress"])
 def test_fixture_family_exists(name: str) -> None:
     assert (FIXTURES / f"{name}.md").exists()
+
+
+def test_status_has_no_inline_start_border() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/54-checklist.css"
+    ).read_text()
+    rules = [part.split("}", 1)[0] for part in css.split(".vd-checklist-item {")[1:]]
+    assert rules
+    assert all("border-inline-start" not in rule for rule in rules)

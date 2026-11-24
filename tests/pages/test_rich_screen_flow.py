@@ -517,3 +517,12 @@ def test_interact_screens_are_44px_targets_in_both_layouts(open_page: Any) -> No
         )
         assert sizes[0] <= sizes[1]
     page.set_viewport_size({"width": 1100, "height": 800})
+
+
+def test_status_has_no_inline_start_border() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/58-screen-flow.css"
+    ).read_text()
+    rules = [part.split("}", 1)[0] for part in css.split(".vd-sf-item-on {")[1:]]
+    assert rules
+    assert all("border-inline-start" not in rule for rule in rules)
