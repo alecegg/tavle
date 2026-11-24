@@ -2,7 +2,7 @@
 // fixtures/<block>.json (inputs, the props the server sends, the id and the HTML it produced).
 // `data-props` is compared as JSON: Python and JavaScript space their JSON differently.
 import { canonical, fragment } from './canonical.js';
-import { mountComponents } from '@varde/pages-static/components/mount.js';
+import { mountComponents } from '@ui/static/components/mount.js';
 import { loadComponents } from './registry.js';
 import choice from './fixtures/choice.json';
 import form from './fixtures/form.json';

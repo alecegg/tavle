@@ -24,7 +24,7 @@ describe('read-only pages', () => {
 
   it('disables every control of a block mounted marked [data-readonly]', async () => {
     const { loadComponents } = await import('./registry.js');
-    const { mountComponents } = await import('@varde/pages-static/components/mount.js');
+    const { mountComponents } = await import('@ui/static/components/mount.js');
     const { m, components } = loadComponents();
     const readonly = document.createElement('main');
     readonly.innerHTML = host.replace('<div ', '<div data-readonly ');

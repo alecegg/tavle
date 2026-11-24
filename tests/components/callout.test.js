@@ -5,7 +5,7 @@ import { canonical, fragment } from './canonical.js';
 import { loadComponents } from './registry.js';
 import cases from './fixtures/callout.json';
 import exported from './fixtures/export-callout.html?raw';
-import { mountComponents } from '@varde/pages-static/components/mount.js';
+import { mountComponents } from '@ui/static/components/mount.js';
 
 describe('callout pilot', () => {
   const { m, components } = loadComponents();

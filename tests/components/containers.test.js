@@ -3,7 +3,7 @@
 // that mount lifts out of the host and each slot adopts.
 import { canonical, fragment } from './canonical.js';
 import { loadComponents } from './registry.js';
-import { mountComponents } from '@varde/pages-static/components/mount.js';
+import { mountComponents } from '@ui/static/components/mount.js';
 import cases from './fixtures/containers.json';
 
 const { m, components } = loadComponents();
