@@ -21,9 +21,9 @@ from varde.pages.serve import PageServer
 pytestmark = pytest.mark.slow
 
 DOC = (
-    "# Plan\n\nAlpha paragraph.\n\n## Part one\n\n"
+    "# Plan\n\nAlpha paragraph.\n\n## Part one\n\n## Part two\n\n## Part three\n\n"
     + "Filler line.\n\n" * 60
-    + "## Part two\n\nOmega paragraph.\n"
+    + "## Part four\n\nOmega paragraph.\n"
 )
 HARNESS = (
     "<!doctype html><body><div id='outside' style='height:40px'>outside</div>"

@@ -342,7 +342,7 @@ def test_interact_panel_is_labelled_by_its_tab_and_others_hidden(
 
 
 TAB_PAGE = (
-    "# T\n\n## Views\n\n"
+    "# T\n\n## Views\n\n## More\n\n"
     + statements(CALL, CALL_B)
     + statements(tabs(panel("Alpha", "a"), panel("Beta", "b")))
 )
@@ -359,7 +359,7 @@ def test_tab_names_are_listed_once_in_the_contents_and_not_in_the_block(
 ) -> None:
     html = render(tmp_path, TAB_PAGE)
     links = contents_links(html)
-    assert [text for _, text in links] == ["Views", "Alpha", "Beta"]
+    assert [text for _, text in links] == ["Views", "More", "Alpha", "Beta"]
     block = html[html.index('data-mithril="tabs"') :]
     assert "tab: [" in block and "Alpha" in block  # the panels are the block's props
     assert "toc-l3" in html
@@ -369,13 +369,15 @@ def test_tab_entries_target_the_n_th_panel_heading_of_their_block(
     tmp_path: Path,
 ) -> None:
     links = contents_links(render(tmp_path, TAB_PAGE))
-    assert [target for target, _ in links[1:]] == ["vd-ctab-t-1-h", "vd-ctab-t-2-h"]
+    assert [target for target, _ in links[2:]] == ["vd-ctab-t-1-h", "vd-ctab-t-2-h"]
 
 
 def test_an_invalid_tabs_block_adds_no_contents_entries(tmp_path: Path) -> None:
     bad = "t = tabs(tab: [])"
-    html = render(tmp_path, "# T\n\n## One\n\n## Two\n\n" + statements(bad))
-    assert [text for _, text in contents_links(html)] == ["One", "Two"]
+    html = render(
+        tmp_path, "# T\n\n## One\n\n## Two\n\n## Three\n\n## Four\n\n" + statements(bad)
+    )
+    assert [text for _, text in contents_links(html)] == ["One", "Two", "Three", "Four"]
 
 
 @pytest.mark.slow

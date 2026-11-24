@@ -27,21 +27,34 @@ def test_h1_is_skipped_and_one_heading_is_too_few() -> None:
 
 
 def test_nested_levels_link_to_heading_ids() -> None:
-    out = _nav((2, "A", "h-a"), (3, "B", "h-b"), (4, "C", "h-c"))
-    assert "Contents (2)" in out
+    out = _nav(
+        (2, "A", "h-a"),
+        (3, "B", "h-b"),
+        (4, "C", "h-c"),
+        (2, "D", "h-d"),
+        (2, "E", "h-e"),
+    )
+    assert "Contents (4)" in out
     assert '<li class="toc-l2"><a href="#h-a">A</a></li>' in out
     assert '<li class="toc-l3"><a href="#h-b">B</a></li>' in out
     assert "h-c" not in out
 
 
 def test_hostile_text_is_escaped() -> None:
-    out = _nav((2, "<script>x</script>", "h-a"), (2, "ok", 'h-b"><i>'))
+    out = _nav(
+        (2, "<script>x</script>", "h-a"),
+        (2, "ok", 'h-b"><i>'),
+        (2, "C", "c"),
+        (2, "D", "d"),
+    )
     assert "<script>" not in out and "&lt;script&gt;" in out
     assert "<i>" not in out
 
 
 def test_page_with_duplicate_headings_links_unique_ids() -> None:
-    page = render_page("# T\n\n## Same\n\n## Same\n\n### Sub\n", "d.md").body
+    page = render_page(
+        "# T\n\n## Same\n\n## Same\n\n### Sub\n\n## Fourth\n", "d.md"
+    ).body
     assert page.count('<a href="#h-same">') == 1
     assert '<a href="#h-same-2">' in page and '<a href="#h-sub">' in page
     assert "doc-header" not in page  # the page's own H1 is its title
@@ -57,11 +70,13 @@ def test_headings_inside_include_are_ignored() -> None:
     assert "doc-toc" not in body
 
 
-def test_current_section_is_tinted_and_bold_without_an_edge_bar() -> None:
+def test_current_section_is_dotted_and_bold_without_an_edge_bar() -> None:
     css = (CSS_DIR / "31-toc.css").read_text()
     rule = re.search(r'\.doc-toc a\[aria-current="location"\] \{([^}]*)\}', css)
     assert rule
-    assert "background: var(--vd-selected)" in rule.group(1)
+    assert "background:" not in rule.group(1)
+    dot = re.search(r'\.doc-toc a\[aria-current="location"\]::before \{([^}]*)\}', css)
+    assert dot and "background: var(--vd-accent-2)" in dot.group(1)
     assert "font-weight: 700" in rule.group(1)
     assert "border-inline-start" not in css
 
@@ -160,7 +175,7 @@ def test_tab_entry_is_current_only_while_its_panel_shows(toc_page: Any) -> None:
 
 
 @pytest.mark.slow
-def test_current_marker_is_a_tint_not_a_single_edge_border(toc_page: Any) -> None:
+def test_current_marker_is_a_dot_not_a_tint_or_edge_bar(toc_page: Any) -> None:
     toc_page.set_viewport_size({"width": 1280, "height": 900})
     _scroll_to(toc_page, "#h-fourth")
     toc_page.wait_for_selector(CURRENT.format("#h-fourth"))
@@ -178,7 +193,7 @@ def test_current_marker_is_a_tint_not_a_single_edge_border(toc_page: Any) -> Non
         }"""
     )
     assert len(set(style["widths"])) == 1
-    assert style["tint"] != "rgba(0, 0, 0, 0)"
+    assert style["tint"] == "rgba(0, 0, 0, 0)"
     assert int(style["weight"]) >= 600
 
 
@@ -230,7 +245,7 @@ def test_phone_contents_bar_names_the_current_section(toc_page: Any) -> None:
 
 
 def test_summary_holds_a_slot_for_the_current_section_name() -> None:
-    out = _nav((2, "A", "h-a"), (2, "B", "h-b"))
+    out = _nav((2, "A", "h-a"), (2, "B", "h-b"), (2, "C", "h-c"), (2, "D", "h-d"))
     assert '<span class="toc-here"></span>' in out
 
 

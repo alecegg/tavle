@@ -6,7 +6,7 @@ import html
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-MIN_ENTRIES = 2
+MIN_ENTRIES = 4
 LEVELS = (2, 3)
 
 
@@ -32,7 +32,7 @@ def _item(entry: TocEntry) -> str:
 
 
 def toc_html(entries: tuple[TocEntry, ...]) -> str:
-    """The nav, or "" below two entries. Level only indents; the list is flat."""
+    """The nav, or "" below four entries. Level only indents; the list is flat."""
     if len(entries) < MIN_ENTRIES:
         return ""
     items = "".join(_item(entry) for entry in entries)
@@ -40,5 +40,5 @@ def toc_html(entries: tuple[TocEntry, ...]) -> str:
         '<nav class="doc-toc" aria-label="Contents"><details>'
         f"<summary><span>Contents ({len(entries)})</span>"
         '<span class="toc-here"></span></summary>'
-        f"<ol>{items}</ol></details></nav>"
+        f'<div class="toc-label">On this page</div><ol>{items}</ol></details></nav>'
     )
