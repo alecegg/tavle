@@ -27,8 +27,19 @@ def _hex(h: float, lightness: float, saturation: float) -> str:
     return "#" + "".join(f"{round(channel * 255):02x}" for channel in rgb)
 
 
-def derive_dark(light_tokens: Mapping[str, str]) -> dict[str, str]:
-    """Keep hue and lift colours to contrast on dark surfaces."""
+def _over(colour: RGBA, alpha: float, base: RGBA) -> RGBA:
+    """`colour` at `alpha` laid over the opaque `base`."""
+    mixed = (
+        round(c * alpha + b * (1 - alpha))
+        for c, b in zip(colour[:3], base[:3], strict=True)
+    )
+    return (*mixed, 1)  # type: ignore[return-value]
+
+
+def derive_dark(
+    light_tokens: Mapping[str, str], tint_strength: float
+) -> dict[str, str]:
+    """Keep hue and lift colours to contrast on dark surfaces and on their own tint."""
     result: dict[str, str] = {}
     for name in ("surface", "card", "text"):
         h, _, s = _hls(light_tokens[name])
@@ -48,9 +59,9 @@ def derive_dark(light_tokens: Mapping[str, str]) -> dict[str, str]:
         candidate = _hex(h, 1, min(s, 0.8))
         for step in range(70, 101, 2):
             candidate = _hex(h, step / 100, min(s, 0.8))
-            if all(
-                contrast_ratio(_rgba(candidate), surface) >= 4.5 for surface in surfaces
-            ):
+            colour = _rgba(candidate)
+            tint = _over(colour, tint_strength, surfaces[1])
+            if all(contrast_ratio(colour, back) >= 4.5 for back in (*surfaces, tint)):
                 break
         result[name] = candidate
     return result

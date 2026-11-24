@@ -24,7 +24,7 @@ def test_palette_and_ink_steps():
 
 
 def test_dark_accent_contrast():
-    palette = derive_colour(derive_dark(TOKENS), 0.12, 0.2)
+    palette = derive_colour(derive_dark(TOKENS, 0.12), 0.12, 0.2)
     accent = palette["--vd-accent"]
     assert isinstance(accent, tuple)
     for name in ("surface", "surface-sunk", "surface-elevated"):
