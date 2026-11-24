@@ -1,0 +1,49 @@
+font-body = "sans"
+font-heading = "humanist"
+type-scale = 1.0
+heading-scale = 1.0
+heading-weight = 700
+heading-tracking = -0.01
+heading-case = "upper"
+heading-color = "text"
+heading-marker = "square"
+radius = 0
+space-scale = 1.0
+section-gap = 8
+page-width = 60
+tint-strength = 0.08
+border-strength = 0.16
+
+[light]
+surface = "#eaf1f2"
+card = "#f8fcfc"
+text = "#131825"
+accent = "#006b73"
+accent-alt = "#0c6e64"
+success = "#286f2c"
+warning = "#8a5a00"
+danger = "#b02020"
+info = "#006b73"
+decision = "#7028eb"
+series-1 = "#2e7d32"
+series-2 = "#c67800"
+series-3 = "#8e24aa"
+series-4 = "#00838f"
+series-5 = "#c62828"
+
+[dark]
+surface = "#101e29"
+card = "#1c2c38"
+text = "#e9ecf2"
+accent = "#65d9dd"
+accent-alt = "#51d6c5"
+success = "#66bb6a"
+warning = "#ffb74d"
+danger = "#ff8a80"
+info = "#65d9dd"
+decision = "#ae86f4"
+series-1 = "#66bb6a"
+series-2 = "#ffb74d"
+series-3 = "#ce93d8"
+series-4 = "#4dd0e1"
+series-5 = "#ef9a9a"
