@@ -9,6 +9,10 @@ from pathlib import Path
 import pytest
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
+UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+CSS_FILES = sorted(
+    [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
+)
 TONES = ("info", "decision", "risk", "warning", "success")
 TRIPLE = re.compile(r"(\d+) (\d+)% (\d+)%")
 # classes the part files styled before the restyle; each must keep a rule
@@ -54,7 +58,10 @@ wireframe
 
 def _css(name: str) -> str:
     return re.sub(
-        r"/\*.*?\*/", "", (CSS_DIR / f"{name}.css").read_text(), flags=re.DOTALL
+        r"/\*.*?\*/",
+        "",
+        (next(p for p in CSS_FILES if p.stem == name)).read_text(),
+        flags=re.DOTALL,
     )
 
 
@@ -115,7 +122,7 @@ def test_no_blurred_box_shadow_anywhere() -> None:
         for name, value in _scheme_tokens(scheme).items():
             if name.startswith("--vd-shadow"):
                 assert value == "none", name
-    for part in sorted(CSS_DIR.glob("*.css")):
+    for part in CSS_FILES:
         for value in re.findall(r"box-shadow\s*:\s*([^;}]+)", _css(part.stem)):
             spread_only = re.fullmatch(
                 r"0 -?\d+px 0 0 [^,]+|0 0 0 \d+px [^,]+|none|var\(--vd-shadow-\d\)",
@@ -125,7 +132,7 @@ def test_no_blurred_box_shadow_anywhere() -> None:
 
 
 def test_every_pre_existing_class_still_has_a_rule() -> None:
-    css = "\n".join(_css(p.stem) for p in sorted(CSS_DIR.glob("*.css")))
+    css = "\n".join(_css(p.stem) for p in CSS_FILES)
     selectors = re.sub(r"\{[^{}]*\}", ";", css)
     missing = [
         c for c in CLASSES if not re.search(rf"\.{re.escape(c)}(?![\w-])", selectors)

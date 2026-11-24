@@ -57,7 +57,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
 
 def test_status_has_no_inline_start_border() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/59-timeline.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/59-timeline.css"
     ).read_text()
     rules = [part.split("}", 1)[0] for part in css.split(".vd-timeline-body {")[1:]]
     assert rules

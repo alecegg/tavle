@@ -262,7 +262,7 @@ def test_two_hundred_points_and_twelve_series_render_fast_and_thin_labels() -> N
     assert len(chart_props(data)["table"]["rows"]) == 200
 
 
-CSS = Path(__file__).parents[2].joinpath("src/varde/pages/static/css/41-chart.css")
+CSS = Path(__file__).parents[2].joinpath("src/varde/ui/static/css/41-chart.css")
 FONT_SIZE = r"font-size: calc\(var\(--vd-text-(?:xs|md)\) \* var\(--vb-k\)\)"
 
 

@@ -19,7 +19,7 @@ from varde.ui.components import host_props
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105
-SHARED_JS = Path(__file__).parents[2] / "src/varde/pages/static/components/shared.js"
+SHARED_JS = Path(__file__).parents[2] / "src/varde/ui/static/components/shared.js"
 MAIN = re.compile(r'<main data-role="page">(.*)</main>', re.DOTALL)
 
 
@@ -469,7 +469,7 @@ def test_held_include_error_card_moves_into_its_slot(
 
 def test_only_the_neutral_column_separator_keeps_an_inline_start_border() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/55-containers.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/55-containers.css"
     ).read_text()
     edged = [
         line.split("{")[0].strip()

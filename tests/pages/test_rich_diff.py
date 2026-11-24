@@ -17,7 +17,7 @@ from varde.ui.blocks.diff_rows import (
     text_lines,
 )
 
-PAGES = Path(str(files("varde.pages")))
+UI = Path(str(files("varde.ui")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 BEFORE = "".join(f"line {i}\n" for i in range(1, 31))
 AFTER = BEFORE.replace("line 15\n", "line fifteen\n")
@@ -91,7 +91,7 @@ def test_validation(data: dict[str, Any], rules: list[str]) -> None:
 
 
 def test_stylesheet_ships_the_layout_rules() -> None:
-    css = (PAGES / "static" / "css" / "52-diff.css").read_text()
+    css = (UI / "static" / "css" / "52-diff.css").read_text()
     for needle in (
         "@container vd-doc (min-width: 44rem)",
         "forced-colors",

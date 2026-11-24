@@ -16,14 +16,14 @@ from varde.pages.serve import PageServer
 from varde.ui.blocks import check_props
 from varde.ui.blocks.tables import numeric
 
-PAGES = Path(str(files("varde.pages")))
+UI = Path(str(files("varde.ui")))
 CSS = re.sub(
     r"/\*.*?\*/",
     "",
-    (PAGES / "static" / "css" / "40-table.css").read_text(),
+    (UI / "static" / "css" / "40-table.css").read_text(),
     flags=re.DOTALL,
 )
-JS = (PAGES / "static" / "table.js").read_text()
+JS = (UI / "static" / "table.js").read_text()
 PHYSICAL = re.compile(
     r"\b(?:margin|padding|border)-(?:left|right|top|bottom)\b"
     r"|(?<![\w-])(?:left|right|top|bottom|width|height|min-width|min-height)\s*:"
@@ -499,7 +499,7 @@ def test_print_block_is_last_and_resets_the_screen_rules() -> None:
 
 
 def test_print_lets_table_dates_wrap_in_fixed_columns() -> None:
-    css = (PAGES / "static" / "css" / "40-table.css").read_text()
+    css = (UI / "static" / "css" / "40-table.css").read_text()
     assert ".vb-table .vd-date" in css[css.index("@media print") :]
 
 

@@ -14,7 +14,7 @@ from varde.ui.blocks_render.annotated_code import (
     read_notes,
 )
 
-PAGES = Path(__file__).parents[2] / "src" / "varde" / "pages"
+UI = Path(__file__).parents[2] / "src" / "varde" / "ui"
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SOURCE = "".join(f"l{i} = {i}\n" for i in range(1, 41))
 
@@ -67,7 +67,7 @@ def test_limits_and_shape_faults() -> None:
 
 
 def test_stylesheet_has_margin_layout_print_and_forced_colours_rules() -> None:
-    css = (PAGES / "static" / "css" / "48-annotated.css").read_text()
+    css = (UI / "static" / "css" / "48-annotated.css").read_text()
     assert "@container vd-doc (min-width: 44rem)" in css
     assert css.index("@container vd-doc") < css.index(
         "grid-template-columns: minmax(0, 1fr) 18rem"
@@ -77,12 +77,12 @@ def test_stylesheet_has_margin_layout_print_and_forced_colours_rules() -> None:
 
 
 def test_script_has_no_inline_handlers_and_handles_print() -> None:
-    js = (PAGES / "static" / "annotated.js").read_text()
+    js = (UI / "static" / "annotated.js").read_text()
     assert "beforeprint" in js and "innerHTML" not in js
 
 
 def test_pins_reserve_room_without_line_numbers_too() -> None:
-    css = (PAGES / "static" / "css" / "48-annotated.css").read_text()
+    css = (UI / "static" / "css" / "48-annotated.css").read_text()
     assert re.search(
         r"\.vd-annotated-code \.vd-code-nonum \.vd-code-line \{[^}]*"
         r"padding-inline-start: calc\([^}]*var\(--vd-pin-cols\)",

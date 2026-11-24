@@ -35,7 +35,7 @@ def sequence_props(data: dict[str, Any]) -> Any:
 
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
-STATIC = Path(str(files("varde.pages").joinpath("static")))
+STATIC = Path(str(files("varde.ui").joinpath("static")))
 
 
 esc = htmllib.escape

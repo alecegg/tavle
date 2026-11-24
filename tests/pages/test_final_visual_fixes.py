@@ -5,11 +5,16 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
+PAGE_STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
+UI_STATIC = Path(__file__).parents[2] / "src/varde/ui/static"
 
 
 def css(name: str) -> str:
-    return (STATIC / "css" / name).read_text()
+    return (
+        (PAGE_STATIC if (PAGE_STATIC / "css" / name).exists() else UI_STATIC)
+        / "css"
+        / name
+    ).read_text()
 
 
 def rule(text: str, selector: str) -> str:
@@ -20,7 +25,7 @@ def rule(text: str, selector: str) -> str:
 
 def test_diagram_and_flow_fit_the_whole_graph_on_first_paint() -> None:
     for name in ("diagram.js", "flow.js"):
-        js = (STATIC / name).read_text()
+        js = (UI_STATIC / name).read_text()
         assert "const MIN_FIT = 0.25;" in js
         assert "TARGET" not in js
         assert "minUnit" not in js

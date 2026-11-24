@@ -62,7 +62,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
     assert "style=" not in body and "vb-error" not in body
 
 
-STATIC = Path(__file__).parents[2] / "src" / "varde" / "pages" / "static"
+STATIC = Path(__file__).parents[2] / "src" / "varde" / "ui" / "static"
 
 
 def test_sentence_value_is_marked_long_and_set_below_heading_size() -> None:

@@ -322,7 +322,7 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
     wheel = next(out.glob("varde-*.whl"))
     names = zipfile.ZipFile(wheel).namelist()
     for asset in ("app.js", "css/00-tokens.css", "css/50-blocks.css"):
-        assert f"varde/pages/static/{asset}" in names
+        assert f"varde/{'pages' if asset == 'app.js' else 'ui'}/static/{asset}" in names
 
 
 def test_stalled_post_body_times_out(running: Running, monkeypatch) -> None:

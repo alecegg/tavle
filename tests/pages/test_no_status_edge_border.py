@@ -4,6 +4,10 @@ import re
 from pathlib import Path
 
 CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pages/static/css"
+UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+CSS_FILES = sorted(
+    [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
+)
 ALLOW_EDGE_BORDERS = {
     ("01-base.css", "blockquote"): "Quote bar, same in every state",
     ("10-chrome.css", "blockquote"): "Quote bar, same in every state",
@@ -48,7 +52,7 @@ EDGE = re.compile(
 
 def edge_rules() -> list[tuple[str, str, str]]:
     rules = []
-    for path in sorted(CSS_DIR.glob("*.css")):
+    for path in CSS_FILES:
         css = re.sub(r"/\*.*?\*/", "", path.read_text(), flags=re.DOTALL)
         for match in RULE.finditer(css):
             selector = match.group(1).strip()

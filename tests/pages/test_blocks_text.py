@@ -25,7 +25,7 @@ from varde.ui.components import component_bundle
 
 TESTS = Path(__file__).parent
 FIXTURES = TESTS / "components" / "fixtures"
-STATIC = TESTS.parents[1] / "src" / "varde" / "pages" / "static" / "components"
+STATIC = TESTS.parents[1] / "src" / "varde" / "ui" / "static" / "components"
 TEXT_BLOCKS = (
     "checklist",
     "decision",

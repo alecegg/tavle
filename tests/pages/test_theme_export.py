@@ -6,6 +6,7 @@ from pathlib import Path
 from test_export_standalone import every_block_page
 
 from varde.pages.assemble import assemble_static
+from varde.pages.template import page_css
 from varde.ui.components import export_page
 
 
@@ -15,7 +16,9 @@ def test_every_block_export_with_and_without_theme(tmp_path: Path, monkeypatch) 
     doc = tmp_path / "all.md"
     unthemed = assemble_static(doc)
     assert "data-vd-theme" not in unthemed
-    assert unthemed == export_page(doc.name, f'<main data-role="page">{body}</main>')
+    assert unthemed == export_page(
+        doc.name, f'<main data-role="page">{body}</main>', page_css()
+    )
 
     doc.write_text(
         "---\ntheme: harbor\n---\n" + doc.read_text(encoding="utf-8"), encoding="utf-8"

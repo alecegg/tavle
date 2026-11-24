@@ -6,8 +6,9 @@ import html
 import re
 from functools import cache
 from importlib.resources import files
+from importlib.resources.abc import Traversable
 
-from varde.ui.shell import static_css
+from varde.ui.shell import UI_STATIC, css_files, join_css
 
 # Load order for the known scripts (`recap.js` hosts `window.varde` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other
@@ -21,18 +22,36 @@ _SCRIPT_ORDER = (
 _MODULE_SYNTAX = re.compile(r"^(import|export)\s", re.MULTILINE)
 
 
+_HOST_STATIC = files("varde.pages").joinpath("static")
+
+
+def static_file(name: str) -> Traversable:
+    """A served `/static/<name>` file: varde's own page scripts, else the library's."""
+    host = _HOST_STATIC.joinpath(name)
+    return host if host.is_file() else UI_STATIC.joinpath(name)
+
+
+def page_css(skip: tuple[str, ...] = ()) -> str:
+    """The page stylesheet: library and page-chrome CSS in one name order."""
+    host = (
+        e for e in _HOST_STATIC.joinpath("css").iterdir() if e.name.endswith(".css")
+    )
+    return join_css([*css_files(), *host], skip)
+
+
 @cache
 def _is_es_module(name: str) -> bool:
     """A `static/*.js` with `import` or `export` lines is loaded by another script."""
-    path = files("varde.pages").joinpath("static", name)
-    return _MODULE_SYNTAX.search(path.read_text(encoding="utf-8")) is not None
+    text = static_file(name).read_text(encoding="utf-8")
+    return _MODULE_SYNTAX.search(text) is not None
 
 
 def static_scripts() -> tuple[str, ...]:
-    """Script file names shipped in `static/`, in page load order."""
+    """Script file names served under `/static/`, in page load order."""
     found = sorted(
         entry.name
-        for entry in files("varde.pages").joinpath("static").iterdir()
+        for folder in (_HOST_STATIC, UI_STATIC)
+        for entry in folder.iterdir()
         if entry.name.endswith(".js")
     )
     known = [name for name in _SCRIPT_ORDER if name in found]
@@ -81,7 +100,7 @@ def page_shell(title: str, main: str, token: str | None, api_base: str = "") -> 
     if api_base:
         head = _served_head(None, title_tag)
     elif token is None:
-        head = title_tag + f"<style>{static_css()}</style>"
+        head = title_tag + f"<style>{page_css()}</style>"
     else:
         head = _served_head(token, title_tag)
     body_attrs = _api_body_attrs(api_base) if api_base else ""

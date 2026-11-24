@@ -21,7 +21,11 @@ from varde.ui.components import component_bundle
 VECTORS = json.loads(
     (Path(__file__).parent / "fixtures/url-vectors.json").read_text(encoding="utf-8")
 )
-STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
+SRC = Path(__file__).parents[2] / "src/varde"
+# page scripts (varde.pages) and component enhancers (varde.ui), served together
+SCRIPTS = sorted(
+    [*(SRC / "pages/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
+)
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 JS_URL = "javascript:alert(1)"
 DECISION = statement_text(
@@ -72,7 +76,7 @@ def test_rendered_and_exported_html_has_no_executable_form(tmp_path: Path) -> No
 
 
 def test_static_scripts_have_no_dynamic_code_paths() -> None:
-    for path in sorted(STATIC.glob("*.js")):
+    for path in SCRIPTS:
         assert not FORBIDDEN_JS.search(path.read_text()), path.name
 
 

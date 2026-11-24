@@ -8,13 +8,17 @@ from pathlib import Path
 
 import pytest
 
-STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
+SRC = Path(__file__).parents[2] / "src/varde"
+# page scripts (varde.pages) and component enhancers (varde.ui), served together
+SCRIPTS = sorted(
+    [*(SRC / "pages/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
+)
 NODE = shutil.which("node")
 
 
 @pytest.mark.slow
 @pytest.mark.skipif(NODE is None, reason="node not installed")
-@pytest.mark.parametrize("path", sorted(STATIC.glob("*.js")), ids=lambda p: p.name)
+@pytest.mark.parametrize("path", SCRIPTS, ids=lambda p: p.name)
 def test_module_parses(path: Path) -> None:
     result = subprocess.run(  # noqa: S603
         [NODE or "node", "--check", "--input-type=module"],

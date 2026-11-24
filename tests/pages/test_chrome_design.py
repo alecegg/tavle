@@ -9,6 +9,10 @@ from pathlib import Path
 import pytest
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
+UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+CSS_FILES = sorted(
+    [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
+)
 OWNED = ("10-chrome.css", "50-blocks.css")
 DECLARATION = re.compile(r"([a-z-]+)\s*:\s*([^;{}]+);")
 LENGTH = re.compile(r"-?\d*\.?\d+(?:px|rem|em|vw|vh|ch)\b")
@@ -21,7 +25,12 @@ PHYSICAL = re.compile(
 
 
 def _text(name: str) -> str:
-    return re.sub(r"/\*.*?\*/", "", (CSS_DIR / name).read_text(), flags=re.DOTALL)
+    return re.sub(
+        r"/\*.*?\*/",
+        "",
+        (next(p for p in CSS_FILES if p.name == name)).read_text(),
+        flags=re.DOTALL,
+    )
 
 
 def _declarations(name: str) -> list[tuple[str, str]]:

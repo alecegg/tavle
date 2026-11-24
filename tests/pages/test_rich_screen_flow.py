@@ -66,7 +66,7 @@ def notes(items: list[dict[str, Any]]) -> str:
 
 F1 = "#blk-f1"  # the fixture also holds a one-screen flow, f2
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
-STATIC = Path(str(files("varde.pages").joinpath("static")))
+STATIC = Path(str(files("varde.ui").joinpath("static")))
 
 
 def screen(ident: str, title: str = "", **extra: Any) -> dict[str, Any]:
@@ -614,7 +614,7 @@ def test_interact_screens_are_44px_targets_in_both_layouts(open_page: Any) -> No
 
 def test_status_has_no_inline_start_border() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/58-screen-flow.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/58-screen-flow.css"
     ).read_text()
     rules = [part.split("}", 1)[0] for part in css.split(".vd-sf-item-on {")[1:]]
     assert rules

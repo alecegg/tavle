@@ -12,6 +12,7 @@ from varde.pages.serve import PageServer
 from varde.pages.toc import toc_entries, toc_html
 
 CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pages/static/css"
+UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
 
 
 def _nav(*headings: tuple[int, str, str]) -> str:
@@ -250,7 +251,7 @@ def test_summary_holds_a_slot_for_the_current_section_name() -> None:
 
 
 def test_the_toc_column_is_reserved_only_on_a_page_with_a_toc() -> None:
-    base = (CSS_DIR / "01-base.css").read_text()
+    base = (UI_CSS_DIR / "01-base.css").read_text()
     assert "main:has(> .doc-toc) > * { margin-inline:" in base
     assert re.search(r"\nmain \{[^}]*max-inline-size: var\(--vd-doc-width\)", base)
 

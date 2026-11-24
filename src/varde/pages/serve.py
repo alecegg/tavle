@@ -38,7 +38,6 @@ from varde.pages.server_parts import (
     MAX_STREAMS,
     READ_TIMEOUT,
     SECURITY_HEADERS,
-    STATIC_DIR,
     TOKEN_HEADER,
     Broadcaster,
     host_allowed,
@@ -50,12 +49,12 @@ from varde.pages.server_parts import (
     write_event_stream,
 )
 from varde.pages.store import EDIT_OFF, sources_for, store_comment
-from varde.pages.template import BUNDLE_SCRIPT, static_scripts
+from varde.pages.template import BUNDLE_SCRIPT, page_css, static_file, static_scripts
 from varde.pages.theme.page import doc_theme
 from varde.pages.validation import parse_json_object, strings
 from varde.ui.components import component_bundle
 from varde.ui.media import Problem, load
-from varde.ui.shell import TOKENS_CSS, static_css
+from varde.ui.shell import TOKENS_CSS
 from varde.ui.theme.css import theme_css
 from varde.ui.theme.tokens import ThemeError
 
@@ -65,12 +64,12 @@ INLINE_CSS = "app-inline.css"
 
 def static_body(name: str) -> bytes:
     if name == "app.css":
-        return static_css().encode("utf-8")
+        return page_css().encode("utf-8")
     if name == INLINE_CSS:
-        return static_css(skip=(TOKENS_CSS,)).encode("utf-8")
+        return page_css(skip=(TOKENS_CSS,)).encode("utf-8")
     if name == BUNDLE_SCRIPT:
         return component_bundle().encode("utf-8")
-    return (STATIC_DIR / name).read_bytes()
+    return static_file(name).read_bytes()
 
 
 STATIC_TYPES = {

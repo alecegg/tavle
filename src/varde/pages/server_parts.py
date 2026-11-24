@@ -9,7 +9,8 @@ from collections.abc import Collection, Sequence
 from io import BufferedIOBase
 from pathlib import Path
 
-STATIC_DIR = Path(__file__).parent / "static"
+from varde.ui.shell import TOKENS_CSS, UI_STATIC
+
 VENDOR_ASSETS = frozenset({"mithril.js"})
 MAX_BODY = 64 * 1024
 MAX_STREAMS = 16
@@ -59,11 +60,11 @@ def vendor_asset(name: str) -> bytes:
     """Bytes of a vendored script; any name off the allowlist raises ValueError."""
     if name not in VENDOR_ASSETS:
         raise ValueError(f"unknown vendor asset: {name!r}")
-    return (STATIC_DIR / "vendor" / name).read_bytes()
+    return UI_STATIC.joinpath("vendor", name).read_bytes()
 
 
 def token_css() -> str:
-    return (STATIC_DIR / "css" / "00-tokens.css").read_text(encoding="utf-8")
+    return UI_STATIC.joinpath("css", TOKENS_CSS).read_text(encoding="utf-8")
 
 
 class Broadcaster:

@@ -168,7 +168,7 @@ def test_iso_dates_are_wrapped_so_they_cannot_split_at_a_hyphen() -> None:
     head = _header("status: todo\nstatus_at: 2026-11-04T09:15 note")
     assert 'status_at: <span class="vd-date">2026-11-04</span>T09:15 note' in head
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/50-blocks.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/50-blocks.css"
     ).read_text()
     assert ".vd-date { white-space: nowrap; }" in css
 

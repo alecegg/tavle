@@ -13,6 +13,7 @@ from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 from varde.pages.assemble import include_ctx
 from varde.pages.page_check import PAGE_SPECS
 from varde.pages.render import render_page
+from varde.pages.template import page_css
 from varde.ui.blocks import COMPONENT_SPECS
 from varde.ui.components import export_page, mount_block
 from varde.ui.shell import make_read_only
@@ -66,7 +67,7 @@ def export_document(root: Path) -> str:
         mount_block("callout", props, str(props["text"])) for props in CALLOUTS.values()
     )
     main += _code_diff_hosts() + every_block_page(root)
-    return export_page("pilot", f'<main data-role="page">{main}</main>')
+    return export_page("pilot", f'<main data-role="page">{main}</main>', page_css())
 
 
 def test_export_fixture_matches_python_export(tmp_path: Path) -> None:

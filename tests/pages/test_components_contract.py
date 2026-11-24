@@ -22,7 +22,7 @@ from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.ui.components import component_bundle, mount_block
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
-COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"
+COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/ui/static/components"
 REGEN = os.environ.get("VARDE_REGEN_FIXTURES") == "1"
 CASES = load_cases()
 VALID_CASES = [case for case in CASES if case.valid]

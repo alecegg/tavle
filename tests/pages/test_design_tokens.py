@@ -8,10 +8,13 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.template import page_shell
-from varde.ui.shell import static_css
+from varde.pages.template import page_css, page_shell
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
+UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+CSS_FILES = sorted(
+    [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
+)
 PART_NAMES = (
     "00-tokens", "01-base", "10-chrome", "20-choice", "21-form", "22-comment",
     "23-decision", "24-ranking", "25-slider", "30-menu", "31-toc", "40-table",
@@ -75,7 +78,7 @@ def _declarations(body: str) -> dict[str, str]:
 
 
 def _tokens(scheme: str) -> dict[str, str]:
-    raw = (CSS_DIR / "00-tokens.css").read_text()
+    raw = (UI_CSS_DIR / "00-tokens.css").read_text()
     css = re.sub(r"/\*.*?\*/", "", raw, flags=re.DOTALL)
     root, _ = _block(css, css.index(":root"))
     tokens = _declarations(root)
@@ -151,7 +154,7 @@ def test_token_table_covers_the_design_language() -> None:
         "--vd-text-xs", "--vd-text-2xl", "--vd-space-1", "--vd-space-9",
     )  # fmt: skip
     assert [name for name in required if name not in tokens] == []
-    css = (CSS_DIR / "00-tokens.css").read_text()
+    css = (UI_CSS_DIR / "00-tokens.css").read_text()
     for query in (
         "prefers-color-scheme: dark", "prefers-reduced-motion: reduce",
         "forced-colors: active", "pointer: coarse", "color-scheme: light dark",
@@ -183,7 +186,7 @@ def test_flow_leaves_more_room_before_a_heading_than_after_it() -> None:
 
 
 def test_base_applies_the_flow_tokens_to_the_page_blocks() -> None:
-    base = (CSS_DIR / "01-base.css").read_text()
+    base = (UI_CSS_DIR / "01-base.css").read_text()
     for name in FLOW_TOKENS:
         assert f"margin-block-start: var({name})" in base
     assert "main > .block + .block.heading" in base
@@ -192,11 +195,13 @@ def test_base_applies_the_flow_tokens_to_the_page_blocks() -> None:
 
 
 def test_part_files_exist_and_load_in_order() -> None:
-    names = sorted(p.stem for p in CSS_DIR.glob("*.css"))
+    names = [p.stem for p in CSS_FILES]
     assert names == list(PART_NAMES)
-    shipped = static_css()
+    shipped = page_css()
     positions = [
-        shipped.index((CSS_DIR / f"{name}.css").read_text().splitlines()[0])
+        shipped.index(
+            (next(p for p in CSS_FILES if p.stem == name)).read_text().splitlines()[0]
+        )
         for name in PART_NAMES
     ]
     assert positions == sorted(positions)
@@ -204,7 +209,7 @@ def test_part_files_exist_and_load_in_order() -> None:
 
 def test_no_colour_literal_outside_the_tokens_file() -> None:
     offenders = []
-    for part in sorted(CSS_DIR.glob("*.css")):
+    for part in CSS_FILES:
         if part.name == "00-tokens.css":
             continue
         text = re.sub(r"/\*.*?\*/", "", part.read_text(), flags=re.DOTALL)
@@ -215,7 +220,7 @@ def test_no_colour_literal_outside_the_tokens_file() -> None:
 
 
 def test_hover_rules_sit_inside_the_hover_media_query() -> None:
-    for part in sorted(CSS_DIR.glob("*.css")):
+    for part in CSS_FILES:
         text = part.read_text()
         while "@media (hover: hover)" in text:
             start = text.index("@media (hover: hover)")
@@ -225,28 +230,28 @@ def test_hover_rules_sit_inside_the_hover_media_query() -> None:
 
 
 def test_no_import_inline_style_or_foreign_url() -> None:
-    for part in sorted(CSS_DIR.glob("*.css")):
+    for part in CSS_FILES:
         text = part.read_text()
         assert not re.search(r"@import|expression\(|style=", text), part.name
         assert not re.search(r"url\(\s*[\"']?(?:https?:)?//", text), part.name
 
 
 def test_served_css_equals_the_concatenation() -> None:
-    parts = [p.read_text() for p in sorted(CSS_DIR.glob("*.css"))]
-    assert static_css() == "\n".join(parts)
-    assert "@import" not in static_css()
-    assert "url(" not in static_css()
+    parts = [p.read_text() for p in CSS_FILES]
+    assert page_css() == "\n".join(parts)
+    assert "@import" not in page_css()
+    assert "url(" not in page_css()
 
 
 def test_export_inlines_the_same_css() -> None:
     out = page_shell("t", "<main></main>", None)
-    assert f"<style>{static_css()}</style>" in out
+    assert f"<style>{page_css()}</style>" in out
 
 
 def test_served_route_returns_the_concatenation() -> None:
     from varde.pages.serve import static_body
 
-    assert static_body("app.css") == static_css().encode("utf-8")
+    assert static_body("app.css") == page_css().encode("utf-8")
 
 
 def test_heading_tokens_keep_default_values_and_drive_chrome() -> None:

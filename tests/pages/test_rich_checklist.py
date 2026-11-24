@@ -59,7 +59,7 @@ def test_fixture_family_exists(name: str) -> None:
 
 def test_status_has_no_inline_start_border() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/54-checklist.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/54-checklist.css"
     ).read_text()
     rules = [part.split("}", 1)[0] for part in css.split(".vd-checklist-item {")[1:]]
     assert rules
@@ -68,7 +68,7 @@ def test_status_has_no_inline_start_border() -> None:
 
 def test_progress_remainder_is_the_quiet_line_colour() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/54-checklist.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/54-checklist.css"
     ).read_text()
     screen = css.split("@media (forced-colors: active)", 1)[0]
 

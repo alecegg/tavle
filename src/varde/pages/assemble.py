@@ -26,7 +26,7 @@ from varde.pages.render import (
     render_page,
     strip_comments,
 )
-from varde.pages.template import page_shell
+from varde.pages.template import page_css, page_shell
 from varde.pages.theme.page import page_theme, require_theme
 from varde.ui.components import export_page
 from varde.ui.lines import parse_lines
@@ -204,4 +204,4 @@ def assemble_static(doc: Path) -> str:
     page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
     style = require_theme(doc, text)
     main = f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
-    return export_page(doc.name, main)
+    return export_page(doc.name, main, page_css())

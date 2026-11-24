@@ -73,7 +73,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
 
 
 def test_risk_styles_have_no_status_edge_border() -> None:
-    css = Path("src/varde/pages/static/css/61-risk.css").read_text()
+    css = Path("src/varde/ui/static/css/61-risk.css").read_text()
     assert "border-inline-start" not in css
 
 

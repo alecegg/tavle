@@ -146,7 +146,7 @@ def test_fixtures_validate_and_render_without_errors(name: str) -> None:
 
 def test_change_has_no_inline_start_border() -> None:
     css = (
-        Path(__file__).parents[2] / "src/varde/pages/static/css/47-change.css"
+        Path(__file__).parents[2] / "src/varde/ui/static/css/47-change.css"
     ).read_text()
     assert "border-inline-start" not in css
     assert "border-left" not in css
