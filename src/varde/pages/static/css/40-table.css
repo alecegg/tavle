@@ -32,9 +32,12 @@
   .vb-sort:hover { background: var(--vd-hover); }
   .vb-table tbody tr:not(.vb-group-head):hover { background: var(--vd-hover); }
 }
-th[aria-sort="ascending"] .vb-sort::after { content: " \25B2"; font-size: 0.7em; }
-th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em; }
-.vb-status { display: inline-flex; align-items: baseline; gap: var(--vd-space-1); font-weight: 600; }
+/* Sort arrows are CSS triangles: a typed arrow needs a font the machine may lack. */
+th[aria-sort="ascending"] .vb-sort::after, th[aria-sort="descending"] .vb-sort::after { content: ""; display: inline-block; margin-inline-start: 0.35em; border-inline: 0.25em solid transparent; }
+th[aria-sort="ascending"] .vb-sort::after { border-block-end: 0.4em solid currentColor; }
+th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid currentColor; }
+.vb-status { display: inline-flex; align-items: center; gap: var(--vd-space-1); font-weight: 600; }
+.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; fill: currentColor; stroke: currentColor; }
 .vb-status-ok { color: var(--vd-success); }
 .vb-status-warn { color: var(--vd-warning); }
 .vb-status-bad { color: var(--vd-danger); }
@@ -44,6 +47,8 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 .vb-bar-fill { fill: var(--vd-accent); }
 .vb-bar-num { display: inline-block; min-inline-size: 3ch; }
 .vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: var(--vd-space-2) 0; }
+/* A bar whose controls are all hidden takes no room. */
+.vb-filterbar:not(:has(> :not([hidden]))) { display: none; }
 .vb-filter { flex: 1; min-inline-size: 8rem; min-block-size: 44px; font: inherit; padding: 0.3em 0.6em; background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
 .vb-filter:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-more { margin-block: var(--vd-space-2) 0; }
@@ -53,8 +58,12 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 .vb-more-toggle:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-filter-status, .vb-scrollhint, .vb-foot { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vb-foot { margin-block: var(--vd-space-2) 0; }
+/* The row and column count is for screen readers (.vb-sr) until a filter shows it. */
+.vb-filterbar:has(.vb-filter) ~ .vb-foot.vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; }
 .vb-wrap-toggle { padding-inline: var(--vd-space-3); border: 2px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font: inherit; cursor: pointer; }
-.vb-wrap-toggle[aria-pressed="true"]::before { content: "\2713\00a0"; }
+/* The pressed mark is a CSS check, not a typed one. */
+.vb-wrap-toggle[aria-pressed="true"]::before { content: ""; display: inline-block; box-sizing: border-box; inline-size: 0.35em; block-size: 0.65em; margin-inline-end: 0.5em; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-0.1em) rotate(45deg); }
+.vb-wrap-toggle[hidden] { display: none; }
 .vb-wrap-toggle[aria-pressed="true"] { background: var(--vd-selected); border-color: var(--vd-border-selected); }
 /* The sort select stands in for the header buttons on phones only. */
 .vb-sortpick { display: none; align-items: center; gap: var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }

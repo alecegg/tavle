@@ -1,16 +1,16 @@
 // table and data-model: sort, filter, row cap, wrap toggle, scroll hint, relations.
 import { make, control, keepInside, whileConnected } from './dom.js';
 
-const MIN_ROWS_FOR_FILTER = 3;
+// A short table is read at a glance: filter and sort controls appear only from these row counts.
+const MIN_ROWS_FOR_FILTER = 8;
+const MIN_ROWS_FOR_SORT = 5;
 // A longer table shows this many rows and a toggle that names the total; a scroll region would cut a row in half.
 const COLLAPSED_ROWS = 12;
 
 function cellValue(row, column) {
   const cell = row.cells[column];
   if (!cell) return '';
-  const glyph = cell.querySelector('.vb-status-glyph');
-  const text = cell.textContent.trim();
-  return glyph ? text.slice(glyph.textContent.length).trim() : text;
+  return cell.textContent.trim();
 }
 
 function compareCells(a, b) {
@@ -50,9 +50,12 @@ function cycleSort(table, state, column) {
   applySort(table, state, column, direction);
 }
 
-function makeSortable(table) {
+function tableState(table, sortable) {
   const original = new Map(Array.from(table.tBodies, (body) => [body, dataRows(body)]));
-  const state = { column: -1, direction: 0, original, picker: null, needle: '', expanded: false, more: null };
+  return { column: -1, direction: 0, original, picker: null, needle: '', expanded: false, more: null, sortable };
+}
+
+function addSortButtons(table, state) {
   table.tHead.querySelectorAll('th').forEach((th, index) => {
     if (!th.textContent.trim()) return;
     const button = make('button', 'vb-sort');
@@ -62,7 +65,6 @@ function makeSortable(table) {
     th.append(button);
     th.setAttribute('aria-sort', 'none');
   });
-  return state;
 }
 
 // Stack mode hides the header (and its buttons), so phones sort through a select.
@@ -156,14 +158,19 @@ function wrapToggle(region) {
   return button;
 }
 
-function scrollHint(region) {
-  const hint = make('span', 'vb-scrollhint', 'Scrolls sideways');
-  const update = () => { hint.hidden = region.scrollWidth <= region.clientWidth + 1; };
+// The scroll hint and the wrap toggle show only while the table is wider than its region;
+// the toggle also stays while text is unwrapped, so the reader can wrap it again.
+function trackOverflow(region, hint, toggle) {
+  const update = () => {
+    const overflowing = region.scrollWidth > region.clientWidth + 1;
+    hint.hidden = !overflowing;
+    toggle.hidden = !overflowing && !region.classList.contains('vb-nowrap');
+  };
   update();
   whileConnected(region, 'resize', update);
   region.addEventListener('click', update);
+  toggle.addEventListener('click', update);
   if (typeof ResizeObserver === 'function') new ResizeObserver(update).observe(region);
-  return hint;
 }
 
 // Chromium does not scroll sideways to a focused control in a sticky first column, so do it here.
@@ -173,15 +180,21 @@ function keepFocusVisible(region) {
   });
 }
 
-function addToolbar(table, state) {
+function rowCount(table) {
+  return Array.from(table.tBodies).reduce((sum, body) => sum + dataRows(body).length, 0);
+}
+
+function addToolbar(table, state, total) {
   const region = table.closest('.vb-scroll');
   if (!region) return;
-  const total = Array.from(table.tBodies).reduce((sum, body) => sum + dataRows(body).length, 0);
   keepFocusVisible(region);
   const bar = make('div', 'vb-filterbar');
+  const hint = make('span', 'vb-scrollhint', 'Scrolls sideways');
+  const toggle = wrapToggle(region);
   if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, state, total));
-  if (table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
-  bar.append(wrapToggle(region), scrollHint(region));
+  if (state.sortable && table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
+  bar.append(toggle, hint);
+  trackOverflow(region, hint, toggle);
   region.after(bar);
   if (total > COLLAPSED_ROWS) region.after(moreToggle(table, state));
   showRows(table, state);
@@ -200,7 +213,10 @@ function collapseRelations(list) {
 export function enhanceTables(block) {
   for (const table of block.querySelectorAll('table.vb-table')) {
     if (!table.tHead || !table.tBodies[0]) continue;
-    addToolbar(table, makeSortable(table));
+    const total = rowCount(table);
+    const state = tableState(table, total >= MIN_ROWS_FOR_SORT);
+    if (state.sortable) addSortButtons(table, state);
+    addToolbar(table, state, total);
   }
   for (const list of block.querySelectorAll('.vb-relations')) collapseRelations(list);
 }

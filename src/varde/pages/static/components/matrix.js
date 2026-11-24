@@ -7,7 +7,7 @@ const SCALES = {
 const FIRST_COLUMN = 'Criterion';
 const TOTAL_LABEL = 'Weighted total';
 const NOT_RATED = 'Not rated';
-const LEVEL_TONES = { high: ['ok', '✓'], medium: ['warn', '▲'], low: ['bad', '✕'] };
+const LEVEL_TONES = { high: 'ok', medium: 'warn', low: 'bad' };
 
 function ratingScale(cell) {
   const word = typeof cell === 'string' ? cell.trim().toLowerCase() : '';
