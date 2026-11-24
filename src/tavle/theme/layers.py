@@ -6,8 +6,8 @@ import tomllib
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 
-from varde.pages.theme.presets import PRESET_NAMES
-from varde.pages.theme.tokens import TOKEN_BY_NAME, ThemeError, validate_value
+from varde.ui.theme.presets import PRESET_NAMES
+from varde.ui.theme.tokens import TOKEN_BY_NAME, ThemeError, validate_value
 
 
 @dataclass

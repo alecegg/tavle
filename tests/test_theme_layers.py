@@ -1,7 +1,7 @@
 import pytest
 
-from varde.pages.theme.layers import parse_frontmatter, parse_toml
-from varde.pages.theme.tokens import ThemeError
+from varde.ui.theme.layers import parse_frontmatter, parse_toml
+from varde.ui.theme.tokens import ThemeError
 
 
 def test_toml_layer():

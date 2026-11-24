@@ -3,8 +3,8 @@
 import math
 import re
 
-from varde.pages.theme.resolve import ResolvedTheme
-from varde.pages.theme.tokens import FONT_STACKS
+from varde.ui.theme.resolved import ResolvedTheme
+from varde.ui.theme.tokens import FONT_STACKS
 
 _NUMBER = r"-?(?:\d+(?:\.\d+)?|\.\d+)"
 _VALUE = re.compile(

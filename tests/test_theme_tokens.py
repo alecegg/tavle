@@ -1,6 +1,6 @@
 import pytest
 
-from varde.pages.theme.tokens import (
+from varde.ui.theme.tokens import (
     FONT_STACKS,
     TOKENS,
     ThemeError,

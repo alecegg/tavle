@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.theme.css import style_element, theme_css
 from varde.pages.theme.resolve import resolve_theme
+from varde.ui.theme.css import style_element, theme_css
 
 
 def test_scopes_and_declarations(

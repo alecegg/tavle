@@ -4,10 +4,10 @@ from typing import cast
 
 import pytest
 
-from varde.pages.theme.derive_colour import derive_dark
-from varde.pages.theme.presets import load_preset
-from varde.pages.theme.tokens import ThemeError
-from varde.pages.theme.validate import validate_theme
+from varde.ui.theme.derive_colour import derive_dark
+from varde.ui.theme.presets import load_preset
+from varde.ui.theme.tokens import ThemeError
+from varde.ui.theme.validate import validate_theme
 
 
 def test_preset_and_derived_dark_pass():

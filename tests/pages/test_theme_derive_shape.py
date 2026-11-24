@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-from varde.pages.theme.derive_shape import FIXED_TOKENS, derive_shape
+from varde.ui.theme.derive_shape import FIXED_TOKENS, derive_shape
 
 
 def test_shared_defaults_and_coverage() -> None:

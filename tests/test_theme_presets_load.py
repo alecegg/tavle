@@ -5,8 +5,8 @@ from importlib.resources import files
 
 import pytest
 
-from varde.pages.theme.presets import PRESET_NAMES, load_preset
-from varde.pages.theme.tokens import TOKENS, ThemeError
+from varde.ui.theme.presets import PRESET_NAMES, load_preset
+from varde.ui.theme.tokens import TOKENS, ThemeError
 
 
 def test_varde_complete() -> None:
