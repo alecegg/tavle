@@ -26,9 +26,7 @@ def test_minimal_block_is_valid():
 
 
 def test_unknown_option():
-    assert rules(fenced(VALID + 'options = ["approve", "maybe"]\n')) == [
-        "option-unknown"
-    ]
+    assert rules(fenced(VALID + 'options = ["approve", "maybe"]\n')) == ["type"]
 
 
 def test_duplicate_option():
@@ -59,3 +57,8 @@ def test_blocks_command_prints_fields_and_example(capsys):
     text = blocks.type_text("decision")
     assert "question" in text and "options" in text and "evidence" in text
     assert 'question: "' in text
+
+
+def test_wrong_type_and_blank_question():
+    assert rules(fenced("question = 1\n")) == ["type"]
+    assert rules(fenced('question = " "\n')) == ["type"]
