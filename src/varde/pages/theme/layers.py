@@ -6,6 +6,7 @@ import tomllib
 from collections.abc import Mapping
 from dataclasses import dataclass, field
 
+from varde.pages.theme.presets import PRESET_NAMES
 from varde.pages.theme.tokens import TOKEN_BY_NAME, ThemeError, validate_value
 
 
@@ -29,7 +30,7 @@ def _token(name: str, value: object, scope: str, label: str) -> None:
 
 
 def _preset(value: object, label: str) -> str:
-    names = ("varde", "paper", "harbor", "signal")
+    names = PRESET_NAMES
     if not isinstance(value, str) or value not in names:
         matches = (
             difflib.get_close_matches(value, names) if isinstance(value, str) else []
