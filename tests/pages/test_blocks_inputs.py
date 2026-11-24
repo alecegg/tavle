@@ -126,6 +126,23 @@ def test_form_hands_the_client_only_its_whitelisted_field_keys() -> None:
     assert fields[0]["hint"] == "From 1 to 9." and fields[2]["limit"] == 5  # type: ignore[index]
 
 
+def test_form_label_drops_the_fields_own_key_in_parentheses() -> None:
+    props = form_props(
+        {
+            "fields": [
+                {
+                    "name": "review_date",
+                    "label": "Review date (review_date), x",
+                    "type": "text",
+                },
+                {"name": "n", "label": "Hours (about 3)", "type": "number"},
+            ]
+        }
+    )
+    labels = [f["label"] for f in props["fields"]]  # type: ignore[attr-defined]
+    assert labels == ["Review date, x", "Hours (about 3)"]
+
+
 def test_ranking_names_twins_apart_and_slider_reports_text_and_ticks() -> None:
     ranked = ranking_props(
         {"question": "Q", "items": [{"label": "Same", "value": "x"}, "b"]}
