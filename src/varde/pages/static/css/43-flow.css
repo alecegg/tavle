@@ -1,5 +1,5 @@
 /* Flow block and dependency graph. */
-.dep-graph { display: block; max-inline-size: none; }
+.dep-graph { display: block; max-inline-size: none; margin-inline: auto; }
 .dep-graph .node rect { fill: var(--vd-surface); stroke: var(--vd-accent); stroke-width: 1.5; }
 .dep-graph .node text { fill: var(--vd-text); font-size: 12px; font-family: var(--vd-font-body); }
 .dep-graph .node.missing rect { stroke: var(--vd-text-secondary); stroke-dasharray: 4 3; }

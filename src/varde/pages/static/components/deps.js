@@ -28,7 +28,7 @@ export function view(m, props, c) {
     props.nodes.map((n) => node(m, n, c))
   ]);
   return [
-    m('div.scroll', graph),
+    m('div.scroll.vb-card', graph),
     props.truncated ? m('p.graph-note', 'Graph truncated: too many tasks or dependencies.') : null
   ];
 }
