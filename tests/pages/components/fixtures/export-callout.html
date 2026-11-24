@@ -4,20 +4,21 @@
   color-scheme: light dark;
 
   /* ink ramp (alpha steps of the text colour) */
-  --vd-ink: #171717;
-  --vd-ink-4: rgba(23, 23, 23, 0.04);
-  --vd-ink-8: rgba(23, 23, 23, 0.08);
-  --vd-ink-16: rgba(23, 23, 23, 0.16);
-  --vd-ink-36: rgba(23, 23, 23, 0.36);
-  --vd-ink-50: rgba(23, 23, 23, 0.5);
-  --vd-ink-60: rgba(23, 23, 23, 0.6);
-  --vd-ink-70: rgba(23, 23, 23, 0.7);
-  --vd-ink-80: rgba(23, 23, 23, 0.8);
+  --vd-ink: rgb(19, 24, 37);
+  --vd-ink-4: rgba(19, 24, 37, 0.04);
+  --vd-ink-8: rgba(19, 24, 37, 0.08);
+  --vd-ink-16: rgba(19, 24, 37, 0.16);
+  --vd-ink-36: rgba(19, 24, 37, 0.36);
+  --vd-ink-50: rgba(19, 24, 37, 0.5);
+  --vd-ink-60: rgba(19, 24, 37, 0.6);
+  --vd-ink-70: rgba(19, 24, 37, 0.7);
+  --vd-ink-80: rgba(19, 24, 37, 0.8);
 
-  /* surfaces */
-  --vd-surface: #ffffff;
-  --vd-surface-sunk: #f5f5f5;
-  --vd-surface-elevated: #ffffff;
+  /* surfaces: one slate-blue family (hue 220 light, 224 dark). The page is the base, a block card (elevated) sits above it
+     and a sunk panel below it; 50-blocks re-points --vd-surface to the card inside a card so its content matches it */
+  --vd-surface: #eff1f6;
+  --vd-surface-sunk: #e6e9ef;
+  --vd-surface-elevated: #fbfcfe;
 
   /* neutral ramp: text 10%, muted 45%, line 90%, fill 95% lightness; colour is spent on the tones only */
   --vd-neutral-text: hsl(0 0% 10%);
@@ -30,16 +31,18 @@
   --vd-text-secondary: var(--vd-ink-70);
 
   /* accent and status hues (text-safe on every surface) */
-  --vd-accent: #0b5fd6;
+  --vd-accent: rgb(44, 63, 186);
   --vd-on-accent: #ffffff;
-  --vd-accent-subtle: rgba(11, 95, 214, 0.12);
-  --vd-info: #0b5fd6;
-  --vd-info-subtle: rgba(11, 95, 214, 0.12);
-  --vd-success: #2e7d32;
+  --vd-accent-subtle: rgba(44, 63, 186, 0.12);
+  --vd-accent-2: rgb(12, 110, 100);
+  --vd-accent-2-subtle: rgba(12, 110, 100, 0.12);
+  --vd-info: rgb(44, 63, 186);
+  --vd-info-subtle: rgba(44, 63, 186, 0.12);
+  --vd-success: #286f2c;
   --vd-success-subtle: rgba(46, 125, 50, 0.08);
   --vd-warning: #8a5a00;
   --vd-warning-subtle: rgba(198, 120, 0, 0.14);
-  --vd-danger: #c62828;
+  --vd-danger: #b02020;
   --vd-danger-subtle: rgba(198, 40, 40, 0.12);
   --vd-mark: #fff3b0;
   --vd-overlay: rgba(0, 0, 0, 0.4);
@@ -57,7 +60,7 @@
   --vd-series-5-fill: rgba(198, 40, 40, 0.15);
 
   /* borders */
-  --vd-border: var(--vd-line);
+  --vd-border: #ced3de;
   --vd-border-interactive: var(--vd-ink-50);
   --vd-border-selected: var(--vd-accent);
 
@@ -123,27 +126,27 @@
   --vd-tone-info-edge: hsl(var(--vd-tone-info));
   --vd-tone-info-tint: hsl(var(--vd-tone-info) / 0.08);
   --vd-tone-info-tint-2: hsl(var(--vd-tone-info) / 0.02);
-  --vd-tone-info-text: hsl(218 85% 47%);
+  --vd-tone-info-text: hsl(218 85% 44%);
   --vd-tone-decision: 262 83% 58%;
   --vd-tone-decision-edge: hsl(var(--vd-tone-decision));
   --vd-tone-decision-tint: hsl(var(--vd-tone-decision) / 0.08);
   --vd-tone-decision-tint-2: hsl(var(--vd-tone-decision) / 0.02);
-  --vd-tone-decision-text: hsl(262 83% 57%);
+  --vd-tone-decision-text: hsl(262 83% 54%);
   --vd-tone-risk: 0 84% 60%;
   --vd-tone-risk-edge: hsl(var(--vd-tone-risk));
   --vd-tone-risk-tint: hsl(var(--vd-tone-risk) / 0.08);
   --vd-tone-risk-tint-2: hsl(var(--vd-tone-risk) / 0.02);
-  --vd-tone-risk-text: hsl(0 84% 43%);
-  --vd-tone-warning: 25 95% 48%;
+  --vd-tone-risk-text: hsl(0 84% 40%);
+  --vd-tone-warning: 25 95% 42%;
   --vd-tone-warning-edge: hsl(var(--vd-tone-warning));
   --vd-tone-warning-tint: hsl(var(--vd-tone-warning) / 0.08);
   --vd-tone-warning-tint-2: hsl(var(--vd-tone-warning) / 0.02);
-  --vd-tone-warning-text: hsl(25 95% 34%);
-  --vd-tone-success: 142 71% 38%;
+  --vd-tone-warning-text: hsl(25 95% 32%);
+  --vd-tone-success: 142 71% 33%;
   --vd-tone-success-edge: hsl(var(--vd-tone-success));
   --vd-tone-success-tint: hsl(var(--vd-tone-success) / 0.08);
   --vd-tone-success-tint-2: hsl(var(--vd-tone-success) / 0.02);
-  --vd-tone-success-text: hsl(142 71% 27%);
+  --vd-tone-success-text: hsl(142 71% 25%);
 
   /* block label, code panel, hairline elevation and density (regular is the default) */
   --vd-label-size: 0.8rem;
@@ -175,27 +178,30 @@
    an explicit data-theme="dark" (the dashboard sets one); test_tokens_shared keeps them equal. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]), :host(:not([data-theme="light"])) {
-    --vd-ink: #ececec;
-    --vd-ink-4: rgba(236, 236, 236, 0.04);
-    --vd-ink-8: rgba(236, 236, 236, 0.08);
-    --vd-ink-16: rgba(236, 236, 236, 0.16);
-    --vd-ink-36: rgba(236, 236, 236, 0.36);
-    --vd-ink-50: rgba(236, 236, 236, 0.5);
-    --vd-ink-60: rgba(236, 236, 236, 0.6);
-    --vd-ink-70: rgba(236, 236, 236, 0.7);
-    --vd-ink-80: rgba(236, 236, 236, 0.8);
-    --vd-surface: #171717;
-    --vd-surface-sunk: #0f0f0f;
-    --vd-surface-elevated: #232323;
+    --vd-ink: rgb(233, 236, 242);
+    --vd-ink-4: rgba(233, 236, 242, 0.04);
+    --vd-ink-8: rgba(233, 236, 242, 0.08);
+    --vd-ink-16: rgba(233, 236, 242, 0.16);
+    --vd-ink-36: rgba(233, 236, 242, 0.36);
+    --vd-ink-50: rgba(233, 236, 242, 0.5);
+    --vd-ink-60: rgba(233, 236, 242, 0.6);
+    --vd-ink-70: rgba(233, 236, 242, 0.7);
+    --vd-ink-80: rgba(233, 236, 242, 0.8);
+    --vd-surface: #151923;
+    --vd-surface-sunk: #0b0d13;
+    --vd-surface-elevated: #212531;
+    --vd-border: #393e4c;
     --vd-neutral-text: hsl(0 0% 90%);
     --vd-neutral-muted: hsl(0 0% 62%);
     --vd-line: hsl(0 0% 20%);
     --vd-fill: hsl(0 0% 12%);
-    --vd-accent: #6aa5ff;
-    --vd-on-accent: #0b0b0b;
-    --vd-accent-subtle: rgba(106, 165, 255, 0.18);
-    --vd-info: #6aa5ff;
-    --vd-info-subtle: rgba(106, 165, 255, 0.18);
+    --vd-accent: rgb(147, 168, 251);
+    --vd-on-accent: rgb(11, 13, 19);
+    --vd-accent-subtle: rgba(147, 168, 251, 0.18);
+    --vd-accent-2: rgb(81, 214, 197);
+    --vd-accent-2-subtle: rgba(81, 214, 197, 0.16);
+    --vd-info: rgb(147, 168, 251);
+    --vd-info-subtle: rgba(147, 168, 251, 0.18);
     --vd-success: #66bb6a;
     --vd-success-subtle: rgba(102, 187, 106, 0.16);
     --vd-warning: #ffb74d;
@@ -219,12 +225,12 @@
     --vd-tone-risk-tint: hsl(var(--vd-tone-risk) / 0.08);
     --vd-tone-risk-tint-2: hsl(var(--vd-tone-risk) / 0.02);
     --vd-tone-risk-text: hsl(0 84% 72%);
-    --vd-tone-warning: 25 95% 58%;
+    --vd-tone-warning: 25 95% 52%;
     --vd-tone-warning-edge: hsl(var(--vd-tone-warning));
     --vd-tone-warning-tint: hsl(var(--vd-tone-warning) / 0.08);
     --vd-tone-warning-tint-2: hsl(var(--vd-tone-warning) / 0.02);
     --vd-tone-warning-text: hsl(25 95% 62%);
-    --vd-tone-success: 142 71% 48%;
+    --vd-tone-success: 142 71% 43%;
     --vd-tone-success-edge: hsl(var(--vd-tone-success));
     --vd-tone-success-tint: hsl(var(--vd-tone-success) / 0.08);
     --vd-tone-success-tint-2: hsl(var(--vd-tone-success) / 0.02);
@@ -244,27 +250,30 @@
 
 :root[data-theme="dark"], :host([data-theme="dark"]) {
   color-scheme: dark;
-  --vd-ink: #ececec;
-  --vd-ink-4: rgba(236, 236, 236, 0.04);
-  --vd-ink-8: rgba(236, 236, 236, 0.08);
-  --vd-ink-16: rgba(236, 236, 236, 0.16);
-  --vd-ink-36: rgba(236, 236, 236, 0.36);
-  --vd-ink-50: rgba(236, 236, 236, 0.5);
-  --vd-ink-60: rgba(236, 236, 236, 0.6);
-  --vd-ink-70: rgba(236, 236, 236, 0.7);
-  --vd-ink-80: rgba(236, 236, 236, 0.8);
-  --vd-surface: #171717;
-  --vd-surface-sunk: #0f0f0f;
-  --vd-surface-elevated: #232323;
+  --vd-ink: rgb(233, 236, 242);
+  --vd-ink-4: rgba(233, 236, 242, 0.04);
+  --vd-ink-8: rgba(233, 236, 242, 0.08);
+  --vd-ink-16: rgba(233, 236, 242, 0.16);
+  --vd-ink-36: rgba(233, 236, 242, 0.36);
+  --vd-ink-50: rgba(233, 236, 242, 0.5);
+  --vd-ink-60: rgba(233, 236, 242, 0.6);
+  --vd-ink-70: rgba(233, 236, 242, 0.7);
+  --vd-ink-80: rgba(233, 236, 242, 0.8);
+  --vd-surface: #151923;
+  --vd-surface-sunk: #0b0d13;
+  --vd-surface-elevated: #212531;
+  --vd-border: #393e4c;
   --vd-neutral-text: hsl(0 0% 90%);
   --vd-neutral-muted: hsl(0 0% 62%);
   --vd-line: hsl(0 0% 20%);
   --vd-fill: hsl(0 0% 12%);
-  --vd-accent: #6aa5ff;
-  --vd-on-accent: #0b0b0b;
-  --vd-accent-subtle: rgba(106, 165, 255, 0.18);
-  --vd-info: #6aa5ff;
-  --vd-info-subtle: rgba(106, 165, 255, 0.18);
+  --vd-accent: rgb(147, 168, 251);
+  --vd-on-accent: rgb(11, 13, 19);
+  --vd-accent-subtle: rgba(147, 168, 251, 0.18);
+  --vd-accent-2: rgb(81, 214, 197);
+  --vd-accent-2-subtle: rgba(81, 214, 197, 0.16);
+  --vd-info: rgb(147, 168, 251);
+  --vd-info-subtle: rgba(147, 168, 251, 0.18);
   --vd-success: #66bb6a;
   --vd-success-subtle: rgba(102, 187, 106, 0.16);
   --vd-warning: #ffb74d;
@@ -288,12 +297,12 @@
   --vd-tone-risk-tint: hsl(var(--vd-tone-risk) / 0.08);
   --vd-tone-risk-tint-2: hsl(var(--vd-tone-risk) / 0.02);
   --vd-tone-risk-text: hsl(0 84% 72%);
-  --vd-tone-warning: 25 95% 58%;
+  --vd-tone-warning: 25 95% 52%;
   --vd-tone-warning-edge: hsl(var(--vd-tone-warning));
   --vd-tone-warning-tint: hsl(var(--vd-tone-warning) / 0.08);
   --vd-tone-warning-tint-2: hsl(var(--vd-tone-warning) / 0.02);
   --vd-tone-warning-text: hsl(25 95% 62%);
-  --vd-tone-success: 142 71% 48%;
+  --vd-tone-success: 142 71% 43%;
   --vd-tone-success-edge: hsl(var(--vd-tone-success));
   --vd-tone-success-tint: hsl(var(--vd-tone-success) / 0.08);
   --vd-tone-success-tint-2: hsl(var(--vd-tone-success) / 0.02);
@@ -1429,7 +1438,8 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
 .vb { margin-block: var(--vd-space-3); max-inline-size: 100%; }
 .vb-grid { display: grid; min-inline-size: 0; max-inline-size: 100%; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--vd-space-3); }
 .vd-date { white-space: nowrap; }
-.vb-card { border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); padding: var(--vd-space-3) var(--vd-space-4); min-inline-size: 0; overflow-x: auto; background:
+/* a card is an object above the page: its content reads the card surface as its own --vd-surface */
+.vb-card { --vd-surface: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); padding: var(--vd-space-3) var(--vd-space-4); min-inline-size: 0; overflow-x: auto; background:
   linear-gradient(to right, var(--vd-surface) 50%, transparent) local 0 0 / 2rem 100% no-repeat,
   linear-gradient(to left, var(--vd-surface) 50%, transparent) local 100% 0 / 2rem 100% no-repeat,
   linear-gradient(to right, var(--vd-text-secondary) 0 3px, var(--vd-border-interactive) 3px, transparent) scroll 0 0 / 0.75rem 100% no-repeat,
@@ -1437,7 +1447,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
   var(--vd-surface); }
 .vb-title { margin: 0 0 var(--vd-space-2); font-size: var(--vd-text-md); font-weight: 600; }
 .vb-badge { display: inline-flex; align-items: center; box-sizing: border-box; min-block-size: 1.5em; padding-inline: var(--vd-space-2); white-space: nowrap; border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-full); font-size: var(--vd-text-xs); line-height: 1.3; }
-.vb-badge-key { border-color: var(--vd-accent); color: var(--vd-accent); background: var(--vd-accent-subtle); }
+.vb-badge-key { border-color: var(--vd-accent-2); color: var(--vd-accent-2); background: var(--vd-accent-2-subtle); }
 .vb-rel { color: var(--vd-text-secondary); }
 .vb-method { font-weight: 600; border-color: var(--vd-accent); color: var(--vd-accent); background: var(--vd-accent-subtle); }
 .vb-auth { border-color: var(--vd-success); color: var(--vd-success); background: var(--vd-success-subtle); }
