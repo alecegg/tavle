@@ -81,9 +81,13 @@ def test_button_family_has_every_state() -> None:
     assert css.index("button:hover") > hover_start
 
 
-def test_thread_bar_is_a_logical_border() -> None:
-    thread = re.search(r"\.thread \{([^}]*)\}", _text("10-chrome.css"))
-    assert thread and "border-inline-start" in thread.group(1)
+def test_thread_state_uses_a_full_border_not_an_edge_bar() -> None:
+    css = _text("10-chrome.css")
+    thread = re.search(r"\.thread \{([^}]*)\}", css)
+    resolved = re.search(r"\.thread\.resolved \{([^}]*)\}", css)
+    assert thread and "border: 1px solid" in thread.group(1)
+    assert "border-inline-start" not in thread.group(1)
+    assert resolved and "border-style: dashed" in resolved.group(1)
 
 
 def test_flash_and_forced_colors_are_covered() -> None:

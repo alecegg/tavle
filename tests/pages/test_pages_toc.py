@@ -1,5 +1,10 @@
+import re
+from pathlib import Path
+
 from varde.pages.render import render_page
 from varde.pages.toc import toc_entries, toc_html
+
+CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pages/static/css"
 
 
 def _nav(*headings: tuple[int, str, str]) -> str:
@@ -42,3 +47,12 @@ def test_page_without_two_headings_has_no_nav() -> None:
 def test_headings_inside_include_are_ignored() -> None:
     body = render_page("# T\n\n## One\n\n<h2>raw</h2>\n", "d.md").body
     assert "doc-toc" not in body
+
+
+def test_current_section_is_tinted_and_bold_without_an_edge_bar() -> None:
+    css = (CSS_DIR / "31-toc.css").read_text()
+    rule = re.search(r'\.doc-toc a\[aria-current="location"\] \{([^}]*)\}', css)
+    assert rule
+    assert "background: var(--vd-selected)" in rule.group(1)
+    assert "font-weight: 700" in rule.group(1)
+    assert "border-inline-start" not in css

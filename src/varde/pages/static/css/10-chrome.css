@@ -58,8 +58,8 @@ button.danger:active:not(:disabled), button.destructive:active:not(:disabled) { 
 .thread > .accept-btn { margin-block-start: var(--vd-space-2); font-size: var(--vd-text-sm); }
 
 /* comment threads */
-.thread { border-inline-start: 3px solid var(--vd-accent); margin-block: var(--vd-space-2); margin-inline: var(--vd-space-2) 0; padding: var(--vd-space-2) var(--vd-space-4); background: var(--vd-surface-sunk); border-start-end-radius: var(--vd-radius-m); border-end-end-radius: var(--vd-radius-m); font-size: var(--vd-text-sm); }
-.thread.resolved { border-inline-start-color: var(--vd-border-interactive); color: var(--vd-text-secondary); }
+.thread { border: 1px solid var(--vd-accent); margin-block: var(--vd-space-2); margin-inline: var(--vd-space-2) 0; padding: var(--vd-space-2) var(--vd-space-4); background: var(--vd-accent-subtle); border-radius: var(--vd-radius-m); font-size: var(--vd-text-sm); }
+.thread.resolved { border-style: dashed; border-color: var(--vd-border-interactive); background: var(--vd-surface-sunk); color: var(--vd-text-secondary); }
 .thread .meta { color: var(--vd-text-secondary); font-size: var(--vd-text-xs); margin: 0; }
 .thread .text, .reply .text { white-space: pre-wrap; margin-block: var(--vd-space-1); }
 .reply { margin-inline-start: var(--vd-space-4); padding-block-start: var(--vd-space-2); border-block-start: 1px dashed var(--vd-border-interactive); }
