@@ -23,7 +23,6 @@
 .vd-diff-add { --vd-diff-edge: var(--vd-tone-success-edge); --vd-diff-tint: var(--vd-tone-success-tint); }
 .vd-diff-del { --vd-diff-edge: var(--vd-tone-risk-edge); --vd-diff-tint: var(--vd-tone-risk-tint); }
 tr.vd-diff-add > td, tr.vd-diff-del > td, td.vd-diff-add, td.vd-diff-del { background: var(--vd-diff-tint); }
-tr.vd-diff-add > .vd-diff-mark, tr.vd-diff-del > .vd-diff-mark, td.vd-diff-mark.vd-diff-add, td.vd-diff-mark.vd-diff-del { border-inline-start: 3px solid var(--vd-diff-edge); }
 td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-diff-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .vd-diff-hunk > td { padding: var(--vd-space-1) var(--vd-space-3); background: var(--vd-tone-info-tint); color: var(--vd-tone-info-text); font-size: var(--vd-label-size); overflow-wrap: anywhere; }
@@ -57,7 +56,6 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
   .vd-diff { border: 1px solid CanvasText; }
   .vd-diff > .vd-diff-head { border-block-end: 1px solid CanvasText; }
   tr.vd-diff-add > td, tr.vd-diff-del > td, td.vd-diff-add, td.vd-diff-del, td.vd-diff-empty, .vd-diff-hunk > td { background: none; color: CanvasText; }
-  tr.vd-diff-add > .vd-diff-mark, tr.vd-diff-del > .vd-diff-mark, td.vd-diff-mark.vd-diff-add, td.vd-diff-mark.vd-diff-del { border-inline-start-color: CanvasText; }
   .vd-diff-hunk > td { border-block: 1px solid CanvasText; }
   .vd-diff-fold-row, .vd-diff-gap, .vd-diff-more { border-block-color: CanvasText; }
   .vd-diff-pin::before, .vd-diff-note-n { border-color: CanvasText; }
