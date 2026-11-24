@@ -211,7 +211,7 @@ def _pin(pin: Pin) -> Shape:
         {
             "class": "vb-ev-no",
             "x": f1(x),
-            "y": f1(cy + 5),
+            "y": f1(cy),
             "text-anchor": "middle",
         },
         str(event.n),
@@ -223,7 +223,7 @@ def _pin(pin: Pin) -> Shape:
                 {
                     "class": "vb-note-label vb-ev-text",
                     "x": f1(x + half + 4),
-                    "y": f1(cy + 5),
+                    "y": f1(cy),
                     "text-anchor": "start",
                 },
                 pin.label,

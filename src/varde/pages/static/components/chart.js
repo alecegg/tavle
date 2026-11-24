@@ -3,7 +3,7 @@
 // events ({n, label, kind, where, tone, class}), notes (text), table ({head, rows}), copy.
 // static/chart.js adds the tooltip, readout, legend toggles and keyboard reading on the mounted DOM.
 function legend(m, c, items) {
-  if (!items.length) return null;
+  if (items.length < 2) return null; // a single series is named by the title
   return m('ul.vb-legend', items.map((item) => m('li', {
     class: item.class,
     'data-series': String(item.n),

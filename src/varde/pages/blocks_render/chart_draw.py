@@ -2,8 +2,9 @@
 
 The browser builds each shape (`components/chart.js`). Everything is class- and
 attribute-styled (no `style=`); colours come from the `--vd-series-*` tokens in
-`41-chart.css`. Text is 15 viewBox units, so it stays
-at or above 11 CSS px while the SVG is at least 264 px wide; labels thin out
+`41-chart.css`. The SVG fills its block, so marks scale with it while the CSS
+holds label text at a fixed rendered size. The layout reserves 15 viewBox units per
+label, which is the real size down to a plot about 288 px wide; labels thin out
 instead of overlapping. Marks carry `data-series` and `data-index` for the
 script, plus an `aria-label` reading.
 """
@@ -31,7 +32,7 @@ from varde.pages.blocks_render.chart_scale import (
 )
 from varde.pages.blocks_render.svg import Shape, el, ellipsize, f1
 
-W, H = 360.0, 220.0
+W, H = 360.0, 220.0  # W is also --vb-w in 41-chart.css
 GLYPH_SPREAD = 1.1  # wide glyphs make real labels up to this much wider than CHAR says
 SPARK_W, SPARK_H = 160.0, 44.0
 BOTTOM, NOTE_ROW = 34.0, 17.0
@@ -258,7 +259,7 @@ def _end_labels(
         _text(
             "vb-end",
             frame.x1 + 8,
-            y + 5,
+            y,
             "start",
             ellipsize(names[n], limit),
             {"data-series": str(n)},
@@ -411,7 +412,7 @@ def _grid(frame: Frame, axes: dict[str, Axis]) -> list[Shape]:
             anchor, x = (
                 ("end", frame.x0 - 6) if side == "left" else ("start", frame.x1 + 6)
             )
-            out.append(_text("vb-tick", x, y + 5, anchor, axis.text(t)))
+            out.append(_text("vb-tick", x, y, anchor, axis.text(t)))
     out.append(_line("vb-axis", frame.x0, frame.y1, frame.x1, frame.y1))
     return out
 
@@ -429,7 +430,7 @@ def _category_labels(model: Model, frame: Frame, slot: float) -> list[Shape]:
         if x - half < reach + 4 and out:
             continue  # clamping must not push a label onto its neighbour
         reach = x + half
-        out.append(_text("vb-tick", x, frame.y1 + 22, "middle", shown[i]))
+        out.append(_text("vb-tick", x, frame.y1 + 17, "middle", shown[i]))
     return out
 
 
@@ -509,7 +510,7 @@ def _hbar_axis(axis: Axis, frame: Frame) -> list[Shape]:
     for t in axis.ticks:
         x = axis.at(t)
         out.append(_line("vb-axis" if t == 0 else "vb-grid", x, frame.y0, x, frame.y1))
-        out.append(_text("vb-tick", x, frame.y1 + 22, "middle", axis.text(t)))
+        out.append(_text("vb-tick", x, frame.y1 + 17, "middle", axis.text(t)))
     out.append(_line("vb-axis", frame.x0, frame.y0, frame.x0, frame.y1))
     return out
 
@@ -523,7 +524,7 @@ def _hbar_rows(shown: list[str], frame: Frame, slot: float) -> list[Shape]:
             _column(i, frame.x0, f1(frame.y0 + slot * i), frame.x1 - frame.x0, f1(slot))
         )
         if i % step == 0:
-            out.append(_text("vb-tick", frame.x0 - 6, y + 5, "end", label))
+            out.append(_text("vb-tick", frame.x0 - 6, y, "end", label))
     return out
 
 
@@ -600,7 +601,7 @@ def scatter(model: Model) -> Drawing:
     frame = Frame(left, W - 14, top, H - BOTTOM)
     out = _grid(frame, {"left": yaxis})
     out += [
-        _text("vb-tick", xaxis.at(t), frame.y1 + 22, "middle", xaxis.text(t))
+        _text("vb-tick", xaxis.at(t), frame.y1 + 17, "middle", xaxis.text(t))
         for t in xaxis.ticks
     ]
     out += _scatter_notes(model, xaxis, frame, top, wanted)
@@ -699,14 +700,14 @@ def donut(model: Model) -> Drawing:
                 _text(
                     "vb-pct",
                     tx,
-                    ty + 5,
+                    ty,
                     anchor,
                     f"{share * 100:.0f}%",
                     {"data-series": str(s.n)},
                 )
             )
     out.append(
-        _text("vb-center", cx, cy + 5, "middle", show(model, model.series[0], total))
+        _text("vb-center", cx, cy, "middle", show(model, model.series[0], total))
     )
     return Drawing(out, W, H, False)
 

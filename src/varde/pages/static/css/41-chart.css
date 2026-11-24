@@ -1,12 +1,17 @@
 /* Chart block: server SVG marks, legend toggles, tooltip, data table. */
-.chart > .vb-card { border: 0; padding: 0; background: transparent; overflow: visible; }
-.vb-plot { position: relative; max-inline-size: 42rem; border-radius: var(--vd-radius-m); }
+.chart > .vb-card { overflow: visible; }
+.chart .vb-title { margin-block-end: var(--vd-space-3); }
+/* The plot fills its block. Marks scale with the SVG; text must not, so each label's font-size
+   in SVG units is its rendered size times --vb-k, the viewBox width over the plot width
+   (tan(atan2(a, b)) is the unitless a/b). --vb-w is the viewBox width, chart_draw.W. */
+.vb-plot { position: relative; container-type: inline-size; --vb-w: 360px; --vb-k: tan(atan2(var(--vb-w), 100cqw)); border-radius: var(--vd-radius-m); }
 .vb-plot:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
 .vb-chart { display: block; inline-size: 100%; block-size: auto; direction: ltr; } /* plots are not mirrored: text-anchor start must stay left */
 .vb-spark { max-inline-size: 12rem; }
-.vb-tick, .vb-end, .vb-pct, .vb-note-label { fill: var(--vd-text); font: 15px var(--vd-font-body); }
+.vb-tick, .vb-end, .vb-pct, .vb-note-label { fill: var(--vd-text); font-family: var(--vd-font-body); font-size: var(--vd-text-xs); font-size: calc(var(--vd-text-xs) * var(--vb-k)); }
 .vb-note-label { fill: var(--vd-text-secondary); }
-.vb-center { fill: var(--vd-text); font: 600 18px var(--vd-font-body); }
+.vb-tick, .vb-end, .vb-pct, .vb-center, .vb-ev-no, .vb-ev-text { dominant-baseline: central; } /* y is the label's middle at any text size */
+.vb-center { fill: var(--vd-text); font-family: var(--vd-font-body); font-weight: 600; font-size: var(--vd-text-md); font-size: calc(var(--vd-text-md) * var(--vb-k)); }
 .vb-axis { stroke: var(--vd-text-secondary); stroke-width: 1; }
 .vb-grid { stroke: var(--vd-border); stroke-width: 0.7; }
 .vb-note { stroke: var(--vd-text-secondary); stroke-width: 1.5; stroke-dasharray: 1 4; }
@@ -67,7 +72,7 @@
   .vb-series-toggle[aria-pressed="true"] { border-color: Highlight; }
 }
 @media print {
-  .vb-plot { max-inline-size: 100%; break-inside: avoid; }
+  .vb-plot { break-inside: avoid; }
   .vb-tip, .vb-readout { display: none; }
   .vb-bar, .vb-slice { stroke: var(--vd-text); stroke-width: 1.5; }
   .vb-line { stroke: var(--vd-text); }
@@ -98,7 +103,7 @@
 .vb-ev-t-success .vb-ev-line { stroke-dasharray: 14 5; }
 .vb-ev-shape { fill: var(--vd-surface); stroke: var(--vb-t); stroke-width: 2.5; }
 .vb-ev-glyph { fill: var(--vb-t); }
-.vb-ev-no { fill: var(--vd-text); font: 600 15px var(--vd-font-body); }
+.vb-ev-no { fill: var(--vd-text); font-family: var(--vd-font-body); font-weight: 600; font-size: var(--vd-text-xs); font-size: calc(var(--vd-text-xs) * var(--vb-k)); }
 .vb-ev.vb-on .vb-ev-shape { stroke: var(--vd-text); stroke-width: 3.5; }
 .vb-ev.vb-on .vb-hatch { opacity: 1; }
 .vb-ev.vb-on .vb-ev-line, .vb-ev.vb-on .vb-band-rule { stroke-width: 4; }
