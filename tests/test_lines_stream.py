@@ -2,8 +2,8 @@
 
 import pytest
 
-from varde.base.ui_lines import parse_lines
-from varde.base.ui_lines.grammar import EXAMPLES
+from varde.ui.lines import parse_lines
+from varde.ui.lines.grammar import EXAMPLES
 
 
 def _stream(text):

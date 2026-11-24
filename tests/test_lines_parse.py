@@ -2,8 +2,8 @@
 
 import pytest
 
-from varde.base.ui_lines import Ref, parse_lines
-from varde.base.ui_lines.grammar import EXAMPLES
+from varde.ui.lines import Ref, parse_lines
+from varde.ui.lines.grammar import EXAMPLES
 
 
 @pytest.mark.parametrize("example", EXAMPLES)
