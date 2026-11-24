@@ -20,7 +20,7 @@ from varde.pages.include import (
     resolve_includes,
 )
 from varde.pages.markdown_syntax import FenceScanner
-from varde.pages.media import page_media
+from varde.pages.page_media import page_media
 from varde.pages.render import (
     PageCtx,
     RenderedPage,

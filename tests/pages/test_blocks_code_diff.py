@@ -32,9 +32,9 @@ from varde.pages.blocks_render.file_tree import (
 )
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.components import component_bundle, host_props, mount_block
-from varde.pages.graph import deps_layout
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
+from varde.ui.graph import deps_layout
 
 TESTS = Path(__file__).parent
 FIXTURES = TESTS / "components" / "fixtures"
@@ -90,8 +90,8 @@ def test_fixture_inputs_still_produce_the_recorded_props(
     # the "big" and "truncated" cases were recorded with small caps
     monkeypatch.setattr("varde.pages.blocks.diff_rows.MAX_ROWS", 20)
     monkeypatch.setattr("varde.pages.blocks_render.diff.MAX_ROWS", 20)
-    monkeypatch.setattr("varde.pages.graph._MAX_NODES", 12)
-    monkeypatch.setattr("varde.pages.graph._MAX_EDGES", 10)
+    monkeypatch.setattr("varde.ui.graph._MAX_NODES", 12)
+    monkeypatch.setattr("varde.ui.graph._MAX_EDGES", 10)
     cases = _fixture(block)
     assert len(cases) >= 5
     for case in cases:
