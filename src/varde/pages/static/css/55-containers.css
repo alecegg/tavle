@@ -1,5 +1,5 @@
 /* Containers: tabs and columns that hold other blocks. Every panel shows by default; containers.js adds the tablist. Tones and colours come only from tokens. */
-.vd-containers { margin-block: var(--vd-density-gap); min-inline-size: 0; }
+.vd-containers { min-inline-size: 0; }
 .vd-containers-panel { min-inline-size: 0; }
 .vd-containers-label { margin: 0 0 var(--vd-space-2); font-size: var(--vd-text-md); font-weight: 650; overflow-wrap: anywhere; }
 .vd-containers-alt { margin: 0 0 var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: anywhere; }

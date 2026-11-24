@@ -1,5 +1,5 @@
 /* Diff: header, unified and side-by-side line tables, folded unchanged runs, numbered notes. Colours come only from --vd-* tokens. */
-.vd-diff { margin-block: var(--vd-density-gap); margin-inline: 0; min-inline-size: 0; --vd-diff-gutter: 3ch; }
+.vd-diff { margin-inline: 0; min-inline-size: 0; --vd-diff-gutter: 3ch; }
 .vd-diff-d2 { --vd-diff-gutter: 4ch; }
 .vd-diff-d3 { --vd-diff-gutter: 5ch; }
 .vd-diff-d4 { --vd-diff-gutter: 6ch; }

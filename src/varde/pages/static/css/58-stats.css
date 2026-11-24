@@ -1,5 +1,5 @@
 /* Stats block: a grid of cards, each a small label, a large value and an optional change. Tones come only from the --vd-tone-* tokens. */
-.vd-stats { margin-block: var(--vd-density-gap); min-inline-size: 0; }
+.vd-stats { min-inline-size: 0; }
 .vd-stats-summary { margin: 0 0 var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vd-stats-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vd-space-3); min-inline-size: 0; }
 .vd-stats-card { --vd-stats-edge: var(--vd-border); --vd-stats-text: var(--vd-text-secondary); min-inline-size: 0; padding: var(--vd-space-3) var(--vd-space-4); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); background: var(--vd-surface-sunk); }

@@ -159,7 +159,6 @@
   --vd-toc-width: 11rem;
   --vd-toc-gap: var(--vd-space-7);
   --vd-body-leading: 1.75;
-  --vd-density-gap: var(--vd-space-3);
   --vd-density-pad: var(--vd-space-4);
   --vd-density-font: var(--vd-text-md);
   --vd-density-radius: var(--vd-radius-l);
@@ -371,17 +370,15 @@
   }
 }
 
-/* density: one attribute on the page scope switches gap, pad, font, radius and stroke;
+/* density: one attribute on the page scope switches pad, font, radius and stroke;
    the wireframe keeps its own scope tokens (44-wireframe) and ignores these */
 [data-density="compact"] {
-  --vd-density-gap: var(--vd-space-2);
   --vd-density-pad: var(--vd-space-3);
   --vd-density-font: var(--vd-text-sm);
   --vd-density-radius: var(--vd-radius-m);
   --vd-density-stroke: 1px;
 }
 [data-density="roomy"] {
-  --vd-density-gap: var(--vd-space-5);
   --vd-density-pad: var(--vd-space-6);
   --vd-density-font: var(--vd-text-lg);
   --vd-density-radius: var(--vd-radius-l);

@@ -1,5 +1,5 @@
 /* Screen flow: wireframe tiles in lanes, one straight arrow between neighbours. Tokens only; selection never relies on colour alone. */
-.vd-sf { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vd-space-3); margin-block: var(--vd-density-gap); min-inline-size: 0; }
+.vd-sf { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vd-space-3); min-inline-size: 0; }
 .vd-sf-title { margin: 0; overflow-wrap: break-word; }
 .vd-sf-summary { margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: break-word; }
 .vd-sf-scroll-hint { margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }

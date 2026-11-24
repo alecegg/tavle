@@ -1,5 +1,5 @@
 /* Risks block: a 3x3 summary grid (role=img) and the full risk list. Severity is a glyph plus a word; the cell border style (solid, dashed, double) repeats it for grey print. Chips shrink to dots in a narrow container. Tones come only from the --vd-tone-* tokens. */
-.vd-risk { --vd-rk-edge: var(--vd-tone-info-edge); --vd-rk-text: var(--vd-tone-info-text); margin-block: var(--vd-density-gap); min-inline-size: 0; max-inline-size: 100%; }
+.vd-risk { --vd-rk-edge: var(--vd-tone-info-edge); --vd-rk-text: var(--vd-tone-info-text); min-inline-size: 0; max-inline-size: 100%; }
 .vd-risk-title { margin: 0 0 var(--vd-space-2); font-weight: 650; overflow-wrap: break-word; }
 .vd-risk-summary, .vd-risk-axes { margin: 0 0 var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: break-word; }
 .vd-risk-grid { display: grid; grid-template-columns: 4.5rem repeat(3, minmax(0, 1fr)); gap: var(--vd-space-1); min-inline-size: 0; max-inline-size: 100%; margin-block-end: var(--vd-space-4); }

@@ -1,5 +1,5 @@
 /* Checklist block: one row per item with a glyph-and-word state badge, a native progress bar and a count. Tones come only from the --vd-tone-* tokens. */
-.vd-checklist { --vd-check-edge: var(--vd-border); margin-block: var(--vd-density-gap); min-inline-size: 0; }
+.vd-checklist { --vd-check-edge: var(--vd-border); min-inline-size: 0; }
 .vd-checklist-title { margin: 0 0 var(--vd-space-2); font-weight: 650; overflow-wrap: anywhere; }
 .vd-checklist-progress { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-1) var(--vd-space-3); margin-block-end: var(--vd-space-2); }
 /* the unfinished part is the quiet line colour, the done part the success tone */

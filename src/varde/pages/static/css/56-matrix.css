@@ -1,5 +1,5 @@
 /* Option matrix block: a table preset. Recommended column, badge and tone colours; the table CSS does the layout. Tones come only from the --vd-tone-* tokens. */
-.vd-matrix { margin-block: var(--vd-density-gap); min-inline-size: 0; max-inline-size: 100%; }
+.vd-matrix { min-inline-size: 0; max-inline-size: 100%; }
 .vd-matrix .vb-scroll { position: relative; }
 .vd-matrix .vb-status-ok { color: var(--vd-tone-success-text); }
 .vd-matrix .vb-status-warn { color: var(--vd-tone-warning-text); }

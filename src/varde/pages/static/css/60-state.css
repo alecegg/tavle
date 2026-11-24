@@ -1,5 +1,5 @@
 /* State block: a 1:1 scale SVG in a scroll region, then the states and transitions as text lists. Colours come only from --vd-* tokens. */
-.vd-state { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vd-space-3); margin-block: var(--vd-density-gap); min-inline-size: 0; }
+.vd-state { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--vd-space-3); min-inline-size: 0; }
 .vd-state-title { margin: 0; overflow-wrap: break-word; }
 .vd-state-summary { margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: break-word; }
 .vd-state-view { position: relative; overflow: auto; max-inline-size: 100%; min-inline-size: 0; min-block-size: 44px; max-block-size: 40rem; border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); scroll-padding: 8px; }

@@ -1,5 +1,5 @@
 /* Annotated code: pins in the gutter, folded quiet stretches, numbered notes (below the code, or a margin column in a wide page). Colours come only from --vd-* tokens. */
-.vd-annotated-code { margin-block: var(--vd-density-gap); min-inline-size: 0; display: grid; gap: var(--vd-space-3); grid-template-columns: minmax(0, 1fr); }
+.vd-annotated-code { min-inline-size: 0; display: grid; gap: var(--vd-space-3); grid-template-columns: minmax(0, 1fr); }
 .vd-annotated-code > .vd-code { margin-block: 0; }
 .vd-annotated-code { --vd-pin-cols: 1; }
 .vd-annotated-c2 { --vd-pin-cols: 2; }

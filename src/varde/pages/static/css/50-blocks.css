@@ -1,5 +1,5 @@
 /* Typed blocks: cards, badges, endpoint, data-model, recap (owned by dw-chrome). Tokens only. */
-.vb { margin-block: var(--vd-space-3); max-inline-size: 100%; }
+.vb { max-inline-size: 100%; }
 .vb-grid { display: grid; min-inline-size: 0; max-inline-size: 100%; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: var(--vd-space-3); }
 .vd-date { white-space: nowrap; }
 /* a card is an object above the page: its content reads the card surface as its own --vd-surface */
@@ -25,7 +25,7 @@
 .vb-ctl { min-block-size: var(--vd-control-height); min-inline-size: var(--vd-control-height); }
 .vb-hash { font-family: var(--vd-font-mono); font-size: var(--vd-text-sm); }
 
-.recap { margin-block: var(--vd-space-3); max-inline-size: 100%; min-inline-size: 0; }
+.recap { max-inline-size: 100%; min-inline-size: 0; }
 .recap table { inline-size: 100%; font-size: var(--vd-text-sm); table-layout: fixed; }
 .recap td, .recap th { overflow-wrap: anywhere; text-align: start; vertical-align: top; }
 .recap-drift { list-style: none; padding: 0; }
