@@ -31,13 +31,9 @@ def _decimals_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def _labels_faults(data: dict[str, object]) -> list[Fault]:
-    if "labels" not in data:
-        if data.get("kind") == "scatter":
-            return []
-        return [Fault("missing-key", "chart: missing required key 'labels'")]
-    if data["labels"] == []:
-        return [Fault("type", "chart.labels must not be empty")]
-    return []
+    if "labels" in data or data.get("kind") == "scatter":
+        return []
+    return [Fault("missing-key", "chart: missing required key 'labels'")]
 
 
 def _numbers(value: object) -> list[float] | None:
@@ -51,10 +47,10 @@ def _values_faults(
     kind: object, labels: object, series: dict[str, object], where: str
 ) -> list[Fault]:
     values = _numbers(series.get("values"))
-    if values is None:
-        return []  # absent, or a type fault the properties already report
-    if not values or not all(math.isfinite(v) for v in values):
-        return [Fault("type", f"{where}.values must be a non-empty list of numbers")]
+    if not values:
+        return []  # absent, empty or a type fault the properties already report
+    if not all(math.isfinite(v) for v in values):
+        return [Fault("type", f"{where}.values must be a list of finite numbers")]
     if len(values) > MAX_POINTS:
         return [Fault("too-many", f"{where}.values: at most {MAX_POINTS} numbers")]
     if kind == "donut" and any(v < 0 for v in values):
@@ -104,9 +100,8 @@ def _one_series_faults(
 
 
 def _series_faults(data: dict[str, object]) -> list[Fault]:
-    kind, labels = data.get("kind"), data.get("labels")
-    if data.get("series") == []:
-        return [Fault("type", "chart: 'series' must not be empty")]
+    kind = data.get("kind")
+    labels = data.get("labels") or None  # an empty list is reported by the properties
     items = tables(data, "series", "chart")
     faults: list[Fault] = []
     if len(items) > MAX_SERIES:
@@ -163,23 +158,32 @@ CHART = BlockSpec(
     validate_chart,
     properties=(
         PropertySpec("kind", "string", required=True, enum=_CHART_KINDS),
-        PropertySpec("labels", "list", items="string"),
-        PropertySpec("title", "string"),
-        PropertySpec("unit", "string"),
-        PropertySpec("desc", "string"),
-        PropertySpec("right_unit", "string"),
+        PropertySpec("labels", "list", items="string", nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec("unit", "string", nonempty=True),
+        PropertySpec("desc", "string", nonempty=True),
+        PropertySpec("right_unit", "string", nonempty=True),
         PropertySpec("decimals", "integer"),
         PropertySpec("stack", "boolean"),
         PropertySpec("horizontal", "boolean"),
-        PropertySpec("notes", "list", items="object", fields=NOTE_PROPERTIES),
+        PropertySpec(
+            "notes",
+            "list",
+            nonempty=True,
+            items="object",
+            fields=NOTE_PROPERTIES,
+        ),
         PropertySpec(
             "series",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("name", "string", required=True),
-                PropertySpec("values", "list", required=True, items="number"),
+                PropertySpec("name", "string", required=True, nonempty=True),
+                PropertySpec(
+                    "values", "list", required=True, nonempty=True, items="number"
+                ),
                 PropertySpec("x", "list", items="number"),
                 PropertySpec("axis", "string", enum=("left", "right")),
                 PropertySpec("type", "string", enum=("bar", "line")),

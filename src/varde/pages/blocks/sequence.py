@@ -1,6 +1,5 @@
 """Block type for a sequence diagram: actors, ordered steps, optional groups."""
 
-from varde.pages.blocks.diagrams import empty_list_faults
 from varde.pages.blocks.rules import Fault, duplicates, tables
 from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
@@ -30,6 +29,8 @@ def _end_fault(step: dict[str, object], key: str, actors: list[str], where: str)
 
 
 def _step_faults(step: dict[str, object], actors: list[str], where: str) -> list[Fault]:
+    if not actors:
+        return []  # no actor to refer to; the properties report the empty list
     return _end_fault(step, "from", actors, where) + _end_fault(
         step, "to", actors, where
     )
@@ -46,9 +47,8 @@ def _steps_faults(data: dict[str, object], actors: list[str]) -> list[Fault]:
 
 
 def validate_sequence(data: dict[str, object]) -> list[Fault]:
-    faults = empty_list_faults(data, ("actors", "steps"), "sequence")
     actor_faults, actors = _actor_faults(data)
-    return faults + actor_faults + _steps_faults(data, actors)
+    return actor_faults + _steps_faults(data, actors)
 
 
 SEQUENCE = BlockSpec(
@@ -91,26 +91,28 @@ SEQUENCE = BlockSpec(
             "actors",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("id", "string", required=True),
-                PropertySpec("label", "string", required=True),
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
             ),
         ),
         PropertySpec(
             "steps",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
                 PropertySpec("from", "string", required=True),
                 PropertySpec("to", "string", required=True),
-                PropertySpec("text", "string", required=True),
+                PropertySpec("text", "string", required=True, nonempty=True),
                 PropertySpec("kind", "string", enum=KINDS),
-                PropertySpec("group", "string"),
+                PropertySpec("group", "string", nonempty=True),
             ),
         ),
-        PropertySpec("desc", "string", required=True),
-        PropertySpec("title", "string"),
+        PropertySpec("desc", "string", required=True, nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
     ),
 )

@@ -27,7 +27,7 @@ CALLOUT = BlockSpec(
     validate_callout,
     properties=(
         PropertySpec("tone", "string", required=True, enum=TONES),
-        PropertySpec("text", "string", required=True),
-        PropertySpec("title", "string"),
+        PropertySpec("text", "string", required=True, nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
     ),
 )

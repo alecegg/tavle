@@ -111,14 +111,14 @@ STATS = BlockSpec(
             required=True,
             items="object",
             fields=(
-                PropertySpec("label", "string", required=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
                 # value and delta take text or a number; the validator checks them.
                 PropertySpec("value", "any", required=True),
                 PropertySpec("delta", "any"),
                 PropertySpec("direction", "string", enum=DIRECTIONS),
                 PropertySpec("good", "string", enum=GOODS),
                 PropertySpec("tone", "string", enum=TONES),
-                PropertySpec("note", "string"),
+                PropertySpec("note", "string", nonempty=True),
                 PropertySpec("decimals", "integer"),
             ),
         ),

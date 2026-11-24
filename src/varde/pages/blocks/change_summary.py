@@ -112,5 +112,5 @@ CHANGE_SUMMARY = BlockSpec(
 )
 """,
     validate_change_summary,
-    properties=(PropertySpec("title", "string"),),
+    properties=(PropertySpec("title", "string", nonempty=True),),
 )

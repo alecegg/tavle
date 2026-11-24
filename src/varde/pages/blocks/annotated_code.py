@@ -101,9 +101,9 @@ ANNOTATED_CODE = BlockSpec(
 """,
     validate_annotated_code,
     properties=(
-        PropertySpec("filename", "string", required=True),
-        PropertySpec("language", "string", required=True),
-        PropertySpec("source", "string", required=True),
+        PropertySpec("filename", "string", required=True, nonempty=True),
+        PropertySpec("language", "string", required=True, nonempty=True),
+        PropertySpec("source", "string", required=True, nonempty=True),
         PropertySpec("collapse", "boolean"),
         PropertySpec(
             "notes",
@@ -112,8 +112,8 @@ ANNOTATED_CODE = BlockSpec(
             items="object",
             fields=(
                 PropertySpec("lines", "any", required=True),
-                PropertySpec("note", "string", required=True),
-                PropertySpec("label", "string"),
+                PropertySpec("note", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", nonempty=True),
                 PropertySpec("kind", "string", enum=KINDS),
             ),
         ),

@@ -74,8 +74,6 @@ def _row_count(group: dict[str, object]) -> int | None:
 
 
 def _group_faults(data: dict[str, object], row_count: int) -> list[Fault]:
-    if data.get("groups") == []:
-        return [Fault("type", "table: 'groups' must not be empty")]
     counts = [_row_count(g) for g in tables(data, "groups", "table")]
     faults = [
         Fault("type", f"table.groups[{n}].rows must be a positive integer")
@@ -90,8 +88,6 @@ def _group_faults(data: dict[str, object], row_count: int) -> list[Fault]:
 
 
 def _column_faults(data: dict[str, object], columns: object) -> list[Fault]:
-    if columns == []:
-        return [Fault("type", "table.columns must not be empty")]
     faults: list[Fault] = []
     if isinstance(columns, list):
         faults += [
@@ -121,9 +117,7 @@ def validate_table(data: dict[str, object]) -> list[Fault]:
     columns = data.get("columns")
     faults = _column_faults(data, columns)
     rows = data.get("rows")
-    if rows == []:
-        faults.append(Fault("type", "table.rows must not be empty"))
-    if not isinstance(rows, list) or not isinstance(columns, list):
+    if not isinstance(rows, list) or not isinstance(columns, list) or not columns:
         return faults
     if all(isinstance(row, list) for row in rows):
         faults += _body_faults(data, columns, rows)
@@ -153,20 +147,21 @@ TABLE = BlockSpec(
 """,
     validate_table,
     properties=(
-        PropertySpec("caption", "string"),
-        PropertySpec("columns", "list", required=True, items="string"),
+        PropertySpec("caption", "string", nonempty=True),
+        PropertySpec("columns", "list", required=True, nonempty=True, items="string"),
         # Each row is a list; `items="list"` would check the cells as lists too.
-        PropertySpec("rows", "list", required=True, items="list"),
+        PropertySpec("rows", "list", required=True, nonempty=True, items="list"),
         PropertySpec("types", "object"),  # column names are the keys
-        PropertySpec("footnote", "string"),
+        PropertySpec("footnote", "string", nonempty=True),
         PropertySpec("sticky_column", "boolean"),
         PropertySpec("stack", "boolean"),
         PropertySpec(
             "groups",
             "list",
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("label", "string", required=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
                 PropertySpec("rows", "integer", required=True),
             ),
         ),

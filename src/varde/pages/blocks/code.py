@@ -64,9 +64,9 @@ CODE = BlockSpec(
     validate_code,
     block_type="code",
     properties=(
-        PropertySpec("language", "string", required=True),
-        PropertySpec("source", "string", required=True),
-        PropertySpec("title", "string"),
+        PropertySpec("language", "string", required=True, nonempty=True),
+        PropertySpec("source", "string", required=True, nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
         PropertySpec("lines", "any"),
         PropertySpec("wrap", "boolean"),
         PropertySpec("numbers", "boolean"),

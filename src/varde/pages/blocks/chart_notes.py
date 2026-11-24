@@ -13,7 +13,7 @@ MAX_NOTES = 12
 TONES = ("info", "decision", "risk", "warning", "success")
 # x, from and to take a label or a number; `_point_fault` checks the value.
 NOTE_PROPERTIES = (
-    PropertySpec("label", "string", required=True),
+    PropertySpec("label", "string", required=True, nonempty=True),
     PropertySpec("tone", "string", enum=TONES),
     PropertySpec("x", "any"),
     PropertySpec("from", "any"),
@@ -108,9 +108,6 @@ def _note_rule_faults(
 
 def note_rule_faults(data: dict[str, object]) -> list[Fault]:
     """Rules the metadata cannot express: count, marker or band form, positions."""
-    notes = data.get("notes")
-    if notes == []:
-        return [Fault("type", "chart: 'notes' must not be empty")]
     faults: list[Fault] = []
     found = tables(data, "notes", "chart")
     if len(found) > MAX_NOTES:

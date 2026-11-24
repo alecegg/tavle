@@ -47,21 +47,12 @@ def src_fault(src: str) -> str | None:
     return None
 
 
-def _blank_faults(data: dict[str, object]) -> list[Fault]:
-    """A string field the metadata accepts but the page must not leave blank."""
-    return [
-        Fault("type", f"image: '{key}' must be a non-empty string")
-        for key in ("src", "alt", "caption")
-        if isinstance(data.get(key), str) and not str(data[key]).strip()
-    ]
-
-
 def validate_image(data: dict[str, object]) -> list[Fault]:
-    faults = _blank_faults(data)
     src = data.get("src")
-    if isinstance(src, str) and src.strip() and (reason := src_fault(src)):
-        faults.append(Fault("src", reason))
-    return faults
+    if not isinstance(src, str) or not src.strip():
+        return []  # absent, or a fault the properties already report
+    reason = src_fault(src)
+    return [Fault("src", reason)] if reason else []
 
 
 IMAGE = BlockSpec(
@@ -86,9 +77,9 @@ IMAGE = BlockSpec(
 """,
     validate_image,
     properties=(
-        PropertySpec("src", "string", required=True),
-        PropertySpec("alt", "string", required=True),
-        PropertySpec("caption", "string"),
+        PropertySpec("src", "string", required=True, nonempty=True),
+        PropertySpec("alt", "string", required=True, nonempty=True),
+        PropertySpec("caption", "string", nonempty=True),
         PropertySpec("width", "string", enum=WIDTHS),
     ),
 )

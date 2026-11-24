@@ -1,15 +1,13 @@
 """Block type for process: flow."""
 
-from varde.pages.blocks.diagrams import empty_list_faults
 from varde.pages.blocks.rules import Fault, duplicates, tables
 from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def validate_flow(data: dict[str, object]) -> list[Fault]:
-    faults = empty_list_faults(data, ("step",), "flow")
     steps = tables(data, "step", "flow")
     ids = [n for s in steps if isinstance(n := s.get("id"), str)]
-    faults += [
+    faults = [
         Fault("step-duplicate", f"flow: step id '{name}' is used more than once")
         for name in duplicates(ids)
     ]
@@ -48,16 +46,17 @@ FLOW = BlockSpec(
 """,
     validate_flow,
     properties=(
-        PropertySpec("title", "string"),
+        PropertySpec("title", "string", nonempty=True),
         PropertySpec(
             "step",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("id", "string", required=True),
-                PropertySpec("text", "string", required=True),
-                PropertySpec("next", "list", items="string"),
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("text", "string", required=True, nonempty=True),
+                PropertySpec("next", "list", nonempty=True, items="string"),
             ),
         ),
     ),

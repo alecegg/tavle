@@ -14,18 +14,15 @@ CHANGE_FIELDS = (
 # The metadata of `change` and `was`, for every table that carries them.
 CHANGE_PROPERTIES = (
     PropertySpec("change", "string", enum=CHANGES),
-    PropertySpec("was", "string"),
+    PropertySpec("was", "string", nonempty=True),
 )
 
 
 def change_rule_faults(data: dict[str, object], where: str) -> list[Fault]:
-    """Cross-field rules of `change` and `was`; type and enum faults are not here."""
+    """Cross-field rules of `change` and `was`; the properties own the rest."""
     faults: list[Fault] = []
     change = data.get("change")
     has_was = "was" in data
-    was = data.get("was")
-    if isinstance(was, str) and not was.strip():
-        faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
     if has_was and "change" not in data:
         faults.append(Fault("change", f"{where}: was needs a change ({_ALLOWED})"))
     if change == "renamed" and not has_was:
@@ -43,6 +40,7 @@ def change_faults(data: dict[str, object], where: str) -> list[Fault]:
     faults: list[Fault] = []
     if "change" in data and data["change"] not in CHANGES:
         faults.append(Fault("change", f"{where}: change must be one of {_ALLOWED}"))
-    if "was" in data and not isinstance(data["was"], str):
+    was = data.get("was")
+    if "was" in data and not (isinstance(was, str) and was.strip()):
         faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
     return faults + change_rule_faults(data, where)

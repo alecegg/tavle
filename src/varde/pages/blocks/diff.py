@@ -97,12 +97,12 @@ DIFF = BlockSpec(
     validate_diff,
     block_type="code",
     properties=(
-        PropertySpec("filename", "string"),
+        PropertySpec("filename", "string", nonempty=True),
         PropertySpec("before", "string"),
         PropertySpec("after", "string"),
         PropertySpec("patch", "string"),
         PropertySpec("mode", "string", enum=MODES),
-        PropertySpec("language", "string"),
+        PropertySpec("language", "string", nonempty=True),
         PropertySpec(
             "notes",
             "list",
@@ -110,7 +110,7 @@ DIFF = BlockSpec(
             fields=(
                 PropertySpec("side", "string", required=True, enum=SIDES),
                 PropertySpec("lines", "any", required=True),
-                PropertySpec("note", "string", required=True),
+                PropertySpec("note", "string", required=True, nonempty=True),
             ),
         ),
     ),

@@ -13,17 +13,6 @@ MAX_EDGES = 400
 MAX_GROUPS = 3  # one pre-computed layout per subset of collapsed groups
 
 
-def empty_list_faults(
-    data: dict[str, object], keys: tuple[str, ...], where: str
-) -> list[Fault]:
-    """An empty list passes the properties; these blocks need at least one item."""
-    return [
-        Fault("type", f"{where}: '{key}' must not be empty")
-        for key in keys
-        if data.get(key) == []
-    ]
-
-
 def _group_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     faults: list[Fault] = []
     entries = tables(data, "groups", "diagram")
@@ -111,10 +100,9 @@ def _tree_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_diagram(data: dict[str, object]) -> list[Fault]:
-    faults = empty_list_faults(data, ("nodes", "edges", "groups"), "diagram")
     group_faults, groups = _group_faults(data)
     node_faults, nodes = _node_faults(data, groups)
-    faults += group_faults + node_faults + _edge_faults(data, nodes)
+    faults = group_faults + node_faults + _edge_faults(data, nodes)
     used = {
         g
         for n in tables(data, "nodes", "diagram")
@@ -177,24 +165,26 @@ DIAGRAM = BlockSpec(
             "nodes",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("id", "string", required=True),
-                PropertySpec("label", "string", required=True),
-                PropertySpec("group", "string"),
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
+                PropertySpec("group", "string", nonempty=True),
                 PropertySpec("shape", "string", enum=SHAPES),
-                PropertySpec("detail", "string"),
+                PropertySpec("detail", "string", nonempty=True),
                 PropertySpec("emphasis", "string", enum=EMPHASIS),
             ),
         ),
         PropertySpec(
             "edges",
             "list",
+            nonempty=True,
             items="object",
             fields=(
                 PropertySpec("from", "string", required=True),
                 PropertySpec("to", "string", required=True),
-                PropertySpec("label", "string"),
+                PropertySpec("label", "string", nonempty=True),
                 PropertySpec("style", "string", enum=EDGE_STYLES),
                 PropertySpec("emphasis", "string", enum=EMPHASIS),
             ),
@@ -203,13 +193,14 @@ DIAGRAM = BlockSpec(
         PropertySpec(
             "groups",
             "list",
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("id", "string", required=True),
-                PropertySpec("label", "string", required=True),
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
             ),
         ),
-        PropertySpec("title", "string"),
-        PropertySpec("desc", "string"),
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec("desc", "string", nonempty=True),
     ),
 )

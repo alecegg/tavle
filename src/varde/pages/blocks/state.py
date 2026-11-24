@@ -1,6 +1,5 @@
 """Block type for a state machine: states and labelled transitions."""
 
-from varde.pages.blocks.diagrams import empty_list_faults
 from varde.pages.blocks.rules import Fault, duplicates, tables
 from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
@@ -48,9 +47,8 @@ def _move_faults(data: dict[str, object], names: list[str]) -> list[Fault]:
 
 
 def validate_state(data: dict[str, object]) -> list[Fault]:
-    faults = empty_list_faults(data, ("states", "transitions"), "state")
     state_faults, names = _state_faults(data)
-    return faults + state_faults + _move_faults(data, names)
+    return state_faults + _move_faults(data, names)
 
 
 STATE = BlockSpec(
@@ -94,26 +92,28 @@ STATE = BlockSpec(
             "states",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("id", "string", required=True),
-                PropertySpec("label", "string", required=True),
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
                 PropertySpec("kind", "string", enum=KINDS),
-                PropertySpec("note", "string"),
+                PropertySpec("note", "string", nonempty=True),
             ),
         ),
         PropertySpec(
             "transitions",
             "list",
+            nonempty=True,
             items="object",
             fields=(
                 PropertySpec("from", "string", required=True),
                 PropertySpec("to", "string", required=True),
-                PropertySpec("label", "string"),
-                PropertySpec("guard", "string"),
+                PropertySpec("label", "string", nonempty=True),
+                PropertySpec("guard", "string", nonempty=True),
             ),
         ),
-        PropertySpec("desc", "string", required=True),
-        PropertySpec("title", "string"),
+        PropertySpec("desc", "string", required=True, nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
     ),
 )

@@ -11,10 +11,8 @@ from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 def path_faults(path: object, where: str) -> list[Fault]:
     """A path is `a/b/c`: no empty, `.` or `..` part, no leading or trailing slash."""
-    if not isinstance(path, str):
-        return []
-    if not path.strip():
-        return [Fault("type", f"{where}: 'path' must be a non-empty string")]
+    if not isinstance(path, str) or not path.strip():
+        return []  # absent, or a fault the properties already report
     if any(part in ("", ".", "..") for part in path.split("/")):
         return [
             Fault(
@@ -51,8 +49,6 @@ def _collapse_faults(data: dict[str, object]) -> list[Fault]:
 
 def validate_file_tree(data: dict[str, object]) -> list[Fault]:
     faults = _collapse_faults(data)
-    if data.get("entries") == []:
-        faults.append(Fault("type", "file-tree: 'entries' must not be empty"))
     entries = tables(data, "entries", "file-tree")
     for n, entry in enumerate(entries, 1):
         faults += _entry_faults(entry, f"file-tree.entries[{n}]")
@@ -91,17 +87,18 @@ FILE_TREE = BlockSpec(
 """,
     validate_file_tree,
     properties=(
-        PropertySpec("title", "string"),
+        PropertySpec("title", "string", nonempty=True),
         PropertySpec("collapse", "integer"),
         PropertySpec(
             "entries",
             "list",
             required=True,
+            nonempty=True,
             items="object",
             fields=(
-                PropertySpec("path", "string", required=True),
-                PropertySpec("note", "string"),
-                PropertySpec("role", "string"),
+                PropertySpec("path", "string", required=True, nonempty=True),
+                PropertySpec("note", "string", nonempty=True),
+                PropertySpec("role", "string", nonempty=True),
                 *CHANGE_PROPERTIES,
             ),
         ),

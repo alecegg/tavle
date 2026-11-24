@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import pytest
+
 from varde.pages.blocks import COMPONENT_SPECS, check_props
 from varde.pages.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.pages.components import component_bundle
@@ -79,3 +81,25 @@ def test_table_rows_are_checked_once_each_as_lists() -> None:
     assert check_props("table", mixed, 1) == []
     errors = check_props("table", {**_TABLE, "rows": [["1", "2"], "x"]}, 1)
     assert [e.message for e in errors] == ["'rows[1]' must be list"]
+
+
+_EMPTY_VALUES: list[tuple[str, dict[str, object], str]] = [
+    ("table", {**_TABLE, "caption": ""}, "caption"),
+    ("table", {**_TABLE, "footnote": " "}, "footnote"),
+    ("table", {**_TABLE, "columns": []}, "columns"),
+    ("table", {**_TABLE, "rows": []}, "rows"),
+    ("table", {**_TABLE, "groups": []}, "groups"),
+    ("table", {**_TABLE, "groups": [{"label": "", "rows": 1}]}, "groups[0].label"),
+    ("stats", {"item": [{**_FIRST, "label": ""}, _SECOND]}, "item[0].label"),
+    ("stats", {"item": [{**_FIRST, "note": " "}, _SECOND]}, "item[0].note"),
+]
+
+
+@pytest.mark.parametrize(("block", "props", "path"), _EMPTY_VALUES)
+def test_blank_text_and_empty_lists_fault_once(
+    block: str, props: dict[str, object], path: str
+) -> None:
+    errors = check_props(block, props, 1)
+    assert [(e.rule, e.message) for e in errors] == [
+        ("type", f"'{path}' must not be empty")
+    ]
