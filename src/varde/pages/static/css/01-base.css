@@ -23,6 +23,7 @@ main > .block > :is(:last-child, :has(+ .menu-btn:last-child)) { margin-block-en
 main > .block > [data-mithril] > * { margin-block: 0; } /* a client block's root sits one level down */
 main > .block + .block { margin-block-start: var(--vd-flow-block); }
 main > .block + .block.heading { margin-block-start: var(--vd-flow-before-heading); }
+main > .block + .block.heading:has(> h2) { margin-block-start: var(--vd-space-7); }
 main > .block.heading + .block { margin-block-start: var(--vd-flow-after-heading); }
 a { color: var(--vd-accent); }
 a:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
