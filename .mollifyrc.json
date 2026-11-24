@@ -2,12 +2,12 @@
   "max_cyclomatic": 10,
   "max_cognitive": 10,
   "ignore": [
-    "/tests/",
-    "/fixtures/",
-    "/bench/",
-    "/samples/",
-    "/corpus/",
-    "/e2e/"
+    "tests/",
+    "fixtures/",
+    "bench/",
+    "samples/",
+    "corpus/",
+    "e2e/"
   ],
   "exclude_dirs": [
     "node_modules",
