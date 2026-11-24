@@ -868,21 +868,23 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 }
 @media print { .doc-toc { display: none; } }
 
-/* Table block: scroll region, sticky header, typed columns, groups, stack mode. Tokens only. */
-.vb-scroll { overflow: auto; max-inline-size: 100%; max-block-size: min(32rem, 70vh); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); background:
+/* Table block: scroll region, typed columns, groups, stack mode. Tokens only. */
+.vb-scroll { overflow: auto; max-inline-size: 100%; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); background:
   linear-gradient(to right, var(--vd-surface) 50%, transparent) local 0 0 / 2rem 100% no-repeat,
   linear-gradient(to left, var(--vd-surface) 50%, transparent) local 100% 0 / 2rem 100% no-repeat,
   linear-gradient(to right, var(--vd-text-secondary) 0 3px, var(--vd-border-interactive) 3px, transparent) scroll 0 0 / 0.75rem 100% no-repeat,
   linear-gradient(to left, var(--vd-text-secondary) 0 3px, var(--vd-border-interactive) 3px, transparent) scroll 100% 0 / 0.75rem 100% no-repeat,
   var(--vd-surface); }
-.vb-scroll { scroll-padding-block: 4.5rem 0.5rem; scroll-padding-inline: 1rem; }
+/* A plain table sits inside its card: one frame, not a card inside a card. */
+.vb.table .vb-scroll { border: 0; border-radius: 0; }
+.vb-scroll { scroll-padding-inline: 1rem; }
 .vb-scroll:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-table { display: table; inline-size: 100%; min-inline-size: min-content; overflow: visible; font-size: var(--vd-text-sm); border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; }
 .vb-table th, .vb-table td { border: 0; border-block-end: 1px solid var(--vd-border); padding: var(--vd-space-2) var(--vd-space-3); text-align: start; vertical-align: top; line-height: 1.3; overflow-wrap: normal; word-break: normal; hyphens: none; }
 /* Short tokens never break mid-word; a narrow region scrolls sideways instead. */
 .vb-table .vb-status, .vb-table .vb-badge, .vb-table code, .vb-table .vb-bar-num, .vb-table td.vb-num { white-space: nowrap; }
 .vb-nowrap .vb-table th, .vb-nowrap .vb-table td { white-space: nowrap; overflow-wrap: normal; }
-.vb-table thead th { white-space: nowrap; position: sticky; inset-block-start: 0; z-index: 2; background: var(--vd-surface-elevated); border-block-end: 2px solid var(--vd-border-interactive); font-weight: 600; }
+.vb-table thead th { white-space: nowrap; background: var(--vd-surface-elevated); border-block-end: 2px solid var(--vd-border-interactive); font-weight: 600; }
 .vb-table tbody tr { background: var(--vd-surface); }
 .vb-table tbody tr:nth-child(even) { background: var(--vd-surface); }
 .vb-table .vb-num { text-align: end; }
@@ -914,6 +916,11 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 .vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: var(--vd-space-2) 0; }
 .vb-filter { flex: 1; min-inline-size: 8rem; min-block-size: 44px; font: inherit; padding: 0.3em 0.6em; background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
 .vb-filter:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
+.vb-more { margin-block: var(--vd-space-2) 0; }
+.vb-more[hidden] { display: none; }
+.vb-more-toggle { padding-inline: var(--vd-space-3); border: 2px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font: inherit; cursor: pointer; }
+@media (hover: hover) { .vb-more-toggle:hover { background: var(--vd-hover); } }
+.vb-more-toggle:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-filter-status, .vb-scrollhint, .vb-foot { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vb-foot { margin-block: var(--vd-space-2) 0; }
 .vb-wrap-toggle { padding-inline: var(--vd-space-3); border: 2px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font: inherit; cursor: pointer; }
@@ -932,7 +939,6 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 }
 tr[hidden], .vb-scrollhint[hidden] { display: none; }
 @media screen and (max-width: 40rem) {
-  .vb-scroll:has(.vb-table-stack) { max-block-size: none; }
   .vb-table-stack { min-inline-size: 0; }
   .vb-table-stack thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
   .vb-table-stack, .vb-table-stack tbody, .vb-table-stack tr { display: block; }
@@ -952,9 +958,9 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
   .vb-wrap-toggle[aria-pressed="true"] { border-color: Highlight; outline: 1px solid Highlight; }
 }
 @media print {
-  .vb-scroll { overflow: visible; max-block-size: none; background: none; }
+  .vb-scroll { overflow: visible; background: none; }
   .vb-table { inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; table-layout: fixed; }
-  .vb-table thead th, .vb-table-sticky th:first-child, .vb-table-sticky td:first-child { position: static; }
+  .vb-table-sticky th:first-child, .vb-table-sticky td:first-child { position: static; }
   .vb-table th, .vb-table td, .vb-table thead th, .vb-table td a, .vb-table .vb-sort, .vb-table .vb-status, .vb-table .vb-badge, .vb-table code, .vb-table .vb-bar-num, .vb-table td.vb-num, .vb-table .vd-date { white-space: normal; overflow-wrap: anywhere; word-break: break-word; min-inline-size: 0; min-block-size: 0; }
   .vb-filterbar { display: none; }
 }
@@ -1774,6 +1780,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-stats-body > dd { margin: 0; min-inline-size: 0; }
 .vd-stats-label { color: var(--vd-text-secondary); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; overflow-wrap: anywhere; }
 .vd-stats-value { margin-block: var(--vd-space-1); font-size: var(--vd-text-2xl); font-weight: 650; line-height: var(--vd-leading-heading); overflow-wrap: anywhere; }
+.vd-stats-long { font-size: var(--vd-text-md); font-weight: 600; }
 .vd-stats-delta { color: var(--vd-stats-text); font-size: var(--vd-text-sm); font-weight: 600; overflow-wrap: anywhere; }
 .vd-stats-mark { white-space: nowrap; overflow-wrap: normal; }
 .vd-stats-glyph { font-family: var(--vd-font-mono); }
@@ -4118,6 +4125,7 @@ components["stats"] = (() => {
 const ARROWS = { up: '▲', down: '▼', flat: '▬' };
 const SIGNS = ['+', '-', '−'];
 const GOOD_TONE = { true: 'success', false: 'risk' };
+const LONG_VALUE_CHARS = 16;
 
 function deltaDirection(item) {
   if (typeof item.direction === 'string') return item.direction;
@@ -4169,12 +4177,18 @@ function delta(m, c, item) {
   ]);
 }
 
+// CSS cannot test text length, so a sentence value gets a class that sizes it down.
+function valueCell(m, c, item) {
+  const isLong = typeof item.value === 'string' && item.value.length > LONG_VALUE_CHARS;
+  return m(isLong ? 'dd.vd-stats-value.vd-stats-long' : 'dd.vd-stats-value', valueText(c, item));
+}
+
 function card(m, c, item) {
   const tone = itemTone(item, deltaDirection(item));
   return m(`div.vd-stats-card.vd-stats-${tone}`, { role: 'group', 'aria-label': cardName(c, item) }, [
     m('dl.vd-stats-body', [
       m('dt.vd-stats-label', item.label),
-      m('dd.vd-stats-value', valueText(c, item)),
+      valueCell(m, c, item),
       delta(m, c, item),
       'note' in item ? m('dd.vd-stats-note', c.shared.inline(m, String(item.note))) : null
     ])
