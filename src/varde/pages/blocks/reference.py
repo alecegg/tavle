@@ -16,5 +16,9 @@ def type_text(name: str) -> str:
     )
 
 
-def reference_text() -> str:
-    return "\n".join(type_text(name) for name in sorted(COMPONENT_SPECS))
+def index_text() -> str:
+    """One line per component; `type_text` gives a component's fields."""
+    lines = [
+        f"{name} - {COMPONENT_SPECS[name].summary}" for name in sorted(COMPONENT_SPECS)
+    ]
+    return "\n".join(lines) + "\n\nFields and an example: varde pages blocks <TYPE>\n"
