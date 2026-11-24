@@ -851,10 +851,10 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 
 /* 30-menu: per-block action menu. Tokens only; logical properties. */
 /* The button is hidden at rest and shown for one block at a time: pointer hover, focus inside, or a tap (.menu-active, set by menu.js). It stays in the tab order and the accessibility tree (opacity, never display or visibility). */
-/* No top row is reserved, so the flow tokens own the gap under each heading: the revealed button floats over the block's corner. With a mouse, text-flow blocks reserve a side gutter so the button covers no text; on touch nothing is reserved, so text keeps its full width. */
+/* No top row is reserved, so the flow tokens own the gap under each heading: the revealed button floats over the block's corner. With a mouse, prose and list blocks reserve a side gutter so the button covers no text (a heading keeps full width so its rule and title band line up with the cards); on touch nothing is reserved, so text keeps its full width. */
 .block.has-menu { padding-block-start: var(--vd-space-1); }
 @media (hover: hover) {
-  .block.has-menu:is([data-block-type="prose"], [data-block-type="heading"], [data-block-type="list"], :not([data-block-type])) { padding-inline-end: var(--vd-control-height); }
+  .block.has-menu:is([data-block-type="prose"], [data-block-type="list"], :not([data-block-type])) { padding-inline-end: var(--vd-control-height); }
 }
 .menu-btn { position: absolute; inset-block-start: 0; inset-inline-end: 0; inline-size: var(--vd-control-height); block-size: var(--vd-control-height); box-sizing: border-box; min-inline-size: 44px; min-block-size: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font-size: var(--vd-text-lg); font-weight: 700; line-height: 1; opacity: 0; z-index: 2; }
 @media (hover: none) { .menu-btn { pointer-events: none; box-shadow: var(--vd-shadow-3); } }
@@ -1614,7 +1614,8 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 }
 
 /* Checklist block: one row per item with a glyph-and-word state badge, a native progress bar and a count. Tones come only from the --vd-tone-* tokens. */
-.vd-checklist { --vd-check-edge: var(--vd-border); min-inline-size: 0; }
+/* framed like the other blocks: a card above the page */
+.vd-checklist { --vd-check-edge: var(--vd-border); --vd-surface: var(--vd-surface-elevated); min-inline-size: 0; background: var(--vd-surface); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); padding: var(--vd-space-3) var(--vd-space-4); }
 .vd-checklist-title { margin: 0 0 var(--vd-space-2); font-weight: 650; overflow-wrap: anywhere; }
 .vd-checklist-progress { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-1) var(--vd-space-3); margin-block-end: var(--vd-space-2); }
 /* the unfinished part is the quiet line colour, the done part the success tone */
@@ -1856,6 +1857,8 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 @container vd-doc (min-width: 44rem) {
   .vd-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .vd-stats-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* four tiles below the 4-across width go 2 by 2, never 3 and an orphan */
+  .vd-stats-n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @container vd-doc (min-width: 64rem) {
   .vd-stats-n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
