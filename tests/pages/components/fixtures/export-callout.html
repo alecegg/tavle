@@ -391,12 +391,13 @@ html, :host { -webkit-text-size-adjust: 100%; }
 :host { display: block; }
 body, :host { margin: 0; background: var(--vd-surface); color: var(--vd-text); font: var(--vd-density-font) / var(--vd-body-leading) var(--vd-font-body); overflow-wrap: anywhere; }
 /* the page is the vd-doc container: blocks respond to their column, not the viewport.
-   The column is 60rem; a 11rem TOC rail plus its 2rem gap joins it at a container width of 64rem or more. */
-main { container: vd-doc / inline-size; max-inline-size: calc(var(--vd-doc-width) + var(--vd-toc-width) + var(--vd-toc-gap)); margin-inline: auto; padding: var(--vd-space-4); }
+   The column is 60rem; a 11rem TOC rail plus its 2rem gap joins it, on a page that has a TOC, at a container width of 64rem or more. */
+main { container: vd-doc / inline-size; max-inline-size: var(--vd-doc-width); margin-inline: auto; padding: var(--vd-space-4); }
+main:has(> .doc-toc) { max-inline-size: calc(var(--vd-doc-width) + var(--vd-toc-width) + var(--vd-toc-gap)); } /* only a page with a TOC reserves its column */
 main > * { max-inline-size: var(--vd-doc-width); margin-inline: auto; }
 .doc-toc { margin-block: var(--vd-space-3); }
 @container vd-doc (min-width: 64rem) {
-  main > * { margin-inline: calc(var(--vd-toc-width) + var(--vd-toc-gap)) 0; }
+  main:has(> .doc-toc) > * { margin-inline: calc(var(--vd-toc-width) + var(--vd-toc-gap)) 0; }
   main > .doc-toc { display: block; float: inline-start; position: sticky; inset-block-start: var(--vd-space-6); inline-size: var(--vd-toc-width); margin: 0 calc(-1 * var(--vd-toc-width)) 0 0; max-block-size: calc(100vh - var(--vd-space-9)); overflow-y: auto; font-size: var(--vd-text-sm); }
 }
 @container vd-doc (max-width: 44rem) {
@@ -599,20 +600,20 @@ textarea.choice-text:focus-visible { outline: 2px solid var(--vd-focus-ring); ou
 .form-label { font-weight: 600; font-size: var(--vd-text-md); line-height: var(--vd-leading-heading); overflow-wrap: anywhere; }
 .form-hint { font-size: var(--vd-text-sm); color: var(--vd-text-secondary); overflow-wrap: anywhere; }
 
-.form-field > input:not([type="checkbox"]), .form-field > select {
+.form-field > input:not([type="checkbox"]), .form-field > select, .form-field > textarea {
   --form-pad: var(--vd-space-3);
   inline-size: 100%; max-inline-size: 100%; box-sizing: border-box; min-block-size: var(--vd-control-height);
   padding: var(--vd-space-2) var(--form-pad); font: inherit; font-size: max(1rem, 16px); line-height: var(--vd-leading-heading);
   color: var(--vd-text); background: var(--vd-surface); border: 1px solid var(--vd-border-interactive);
   border-radius: var(--vd-radius-l); transition: border-color var(--vd-dur) ease;
 }
-.form-field > input, .form-field > select { scroll-margin-block: var(--vd-space-4); }
-.form-field > input:focus-visible, .form-field > select:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; border-color: var(--vd-border-selected); }
-.form-field > input[aria-invalid="true"], .form-field > select[aria-invalid="true"] { border-width: 2px; border-color: var(--vd-error); padding-inline: calc(var(--vd-space-3) - 1px); }
-.form-field > input[aria-invalid="true"]:focus-visible, .form-field > select[aria-invalid="true"]:focus-visible { border-color: var(--vd-error); outline-color: var(--vd-focus-ring); }
-.form-field > input:disabled, .form-field > select:disabled { background: var(--vd-readonly); color: var(--vd-text-secondary); cursor: default; }
+.form-field > input, .form-field > select, .form-field > textarea { scroll-margin-block: var(--vd-space-4); }
+.form-field > input:focus-visible, .form-field > select:focus-visible, .form-field > textarea:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; border-color: var(--vd-border-selected); }
+.form-field > input[aria-invalid="true"], .form-field > select[aria-invalid="true"], .form-field > textarea[aria-invalid="true"] { border-width: 2px; border-color: var(--vd-error); padding-inline: calc(var(--vd-space-3) - 1px); }
+.form-field > input[aria-invalid="true"]:focus-visible, .form-field > select[aria-invalid="true"]:focus-visible, .form-field > textarea[aria-invalid="true"]:focus-visible { border-color: var(--vd-error); outline-color: var(--vd-focus-ring); }
+.form-field > input:disabled, .form-field > select:disabled, .form-field > textarea:disabled { background: var(--vd-readonly); color: var(--vd-text-secondary); cursor: default; }
 @media (hover: hover) {
-  .form-field > input:not([type="checkbox"]):not(:disabled):not(:focus):hover, .form-field > select:not(:disabled):not(:focus):hover { border-color: var(--vd-text); }
+  .form-field > input:not([type="checkbox"]):not(:disabled):not(:focus):hover, .form-field > select:not(:disabled):not(:focus):hover, .form-field > textarea:not(:disabled):not(:focus):hover { border-color: var(--vd-text); }
 }
 
 /* checkbox: the whole row is the 44px target, native box kept and tinted */
@@ -631,6 +632,10 @@ textarea.choice-text:focus-visible { outline: 2px solid var(--vd-focus-ring); ou
 .form-error { margin: var(--vd-space-2) 0 0; color: var(--vd-error); font-size: var(--vd-text-sm); }
 .form-error:empty { display: none; }
 @media (pointer: coarse) { .form-grid { gap: var(--vd-space-6) var(--vd-space-4); } }
+
+/* a long text field is a textarea across the whole row */
+.form-long { grid-column: 1 / -1; }
+.form-field > textarea { min-block-size: calc(var(--vd-control-height) * 2); resize: vertical; }
 
 /* 22-comment: stacked label, full-width textarea, counter, send row. The field
    grows with its text (field-sizing, JS fallback in recap.js); 16px+ font, 44px+
@@ -874,7 +879,9 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
    Links are 44px hit areas; the current link carries a tint and bold weight, never an edge bar. */
 :root, :host { scroll-padding-block-start: var(--vd-space-9); }
 .block, h1, h2, h3, h4, h5, h6 { scroll-margin-block-start: var(--vd-space-9); }
-.doc-toc summary { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
+.doc-toc summary { display: flex; align-items: center; gap: var(--vd-space-2); min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
+.doc-toc .toc-here { min-inline-size: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; color: var(--vd-text-secondary); }
+.doc-toc .toc-here:not(:empty)::before { content: "\00b7\00a0"; }
 .doc-toc ol { list-style: none; margin: 0; padding: 0; }
 .doc-toc a { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); color: var(--vd-text); text-decoration: none; overflow-wrap: anywhere; }
 @media (hover: hover) { .doc-toc a:hover { background: var(--vd-hover); text-decoration: underline; } }
@@ -964,8 +971,9 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-wrap-toggle[hidden] { display: none; }
 .vb-wrap-toggle[aria-pressed="true"] { background: var(--vd-selected); border-color: var(--vd-border-selected); }
 /* The sort select stands in for the header buttons on phones only. */
-.vb-sortpick { display: none; align-items: center; gap: var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
-.vb-sortselect { min-block-size: 44px; font: inherit; padding-inline: var(--vd-space-2); background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
+.vb-sortpick { display: none; flex: 1 1 100%; min-inline-size: 0; align-items: center; gap: var(--vd-space-2); white-space: nowrap; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
+/* The select shrinks to the card; the label text never breaks (the page's `anywhere` wrap would split it per letter). */
+.vb-sortselect { flex: 1 1 0; min-inline-size: 0; max-inline-size: 100%; min-block-size: 44px; font: inherit; padding-inline: var(--vd-space-2); background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
 .vb-sortselect:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 /* A sticky first column only where it leaves room for the rest; phones scroll or stack. */
 @media (width >= 40.0625rem) {
@@ -974,7 +982,8 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-sticky thead th:first-child { z-index: 3; background: var(--vd-surface-elevated); }
   .vb-table-sticky .vb-group-head th:first-child { position: static; border-inline-end: 0; }
 }
-tr[hidden], .vb-scrollhint[hidden] { display: none; }
+/* Beats the stack mode's `tr { display: block }`, so a collapsed row stays hidden on phones too. */
+.vb-table tr[hidden], .vb-scrollhint[hidden] { display: none; }
 @media screen and (max-width: 40rem) {
   .vb-table-stack { min-inline-size: 0; }
   .vb-table-stack thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -986,7 +995,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
   .vb-table-stack td a { justify-self: start; max-inline-size: 100%; }
   .vb-table-stack .vb-num { text-align: start; }
   .vb-table-stack.vb-table-sticky th:first-child, .vb-table-stack.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }
-  .vb-sortpick { display: inline-flex; }
+  .vb-sortpick { display: flex; }
 }
 @media (forced-colors: active) {
   .vb-scroll, .vb-table th, .vb-table td { border-color: CanvasText; }
@@ -1542,7 +1551,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
   .vd-diff-split-mode > .vd-diff-unified { display: none; }
 }
 @container vd-doc (min-width: 64rem) {
-  main > .vd-diff-split-mode { max-inline-size: min(1560px, calc(100cqw - var(--vd-toc-width) - var(--vd-toc-gap))); }
+  main:has(> .doc-toc) > .vd-diff-split-mode { max-inline-size: min(1560px, calc(100cqw - var(--vd-toc-width) - var(--vd-toc-gap))); }
 }
 @media (forced-colors: active) {
   .vd-diff { border: 1px solid CanvasText; }
@@ -2033,7 +2042,6 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
   .vd-er-fk { color: LinkText; }
 }
 @media print {
-  .vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; }
   .vd-er-view { display: block; overflow: visible; max-block-size: none; }
   .vd-er-svg { max-inline-size: 100%; inline-size: 100%; block-size: auto; }
   .vd-er-cards, .vd-er-card, .vd-er-card > .vb-card, .vd-er-rel { overflow: visible; block-size: auto; max-block-size: none; contain: none; white-space: normal; overflow-wrap: anywhere; }
@@ -2051,6 +2059,8 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vb-fields th:first-child, .vb-fields td:first-child { min-inline-size: 10ch; }
 .vb-fields th:nth-child(2), .vb-fields td:nth-child(2) { min-inline-size: 8ch; }
 .vb-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* On paper there is no screen reader: the text prints. Below the rule above, so it wins. */
+@media print { .vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; } }
 .vb-fields thead th { white-space: nowrap; font-weight: 600; border-block-end: 2px solid var(--vd-border-interactive); background: var(--vd-surface-elevated); }
 .vb-fields code, .vb-fields .vb-badge, .vb-fields .vd-change-badge { white-space: nowrap; }
 .vb-fields td a { display: inline-flex; align-items: center; box-sizing: border-box; min-block-size: 44px; min-inline-size: 44px; white-space: nowrap; }
@@ -2165,7 +2175,7 @@ first
 third
 
 </pre></noscript><script type="application/json">{"tone": "info", "text": "\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n"}</script></div><div data-mithril="callout" data-copy="Body"><noscript><pre class="vd-noscript">Body</pre></noscript><script type="application/json">{"tone": "info", "title": "", "text": "Body"}</script></div><div data-mithril="callout" data-copy="café ✓ ◆"><noscript><pre class="vd-noscript">café ✓ ◆</pre></noscript><script type="application/json">{"tone": "success", "text": "café ✓ ◆"}</script></div><div data-mithril="code" data-copy="marks"><noscript><pre class="vd-noscript">marks</pre></noscript><script type="application/json">{"copy": "l1\nl2\nl3\nl4\nl5\nl6\nl7\nl8\nl9\nl10\nl11\nl12\nl13\nl14\nl15\nl16\nl17\nl18\nl19\nl20", "title": "m.py", "language": "py", "langClass": "py", "wrap": false, "numbers": true, "first": 1, "lines": [[["", "l1"]], [["", "l2"]], [["", "l3"]], [["", "l4"]], [["", "l5"]], [["", "l6"]], [["", "l7"]], [["", "l8"]], [["", "l9"]], [["", "l10"]], [["", "l11"]], [["", "l12"]], [["", "l13"]], [["", "l14"]], [["", "l15"]], [["", "l16"]], [["", "l17"]], [["", "l18"]], [["", "l19"]], [["", "l20"]]], "marked": [2, 5, 6, 7, 19, 20], "note": "Marked lines 2, 5-7, 19-20"}</script></div><div data-mithril="annotated-code" data-copy="range-and-kinds"><noscript><pre class="vd-noscript">range-and-kinds</pre></noscript><script type="application/json">{"copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 5-7: Setup: n1\n2. line 20: n2\n3. lines 30-31: n3", "title": "f.py", "language": "python", "langClass": "python", "wrap": true, "numbers": true, "first": 1, "lines": [[["", "l1 = "], ["n", "1"]], [["", "l2 = "], ["n", "2"]], [["", "l3 = "], ["n", "3"]], [["", "l4 = "], ["n", "4"]], [["", "l5 = "], ["n", "5"]], [["", "l6 = "], ["n", "6"]], [["", "l7 = "], ["n", "7"]], [["", "l8 = "], ["n", "8"]], [["", "l9 = "], ["n", "9"]], [["", "l10 = "], ["n", "10"]], [["", "l11 = "], ["n", "11"]], [["", "l12 = "], ["n", "12"]], [["", "l13 = "], ["n", "13"]], [["", "l14 = "], ["n", "14"]], [["", "l15 = "], ["n", "15"]], [["", "l16 = "], ["n", "16"]], [["", "l17 = "], ["n", "17"]], [["", "l18 = "], ["n", "18"]], [["", "l19 = "], ["n", "19"]], [["", "l20 = "], ["n", "20"]], [["", "l21 = "], ["n", "21"]], [["", "l22 = "], ["n", "22"]], [["", "l23 = "], ["n", "23"]], [["", "l24 = "], ["n", "24"]], [["", "l25 = "], ["n", "25"]], [["", "l26 = "], ["n", "26"]], [["", "l27 = "], ["n", "27"]], [["", "l28 = "], ["n", "28"]], [["", "l29 = "], ["n", "29"]], [["", "l30 = "], ["n", "30"]], [["", "l31 = "], ["n", "31"]], [["", "l32 = "], ["n", "32"]], [["", "l33 = "], ["n", "33"]], [["", "l34 = "], ["n", "34"]], [["", "l35 = "], ["n", "35"]], [["", "l36 = "], ["n", "36"]], [["", "l37 = "], ["n", "37"]], [["", "l38 = "], ["n", "38"]], [["", "l39 = "], ["n", "39"]], [["", "l40 = "], ["n", "40"]]], "marked": [5, 6, 7, 20, 30, 31], "note": "Marked lines 5-7, 20, 30-31", "uid": "d111aff1", "columns": 1, "folds": [[11, 16], [35, 40]], "notes": [{"number": 1, "start": 5, "end": 7, "label": "Setup", "text": "n1", "kind": "warn", "glyph": "!", "word": "Warning", "tone": "warning", "where": "lines 5-7"}, {"number": 2, "start": 20, "end": 20, "label": "", "text": "n2", "kind": "change", "glyph": "Δ", "word": "Change", "tone": "decision", "where": "line 20"}, {"number": 3, "start": 30, "end": 31, "label": "", "text": "n3", "kind": "info", "glyph": "i", "word": "Info", "tone": "info", "where": "lines 30-31"}]}</script></div><div data-mithril="diff" data-copy="split-fold-notes"><noscript><pre class="vd-noscript">split-fold-notes</pre></noscript><script type="application/json">{"name": "diff", "language": "", "uid": "2dbc2eab", "digits": 2, "split": true, "change": "modified", "was": "", "count": "+1 added, -1 removed", "copy": "--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18", "blocks": [{"kind": "fold", "header": "", "rows": [{"kind": "same", "old": 1, "new": 1, "text": "line 1", "code": [["", "line 1"]]}, {"kind": "same", "old": 2, "new": 2, "text": "line 2", "code": [["", "line 2"]]}, {"kind": "same", "old": 3, "new": 3, "text": "line 3", "code": [["", "line 3"]]}, {"kind": "same", "old": 4, "new": 4, "text": "line 4", "code": [["", "line 4"]]}, {"kind": "same", "old": 5, "new": 5, "text": "line 5", "code": [["", "line 5"]]}, {"kind": "same", "old": 6, "new": 6, "text": "line 6", "code": [["", "line 6"]]}, {"kind": "same", "old": 7, "new": 7, "text": "line 7", "code": [["", "line 7"]]}, {"kind": "same", "old": 8, "new": 8, "text": "line 8", "code": [["", "line 8"]]}, {"kind": "same", "old": 9, "new": 9, "text": "line 9", "code": [["", "line 9"]]}, {"kind": "same", "old": 10, "new": 10, "text": "line 10", "code": [["", "line 10"]]}, {"kind": "same", "old": 11, "new": 11, "text": "line 11", "code": [["", "line 11"]]}]}, {"kind": "rows", "header": "@@ -12,8 +12,8 @@", "rows": [{"kind": "same", "old": 12, "new": 12, "text": "line 12", "code": [["", "line 12"]]}, {"kind": "same", "old": 13, "new": 13, "text": "line 13", "code": [["", "line 13"]]}, {"kind": "same", "old": 14, "new": 14, "text": "line 14", "code": [["", "line 14"]]}, {"kind": "del", "old": 15, "new": null, "text": "line 15", "code": [["", "line 15"]]}, {"kind": "add", "old": null, "new": 15, "text": "line fifteen", "code": [["", "line fifteen"]]}, {"kind": "same", "old": 16, "new": 16, "text": "line 16", "code": [["", "line 16"]]}, {"kind": "same", "old": 17, "new": 17, "text": "line 17", "code": [["", "line 17"]]}, {"kind": "same", "old": 18, "new": 18, "text": "line 18", "code": [["", "line 18"]]}, {"kind": "same", "old": 19, "new": 19, "text": "line 19", "code": [["", "line 19"]]}]}, {"kind": "more", "header": "11", "rows": []}], "notes": [{"number": 1, "side": "after", "start": 15, "where": "after line 15", "text": "n"}]}</script></div><div data-mithril="file-tree" data-copy="links"><noscript><pre class="vd-noscript">links</pre></noscript><script type="application/json">{"title": "", "summary": "3 files: 1 added, 2 unchanged", "collapse": null, "copy": "3 files: 1 added, 2 unchanged\nsrc/\n  pkg/\n    + mod.py\n  x.py\nother.py", "folders": [{"name": "src", "path": "src", "count": 2, "folders": [{"name": "pkg", "path": "src/pkg", "count": 1, "folders": [], "files": [{"name": "mod.py", "path": "src/pkg/mod.py", "change": "added", "was": "", "role": "", "note": "", "label": "added src/pkg/mod.py"}]}], "files": [{"name": "x.py", "path": "src/x.py", "change": "", "was": "", "role": "", "note": "", "label": "src/x.py"}]}], "files": [{"name": "other.py", "path": "other.py", "change": "", "was": "", "role": "", "note": "", "label": "other.py"}], "links": {"src/pkg/mod.py": "blk-s/1", "src/x.py": "blk-my-id"}}</script></div><div data-mithril="change-summary" data-copy="titled"><noscript><pre class="vd-noscript">titled</pre></noscript><script type="application/json">{"title": "What", "text": "1 file added", "copy": "What\n1 file added"}</script></div><div data-mithril="deps" data-copy="chain"><noscript><pre class="vd-noscript">chain</pre></noscript><script type="application/json">{"empty": false, "width": 132, "height": 190, "truncated": false, "edges": [{"d": "M66 40C66 60 66 60 66 80", "back": false}, {"d": "M66 40C66 95 66 95 66 150", "back": false}, {"d": "M66 110C66 130 66 130 66 150", "back": false}], "nodes": [{"known": true, "title": "a", "label": "a", "x": "10", "y": "10", "tx": "66", "ty": "29", "w": 112, "h": 30}, {"known": true, "title": "b", "label": "b", "x": "10", "y": "80", "tx": "66", "ty": "99", "w": 112, "h": 30}, {"known": true, "title": "c", "label": "c", "x": "10", "y": "150", "tx": "66", "ty": "169", "w": 112, "h": 30}]}</script></div>
-<nav class="doc-toc" aria-label="Contents"><details><summary>Contents (2)</summary><ol><li class="toc-l3"><a href="#vd-ctab-tabs-1-h">Code</a></li><li class="toc-l3"><a href="#vd-ctab-tabs-2-h">Checks</a></li></ol></details></nav>
+<nav class="doc-toc" aria-label="Contents"><details><summary><span>Contents (2)</span><span class="toc-here"></span></summary><ol><li class="toc-l3"><a href="#vd-ctab-tabs-1-h">Code</a></li><li class="toc-l3"><a href="#vd-ctab-tabs-2-h">Checks</a></li></ol></details></nav>
 <div class="block heading" id="blk-every-block" data-anchor="every-block" data-hash="436264c1bdfa" data-block-type="heading"><h1 id="h-every-block">Every block</h1></div>
 <div class="block" id="blk-data-model" data-anchor="data-model" data-hash="77bc963b6705" data-block-type="visual"><div data-readonly data-mithril="data-model" data-block-id="data-model" data-copy="data-model = data-model(
   entity: [
@@ -2640,7 +2650,7 @@ Transitions:
     {&quot;from&quot;: &quot;bad&quot;, &quot;to&quot;: &quot;run&quot;, &quot;label&quot;: &quot;retry&quot;, &quot;guard&quot;: &quot;attempts &lt; 3&quot;},
     {&quot;from&quot;: &quot;run&quot;, &quot;to&quot;: &quot;run&quot;, &quot;label&quot;: &quot;heartbeat&quot;},
   ],
-)</pre></noscript><script type="application/json">{"title": "Job", "name": "Job", "desc": "A job waits, runs, and ends done or failed; failed jobs retry.", "counts": "4 states, 5 transitions", "drawing": {"box": "0 0 235.48 452", "width": "235.48", "height": "452", "shapes": [["g", {"class": "vd-state-edge"}, [["title", {}, "initial state marker to Idle"], ["path", {"class": "vd-state-line", "d": "M104.0 48.0 L104.0 140.0"}, null], ["polygon", {"class": "vd-state-head", "points": "104.0,140.0 99.0,130.0 109.0,130.0"}, null]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Idle to Running on start"], ["path", {"class": "vd-state-line", "d": "M104.0 188.0 L57.2 264.0"}, null], ["polygon", {"class": "vd-state-head", "points": "57.2,264.0 58.2,252.9 66.7,258.1"}, null], ["rect", {"class": "vd-state-label-bg", "x": "60.6", "y": "217.0", "width": "40.0", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "80.6", "y": "226.0"}, "start"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Done on finish"], ["path", {"class": "vd-state-line", "d": "M57.2 312.0 L48.0 388.0"}, null], ["polygon", {"class": "vd-state-head", "points": "48.0,388.0 44.2,377.5 54.2,378.7"}, null], ["rect", {"class": "vd-state-label-bg", "x": "29.4", "y": "341.0", "width": "46.4", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "52.6", "y": "350.0"}, "finish"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Failed on crash"], ["path", {"class": "vd-state-line", "d": "M52.2 312.0 L145.0 388.0"}, null], ["polygon", {"class": "vd-state-head", "points": "145.0,388.0 134.1,385.5 140.4,377.8"}, null], ["rect", {"class": "vd-state-label-bg", "x": "78.6", "y": "341.0", "width": "40.0", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "98.6", "y": "350.0"}, "crash"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Failed to Running on retry [attempts \u003c 3]"], ["path", {"class": "vd-state-line", "d": "M155.0 388.0 L62.2 312.0"}, null], ["polygon", {"class": "vd-state-head", "points": "62.2,312.0 73.1,314.5 66.8,322.2"}, null], ["rect", {"class": "vd-state-label-bg", "x": "121.9", "y": "341.6", "width": "97.6", "height": "32.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "170.7", "y": "350.6"}, "retry"], ["tspan", {"x": "170.7", "y": "364.6"}, "[attempts \u003c 3]"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Running on heartbeat"], ["path", {"class": "vd-state-line", "d": "M95.7 278.4 L113.7 278.4 L113.7 297.6 L95.7 297.6"}, null], ["polygon", {"class": "vd-state-head", "points": "95.7,297.6 105.7,292.6 105.7,302.6"}, null], ["rect", {"class": "vd-state-label-bg", "x": "117.7", "y": "279.0", "width": "65.6", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "150.5", "y": "288.0"}, "heartbeat"]]]]], ["g", {"class": "vd-state-start", "transform": "translate(72.0 16.0)"}, [["title", {}, "initial state marker"], ["circle", {"class": "vd-state-dot", "cx": "32.0", "cy": "24.0", "r": "8"}, null]]], ["g", {"class": "vd-state-node vd-state-initial", "transform": "translate(72.0 140.0)"}, [["title", {}, "Idle, initial state"], ["rect", {"class": "vd-state-shape", "width": "64.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "32.0", "y": "24.0"}, "Idle"]]]]], ["g", {"class": "vd-state-node vd-state-normal", "transform": "translate(18.7 264.0)"}, [["title", {}, "Running, state"], ["rect", {"class": "vd-state-shape", "width": "77.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "38.5", "y": "24.0"}, "Running"]]]]], ["g", {"class": "vd-state-node vd-state-final", "transform": "translate(16.0 388.0)"}, [["title", {}, "Done, final state"], ["rect", {"class": "vd-state-shape", "width": "64.0", "height": "48.0", "rx": "10"}, null], ["rect", {"class": "vd-state-ring", "x": "4", "y": "4", "width": "56.0", "height": "40.0", "rx": "7"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "32.0", "y": "24.0"}, "Done"]]]]], ["g", {"class": "vd-state-node vd-state-error", "transform": "translate(108.0 388.0)"}, [["title", {}, "Failed, error state"], ["rect", {"class": "vd-state-shape", "width": "84.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "42.0", "y": "24.0"}, "✕ Failed"]]]]]]}, "states": ["Idle (initial state)", "Running (state)", "Done (final state)", "Failed (error state)"], "moves": ["Idle to Running on start", "Running to Done on finish", "Running to Failed on crash", "Failed to Running on retry [attempts \u003c 3]", "Running to Running on heartbeat"], "copy": "Job (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish\n3. Running to Failed on crash\n4. Failed to Running on retry [attempts \u003c 3]\n5. Running to Running on heartbeat"}</script></div></div>
+)</pre></noscript><script type="application/json">{"title": "Job", "name": "Job", "desc": "A job waits, runs, and ends done or failed; failed jobs retry.", "counts": "4 states, 5 transitions", "drawing": {"box": "0 0 276.3 452", "width": "276.3", "height": "452", "shapes": [["g", {"class": "vd-state-edge"}, [["title", {}, "initial state marker to Idle"], ["path", {"class": "vd-state-line", "d": "M101.3 48.0 L101.3 140.0"}, null], ["polygon", {"class": "vd-state-head", "points": "101.3,140.0 96.3,130.0 106.3,130.0"}, null]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Idle to Running on start"], ["path", {"class": "vd-state-line", "d": "M101.3 188.0 L54.5 264.0"}, null], ["polygon", {"class": "vd-state-head", "points": "54.5,264.0 55.5,252.9 64.0,258.1"}, null], ["rect", {"class": "vd-state-label-bg", "x": "57.9", "y": "217.0", "width": "40.0", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "77.9", "y": "226.0"}, "start"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Done on finish"], ["path", {"class": "vd-state-line", "d": "M54.5 312.0 L52.3 388.0"}, null], ["polygon", {"class": "vd-state-head", "points": "52.3,388.0 47.6,377.9 57.6,378.1"}, null], ["rect", {"class": "vd-state-label-bg", "x": "30.2", "y": "341.0", "width": "46.4", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "53.4", "y": "350.0"}, "finish"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Failed on crash"], ["path", {"class": "vd-state-line", "d": "M49.5 312.0 L142.3 388.0"}, null], ["polygon", {"class": "vd-state-head", "points": "142.3,388.0 131.4,385.5 137.7,377.8"}, null], ["rect", {"class": "vd-state-label-bg", "x": "85.2", "y": "348.6", "width": "40.0", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "105.2", "y": "357.6"}, "crash"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Failed to Running on retry [attempts \u003c 3]"], ["path", {"class": "vd-state-line", "d": "M152.3 388.0 L59.5 312.0"}, null], ["polygon", {"class": "vd-state-head", "points": "59.5,312.0 70.4,314.5 64.1,322.2"}, null], ["rect", {"class": "vd-state-label-bg", "x": "162.7", "y": "334.0", "width": "97.6", "height": "32.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "211.5", "y": "343.0"}, "retry"], ["tspan", {"x": "211.5", "y": "357.0"}, "[attempts \u003c 3]"]]]]], ["g", {"class": "vd-state-edge"}, [["title", {}, "Running to Running on heartbeat"], ["path", {"class": "vd-state-line", "d": "M93.0 278.4 L111.0 278.4 L111.0 297.6 L93.0 297.6"}, null], ["polygon", {"class": "vd-state-head", "points": "93.0,297.6 103.0,292.6 103.0,302.6"}, null], ["rect", {"class": "vd-state-label-bg", "x": "115.0", "y": "279.0", "width": "65.6", "height": "18.0", "rx": "3"}, null], ["text", {"class": "vd-state-edge-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "147.8", "y": "288.0"}, "heartbeat"]]]]], ["g", {"class": "vd-state-start", "transform": "translate(69.3 16.0)"}, [["title", {}, "initial state marker"], ["circle", {"class": "vd-state-dot", "cx": "32.0", "cy": "24.0", "r": "8"}, null]]], ["g", {"class": "vd-state-node vd-state-initial", "transform": "translate(69.3 140.0)"}, [["title", {}, "Idle, initial state"], ["rect", {"class": "vd-state-shape", "width": "64.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "32.0", "y": "24.0"}, "Idle"]]]]], ["g", {"class": "vd-state-node vd-state-normal", "transform": "translate(16.0 264.0)"}, [["title", {}, "Running, state"], ["rect", {"class": "vd-state-shape", "width": "77.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "38.5", "y": "24.0"}, "Running"]]]]], ["g", {"class": "vd-state-node vd-state-final", "transform": "translate(20.3 388.0)"}, [["title", {}, "Done, final state"], ["rect", {"class": "vd-state-shape", "width": "64.0", "height": "48.0", "rx": "10"}, null], ["rect", {"class": "vd-state-ring", "x": "4", "y": "4", "width": "56.0", "height": "40.0", "rx": "7"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "32.0", "y": "24.0"}, "Done"]]]]], ["g", {"class": "vd-state-node vd-state-error", "transform": "translate(112.3 388.0)"}, [["title", {}, "Failed, error state"], ["rect", {"class": "vd-state-shape", "width": "70.0", "height": "48.0", "rx": "10"}, null], ["text", {"class": "vd-state-label", "text-anchor": "middle", "dominant-baseline": "central"}, [["tspan", {"x": "35.0", "y": "24.0"}, "Failed"]]]]]]}, "states": ["Idle (initial state)", "Running (state)", "Done (final state)", "Failed (error state)"], "moves": ["Idle to Running on start", "Running to Done on finish", "Running to Failed on crash", "Failed to Running on retry [attempts \u003c 3]", "Running to Running on heartbeat"], "copy": "Job (4 states, 5 transitions)\nStates:\n- Idle (initial state)\n- Running (state)\n- Done (final state)\n- Failed (error state)\nTransitions:\n1. Idle to Running on start\n2. Running to Done on finish\n3. Running to Failed on crash\n4. Failed to Running on retry [attempts \u003c 3]\n5. Running to Running on heartbeat"}</script></div></div>
 <div class="block" id="blk-screen-flow" data-anchor="screen-flow" data-hash="786ef1448aee" data-block-type="visual"><div data-readonly data-mithril="screen-flow" data-block-id="screen-flow" data-copy="Checkout (screen flow, 3 screens, 2 steps)
 1. Cart: 3 regions: header, lines, pay; next: Payment (Pay)
 2. Payment: 3 regions: header, card, pay; next: Receipt (Card accepted)
@@ -2960,7 +2970,7 @@ function view(m, props, c, blockId) {
     props.comment ? note(m, props.maxNote) : null,
     c.shared.inputFooter(m, 'choice', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'choice', { multiple: props.multiple, comment: props.comment }, 'Choice', form);
+  return c.shared.inputRoot(m, 'choice', { multiple: props.multiple, comment: props.comment }, '', form);
 }
 
 return { view };
@@ -3035,7 +3045,7 @@ function view(m, props, c, blockId) {
     m('span.comment-announce', { 'aria-live': 'polite' })
   ]);
   const form = m('form.comment-item', { 'data-item': id, novalidate: true }, [field, c.shared.inputFooter(m, 'comment', props.submit, id)]);
-  return c.shared.inputRoot(m, 'comment', {}, 'Comment', form);
+  return c.shared.inputRoot(m, 'comment', {}, '', form);
 }
 
 return { view };
@@ -3146,7 +3156,6 @@ function view(m, props, c, blockId) {
   const id = c.shared.pyStr(blockId);
   return m('div.vb.decision', [
     m('section.vb-card', [
-      m('h4.vb-title', 'Decision'),
       m('p.decision-question', props.question),
       evidence(m, props),
       props.diff ? m('pre.decision-diff', { tabindex: '0' }, m('code', props.diff)) : null,
@@ -3516,10 +3525,28 @@ return { view };
 components["form"] = (() => {
 // Form block as a component: typed fields, a count of required fields left and a send row.
 // `props.fields[].client` is the whitelist recap.js reads back; the rest is what is drawn.
+
+// A text field allowed more characters than this is a textarea; shorter ones are one line.
+const LONG_TEXT_LIMIT = 100;
+
+function isLongText(f) {
+  return f.type === 'text' && f.limit > LONG_TEXT_LIMIT;
+}
+
+// An unchosen select shows `Choose…`. A required one cannot go back to it, so it is disabled;
+// its empty value still fails the required check in recap.js.
+function select(m, f, attrs) {
+  // The attribute, not the property, so a serialised page keeps the choice too.
+  const keepSelected = (vnode) => vnode.dom.setAttribute('selected', '');
+  const placeholder = m('option', { value: '', disabled: f.required, oncreate: keepSelected }, 'Choose…');
+  return m('select', attrs, [placeholder, ...f.options.map((o) => m('option', o))]);
+}
+
 function control(m, f, attrs) {
   if (f.type === 'checkbox') return m('input', { type: 'checkbox', ...attrs });
-  if (f.type === 'select') return m('select', attrs, [m('option', { value: '' }), ...f.options.map((o) => m('option', o))]);
+  if (f.type === 'select') return select(m, f, attrs);
   if (f.type === 'number') return m('input', { type: 'number', step: 'any', ...attrs, min: f.minText, max: f.maxText });
+  if (isLongText(f)) return m('textarea', { rows: '4', maxlength: f.limit, ...attrs });
   return m('input', { type: 'text', maxlength: f.limit, ...attrs });
 }
 
@@ -3530,7 +3557,7 @@ function row(m, f, group) {
   if (f.hint) attrs['aria-describedby'] = hintId;
   const label = m('span.form-label', f.label + (f.required ? ' *' : ''));
   const input = control(m, f, attrs);
-  return m(`div.form-row.form-${f.type}`, [
+  return m(`div.form-row.form-${f.type}${isLongText(f) ? '.form-long' : ''}`, [
     m('label.form-field', f.type === 'checkbox' ? [input, label] : [label, input]),
     f.hint ? m('span.form-hint', { id: hintId }, f.hint) : null
   ]);
@@ -3545,7 +3572,7 @@ function view(m, props, c, blockId) {
     m('p.form-remaining', { 'aria-live': 'polite' }),
     c.shared.inputFooter(m, 'form', props.submit, id)
   ]);
-  return c.shared.inputRoot(m, 'form', { fields: props.fields.map((f) => f.client) }, 'Form', form);
+  return c.shared.inputRoot(m, 'form', { fields: props.fields.map((f) => f.client) }, '', form);
 }
 
 return { view };
@@ -3745,7 +3772,7 @@ function view(m, props, c, blockId) {
     m('span.ranking-live', { role: 'status', 'aria-live': 'polite' }),
     c.shared.inputFooter(m, 'ranking', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'ranking', {}, 'Ranking', form);
+  return c.shared.inputRoot(m, 'ranking', {}, '', form);
 }
 
 return { view };
@@ -3930,7 +3957,7 @@ function view(m, props, c) {
   const title = props.title || 'Risks';
   return m('section.vb.risks.vd-risk', { 'aria-label': title, 'data-copy': copyText(risks) }, [
     props.title ? m('p.vd-risk-title', props.title) : null,
-    m('p.vb-alt.vd-risk-summary', summaryText(c, risks)),
+    m('p.vb-alt.vb-sr.vd-risk-summary', summaryText(c, risks)),
     m('p.vd-risk-axes', 'Rows are likelihood, high at the top. Columns are impact, low at the left.'),
     grid(m, c, risks),
     m('dl.vd-risk-list', risks.map((risk) => entry(m, c, risk)))
@@ -4159,7 +4186,7 @@ function containerView(m, kind, props, blockId, held) {
   const grid = kind === 'columns' ? m(`div.vd-columns-grid.vd-columns-n${panels.length}`, inner) : inner;
   const cls = kind === 'tabs' ? 'vd-ctabs' : 'vd-columns';
   // The page contents already lists tab names, so only columns draw an index line.
-  const index = kind === 'tabs' ? [] : [m('p.vb-alt.vd-containers-alt', names ? `${count}: ${names}` : count)];
+  const index = kind === 'tabs' ? [] : [m('p.vb-alt.vb-sr.vd-containers-alt', names ? `${count}: ${names}` : count)];
   return m(`section.vb.${kind}.vd-containers.${cls}`, { 'aria-label': kind === 'tabs' ? 'Tabs' : 'Columns' }, [
     ...index,
     grid
@@ -4194,7 +4221,7 @@ function view(m, props, c, blockId) {
     ]),
     c.shared.inputFooter(m, 'slider', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'slider', { min: props.min, max: props.max, step: props.step }, 'Slider', form);
+  return c.shared.inputRoot(m, 'slider', { min: props.min, max: props.max, step: props.step }, '', form);
 }
 
 return { view };
@@ -4296,7 +4323,7 @@ function view(m, props, c) {
   const items = c.shared.objects(props.item);
   const count = items.length;
   return m('section.vb.stats.vd-stats', { 'aria-label': 'Stats', 'data-copy': copyText(c, items) }, [
-    m('p.vb-alt.vd-stats-summary', `${count} ${count === 1 ? 'stat' : 'stats'}`),
+    m('p.vb-alt.vb-sr.vd-stats-summary', `${count} ${count === 1 ? 'stat' : 'stats'}`),
     m(`div.vd-stats-grid.vd-stats-n${count}`, items.map((item) => card(m, c, item)))
   ]);
 }
@@ -4589,7 +4616,7 @@ function tile(m, t) {
 }
 
 function view(m, props, c) {
-  const alt = m('p.vb-alt', `${props.tiles.length} states of the screen`);
+  const alt = m('p.vb-alt.vb-sr', `${props.tiles.length} states of the screen`);
   const attrs = props.layout === null ? {} : { 'data-layout': props.layout };
   const grid = m('div.vb-grid', attrs, props.tiles.map((t) => tile(m, t)));
   return m('div.vb.ui-states', { 'data-copy': props.copy }, c.shared.card(m, props.heading, [alt, grid]));
