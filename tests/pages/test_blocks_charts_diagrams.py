@@ -10,12 +10,14 @@ fallback, every host carries its copy text, and a container copies a held client
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props
+from varde.base.ui_lines.parse import parse_lines
+from varde.pages.blocks import COMPONENT_SPECS, check_props
 from varde.pages.blocks_render.charts import chart_props
 from varde.pages.blocks_render.diagrams import diagram_props
 from varde.pages.blocks_render.flow import flow_props
@@ -174,3 +176,101 @@ def test_chart_note_metadata_and_rules_check_a_note_once() -> None:
         errors = check_props("chart", {**_CHART, "notes": notes}, 1)
         assert len(errors) == 1, notes
         assert field in errors[0].message
+
+
+_DIAGRAM = {"kind": "graph", "nodes": [{"id": "a", "label": "A"}]}
+_FLOW = {"step": [{"id": "a", "text": "A", "next": ["a"]}]}
+_STATE = {"desc": "d", "states": [{"id": "a", "label": "A", "kind": "initial"}]}
+_SEQUENCE = {
+    "desc": "d",
+    "actors": [{"id": "a", "label": "A"}],
+    "steps": [{"from": "a", "to": "a", "text": "t"}],
+}
+_FAMILY: dict[str, Mapping[str, object]] = {
+    "diagram": _DIAGRAM,
+    "flow": _FLOW,
+    "state": _STATE,
+    "sequence": _SEQUENCE,
+}
+
+
+@pytest.mark.parametrize("block", _FAMILY)
+def test_family_example_passes(block: str) -> None:
+    result = parse_lines(COMPONENT_SPECS[block].example)
+    assert result.errors == []
+    assert check_props(block, result.statements[0].props, 1) == []
+    assert check_props(block, dict(_FAMILY[block]), 1) == []
+
+
+_FAMILY_FAULTS: list[tuple[str, dict[str, object], str]] = [
+    ("diagram", {**_DIAGRAM, "mermaid": "x"}, "unknown key 'mermaid'"),
+    ("diagram", {"kind": "graph"}, "missing required key 'nodes'"),
+    ("diagram", {**_DIAGRAM, "direction": 3}, "'direction' must be string"),
+    ("diagram", {**_DIAGRAM, "kind": "ring"}, "'kind' must be one of"),
+    (
+        "diagram",
+        {**_DIAGRAM, "nodes": [{"id": "a", "label": "A", "size": 1}]},
+        "unknown key 'nodes[0].size'",
+    ),
+    (
+        "diagram",
+        {**_DIAGRAM, "edges": [{"from": "a"}]},
+        "missing required key 'edges[0].to'",
+    ),
+    (
+        "diagram",
+        {**_DIAGRAM, "edges": [{"from": "a", "to": 2}]},
+        "'edges[0].to' must be string",
+    ),
+    ("diagram", {**_DIAGRAM, "nodes": []}, "'nodes' must not be empty"),
+    ("flow", {**_FLOW, "extra": 1}, "unknown key 'extra'"),
+    ("flow", {"title": "t"}, "missing required key 'step'"),
+    ("flow", {"step": "a"}, "'step' must be list"),
+    ("flow", {"step": [{"id": "a"}]}, "missing required key 'step[0].text'"),
+    ("flow", {"step": [{"id": "a", "text": "A", "next": "b"}]}, "'step[0].next'"),
+    ("flow", {"step": []}, "'step' must not be empty"),
+    ("state", {**_STATE, "extra": 1}, "unknown key 'extra'"),
+    ("state", {"states": _STATE["states"]}, "missing required key 'desc'"),
+    ("state", {**_STATE, "title": 1}, "'title' must be string"),
+    (
+        "state",
+        {
+            **_STATE,
+            "states": [*_STATE["states"], {"id": "b", "label": "B", "kind": "loud"}],
+        },
+        "'states[1].kind' must be one of",
+    ),
+    (
+        "state",
+        {**_STATE, "transitions": [{"from": "a"}]},
+        "missing required key 'transitions[0].to'",
+    ),
+    ("state", {**_STATE, "states": []}, "'states' must not be empty"),
+    ("sequence", {**_SEQUENCE, "extra": 1}, "unknown key 'extra'"),
+    ("sequence", {**_SEQUENCE, "desc": None}, "'desc' must be string"),
+    (
+        "sequence",
+        {"desc": "d", "actors": _SEQUENCE["actors"]},
+        "missing required key 'steps'",
+    ),
+    (
+        "sequence",
+        {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": "t", "kind": "x"}]},
+        "'steps[0].kind' must be one of",
+    ),
+    (
+        "sequence",
+        {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": 1}]},
+        "'steps[0].text' must be string",
+    ),
+    ("sequence", {**_SEQUENCE, "steps": []}, "'steps' must not be empty"),
+]
+
+
+@pytest.mark.parametrize(("block", "props", "message"), _FAMILY_FAULTS)
+def test_family_shape_mistake_gets_one_fault_naming_the_field(
+    block: str, props: dict[str, object], message: str
+) -> None:
+    errors = check_props(block, props, 1)
+    assert len(errors) == 1, errors
+    assert message in errors[0].message
