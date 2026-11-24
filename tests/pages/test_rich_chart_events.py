@@ -94,8 +94,8 @@ def test_invalid_ranges_unknown_tone_and_mixed_keys_are_faulted() -> None:
     backwards = {"from": "c", "to": "b", "label": "n"}
     assert rules(with_notes(LINE, backwards)) == {"note-range"}
     assert "note-x" in rules(with_notes(LINE, {"from": "zz", "to": "b", "label": "n"}))
-    assert "note-tone" in rules(with_notes(LINE, {**BAND, "tone": "loud"}))
-    assert "note-tone" in rules(with_notes(LINE, {**MARK, "tone": "loud"}))
+    assert "type" in rules(with_notes(LINE, {**BAND, "tone": "loud"}))
+    assert "type" in rules(with_notes(LINE, {**MARK, "tone": "loud"}))
     assert "note-mixed" in rules(
         with_notes(LINE, {"x": "a", "from": "a", "label": "n"})
     )

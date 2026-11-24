@@ -15,6 +15,7 @@ from typing import Any
 
 import pytest
 
+from varde.pages.blocks import check_props
 from varde.pages.blocks_render.charts import chart_props
 from varde.pages.blocks_render.diagrams import diagram_props
 from varde.pages.blocks_render.flow import flow_props
@@ -122,3 +123,54 @@ def test_a_container_copies_a_held_client_block_from_its_host() -> None:
     body = render_page(doc, "t.md").body
     assert "vb-error" not in body
     assert 'data-copy="One\n\nlabel,s\na,1"' in body  # the tab, then the chart's copy
+
+
+_CHART = {
+    "kind": "bar",
+    "labels": ["a", "b"],
+    "series": [{"name": "s", "values": [1, 2]}],
+}
+_CHART_NOTE = {"x": "a", "label": "n"}
+
+
+def test_chart_example_passes_and_a_shape_mistake_gets_one_fault() -> None:
+    assert check_props("chart", _CHART, 1) == []
+    cases: list[tuple[dict[str, object], str]] = [
+        ({**_CHART, "unexpected": 1}, "unexpected"),
+        ({"kind": "bar", "labels": ["a"]}, "series"),
+        ({**_CHART, "decimals": "2"}, "decimals"),
+        ({**_CHART, "decimals": 9}, "decimals"),
+        ({**_CHART, "kind": "pie"}, "kind"),
+        ({**_CHART, "series": [{"name": "s", "values": [1, "x"]}]}, "values[1]"),
+        ({**_CHART, "series": [{"values": [1, 2]}]}, "series[0].name"),
+        (
+            {
+                **_CHART,
+                "kind": "combo",
+                "series": [{"name": "s", "values": [1, 2], "axis": "up"}],
+            },
+            "axis",
+        ),
+    ]
+    for props, field in cases:
+        errors = check_props("chart", props, 1)
+        assert len(errors) == 1, props
+        assert field in errors[0].message
+
+
+def test_chart_note_metadata_and_rules_check_a_note_once() -> None:
+    assert check_props("chart", {**_CHART, "notes": [_CHART_NOTE]}, 1) == []
+    cases: list[tuple[list[object], str]] = [
+        ([{**_CHART_NOTE, "unexpected": 1}], "notes[0].unexpected"),
+        ([{"x": "a"}], "notes[0].label"),
+        ([{**_CHART_NOTE, "label": 3}], "notes[0].label"),
+        ([{**_CHART_NOTE, "tone": "loud"}], "notes[0].tone"),
+        ([{"label": "n", "from": "a"}], "notes[1]: missing required key 'to'"),
+        ([{**_CHART_NOTE, "x": "nope"}], "notes[1].x"),
+        ([], "'notes' must not be empty"),
+        (["x"], "notes[0]"),
+    ]
+    for notes, field in cases:
+        errors = check_props("chart", {**_CHART, "notes": notes}, 1)
+        assert len(errors) == 1, notes
+        assert field in errors[0].message

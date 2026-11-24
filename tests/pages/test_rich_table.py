@@ -72,7 +72,7 @@ def test_existing_props_stay_valid_and_new_props_are_optional() -> None:
         ({"types": {"owner": "link", "latency": "number"}}, None),
         ({"sticky_column": "yes"}, "type"),
         ({"stack": 1}, "type"),
-        ({"footnote": ""}, "type"),
+        ({"footnote": ""}, None),  # an empty string is a string
         ({"groups": [{"label": "A", "rows": 3}]}, "group-rows"),
         ({"groups": [{"label": "A"}]}, "missing-key"),
         ({"groups": [{"label": "A", "rows": 0}]}, "type"),

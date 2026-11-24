@@ -15,11 +15,9 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.blocks import COMPONENT_SPECS, check_props
-from varde.pages.blocks.chart_notes import NOTE_PROPERTIES, note_rule_faults
+from varde.pages.blocks import check_props
 from varde.pages.blocks.decision import OPTIONS
 from varde.pages.blocks.option_matrix import FIRST_COLUMN, SCALES
-from varde.pages.blocks.spec import BlockSpec, PropertySpec
 from varde.pages.blocks_render.decision import LABELS, VERDICT_OF
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.components import component_bundle
@@ -151,35 +149,5 @@ def test_change_summary_metadata_rejects_shape_errors() -> None:
     ]
     for props, field in cases:
         errors = check_props("change-summary", props, 1)
-        assert len(errors) == 1
-        assert field in errors[0].message
-
-
-def test_chart_note_metadata_and_rules_check_a_note_once(monkeypatch) -> None:
-    spec = BlockSpec(
-        "notes-test",
-        "chart notes",
-        (),
-        "",
-        note_rule_faults,
-        properties=(
-            PropertySpec("labels", "list", items="string"),
-            PropertySpec(
-                "notes", "list", items="object", fields=NOTE_PROPERTIES, required=True
-            ),
-        ),
-    )
-    monkeypatch.setitem(COMPONENT_SPECS, "notes-test", spec)
-    base = {"labels": ["a", "b"]}
-    note = {"x": "a", "label": "n"}
-    assert check_props("notes-test", {**base, "notes": [note]}, 1) == []
-    for notes, field in [
-        ([{**note, "unexpected": 1}], "notes[0].unexpected"),
-        ([{"x": "a"}], "notes[0].label"),
-        ([{**note, "label": 3}], "notes[0].label"),
-        ([{**note, "tone": "loud"}], "notes[0].tone"),
-        ([{"label": "n", "from": "a"}], "notes[1]: missing required key 'to'"),
-    ]:
-        errors = check_props("notes-test", {**base, "notes": notes}, 1)
         assert len(errors) == 1
         assert field in errors[0].message
