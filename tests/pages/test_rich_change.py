@@ -130,3 +130,11 @@ def test_fixtures_validate_and_render_without_errors(name: str) -> None:
     body = render_page(doc, "t.md").body
     assert "vb-error" not in body and '"change": "' in body
     assert "<img" not in body and "<script>alert" not in body and "style=" not in body
+
+
+def test_change_has_no_inline_start_border() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/47-change.css"
+    ).read_text()
+    assert "border-inline-start" not in css
+    assert "border-left" not in css

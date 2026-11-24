@@ -365,3 +365,15 @@ def test_held_include_error_card_moves_into_its_slot(
     assert block_ids(html).count("inc") == 1
     assert "vb-error" in slot_of(html, "inc")
     assert "is missing" not in html
+
+
+def test_only_the_neutral_column_separator_keeps_an_inline_start_border() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/55-containers.css"
+    ).read_text()
+    edged = [
+        line.split("{")[0].strip()
+        for line in css.splitlines()
+        if "border-inline-start" in line
+    ]
+    assert set(edged) == {".vd-columns-panel"}
