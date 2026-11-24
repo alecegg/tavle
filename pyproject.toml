@@ -2,6 +2,7 @@
 name = "tavle"
 version = "0.1.0"
 requires-python = ">=3.14"
+license = "MIT"
 dependencies = []
 
 [build-system]
