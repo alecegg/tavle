@@ -6,7 +6,7 @@ from pathlib import Path
 
 from varde.pages.render import split_frontmatter, strip_comments
 from varde.pages.theme.css import style_element, theme_css
-from varde.pages.theme.resolve import resolve_theme
+from varde.pages.theme.resolve import ResolvedTheme, resolve_theme
 from varde.pages.theme.tokens import ThemeError
 
 
@@ -16,10 +16,15 @@ class PageTheme:
     error: str
 
 
+def doc_theme(doc: Path, text: str) -> ResolvedTheme:
+    """Resolve the theme for a page from its layers and front matter."""
+    frontmatter, _ = split_frontmatter(strip_comments(text.splitlines()))
+    return resolve_theme(doc, frontmatter)
+
+
 def require_theme(doc: Path, text: str) -> str:
     """Return the theme style, raising on invalid input."""
-    frontmatter, _ = split_frontmatter(strip_comments(text.splitlines()))
-    theme = resolve_theme(doc, frontmatter)
+    theme = doc_theme(doc, text)
     return style_element(theme_css(theme)) if theme.active else ""
 
 
