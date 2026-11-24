@@ -200,7 +200,7 @@ def test_current_marker_is_a_dot_not_a_tint_or_edge_bar(toc_page: Any) -> None:
 @pytest.mark.slow
 def test_phone_contents_bar_stays_in_view_and_closes_on_follow(toc_page: Any) -> None:
     toc_page.set_viewport_size({"width": 390, "height": 844})
-    toc_page.wait_for_function("!document.querySelector('.doc-toc details').open")
+    toc_page.wait_for_selector(".doc-toc details:not([open])", state="attached")
     _scroll_to(toc_page, "#h-fourth")
     summary = toc_page.locator(".doc-toc summary")
     box = summary.bounding_box()
@@ -209,7 +209,7 @@ def test_phone_contents_bar_stays_in_view_and_closes_on_follow(toc_page: Any) ->
     summary.click()
     assert toc_page.locator(".doc-toc details").get_attribute("open") is not None
     toc_page.locator(LINK.format("#h-second")).click()
-    toc_page.wait_for_function("!document.querySelector('.doc-toc details').open")
+    toc_page.wait_for_selector(".doc-toc details:not([open])", state="attached")
     top = toc_page.eval_on_selector("#h-second", "(h) => h.getBoundingClientRect().top")
     bar = summary.bounding_box()
     assert bar["y"] + bar["height"] <= top < 200
