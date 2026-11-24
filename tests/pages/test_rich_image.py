@@ -122,6 +122,26 @@ def test_missing_alt_and_bad_props_are_faults() -> None:
         assert check_props("image", bad, 1), bad
 
 
+def test_image_metadata_rejects_shape_errors() -> None:
+    valid: dict[str, object] = {"src": "a.png", "alt": "x"}
+    cases: list[tuple[dict[str, object], str]] = [
+        ({**valid, "unexpected": 1}, "unexpected"),
+        ({"src": "a.png"}, "alt"),
+        ({"alt": "x"}, "src"),
+        ({**valid, "alt": 3}, "'alt' must be string"),
+        ({**valid, "caption": 3}, "'caption' must be string"),
+        ({**valid, "width": "huge"}, "'width' must be one of narrow, full"),
+        ({**valid, "alt": "  "}, "'alt' must be a non-empty string"),
+        ({**valid, "caption": ""}, "'caption' must be a non-empty string"),
+        ({**valid, "src": ""}, "'src' must be a non-empty string"),
+        ({**valid, "src": "../a.png"}, "'..'"),
+    ]
+    for props, text in cases:
+        errors = check_props("image", props, 1)
+        assert len(errors) == 1, props
+        assert text in errors[0].message, props
+
+
 def test_check_flags_a_statement_without_alt() -> None:
     text = '```ui\nk = image(\n  src: "a.png",\n)\n```\n'
     assert any("alt" in e.text() for e in check(text))
