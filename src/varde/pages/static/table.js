@@ -6,6 +6,13 @@ const MIN_ROWS_FOR_FILTER = 8;
 const MIN_ROWS_FOR_SORT = 5;
 // A longer table shows this many rows and a toggle that names the total; a scroll region would cut a row in half.
 const COLLAPSED_ROWS = 12;
+// A table collapses only when the toggle would hide at least this many rows: hiding two or three
+// rows behind a button costs the reader more than it saves.
+const MIN_HIDDEN_ROWS = 5;
+
+function collapses(matched) {
+  return matched - COLLAPSED_ROWS >= MIN_HIDDEN_ROWS;
+}
 
 function cellValue(row, column) {
   const cell = row.cells[column];
@@ -87,16 +94,26 @@ function sortPicker(table, state) {
   return label;
 }
 
-// Shows the rows that match the filter, in their current order, up to the cap unless expanded.
-// Returns the match count; the group header of a body with nothing shown hides.
+// Shows the rows that match the filter, in their current order, up to the cap when the table
+// collapses and is not expanded. Returns the match count; the group header of a body with nothing
+// shown hides.
 function showRows(table, state) {
+  const hits = new Map();
   let matched = 0;
+  for (const body of table.tBodies) {
+    for (const row of dataRows(body)) {
+      const hit = !state.needle || row.textContent.toLowerCase().includes(state.needle);
+      hits.set(row, hit);
+      if (hit) matched += 1;
+    }
+  }
+  const capped = !state.expanded && collapses(matched);
+  let shown = 0;
   for (const body of table.tBodies) {
     let visible = 0;
     for (const row of dataRows(body)) {
-      const hit = !state.needle || row.textContent.toLowerCase().includes(state.needle);
-      if (hit) matched += 1;
-      row.hidden = !hit || (!state.expanded && matched > COLLAPSED_ROWS);
+      if (hits.get(row)) shown += 1;
+      row.hidden = !hits.get(row) || (capped && shown > COLLAPSED_ROWS);
       if (!row.hidden) visible += 1;
     }
     const head = body.querySelector('.vb-group-head');
@@ -108,7 +125,7 @@ function showRows(table, state) {
 
 function updateMore(state, matched) {
   const button = state.more.firstElementChild;
-  state.more.hidden = matched <= COLLAPSED_ROWS;
+  state.more.hidden = !collapses(matched);
   button.textContent = state.expanded ? 'Show first ' + COLLAPSED_ROWS + ' rows' : 'Show all ' + matched + ' rows';
   button.setAttribute('aria-expanded', String(state.expanded));
 }
@@ -196,7 +213,7 @@ function addToolbar(table, state, total) {
   bar.append(toggle, hint);
   trackOverflow(region, hint, toggle);
   region.after(bar);
-  if (total > COLLAPSED_ROWS) region.after(moreToggle(table, state));
+  if (collapses(total)) region.after(moreToggle(table, state));
   showRows(table, state);
 }
 

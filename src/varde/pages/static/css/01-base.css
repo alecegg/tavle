@@ -4,12 +4,13 @@ html, :host { -webkit-text-size-adjust: 100%; }
 :host { display: block; }
 body, :host { margin: 0; background: var(--vd-surface); color: var(--vd-text); font: var(--vd-density-font) / var(--vd-body-leading) var(--vd-font-body); overflow-wrap: anywhere; }
 /* the page is the vd-doc container: blocks respond to their column, not the viewport.
-   The column is 60rem; a 11rem TOC rail plus its 2rem gap joins it at a container width of 64rem or more. */
-main { container: vd-doc / inline-size; max-inline-size: calc(var(--vd-doc-width) + var(--vd-toc-width) + var(--vd-toc-gap)); margin-inline: auto; padding: var(--vd-space-4); }
+   The column is 60rem; a 11rem TOC rail plus its 2rem gap joins it, on a page that has a TOC, at a container width of 64rem or more. */
+main { container: vd-doc / inline-size; max-inline-size: var(--vd-doc-width); margin-inline: auto; padding: var(--vd-space-4); }
+main:has(> .doc-toc) { max-inline-size: calc(var(--vd-doc-width) + var(--vd-toc-width) + var(--vd-toc-gap)); } /* only a page with a TOC reserves its column */
 main > * { max-inline-size: var(--vd-doc-width); margin-inline: auto; }
 .doc-toc { margin-block: var(--vd-space-3); }
 @container vd-doc (min-width: 64rem) {
-  main > * { margin-inline: calc(var(--vd-toc-width) + var(--vd-toc-gap)) 0; }
+  main:has(> .doc-toc) > * { margin-inline: calc(var(--vd-toc-width) + var(--vd-toc-gap)) 0; }
   main > .doc-toc { display: block; float: inline-start; position: sticky; inset-block-start: var(--vd-space-6); inline-size: var(--vd-toc-width); margin: 0 calc(-1 * var(--vd-toc-width)) 0 0; max-block-size: calc(100vh - var(--vd-space-9)); overflow-y: auto; font-size: var(--vd-text-sm); }
 }
 @container vd-doc (max-width: 44rem) {

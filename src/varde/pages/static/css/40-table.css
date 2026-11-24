@@ -66,8 +66,9 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-wrap-toggle[hidden] { display: none; }
 .vb-wrap-toggle[aria-pressed="true"] { background: var(--vd-selected); border-color: var(--vd-border-selected); }
 /* The sort select stands in for the header buttons on phones only. */
-.vb-sortpick { display: none; align-items: center; gap: var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
-.vb-sortselect { min-block-size: 44px; font: inherit; padding-inline: var(--vd-space-2); background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
+.vb-sortpick { display: none; flex: 1 1 100%; min-inline-size: 0; align-items: center; gap: var(--vd-space-2); white-space: nowrap; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
+/* The select shrinks to the card; the label text never breaks (the page's `anywhere` wrap would split it per letter). */
+.vb-sortselect { flex: 1 1 0; min-inline-size: 0; max-inline-size: 100%; min-block-size: 44px; font: inherit; padding-inline: var(--vd-space-2); background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
 .vb-sortselect:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 /* A sticky first column only where it leaves room for the rest; phones scroll or stack. */
 @media (width >= 40.0625rem) {
@@ -76,7 +77,8 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-sticky thead th:first-child { z-index: 3; background: var(--vd-surface-elevated); }
   .vb-table-sticky .vb-group-head th:first-child { position: static; border-inline-end: 0; }
 }
-tr[hidden], .vb-scrollhint[hidden] { display: none; }
+/* Beats the stack mode's `tr { display: block }`, so a collapsed row stays hidden on phones too. */
+.vb-table tr[hidden], .vb-scrollhint[hidden] { display: none; }
 @media screen and (max-width: 40rem) {
   .vb-table-stack { min-inline-size: 0; }
   .vb-table-stack thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
@@ -88,7 +90,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
   .vb-table-stack td a { justify-self: start; max-inline-size: 100%; }
   .vb-table-stack .vb-num { text-align: start; }
   .vb-table-stack.vb-table-sticky th:first-child, .vb-table-stack.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }
-  .vb-sortpick { display: inline-flex; }
+  .vb-sortpick { display: flex; }
 }
 @media (forced-colors: active) {
   .vb-scroll, .vb-table th, .vb-table td { border-color: CanvasText; }
