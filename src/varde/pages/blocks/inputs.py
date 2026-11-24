@@ -9,7 +9,7 @@ import re
 
 from varde.pages.blocks.rules import Fault, check_keys, duplicates, is_number
 from varde.pages.blocks.spec import BlockSpec, PropertySpec
-from varde.pages.validation import CONTROLS, MAX_ITEM
+from varde.ui.limits import CONTROLS, MAX_ITEM
 
 MAX_OPTIONS = 50
 MAX_FIELDS = 30
