@@ -38,3 +38,6 @@
 
 /* Mithril host (client-side blocks): the block's own element is the layout box. */
 [data-mithril] { display: contents; }
+
+/* The table region owns horizontal scrolling when a card contains one. */
+.vb-card:has(.vb-scroll) { overflow: visible; }

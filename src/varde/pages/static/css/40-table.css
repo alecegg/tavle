@@ -86,13 +86,17 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-stack.vb-table-sticky th:first-child, .vb-table-stack.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }
   .vb-sortpick { display: flex; }
 }
+/* Hidden columns fade out at the edge they continue past (classes set by table.js); opaque cells hide a background shadow. A mask reads only alpha, so any opaque token works. */
+.vb-scroll.vb-more-end { mask-image: linear-gradient(to left, transparent, var(--vd-text) 3rem); }
+.vb-scroll.vb-more-start { mask-image: linear-gradient(to right, transparent, var(--vd-text) 3rem); }
+.vb-scroll.vb-more-start.vb-more-end { mask-image: linear-gradient(to right, transparent, var(--vd-text) 3rem, var(--vd-text) calc(100% - 3rem), transparent); }
 @media (forced-colors: active) {
   .vb-scroll, .vb-table th, .vb-table td { border-color: CanvasText; }
   .vb-bar-fill { fill: Highlight; }
   .vb-bar-track { stroke: CanvasText; }
 }
 @media print {
-  .vb-scroll { overflow: visible; background: none; }
+  .vb-scroll { overflow: visible; background: none; mask-image: none; }
   .vb-table { inline-size: 100%; max-inline-size: 100%; min-inline-size: 0; table-layout: fixed; }
   .vb-table-sticky th:first-child, .vb-table-sticky td:first-child { position: static; }
   .vb-table th, .vb-table td, .vb-table thead th, .vb-table td a, .vb-table .vb-sort, .vb-table .vb-status, .vb-table .vb-badge, .vb-table code, .vb-table .vb-bar-num, .vb-table td.vb-num, .vb-table .vd-date { white-space: normal; overflow-wrap: anywhere; word-break: break-word; min-inline-size: 0; min-block-size: 0; }

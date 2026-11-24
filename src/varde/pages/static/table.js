@@ -1,4 +1,4 @@
-// table and data-model: sort, filter, row cap, wrap toggle, scroll hint, relations.
+// table and data-model: sort, filter, row cap, scroll hint and edge fades, relations.
 import { make, control, keepInside, whileConnected } from './dom.js';
 
 // A short table is read at a glance: filter and sort controls appear only from these row counts.
@@ -166,15 +166,19 @@ function filterField(table, state, total) {
   return [input, status];
 }
 
-// The scroll hint shows only while the table is wider than its region.
+// The scroll hint shows only while the table is wider than its region; each edge with columns past it fades.
 function trackOverflow(region, hint) {
   const update = () => {
     const overflowing = region.scrollWidth > region.clientWidth + 1;
+    const start = Math.abs(region.scrollLeft);
     hint.hidden = !overflowing;
+    region.classList.toggle('vb-more-start', overflowing && start > 1);
+    region.classList.toggle('vb-more-end', overflowing && start + region.clientWidth < region.scrollWidth - 1);
   };
   update();
   whileConnected(region, 'resize', update);
   region.addEventListener('click', update);
+  region.addEventListener('scroll', update, { passive: true });
   if (typeof ResizeObserver === 'function') new ResizeObserver(update).observe(region);
 }
 
