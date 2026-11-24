@@ -59,3 +59,27 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
     body = render_page(doc, "t.md").body
     assert "<img" not in body and "<script>alert" not in body
     assert "style=" not in body and "vb-error" not in body
+
+
+STATIC = Path(__file__).parents[2] / "src" / "varde" / "pages" / "static"
+
+
+def test_sentence_value_is_marked_long_and_set_below_heading_size() -> None:
+    js = (STATIC / "components" / "stats.js").read_text()
+    assert "LONG_VALUE_CHARS = 16" in js and "dd.vd-stats-value.vd-stats-long" in js
+    rule = next(
+        line
+        for line in (STATIC / "css" / "58-stats.css").read_text().splitlines()
+        if line.startswith(".vd-stats-long")
+    )
+    assert "clamp" not in rule and "overflow" not in rule  # never hide text
+    size = rule.split("font-size:")[1].split(";")[0].strip()
+    assert size == "var(--vd-text-md)"
+    tokens = (STATIC / "css" / "00-tokens.css").read_text()
+    assert (
+        "--vd-text-md: 1rem;" in tokens and "--vd-heading-3: clamp(1.125rem" in tokens
+    )
+    stats = (STATIC / "css" / "58-stats.css").read_text()
+    assert (
+        "font-size: var(--vd-text-2xl)" in stats
+    )  # short and numeric values keep the big size
