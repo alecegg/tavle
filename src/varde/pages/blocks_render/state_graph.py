@@ -24,7 +24,6 @@ KIND_WORDS = {
 }
 NODE_CLIP = 60
 LABEL_CLIP = 40
-ERROR_GLYPH = "✕ "
 
 
 def states_of(data: Props) -> list[Props]:
@@ -81,8 +80,7 @@ def unreachable_ids(states: Sequence[Props], moves: Sequence[Props]) -> set[str]
 
 
 def node_label(state: Props) -> str:
-    glyph = ERROR_GLYPH if kind_of(state) == "error" else ""
-    return glyph + ellipsize(str(state["label"]), NODE_CLIP)
+    return ellipsize(str(state["label"]), NODE_CLIP)
 
 
 def free_id(taken: set[str]) -> str:

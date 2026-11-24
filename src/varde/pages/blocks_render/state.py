@@ -1,8 +1,8 @@
 """Props for the state block, drawn on the flow layout.
 
 `state_graph` adapts the states and transitions to `layout_graph`; this module draws
-the result: start dot, double border for final, cross mark for error, dashed border
-for unreachable, self-loops with their label beside the node.
+the result: start dot, double border for final, thick risk border for error, dashed
+border for unreachable, self-loops with their label beside the node.
 `static/components/state.js` builds the DOM: the drawing sits at 1:1 scale in a
 scroll region. Below it the states and an ordered list of transitions are the text
 alternative, the print form and the copy text. Colours come only from `--vd-*`
