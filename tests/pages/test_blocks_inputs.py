@@ -18,11 +18,12 @@ from typing import Any
 import pytest
 from ui_fence import block_host, example_fence
 
-from varde.pages.blocks.check import COMPONENT_SPECS, check, check_props
+from varde.pages.blocks.check import COMPONENT_SPECS, check_props
 from varde.pages.blocks_render.inputs import choice_props, form_props
 from varde.pages.blocks_render.inputs_ordered import ranking_props, slider_props
 from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.components import component_bundle
+from varde.pages.page_check import check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 from varde.pages.template import make_read_only

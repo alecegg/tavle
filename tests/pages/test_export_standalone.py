@@ -13,6 +13,7 @@ from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 from varde.pages.assemble import include_ctx
 from varde.pages.blocks import COMPONENT_SPECS
 from varde.pages.components import export_page, mount_block
+from varde.pages.page_check import PAGE_SPECS
 from varde.pages.render import render_page
 from varde.pages.template import make_read_only
 
@@ -52,9 +53,7 @@ def every_block_page(root: Path) -> str:
     (root / "plan.md").write_text(
         "# Plan\n\n## Acceptance criteria\n\n- works\n", "utf-8"
     )
-    fences = (
-        f"```ui\n{spec.example.strip()}\n```\n" for spec in COMPONENT_SPECS.values()
-    )
+    fences = (f"```ui\n{spec.example.strip()}\n```\n" for spec in PAGE_SPECS.values())
     doc = root / "all.md"
     doc.write_text("# Every block\n\n" + "\n".join(fences), encoding="utf-8")
     text = doc.read_text(encoding="utf-8")
@@ -79,7 +78,7 @@ def test_export_holds_every_block_type(tmp_path: Path) -> None:
     markup = re.sub(r"<script>.*?</script>", "", page, flags=re.DOTALL)
     hosts = set(re.findall(r'data-mithril="([\w-]+)"', markup))
     # an include is expanded into the parts it names; it has no host of its own
-    assert hosts == set(COMPONENT_SPECS) - {"include"}
+    assert hosts == set(COMPONENT_SPECS)
     assert "works" in page and 'class="vb-card vb-error' not in markup
 
 

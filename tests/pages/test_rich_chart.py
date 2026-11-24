@@ -24,6 +24,7 @@ from varde.pages.blocks_render.chart_scale import (
 )
 from varde.pages.blocks_render.charts import chart_props as _chart_props
 from varde.pages.blocks_render.registry import COMPONENTS
+from varde.pages.page_check import PAGE_SPECS
 from varde.pages.serve import PageServer
 from varde.ui.lines import parse_lines
 
@@ -410,7 +411,7 @@ def test_spec_example_validates_and_every_kind_is_listed() -> None:
     result = parse_lines(CHART.example)
     assert result.errors == []
     assert check_props("chart", result.statements[0].props, 1) == []
-    text = type_text("chart")
+    text = type_text(PAGE_SPECS, "chart")
     assert all(kind in text for kind in KINDS)
 
 

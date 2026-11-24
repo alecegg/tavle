@@ -18,7 +18,7 @@ included part) and `error`.
 from collections.abc import Mapping
 
 from varde.pages.blocks.spec import INPUT_BLOCK_TYPES
-from varde.pages.blocks_render.registry import COMPONENTS
+from varde.pages.page_check import PAGE_SPECS
 
 BLOCK_TYPES: tuple[str, ...] = (
     "prose",
@@ -79,7 +79,7 @@ def menu_entries(
 
 def component_block_type(component: str) -> str:
     """The block type of a `ui` component name (`include` renders as parts)."""
-    entry = COMPONENTS.get(component)
-    if entry is None:
+    spec = PAGE_SPECS.get(component)
+    if spec is None:
         return "error"
-    return entry.spec.block_type
+    return spec.block_type

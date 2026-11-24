@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from ui_fence import example_fence, ui_fence
 
-from varde.pages import blocks
+from varde.pages import blocks, page_check
+from varde.pages.page_check import PAGE_SPECS
 
 VALID = 'question = "Ship it?"\n'
 
@@ -14,15 +15,15 @@ def fenced(body: str, id_: str = "d1", before: str = "") -> str:
 
 
 def rules(doc: str) -> list[str]:
-    return [e.rule for e in blocks.check(doc)]
+    return [e.rule for e in page_check.check(doc)]
 
 
 def test_example_is_valid():
-    assert blocks.check(example_fence(blocks.SPECS["decision"].example)) == []
+    assert page_check.check(example_fence(blocks.SPECS["decision"].example)) == []
 
 
 def test_minimal_block_is_valid():
-    assert blocks.check(fenced(VALID)) == []
+    assert page_check.check(fenced(VALID)) == []
 
 
 def test_unknown_option():
@@ -35,7 +36,7 @@ def test_duplicate_option():
 
 def test_duplicate_id_reports_line():
     doc = fenced(VALID) + fenced(VALID)
-    errors = blocks.check(doc)
+    errors = page_check.check(doc)
     assert [e.rule for e in errors] == ["id-duplicate"]
     assert errors[0].line == 7
 
@@ -54,7 +55,7 @@ def test_unknown_key():
 
 
 def test_blocks_command_prints_fields_and_example(capsys):
-    text = blocks.type_text("decision")
+    text = blocks.type_text(PAGE_SPECS, "decision")
     assert "question" in text and "options" in text and "evidence" in text
     assert 'question: "' in text
 

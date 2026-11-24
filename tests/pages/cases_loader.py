@@ -13,6 +13,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
+from varde.pages.blocks_render.registry import PAGE_STATEMENTS
 from varde.pages.fences import ui_statements
 
 CASES = Path(__file__).parent / "cases"
@@ -42,7 +43,9 @@ def _matrix_cases() -> list[Case]:
     for fixture in sorted(MATRIX.glob("*.md")):
         for _, statement in ui_statements(fixture.read_text(encoding="utf-8")):
             name = f"{fixture.stem}:{statement.id}"
-            if name not in MATRIX_REJECTED:
+            # Page statements (`include`) are not components; test_include covers them.
+            page_only = statement.component in PAGE_STATEMENTS
+            if name not in MATRIX_REJECTED and not page_only:
                 cases.append(Case(name, statement.component, statement.props))
     return cases
 

@@ -18,8 +18,9 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde.pages.blocks import check_props
+from varde.pages.blocks import props_errors
 from varde.pages.fences import ui_statements
+from varde.pages.include_statement import INCLUDE
 from varde.pages.select import (
     Selector,
     SelectorError,
@@ -87,7 +88,7 @@ def find_includes(text: str) -> list[IncludeRef]:
     """Every `include` statement on the page; raises IncludeError."""
     refs: list[IncludeRef] = []
     for line, statement in _include_statements(text):
-        faults = check_props("include", statement.props, line)
+        faults = props_errors(INCLUDE, statement.props, line)
         if faults:
             raise IncludeError(line, faults[0].message)
         if any(ref.id == statement.id for ref in refs):
@@ -279,7 +280,7 @@ def include_errors(text: str, root: Path | None = None) -> list[tuple[int, str, 
     with such a fault (or no `root`) gets nothing here.
     """
     statements = _include_statements(text)
-    if root is None or any(check_props("include", s.props, n) for n, s in statements):
+    if root is None or any(props_errors(INCLUDE, s.props, n) for n, s in statements):
         return []
     try:
         parts = resolve_includes(text, root)

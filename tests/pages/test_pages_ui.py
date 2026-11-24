@@ -13,8 +13,8 @@ from typing import Any
 import pytest
 
 from varde.pages.assemble import assemble, parse_page_stream
-from varde.pages.blocks import check
 from varde.pages.comments import fold, read_rows
+from varde.pages.page_check import check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 

@@ -8,8 +8,9 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check, check_props, type_text
+from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks_render.registry import COMPONENTS
+from varde.pages.page_check import PAGE_SPECS, check
 from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
@@ -63,7 +64,7 @@ def test_props_are_validated() -> None:
 def test_registered_help_and_fixtures() -> None:
     assert "matrix" in COMPONENTS
     text = files("varde.pages").joinpath("help", "blocks.txt").read_text()
-    assert type_text("matrix") in text
+    assert type_text(PAGE_SPECS, "matrix") in text
     for name in ("rich-matrix", "rich-matrix-stress"):
         doc = (FIXTURES / f"{name}.md").read_text()
         assert check(doc) == []

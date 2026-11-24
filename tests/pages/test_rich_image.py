@@ -15,11 +15,12 @@ import pytest
 
 from varde.pages import media
 from varde.pages.assemble import assemble_page, assemble_static
-from varde.pages.blocks import check, check_props
+from varde.pages.blocks import check_props
 from varde.pages.blocks.image import src_fault
 from varde.pages.blocks.image_header import read_header
 from varde.pages.blocks_render.image import copy_text, image_props
 from varde.pages.media import Media, Problem, probe
+from varde.pages.page_check import check
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105

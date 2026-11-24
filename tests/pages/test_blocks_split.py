@@ -1,11 +1,12 @@
 """The block code split by kind keeps every existing render output unchanged."""
 
-from varde.pages.blocks import SPECS, check_props
+from varde.pages.blocks import SPECS, check_props, props_errors
 from varde.pages.blocks import charts as chart_spec
 from varde.pages.blocks import diagrams as diagram_spec
 from varde.pages.blocks import flow as flow_spec
 from varde.pages.blocks import tables as table_spec
 from varde.pages.blocks_render import diagrams, flow, registry
+from varde.pages.include_statement import INCLUDE
 
 TABLE = {
     "columns": ["a", "b<"],
@@ -68,8 +69,8 @@ def test_include_property_faults_are_single_and_name_the_field() -> None:
         ({**ok, "title": ""}, "title"),
         ({**ok, "select": "nope"}, "selector"),
     ]
-    assert check_props("include", {**ok, "title": "T"}, 1) == []
+    assert props_errors(INCLUDE, {**ok, "title": "T"}, 1) == []
     for data, field in cases:
-        faults = check_props("include", data, 1)
+        faults = props_errors(INCLUDE, data, 1)
         assert len(faults) == 1, (data, faults)
         assert field in faults[0].message

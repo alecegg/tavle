@@ -13,7 +13,7 @@ from typing import Any
 import pytest
 from scene_html import shapes_html
 
-from varde.pages.blocks import check, check_props
+from varde.pages.blocks import check_props
 from varde.pages.blocks_render.diagram_layout import (
     EdgeSpec,
     layout_graph,
@@ -29,6 +29,7 @@ from varde.pages.blocks_render.state_graph import (
     transitions_of,
     unreachable_ids,
 )
+from varde.pages.page_check import check
 from varde.pages.render import render_page
 
 

@@ -6,10 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.blocks import check, check_props
+from varde.pages.blocks import check_props
 from varde.pages.blocks.change import CHANGES, change_rule_faults
 from varde.pages.blocks_render.backend import data_model_props, endpoint_props
 from varde.pages.blocks_render.change import copy_line
+from varde.pages.page_check import check
 from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

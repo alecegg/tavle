@@ -7,8 +7,9 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check, check_props
+from varde.pages.blocks import check_props
 from varde.pages.blocks_render.registry import COMPONENTS
+from varde.pages.page_check import check
 from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

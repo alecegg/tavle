@@ -14,6 +14,7 @@ from varde.pages.blocks_render.file_tree import (
     match_target,
     summary_text,
 )
+from varde.pages.page_check import PAGE_SPECS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 HOSTILE = '<img src=x onerror=alert(1)> "q" &amp; <script>alert(1)</script>'
@@ -89,5 +90,5 @@ def test_match_target_prefers_the_exact_then_the_longest_tail() -> None:
 
 
 def test_help_text_lists_the_props() -> None:
-    text = type_text("file-tree")
+    text = type_text(PAGE_SPECS, "file-tree")
     assert text.startswith("file-tree - ") and "collapse" in text and "entries" in text

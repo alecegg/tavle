@@ -8,13 +8,8 @@ from dataclasses import dataclass, field, replace
 
 from varde.pages.actions import component_block_type
 from varde.pages.anchors import AnchorState, block_hash
-from varde.pages.blocks import CUSTOM_REMOVED
 from varde.pages.blocks.change_summary import Marker, collect_markers
-from varde.pages.blocks.check import (
-    OLD_FENCES,
-    TOML_FENCE_REMOVED,
-    check_props,
-)
+from varde.pages.blocks.check import check_props, props_errors
 from varde.pages.blocks_render import (
     error_card,
     errors_card,
@@ -36,10 +31,12 @@ from varde.pages.blocks_render.file_tree import (
 )
 from varde.pages.blocks_render.image import image_props, render_refused
 from varde.pages.header import count_words, header_html
+from varde.pages.include_statement import INCLUDE
 from varde.pages.markdown_syntax import FENCE as _FENCE
 from varde.pages.markdown_syntax import HEADING as _HEADING
 from varde.pages.markdown_syntax import FenceScanner, fence_closes
 from varde.pages.media import Media, Problem
+from varde.pages.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
 from varde.pages.toc import toc_entries, toc_html
 from varde.ui.lines import ParseError, Statement, parse_lines
 
@@ -419,7 +416,7 @@ def _statement_html(
             statement.component, statement.props, statement.id, line, source
         )
         return "other", html_, component_block_type(statement.component)
-    errors = [e.text() for e in check_props("include", statement.props, line)]
+    errors = [e.text() for e in props_errors(INCLUDE, statement.props, line)]
     if errors:
         return "other", errors_card("include", errors), "error"
     if ctx.include_error:

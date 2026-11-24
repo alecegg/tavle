@@ -8,6 +8,7 @@ from typing import Any
 import pytest
 
 from varde.pages import blocks
+from varde.pages.page_check import PAGE_SPECS
 
 FIELD_LINE = re.compile(r"^( *)(\S+) +(required|optional) +(.+)$")
 
@@ -47,11 +48,22 @@ def expected_rows(entry: dict[str, Any]) -> list[tuple[int, str, str, str]]:
     return rows
 
 
-@pytest.mark.parametrize("entry", blocks.catalog(), ids=lambda e: str(e["name"]))
+@pytest.mark.parametrize(
+    "entry",
+    blocks.catalog(
+        PAGE_SPECS,
+    ),
+    ids=lambda e: str(e["name"]),
+)
 def test_help_lists_every_json_property(entry: dict[str, Any]) -> None:
-    text = blocks.type_text(str(entry["name"]))
+    text = blocks.type_text(PAGE_SPECS, str(entry["name"]))
     assert field_rows(text) == expected_rows(entry)
 
 
 def test_every_widget_has_a_property_in_the_json() -> None:
-    assert all(entry["properties"] for entry in blocks.catalog())
+    assert all(
+        entry["properties"]
+        for entry in blocks.catalog(
+            PAGE_SPECS,
+        )
+    )

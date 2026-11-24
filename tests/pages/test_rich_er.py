@@ -24,6 +24,7 @@ from varde.pages.blocks_render.er_layout import (
     place,
     route,
 )
+from varde.pages.page_check import PAGE_SPECS
 from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
@@ -229,5 +230,5 @@ def test_fixtures_render_without_error(name: str) -> None:
 
 
 def test_help_text_lists_the_layout_prop() -> None:
-    text = type_text("data-model")
+    text = type_text(PAGE_SPECS, "data-model")
     assert "layout" in text and "graph" in text

@@ -13,7 +13,7 @@ from typing import Any
 import pytest
 from scene_html import shapes_html
 
-from varde.pages import blocks
+from varde.pages import blocks, page_check
 from varde.pages.blocks import check_props
 from varde.pages.blocks.screens import KINDS, SURFACES
 from varde.pages.blocks_render import screens
@@ -337,7 +337,7 @@ def test_static_export_shows_svg_notes_and_every_state_without_script() -> None:
 
 def test_stress_fixture_escapes_hostile_text() -> None:
     text = (FIXTURES / "rich-wireframe-stress.md").read_text(encoding="utf-8")
-    assert blocks.check(text) == []
+    assert page_check.check(text) == []
     body = render_page(text, "t.md").body
     assert "vb-error" not in body and "<script>alert" not in body
     assert "<img src=x" not in body and "style=" not in body
@@ -346,7 +346,7 @@ def test_stress_fixture_escapes_hostile_text() -> None:
 
 def test_normal_fixture_is_valid() -> None:
     text = (FIXTURES / "rich-wireframe.md").read_text(encoding="utf-8")
-    assert blocks.check(text) == []
+    assert page_check.check(text) == []
     body = render_page(text, "t.md").body
     assert body.count('data-mithril="wireframe"') == 2
 
