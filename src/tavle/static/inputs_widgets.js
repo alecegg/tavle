@@ -1,6 +1,6 @@
-import { fieldValue } from './inputs_fields.js';
+(globalThis.vardePageParts ||= {}).inputWidgets = function mountInputs({ register, onSubmit, fail, setNote, sendAnswer }) {
+  const { fieldValue } = globalThis.vardePageParts.inputFields;
 
-export function mountInputs({ register, onSubmit, fail, setNote, sendAnswer }) {
   function textOf(root, kind) {
     const area = root.querySelector('.' + kind + '-text');
     return area ? area.value : '';
@@ -133,4 +133,4 @@ export function mountInputs({ register, onSubmit, fail, setNote, sendAnswer }) {
     },
   });
 
-  }
+  };

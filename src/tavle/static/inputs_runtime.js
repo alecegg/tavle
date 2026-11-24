@@ -1,9 +1,8 @@
-import { readFields } from './inputs_fields.js';
-import { mountInputs as mountInputWidgets } from './inputs_widgets.js';
-
 // Component props, state and input hydration, independent of the page host.
 (globalThis.vardePageParts ||= {}).inputRuntime = (tree, ctx) => {
   'use strict';
+  const { readFields } = globalThis.vardePageParts.inputFields;
+  const mountInputWidgets = globalThis.vardePageParts.inputWidgets;
   // ---- props: parse, then whitelist -----------------------------------------
 
   // Port of pages/render.py classify_url; tests/docs/fixtures/url-vectors.json is

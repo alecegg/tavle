@@ -1,3 +1,4 @@
+(globalThis.vardePageParts ||= {}).inputFields = (() => {
   const FIELD_TYPES = ['text', 'number', 'select', 'checkbox'];
   const FIELD_NAME = /^[a-z][a-z0-9_-]{0,47}$/; // the server's rule; bars `__proto__`
 
@@ -8,7 +9,7 @@
 
   // Form field descriptors: only name, type, required, min and max survive; one
   // bad entry rejects the list, so the form never sends a partial answer.
-  export function readFields(list) {
+  function readFields(list) {
     const fields = [];
     for (const raw of list) {
       if (!validField(raw)) return undefined;
@@ -23,7 +24,7 @@
 
 
   // The value of one form control, or an Error (with `control`) naming what is wrong.
-  export function fieldValue(field, control) {
+  function fieldValue(field, control) {
     const bad = (message) => Object.assign(new Error(message), { control });
     if (!control) return bad('Form is incomplete.');
     if (field.type === 'checkbox') {
@@ -44,3 +45,5 @@
     return number;
   }
 
+  return { readFields, fieldValue };
+})();
