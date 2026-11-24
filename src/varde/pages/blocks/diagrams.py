@@ -1,14 +1,7 @@
 """Block type for structure: diagram (a graph or tree of nodes and edges)."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    str_field,
-    tables,
-    tables_fault,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("graph", "tree")
 SHAPES = ("box", "rounded", "cylinder", "diamond")
@@ -20,16 +13,19 @@ MAX_EDGES = 400
 MAX_GROUPS = 3  # one pre-computed layout per subset of collapsed groups
 
 
-def _choice_fault(
-    data: dict[str, object], key: str, allowed: tuple[str, ...], where: str
-):
-    if key in data and data[key] not in allowed:
-        return [Fault("type", f"{where}: {key} must be one of {list(allowed)}")]
-    return []
+def empty_list_faults(
+    data: dict[str, object], keys: tuple[str, ...], where: str
+) -> list[Fault]:
+    """An empty list passes the properties; these blocks need at least one item."""
+    return [
+        Fault("type", f"{where}: '{key}' must not be empty")
+        for key in keys
+        if data.get(key) == []
+    ]
 
 
 def _group_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
-    faults = tables_fault(data, "groups", "diagram")
+    faults: list[Fault] = []
     entries = tables(data, "groups", "diagram")
     names = [n for g in entries if isinstance(n := g.get("id"), str)]
     faults += [
@@ -38,17 +34,13 @@ def _group_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     ]
     if len(entries) > MAX_GROUPS:
         faults.append(Fault("too-many", f"diagram: at most {MAX_GROUPS} groups"))
-    for n, group in enumerate(entries, 1):
-        where = f"groups[{n}]"
-        faults += check_keys(group, {"id", "label"}, set(), where)
-        faults += str_field(group, "id", where) + str_field(group, "label", where)
     return faults, names
 
 
 def _node_faults(
     data: dict[str, object], groups: list[str]
 ) -> tuple[list[Fault], list[str]]:
-    faults = tables_fault(data, "nodes", "diagram")
+    faults: list[Fault] = []
     entries = tables(data, "nodes", "diagram")
     names = [n for e in entries if isinstance(n := e.get("id"), str)]
     faults += [
@@ -59,13 +51,6 @@ def _node_faults(
         faults.append(Fault("too-many", f"diagram: at most {MAX_NODES} nodes"))
     for n, node in enumerate(entries, 1):
         where = f"nodes[{n}]"
-        faults += check_keys(
-            node, {"id", "label"}, {"group", "shape", "detail", "emphasis"}, where
-        )
-        for key in ("id", "label", "group", "detail"):
-            faults += str_field(node, key, where)
-        faults += _choice_fault(node, "shape", SHAPES, where)
-        faults += _choice_fault(node, "emphasis", EMPHASIS, where)
         group = node.get("group")
         if isinstance(group, str) and group not in groups:
             faults.append(
@@ -75,23 +60,15 @@ def _node_faults(
 
 
 def _edge_faults(data: dict[str, object], nodes: list[str]) -> list[Fault]:
-    faults = tables_fault(data, "edges", "diagram")
+    faults: list[Fault] = []
     entries = tables(data, "edges", "diagram")
     if len(entries) > MAX_EDGES:
         faults.append(Fault("too-many", f"diagram: at most {MAX_EDGES} edges"))
     for n, edge in enumerate(entries, 1):
         where = f"edges[{n}]"
-        faults += check_keys(
-            edge, {"from", "to"}, {"label", "style", "emphasis"}, where
-        )
-        faults += _choice_fault(edge, "style", EDGE_STYLES, where)
-        faults += _choice_fault(edge, "emphasis", EMPHASIS, where)
-        faults += str_field(edge, "label", where)
         for key in ("from", "to"):
             end = edge.get(key)
-            if key in edge and not isinstance(end, str):
-                faults.append(Fault("type", f"{where}.{key} must be a string"))
-            elif isinstance(end, str) and end not in nodes:
+            if isinstance(end, str) and end not in nodes:
                 faults.append(
                     Fault("edge-target", f"{where}: {key} '{end}' is not a node id")
                 )
@@ -134,14 +111,7 @@ def _tree_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_diagram(data: dict[str, object]) -> list[Fault]:
-    required, optional = (
-        {"kind", "nodes"},
-        {"edges", "direction", "groups", "title", "desc"},
-    )
-    faults = check_keys(data, required, optional, "diagram")
-    faults += str_field(data, "title", "diagram") + str_field(data, "desc", "diagram")
-    faults += _choice_fault(data, "kind", KINDS, "diagram")
-    faults += _choice_fault(data, "direction", DIRECTIONS, "diagram")
+    faults = empty_list_faults(data, ("nodes", "edges", "groups"), "diagram")
     group_faults, groups = _group_faults(data)
     node_faults, nodes = _node_faults(data, groups)
     faults += group_faults + node_faults + _edge_faults(data, nodes)
@@ -201,4 +171,45 @@ DIAGRAM = BlockSpec(
 )
 """,
     validate_diagram,
+    properties=(
+        PropertySpec("kind", "string", required=True, enum=KINDS),
+        PropertySpec(
+            "nodes",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("id", "string", required=True),
+                PropertySpec("label", "string", required=True),
+                PropertySpec("group", "string"),
+                PropertySpec("shape", "string", enum=SHAPES),
+                PropertySpec("detail", "string"),
+                PropertySpec("emphasis", "string", enum=EMPHASIS),
+            ),
+        ),
+        PropertySpec(
+            "edges",
+            "list",
+            items="object",
+            fields=(
+                PropertySpec("from", "string", required=True),
+                PropertySpec("to", "string", required=True),
+                PropertySpec("label", "string"),
+                PropertySpec("style", "string", enum=EDGE_STYLES),
+                PropertySpec("emphasis", "string", enum=EMPHASIS),
+            ),
+        ),
+        PropertySpec("direction", "string", enum=DIRECTIONS),
+        PropertySpec(
+            "groups",
+            "list",
+            items="object",
+            fields=(
+                PropertySpec("id", "string", required=True),
+                PropertySpec("label", "string", required=True),
+            ),
+        ),
+        PropertySpec("title", "string"),
+        PropertySpec("desc", "string"),
+    ),
 )

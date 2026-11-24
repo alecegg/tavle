@@ -1,20 +1,12 @@
 """Block type for process: flow."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    list_of,
-    str_field,
-    tables,
-    tables_fault,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.diagrams import empty_list_faults
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def validate_flow(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"step"}, {"title"}, "flow")
-    faults += str_field(data, "title", "flow") + tables_fault(data, "step", "flow")
+    faults = empty_list_faults(data, ("step",), "flow")
     steps = tables(data, "step", "flow")
     ids = [n for s in steps if isinstance(n := s.get("id"), str)]
     faults += [
@@ -23,12 +15,9 @@ def validate_flow(data: dict[str, object]) -> list[Fault]:
     ]
     for n, step in enumerate(steps, 1):
         where = f"step[{n}]"
-        faults += check_keys(step, {"id", "text"}, {"next"}, where)
-        faults += str_field(step, "id", where) + str_field(step, "text", where)
-        if "next" not in step:
+        targets = step.get("next")
+        if not isinstance(targets, list):
             continue
-        faults += list_of(step["next"], f"{where}.next")
-        targets = step["next"] if isinstance(step["next"], list) else []
         faults += [
             Fault("step-target", f"{where}: next '{t}' is not a step id")
             for t in targets
@@ -58,4 +47,18 @@ FLOW = BlockSpec(
 )
 """,
     validate_flow,
+    properties=(
+        PropertySpec("title", "string"),
+        PropertySpec(
+            "step",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("id", "string", required=True),
+                PropertySpec("text", "string", required=True),
+                PropertySpec("next", "list", items="string"),
+            ),
+        ),
+    ),
 )

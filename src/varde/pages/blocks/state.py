@@ -1,28 +1,11 @@
 """Block type for a state machine: states and labelled transitions."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    str_field,
-    tables,
-    tables_fault,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.diagrams import empty_list_faults
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("initial", "normal", "final", "error")
 MAX_STATES = 40
-STATE_OPTIONAL = {"kind", "note"}
-MOVE_OPTIONAL = {"label", "guard"}
-
-
-def _one_state_faults(state: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(state, {"id", "label"}, STATE_OPTIONAL, where)
-    for key in ("id", "label", "note"):
-        faults += str_field(state, key, where)
-    if "kind" in state and state["kind"] not in KINDS:
-        faults.append(Fault("type", f"{where}: kind must be one of {list(KINDS)}"))
-    return faults
 
 
 def _initial_faults(entries: list[dict[str, object]]) -> list[Fault]:
@@ -36,7 +19,7 @@ def _initial_faults(entries: list[dict[str, object]]) -> list[Fault]:
 
 
 def _state_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
-    faults = tables_fault(data, "states", "state")
+    faults: list[Fault] = []
     entries = tables(data, "states", "state")
     names = [n for s in entries if isinstance(n := s.get("id"), str)]
     faults += [
@@ -45,37 +28,27 @@ def _state_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     ]
     if len(entries) > MAX_STATES:
         faults.append(Fault("too-many", f"state: at most {MAX_STATES} states"))
-    for n, state in enumerate(entries, 1):
-        faults += _one_state_faults(state, f"states[{n}]")
     return faults + _initial_faults(entries), names
 
 
 def _end_fault(move: dict[str, object], key: str, names: list[str], where: str):
-    if key not in move:
-        return []
-    end = move[key]
-    if not isinstance(end, str):
-        return [Fault("type", f"{where}.{key} must be a string")]
-    if end not in names:
+    end = move.get(key)
+    if isinstance(end, str) and end not in names:
         return [Fault("transition-state", f"{where}: {key} '{end}' is not a state id")]
     return []
 
 
 def _move_faults(data: dict[str, object], names: list[str]) -> list[Fault]:
-    faults = tables_fault(data, "transitions", "state")
+    faults: list[Fault] = []
     for n, move in enumerate(tables(data, "transitions", "state"), 1):
         where = f"transitions[{n}]"
-        faults += check_keys(move, {"from", "to"}, MOVE_OPTIONAL, where)
         faults += _end_fault(move, "from", names, where)
         faults += _end_fault(move, "to", names, where)
-        faults += str_field(move, "label", where) + str_field(move, "guard", where)
     return faults
 
 
 def validate_state(data: dict[str, object]) -> list[Fault]:
-    required, optional = {"states", "desc"}, {"title", "transitions"}
-    faults = check_keys(data, required, optional, "state")
-    faults += str_field(data, "title", "state") + str_field(data, "desc", "state")
+    faults = empty_list_faults(data, ("states", "transitions"), "state")
     state_faults, names = _state_faults(data)
     return faults + state_faults + _move_faults(data, names)
 
@@ -116,4 +89,31 @@ STATE = BlockSpec(
 )
 """,
     validate_state,
+    properties=(
+        PropertySpec(
+            "states",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("id", "string", required=True),
+                PropertySpec("label", "string", required=True),
+                PropertySpec("kind", "string", enum=KINDS),
+                PropertySpec("note", "string"),
+            ),
+        ),
+        PropertySpec(
+            "transitions",
+            "list",
+            items="object",
+            fields=(
+                PropertySpec("from", "string", required=True),
+                PropertySpec("to", "string", required=True),
+                PropertySpec("label", "string"),
+                PropertySpec("guard", "string"),
+            ),
+        ),
+        PropertySpec("desc", "string", required=True),
+        PropertySpec("title", "string"),
+    ),
 )

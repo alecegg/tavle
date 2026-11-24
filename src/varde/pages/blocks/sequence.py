@@ -1,24 +1,16 @@
 """Block type for a sequence diagram: actors, ordered steps, optional groups."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    str_field,
-    tables,
-    tables_fault,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.diagrams import empty_list_faults
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("call", "return", "async", "note")
 MAX_ACTORS = 12
 MAX_STEPS = 200
-ACTOR_OPTIONAL: set[str] = set()
-STEP_OPTIONAL = {"kind", "group"}
 
 
 def _actor_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
-    faults = tables_fault(data, "actors", "sequence")
+    faults: list[Fault] = []
     entries = tables(data, "actors", "sequence")
     names = [n for a in entries if isinstance(n := a.get("id"), str)]
     faults += [
@@ -27,36 +19,24 @@ def _actor_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     ]
     if len(entries) > MAX_ACTORS:
         faults.append(Fault("too-many", f"sequence: at most {MAX_ACTORS} actors"))
-    for n, actor in enumerate(entries, 1):
-        where = f"actors[{n}]"
-        faults += check_keys(actor, {"id", "label"}, ACTOR_OPTIONAL, where)
-        faults += str_field(actor, "id", where) + str_field(actor, "label", where)
     return faults, names
 
 
 def _end_fault(step: dict[str, object], key: str, actors: list[str], where: str):
     end = step.get(key)
-    if key not in step:
-        return []
-    if not isinstance(end, str):
-        return [Fault("type", f"{where}.{key} must be a string")]
-    if end not in actors:
+    if isinstance(end, str) and end not in actors:
         return [Fault("step-actor", f"{where}: {key} '{end}' is not an actor id")]
     return []
 
 
 def _step_faults(step: dict[str, object], actors: list[str], where: str) -> list[Fault]:
-    faults = check_keys(step, {"from", "to", "text"}, STEP_OPTIONAL, where)
-    faults += _end_fault(step, "from", actors, where)
-    faults += _end_fault(step, "to", actors, where)
-    faults += str_field(step, "text", where) + str_field(step, "group", where)
-    if "kind" in step and step["kind"] not in KINDS:
-        faults.append(Fault("type", f"{where}: kind must be one of {list(KINDS)}"))
-    return faults
+    return _end_fault(step, "from", actors, where) + _end_fault(
+        step, "to", actors, where
+    )
 
 
 def _steps_faults(data: dict[str, object], actors: list[str]) -> list[Fault]:
-    faults = tables_fault(data, "steps", "sequence")
+    faults: list[Fault] = []
     entries = tables(data, "steps", "sequence")
     if len(entries) > MAX_STEPS:
         faults.append(Fault("too-many", f"sequence: at most {MAX_STEPS} steps"))
@@ -66,8 +46,7 @@ def _steps_faults(data: dict[str, object], actors: list[str]) -> list[Fault]:
 
 
 def validate_sequence(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"actors", "steps", "desc"}, {"title"}, "sequence")
-    faults += str_field(data, "title", "sequence") + str_field(data, "desc", "sequence")
+    faults = empty_list_faults(data, ("actors", "steps"), "sequence")
     actor_faults, actors = _actor_faults(data)
     return faults + actor_faults + _steps_faults(data, actors)
 
@@ -107,4 +86,31 @@ SEQUENCE = BlockSpec(
 )
 """,
     validate_sequence,
+    properties=(
+        PropertySpec(
+            "actors",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("id", "string", required=True),
+                PropertySpec("label", "string", required=True),
+            ),
+        ),
+        PropertySpec(
+            "steps",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("from", "string", required=True),
+                PropertySpec("to", "string", required=True),
+                PropertySpec("text", "string", required=True),
+                PropertySpec("kind", "string", enum=KINDS),
+                PropertySpec("group", "string"),
+            ),
+        ),
+        PropertySpec("desc", "string", required=True),
+        PropertySpec("title", "string"),
+    ),
 )
