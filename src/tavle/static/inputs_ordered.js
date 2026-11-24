@@ -1,25 +1,19 @@
-// Input components `ranking` and `slider`. Its part runs after `recap.js`'s (which makes
-// `ctx.varde`, the send/submit/focus helpers shared with `choice`). The
+// Input components `ranking` and `slider`. Its part runs after the host's, which mounts
+// `inputs_runtime.js` (`ctx.inputs`: the send/submit/focus helpers shared with `choice`). The
 // server writes all markup; props are the slider's three numbers only. Text goes
 // through textContent; no inline script or style, no HTML built from data.
 (globalThis.vardePageParts ||= {}).inputs = (tree, ctx) => {
   'use strict';
-  const host = ctx.varde;
-  if (!host) return console.error('inputs_ordered.js: window.varde is missing');
-  if (!host.inputs) {
-    // A stale or reordered `recap.js`: say so on the widget instead of staying dead.
-    console.error('inputs_ordered.js: window.varde.inputs is missing');
-    for (const name of ['ranking', 'slider']) {
-      host.register(name, {
-        hydrate(root) {
-          const note = root.querySelector('.' + name + '-error');
-          if (note) note.textContent = 'This input could not start; reload the page.';
-        },
-      });
+  const host = ctx.inputs;
+  if (!host) {
+    // A stale or reordered runtime: say so on the widgets instead of staying dead.
+    console.error('inputs_ordered.js: ctx.inputs is missing');
+    for (const note of tree.querySelectorAll('.ranking-error, .slider-error')) {
+      note.textContent = 'This input could not start; reload the page.';
     }
-    return host.hydrate(tree);
+    return;
   }
-  const { sendAnswer, onSubmit, fail } = host.inputs;
+  const { sendAnswer, onSubmit, fail } = host;
 
   // ---- ranking ----------------------------------------------------------------
 
