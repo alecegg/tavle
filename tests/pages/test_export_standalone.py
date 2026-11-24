@@ -88,6 +88,10 @@ def test_export_is_self_contained(tmp_path: Path) -> None:
     markup = re.sub(
         r"<script[^>]*>.*?</script>", "<script></script>", page, flags=re.DOTALL
     )
-    for remote in ("src=", "href=", "http://", "https://", "@import", "url(", "<link"):
+    for remote in ("src=", "http://", "https://", "@import", "url(", "<link"):
         assert remote not in markup
+    # only same-page links (the contents list) may remain
+    assert re.findall(r'href="([^"]*)"', markup) == re.findall(
+        r'href="(#[^"]*)"', markup
+    )
     assert page.count("<script>") == 1 and "window.m=" in page

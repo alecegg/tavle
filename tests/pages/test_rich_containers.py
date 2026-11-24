@@ -18,6 +18,7 @@ from varde.pages.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105
+SHARED_JS = Path(__file__).parents[2] / "src/varde/pages/static/components/shared.js"
 MAIN = re.compile(r'<main data-role="page">(.*)</main>', re.DOTALL)
 
 
@@ -308,13 +309,75 @@ def test_interact_panel_is_labelled_by_its_tab_and_others_hidden(
     assert region.get_attribute("tabindex") == "0"
 
 
+TAB_PAGE = (
+    "# T\n\n## Views\n\n"
+    + statements(CALL, CALL_B)
+    + statements(tabs(panel("Alpha", "a"), panel("Beta", "b")))
+)
+
+
+def contents_links(html: str) -> list[tuple[str, str]]:
+    nav = re.search(r'<nav class="doc-toc".*?</nav>', html, re.DOTALL)
+    assert nav
+    return re.findall(r'<a href="#([^"]*)">([^<]*)</a>', nav.group(0))
+
+
+def test_tab_names_are_listed_once_in_the_contents_and_not_in_the_block(
+    tmp_path: Path,
+) -> None:
+    html = render(tmp_path, TAB_PAGE)
+    links = contents_links(html)
+    assert [text for _, text in links] == ["Views", "Alpha", "Beta"]
+    block = html[html.index('data-mithril="tabs"') :]
+    assert "tab: [" in block and "Alpha" in block  # the panels are the block's props
+    assert "toc-l3" in html
+
+
+def test_tab_entries_target_the_n_th_panel_heading_of_their_block(
+    tmp_path: Path,
+) -> None:
+    links = contents_links(render(tmp_path, TAB_PAGE))
+    assert [target for target, _ in links[1:]] == ["vd-ctab-t-1-h", "vd-ctab-t-2-h"]
+
+
+def test_an_invalid_tabs_block_adds_no_contents_entries(tmp_path: Path) -> None:
+    bad = "t = tabs(tab: [])"
+    html = render(tmp_path, "# T\n\n## One\n\n## Two\n\n" + statements(bad))
+    assert [text for _, text in contents_links(html)] == ["One", "Two"]
+
+
 @pytest.mark.slow
-def test_interact_held_blocks_keep_one_menu_each(open_page: Any) -> None:
+def test_interact_every_tab_entry_targets_a_drawn_heading_and_selects_its_tab(
+    open_page: Any,
+) -> None:
     page = open_page
-    page.wait_for_selector("#blk-code1 > .menu-btn", state="attached")
-    assert page.locator("#blk-code1 > .menu-btn").count() == 1
-    assert page.locator("#blk-tabs1 > .menu-btn").count() == 1
-    assert page.locator("#blk-tabs1 .menu-btn").count() >= 2
+    page.locator(".doc-toc details").evaluate("(el) => { el.open = true; }")
+    links = page.locator('.doc-toc a[href^="#vd-ctab-"]')
+    assert [links.nth(i).inner_text() for i in range(links.count())] == [
+        "Code",
+        "Change",
+        "Checks",
+    ]
+    assert page.locator(".vd-ctabs > .vd-containers-alt").count() == 0
+    for index in (2, 1, 0):
+        link = links.nth(index)
+        target = link.get_attribute("href")[1:]
+        assert page.locator(f'[id="{target}"]').count() == 1
+        link.click()
+        assert selected(page) == link.inner_text()
+        panel_ = page.locator('.vd-ctabs-panel[role="tabpanel"]').nth(index)
+        assert panel_.is_visible()
+
+
+@pytest.mark.slow
+def test_interact_a_page_opened_at_a_tab_entry_shows_that_tab(open_page: Any) -> None:
+    page = open_page
+    last = page.locator('.doc-toc a[href^="#vd-ctab-"]').nth(2)
+    name, target = last.text_content(), last.get_attribute("href")
+    page.goto(page.url.split("#")[0] + target)
+    page.reload()
+    page.wait_for_selector(".vd-ctabs-tab")
+    assert selected(page) == name
 
 
 def slot_of(html: str, held: str) -> str:

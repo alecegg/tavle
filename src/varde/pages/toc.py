@@ -14,20 +14,20 @@ LEVELS = (2, 3)
 class TocEntry:
     level: int
     text: str
-    section: str  # the slug behind the heading's `id="h-<section>"`
+    target: str  # the id the link points at
 
 
 def toc_entries(headings: Iterable[tuple[int, str, str]]) -> tuple[TocEntry, ...]:
-    """Keep h2 and h3 from (level, text, section) triples; h1 is the title."""
+    """Keep h2 and h3 from (level, text, target id) triples; h1 is the title."""
     return tuple(
-        TocEntry(level, " ".join(text.split()), section)
-        for level, text, section in headings
+        TocEntry(level, " ".join(text.split()), target)
+        for level, text, target in headings
         if level in LEVELS
     )
 
 
 def _item(entry: TocEntry) -> str:
-    link = f'<a href="#h-{html.escape(entry.section)}">{html.escape(entry.text)}</a>'
+    link = f'<a href="#{html.escape(entry.target)}">{html.escape(entry.text)}</a>'
     return f'<li class="toc-l{entry.level}">{link}</li>'
 
 

@@ -24,7 +24,12 @@ from varde.pages.blocks_render import (
 )
 from varde.pages.blocks_render.change_summary import change_summary_props
 from varde.pages.blocks_render.code import code_props
-from varde.pages.blocks_render.containers import Filled, Placed, fill_containers
+from varde.pages.blocks_render.containers import (
+    Filled,
+    Placed,
+    fill_containers,
+    tab_headings,
+)
 from varde.pages.blocks_render.file_tree import (
     code_titles,
     link_file_trees,
@@ -719,7 +724,7 @@ def _place_part(
         part.kind, part.text, part.block_id, section, count
     )
     if part.kind == "heading":
-        headings.append((part.level, plain_text(part.html, 120), section))
+        headings.append((part.level, plain_text(part.html, 120), f"h-{section}"))
         inner = part.html.replace(">", f' id="h-{section}">', 1)
         return section, inner, "block heading", section, 0
     return anchor, part.html, "block", section, count
@@ -806,6 +811,8 @@ def assemble_parts(
         anchor, inner, cls, section, count = _place_part(
             part, section, count, anchors, headings
         )
+        if part.component == "tabs" and part.block_id:
+            headings.extend(tab_headings(part.props, part.block_id))
         for file_title in code_titles(part.html):
             titles.setdefault(file_title, anchor)
         items.append(_Laid(part, anchor, digest, inner, cls))

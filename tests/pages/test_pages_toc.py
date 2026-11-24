@@ -20,7 +20,7 @@ def test_h1_is_skipped_and_one_heading_is_too_few() -> None:
 
 
 def test_nested_levels_link_to_heading_ids() -> None:
-    out = _nav((2, "A", "a"), (3, "B", "b"), (4, "C", "c"))
+    out = _nav((2, "A", "h-a"), (3, "B", "h-b"), (4, "C", "h-c"))
     assert "Contents (2)" in out
     assert '<li class="toc-l2"><a href="#h-a">A</a></li>' in out
     assert '<li class="toc-l3"><a href="#h-b">B</a></li>' in out
@@ -28,7 +28,7 @@ def test_nested_levels_link_to_heading_ids() -> None:
 
 
 def test_hostile_text_is_escaped() -> None:
-    out = _nav((2, "<script>x</script>", "a"), (2, "ok", 'b"><i>'))
+    out = _nav((2, "<script>x</script>", "h-a"), (2, "ok", 'h-b"><i>'))
     assert "<script>" not in out and "&lt;script&gt;" in out
     assert "<i>" not in out
 
