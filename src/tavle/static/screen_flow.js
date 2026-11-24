@@ -6,6 +6,7 @@
 // (an across and a down drawing; CSS shows one), so no layout runs here.
 import { control, make, keepInside } from './dom.js';
 import { mountViewport } from './viewport.js';
+import { ARROWS_AND_ENDS, handleViewKey } from './view_keys.js';
 
 const HINT = 'Select a screen to read its regions, notes and next step.';
 const ZOOM_IN = 1.25;
@@ -116,13 +117,12 @@ export function enhanceScreenFlow(block) {
     view.addEventListener('keydown', (event) => {
       const target = event.target.closest('.vd-sf-screen');
       if (!target || event.target !== target) return;
-      const activate = event.key === 'Enter' || event.key === ' ';
-      const moves = STEP[event.key] || event.key === 'Home' || event.key === 'End';
-      if (!activate && !moves && event.key !== 'Escape') return;
-      event.preventDefault();
-      if (event.key === 'Escape') clear();
-      else if (activate) select(target.dataset.screen);
-      else move(screens, target, event.key);
+      handleViewKey(event, {
+        activate: () => select(target.dataset.screen),
+        clear,
+        move: (key) => move(screens, target, key),
+        moveKeys: ARROWS_AND_ENDS,
+      });
     });
     return viewport;
   });

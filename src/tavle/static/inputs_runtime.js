@@ -1,3 +1,6 @@
+import { readFields } from './inputs_fields.js';
+import { mountInputs as mountInputWidgets } from './inputs_widgets.js';
+
 // Component props, state and input hydration, independent of the page host.
 (globalThis.vardePageParts ||= {}).inputRuntime = (tree, ctx) => {
   'use strict';
@@ -42,25 +45,6 @@
     strings: (v) => (Array.isArray(v) && v.every((x) => typeof x === 'string') ? v.slice() : undefined),
     fields: (v) => (Array.isArray(v) && v.length <= 50 ? readFields(v) : undefined),
   };
-
-  const FIELD_TYPES = ['text', 'number', 'select', 'checkbox'];
-  const FIELD_NAME = /^[a-z][a-z0-9_-]{0,47}$/; // the server's rule; bars `__proto__`
-
-  // Form field descriptors: only name, type, required, min and max survive; one
-  // bad entry rejects the list, so the form never sends a partial answer.
-  function readFields(list) {
-    const fields = [];
-    for (const raw of list) {
-      if (raw === null || typeof raw !== 'object' || typeof raw.name !== 'string') return undefined;
-      if (!FIELD_TYPES.includes(raw.type) || !FIELD_NAME.test(raw.name)) return undefined;
-      const field = { name: raw.name, type: raw.type, required: raw.required === true };
-      for (const key of ['min', 'max']) {
-        if (typeof raw[key] === 'number' && Number.isFinite(raw[key])) field[key] = raw[key];
-      }
-      fields.push(field);
-    }
-    return fields;
-  }
 
   // `schema` maps key -> type name above. Unknown keys and wrong types are dropped.
   function readProps(element, schema) {
@@ -173,151 +157,8 @@
     });
   }
 
-  function mountInputs() {
-  function textOf(root, kind) {
-    const area = root.querySelector('.' + kind + '-text');
-    return area ? area.value : '';
-  }
+  const mountInputs = () => mountInputWidgets({ register, onSubmit, fail, setNote, sendAnswer });
 
-  // Clears a choice error: text, aria-invalid on the options and the group link.
-  function clearChoiceError(root) {
-    setNote(root, '.choice-error', '');
-    root.querySelectorAll('.choice-option input').forEach((input) => input.removeAttribute('aria-invalid'));
-  }
-
-  register('choice', {
-    props: { multiple: 'boolean', comment: 'boolean' },
-    hydrate(root, props) {
-      const group = root.querySelector('.choice-group');
-      if (group) group.addEventListener('change', () => clearChoiceError(root));
-      onSubmit(root, 'choice', (form) => {
-        const picked = Array.from(form.querySelectorAll('input:checked')).map((input) => input.value);
-        if (!picked.length) {
-          const options = form.querySelectorAll('.choice-option input');
-          options.forEach((input) => input.setAttribute('aria-invalid', 'true'));
-          return fail(root, 'choice', 'Pick an option.', options[0]);
-        }
-        clearChoiceError(root);
-        sendAnswer(root, 'choice', props.multiple ? picked : picked[0], textOf(root, 'choice'));
-      });
-    },
-  });
-
-  // Auto-grow only where `field-sizing: content` is missing; one read, one write per input.
-  function autoGrow(area) {
-    if (CSS.supports('field-sizing', 'content')) return;
-    area.style.blockSize = 'auto';
-    area.style.blockSize = area.scrollHeight + 'px';
-  }
-
-  // Updates the visible counter always; the live region speaks only at 80% and 100%.
-  function countComment(root, area, state) {
-    const max = area.maxLength;
-    const length = area.value.length;
-    const count = root.querySelector('.comment-count');
-    if (count) count.textContent = length + ' / ' + max;
-    const level = length >= max ? 2 : length >= max * 0.8 ? 1 : 0;
-    if (level === state.level) return;
-    state.level = level;
-    const announce = root.querySelector('.comment-announce');
-    if (announce) announce.textContent = level === 2 ? 'Character limit reached.' : level === 1 ? (max - length) + ' characters left.' : '';
-  }
-
-  register('comment', {
-    hydrate(root) {
-      const area = root.querySelector('.comment-text');
-      const state = { level: 0 };
-      if (area) area.addEventListener('input', () => { countComment(root, area, state); autoGrow(area); });
-      onSubmit(root, 'comment', async () => {
-        const text = textOf(root, 'comment');
-        if (!text.trim()) return fail(root, 'comment', 'A comment needs text.', area);
-        setNote(root, '.comment-state', 'Sending...');
-        const saved = await sendAnswer(root, 'comment', 'commented', text);
-        if (!saved) setNote(root, '.comment-state', '');
-      });
-    },
-  });
-
-  // The value of one form control, or an Error (with `control`) naming what is wrong.
-  function fieldValue(field, control) {
-    const bad = (message) => Object.assign(new Error(message), { control });
-    if (!control) return bad('Form is incomplete.');
-    if (field.type === 'checkbox') {
-      return field.required && !control.checked ? bad(field.name + ' must be ticked.') : control.checked;
-    }
-    if (field.type !== 'number') {
-      return field.required && !control.value.trim() ? bad(field.name + ' is required.') : control.value;
-    }
-    if (!control.value.trim()) return field.required ? bad(field.name + ' is required.') : null;
-    const number = Number(control.value);
-    if (!Number.isFinite(number)) return bad(field.name + ' must be a number.');
-    if (field.min !== undefined && number < field.min) return bad(field.name + ' is below ' + field.min + '.');
-    if (field.max !== undefined && number > field.max) return bad(field.name + ' is above ' + field.max + '.');
-    return number;
-  }
-
-  // True when a required field is still empty (unticked, blank or unselected).
-  function unfilled(field, control) {
-    if (!field.required || !control) return false;
-    return field.type === 'checkbox' ? !control.checked : !control.value.trim();
-  }
-
-  function showRemaining(root, fields, controls) {
-    const count = fields.filter((field) => unfilled(field, controls.get(field.name))).length;
-    if (!fields.some((field) => field.required)) return;
-    const text = count ? count + ' required ' + (count === 1 ? 'field' : 'fields') + ' left' : 'All required fields filled';
-    setNote(root, '.form-remaining', text);
-  }
-
-  // Marks `control` invalid and keeps its hint beside the error in aria-describedby.
-  function markInvalid(root, control) {
-    const note = root.querySelector('.form-error');
-    const hint = (control.dataset.hint || '');
-    control.setAttribute('aria-invalid', 'true');
-    if (note && note.id) control.setAttribute('aria-describedby', (hint + ' ' + note.id).trim());
-  }
-
-  register('form', {
-    props: { fields: 'fields' },
-    hydrate(root, props) {
-      const fields = props.fields || [];
-      const controls = new Map();
-      root.querySelectorAll('[data-field]').forEach((control) => {
-        controls.set(control.dataset.field, control);
-        control.dataset.hint = control.getAttribute('aria-describedby') || '';
-      });
-      const update = (event) => {
-        const target = event && event.target;
-        if (target && target.removeAttribute) {
-          target.removeAttribute('aria-invalid');
-          if (target.dataset && 'hint' in target.dataset) {
-            if (target.dataset.hint) target.setAttribute('aria-describedby', target.dataset.hint);
-            else target.removeAttribute('aria-describedby');
-          }
-        }
-        if (!root.querySelector('[aria-invalid]')) setNote(root, '.form-error', '');
-        showRemaining(root, fields, controls);
-      };
-      root.addEventListener('input', update);
-      root.addEventListener('change', update);
-      showRemaining(root, fields, controls);
-      onSubmit(root, 'form', () => {
-        const value = Object.create(null);
-        for (const field of fields) {
-          const got = fieldValue(field, controls.get(field.name));
-          if (got instanceof Error) {
-            fail(root, 'form', got.message, got.control);
-            if (got.control) markInvalid(root, got.control);
-            return;
-          }
-          value[field.name] = got;
-        }
-        sendAnswer(root, 'form', value, '');
-      });
-    },
-  });
-
-  }
   ctx.inputs = Object.freeze({ register, hydrate, sendAnswer, onSubmit, fail });
   return { readProps, classifyUrl, safeUrl, formState, register, hydrate, mountInputs, setNote };
 };

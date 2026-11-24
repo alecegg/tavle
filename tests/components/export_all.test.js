@@ -13,8 +13,14 @@ async function open() {
 }
 
 describe('standalone export of every block type', () => {
-  it('mounts every host and raises no script error', async () => {
-    const { doc, errors } = await open();
+  // The tests only read the page, so one parse serves them all; parsing it per test timed out under load.
+  let page;
+  beforeAll(async () => {
+    page = await open();
+  });
+
+  it('mounts every host and raises no script error', () => {
+    const { doc, errors } = page;
     const hosts = [...doc.querySelectorAll('[data-mithril]')];
     expect(hosts.length).toBeGreaterThan(30);
     expect(hosts.filter((host) => host.dataset.mounted !== '1').map((host) => host.dataset.mithril)).toEqual([]);
@@ -23,8 +29,8 @@ describe('standalone export of every block type', () => {
     expect([...doc.querySelectorAll('img')].filter((img) => !img.src.startsWith('data:'))).toHaveLength(0);
   });
 
-  it('draws the containers and mounts the blocks they hold inside their panels', async () => {
-    const { doc } = await open();
+  it('draws the containers and mounts the blocks they hold inside their panels', () => {
+    const { doc } = page;
     const tabs = doc.querySelector('[data-mithril="tabs"] > section.vd-ctabs');
     expect(tabs.querySelectorAll(':scope > .vd-containers-panel').length).toBe(2);
     const held = tabs.querySelectorAll('.vd-containers-slot [data-mithril]');
@@ -36,8 +42,8 @@ describe('standalone export of every block type', () => {
     expect(doc.querySelectorAll('[data-mithril="code"][data-block-id="code"]').length).toBe(1);
   });
 
-  it('disables the controls of every input block in a static export', async () => {
-    const { doc } = await open();
+  it('disables the controls of every input block in a static export', () => {
+    const { doc } = page;
     for (const name of ['choice', 'form', 'comment', 'ranking', 'slider']) {
       const controls = doc.querySelectorAll(`[data-mithril="${name}"] :is(button, input, select, textarea)`);
       expect(controls.length).toBeGreaterThan(0);

@@ -6,6 +6,7 @@
 // No layout runs in the browser.
 import { control, make, keepInside } from './dom.js';
 import { mountViewport } from './viewport.js';
+import { ARROWS_AND_ENDS, handleViewKey } from './view_keys.js';
 
 const HINT = 'Select a region to read its notes.';
 const MIN_FIT = 0.5;
@@ -89,6 +90,19 @@ function describe(frame, region) {
   return prefix + labelOf(region) + '. ' + said;
 }
 
+function paintFrame(frame, selected, chosen) {
+  for (const region of frame.regions) {
+    const key = frame.index + ':' + region.dataset.region;
+    const role = key === selected ? ' vw-sel' : key === chosen ? ' vw-hot' : '';
+    setRole(region, role);
+    region.setAttribute('aria-pressed', String(key === selected));
+  }
+  for (const note of frame.notes) {
+    const on = selected === frame.index + ':' + note.dataset.region;
+    note.classList.toggle('vw-note-on', on);
+  }
+}
+
 export function enhanceWireframe(block) {
   if (!block.classList.contains('wireframe')) return;
   const host = block.querySelector('.vw-frames');
@@ -103,18 +117,7 @@ export function enhanceWireframe(block) {
 
   function paint() {
     const chosen = state.hover || state.focus || state.selected;
-    for (const frame of frames) {
-      for (const region of frame.regions) {
-        const key = frame.index + ':' + region.dataset.region;
-        const role = key === state.selected ? ' vw-sel' : key === chosen ? ' vw-hot' : '';
-        setRole(region, role);
-        region.setAttribute('aria-pressed', String(key === state.selected));
-      }
-      for (const note of frame.notes) {
-        const on = state.selected === frame.index + ':' + note.dataset.region;
-        note.classList.toggle('vw-note-on', on);
-      }
-    }
+    for (const frame of frames) paintFrame(frame, state.selected, chosen);
   }
 
   function select(frame, region) {
@@ -174,13 +177,12 @@ export function enhanceWireframe(block) {
     view.addEventListener('keydown', (event) => {
       const target = event.target.closest('.vw-region');
       if (!target || event.target !== target) return;
-      const activate = event.key === 'Enter' || event.key === ' ';
-      const moves = STEP[event.key] || event.key === 'Home' || event.key === 'End';
-      if (!activate && !moves && event.key !== 'Escape') return;
-      event.preventDefault();
-      if (event.key === 'Escape') clear();
-      else if (activate) select(frame, target);
-      else move(frame, target, event.key);
+      handleViewKey(event, {
+        activate: () => select(frame, target),
+        clear,
+        move: (key) => move(frame, target, key),
+        moveKeys: ARROWS_AND_ENDS,
+      });
     });
     return viewport;
   });

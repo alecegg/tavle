@@ -67,6 +67,21 @@ function setRole(node, role) {
   node.setAttribute('class', node.getAttribute('class').replace(ROLE, '') + role);
 }
 
+function nodeRole(name, id, before, after) {
+  if (!id) return '';
+  if (name === id) return ' vd-sel';
+  if (before.has(name)) return ' vf-up';
+  if (after.has(name)) return ' vf-down';
+  return ' vd-dim';
+}
+
+function edgeRole(edge, id, upSet, downSet) {
+  if (!id) return '';
+  const { from, to } = edge.dataset;
+  const hot = (upSet.has(from) && upSet.has(to)) || (downSet.has(from) && downSet.has(to));
+  return hot ? ' vd-hot' : ' vd-dim';
+}
+
 export function enhanceFlow(block) {
   if (!block.classList.contains('flow')) return;
   const view = block.querySelector('.vd-view');
@@ -88,17 +103,15 @@ export function enhanceFlow(block) {
     const before = id ? reachable(id, into) : new Set();
     const after = id ? reachable(id, out) : new Set();
     for (const [name, node] of byId) {
-      const role = !id ? '' : name === id ? ' vd-sel' : before.has(name) ? ' vf-up' : after.has(name) ? ' vf-down' : ' vd-dim';
+      const role = nodeRole(name, id, before, after);
       setRole(node, role);
       node.setAttribute('aria-pressed', String(name === state.selected));
     }
     const upSet = new Set([...before, id]);
     const downSet = new Set([...after, id]);
     for (const edge of view.querySelectorAll('.vd-edge')) {
-      const { from, to } = edge.dataset;
-      const hot = id && ((upSet.has(from) && upSet.has(to)) || (downSet.has(from) && downSet.has(to)));
       const base = edge.getAttribute('class').replace(/ vd-(hot|dim)/g, '');
-      edge.setAttribute('class', base + (!id ? '' : hot ? ' vd-hot' : ' vd-dim'));
+      edge.setAttribute('class', base + edgeRole(edge, id, upSet, downSet));
     }
   }
 

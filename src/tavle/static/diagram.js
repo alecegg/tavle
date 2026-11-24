@@ -5,6 +5,7 @@
 // arrow keys on a node move along its edges. No layout runs in the browser.
 import { control, make, whileConnected } from './dom.js';
 import { mountViewport } from './viewport.js';
+import { ARROWS, handleViewKey } from './view_keys.js';
 
 const HINT = 'Select a node for details.';
 const FOLLOW = { ArrowRight: 'out', ArrowDown: 'out', ArrowLeft: 'in', ArrowUp: 'in' };
@@ -74,22 +75,37 @@ function keepInside(view, target) {
   }
 }
 
-function paint(view, adjacency, id, selected) {
+function nodeRole(name, id, near) {
+  if (!id) return '';
+  if (name === id) return ' vd-sel';
+  return near.has(name) ? ' vd-near' : ' vd-dim';
+}
+
+function edgeRole(edge, id) {
+  if (!id) return '';
+  const touches = edge.dataset.from === id || edge.dataset.to === id;
+  return touches ? ' vd-hot' : ' vd-dim';
+}
+
+function neighbours(adjacency, id) {
   const near = new Set();
-  if (id) {
-    for (const to of adjacency.out.get(id) || []) near.add(to);
-    for (const from of adjacency.into.get(id) || []) near.add(from);
-  }
+  if (!id) return near;
+  for (const to of adjacency.out.get(id) || []) near.add(to);
+  for (const from of adjacency.into.get(id) || []) near.add(from);
+  return near;
+}
+
+function paint(view, adjacency, id, selected) {
+  const near = neighbours(adjacency, id);
   for (const node of view.querySelectorAll('.vd-node')) {
     const name = node.dataset.id;
-    const role = !id ? '' : name === id ? ' vd-sel' : near.has(name) ? ' vd-near' : ' vd-dim';
+    const role = nodeRole(name, id, near);
     node.setAttribute('class', node.getAttribute('class').replace(/ vd-(sel|near|dim)/g, '') + role);
     if (node.hasAttribute('aria-pressed')) node.setAttribute('aria-pressed', String(name === selected));
   }
   for (const edge of view.querySelectorAll('.vd-edge')) {
-    const touches = id && (edge.dataset.from === id || edge.dataset.to === id);
     const base = edge.getAttribute('class').replace(/ vd-(hot|dim)/g, '');
-    edge.setAttribute('class', base + (!id ? '' : touches ? ' vd-hot' : ' vd-dim'));
+    edge.setAttribute('class', base + edgeRole(edge, id));
   }
 }
 
@@ -224,21 +240,21 @@ export function enhanceDiagram(block) {
     view.addEventListener('keydown', (event) => {
       const node = event.target.closest('.vd-node, .vd-group-head');
       if (!node || event.target !== node) return;
-      const activate = event.key === 'Enter' || event.key === ' ';
-      const direction = FOLLOW[event.key];
-      if (!activate && !direction && event.key !== 'Escape') return;
-      event.preventDefault();
-      if (event.key === 'Escape') {
+      const activate = () => {
+        if (node.matches('.vd-super, .vd-group-head')) toggleGroup(node);
+        else select(node);
+      };
+      const clear = () => {
         state.selected = null;
         readout.textContent = HINT;
         repaint();
-      } else if (activate && node.matches('.vd-super, .vd-group-head')) {
-        toggleGroup(node);
-      } else if (activate) {
-        select(node);
-      } else {
-        follow(view, node, direction);
-      }
+      };
+      handleViewKey(event, {
+        activate,
+        clear,
+        move: (key) => follow(view, node, FOLLOW[key]),
+        moveKeys: ARROWS,
+      });
     });
   }
   function fitWhole() {

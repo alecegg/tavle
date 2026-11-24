@@ -15,6 +15,14 @@ export function lineNode(m, number, tokens, marked) {
 }
 
 // opts: cls (leading classes), line(number, tokens, marked) for a custom line, arrange(items) to group lines.
+function caption(m, props, label) {
+  return m('figcaption.vd-code-head', [
+    props.title ? m('span.vd-code-title', props.title) : null,
+    m('span.vd-code-lang', label),
+    props.note ? m('span.vd-code-marks', props.note) : null
+  ]);
+}
+
 export function panel(m, props, opts = {}) {
   const first = props.first;
   const last = first + props.lines.length - 1;
@@ -31,11 +39,7 @@ export function panel(m, props, opts = {}) {
   const label = props.language || 'text';
   const region = `${props.title || 'Code'}, ${label}, lines ${first} to ${last}`;
   return m('figure', { class: classes, 'data-copy': raw }, [
-    m('figcaption.vd-code-head', [
-      props.title ? m('span.vd-code-title', props.title) : null,
-      m('span.vd-code-lang', label),
-      props.note ? m('span.vd-code-marks', props.note) : null
-    ]),
+    caption(m, props, label),
     m('div.vd-code-scroll', { role: 'region', 'aria-label': region, tabindex: '0' }, [
       m('pre.vd-code-pre', m('code', { class: props.language ? `language-${props.langClass}` : undefined }, arrange(items)))
     ])

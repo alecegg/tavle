@@ -94,33 +94,40 @@ function sortPicker(table, state) {
   return label;
 }
 
+// Maps each data row to whether it matches the filter text.
+function matchingRows(table, needle) {
+  const hits = new Map();
+  for (const body of table.tBodies) {
+    for (const row of dataRows(body)) {
+      hits.set(row, !needle || row.textContent.toLowerCase().includes(needle));
+    }
+  }
+  return hits;
+}
+
 // Shows the rows that match the filter, in their current order, up to the cap when the table
 // collapses and is not expanded. Returns the match count; the group header of a body with nothing
 // shown hides.
 function showRows(table, state) {
-  const hits = new Map();
-  let matched = 0;
-  for (const body of table.tBodies) {
-    for (const row of dataRows(body)) {
-      const hit = !state.needle || row.textContent.toLowerCase().includes(state.needle);
-      hits.set(row, hit);
-      if (hit) matched += 1;
-    }
-  }
+  const hits = matchingRows(table, state.needle);
+  const matched = Array.from(hits.values()).filter(Boolean).length;
   const capped = !state.expanded && collapses(matched);
-  let shown = 0;
-  for (const body of table.tBodies) {
-    let visible = 0;
-    for (const row of dataRows(body)) {
-      if (hits.get(row)) shown += 1;
-      row.hidden = !hits.get(row) || (capped && shown > COLLAPSED_ROWS);
-      if (!row.hidden) visible += 1;
-    }
-    const head = body.querySelector('.vb-group-head');
-    if (head) head.hidden = visible === 0;
-  }
+  showMatchingBodies(table, hits, capped);
   if (state.more) updateMore(state, matched);
   return matched;
+}
+
+function showMatchingBodies(table, hits, capped) {
+  let shown = 0;
+  for (const body of table.tBodies) {
+    const rows = dataRows(body);
+    for (const row of rows) {
+      if (hits.get(row)) shown += 1;
+      row.hidden = !hits.get(row) || (capped && shown > COLLAPSED_ROWS);
+    }
+    const head = body.querySelector('.vb-group-head');
+    if (head) head.hidden = rows.every((row) => row.hidden);
+  }
 }
 
 function updateMore(state, matched) {
