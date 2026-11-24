@@ -672,7 +672,7 @@ textarea.comment-text:disabled, textarea.comment-text:read-only { background: va
 .decision-diff:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .decision-buttons { display: flex; flex-wrap: wrap; gap: var(--vd-space-2); margin-block-end: var(--vd-space-3); }
 .decision-verdict { display: inline-flex; align-items: center; justify-content: center; gap: var(--vd-space-2); flex: 1 1 8rem; min-inline-size: 0; max-inline-size: 100%; overflow-wrap: anywhere; font-weight: 600; }
-.decision-glyph { font-weight: 700; line-height: 1; }
+.decision-glyph { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .decision-approve { border-color: var(--vd-success); color: var(--vd-text); }
 .decision-approve .decision-glyph { color: var(--vd-success); }
 .decision-deny { border-color: var(--vd-danger); color: var(--vd-text); }
@@ -935,7 +935,7 @@ th[aria-sort="ascending"] .vb-sort::after, th[aria-sort="descending"] .vb-sort::
 th[aria-sort="ascending"] .vb-sort::after { border-block-end: 0.4em solid currentColor; }
 th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid currentColor; }
 .vb-status { display: inline-flex; align-items: center; gap: var(--vd-space-1); font-weight: 600; }
-.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; fill: currentColor; stroke: currentColor; }
+.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; }
 .vb-status-ok { color: var(--vd-success); }
 .vb-status-warn { color: var(--vd-warning); }
 .vb-status-bad { color: var(--vd-danger); }
@@ -1357,7 +1357,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
 .vd-callout-warning { --vd-callout-edge: var(--vd-tone-warning-edge); --vd-callout-tint: var(--vd-tone-warning-tint); --vd-callout-tint-2: var(--vd-tone-warning-tint-2); --vd-callout-text: var(--vd-tone-warning-text); }
 .vd-callout-success { --vd-callout-edge: var(--vd-tone-success-edge); --vd-callout-tint: var(--vd-tone-success-tint); --vd-callout-tint-2: var(--vd-tone-success-tint-2); --vd-callout-text: var(--vd-tone-success-text); }
 .vd-callout-label { margin: 0 0 var(--vd-space-1); color: var(--vd-callout-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-callout-glyph { display: inline-block; inline-size: 1.1em; block-size: 1.1em; vertical-align: -0.2em; margin-inline-end: 0.1em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.vd-callout-glyph { display: inline-block; inline-size: 1.1em; block-size: 1.1em; vertical-align: -0.2em; margin-inline-end: 0.1em; }
 .vd-callout-title { margin: 0 0 var(--vd-space-1); font-weight: 650; }
 .vd-callout-text { margin: 0 0 var(--vd-space-2); }
 .vd-callout-text:last-child { margin-block-end: 0; }
@@ -1615,7 +1615,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-checklist-done { --vd-check-edge: var(--vd-tone-success-edge); --vd-check-tint: var(--vd-tone-success-tint); --vd-check-text: var(--vd-tone-success-text); }
 .vd-checklist-blocked { --vd-check-edge: var(--vd-tone-risk-edge); --vd-check-tint: var(--vd-tone-risk-tint); --vd-check-text: var(--vd-tone-risk-text); }
 .vd-checklist-state { display: inline-flex; align-items: baseline; gap: var(--vd-space-1); padding-inline: var(--vd-space-2); border: 1px solid var(--vd-check-edge); border-radius: var(--vd-radius-full); background: var(--vd-check-tint); color: var(--vd-check-text); font-size: var(--vd-text-xs); font-weight: 600; line-height: var(--vd-leading-body); white-space: nowrap; overflow-wrap: normal; }
-.vd-checklist-glyph { font-family: var(--vd-font-mono); font-weight: 700; }
+.vd-checklist-glyph { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; align-self: center; }
 .vd-checklist-text { display: flex; flex-direction: column; flex: 1 1 12rem; min-inline-size: 0; }
 .vd-checklist-label { overflow-wrap: anywhere; }
 .vd-checklist-label code { overflow-wrap: anywhere; }
@@ -1833,7 +1833,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-stats-long { font-size: var(--vd-text-md); font-weight: 600; }
 .vd-stats-delta { color: var(--vd-stats-text); font-size: var(--vd-text-sm); font-weight: 600; overflow-wrap: anywhere; }
 .vd-stats-mark { white-space: nowrap; overflow-wrap: normal; }
-.vd-stats-glyph { font-family: var(--vd-font-mono); }
+.vd-stats-glyph { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .vd-stats-note { margin-block-start: var(--vd-space-1); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: anywhere; }
 @container vd-doc (min-width: 28rem) {
   .vd-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1872,6 +1872,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-timeline-active { --vd-tl-state: var(--vd-tone-info-edge); --vd-tl-tint: var(--vd-tone-info-tint); --vd-tl-text: var(--vd-tone-info-text); }
 .vd-timeline-blocked { --vd-tl-state: var(--vd-tone-risk-edge); --vd-tl-tint: var(--vd-tone-risk-tint); --vd-tl-text: var(--vd-tone-risk-text); }
 .vd-timeline-node { position: absolute; inset-block-start: 0; inset-inline-start: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; inline-size: 2rem; block-size: 2rem; border: 2px solid var(--vd-tl-state); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-tl-text); font-family: var(--vd-font-mono); font-size: var(--vd-text-sm); line-height: 1; }
+.vd-timeline-glyph { flex: none; inline-size: 1.1rem; block-size: 1.1rem; }
 .vd-timeline-active .vd-timeline-node { background: var(--vd-tone-info-tint); border-width: 3px; }
 .vd-timeline-active .vd-timeline-body { background: var(--vd-tone-info-tint-2); }
 .vd-timeline-body { min-inline-size: 0; padding: 0 var(--vd-space-3) var(--vd-space-2); background: var(--vd-tl-tint); }
@@ -1947,7 +1948,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-risk-cell-medium { --vd-rk-edge: var(--vd-tone-warning-edge); border-style: dashed; }
 .vd-risk-cell-high { --vd-rk-edge: var(--vd-tone-risk-edge); border-style: double; border-width: 4px; }
 .vd-risk-cell-critical { --vd-rk-edge: var(--vd-tone-risk-edge); border-style: double; border-width: 6px; background: var(--vd-tone-risk-tint); }
-.vd-risk-glyph { flex: none; font-family: var(--vd-font-mono); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); line-height: 1.4; }
+.vd-risk-glyph { flex: none; inline-size: 1em; block-size: 1.4em; padding-block: 0.2em; box-sizing: border-box; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vd-risk-chip, .vd-risk-more { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; padding-inline: var(--vd-space-1); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-text); font-family: var(--vd-font-mono); font-size: var(--vd-text-sm); line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .vd-risk-more { border-style: dashed; }
 .vd-risk-list { margin: 0; padding: 0; min-inline-size: 0; }
@@ -1958,6 +1959,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-risk-entry > dd { margin: 0; min-inline-size: 0; overflow-wrap: break-word; }
 .vd-risk-id { font-family: var(--vd-font-mono); }
 .vd-risk-key { max-inline-size: 100%; overflow-wrap: break-word; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
+.vd-risk-sevmark { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .vd-risk-sevmark, .vd-risk-sevword { color: var(--vd-rk-text); font-weight: 600; }
 @container vd-doc (min-width: 36rem) {
   .vd-risk-entry { grid-template-columns: repeat(3, minmax(13rem, 1fr)); }
@@ -2113,7 +2115,14 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-hdr-risk { --vd-hdr-edge: var(--vd-tone-risk-edge); --vd-hdr-tint: var(--vd-tone-risk-tint); --vd-hdr-text: var(--vd-tone-risk-text); }
 .vd-hdr-warning { --vd-hdr-edge: var(--vd-tone-warning-edge); --vd-hdr-tint: var(--vd-tone-warning-tint); --vd-hdr-text: var(--vd-tone-warning-text); }
 .vd-hdr-success { --vd-hdr-edge: var(--vd-tone-success-edge); --vd-hdr-tint: var(--vd-tone-success-tint); --vd-hdr-text: var(--vd-tone-success-text); }
-.vd-hdr-glyph { font-family: var(--vd-font-mono); }
+/* The status mark is a CSS shape, so no font is needed. Each shape fills the box with the chip's text colour. */
+.vd-hdr-glyph { flex: none; align-self: center; box-sizing: border-box; inline-size: 0.9em; block-size: 0.9em; background: currentColor; print-color-adjust: exact; }
+.vd-hdr-glyph-ring, .vd-hdr-glyph-half { background: none; border: 2px solid currentColor; border-radius: 50%; }
+.vd-hdr-glyph-half { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.vd-hdr-glyph-dot { border-radius: 50%; transform: scale(0.6); }
+.vd-hdr-glyph-triangle { clip-path: polygon(50% 5%, 100% 95%, 0 95%); }
+.vd-hdr-glyph-cross { clip-path: polygon(20% 0, 50% 30%, 80% 0, 100% 20%, 70% 50%, 100% 80%, 80% 100%, 50% 70%, 20% 100%, 0 80%, 30% 50%, 0 20%); }
+.vd-hdr-glyph-check { clip-path: polygon(0 55%, 15% 40%, 38% 63%, 85% 10%, 100% 25%, 38% 93%); }
 .vd-hdr-chip .status { margin: 0; min-inline-size: 0; font-size: inherit; color: inherit; overflow-wrap: break-word; }
 .vd-hdr-item { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: anywhere; }
 .vd-hdr-key { font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
@@ -2122,6 +2131,7 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-hdr-link { display: block; inline-size: fit-content; box-sizing: border-box; min-inline-size: 44px; min-block-size: 44px; max-inline-size: 100%; padding: var(--vd-space-2) var(--vd-space-3); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); font-size: var(--vd-text-sm); overflow-wrap: break-word; }
 @media (forced-colors: active) {
   .vd-hdr-chip { border-color: CanvasText; background: none; color: CanvasText; }
+  .vd-hdr-glyph { forced-color-adjust: none; }
   .vd-hdr-link { border-color: LinkText; }
 }
 @media print {
@@ -2757,29 +2767,18 @@ components["callout"] = (() => {
 // Callout block as a component. Same DOM as blocks_render/callout.py.
 // A component file has no imports: it exports `view(m, props, components)` and may export helpers;
 // `components.shared` holds the helpers blocks have in common.
-// Each tone has a word and an icon of its own shape, drawn on a 16-unit box so no font is needed.
-const FILLED = { fill: 'currentColor' };
-const TONES = {
-  info: ['Info', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 7.2v4' }], ['circle', { cx: '8', cy: '4.9', r: '0.9', ...FILLED }]]],
-  decision: ['Decision', [['path', { d: 'M8 1.5L14.5 8L8 14.5L1.5 8Z', ...FILLED }]]],
-  risk: ['Risk', [['path', { d: 'M8 2L14.5 13.5H1.5Z', ...FILLED }]]],
-  warning: ['Warning', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 4.4v4.3' }], ['circle', { cx: '8', cy: '11.2', r: '0.9', ...FILLED }]]],
-  success: ['Success', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M5 8.2l2.1 2.1L11 5.8' }]]]
-};
-
-function icon(m, shapes) {
-  return m('svg.vd-callout-glyph', { viewBox: '0 0 16 16', 'aria-hidden': 'true', focusable: 'false' }, shapes.map(([tag, attrs]) => m(tag, attrs)));
-}
+// Each tone has a word and an icon of its own shape (see icons.js).
+const TONES = { info: ['Info', 'info'], decision: ['Decision', 'diamond'], risk: ['Risk', 'triangle'], warning: ['Warning', 'alert'], success: ['Success', 'check-circle'] };
 
 function copyText(props) {
   return [props.title, props.text].filter((part) => part).join('\n');
 }
 
 function view(m, props, c) {
-  const [word, shapes] = TONES[props.tone];
+  const [word, shape] = TONES[props.tone];
   const paragraphs = props.text.split(/\n\s*\n/).filter((p) => p.trim());
   return m(`aside.vb.callout.vd-callout.vd-callout-${props.tone}`, { 'data-copy': copyText(props) }, [
-    m('p.vd-callout-label', [icon(m, shapes), ` ${word}`]),
+    m('p.vd-callout-label', [c.icons.icon(m, shape, 'vd-callout-glyph'), ` ${word}`]),
     props.title === undefined ? null : m('p.vd-callout-title', props.title),
     paragraphs.map((p) => m('p.vd-callout-text', c.shared.inline(m, p.trim())))
   ]);
@@ -2885,7 +2884,7 @@ return { view };
 })();
 components["checklist"] = (() => {
 // Checklist block as a component: state glyph and word per item, progress bar and count.
-const STATES = { done: ['✓', 'Done'], open: ['○', 'Open'], blocked: ['✕', 'Blocked'] };
+const STATES = { done: ['check', 'Done'], open: ['ring', 'Open'], blocked: ['cross', 'Blocked'] };
 
 function itemState(item) {
   if (typeof item.status === 'string') return item.status;
@@ -2894,9 +2893,9 @@ function itemState(item) {
 
 function item(m, c, entry) {
   const state = itemState(entry);
-  const [glyph, word] = STATES[state];
+  const [shape, word] = STATES[state];
   return m(`li.vd-checklist-item.vd-checklist-${state}`, [
-    m('span.vd-checklist-state', [m('span.vd-checklist-glyph', { 'aria-hidden': 'true' }, glyph), ` ${word}`]),
+    m('span.vd-checklist-state', [c.icons.icon(m, shape, 'vd-checklist-glyph'), ` ${word}`]),
     m('span.vd-checklist-text', [
       m('span.vd-checklist-label', c.shared.inline(m, String(entry.label))),
       'note' in entry ? m('span.vd-checklist-note', c.shared.inline(m, String(entry.note))) : null
@@ -3116,7 +3115,7 @@ const OPTIONS = ['approve', 'deny', 'comment'];
 const VERDICT_OF = { approve: 'approved', deny: 'denied', comment: 'commented' };
 const LABELS = { approve: 'Approve', deny: 'Deny', comment: 'Comment' };
 // A glyph beside each label, so approve and deny differ without colour.
-const GLYPHS = { approve: '✓', deny: '✕', comment: '✎' };
+const ICONS = { approve: 'check', deny: 'cross', comment: 'pencil' };
 
 function evidence(m, props) {
   const rows = Array.isArray(props.evidence) ? props.evidence : [];
@@ -3125,10 +3124,10 @@ function evidence(m, props) {
 }
 
 // `decision-comment` names the comment field; the comment button must not share it.
-function button(m, option) {
+function button(m, c, option) {
   const tone = option === 'comment' ? '' : `.decision-${option}`;
   return m(`button.decision-verdict${tone}`, { type: 'button', 'data-verdict': VERDICT_OF[option] }, [
-    m('span.decision-glyph', { 'aria-hidden': 'true' }, GLYPHS[option]),
+    c.icons.icon(m, ICONS[option], 'decision-glyph'),
     m('span', LABELS[option])
   ]);
 }
@@ -3152,7 +3151,7 @@ function view(m, props, c, blockId) {
       evidence(m, props),
       props.diff ? m('pre.decision-diff', { tabindex: '0' }, m('code', props.diff)) : null,
       m('div.decision-item', { 'data-item': id }, [
-        m('div.decision-buttons', { role: 'group', 'aria-label': 'Verdict' }, options.map((option) => button(m, option))),
+        m('div.decision-buttons', { role: 'group', 'aria-label': 'Verdict' }, options.map((option) => button(m, c, option))),
         commentField(m, options, id),
         m('p.decision-status', ['Status: ', m('span.decision-state', { 'aria-live': 'polite' }, 'Undecided')])
       ]),
@@ -3551,6 +3550,45 @@ function view(m, props, c, blockId) {
 
 return { view };
 })();
+components["icons"] = (() => {
+// The one owner of the icon drawings. Not a block: it has no `view`.
+// Icons are drawn, never typed: a glyph needs a font the machine may lack. Each is a list of
+// [element, attributes] on a 16-unit box. Strokes and fills take the text colour (`currentColor`),
+// so a tone class on the parent sets the colour.
+const FILLED = { fill: 'currentColor', stroke: 'none' };
+const ICONS = {
+  check: [['path', { d: 'M3 8.5l3.2 3.2L13 4.5' }]],
+  'check-circle': [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M5 8.2l2.1 2.1L11 5.8' }]],
+  cross: [['path', { d: 'M4 4l8 8M12 4l-8 8' }]],
+  dot: [['circle', { cx: '8', cy: '8', r: '4', ...FILLED }]],
+  ring: [['circle', { cx: '8', cy: '8', r: '5' }]],
+  half: [['circle', { cx: '8', cy: '8', r: '5' }], ['path', { d: 'M8 3a5 5 0 0 0 0 10Z', ...FILLED }]],
+  triangle: [['path', { d: 'M8 2L14.5 13.5H1.5Z', ...FILLED }]],
+  'triangle-down': [['path', { d: 'M8 14L14.5 2.5H1.5Z', ...FILLED }]],
+  bar: [['path', { d: 'M2 6.5h12v3H2Z', ...FILLED }]],
+  diamond: [['path', { d: 'M8 1.5L14.5 8L8 14.5L1.5 8Z', ...FILLED }]],
+  info: [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 7.2v4' }], ['circle', { cx: '8', cy: '4.9', r: '0.9', ...FILLED }]],
+  alert: [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 4.4v4.3' }], ['circle', { cx: '8', cy: '11.2', r: '0.9', ...FILLED }]],
+  pencil: [['path', { d: 'M3 13l0.8-3.2L10.6 3a1.4 1.4 0 0 1 2 0l0.4 0.4a1.4 1.4 0 0 1 0 2L6.2 12.2Z' }], ['path', { d: 'M9.3 4.4l2.3 2.3' }]]
+};
+
+// An `svg.<cls>` icon: decorative (`aria-hidden`), sized and placed by the caller's css class.
+function icon(m, name, cls) {
+  const attrs = {
+    viewBox: '0 0 16 16',
+    'aria-hidden': 'true',
+    focusable: 'false',
+    fill: 'none',
+    stroke: 'currentColor',
+    'stroke-width': '1.8',
+    'stroke-linecap': 'round',
+    'stroke-linejoin': 'round'
+  };
+  return m(`svg.${cls}`, attrs, ICONS[name].map(([tag, shape]) => m(tag, shape)));
+}
+
+return { icon };
+})();
 components["image"] = (() => {
 // Image: a figure with the picture (a link to the file, an inline data URL, or a note), caption and alt line.
 // Props: alt, caption, narrow, picture ({kind: link|inline|missing, ...}), summary, copy.
@@ -3814,7 +3852,7 @@ components["risks"] = (() => {
 const LEVELS = ['low', 'medium', 'high'];
 const SCORE = { low: 1, medium: 2, high: 3 };
 const SEVERITIES = ['low', 'medium', 'high', 'critical'];
-const GLYPHS = { low: '○', medium: '◐', high: '▲', critical: '◆' };
+const ICONS = { low: 'ring', medium: 'half', high: 'triangle', critical: 'diamond' };
 const WORDS = { low: 'Low', medium: 'Medium', high: 'High', critical: 'Critical' };
 const CHIPS_PER_CELL = 4;
 const OPTIONAL = ['mitigation', 'owner'];
@@ -3850,12 +3888,12 @@ function copyText(risks) {
     .join('\n');
 }
 
-function cell(m, likelihood, impact, risks) {
+function cell(m, c, likelihood, impact, risks) {
   const sev = severityOf(likelihood, impact);
   const here = risks.filter((r) => r.likelihood === likelihood && r.impact === impact);
   const extra = here.length - CHIPS_PER_CELL;
   return m(`div.vd-risk-cell.vd-risk-cell-${sev}${here.length ? '' : '.vd-risk-empty'}`, [
-    m('span.vd-risk-glyph', GLYPHS[sev]),
+    c.icons.icon(m, ICONS[sev], 'vd-risk-glyph'),
     here.slice(0, CHIPS_PER_CELL).map((r) => m('span.vd-risk-chip', r.id)),
     extra > 0 ? m('span.vd-risk-more', `+${extra}`) : null
   ]);
@@ -3867,7 +3905,7 @@ function grid(m, c, risks) {
     LEVELS.map((level) => m('span.vd-risk-colhead', WORDS[level])),
     [...LEVELS].reverse().map((likelihood) => [
       m('span.vd-risk-rowhead', WORDS[likelihood]),
-      LEVELS.map((impact) => cell(m, likelihood, impact, risks))
+      LEVELS.map((impact) => cell(m, c, likelihood, impact, risks))
     ])
   ]);
 }
@@ -3876,13 +3914,13 @@ function field(m, key, value) {
   return m('dd', [m('span.vd-risk-key', key), ' ', value]);
 }
 
-function entry(m, risk) {
+function entry(m, c, risk) {
   const sev = severity(risk);
   return m(`div.vd-risk-entry.vd-risk-sev-${sev}`, [
     m('dt', [m('span.vd-risk-id', risk.id), ' ', m('span.vd-risk-label', risk.label)]),
     field(m, 'Likelihood', WORDS[risk.likelihood]),
     field(m, 'Impact', WORDS[risk.impact]),
-    field(m, 'Severity', [m('span.vd-risk-sevmark', { 'aria-hidden': 'true' }, GLYPHS[sev]), ' ', m('span.vd-risk-sevword', WORDS[sev])]),
+    field(m, 'Severity', [c.icons.icon(m, ICONS[sev], 'vd-risk-sevmark'), ' ', m('span.vd-risk-sevword', WORDS[sev])]),
     OPTIONAL.filter((key) => key in risk).map((key) => field(m, key[0].toUpperCase() + key.slice(1), String(risk[key])))
   ]);
 }
@@ -3895,7 +3933,7 @@ function view(m, props, c) {
     m('p.vb-alt.vd-risk-summary', summaryText(c, risks)),
     m('p.vd-risk-axes', 'Rows are likelihood, high at the top. Columns are impact, low at the left.'),
     grid(m, c, risks),
-    m('dl.vd-risk-list', risks.map((risk) => entry(m, risk)))
+    m('dl.vd-risk-list', risks.map((risk) => entry(m, c, risk)))
   ]);
 }
 
@@ -4181,7 +4219,7 @@ return { view };
 })();
 components["stats"] = (() => {
 // Stats block as a component: a grid of cards (label, value, optional change).
-const ARROWS = { up: '▲', down: '▼', flat: '▬' };
+const ARROWS = { up: 'triangle', down: 'triangle-down', flat: 'bar' };
 const SIGNS = ['+', '-', '−'];
 const GOOD_TONE = { true: 'success', false: 'risk' };
 const LONG_VALUE_CHARS = 16;
@@ -4230,7 +4268,7 @@ function delta(m, c, item) {
   if (!('delta' in item)) return null;
   const direction = deltaDirection(item) || 'flat';
   return m('dd.vd-stats-delta', [
-    m('span.vd-stats-mark', [m('span.vd-stats-glyph', { 'aria-hidden': 'true' }, ARROWS[direction]), ' ', m('span.vd-stats-word', direction)]),
+    m('span.vd-stats-mark', [c.icons.icon(m, ARROWS[direction], 'vd-stats-glyph'), ' ', m('span.vd-stats-word', direction)]),
     ' ',
     m('span.vd-stats-number', deltaText(c, item))
   ]);
@@ -4291,7 +4329,7 @@ function classifyUrl(url) {
   return head.includes(':') || !/^[\x00-\x7f]*$/.test(stripped) ? 'text' : 'relative';
 }
 
-// The css modifier of a status word; the word itself always shows and the icon is STATUS_ICONS[modifier].
+// The css modifier of a status word; the word itself always shows and the icon (see icons.js) is STATUS_ICONS[modifier].
 function statusKind(text) {
   const word = text.trim().toLowerCase();
   if (GOOD.includes(word)) return 'ok';
@@ -4300,22 +4338,7 @@ function statusKind(text) {
   return 'neutral';
 }
 
-// Status icons are drawn, never typed: a glyph needs a font the machine may lack. Each is [element, attributes] on a 12-unit box.
-const STATUS_ICONS = {
-  ok: [['path', { d: 'M2.5 6.5l2.5 2.5 4.5-5.5', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }]],
-  warn: [['path', { d: 'M6 1.5L11 10.5H1Z', stroke: 'none' }]],
-  bad: [['path', { d: 'M3 3l6 6M9 3l-6 6', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round' }]],
-  neutral: [['circle', { cx: '6', cy: '6', r: '3', stroke: 'none' }]]
-};
-
-function statusIcon(m, kind) {
-  const shapes = STATUS_ICONS[kind] || STATUS_ICONS.neutral;
-  return m(
-    'svg.vb-status-glyph',
-    { viewBox: '0 0 12 12', 'aria-hidden': 'true', focusable: 'false' },
-    shapes.map(([tag, attrs]) => m(tag, attrs))
-  );
-}
+const STATUS_ICONS = { ok: 'check', warn: 'triangle', bad: 'cross', neutral: 'dot' };
 
 function linkParts(c, cell) {
   if (Array.isArray(cell) && cell.length === 2) return [c.shared.pyStr(cell[0]), c.shared.pyStr(cell[1])];
@@ -4378,7 +4401,7 @@ function bar(m, c, cell, top) {
 function status(m, c, cell, extras) {
   const text = c.shared.pyStr(cell);
   const kind = (extras.statusKind && extras.statusKind(text)) || statusKind(text);
-  return m(`span.vb-status.vb-status-${kind}`, [statusIcon(m, kind), text]);
+  return m(`span.vb-status.vb-status-${kind}`, [c.icons.icon(m, STATUS_ICONS[kind] || STATUS_ICONS.neutral, 'vb-status-glyph'), text]);
 }
 
 function cellView(m, c, cell, kind, top, extras) {
@@ -4514,12 +4537,12 @@ return { view };
 })();
 components["timeline"] = (() => {
 // Timeline block as a component: an ordered list with a rail and one node per item.
-const GLYPHS = { done: '✓', active: '●', planned: '○', blocked: '✕' };
+const ICONS = { done: 'check', active: 'dot', planned: 'ring', blocked: 'cross' };
 const WORDS = { done: 'Done', active: 'Active', planned: 'Planned', blocked: 'Blocked' };
 
 // `4 milestones: 2 done, 1 active, 1 planned`; counts of zero are left out.
 function summaryText(c, items) {
-  const parts = Object.keys(GLYPHS)
+  const parts = Object.keys(ICONS)
     .map((status) => [items.filter((item) => item.status === status).length, status])
     .filter(([n]) => n)
     .map(([n, status]) => `${n} ${status}`);
@@ -4528,7 +4551,7 @@ function summaryText(c, items) {
 
 function item(m, c, entry, current) {
   return m(`li.vd-timeline-item.vd-timeline-${entry.status}`, { 'aria-current': current ? 'step' : null }, [
-    m('span.vd-timeline-node', { 'aria-hidden': 'true' }, GLYPHS[entry.status]),
+    m('span.vd-timeline-node', { 'aria-hidden': 'true' }, c.icons.icon(m, ICONS[entry.status], 'vd-timeline-glyph')),
     m('div.vd-timeline-body', [
       m('p.vd-timeline-when', entry.when),
       m('p.vd-timeline-label', entry.label),
