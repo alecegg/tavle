@@ -12,17 +12,20 @@ import json
 from typing import Any
 
 from varde.pages.fences import ui_statements
-from varde.ui.blocks.check import check_props
-from varde.ui.blocks.inputs import (
+from varde.ui import (
+    COMPONENTS,
+    CONTROLS,
+    MAX_ITEM,
+    MAX_TEXT,
     MAX_VALUE_JSON,
+    AnswerSchema,
     allowed_value,
     check_form_value,
+    check_props,
+    check_slider_value,
     finite,
+    ranking_value,
 )
-from varde.ui.blocks.inputs_ordered import check_slider_value, ranking_value
-from varde.ui.blocks.spec import AnswerSchema
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.limits import CONTROLS, MAX_ITEM, MAX_TEXT
 
 _TEXT_REQUIRED = {"commented"}  # a verdict that is only meaningful with a reason
 

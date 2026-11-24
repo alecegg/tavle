@@ -3,8 +3,7 @@
 from typing import TypedDict
 
 from varde.pages.theme.resolve import ResolvedTheme
-from varde.ui.theme.presets import PRESET_NAMES, load_preset
-from varde.ui.theme.tokens import TOKENS, Token
+from varde.ui import PRESET_NAMES, TOKENS, Token, load_preset
 
 type Values = dict[str, dict[str, object]]
 

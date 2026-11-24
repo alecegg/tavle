@@ -15,30 +15,32 @@ from varde.pages.markdown_syntax import HEADING as _HEADING
 from varde.pages.markdown_syntax import FenceScanner, fence_closes
 from varde.pages.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
 from varde.pages.toc import toc_entries, toc_html
-from varde.ui.blocks.change_summary import Marker, collect_markers
-from varde.ui.blocks.check import check_props, props_errors
-from varde.ui.blocks_render import (
+from varde.ui import (
+    Filled,
+    Marker,
+    Media,
+    ParseError,
+    Placed,
+    Problem,
+    Statement,
+    change_summary_props,
+    check_props,
+    code_props,
+    code_titles,
+    collect_markers,
     error_card,
     errors_card,
-    mount_client_block,
-    render_block,
-)
-from varde.ui.blocks_render.change_summary import change_summary_props
-from varde.ui.blocks_render.code import code_props
-from varde.ui.blocks_render.containers import (
-    Filled,
-    Placed,
     fill_containers,
-    tab_headings,
-)
-from varde.ui.blocks_render.file_tree import (
-    code_titles,
+    image_props,
     link_file_trees,
+    mount_client_block,
+    parse_lines,
+    props_errors,
+    render_block,
+    render_refused,
+    tab_headings,
     target_id,
 )
-from varde.ui.blocks_render.image import image_props, render_refused
-from varde.ui.lines import ParseError, Statement, parse_lines
-from varde.ui.media import Media, Problem
 
 
 @dataclass(frozen=True)

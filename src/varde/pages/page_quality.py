@@ -15,8 +15,7 @@ from varde.pages.render import (
     split_frontmatter,
     strip_comments,
 )
-from varde.ui.blocks.check import OPEN_CHOICES, BlockError
-from varde.ui.lines import parse_lines
+from varde.ui import OPEN_CHOICES, BlockError, parse_lines
 
 # One phrase per line, lower case.
 STALE_PHRASES = (

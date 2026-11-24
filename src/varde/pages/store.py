@@ -23,7 +23,7 @@ from varde.pages.validation import (
     parse_json_object,
     strings,
 )
-from varde.ui.limits import MAX_ITEM, MAX_TEXT
+from varde.ui import MAX_ITEM, MAX_TEXT
 
 EDIT_OFF = "editing is off; serve with --allow-edit"
 

@@ -9,8 +9,7 @@ This module holds only the pure statement checks and the selector grammar
 import re
 from dataclasses import dataclass
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from varde.ui import BlockSpec, Fault, PropertySpec
 
 ANCHOR = re.compile(r"^[a-z0-9-]+(/[0-9]+)?$")
 TASK_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")

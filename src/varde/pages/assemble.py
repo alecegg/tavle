@@ -28,9 +28,7 @@ from varde.pages.render import (
 )
 from varde.pages.template import page_css, page_shell
 from varde.pages.theme.page import page_theme, require_theme
-from varde.ui.components import export_page
-from varde.ui.lines import parse_lines
-from varde.ui.shell import make_read_only
+from varde.ui import export_page, make_read_only, parse_lines
 
 
 def answer_attrs(comment: dict[str, Any]) -> str:

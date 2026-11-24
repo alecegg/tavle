@@ -8,7 +8,7 @@ from functools import cache
 from importlib.resources import files
 from importlib.resources.abc import Traversable
 
-from varde.ui.shell import UI_STATIC, css_files, join_css
+from varde.ui import UI_STATIC, css_files, join_css
 
 # Load order for the known scripts (`recap.js` hosts `window.varde` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other

@@ -13,7 +13,7 @@ import re
 from urllib.parse import urlsplit
 
 from varde.pages.markdown_syntax import FenceScanner
-from varde.ui.blocks_render.common import dated_html
+from varde.ui import dated_html
 
 STRIP_KEYS = ("status", "plan", "commit", "links")
 _META_KEYS = ("type", "risk", "status_at")

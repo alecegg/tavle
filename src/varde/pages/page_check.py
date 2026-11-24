@@ -4,14 +4,14 @@ from pathlib import Path
 
 from varde.pages.fences import find_fences, ui_results
 from varde.pages.include_statement import INCLUDE
-from varde.ui.blocks.check import (
+from varde.ui import (
     COMPONENT_SPECS,
     INPUT_COMPONENTS,
     SPECS,
     BlockError,
     check_props,
+    container_errors,
 )
-from varde.ui.blocks.containers import container_errors
 
 PAGE_SPECS = {**COMPONENT_SPECS, "include": INCLUDE}
 CUSTOM_REMOVED = (
