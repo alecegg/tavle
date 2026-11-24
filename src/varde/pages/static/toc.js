@@ -7,6 +7,8 @@
 // In a shadow root the browser cannot follow "#h-..." into the tree, so a click on any in-page
 // link scrolls its target into view there (the nearest scroller, which the host page chooses).
 const RAIL_MIN_WIDTH = 64 * 16;
+// Before the first heading no section is above the line; the first one is the section the reader
+// is about to enter, so it is marked rather than leaving the contents with no current entry.
 // The observed area runs from far above the page down to a line 25% below the viewport top, so a
 // section is "above" exactly when its start is over that line, even after a jump past it.
 const ABOVE_PAGE = 10_000_000;
@@ -44,9 +46,12 @@ function spy(root, nav) {
   const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
   let sections = [];
   const above = new Set();
+  const here = nav.querySelector('.toc-here');
   const mark = () => {
     let active = -1;
     sections.forEach((h, i) => { if (h && above.has(h)) active = i; });
+    if (active < 0) active = sections.findIndex(Boolean);
+    if (here) here.textContent = active >= 0 ? links[active].textContent : '';
     links.forEach((a, i) => {
       if (i === active) a.setAttribute('aria-current', 'location');
       else a.removeAttribute('aria-current');
@@ -66,6 +71,7 @@ function spy(root, nav) {
     above.clear();
     sections = links.map((a) => sectionOf(root, a));
     sections.forEach((h) => { if (h) observer.observe(h); });
+    mark();
   };
   const replaced = new MutationObserver(watch);
   const main = nav.closest('main');

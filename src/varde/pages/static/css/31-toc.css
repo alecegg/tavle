@@ -2,7 +2,9 @@
    Links are 44px hit areas; the current link carries a tint and bold weight, never an edge bar. */
 :root, :host { scroll-padding-block-start: var(--vd-space-9); }
 .block, h1, h2, h3, h4, h5, h6 { scroll-margin-block-start: var(--vd-space-9); }
-.doc-toc summary { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
+.doc-toc summary { display: flex; align-items: center; gap: var(--vd-space-2); min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
+.doc-toc .toc-here { min-inline-size: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; color: var(--vd-text-secondary); }
+.doc-toc .toc-here:not(:empty)::before { content: "\00b7\00a0"; }
 .doc-toc ol { list-style: none; margin: 0; padding: 0; }
 .doc-toc a { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); color: var(--vd-text); text-decoration: none; overflow-wrap: anywhere; }
 @media (hover: hover) { .doc-toc a:hover { background: var(--vd-hover); text-decoration: underline; } }

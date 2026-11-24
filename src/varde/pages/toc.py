@@ -38,6 +38,7 @@ def toc_html(entries: tuple[TocEntry, ...]) -> str:
     items = "".join(_item(entry) for entry in entries)
     return (
         '<nav class="doc-toc" aria-label="Contents"><details>'
-        f"<summary>Contents ({len(entries)})</summary><ol>{items}</ol>"
-        "</details></nav>"
+        f"<summary><span>Contents ({len(entries)})</span>"
+        '<span class="toc-here"></span></summary>'
+        f"<ol>{items}</ol></details></nav>"
     )

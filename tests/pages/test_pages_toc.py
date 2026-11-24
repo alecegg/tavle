@@ -1,6 +1,7 @@
 import re
 import threading
 from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -209,3 +210,69 @@ def test_contents_bar_is_hidden_in_print(toc_page: Any) -> None:
         )
     finally:
         toc_page.emulate_media(media="screen")
+
+
+@pytest.mark.slow
+def test_top_of_page_marks_the_first_section(toc_page: Any) -> None:
+    toc_page.set_viewport_size({"width": 1280, "height": 900})
+    toc_page.evaluate("() => window.scrollTo(0, 0)")
+    toc_page.wait_for_selector(CURRENT.format("#h-first"))
+    assert _current(toc_page) == ["#h-first"]
+
+
+@pytest.mark.slow
+def test_phone_contents_bar_names_the_current_section(toc_page: Any) -> None:
+    toc_page.set_viewport_size({"width": 390, "height": 844})
+    _scroll_to(toc_page, "#h-fourth")
+    toc_page.wait_for_function(
+        "() => document.querySelector('.doc-toc .toc-here').textContent === 'Fourth'"
+    )
+
+
+def test_summary_holds_a_slot_for_the_current_section_name() -> None:
+    out = _nav((2, "A", "h-a"), (2, "B", "h-b"))
+    assert '<span class="toc-here"></span>' in out
+
+
+def test_the_toc_column_is_reserved_only_on_a_page_with_a_toc() -> None:
+    base = (CSS_DIR / "01-base.css").read_text()
+    assert "main:has(> .doc-toc) > * { margin-inline:" in base
+    assert re.search(r"\nmain \{[^}]*max-inline-size: var\(--vd-doc-width\)", base)
+
+
+NO_TOC_DOC = "# Plain\n\ntext\n"
+
+
+@contextmanager
+def _served(tmp_path: Path, text: str) -> Iterator[PageServer]:
+    doc = tmp_path / "doc.md"
+    doc.write_text(text, encoding="utf-8")
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        yield server
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)
+
+
+def _open(page: Any, server: PageServer, width: int) -> None:
+    page.set_viewport_size({"width": width, "height": 900})
+    page.goto(f"http://127.0.0.1:{server.port}/")
+    page.wait_for_selector("main .block")
+
+
+@pytest.mark.slow
+def test_page_without_a_toc_is_centred_with_no_empty_gutter(
+    toc_page: Any, tmp_path: Path
+) -> None:
+    with _served(tmp_path, NO_TOC_DOC) as server:
+        _open(toc_page, server, 1280)
+        centre = toc_page.eval_on_selector(
+            "main .block",
+            "(b) => {"
+            " const r = b.getBoundingClientRect(); return r.left + r.width / 2; }",
+        )
+    assert centre == pytest.approx(1280 / 2, abs=1)

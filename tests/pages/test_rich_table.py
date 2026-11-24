@@ -517,3 +517,58 @@ def test_print_block_is_last_and_resets_the_screen_rules() -> None:
 def test_print_lets_table_dates_wrap_in_fixed_columns() -> None:
     css = (PAGES / "static" / "css" / "40-table.css").read_text()
     assert ".vb-table .vd-date" in css[css.index("@media print") :]
+
+
+def _doc_with_rows(count: int) -> str:
+    rows = (
+        BODY_ROWS[: BODY_ROWS.index(f"svc{count:02d}") - 2] if count < 30 else BODY_ROWS
+    )
+    return DOC.replace(BODY_ROWS, rows)
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize(
+    ("count", "collapsed"),
+    [(16, False), (17, True)],
+    ids=["hides-four-rows-so-shows-all", "hides-five-rows-so-collapses"],
+)
+def test_interact_table_collapses_only_when_enough_rows_would_hide(
+    shared_page: Any, tmp_path: Path, count: int, collapsed: bool
+) -> None:
+    with _serving(tmp_path, _doc_with_rows(count)) as server:
+        for width in (1024, 390):
+            _open(shared_page, server, width=width)
+            shown = shared_page.locator("tbody tr:visible").count()
+            assert shown == (12 if collapsed else count)
+            assert shared_page.locator(".vb-more").is_visible() is collapsed
+
+
+@pytest.mark.slow
+def test_interact_collapse_hides_the_same_rows_on_a_phone_and_on_a_desktop(
+    shared_page: Any, site: PageServer
+) -> None:
+    for width in (1024, 390):
+        _open(shared_page, site, width=width)
+        assert shared_page.locator("tbody tr:visible").count() == 12
+        shared_page.locator(".vb-more-toggle").click()
+        assert shared_page.locator("tbody tr:visible").count() == 30
+
+
+@pytest.mark.slow
+def test_interact_phone_sort_label_stays_on_one_line_inside_the_card(
+    shared_page: Any, site: PageServer
+) -> None:
+    _open(shared_page, site, width=320)
+    box = shared_page.locator(".vb-sortpick").evaluate(
+        """(label) => {
+            const bar = label.parentElement.getBoundingClientRect();
+            const select = label.querySelector('select').getBoundingClientRect();
+            return {
+                labelHeight: label.getBoundingClientRect().height,
+                selectRight: select.right,
+                barRight: bar.right,
+            };
+        }"""
+    )
+    assert box["labelHeight"] <= 50
+    assert box["selectRight"] <= box["barRight"] + 0.5
