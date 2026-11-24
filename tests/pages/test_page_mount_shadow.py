@@ -262,6 +262,9 @@ def test_print_hooks_open_only_the_mounted_charts(site: tuple[Any, PageServer]) 
         }"""
     )
     mount(page, extra=EXTRA)
+    page.wait_for_function(  # chart hooks load after the mount resolves
+        "() => document.getElementById('host-a').shadowRoot.querySelector('.vb-readout')"
+    )
     states = page.evaluate(
         """() => {
           const inside = () => document.getElementById('host-a').shadowRoot.querySelector('details.vb-data').open;
