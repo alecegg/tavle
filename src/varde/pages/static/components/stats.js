@@ -76,7 +76,7 @@ export function view(m, props, c) {
   const items = c.shared.objects(props.item);
   const count = items.length;
   return m('section.vb.stats.vd-stats', { 'aria-label': 'Stats', 'data-copy': copyText(c, items) }, [
-    m('p.vb-alt.vd-stats-summary', `${count} ${count === 1 ? 'stat' : 'stats'}`),
+    m('p.vb-alt.vb-sr.vd-stats-summary', `${count} ${count === 1 ? 'stat' : 'stats'}`),
     m(`div.vd-stats-grid.vd-stats-n${count}`, items.map((item) => card(m, c, item)))
   ]);
 }

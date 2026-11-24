@@ -46,7 +46,6 @@
   .vd-er-fk { color: LinkText; }
 }
 @media print {
-  .vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; }
   .vd-er-view { display: block; overflow: visible; max-block-size: none; }
   .vd-er-svg { max-inline-size: 100%; inline-size: 100%; block-size: auto; }
   .vd-er-cards, .vd-er-card, .vd-er-card > .vb-card, .vd-er-rel { overflow: visible; block-size: auto; max-block-size: none; contain: none; white-space: normal; overflow-wrap: anywhere; }
@@ -64,6 +63,8 @@
 .vb-fields th:first-child, .vb-fields td:first-child { min-inline-size: 10ch; }
 .vb-fields th:nth-child(2), .vb-fields td:nth-child(2) { min-inline-size: 8ch; }
 .vb-sr { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* On paper there is no screen reader: the text prints. Below the rule above, so it wins. */
+@media print { .vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; } }
 .vb-fields thead th { white-space: nowrap; font-weight: 600; border-block-end: 2px solid var(--vd-border-interactive); background: var(--vd-surface-elevated); }
 .vb-fields code, .vb-fields .vb-badge, .vb-fields .vd-change-badge { white-space: nowrap; }
 .vb-fields td a { display: inline-flex; align-items: center; box-sizing: border-box; min-block-size: 44px; min-inline-size: 44px; white-space: nowrap; }

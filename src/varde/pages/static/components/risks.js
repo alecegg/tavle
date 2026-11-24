@@ -80,7 +80,7 @@ export function view(m, props, c) {
   const title = props.title || 'Risks';
   return m('section.vb.risks.vd-risk', { 'aria-label': title, 'data-copy': copyText(risks) }, [
     props.title ? m('p.vd-risk-title', props.title) : null,
-    m('p.vb-alt.vd-risk-summary', summaryText(c, risks)),
+    m('p.vb-alt.vb-sr.vd-risk-summary', summaryText(c, risks)),
     m('p.vd-risk-axes', 'Rows are likelihood, high at the top. Columns are impact, low at the left.'),
     grid(m, c, risks),
     m('dl.vd-risk-list', risks.map((risk) => entry(m, c, risk)))

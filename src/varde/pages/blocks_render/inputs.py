@@ -28,6 +28,11 @@ def _hint(field: dict) -> str:
     return f"At most {high}." if high is not None else ""
 
 
+def _label(field: dict) -> str:
+    """The label a reader sees: without the field's own key in parentheses."""
+    return str(field["label"]).replace(f" ({field['name']})", "")
+
+
 def _client_field(field: dict) -> dict[str, object]:
     """The keys the client needs to read a field back (a whitelist, not the table)."""
     keys = ("name", "type", "required", "min", "max")
@@ -61,7 +66,7 @@ def _field_props(field: dict) -> Props:
     """One form field as the browser draws it; `client` is what it reads back."""
     shown: Props = {
         "name": field["name"],
-        "label": field["label"],
+        "label": _label(field),
         "type": field["type"],
         "required": field.get("required") is True,
         "hint": _hint(field),

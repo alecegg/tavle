@@ -109,9 +109,28 @@ describe('form markup', () => {
     expect(row.querySelector('input').compareDocumentPosition(row.querySelector('.form-label')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
-  it('starts a select with a blank choice and marks required ones', () => {
+  it('starts a select on a Choose… placeholder, disabled when the field is required', () => {
+    const select = (required) => mount('form', { title: '', submit: 'Go', fields: [field({ name: 's', type: 'select', options: ['a'], required })] });
+    const first = (el) => el.querySelector('select > option');
+    expect(first(select(true)).textContent).toBe('Choose…');
+    expect(first(select(true)).hasAttribute('disabled')).toBe(true);
+    expect(first(select(true)).hasAttribute('selected')).toBe(true);
+    expect(first(select(false)).hasAttribute('disabled')).toBe(false);
+    expect(first(select(false)).getAttribute('value')).toBe('');
+  });
+
+  it('draws a text field above the length threshold as a full-row textarea', () => {
+    const text = (limit) => mount('form', { title: '', submit: 'Go', fields: [field({ name: 't', type: 'text', limit })] });
+    const long = text(600);
+    expect(long.querySelector('textarea[data-field="t"]').getAttribute('maxlength')).toBe('600');
+    expect(long.querySelector('.form-row').classList.contains('form-long')).toBe(true);
+    const short = text(10);
+    expect(short.querySelector('textarea')).toBeNull();
+    expect(short.querySelector('input[type="text"]').getAttribute('maxlength')).toBe('10');
+  });
+
+  it('marks a required select', () => {
     const el = mount('form', { title: '', submit: 'Go', fields: [field({ name: 's', type: 'select', options: ['a'], required: true })] });
-    expect(el.querySelector('select > option').getAttribute('value')).toBe('');
     expect(el.querySelector('select').getAttribute('aria-required')).toBe('true');
     expect(el.querySelector('#form-error-w')).not.toBeNull();
   });

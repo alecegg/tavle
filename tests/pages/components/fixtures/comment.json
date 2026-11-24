@@ -10,7 +10,7 @@
    "maxNote": 8000
   },
   "id": "note",
-  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Comment</h4><form class=\"comment-item\" data-item=\"note\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-note\">Anything?</label><textarea class=\"comment-text\" id=\"comment-text-note\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-note\"></textarea><span class=\"comment-count\" id=\"comment-count-note\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Send</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-note\" role=\"alert\"></p></form></section></div>"
+  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><form class=\"comment-item\" data-item=\"note\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-note\">Anything?</label><textarea class=\"comment-text\" id=\"comment-text-note\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-note\"></textarea><span class=\"comment-count\" id=\"comment-count-note\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Send</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-note\" role=\"alert\"></p></form></section></div>"
  },
  {
   "name": "submit",
@@ -24,7 +24,7 @@
    "maxNote": 8000
   },
   "id": "n2",
-  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Comment</h4><form class=\"comment-item\" data-item=\"n2\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-n2\">Missed?</label><textarea class=\"comment-text\" id=\"comment-text-n2\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-n2\"></textarea><span class=\"comment-count\" id=\"comment-count-n2\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Post</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-n2\" role=\"alert\"></p></form></section></div>"
+  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><form class=\"comment-item\" data-item=\"n2\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-n2\">Missed?</label><textarea class=\"comment-text\" id=\"comment-text-n2\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-n2\"></textarea><span class=\"comment-count\" id=\"comment-count-n2\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Post</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-n2\" role=\"alert\"></p></form></section></div>"
  },
  {
   "name": "hostile",
@@ -38,7 +38,7 @@
    "maxNote": 8000
   },
   "id": "n3",
-  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Comment</h4><form class=\"comment-item\" data-item=\"n3\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-n3\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</label><textarea class=\"comment-text\" id=\"comment-text-n3\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-n3\"></textarea><span class=\"comment-count\" id=\"comment-count-n3\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-n3\" role=\"alert\"></p></form></section></div>"
+  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><form class=\"comment-item\" data-item=\"n3\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-n3\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</label><textarea class=\"comment-text\" id=\"comment-text-n3\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-n3\"></textarea><span class=\"comment-count\" id=\"comment-count-n3\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">&lt;script&gt;alert(1)&lt;/script&gt;&quot;&gt;&lt;img src=x onerror=alert(1)&gt; &amp; &#x27;q&#x27;</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-n3\" role=\"alert\"></p></form></section></div>"
  },
  {
   "name": "no-id",
@@ -51,6 +51,6 @@
    "maxNote": 8000
   },
   "id": null,
-  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><h4 class=\"vb-title\">Comment</h4><form class=\"comment-item\" data-item=\"None\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-None\">L</label><textarea class=\"comment-text\" id=\"comment-text-None\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-None\"></textarea><span class=\"comment-count\" id=\"comment-count-None\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Send</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-None\" role=\"alert\"></p></form></section></div>"
+  "html": "<div class=\"vb comment\" data-component=\"comment\" data-props=\"{}\"><section class=\"vb-card\"><form class=\"comment-item\" data-item=\"None\" novalidate><div class=\"comment-field\"><label class=\"comment-note\" for=\"comment-text-None\">L</label><textarea class=\"comment-text\" id=\"comment-text-None\" rows=\"4\" maxlength=\"8000\" aria-describedby=\"comment-count-None\"></textarea><span class=\"comment-count\" id=\"comment-count-None\">0 / 8000</span><span class=\"comment-announce\" aria-live=\"polite\"></span></div><button type=\"submit\" class=\"comment-send\">Send</button><span class=\"comment-state\" aria-live=\"polite\"></span><p class=\"comment-error\" id=\"comment-error-None\" role=\"alert\"></p></form></section></div>"
  }
 ]

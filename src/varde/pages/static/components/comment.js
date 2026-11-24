@@ -8,5 +8,5 @@ export function view(m, props, c, blockId) {
     m('span.comment-announce', { 'aria-live': 'polite' })
   ]);
   const form = m('form.comment-item', { 'data-item': id, novalidate: true }, [field, c.shared.inputFooter(m, 'comment', props.submit, id)]);
-  return c.shared.inputRoot(m, 'comment', {}, 'Comment', form);
+  return c.shared.inputRoot(m, 'comment', {}, '', form);
 }

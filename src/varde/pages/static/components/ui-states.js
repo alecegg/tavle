@@ -8,7 +8,7 @@ function tile(m, t) {
 }
 
 export function view(m, props, c) {
-  const alt = m('p.vb-alt', `${props.tiles.length} states of the screen`);
+  const alt = m('p.vb-alt.vb-sr', `${props.tiles.length} states of the screen`);
   const attrs = props.layout === null ? {} : { 'data-layout': props.layout };
   const grid = m('div.vb-grid', attrs, props.tiles.map((t) => tile(m, t)));
   return m('div.vb.ui-states', { 'data-copy': props.copy }, c.shared.card(m, props.heading, [alt, grid]));

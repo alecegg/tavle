@@ -157,7 +157,7 @@ export function containerView(m, kind, props, blockId, held) {
   const grid = kind === 'columns' ? m(`div.vd-columns-grid.vd-columns-n${panels.length}`, inner) : inner;
   const cls = kind === 'tabs' ? 'vd-ctabs' : 'vd-columns';
   // The page contents already lists tab names, so only columns draw an index line.
-  const index = kind === 'tabs' ? [] : [m('p.vb-alt.vd-containers-alt', names ? `${count}: ${names}` : count)];
+  const index = kind === 'tabs' ? [] : [m('p.vb-alt.vb-sr.vd-containers-alt', names ? `${count}: ${names}` : count)];
   return m(`section.vb.${kind}.vd-containers.${cls}`, { 'aria-label': kind === 'tabs' ? 'Tabs' : 'Columns' }, [
     ...index,
     grid

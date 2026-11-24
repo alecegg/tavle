@@ -35,7 +35,6 @@ export function view(m, props, c, blockId) {
   const id = c.shared.pyStr(blockId);
   return m('div.vb.decision', [
     m('section.vb-card', [
-      m('h4.vb-title', 'Decision'),
       m('p.decision-question', props.question),
       evidence(m, props),
       props.diff ? m('pre.decision-diff', { tabindex: '0' }, m('code', props.diff)) : null,

@@ -23,5 +23,5 @@ export function view(m, props, c, blockId) {
     ]),
     c.shared.inputFooter(m, 'slider', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'slider', { min: props.min, max: props.max, step: props.step }, 'Slider', form);
+  return c.shared.inputRoot(m, 'slider', { min: props.min, max: props.max, step: props.step }, '', form);
 }

@@ -26,5 +26,5 @@ export function view(m, props, c, blockId) {
     m('span.ranking-live', { role: 'status', 'aria-live': 'polite' }),
     c.shared.inputFooter(m, 'ranking', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'ranking', {}, 'Ranking', form);
+  return c.shared.inputRoot(m, 'ranking', {}, '', form);
 }

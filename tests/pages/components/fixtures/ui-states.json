@@ -51,7 +51,7 @@
    ],
    "copy": "<script>alert(1)</script> (ui-states)\n- empty: No orders <b>yet</b>\n- loading: Skeleton rows\n- error: n/a, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n- offline: Banner: you are offline\n- partial: Some rows failed to load"
   },
-  "html": "<div class=\"vb ui-states\" data-copy=\"&lt;script&gt;alert(1)&lt;/script&gt; (ui-states)\n- empty: No orders &lt;b&gt;yet&lt;/b&gt;\n- loading: Skeleton rows\n- error: n/a, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n- offline: Banner: you are offline\n- partial: Some rows failed to load\"><section class=\"vb-card\"><h4 class=\"vb-title\">&lt;script&gt;alert(1)&lt;/script&gt;</h4><p class=\"vb-alt\">5 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><span class=\"vb-badge vb-na\">n/a</span> <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div><div class=\"vb-state vb-state-offline\"><h5>offline</h5><p>Banner: you are offline</p></div><div class=\"vb-state vb-state-partial\"><h5>partial</h5><p>Some rows failed to load</p></div></div></section></div>"
+  "html": "<div class=\"vb ui-states\" data-copy=\"&lt;script&gt;alert(1)&lt;/script&gt; (ui-states)\n- empty: No orders &lt;b&gt;yet&lt;/b&gt;\n- loading: Skeleton rows\n- error: n/a, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n- offline: Banner: you are offline\n- partial: Some rows failed to load\"><section class=\"vb-card\"><h4 class=\"vb-title\">&lt;script&gt;alert(1)&lt;/script&gt;</h4><p class=\"vb-alt vb-sr\">5 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><span class=\"vb-badge vb-na\">n/a</span> <span>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div><div class=\"vb-state vb-state-offline\"><h5>offline</h5><p>Banner: you are offline</p></div><div class=\"vb-state vb-state-partial\"><h5>partial</h5><p>Some rows failed to load</p></div></div></section></div>"
  },
  {
   "name": "rich-wireframe:s1",
@@ -89,7 +89,7 @@
    ],
    "copy": "Orders list (ui-states)\n- empty: No orders yet, with a Create order button\n- loading: Skeleton rows\n- error: Message and a Retry button"
   },
-  "html": "<div class=\"vb ui-states\" data-copy=\"Orders list (ui-states)\n- empty: No orders yet, with a Create order button\n- loading: Skeleton rows\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders list</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders yet, with a Create order button</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders list (ui-states)\n- empty: No orders yet, with a Create order button\n- loading: Skeleton rows\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders list</h4><p class=\"vb-alt vb-sr\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>No orders yet, with a Create order button</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton rows</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
  },
  {
   "name": "rich-wireframe:s2",
@@ -128,7 +128,7 @@
    ],
    "copy": "Order detail (ui-states)\n- empty: n/a, an order always has lines\n- loading: Skeleton lines\n- error: Message and a Retry button"
   },
-  "html": "<div class=\"vb ui-states\" data-copy=\"Order detail (ui-states)\n- empty: n/a, an order always has lines\n- loading: Skeleton lines\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Order detail</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><span class=\"vb-badge vb-na\">n/a</span> <span>an order always has lines</span></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton lines</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
+  "html": "<div class=\"vb ui-states\" data-copy=\"Order detail (ui-states)\n- empty: n/a, an order always has lines\n- loading: Skeleton lines\n- error: Message and a Retry button\"><section class=\"vb-card\"><h4 class=\"vb-title\">Order detail</h4><p class=\"vb-alt vb-sr\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><span class=\"vb-badge vb-na\">n/a</span> <span>an order always has lines</span></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><p>Skeleton lines</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Message and a Retry button</p></div></div></section></div>"
  },
  {
   "name": "unit-0",
@@ -167,7 +167,7 @@
    ],
    "copy": "Orders (ui-states)\n- empty: Nothing <b>yet</b>\n- error: Retry\n- loading: n/a, instant"
   },
-  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt vb-sr\">3 states of the screen</p><div class=\"vb-grid\" data-layout=\"grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
  },
  {
   "name": "unit-1",
@@ -205,6 +205,6 @@
    ],
    "copy": "Orders (ui-states)\n- empty: Nothing <b>yet</b>\n- error: Retry\n- loading: n/a, instant"
   },
-  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
+  "html": "<div class=\"vb ui-states\" data-copy=\"Orders (ui-states)\n- empty: Nothing &lt;b&gt;yet&lt;/b&gt;\n- error: Retry\n- loading: n/a, instant\"><section class=\"vb-card\"><h4 class=\"vb-title\">Orders</h4><p class=\"vb-alt vb-sr\">3 states of the screen</p><div class=\"vb-grid\"><div class=\"vb-state vb-state-empty\"><h5>empty</h5><p>Nothing &lt;b&gt;yet&lt;/b&gt;</p></div><div class=\"vb-state vb-state-error\"><h5>error</h5><p>Retry</p></div><div class=\"vb-state vb-state-loading\"><h5>loading</h5><span class=\"vb-badge vb-na\">n/a</span> <span>instant</span></div></div></section></div>"
  }
 ]

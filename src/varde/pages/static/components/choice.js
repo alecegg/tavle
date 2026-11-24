@@ -30,5 +30,5 @@ export function view(m, props, c, blockId) {
     props.comment ? note(m, props.maxNote) : null,
     c.shared.inputFooter(m, 'choice', 'Send', id)
   ]);
-  return c.shared.inputRoot(m, 'choice', { multiple: props.multiple, comment: props.comment }, 'Choice', form);
+  return c.shared.inputRoot(m, 'choice', { multiple: props.multiple, comment: props.comment }, '', form);
 }
