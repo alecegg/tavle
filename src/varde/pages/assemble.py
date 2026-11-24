@@ -189,11 +189,6 @@ def assemble(doc: Path, *, token: str, api_base: str = "") -> AssembledPage:
     return AssembledPage(page_shell(doc.name, main, token, api_base), sources)
 
 
-def assemble_main(doc: Path) -> str:
-    """Only the `main` element of the served page, for a host page that mounts it."""
-    return _served_main(doc)[0]
-
-
 def assemble_page(doc: Path, *, token: str, api_base: str = "") -> str:
     """Full served HTML for `doc`; see `page_shell` for `api_base`."""
     return assemble(doc, token=token, api_base=api_base).html
