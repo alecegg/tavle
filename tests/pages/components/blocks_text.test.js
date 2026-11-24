@@ -50,3 +50,22 @@ describe('table url classes', () => {
     expect(components.table.classifyUrl(u.url)).toBe(u.kind);
   });
 });
+
+describe('table status columns', () => {
+  const statuses = (props) => {
+    const host = document.createElement('div');
+    m.render(host, components.table.view(m, props, components));
+    return [...host.querySelectorAll('.vb-status')].map((el) => el.className);
+  };
+  it('tones a column named Status without a declared type', () => {
+    const found = statuses({ columns: ['Task', 'Status'], rows: [['Build', 'Blocked'], ['Ship', 'Done']] });
+    expect(found).toEqual([expect.stringContaining('vb-status-bad'), expect.stringContaining('vb-status-ok')]);
+  });
+  it('tones a column whose every value is a status word', () => {
+    expect(statuses({ columns: ['Service', 'Now'], rows: [['api', 'Down'], ['db', 'In progress']] })).toHaveLength(2);
+  });
+  it('leaves free text and declared types alone', () => {
+    expect(statuses({ columns: ['Task', 'Note'], rows: [['Build', 'Done today']] })).toEqual([]);
+    expect(statuses({ columns: ['Status'], rows: [['Done']], types: { Status: 'text' } })).toEqual([]);
+  });
+});
