@@ -54,6 +54,9 @@ class BlockSpec:
     # expanded to the parts it names.
     block_type: str = "visual"
     properties: tuple[PropertySpec, ...] = ()
+    # every key not named in `properties` must match this (its name is unused);
+    # None makes such a key unknown. ui-states takes any state name this way.
+    extra_keys: PropertySpec | None = None
 
 
 WIDGET = "widget"

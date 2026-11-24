@@ -186,13 +186,19 @@ def check(doc_text: str, root: Path | None = None) -> list[BlockError]:
 
 
 def _property_faults(
-    data: dict[str, object], properties: tuple[PropertySpec, ...], prefix: str = ""
+    data: dict[str, object],
+    properties: tuple[PropertySpec, ...],
+    prefix: str = "",
+    extra_keys: PropertySpec | None = None,
 ) -> list[Fault]:
     names = {prop.name for prop in properties}
-    faults = [
-        Fault("unknown-key", f"unknown key '{prefix}{key}'")
-        for key in sorted(data.keys() - names)
-    ]
+    faults: list[Fault] = []
+    for key in sorted(data.keys() - names):
+        path = f"{prefix}{key}"
+        if extra_keys is None:
+            faults.append(Fault("unknown-key", f"unknown key '{path}'"))
+            continue
+        faults += _value_faults(data[key], extra_keys.type, path, extra_keys)
     for prop in properties:
         path = f"{prefix}{prop.name}"
         if prop.name not in data:
@@ -254,6 +260,6 @@ def check_props(
     faults = _covers_faults(data)
     data.pop("covers", None)
     if spec.properties:
-        faults += _property_faults(data, spec.properties)
+        faults += _property_faults(data, spec.properties, extra_keys=spec.extra_keys)
     faults += spec.validate(data)
     return [BlockError(line, f.rule, f.message) for f in faults]
