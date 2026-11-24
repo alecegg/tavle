@@ -1,13 +1,7 @@
 """Block type for a headline strip of numbers: stats."""
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    is_number,
-    str_field,
-    tables,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, is_number
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 DIRECTIONS = ("up", "down", "flat")
 GOODS = ("up", "down")
@@ -16,7 +10,6 @@ MIN_ITEMS = 2
 MAX_ITEMS = 6
 MAX_DECIMALS = 6
 SIGNS = ("+", "-", "−")
-ITEM_OPTIONAL = {"delta", "direction", "good", "tone", "note", "decimals"}
 
 
 def delta_direction(item: dict[str, object]) -> str | None:
@@ -34,30 +27,20 @@ def delta_direction(item: dict[str, object]) -> str | None:
     return None
 
 
-def _scalar_fault(item: dict[str, object], key: str, where: str) -> list[Fault]:
-    if key not in item or is_number(item[key]):
+def _value_fault(item: dict[str, object], where: str) -> list[Fault]:
+    if "value" not in item or is_number(item["value"]):
         return []
-    return str_field(item, key, where)
-
-
-def _choice_fault(
-    item: dict[str, object], key: str, allowed: tuple[str, ...], where: str
-) -> list[Fault]:
-    if key not in item or item[key] in allowed:
+    value = item["value"]
+    if isinstance(value, str) and value.strip():
         return []
-    return [Fault("type", f"{where}: {key} must be one of {', '.join(allowed)}")]
-
-
-def _is_places(value: object) -> bool:
-    return (
-        isinstance(value, int)
-        and not isinstance(value, bool)
-        and value in range(MAX_DECIMALS + 1)
-    )
+    return [Fault("type", f"{where}: 'value' must be a non-empty string or a number")]
 
 
 def _decimals_fault(item: dict[str, object], where: str) -> list[Fault]:
-    if "decimals" not in item or _is_places(item["decimals"]):
+    decimals = item.get("decimals")
+    if not isinstance(decimals, int) or isinstance(decimals, bool):
+        return []  # absent, or a type fault the properties already report
+    if 0 <= decimals <= MAX_DECIMALS:
         return []
     return [Fault("type", f"{where}: decimals must be 0 to {MAX_DECIMALS}")]
 
@@ -65,7 +48,10 @@ def _decimals_fault(item: dict[str, object], where: str) -> list[Fault]:
 def _delta_fault(item: dict[str, object], where: str) -> list[Fault]:
     if "delta" not in item:
         return []
-    if not str(item["delta"]).strip():
+    delta = item["delta"]
+    if not (is_number(delta) or isinstance(delta, str)):
+        return [Fault("type", f"{where}: 'delta' must be a string or number")]
+    if not str(delta).strip():
         return [Fault("type", f"{where}: 'delta' must be a non-empty string or number")]
     if delta_direction(item) is None:
         return [Fault("direction", f"{where}: delta needs a direction or a +/- sign")]
@@ -73,36 +59,25 @@ def _delta_fault(item: dict[str, object], where: str) -> list[Fault]:
 
 
 def _item_faults(item: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(item, {"label", "value"}, ITEM_OPTIONAL, where)
-    faults += str_field(item, "label", where) + str_field(item, "note", where)
-    faults += _scalar_fault(item, "value", where) + _decimals_fault(item, where)
-    faults += _choice_fault(item, "direction", DIRECTIONS, where)
-    faults += _choice_fault(item, "good", GOODS, where)
-    faults += _choice_fault(item, "tone", TONES, where)
-    if "delta" in item and not (
-        is_number(item["delta"]) or isinstance(item["delta"], str)
-    ):
-        return faults + [Fault("type", f"{where}: 'delta' must be a string or number")]
-    return faults + _delta_fault(item, where)
+    return (
+        _value_fault(item, where)
+        + _decimals_fault(item, where)
+        + _delta_fault(item, where)
+    )
 
 
-def _items_faults(data: dict[str, object]) -> list[Fault]:
-    items = data["item"]
+def validate_stats(data: dict[str, object]) -> list[Fault]:
+    items = data.get("item")
     if not isinstance(items, list) or not all(isinstance(i, dict) for i in items):
-        return [Fault("type", "stats: 'item' must be a list of tables")]
+        return []  # absent, or a type fault the properties already report
     faults: list[Fault] = []
     if not MIN_ITEMS <= len(items) <= MAX_ITEMS:
         faults.append(
             Fault("limit", f"stats: {MIN_ITEMS} to {MAX_ITEMS} items; split the block")
         )
-    for n, item in enumerate(tables(data, "item", "stats"), 1):
+    for n, item in enumerate(items, 1):
         faults += _item_faults(item, f"stats: item[{n}]")
     return faults
-
-
-def validate_stats(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"item"}, set(), "stats")
-    return faults + (_items_faults(data) if "item" in data else [])
 
 
 STATS = BlockSpec(
@@ -129,4 +104,23 @@ STATS = BlockSpec(
 )
 """,
     validate_stats,
+    properties=(
+        PropertySpec(
+            "item",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("label", "string", required=True),
+                # value and delta take text or a number; the validator checks them.
+                PropertySpec("value", "any", required=True),
+                PropertySpec("delta", "any"),
+                PropertySpec("direction", "string", enum=DIRECTIONS),
+                PropertySpec("good", "string", enum=GOODS),
+                PropertySpec("tone", "string", enum=TONES),
+                PropertySpec("note", "string"),
+                PropertySpec("decimals", "integer"),
+            ),
+        ),
+    ),
 )

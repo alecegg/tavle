@@ -1,18 +1,12 @@
 """Chart notes: point markers and bands, with tone.
 
-`NOTE_PROPERTIES` and `note_rule_faults` are what `chart` uses once it declares
-property metadata; `note_faults` adds the shape checks it needs until then.
+`NOTE_PROPERTIES` is the shape `chart` declares for `notes`; `note_rule_faults`
+checks what the metadata cannot express.
 """
 
 import math
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    is_number,
-    str_field,
-    tables,
-)
+from varde.pages.blocks.rules import Fault, is_number, tables
 from varde.pages.blocks.spec import PropertySpec
 
 MAX_NOTES = 12
@@ -124,30 +118,3 @@ def note_rule_faults(data: dict[str, object]) -> list[Fault]:
     for n, note in enumerate(found, 1):
         faults += _note_rule_faults(data, note, f"notes[{n}]")
     return faults
-
-
-def _tone_faults(note: dict[str, object], where: str) -> list[Fault]:
-    if "tone" not in note or note["tone"] in TONES:
-        return []
-    return [Fault("note-tone", f"{where}.tone must be one of {list(TONES)}")]
-
-
-def _note_shape_faults(note: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(note, {"label"}, {"x", "from", "to", "tone"}, where)
-    return faults + str_field(note, "label", where) + _tone_faults(note, where)
-
-
-def note_faults(data: dict[str, object]) -> list[Fault]:
-    """All note faults, for `chart` until it declares `NOTE_PROPERTIES` (then it
-    calls `note_rule_faults` alone and this function and its shape checks go)."""
-    if "notes" not in data:
-        return []
-    notes = data["notes"]
-    faults: list[Fault] = []
-    if not (isinstance(notes, list) and all(isinstance(n, dict) for n in notes)):
-        faults.append(
-            Fault("type", "chart: 'notes' must be a non-empty array of tables")
-        )
-    for n, note in enumerate(tables(data, "notes", "chart"), 1):
-        faults += _note_shape_faults(note, f"notes[{n}]")
-    return faults + note_rule_faults(data)

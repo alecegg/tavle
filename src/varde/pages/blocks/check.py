@@ -226,8 +226,12 @@ def _value_faults(
     if kind == "object" and isinstance(value, dict) and prop.fields:
         faults += _property_faults(value, prop.fields, f"{path}.")
     if kind == "list" and isinstance(value, list) and prop.items:
+        # each element is one value of the items type, never the list itself
+        element = PropertySpec(
+            prop.name, prop.items, enum=prop.enum, fields=prop.fields
+        )
         for index, item in enumerate(value):
-            faults += _value_faults(item, prop.items, f"{path}[{index}]", prop)
+            faults += _value_faults(item, prop.items, f"{path}[{index}]", element)
     return faults
 
 
