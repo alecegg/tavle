@@ -7,8 +7,8 @@
 from collections.abc import Iterable, Mapping
 
 from varde.pages.blocks.change import CHANGES
-from varde.pages.blocks.rules import Fault, check_keys, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 Marker = tuple[str, str]  # (kind, change)
 KINDS = {
@@ -94,8 +94,7 @@ def sentence(markers: Iterable[Marker]) -> str:
 
 
 def validate_change_summary(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, set(), {"title"}, "change-summary")
-    return faults + str_field(data, "title", "change-summary")
+    return []
 
 
 CHANGE_SUMMARY = BlockSpec(
@@ -113,4 +112,5 @@ CHANGE_SUMMARY = BlockSpec(
 )
 """,
     validate_change_summary,
+    properties=(PropertySpec("title", "string"),),
 )

@@ -1,4 +1,8 @@
-"""Validation of chart notes: point markers and bands, with tone."""
+"""Chart notes: point markers and bands, with tone.
+
+`NOTE_PROPERTIES` and `note_rule_faults` are what `chart` uses once it declares
+property metadata; `note_faults` adds the shape checks it needs until then.
+"""
 
 import math
 
@@ -8,21 +12,23 @@ from varde.pages.blocks.rules import (
     is_number,
     str_field,
     tables,
-    tables_fault,
 )
+from varde.pages.blocks.spec import PropertySpec
 
 MAX_NOTES = 12
 TONES = ("info", "decision", "risk", "warning", "success")
+# x, from and to take a label or a number; `_point_fault` checks the value.
+NOTE_PROPERTIES = (
+    PropertySpec("label", "string", required=True),
+    PropertySpec("tone", "string", enum=TONES),
+    PropertySpec("x", "any"),
+    PropertySpec("from", "any"),
+    PropertySpec("to", "any"),
+)
 
 
 def _finite(value: object) -> bool:
     return is_number(value) and math.isfinite(value)  # type: ignore[arg-type]
-
-
-def _tone_faults(note: dict[str, object], where: str) -> list[Fault]:
-    if "tone" not in note or note["tone"] in TONES:
-        return []
-    return [Fault("note-tone", f"{where}.tone must be one of {list(TONES)}")]
 
 
 def _point_fault(data: dict[str, object], value: object, where: str) -> Fault | None:
@@ -74,15 +80,18 @@ def _range_faults(
 def _marker_faults(
     data: dict[str, object], note: dict[str, object], where: str
 ) -> list[Fault]:
-    faults = check_keys(note, {"x", "label"}, {"tone"}, where)
-    fault = _point_fault(data, note["x"], f"{where}.x") if "x" in note else None
-    return faults + ([fault] if fault else [])
+    fault = _point_fault(data, note["x"], f"{where}.x")
+    return [fault] if fault else []
 
 
 def _band_faults(
     data: dict[str, object], note: dict[str, object], where: str
 ) -> list[Fault]:
-    faults = check_keys(note, {"from", "to", "label"}, {"tone"}, where)
+    faults = [
+        Fault("missing-key", f"{where}: missing required key '{key}'")
+        for key in ("from", "to")
+        if key not in note
+    ]
     ends = [
         (key, _point_fault(data, note[key], f"{where}.{key}"))
         for key in ("from", "to")
@@ -94,26 +103,51 @@ def _band_faults(
     return faults
 
 
-def _note_faults_one(
+def _note_rule_faults(
     data: dict[str, object], note: dict[str, object], where: str
 ) -> list[Fault]:
     if "x" in note and ("from" in note or "to" in note):
         return [Fault("note-mixed", f"{where}: x cannot be combined with from or to")]
     body = _marker_faults if "x" in note else _band_faults
-    return (
-        str_field(note, "label", where)
-        + _tone_faults(note, where)
-        + body(data, note, where)
-    )
+    return body(data, note, where)
+
+
+def note_rule_faults(data: dict[str, object]) -> list[Fault]:
+    """Rules the metadata cannot express: count, marker or band form, positions."""
+    notes = data.get("notes")
+    if notes == []:
+        return [Fault("type", "chart: 'notes' must not be empty")]
+    faults: list[Fault] = []
+    found = tables(data, "notes", "chart")
+    if len(found) > MAX_NOTES:
+        faults.append(Fault("too-many", f"chart.notes: at most {MAX_NOTES} notes"))
+    for n, note in enumerate(found, 1):
+        faults += _note_rule_faults(data, note, f"notes[{n}]")
+    return faults
+
+
+def _tone_faults(note: dict[str, object], where: str) -> list[Fault]:
+    if "tone" not in note or note["tone"] in TONES:
+        return []
+    return [Fault("note-tone", f"{where}.tone must be one of {list(TONES)}")]
+
+
+def _note_shape_faults(note: dict[str, object], where: str) -> list[Fault]:
+    faults = check_keys(note, {"label"}, {"x", "from", "to", "tone"}, where)
+    return faults + str_field(note, "label", where) + _tone_faults(note, where)
 
 
 def note_faults(data: dict[str, object]) -> list[Fault]:
+    """All note faults, for `chart` until it declares `NOTE_PROPERTIES` (then it
+    calls `note_rule_faults` alone and this function and its shape checks go)."""
     if "notes" not in data:
         return []
-    faults = tables_fault(data, "notes", "chart")
-    notes = tables(data, "notes", "chart")
-    if len(notes) > MAX_NOTES:
-        faults.append(Fault("too-many", f"chart.notes: at most {MAX_NOTES} notes"))
-    for n, note in enumerate(notes, 1):
-        faults += _note_faults_one(data, note, f"notes[{n}]")
-    return faults
+    notes = data["notes"]
+    faults: list[Fault] = []
+    if not (isinstance(notes, list) and all(isinstance(n, dict) for n in notes)):
+        faults.append(
+            Fault("type", "chart: 'notes' must be a non-empty array of tables")
+        )
+    for n, note in enumerate(tables(data, "notes", "chart"), 1):
+        faults += _note_shape_faults(note, f"notes[{n}]")
+    return faults + note_rule_faults(data)

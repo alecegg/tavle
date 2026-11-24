@@ -1,18 +1,10 @@
 """Component `recap`: a plan-to-change recap; props are the recap's JSON keys."""
 
 from varde.pages.blocks.rules import Fault
-from varde.pages.blocks.spec import BlockSpec
-
-_ROW_KEYS = ("file", "status", "hunk")
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def validate_recap(data: dict[str, object]) -> list[Fault]:
-    rows = data.get("rows")
-    if not isinstance(rows, list):
-        return [Fault("type", "recap needs a `rows` list")]
-    for row in rows:
-        if not isinstance(row, dict) or any(k not in row for k in _ROW_KEYS):
-            return [Fault("type", "each recap row needs file, status and hunk")]
     return []
 
 
@@ -38,4 +30,40 @@ RECAP = BlockSpec(
 """,
     validate_recap,
     block_type="status",
+    properties=(
+        PropertySpec("plan", "string"),
+        PropertySpec("base", "string"),
+        PropertySpec("head", "string"),
+        PropertySpec("summary", "object"),
+        PropertySpec(
+            "rows",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("file", "string", required=True),
+                PropertySpec("status", "string", required=True),
+                PropertySpec("hunk", "string", required=True),
+                PropertySpec("old_file", "any"),  # a path, or null for no rename
+                PropertySpec("tasks", "list", items="string"),
+                PropertySpec("blocks", "list", items="string"),
+                PropertySpec("drift", "list", items="string"),
+                PropertySpec("added", "list"),
+                PropertySpec("removed", "list"),
+                PropertySpec("shared", "boolean"),
+                PropertySpec("binary", "boolean"),
+                PropertySpec("truncated", "boolean"),
+            ),
+        ),
+        PropertySpec(
+            "untouched",
+            "list",
+            items="object",
+            fields=(
+                PropertySpec("task", "string"),
+                PropertySpec("owns", "string"),
+            ),
+        ),
+        PropertySpec("unverified", "list", items="string"),
+    ),
 )
