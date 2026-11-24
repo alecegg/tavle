@@ -12,7 +12,7 @@ import pytest
 from scene_html import shapes_html
 
 from varde.base.ui_lines import parse_lines
-from varde.pages.blocks import check_props
+from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks.diagrams import DIAGRAM, MAX_EDGES, MAX_NODES
 from varde.pages.blocks_render.diagram_layout import (
     Box,
@@ -267,7 +267,7 @@ def test_spec_example_validates_and_lists_nodes() -> None:
     result = parse_lines(DIAGRAM.example)
     assert result.errors == []
     assert check_props("diagram", result.statements[0].props, 1) == []
-    assert any(line.startswith("nodes") for line in DIAGRAM.fields)
+    assert "  nodes " in type_text("diagram")
 
 
 def rules(props: dict[str, Any]) -> set[str]:

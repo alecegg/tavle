@@ -14,7 +14,7 @@ import pytest
 from scene_html import svg_html
 
 from varde.base.ui_lines import parse_lines
-from varde.pages.blocks import check_props
+from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks.charts import CHART, MAX_SERIES
 from varde.pages.blocks_render.chart_model import build_model, copy_text
 from varde.pages.blocks_render.chart_scale import (
@@ -410,7 +410,7 @@ def test_spec_example_validates_and_every_kind_is_listed() -> None:
     result = parse_lines(CHART.example)
     assert result.errors == []
     assert check_props("chart", result.statements[0].props, 1) == []
-    text = "\n".join(CHART.fields)
+    text = type_text("chart")
     assert all(kind in text for kind in KINDS)
 
 

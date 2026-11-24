@@ -62,9 +62,10 @@ INCLUDE = BlockSpec(
     "include",
     "A selected part of another markdown file (plan, task, review), rendered in place",
     (
-        "source  path to a .md file under the page's directory",
-        "select  heading:<anchor>, task:<id>, frontmatter, acceptance or lines:<a>-<b>",
-        "title   optional caption",
+        "source: path to a .md file under the page's directory.",
+        "select: heading:<anchor>, task:<id>, frontmatter, acceptance or",
+        "  lines:<a>-<b>.",
+        "title: caption.",
     ),
     r"""include = include(
   source: "plan.md",
