@@ -424,3 +424,13 @@ def test_image_page_csp_img_src_is_unchanged(running: Running) -> None:
     status, headers, _ = running.request("GET", "/")
     assert status == 200
     assert "img-src 'self' data:" in headers["Content-Security-Policy"]
+
+
+def test_theme_css_route(running: Running) -> None:
+    assert running.request("GET", "/theme.css")[0] == 404
+    running.doc.write_text("---\ntheme: harbor\n---\n# Page", encoding="utf-8")
+    status, headers, body = running.request("GET", "/theme.css?v=123")
+    assert status == 200 and headers["Content-Type"].startswith("text/css")
+    assert b"--vd-accent: rgba(0, 107, 115, 1);" in body
+    running.doc.write_text("---\ntheme: invalid\n---\n# Page", encoding="utf-8")
+    assert running.request("GET", "/theme.css")[0] == 404

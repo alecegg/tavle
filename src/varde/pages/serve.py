@@ -58,6 +58,9 @@ from varde.pages.template import (
     static_css,
     static_scripts,
 )
+from varde.pages.theme.css import theme_css
+from varde.pages.theme.page import doc_theme
+from varde.pages.theme.tokens import ThemeError
 from varde.pages.validation import parse_json_object, strings
 
 # `app.css` without the tokens: the host page that mounts a page owns them
@@ -235,6 +238,9 @@ class PageHandler(BaseHTTPRequestHandler):
             body = static_body(name)
             self._reply(HTTPStatus.OK, body, STATIC_TYPES[name])
             return
+        if path == "/theme.css":
+            self._send_theme()
+            return
         if path == "/block":
             self._send_block(urlsplit(self.path).query)
             return
@@ -242,6 +248,17 @@ class PageHandler(BaseHTTPRequestHandler):
             self._send_media(unquote(path.removeprefix("/media/")))
             return
         self._reject(HTTPStatus.NOT_FOUND, "not found")
+
+    def _send_theme(self) -> None:
+        """The page's theme CSS; no theme or an invalid one is a 404."""
+        try:
+            theme = doc_theme(self.app.doc, self.app.doc.read_text(encoding="utf-8"))
+        except ThemeError:
+            theme = None
+        if theme is None or not theme.active:
+            self._reject(HTTPStatus.NOT_FOUND, "not found")
+            return
+        self._reply(HTTPStatus.OK, theme_css(theme).encode(), "text/css; charset=utf-8")
 
     def _send_media(self, src: str) -> None:
         """An image file under the page's directory; anything else is a 404."""

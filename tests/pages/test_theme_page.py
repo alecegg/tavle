@@ -16,8 +16,12 @@ def test_no_theme(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
 def test_harbor_theme(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("VARDE_CONFIG_DIR", str(tmp_path / "config"))
     result = page_theme(tmp_path / "page.md", "---\ntheme: harbor\n---\n# Page")
-    assert result.style.startswith("<style data-vd-theme>")
-    assert "--vd-accent: rgba(0, 107, 115, 1);" in result.style
+    assert result.style.startswith(
+        '<link rel="stylesheet" data-vd-theme href="/theme.css?v='
+    )
+    assert "--vd-accent: rgba(0, 107, 115, 1);" in require_theme(
+        tmp_path / "page.md", "---\ntheme: harbor\n---\n# Page"
+    )
     assert result.error == ""
 
 

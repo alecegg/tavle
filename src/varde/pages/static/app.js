@@ -273,6 +273,13 @@
   }
 
   function syncOthers(fresh) {
+    const theme = root().querySelector(':scope > [data-vd-theme]');
+    const incomingTheme = fresh.querySelector(':scope > [data-vd-theme]');
+    if (theme && !incomingTheme) theme.remove();
+    else if (!theme && incomingTheme) root().prepend(document.importNode(incomingTheme, true));
+    else if (theme && signature(theme) !== signature(incomingTheme)) {
+      theme.replaceWith(document.importNode(incomingTheme, true));
+    }
     const header = root().querySelector(':scope > .doc-header');
     const incomingHeader = fresh.querySelector(':scope > .doc-header');
     if (header && !incomingHeader) header.remove();
