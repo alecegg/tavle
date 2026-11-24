@@ -103,7 +103,6 @@ def test_stylesheet_is_tokens_logical_and_covers_modes() -> None:
     assert PHYSICAL.findall(CSS) == []
     for needle in (
         "position: sticky",
-        "inset-block-start: 0",
         "inset-inline-start: 0",
         "tabular-nums",
         "var(--vd-surface-sunk)",
@@ -194,7 +193,7 @@ def test_interact_sort_and_filter_by_keyboard(
 
 
 @pytest.mark.slow
-def test_interact_region_is_focusable_and_header_stays_visible(
+def test_interact_region_is_focusable_and_never_cuts_a_row(
     shared_page: Any, site: PageServer
 ) -> None:
     page = shared_page
@@ -203,11 +202,98 @@ def test_interact_region_is_focusable_and_header_stays_visible(
     assert region.get_attribute("tabindex") == "0"
     region.focus()
     assert region.evaluate("e => document.activeElement === e")
-    region.evaluate("e => { e.scrollTop = 200; }")
-    assert region.evaluate("e => e.scrollTop") > 0
-    top = region.evaluate("e => e.getBoundingClientRect().top")
-    head = page.locator("thead th").first.evaluate("e => e.getBoundingClientRect().top")
-    assert abs(head - top) <= 2
+    assert region.evaluate("e => e.scrollHeight <= e.clientHeight")
+
+
+@pytest.mark.slow
+def test_interact_long_table_shows_a_capped_window_and_names_the_total(
+    shared_page: Any, site: PageServer
+) -> None:
+    page = shared_page
+    _open(page, site)
+    assert len(_first_column(page)) == 12
+    toggle = page.locator(".vb-more-toggle")
+    assert toggle.inner_text() == "Show all 30 rows"
+    assert toggle.get_attribute("aria-expanded") == "false"
+    assert page.locator(".vb-foot").inner_text() == "30 rows, 3 columns"
+    assert page.locator(".vb-more").evaluate(
+        "e => e.previousElementSibling.classList.contains('vb-scroll')"
+    )
+    toggle.focus()
+    page.keyboard.press("Enter")
+    assert len(_first_column(page)) == 30
+    assert toggle.inner_text() == "Show first 12 rows"
+    assert toggle.get_attribute("aria-expanded") == "true"
+    page.keyboard.press("Space")
+    assert len(_first_column(page)) == 12
+
+
+@pytest.mark.slow
+def test_interact_print_shows_every_row_then_restores_the_cap(
+    shared_page: Any, site: PageServer
+) -> None:
+    page = shared_page
+    _open(page, site)
+    page.evaluate("() => window.dispatchEvent(new Event('beforeprint'))")
+    assert len(_first_column(page)) == 30
+    page.evaluate("() => window.dispatchEvent(new Event('afterprint'))")
+    assert len(_first_column(page)) == 12
+
+
+@pytest.mark.slow
+def test_interact_cap_follows_sort_and_filter(
+    shared_page: Any, site: PageServer
+) -> None:
+    page = shared_page
+    _open(page, site)
+    page.locator("thead th").nth(1).locator(".vb-sort").click()
+    page.locator("thead th").nth(1).locator(".vb-sort").click()
+    assert len(_first_column(page)) == 12
+    assert _first_column(page)[0] == "svc07"
+    page.locator(".vb-filter").fill("svc")
+    assert page.locator(".vb-more-toggle").inner_text() == "Show all 30 rows"
+    page.locator(".vb-filter").fill("svc1")
+    assert len(_first_column(page)) == 10
+    assert not page.locator(".vb-more").is_visible()
+    page.locator(".vb-filter").fill("svc2")
+    assert not page.locator(".vb-more").is_visible()
+
+
+@pytest.mark.slow
+def test_interact_phone_table_keeps_the_toggle_and_one_frame(
+    shared_page: Any, site: PageServer
+) -> None:
+    page = shared_page
+    _open(page, site, width=390)
+    assert page.locator(".vb-more-toggle").inner_text() == "Show all 30 rows"
+    assert (
+        page.locator(".vb-scroll").evaluate("e => getComputedStyle(e).borderTopWidth")
+        == "0px"
+    )
+    assert (
+        page.locator(".vb-card").evaluate("e => getComputedStyle(e).borderTopWidth")
+        == "1px"
+    )
+
+
+@pytest.mark.slow
+def test_interact_short_table_shows_every_row_with_no_toggle(
+    shared_page: Any, tmp_path: Path
+) -> None:
+    doc = tmp_path / "short.md"
+    doc.write_text(DOC.replace(BODY_ROWS, BODY_ROWS[: BODY_ROWS.index("svc12") - 2]))
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        _open(shared_page, server)
+        assert len(_first_column(shared_page)) == 12
+        assert shared_page.locator(".vb-more").count() == 0
+        assert shared_page.locator(".vb-foot").inner_text() == "12 rows, 3 columns"
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)
 
 
 @pytest.mark.slow
@@ -322,6 +408,11 @@ def test_cells_wrap_only_at_word_boundaries_and_tokens_stay_whole() -> None:
     assert "hyphens: none" in cell
     assert "white-space: nowrap" in _rule(".vb-table .vb-status")
     assert "min-inline-size: min-content" in _rule(".vb-table")
+
+
+def test_table_has_no_height_cap_and_no_inner_frame_in_a_card() -> None:
+    assert "max-block-size" not in _rule(".vb-scroll")
+    assert "border: 0" in _rule(".vb.table .vb-scroll")
 
 
 def test_print_block_is_last_and_resets_the_screen_rules() -> None:
