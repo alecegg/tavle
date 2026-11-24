@@ -97,6 +97,11 @@
   --vd-space-8: 2.5rem;
   --vd-space-9: 3rem;
 
+  /* page flow rhythm: one gap between blocks, more room before a heading than after it so it binds to what it introduces */
+  --vd-flow-block: var(--vd-space-4);
+  --vd-flow-before-heading: var(--vd-space-8);
+  --vd-flow-after-heading: var(--vd-space-2);
+
   /* radii */
   --vd-radius-s: 4px;
   --vd-radius-m: 6px;
@@ -388,6 +393,13 @@ main > * { max-inline-size: var(--vd-doc-width); margin-inline: auto; }
   .vb-card { padding: var(--vd-space-3); }
   .vb-grid { grid-template-columns: minmax(0, 1fr); }
 }
+/* page flow: the gaps between blocks are owned here; a block's own outer margins are zeroed so they do not stack on them */
+main > .block > :first-child { margin-block-start: 0; }
+main > .block > :last-child { margin-block-end: 0; }
+main > .block > [data-mithril] > * { margin-block: 0; } /* a client block's root sits one level down */
+main > .block + .block { margin-block-start: var(--vd-flow-block); }
+main > .block + .block.heading { margin-block-start: var(--vd-flow-before-heading); }
+main > .block.heading + .block { margin-block-start: var(--vd-flow-after-heading); }
 a { color: var(--vd-accent); }
 a:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 h1, h2, h3, h4, h5, h6 { line-height: var(--vd-leading-heading); margin-block: 1.2em 0.4em; }
