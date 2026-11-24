@@ -1,6 +1,6 @@
 """Code and diff blocks render client-side: registration, props, hosts, page links.
 
-The component DOM is checked in `tests/pages/components/code_diff.test.js` against
+The component DOM is checked in `tests/ui/components/code_diff.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts, and the server-side logic (lexer,
@@ -37,7 +37,7 @@ from varde.ui.components import component_bundle, host_props, mount_block
 from varde.ui.graph import deps_layout
 
 TESTS = Path(__file__).parent
-FIXTURES = TESTS / "components" / "fixtures"
+FIXTURES = TESTS.parent / "ui" / "components" / "fixtures"
 WIDGETS = TESTS / "fixtures" / "widgets"
 BLOCKS = ("code", "annotated-code", "diff", "file-tree", "change-summary", "deps")
 SAMPLES = {

@@ -1,7 +1,7 @@
 """Component contract: mount hosts, the bundle, and callout as a client-side block.
 
 `fixtures/callout.json` holds the HTML of the former Python callout renderer as a
-golden; Vitest (`tests/pages/components/*.test.js`) checks the component against
+golden; Vitest (`tests/ui/components/*.test.js`) checks the component against
 it. The standalone export fixture is regenerated with
 `VARDE_REGEN_FIXTURES=1 uv run pytest tests/pages`.
 """
@@ -21,7 +21,7 @@ from varde.ui.blocks_render import render_block
 from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.ui.components import component_bundle, mount_block
 
-FIXTURES = Path(__file__).parent / "components" / "fixtures"
+FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
 COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/ui/static/components"
 REGEN = os.environ.get("VARDE_REGEN_FIXTURES") == "1"
 CASES = load_cases()

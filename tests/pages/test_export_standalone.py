@@ -1,6 +1,6 @@
 """A standalone export of component blocks has all code inline, no remote reference.
 
-The browser run of this export is `tests/pages/components/callout.test.js`.
+The browser run of this export is `tests/ui/components/callout.test.js`.
 """
 
 import base64

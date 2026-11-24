@@ -1,6 +1,6 @@
 """Chart, diagram and image blocks render client-side: registration, props, hosts, copy.
 
-The component DOM is checked in `tests/pages/components/charts_diagrams.test.js` against
+The component DOM is checked in `tests/ui/components/charts_diagrams.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts with their source as the no-script
@@ -31,7 +31,7 @@ from varde.ui.components import component_bundle, mount_block
 from varde.ui.lines.parse import parse_lines
 from varde.ui.media import Media
 
-FIXTURES = Path(__file__).parent / "components" / "fixtures"
+FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
 PROPS = {
     "chart": chart_props,
     "diagram": diagram_props,

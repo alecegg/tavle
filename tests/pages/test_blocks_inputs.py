@@ -1,6 +1,6 @@
 """Input blocks render client-side: registration, props, hosts, read-only, validation.
 
-The component DOM is checked in `tests/pages/components/inputs.test.js` against
+The component DOM is checked in `tests/ui/components/inputs.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the statements render hosts whose no-script fallback is their
@@ -28,7 +28,7 @@ from varde.ui.blocks_render.registry import COMPONENTS
 from varde.ui.components import component_bundle
 from varde.ui.shell import make_read_only
 
-FIXTURES = Path(__file__).parent / "components" / "fixtures"
+FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 DOC = (
