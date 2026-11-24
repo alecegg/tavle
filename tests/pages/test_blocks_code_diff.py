@@ -18,6 +18,7 @@ from pathlib import Path
 
 import pytest
 
+from varde.pages.blocks import check_props
 from varde.pages.blocks.change_summary import EMPTY, UNCOUNTED
 from varde.pages.blocks_render.annotated_code import annotated_props
 from varde.pages.blocks_render.change_summary import change_summary_props
@@ -311,6 +312,83 @@ def test_code_titles_read_nested_hosts_and_skip_untitled_ones() -> None:
     titled = mount_block("code", code_props("x", "py", Panel(title="a.py")), "")
     plain = mount_block("code", code_props("x", "py"), "")
     assert code_titles(f"<div>{plain}{titled}</div>") == ["a.py"]
+
+
+@pytest.mark.parametrize(
+    "name,valid,required,nested",
+    [
+        ("diff", {"before": "a", "after": "b"}, "", ("notes", "side")),
+        ("file-tree", {"entries": [{"path": "a.py"}]}, "entries", ("entries", "path")),
+        (
+            "file-tree",
+            {"entries": [{"path": "a.py"}]},
+            "entries",
+            ("entries", "change"),
+        ),
+    ],
+)
+def test_metadata_rejects_shape_errors(
+    name: str, valid: dict[str, object], required: str, nested: tuple[str, str]
+) -> None:
+    assert check_props(name, valid, 1) == []
+    cases = [({**valid, "unexpected": 1}, "unexpected")]
+    if required:
+        cases.append(({k: v for k, v in valid.items() if k != required}, required))
+        cases.append(({**valid, required: 42}, required))
+    parent, field = nested
+    wrong = {"side": "later", "lines": 1, "note": "n"} if parent == "notes" else {}
+    if parent == "notes":
+        cases.append(({**valid, "notes": [wrong]}, field))
+        cases.append(({**valid, "notes": [{"lines": 1, "note": "n"}]}, field))
+        cases.append(({**valid, "mode": "wide"}, "mode"))
+        cases.append(({**valid, "filename": 3}, "filename"))
+    elif field == "path":
+        cases.append(({**valid, "entries": [{"path": 3}]}, "path"))
+        cases.append(({**valid, "entries": [{}]}, "path"))
+        cases.append(({**valid, "entries": [{"path": "a", "x": 1}]}, "entries[0].x"))
+    else:
+        cases.append(({**valid, "entries": [{"path": "a", "change": "moved"}]}, field))
+        cases.append(({**valid, "entries": [{"path": "a", "change": 3}]}, field))
+        cases.append(
+            (
+                {**valid, "entries": [{"path": "a", "change": "modified", "was": 3}]},
+                "was",
+            )
+        )
+    for props, found in cases:
+        errors = check_props(name, props, 1)
+        assert len(errors) == 1, (props, errors)
+        assert found in errors[0].message
+
+
+def test_file_tree_and_change_keep_their_cross_field_rules() -> None:
+    def rules(entry: dict[str, object], **more: object) -> list[str]:
+        data = {"entries": [entry], **more}
+        return [e.rule for e in check_props("file-tree", data, 1)]
+
+    assert rules({"path": "a", "change": "renamed", "was": "b"}) == []
+    assert rules({"path": "a", "change": "renamed"}) == ["change"]
+    assert rules({"path": "a", "change": "added", "was": "b"}) == ["change"]
+    assert rules({"path": "a", "was": "b"}) == ["change"]
+    assert rules({"path": "a", "change": "modified", "was": ""}) == ["type"]
+    assert rules({"path": "a"}, collapse=-1) == ["type"]
+    assert rules({"path": "a"}, collapse=True) == ["type"]
+    assert rules({"path": "a/../b"}) == ["path"]
+    assert [e.rule for e in check_props("file-tree", {"entries": []}, 1)] == ["type"]
+
+
+def test_diff_keeps_its_value_rules() -> None:
+    def rules(**data: object) -> list[str]:
+        return [e.rule for e in check_props("diff", data, 1)]
+
+    assert rules(before="a") == ["input"]
+    assert rules(patch="@@ -1 +1 @@\n-a\n+b", before="a", after="b") == ["input"]
+    assert rules(
+        before="a\n", after="b\n", notes=[{"side": "after", "lines": 9, "note": "n"}]
+    ) == ["range"]
+    assert rules(
+        before="a", after="b", notes=[{"side": "after", "lines": "x", "note": "n"}]
+    ) == ["type"]
 
 
 # --- change-summary ---
