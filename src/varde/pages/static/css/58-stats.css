@@ -23,6 +23,8 @@
 @container vd-doc (min-width: 44rem) {
   .vd-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .vd-stats-n2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* four tiles below the 4-across width go 2 by 2, never 3 and an orphan */
+  .vd-stats-n4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @container vd-doc (min-width: 64rem) {
   .vd-stats-n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
