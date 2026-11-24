@@ -2,7 +2,7 @@
 
 import pytest
 
-from varde.base.contrast import (
+from varde.ui.contrast import (
     FAIL_MARGIN,
     composite,
     fails_threshold,

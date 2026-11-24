@@ -1,5 +1,5 @@
-from varde.base.contrast import contrast_ratio
 from varde.pages.theme.derive_colour import derive_colour, derive_dark
+from varde.ui.contrast import contrast_ratio
 
 TOKENS = {
     "surface": "#f0f0f0",
