@@ -18,6 +18,19 @@ TOKENS_CSS = (  # mollify: ignore[hardcoded-secret] a CSS file name, not a crede
 
 
 UI_STATIC = files("varde.ui").joinpath("static")
+VENDOR_ASSETS = frozenset({"mithril.js"})
+
+
+def vendor_asset(name: str) -> bytes:
+    """Bytes of a vendored script; any name off the allowlist raises ValueError."""
+    if name not in VENDOR_ASSETS:
+        raise ValueError(f"unknown vendor asset: {name!r}")
+    return UI_STATIC.joinpath("vendor", name).read_bytes()
+
+
+def token_css() -> str:
+    """The design-token stylesheet alone, for a host that loads blocks CSS itself."""
+    return UI_STATIC.joinpath("css", TOKENS_CSS).read_text(encoding="utf-8")
 
 
 def css_files() -> list[Traversable]:
