@@ -23,7 +23,7 @@ export function classifyUrl(url) {
   return head.includes(':') || !/^[\x00-\x7f]*$/.test(stripped) ? 'text' : 'relative';
 }
 
-// The css modifier of a status word; the word itself always shows and the icon is STATUS_ICONS[modifier].
+// The css modifier of a status word; the word itself always shows and the icon (see icons.js) is STATUS_ICONS[modifier].
 export function statusKind(text) {
   const word = text.trim().toLowerCase();
   if (GOOD.includes(word)) return 'ok';
@@ -32,22 +32,7 @@ export function statusKind(text) {
   return 'neutral';
 }
 
-// Status icons are drawn, never typed: a glyph needs a font the machine may lack. Each is [element, attributes] on a 12-unit box.
-const STATUS_ICONS = {
-  ok: [['path', { d: 'M2.5 6.5l2.5 2.5 4.5-5.5', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }]],
-  warn: [['path', { d: 'M6 1.5L11 10.5H1Z', stroke: 'none' }]],
-  bad: [['path', { d: 'M3 3l6 6M9 3l-6 6', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round' }]],
-  neutral: [['circle', { cx: '6', cy: '6', r: '3', stroke: 'none' }]]
-};
-
-function statusIcon(m, kind) {
-  const shapes = STATUS_ICONS[kind] || STATUS_ICONS.neutral;
-  return m(
-    'svg.vb-status-glyph',
-    { viewBox: '0 0 12 12', 'aria-hidden': 'true', focusable: 'false' },
-    shapes.map(([tag, attrs]) => m(tag, attrs))
-  );
-}
+const STATUS_ICONS = { ok: 'check', warn: 'triangle', bad: 'cross', neutral: 'dot' };
 
 function linkParts(c, cell) {
   if (Array.isArray(cell) && cell.length === 2) return [c.shared.pyStr(cell[0]), c.shared.pyStr(cell[1])];
@@ -110,7 +95,7 @@ function bar(m, c, cell, top) {
 function status(m, c, cell, extras) {
   const text = c.shared.pyStr(cell);
   const kind = (extras.statusKind && extras.statusKind(text)) || statusKind(text);
-  return m(`span.vb-status.vb-status-${kind}`, [statusIcon(m, kind), text]);
+  return m(`span.vb-status.vb-status-${kind}`, [c.icons.icon(m, STATUS_ICONS[kind] || STATUS_ICONS.neutral, 'vb-status-glyph'), text]);
 }
 
 function cellView(m, c, cell, kind, top, extras) {

@@ -1,5 +1,5 @@
 // Stats block as a component: a grid of cards (label, value, optional change).
-const ARROWS = { up: '▲', down: '▼', flat: '▬' };
+const ARROWS = { up: 'triangle', down: 'triangle-down', flat: 'bar' };
 const SIGNS = ['+', '-', '−'];
 const GOOD_TONE = { true: 'success', false: 'risk' };
 const LONG_VALUE_CHARS = 16;
@@ -48,7 +48,7 @@ function delta(m, c, item) {
   if (!('delta' in item)) return null;
   const direction = deltaDirection(item) || 'flat';
   return m('dd.vd-stats-delta', [
-    m('span.vd-stats-mark', [m('span.vd-stats-glyph', { 'aria-hidden': 'true' }, ARROWS[direction]), ' ', m('span.vd-stats-word', direction)]),
+    m('span.vd-stats-mark', [c.icons.icon(m, ARROWS[direction], 'vd-stats-glyph'), ' ', m('span.vd-stats-word', direction)]),
     ' ',
     m('span.vd-stats-number', deltaText(c, item))
   ]);

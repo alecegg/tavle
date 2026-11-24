@@ -16,7 +16,11 @@ def test_component_registry_matches_the_specs() -> None:
 
 
 def test_each_block_has_a_component_file_and_only_page_statements_do_not() -> None:
-    files = {path.stem for path in COMPONENT_FILES.glob("*.js")} - {"mount", "shared"}
+    files = {path.stem for path in COMPONENT_FILES.glob("*.js")} - {
+        "mount",
+        "shared",
+        "icons",
+    }
     assert files == set(COMPONENT_SPECS) - PAGE_STATEMENTS
     assert 'components["tabs"]' in component_bundle()
 

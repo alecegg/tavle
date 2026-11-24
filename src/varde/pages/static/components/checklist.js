@@ -1,5 +1,5 @@
 // Checklist block as a component: state glyph and word per item, progress bar and count.
-const STATES = { done: ['✓', 'Done'], open: ['○', 'Open'], blocked: ['✕', 'Blocked'] };
+const STATES = { done: ['check', 'Done'], open: ['ring', 'Open'], blocked: ['cross', 'Blocked'] };
 
 function itemState(item) {
   if (typeof item.status === 'string') return item.status;
@@ -8,9 +8,9 @@ function itemState(item) {
 
 function item(m, c, entry) {
   const state = itemState(entry);
-  const [glyph, word] = STATES[state];
+  const [shape, word] = STATES[state];
   return m(`li.vd-checklist-item.vd-checklist-${state}`, [
-    m('span.vd-checklist-state', [m('span.vd-checklist-glyph', { 'aria-hidden': 'true' }, glyph), ` ${word}`]),
+    m('span.vd-checklist-state', [c.icons.icon(m, shape, 'vd-checklist-glyph'), ` ${word}`]),
     m('span.vd-checklist-text', [
       m('span.vd-checklist-label', c.shared.inline(m, String(entry.label))),
       'note' in entry ? m('span.vd-checklist-note', c.shared.inline(m, String(entry.note))) : null

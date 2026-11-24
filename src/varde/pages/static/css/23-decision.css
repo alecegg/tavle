@@ -12,7 +12,7 @@
 .decision-diff:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .decision-buttons { display: flex; flex-wrap: wrap; gap: var(--vd-space-2); margin-block-end: var(--vd-space-3); }
 .decision-verdict { display: inline-flex; align-items: center; justify-content: center; gap: var(--vd-space-2); flex: 1 1 8rem; min-inline-size: 0; max-inline-size: 100%; overflow-wrap: anywhere; font-weight: 600; }
-.decision-glyph { font-weight: 700; line-height: 1; }
+.decision-glyph { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .decision-approve { border-color: var(--vd-success); color: var(--vd-text); }
 .decision-approve .decision-glyph { color: var(--vd-success); }
 .decision-deny { border-color: var(--vd-danger); color: var(--vd-text); }

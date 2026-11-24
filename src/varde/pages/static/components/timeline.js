@@ -1,10 +1,10 @@
 // Timeline block as a component: an ordered list with a rail and one node per item.
-const GLYPHS = { done: '✓', active: '●', planned: '○', blocked: '✕' };
+const ICONS = { done: 'check', active: 'dot', planned: 'ring', blocked: 'cross' };
 const WORDS = { done: 'Done', active: 'Active', planned: 'Planned', blocked: 'Blocked' };
 
 // `4 milestones: 2 done, 1 active, 1 planned`; counts of zero are left out.
 function summaryText(c, items) {
-  const parts = Object.keys(GLYPHS)
+  const parts = Object.keys(ICONS)
     .map((status) => [items.filter((item) => item.status === status).length, status])
     .filter(([n]) => n)
     .map(([n, status]) => `${n} ${status}`);
@@ -13,7 +13,7 @@ function summaryText(c, items) {
 
 function item(m, c, entry, current) {
   return m(`li.vd-timeline-item.vd-timeline-${entry.status}`, { 'aria-current': current ? 'step' : null }, [
-    m('span.vd-timeline-node', { 'aria-hidden': 'true' }, GLYPHS[entry.status]),
+    m('span.vd-timeline-node', { 'aria-hidden': 'true' }, c.icons.icon(m, ICONS[entry.status], 'vd-timeline-glyph')),
     m('div.vd-timeline-body', [
       m('p.vd-timeline-when', entry.when),
       m('p.vd-timeline-label', entry.label),

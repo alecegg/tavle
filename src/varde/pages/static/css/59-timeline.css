@@ -12,6 +12,7 @@
 .vd-timeline-active { --vd-tl-state: var(--vd-tone-info-edge); --vd-tl-tint: var(--vd-tone-info-tint); --vd-tl-text: var(--vd-tone-info-text); }
 .vd-timeline-blocked { --vd-tl-state: var(--vd-tone-risk-edge); --vd-tl-tint: var(--vd-tone-risk-tint); --vd-tl-text: var(--vd-tone-risk-text); }
 .vd-timeline-node { position: absolute; inset-block-start: 0; inset-inline-start: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; inline-size: 2rem; block-size: 2rem; border: 2px solid var(--vd-tl-state); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-tl-text); font-family: var(--vd-font-mono); font-size: var(--vd-text-sm); line-height: 1; }
+.vd-timeline-glyph { flex: none; inline-size: 1.1rem; block-size: 1.1rem; }
 .vd-timeline-active .vd-timeline-node { background: var(--vd-tone-info-tint); border-width: 3px; }
 .vd-timeline-active .vd-timeline-body { background: var(--vd-tone-info-tint-2); }
 .vd-timeline-body { min-inline-size: 0; padding: 0 var(--vd-space-3) var(--vd-space-2); background: var(--vd-tl-tint); }

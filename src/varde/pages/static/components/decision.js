@@ -4,7 +4,7 @@ const OPTIONS = ['approve', 'deny', 'comment'];
 const VERDICT_OF = { approve: 'approved', deny: 'denied', comment: 'commented' };
 const LABELS = { approve: 'Approve', deny: 'Deny', comment: 'Comment' };
 // A glyph beside each label, so approve and deny differ without colour.
-const GLYPHS = { approve: '✓', deny: '✕', comment: '✎' };
+const ICONS = { approve: 'check', deny: 'cross', comment: 'pencil' };
 
 function evidence(m, props) {
   const rows = Array.isArray(props.evidence) ? props.evidence : [];
@@ -13,10 +13,10 @@ function evidence(m, props) {
 }
 
 // `decision-comment` names the comment field; the comment button must not share it.
-function button(m, option) {
+function button(m, c, option) {
   const tone = option === 'comment' ? '' : `.decision-${option}`;
   return m(`button.decision-verdict${tone}`, { type: 'button', 'data-verdict': VERDICT_OF[option] }, [
-    m('span.decision-glyph', { 'aria-hidden': 'true' }, GLYPHS[option]),
+    c.icons.icon(m, ICONS[option], 'decision-glyph'),
     m('span', LABELS[option])
   ]);
 }
@@ -40,7 +40,7 @@ export function view(m, props, c, blockId) {
       evidence(m, props),
       props.diff ? m('pre.decision-diff', { tabindex: '0' }, m('code', props.diff)) : null,
       m('div.decision-item', { 'data-item': id }, [
-        m('div.decision-buttons', { role: 'group', 'aria-label': 'Verdict' }, options.map((option) => button(m, option))),
+        m('div.decision-buttons', { role: 'group', 'aria-label': 'Verdict' }, options.map((option) => button(m, c, option))),
         commentField(m, options, id),
         m('p.decision-status', ['Status: ', m('span.decision-state', { 'aria-live': 'polite' }, 'Undecided')])
       ]),

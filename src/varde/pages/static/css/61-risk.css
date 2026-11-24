@@ -10,7 +10,7 @@
 .vd-risk-cell-medium { --vd-rk-edge: var(--vd-tone-warning-edge); border-style: dashed; }
 .vd-risk-cell-high { --vd-rk-edge: var(--vd-tone-risk-edge); border-style: double; border-width: 4px; }
 .vd-risk-cell-critical { --vd-rk-edge: var(--vd-tone-risk-edge); border-style: double; border-width: 6px; background: var(--vd-tone-risk-tint); }
-.vd-risk-glyph { flex: none; font-family: var(--vd-font-mono); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); line-height: 1.4; }
+.vd-risk-glyph { flex: none; inline-size: 1em; block-size: 1.4em; padding-block: 0.2em; box-sizing: border-box; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vd-risk-chip, .vd-risk-more { box-sizing: border-box; min-inline-size: 0; max-inline-size: 100%; padding-inline: var(--vd-space-1); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-text); font-family: var(--vd-font-mono); font-size: var(--vd-text-sm); line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .vd-risk-more { border-style: dashed; }
 .vd-risk-list { margin: 0; padding: 0; min-inline-size: 0; }
@@ -21,6 +21,7 @@
 .vd-risk-entry > dd { margin: 0; min-inline-size: 0; overflow-wrap: break-word; }
 .vd-risk-id { font-family: var(--vd-font-mono); }
 .vd-risk-key { max-inline-size: 100%; overflow-wrap: break-word; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
+.vd-risk-sevmark { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .vd-risk-sevmark, .vd-risk-sevword { color: var(--vd-rk-text); font-weight: 600; }
 @container vd-doc (min-width: 36rem) {
   .vd-risk-entry { grid-template-columns: repeat(3, minmax(13rem, 1fr)); }

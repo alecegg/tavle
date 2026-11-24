@@ -15,7 +15,7 @@
 .vd-stats-long { font-size: var(--vd-text-md); font-weight: 600; }
 .vd-stats-delta { color: var(--vd-stats-text); font-size: var(--vd-text-sm); font-weight: 600; overflow-wrap: anywhere; }
 .vd-stats-mark { white-space: nowrap; overflow-wrap: normal; }
-.vd-stats-glyph { font-family: var(--vd-font-mono); }
+.vd-stats-glyph { flex: none; inline-size: 1em; block-size: 1em; vertical-align: -0.125em; }
 .vd-stats-note { margin-block-start: var(--vd-space-1); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: anywhere; }
 @container vd-doc (min-width: 28rem) {
   .vd-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

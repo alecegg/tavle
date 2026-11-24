@@ -5,7 +5,7 @@
    "tone": "info",
    "text": "Plain note."
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Plain note.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\"></circle></svg> Info</p><p class=\"vd-callout-text\">Plain note.</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Plain note.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"></circle></svg> Info</p><p class=\"vd-callout-text\">Plain note.</p></aside>"
  },
  {
   "name": "tones-decision",
@@ -14,7 +14,7 @@
    "title": "Storage",
    "text": "Use SQLite."
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-decision\" data-copy=\"Storage\nUse SQLite.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M8 1.5L14.5 8L8 14.5L1.5 8Z\" fill=\"currentColor\"></path></svg> Decision</p><p class=\"vd-callout-title\">Storage</p><p class=\"vd-callout-text\">Use SQLite.</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-decision\" data-copy=\"Storage\nUse SQLite.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 1.5L14.5 8L8 14.5L1.5 8Z\" fill=\"currentColor\" stroke=\"none\"></path></svg> Decision</p><p class=\"vd-callout-title\">Storage</p><p class=\"vd-callout-text\">Use SQLite.</p></aside>"
  },
  {
   "name": "tones-risk",
@@ -22,7 +22,7 @@
    "tone": "risk",
    "text": "One\n\nTwo"
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"One\n\nTwo\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M8 2L14.5 13.5H1.5Z\" fill=\"currentColor\"></path></svg> Risk</p><p class=\"vd-callout-text\">One</p><p class=\"vd-callout-text\">Two</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"One\n\nTwo\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 2L14.5 13.5H1.5Z\" fill=\"currentColor\" stroke=\"none\"></path></svg> Risk</p><p class=\"vd-callout-text\">One</p><p class=\"vd-callout-text\">Two</p></aside>"
  },
  {
   "name": "tones-warning",
@@ -30,7 +30,7 @@
    "tone": "warning",
    "text": "Careful."
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-warning\" data-copy=\"Careful.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 4.4v4.3\"></path><circle cx=\"8\" cy=\"11.2\" r=\"0.9\" fill=\"currentColor\"></circle></svg> Warning</p><p class=\"vd-callout-text\">Careful.</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-warning\" data-copy=\"Careful.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 4.4v4.3\"></path><circle cx=\"8\" cy=\"11.2\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"></circle></svg> Warning</p><p class=\"vd-callout-text\">Careful.</p></aside>"
  },
  {
   "name": "tones-success",
@@ -39,7 +39,7 @@
    "title": "Done",
    "text": "All green."
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"Done\nAll green.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M5 8.2l2.1 2.1L11 5.8\"></path></svg> Success</p><p class=\"vd-callout-title\">Done</p><p class=\"vd-callout-text\">All green.</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"Done\nAll green.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M5 8.2l2.1 2.1L11 5.8\"></path></svg> Success</p><p class=\"vd-callout-title\">Done</p><p class=\"vd-callout-text\">All green.</p></aside>"
  },
  {
   "name": "inline-code",
@@ -47,7 +47,7 @@
    "tone": "info",
    "text": "Use `queue` and `a<b` here, `x` twice `y`."
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Use `queue` and `a&lt;b` here, `x` twice `y`.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\"></circle></svg> Info</p><p class=\"vd-callout-text\">Use <code>queue</code> and <code>a&lt;b</code> here, <code>x</code> twice <code>y</code>.</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Use `queue` and `a&lt;b` here, `x` twice `y`.\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"></circle></svg> Info</p><p class=\"vd-callout-text\">Use <code>queue</code> and <code>a&lt;b</code> here, <code>x</code> twice <code>y</code>.</p></aside>"
  },
  {
   "name": "escaping",
@@ -56,7 +56,7 @@
    "title": "<b>&\"'",
    "text": "<script>alert(1)</script> & \"q\" 'a'"
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"&lt;b&gt;&amp;&quot;&#x27;\n&lt;script&gt;alert(1)&lt;/script&gt; &amp; &quot;q&quot; &#x27;a&#x27;\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M8 2L14.5 13.5H1.5Z\" fill=\"currentColor\"></path></svg> Risk</p><p class=\"vd-callout-title\">&lt;b&gt;&amp;&quot;&#x27;</p><p class=\"vd-callout-text\">&lt;script&gt;alert(1)&lt;/script&gt; &amp; &quot;q&quot; &#x27;a&#x27;</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-risk\" data-copy=\"&lt;b&gt;&amp;&quot;'\n&lt;script&gt;alert(1)&lt;/script&gt; &amp; &quot;q&quot; 'a'\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 2L14.5 13.5H1.5Z\" fill=\"currentColor\" stroke=\"none\"></path></svg> Risk</p><p class=\"vd-callout-title\">&lt;b&gt;&amp;\"'</p><p class=\"vd-callout-text\">&lt;script&gt;alert(1)&lt;/script&gt; &amp; \"q\" 'a'</p></aside>"
  },
  {
   "name": "paragraphs",
@@ -64,7 +64,7 @@
    "tone": "info",
    "text": "\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n"
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\"></circle></svg> Info</p><p class=\"vd-callout-text\">first</p><p class=\"vd-callout-text\">second</p><p class=\"vd-callout-text\">third</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"></circle></svg> Info</p><p class=\"vd-callout-text\">first</p><p class=\"vd-callout-text\">second</p><p class=\"vd-callout-text\">third</p></aside>"
  },
  {
   "name": "empty-title",
@@ -73,7 +73,7 @@
    "title": "",
    "text": "Body"
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Body\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\"></circle></svg> Info</p><p class=\"vd-callout-title\"></p><p class=\"vd-callout-text\">Body</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-info\" data-copy=\"Body\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M8 7.2v4\"></path><circle cx=\"8\" cy=\"4.9\" r=\"0.9\" fill=\"currentColor\" stroke=\"none\"></circle></svg> Info</p><p class=\"vd-callout-title\"></p><p class=\"vd-callout-text\">Body</p></aside>"
  },
  {
   "name": "unicode",
@@ -81,6 +81,6 @@
    "tone": "success",
    "text": "café ✓ ◆"
   },
-  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"café ✓ ◆\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M5 8.2l2.1 2.1L11 5.8\"></path></svg> Success</p><p class=\"vd-callout-text\">café ✓ ◆</p></aside>"
+  "html": "<aside class=\"vb callout vd-callout vd-callout-success\" data-copy=\"café ✓ ◆\"><p class=\"vd-callout-label\"><svg class=\"vd-callout-glyph\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"8\" r=\"6.5\"></circle><path d=\"M5 8.2l2.1 2.1L11 5.8\"></path></svg> Success</p><p class=\"vd-callout-text\">café ✓ ◆</p></aside>"
  }
 ]

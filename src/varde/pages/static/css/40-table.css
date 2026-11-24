@@ -37,7 +37,7 @@ th[aria-sort="ascending"] .vb-sort::after, th[aria-sort="descending"] .vb-sort::
 th[aria-sort="ascending"] .vb-sort::after { border-block-end: 0.4em solid currentColor; }
 th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid currentColor; }
 .vb-status { display: inline-flex; align-items: center; gap: var(--vd-space-1); font-weight: 600; }
-.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; fill: currentColor; stroke: currentColor; }
+.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; }
 .vb-status-ok { color: var(--vd-success); }
 .vb-status-warn { color: var(--vd-warning); }
 .vb-status-bad { color: var(--vd-danger); }
