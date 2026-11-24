@@ -918,7 +918,6 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 .vb-table th, .vb-table td { border: 0; border-block-end: 1px solid var(--vd-border); padding: var(--vd-space-2) var(--vd-space-3); text-align: start; vertical-align: top; line-height: 1.3; overflow-wrap: normal; word-break: normal; hyphens: none; }
 /* Short tokens never break mid-word; a narrow region scrolls sideways instead. */
 .vb-table .vb-status, .vb-table .vb-badge, .vb-table code, .vb-table .vb-bar-num, .vb-table td.vb-num { white-space: nowrap; }
-.vb-nowrap .vb-table th, .vb-nowrap .vb-table td { white-space: nowrap; overflow-wrap: normal; }
 .vb-table thead th { white-space: nowrap; background: var(--vd-surface-elevated); border-block-end: 2px solid var(--vd-border-interactive); font-weight: 600; }
 .vb-table tbody tr { background: var(--vd-surface); }
 .vb-table tbody tr:nth-child(even) { background: var(--vd-surface); }
@@ -931,7 +930,6 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 /* Free text keeps a readable measure: a phone-width region scrolls sideways instead of squeezing it into a tall sliver; wider layouts keep their natural column widths. */
 @media screen and (max-width: 40rem) { .vb-table:not(.vb-table-stack) td:not(.vb-num) { min-inline-size: 6rem; } }
 .vb-sort { box-sizing: border-box; max-inline-size: 100%; min-block-size: 44px; min-inline-size: 44px; border: 0; padding: 0.2em 0.4em; line-height: 1.3; white-space: nowrap; background: transparent; color: inherit; font: inherit; font-weight: inherit; text-align: start; cursor: pointer; }
-.vb-wrap-toggle:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-sort:focus-visible, .vb-table td a:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
 @media (hover: hover) {
   .vb-sort:hover { background: var(--vd-hover); }
@@ -965,11 +963,7 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-foot { margin-block: var(--vd-space-2) 0; }
 /* The row and column count is for screen readers (.vb-sr) until a filter shows it. */
 .vb-filterbar:has(.vb-filter) ~ .vb-foot.vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; }
-.vb-wrap-toggle { padding-inline: var(--vd-space-3); border: 2px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font: inherit; cursor: pointer; }
 /* The pressed mark is a CSS check, not a typed one. */
-.vb-wrap-toggle[aria-pressed="true"]::before { content: ""; display: inline-block; box-sizing: border-box; inline-size: 0.35em; block-size: 0.65em; margin-inline-end: 0.5em; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-0.1em) rotate(45deg); }
-.vb-wrap-toggle[hidden] { display: none; }
-.vb-wrap-toggle[aria-pressed="true"] { background: var(--vd-selected); border-color: var(--vd-border-selected); }
 /* The sort select stands in for the header buttons on phones only. */
 .vb-sortpick { display: none; flex: 1 1 100%; min-inline-size: 0; align-items: center; gap: var(--vd-space-2); white-space: nowrap; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 /* The select shrinks to the card; the label text never breaks (the page's `anywhere` wrap would split it per letter). */
@@ -990,7 +984,7 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-stack, .vb-table-stack tbody, .vb-table-stack tr { display: block; }
   .vb-table-stack tr { border-block-end: 2px solid var(--vd-border-interactive); }
   .vb-table-stack td, .vb-table-stack th { display: grid; grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); min-inline-size: 0; gap: var(--vd-space-2); position: static; text-align: start; }
-  .vb-table-stack td[data-label]::before, .vb-table-stack th[data-label]::before { content: attr(data-label); font-weight: 600; color: var(--vd-text-secondary); }
+  .vb-table-stack td[data-label]::before, .vb-table-stack th[data-label]::before { content: attr(data-label); white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; font-weight: 600; color: var(--vd-text-secondary); }
   .vb-table-stack .vb-group-head th { display: block; }
   .vb-table-stack td a { justify-self: start; max-inline-size: 100%; }
   .vb-table-stack .vb-num { text-align: start; }
@@ -1001,7 +995,6 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-scroll, .vb-table th, .vb-table td { border-color: CanvasText; }
   .vb-bar-fill { fill: Highlight; }
   .vb-bar-track { stroke: CanvasText; }
-  .vb-wrap-toggle[aria-pressed="true"] { border-color: Highlight; outline: 1px solid Highlight; }
 }
 @media print {
   .vb-scroll { overflow: visible; background: none; }
