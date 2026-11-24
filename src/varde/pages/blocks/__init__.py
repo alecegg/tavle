@@ -8,7 +8,7 @@ from varde.pages.blocks.check import (
     check,
     check_props,
 )
-from varde.pages.blocks.reference import index_text, type_text
+from varde.pages.blocks.reference import catalog, index_text, type_text
 
 TYPES: tuple[str, ...] = tuple(sorted(SPECS))
 
@@ -18,6 +18,7 @@ __all__ = [
     "SPECS",
     "TYPES",
     "BlockError",
+    "catalog",
     "check",
     "check_props",
     "index_text",

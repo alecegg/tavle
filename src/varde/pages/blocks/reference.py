@@ -1,5 +1,7 @@
 """Help text for the component vocabulary, built from the specs."""
 
+from dataclasses import asdict
+
 from varde.pages.blocks.check import COMPONENT_SPECS
 
 
@@ -22,3 +24,22 @@ def index_text() -> str:
         f"{name} - {COMPONENT_SPECS[name].summary}" for name in sorted(COMPONENT_SPECS)
     ]
     return "\n".join(lines) + "\n\nFields and an example: varde pages blocks <TYPE>\n"
+
+
+def catalog(names: tuple[str, ...] = ()) -> list[dict[str, object]]:
+    """The metadata of the named components (all when none is named), as plain data.
+
+    Each entry holds name, summary, block_type, properties and extra_keys; a
+    property holds name, type, required, enum, items, fields (nested properties)
+    and nonempty.
+    """
+    return [
+        {
+            "name": spec.name,
+            "summary": spec.summary,
+            "block_type": spec.block_type,
+            "properties": [asdict(prop) for prop in spec.properties],
+            "extra_keys": asdict(spec.extra_keys) if spec.extra_keys else None,
+        }
+        for spec in (COMPONENT_SPECS[name] for name in names or sorted(COMPONENT_SPECS))
+    ]

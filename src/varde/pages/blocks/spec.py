@@ -23,7 +23,6 @@ class PropertySpec:
     enum: tuple[str, ...] = ()
     items: PropertyType | None = None
     fields: tuple[PropertySpec, ...] = ()
-    answer_schema: AnswerSchema | None = None
     # a blank string or an empty list faults; applies to this value, not list items
     nonempty: bool = False
 
