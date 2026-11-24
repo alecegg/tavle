@@ -12,6 +12,8 @@ main { padding-block: var(--vd-space-6) var(--vd-space-9); padding-inline-start:
 h1, h2, h3, h4, h5, h6 { font-family: var(--vd-font-heading); font-weight: 700; letter-spacing: -0.01em; margin-block: var(--vd-space-7) var(--vd-space-2); }
 h4, h5, h6 { font-size: var(--vd-text-md); }
 main > .block:first-of-type > h1:first-child { font-size: var(--vd-title-size); font-weight: 750; letter-spacing: -0.02em; }
+main > .block.heading > h2 { border-block-end: 1px solid var(--vd-line); padding-block-end: var(--vd-space-2); }
+main > .block.heading > h2::before { content: ""; display: inline-block; inline-size: 0.5em; block-size: 0.5em; margin-inline-end: var(--vd-space-2); background: var(--vd-accent-2); vertical-align: middle; }
 h1:first-child, h2:first-child { margin-block-start: 0; }
 p, ul, ol, blockquote, pre, table { margin-block: var(--vd-space-3); }
 ul, ol { padding-inline-start: var(--vd-space-6); }
