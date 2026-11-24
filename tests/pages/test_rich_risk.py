@@ -69,3 +69,8 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
     assert "<img" not in body and "<script>alert" not in body
     assert "style=" not in body and "vb-error" not in body
     assert body.count('data-mithril="risks"') == 3
+
+
+def test_risk_styles_have_no_status_edge_border() -> None:
+    css = Path("src/varde/pages/static/css/61-risk.css").read_text()
+    assert "border-inline-start" not in css

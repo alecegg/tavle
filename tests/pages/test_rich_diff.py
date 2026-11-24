@@ -100,6 +100,7 @@ def test_stylesheet_ships_the_layout_rules() -> None:
         "outline-offset: -",
     ):
         assert needle in css
+    assert "border-inline-start" not in css
     assert "style=" not in css and not re.search(r"#[0-9a-fA-F]{3,8}\b", css)
 
 
