@@ -30,8 +30,8 @@
 .vd-sf-detail { min-block-size: 1.5em; margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); overflow-wrap: break-word; }
 .vd-sf-list, .vd-sf-notes { margin: 0; padding-inline-start: var(--vd-space-7); min-inline-size: 0; }
 .vd-sf-notes { margin-block: var(--vd-space-1); padding-inline-start: var(--vd-space-5); }
-.vd-sf-item, .vd-sf-note { min-inline-size: 0; margin-block-end: var(--vd-space-2); overflow-wrap: break-word; border-inline-start: 3px solid transparent; padding-inline-start: var(--vd-space-1); }
-.vd-sf-item-on { border-inline-start-color: var(--vd-accent); }
+.vd-sf-item, .vd-sf-note { min-inline-size: 0; margin-block-end: var(--vd-space-2); overflow-wrap: break-word; padding-inline-start: var(--vd-space-1); }
+.vd-sf-item-on { background: var(--vd-accent-subtle); }
 .vd-sf-item-on > .vd-sf-name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 @media (forced-colors: active) {
   .vd-sf-view { border-color: CanvasText; }
@@ -42,7 +42,7 @@
   .vd-sf-head { fill: CanvasText; }
   .vd-sf-screen:focus-visible .vd-sf-tile, .vd-sf-screen.vd-sf-sel .vd-sf-tile, .vd-sf-screen.vd-sf-hot .vd-sf-tile { stroke: Highlight; }
   .vd-sf-screen:focus-visible { outline-color: Highlight; }
-  .vd-sf-item-on { border-inline-start-color: Highlight; }
+  .vd-sf-item-on { outline: 1px solid Highlight; }
 }
 @media print {
   .vd-sf, .vd-sf-views, .vd-sf-view, .vd-sf-list, .vd-sf-notes, .vd-sf-item { overflow: visible; max-block-size: none; min-inline-size: 0; min-block-size: 0; white-space: normal; }

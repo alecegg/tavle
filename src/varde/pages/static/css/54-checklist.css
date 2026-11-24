@@ -5,7 +5,7 @@
 .vd-checklist-bar { flex: 1 1 8rem; min-inline-size: 8rem; block-size: 0.75rem; accent-color: var(--vd-tone-success-edge); }
 .vd-checklist-count { margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); white-space: nowrap; }
 .vd-checklist-list { margin: 0; padding: 0; list-style: none; min-inline-size: 0; }
-.vd-checklist-item { --vd-check-edge: var(--vd-tone-info-edge); --vd-check-tint: var(--vd-tone-info-tint); --vd-check-text: var(--vd-text-secondary); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--vd-space-1) var(--vd-space-3); margin: 0; padding: var(--vd-space-2) var(--vd-space-3); border-block-end: 1px solid var(--vd-border); border-inline-start: 3px solid var(--vd-check-edge); min-inline-size: 0; }
+.vd-checklist-item { --vd-check-edge: var(--vd-tone-info-edge); --vd-check-tint: var(--vd-tone-info-tint); --vd-check-text: var(--vd-text-secondary); display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--vd-space-1) var(--vd-space-3); margin: 0; padding: var(--vd-space-2) var(--vd-space-3); border-block-end: 1px solid var(--vd-border); background: var(--vd-check-tint); min-inline-size: 0; }
 .vd-checklist-open { --vd-check-edge: var(--vd-border-interactive); --vd-check-tint: transparent; }
 .vd-checklist-done { --vd-check-edge: var(--vd-tone-success-edge); --vd-check-tint: var(--vd-tone-success-tint); --vd-check-text: var(--vd-tone-success-text); }
 .vd-checklist-blocked { --vd-check-edge: var(--vd-tone-risk-edge); --vd-check-tint: var(--vd-tone-risk-tint); --vd-check-text: var(--vd-tone-risk-text); }
@@ -18,7 +18,7 @@
 .vd-checklist-empty { margin: 0; color: var(--vd-text-secondary); }
 @media (forced-colors: active) {
   .vd-checklist-state { border-color: ButtonBorder; background: none; color: ButtonText; }
-  .vd-checklist-item { border-block-end-color: CanvasText; border-inline-start-color: CanvasText; }
+  .vd-checklist-item { border-block-end-color: CanvasText; outline: 1px solid CanvasText; }
   .vd-checklist-bar { accent-color: Highlight; }
 }
 @media print {
