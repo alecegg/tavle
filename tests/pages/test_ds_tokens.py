@@ -140,9 +140,7 @@ def test_density_attribute_switches_the_vars(preset: str) -> None:
     body, _ = _body(css, css.index(f'[data-density="{preset}"]'))
     switched = _decls(body)
     names = {n for n in default if n.startswith("--vd-density-")}
-    assert names == {
-        f"--vd-density-{k}" for k in ("gap", "pad", "font", "radius", "stroke")
-    }
+    assert names == {f"--vd-density-{k}" for k in ("pad", "font", "radius", "stroke")}
     assert set(switched) == names
     assert switched != {n: default[n] for n in names}
 
