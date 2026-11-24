@@ -405,7 +405,7 @@ main > * { max-inline-size: var(--vd-doc-width); margin-inline: auto; }
 }
 /* page flow: the gaps between blocks are owned here; a block's own outer margins are zeroed so they do not stack on them */
 main > .block > :first-child { margin-block-start: 0; }
-main > .block > :last-child { margin-block-end: 0; }
+main > .block > :is(:last-child, :has(+ .menu-btn:last-child)) { margin-block-end: 0; } /* the action menu button is appended last; the content before it is still the last content */
 main > .block > [data-mithril] > * { margin-block: 0; } /* a client block's root sits one level down */
 main > .block + .block { margin-block-start: var(--vd-flow-block); }
 main > .block + .block.heading { margin-block-start: var(--vd-flow-before-heading); }
@@ -840,10 +840,10 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 
 /* 30-menu: per-block action menu. Tokens only; logical properties. */
 /* The button is hidden at rest and shown for one block at a time: pointer hover, focus inside, or a tap (.menu-active, set by menu.js). It stays in the tab order and the accessibility tree (opacity, never display or visibility). */
-/* With a mouse, text-flow blocks reserve a side gutter and wide blocks (visual, widget, code, table...) a top row so the revealed button covers nothing. On touch nothing is reserved: the revealed button floats over the block's corner, so text keeps its full width. */
+/* No top row is reserved, so the flow tokens own the gap under each heading: the revealed button floats over the block's corner. With a mouse, text-flow blocks reserve a side gutter so the button covers no text; on touch nothing is reserved, so text keeps its full width. */
+.block.has-menu { padding-block-start: var(--vd-space-1); }
 @media (hover: hover) {
-  .block.has-menu { padding-block-start: var(--vd-control-height); min-block-size: var(--vd-control-height); }
-  .block.has-menu:is([data-block-type="prose"], [data-block-type="heading"], [data-block-type="list"], :not([data-block-type])) { padding-block-start: var(--vd-space-1); padding-inline-end: var(--vd-control-height); }
+  .block.has-menu:is([data-block-type="prose"], [data-block-type="heading"], [data-block-type="list"], :not([data-block-type])) { padding-inline-end: var(--vd-control-height); }
 }
 .menu-btn { position: absolute; inset-block-start: 0; inset-inline-end: 0; inline-size: var(--vd-control-height); block-size: var(--vd-control-height); box-sizing: border-box; min-inline-size: 44px; min-block-size: 44px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font-size: var(--vd-text-lg); font-weight: 700; line-height: 1; opacity: 0; z-index: 2; }
 @media (hover: none) { .menu-btn { pointer-events: none; box-shadow: var(--vd-shadow-3); } }
@@ -930,9 +930,12 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
   .vb-sort:hover { background: var(--vd-hover); }
   .vb-table tbody tr:not(.vb-group-head):hover { background: var(--vd-hover); }
 }
-th[aria-sort="ascending"] .vb-sort::after { content: " \25B2"; font-size: 0.7em; }
-th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em; }
-.vb-status { display: inline-flex; align-items: baseline; gap: var(--vd-space-1); font-weight: 600; }
+/* Sort arrows are CSS triangles: a typed arrow needs a font the machine may lack. */
+th[aria-sort="ascending"] .vb-sort::after, th[aria-sort="descending"] .vb-sort::after { content: ""; display: inline-block; margin-inline-start: 0.35em; border-inline: 0.25em solid transparent; }
+th[aria-sort="ascending"] .vb-sort::after { border-block-end: 0.4em solid currentColor; }
+th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid currentColor; }
+.vb-status { display: inline-flex; align-items: center; gap: var(--vd-space-1); font-weight: 600; }
+.vb-status-glyph { flex: none; inline-size: 1em; block-size: 1em; fill: currentColor; stroke: currentColor; }
 .vb-status-ok { color: var(--vd-success); }
 .vb-status-warn { color: var(--vd-warning); }
 .vb-status-bad { color: var(--vd-danger); }
@@ -942,6 +945,8 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 .vb-bar-fill { fill: var(--vd-accent); }
 .vb-bar-num { display: inline-block; min-inline-size: 3ch; }
 .vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: var(--vd-space-2) 0; }
+/* A bar whose controls are all hidden takes no room. */
+.vb-filterbar:not(:has(> :not([hidden]))) { display: none; }
 .vb-filter { flex: 1; min-inline-size: 8rem; min-block-size: 44px; font: inherit; padding: 0.3em 0.6em; background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
 .vb-filter:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-more { margin-block: var(--vd-space-2) 0; }
@@ -951,8 +956,12 @@ th[aria-sort="descending"] .vb-sort::after { content: " \25BC"; font-size: 0.7em
 .vb-more-toggle:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-filter-status, .vb-scrollhint, .vb-foot { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .vb-foot { margin-block: var(--vd-space-2) 0; }
+/* The row and column count is for screen readers (.vb-sr) until a filter shows it. */
+.vb-filterbar:has(.vb-filter) ~ .vb-foot.vb-sr { position: static; clip-path: none; inline-size: auto; block-size: auto; overflow: visible; white-space: normal; }
 .vb-wrap-toggle { padding-inline: var(--vd-space-3); border: 2px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); background: var(--vd-surface); color: var(--vd-text); font: inherit; cursor: pointer; }
-.vb-wrap-toggle[aria-pressed="true"]::before { content: "\2713\00a0"; }
+/* The pressed mark is a CSS check, not a typed one. */
+.vb-wrap-toggle[aria-pressed="true"]::before { content: ""; display: inline-block; box-sizing: border-box; inline-size: 0.35em; block-size: 0.65em; margin-inline-end: 0.5em; border: solid currentColor; border-width: 0 2px 2px 0; transform: translateY(-0.1em) rotate(45deg); }
+.vb-wrap-toggle[hidden] { display: none; }
 .vb-wrap-toggle[aria-pressed="true"] { background: var(--vd-selected); border-color: var(--vd-border-selected); }
 /* The sort select stands in for the header buttons on phones only. */
 .vb-sortpick { display: none; align-items: center; gap: var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
@@ -1348,7 +1357,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
 .vd-callout-warning { --vd-callout-edge: var(--vd-tone-warning-edge); --vd-callout-tint: var(--vd-tone-warning-tint); --vd-callout-tint-2: var(--vd-tone-warning-tint-2); --vd-callout-text: var(--vd-tone-warning-text); }
 .vd-callout-success { --vd-callout-edge: var(--vd-tone-success-edge); --vd-callout-tint: var(--vd-tone-success-tint); --vd-callout-tint-2: var(--vd-tone-success-tint-2); --vd-callout-text: var(--vd-tone-success-text); }
 .vd-callout-label { margin: 0 0 var(--vd-space-1); color: var(--vd-callout-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-callout-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-family: var(--vd-font-mono); font-weight: 700; }
+.vd-callout-glyph { display: inline-block; inline-size: 1.1em; block-size: 1.1em; vertical-align: -0.2em; margin-inline-end: 0.1em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .vd-callout-title { margin: 0 0 var(--vd-space-1); font-weight: 650; }
 .vd-callout-text { margin: 0 0 var(--vd-space-2); }
 .vd-callout-text:last-child { margin-block-end: 0; }
@@ -2145,7 +2154,7 @@ first
 
 third
 
-</pre></noscript><script type="application/json">{"tone": "info", "text": "\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n"}</script></div><div data-mithril="callout" data-copy="Body"><noscript><pre class="vd-noscript">Body</pre></noscript><script type="application/json">{"tone": "info", "title": "", "text": "Body"}</script></div><div data-mithril="callout" data-copy="café ✓ ◆"><noscript><pre class="vd-noscript">café ✓ ◆</pre></noscript><script type="application/json">{"tone": "success", "text": "café ✓ ◆"}</script></div><div data-mithril="code" data-copy="marks"><noscript><pre class="vd-noscript">marks</pre></noscript><script type="application/json">{"copy": "l1\nl2\nl3\nl4\nl5\nl6\nl7\nl8\nl9\nl10\nl11\nl12\nl13\nl14\nl15\nl16\nl17\nl18\nl19\nl20", "title": "m.py", "language": "py", "langClass": "py", "wrap": false, "numbers": true, "first": 1, "lines": [[["", "l1"]], [["", "l2"]], [["", "l3"]], [["", "l4"]], [["", "l5"]], [["", "l6"]], [["", "l7"]], [["", "l8"]], [["", "l9"]], [["", "l10"]], [["", "l11"]], [["", "l12"]], [["", "l13"]], [["", "l14"]], [["", "l15"]], [["", "l16"]], [["", "l17"]], [["", "l18"]], [["", "l19"]], [["", "l20"]]], "marked": [2, 5, 6, 7, 19, 20], "note": "Marked lines 2, 5-7, 19-20"}</script></div><div data-mithril="annotated-code" data-copy="range-and-kinds"><noscript><pre class="vd-noscript">range-and-kinds</pre></noscript><script type="application/json">{"copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 5-7: Setup: n1\n2. line 20: n2\n3. lines 30-31: n3", "title": "f.py", "language": "python", "langClass": "python", "wrap": true, "numbers": true, "first": 1, "lines": [[["", "l1 = "], ["n", "1"]], [["", "l2 = "], ["n", "2"]], [["", "l3 = "], ["n", "3"]], [["", "l4 = "], ["n", "4"]], [["", "l5 = "], ["n", "5"]], [["", "l6 = "], ["n", "6"]], [["", "l7 = "], ["n", "7"]], [["", "l8 = "], ["n", "8"]], [["", "l9 = "], ["n", "9"]], [["", "l10 = "], ["n", "10"]], [["", "l11 = "], ["n", "11"]], [["", "l12 = "], ["n", "12"]], [["", "l13 = "], ["n", "13"]], [["", "l14 = "], ["n", "14"]], [["", "l15 = "], ["n", "15"]], [["", "l16 = "], ["n", "16"]], [["", "l17 = "], ["n", "17"]], [["", "l18 = "], ["n", "18"]], [["", "l19 = "], ["n", "19"]], [["", "l20 = "], ["n", "20"]], [["", "l21 = "], ["n", "21"]], [["", "l22 = "], ["n", "22"]], [["", "l23 = "], ["n", "23"]], [["", "l24 = "], ["n", "24"]], [["", "l25 = "], ["n", "25"]], [["", "l26 = "], ["n", "26"]], [["", "l27 = "], ["n", "27"]], [["", "l28 = "], ["n", "28"]], [["", "l29 = "], ["n", "29"]], [["", "l30 = "], ["n", "30"]], [["", "l31 = "], ["n", "31"]], [["", "l32 = "], ["n", "32"]], [["", "l33 = "], ["n", "33"]], [["", "l34 = "], ["n", "34"]], [["", "l35 = "], ["n", "35"]], [["", "l36 = "], ["n", "36"]], [["", "l37 = "], ["n", "37"]], [["", "l38 = "], ["n", "38"]], [["", "l39 = "], ["n", "39"]], [["", "l40 = "], ["n", "40"]]], "marked": [5, 6, 7, 20, 30, 31], "note": "Marked lines 5-7, 20, 30-31", "uid": "d111aff1", "columns": 1, "folds": [[11, 16], [35, 40]], "notes": [{"number": 1, "start": 5, "end": 7, "label": "Setup", "text": "n1", "kind": "warn", "glyph": "!", "word": "Warning", "tone": "warning", "where": "lines 5-7"}, {"number": 2, "start": 20, "end": 20, "label": "", "text": "n2", "kind": "change", "glyph": "Δ", "word": "Change", "tone": "decision", "where": "line 20"}, {"number": 3, "start": 30, "end": 31, "label": "", "text": "n3", "kind": "info", "glyph": "i", "word": "Info", "tone": "info", "where": "lines 30-31"}]}</script></div><div data-mithril="diff" data-copy="split-fold-notes"><noscript><pre class="vd-noscript">split-fold-notes</pre></noscript><script type="application/json">{"name": "diff", "language": "", "uid": "2dbc2eab", "digits": 2, "split": true, "change": "modified", "was": "", "count": "+1 added, -1 removed", "copy": "--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18", "blocks": [{"kind": "fold", "header": "", "rows": [{"kind": "same", "old": 1, "new": 1, "text": "line 1", "code": [["", "line 1"]]}, {"kind": "same", "old": 2, "new": 2, "text": "line 2", "code": [["", "line 2"]]}, {"kind": "same", "old": 3, "new": 3, "text": "line 3", "code": [["", "line 3"]]}, {"kind": "same", "old": 4, "new": 4, "text": "line 4", "code": [["", "line 4"]]}, {"kind": "same", "old": 5, "new": 5, "text": "line 5", "code": [["", "line 5"]]}, {"kind": "same", "old": 6, "new": 6, "text": "line 6", "code": [["", "line 6"]]}, {"kind": "same", "old": 7, "new": 7, "text": "line 7", "code": [["", "line 7"]]}, {"kind": "same", "old": 8, "new": 8, "text": "line 8", "code": [["", "line 8"]]}, {"kind": "same", "old": 9, "new": 9, "text": "line 9", "code": [["", "line 9"]]}, {"kind": "same", "old": 10, "new": 10, "text": "line 10", "code": [["", "line 10"]]}, {"kind": "same", "old": 11, "new": 11, "text": "line 11", "code": [["", "line 11"]]}]}, {"kind": "rows", "header": "@@ -12,8 +12,8 @@", "rows": [{"kind": "same", "old": 12, "new": 12, "text": "line 12", "code": [["", "line 12"]]}, {"kind": "same", "old": 13, "new": 13, "text": "line 13", "code": [["", "line 13"]]}, {"kind": "same", "old": 14, "new": 14, "text": "line 14", "code": [["", "line 14"]]}, {"kind": "del", "old": 15, "new": null, "text": "line 15", "code": [["", "line 15"]]}, {"kind": "add", "old": null, "new": 15, "text": "line fifteen", "code": [["", "line fifteen"]]}, {"kind": "same", "old": 16, "new": 16, "text": "line 16", "code": [["", "line 16"]]}, {"kind": "same", "old": 17, "new": 17, "text": "line 17", "code": [["", "line 17"]]}, {"kind": "same", "old": 18, "new": 18, "text": "line 18", "code": [["", "line 18"]]}, {"kind": "same", "old": 19, "new": 19, "text": "line 19", "code": [["", "line 19"]]}]}, {"kind": "more", "header": "11", "rows": []}], "notes": [{"number": 1, "side": "after", "start": 15, "where": "after line 15", "text": "n"}]}</script></div><div data-mithril="file-tree" data-copy="links"><noscript><pre class="vd-noscript">links</pre></noscript><script type="application/json">{"title": "", "summary": "3 files: 1 added, 2 unchanged", "collapse": null, "copy": "3 files: 1 added, 2 unchanged\nsrc/\n  pkg/\n    + mod.py\n  x.py\nother.py", "folders": [{"name": "src", "path": "src", "count": 2, "folders": [{"name": "pkg", "path": "src/pkg", "count": 1, "folders": [], "files": [{"name": "mod.py", "path": "src/pkg/mod.py", "change": "added", "was": "", "role": "", "note": "", "label": "added src/pkg/mod.py"}]}], "files": [{"name": "x.py", "path": "src/x.py", "change": "", "was": "", "role": "", "note": "", "label": "src/x.py"}]}], "files": [{"name": "other.py", "path": "other.py", "change": "", "was": "", "role": "", "note": "", "label": "other.py"}], "links": {"src/pkg/mod.py": "blk-s/1", "src/x.py": "blk-my-id"}}</script></div><div data-mithril="change-summary" data-copy="titled"><noscript><pre class="vd-noscript">titled</pre></noscript><script type="application/json">{"title": "What", "text": "1 file added", "copy": "What\n1 file added"}</script></div><div data-mithril="deps" data-copy="chain"><noscript><pre class="vd-noscript">chain</pre></noscript><script type="application/json">{"empty": false, "width": 132, "height": 190, "truncated": false, "edges": [{"d": "M66 40C66 60 66 60 66 80", "back": false}, {"d": "M66 40C66 95 66 95 66 150", "back": false}, {"d": "M66 110C66 130 66 130 66 150", "back": false}], "nodes": [{"known": true, "title": "a", "label": "a", "x": "10", "y": "10", "tx": "66", "ty": "29", "w": 112, "h": 30}, {"known": true, "title": "b", "label": "b", "x": "10", "y": "80", "tx": "66", "ty": "99", "w": 112, "h": 30}, {"known": true, "title": "c", "label": "c", "x": "10", "y": "150", "tx": "66", "ty": "169", "w": 112, "h": 30}]}</script></div><header class="doc-header"><p class="doc-name">all.md</p></header>
+</pre></noscript><script type="application/json">{"tone": "info", "text": "\n\nfirst\n  \n\n  second  \n\n\n\nthird\n\n"}</script></div><div data-mithril="callout" data-copy="Body"><noscript><pre class="vd-noscript">Body</pre></noscript><script type="application/json">{"tone": "info", "title": "", "text": "Body"}</script></div><div data-mithril="callout" data-copy="café ✓ ◆"><noscript><pre class="vd-noscript">café ✓ ◆</pre></noscript><script type="application/json">{"tone": "success", "text": "café ✓ ◆"}</script></div><div data-mithril="code" data-copy="marks"><noscript><pre class="vd-noscript">marks</pre></noscript><script type="application/json">{"copy": "l1\nl2\nl3\nl4\nl5\nl6\nl7\nl8\nl9\nl10\nl11\nl12\nl13\nl14\nl15\nl16\nl17\nl18\nl19\nl20", "title": "m.py", "language": "py", "langClass": "py", "wrap": false, "numbers": true, "first": 1, "lines": [[["", "l1"]], [["", "l2"]], [["", "l3"]], [["", "l4"]], [["", "l5"]], [["", "l6"]], [["", "l7"]], [["", "l8"]], [["", "l9"]], [["", "l10"]], [["", "l11"]], [["", "l12"]], [["", "l13"]], [["", "l14"]], [["", "l15"]], [["", "l16"]], [["", "l17"]], [["", "l18"]], [["", "l19"]], [["", "l20"]]], "marked": [2, 5, 6, 7, 19, 20], "note": "Marked lines 2, 5-7, 19-20"}</script></div><div data-mithril="annotated-code" data-copy="range-and-kinds"><noscript><pre class="vd-noscript">range-and-kinds</pre></noscript><script type="application/json">{"copy": "l1 = 1\nl2 = 2\nl3 = 3\nl4 = 4\nl5 = 5\nl6 = 6\nl7 = 7\nl8 = 8\nl9 = 9\nl10 = 10\nl11 = 11\nl12 = 12\nl13 = 13\nl14 = 14\nl15 = 15\nl16 = 16\nl17 = 17\nl18 = 18\nl19 = 19\nl20 = 20\nl21 = 21\nl22 = 22\nl23 = 23\nl24 = 24\nl25 = 25\nl26 = 26\nl27 = 27\nl28 = 28\nl29 = 29\nl30 = 30\nl31 = 31\nl32 = 32\nl33 = 33\nl34 = 34\nl35 = 35\nl36 = 36\nl37 = 37\nl38 = 38\nl39 = 39\nl40 = 40\n\n1. lines 5-7: Setup: n1\n2. line 20: n2\n3. lines 30-31: n3", "title": "f.py", "language": "python", "langClass": "python", "wrap": true, "numbers": true, "first": 1, "lines": [[["", "l1 = "], ["n", "1"]], [["", "l2 = "], ["n", "2"]], [["", "l3 = "], ["n", "3"]], [["", "l4 = "], ["n", "4"]], [["", "l5 = "], ["n", "5"]], [["", "l6 = "], ["n", "6"]], [["", "l7 = "], ["n", "7"]], [["", "l8 = "], ["n", "8"]], [["", "l9 = "], ["n", "9"]], [["", "l10 = "], ["n", "10"]], [["", "l11 = "], ["n", "11"]], [["", "l12 = "], ["n", "12"]], [["", "l13 = "], ["n", "13"]], [["", "l14 = "], ["n", "14"]], [["", "l15 = "], ["n", "15"]], [["", "l16 = "], ["n", "16"]], [["", "l17 = "], ["n", "17"]], [["", "l18 = "], ["n", "18"]], [["", "l19 = "], ["n", "19"]], [["", "l20 = "], ["n", "20"]], [["", "l21 = "], ["n", "21"]], [["", "l22 = "], ["n", "22"]], [["", "l23 = "], ["n", "23"]], [["", "l24 = "], ["n", "24"]], [["", "l25 = "], ["n", "25"]], [["", "l26 = "], ["n", "26"]], [["", "l27 = "], ["n", "27"]], [["", "l28 = "], ["n", "28"]], [["", "l29 = "], ["n", "29"]], [["", "l30 = "], ["n", "30"]], [["", "l31 = "], ["n", "31"]], [["", "l32 = "], ["n", "32"]], [["", "l33 = "], ["n", "33"]], [["", "l34 = "], ["n", "34"]], [["", "l35 = "], ["n", "35"]], [["", "l36 = "], ["n", "36"]], [["", "l37 = "], ["n", "37"]], [["", "l38 = "], ["n", "38"]], [["", "l39 = "], ["n", "39"]], [["", "l40 = "], ["n", "40"]]], "marked": [5, 6, 7, 20, 30, 31], "note": "Marked lines 5-7, 20, 30-31", "uid": "d111aff1", "columns": 1, "folds": [[11, 16], [35, 40]], "notes": [{"number": 1, "start": 5, "end": 7, "label": "Setup", "text": "n1", "kind": "warn", "glyph": "!", "word": "Warning", "tone": "warning", "where": "lines 5-7"}, {"number": 2, "start": 20, "end": 20, "label": "", "text": "n2", "kind": "change", "glyph": "Δ", "word": "Change", "tone": "decision", "where": "line 20"}, {"number": 3, "start": 30, "end": 31, "label": "", "text": "n3", "kind": "info", "glyph": "i", "word": "Info", "tone": "info", "where": "lines 30-31"}]}</script></div><div data-mithril="diff" data-copy="split-fold-notes"><noscript><pre class="vd-noscript">split-fold-notes</pre></noscript><script type="application/json">{"name": "diff", "language": "", "uid": "2dbc2eab", "digits": 2, "split": true, "change": "modified", "was": "", "count": "+1 added, -1 removed", "copy": "--- a/diff\n+++ b/diff\n@@ -12,7 +12,7 @@\n line 12\n line 13\n line 14\n-line 15\n+line fifteen\n line 16\n line 17\n line 18", "blocks": [{"kind": "fold", "header": "", "rows": [{"kind": "same", "old": 1, "new": 1, "text": "line 1", "code": [["", "line 1"]]}, {"kind": "same", "old": 2, "new": 2, "text": "line 2", "code": [["", "line 2"]]}, {"kind": "same", "old": 3, "new": 3, "text": "line 3", "code": [["", "line 3"]]}, {"kind": "same", "old": 4, "new": 4, "text": "line 4", "code": [["", "line 4"]]}, {"kind": "same", "old": 5, "new": 5, "text": "line 5", "code": [["", "line 5"]]}, {"kind": "same", "old": 6, "new": 6, "text": "line 6", "code": [["", "line 6"]]}, {"kind": "same", "old": 7, "new": 7, "text": "line 7", "code": [["", "line 7"]]}, {"kind": "same", "old": 8, "new": 8, "text": "line 8", "code": [["", "line 8"]]}, {"kind": "same", "old": 9, "new": 9, "text": "line 9", "code": [["", "line 9"]]}, {"kind": "same", "old": 10, "new": 10, "text": "line 10", "code": [["", "line 10"]]}, {"kind": "same", "old": 11, "new": 11, "text": "line 11", "code": [["", "line 11"]]}]}, {"kind": "rows", "header": "@@ -12,8 +12,8 @@", "rows": [{"kind": "same", "old": 12, "new": 12, "text": "line 12", "code": [["", "line 12"]]}, {"kind": "same", "old": 13, "new": 13, "text": "line 13", "code": [["", "line 13"]]}, {"kind": "same", "old": 14, "new": 14, "text": "line 14", "code": [["", "line 14"]]}, {"kind": "del", "old": 15, "new": null, "text": "line 15", "code": [["", "line 15"]]}, {"kind": "add", "old": null, "new": 15, "text": "line fifteen", "code": [["", "line fifteen"]]}, {"kind": "same", "old": 16, "new": 16, "text": "line 16", "code": [["", "line 16"]]}, {"kind": "same", "old": 17, "new": 17, "text": "line 17", "code": [["", "line 17"]]}, {"kind": "same", "old": 18, "new": 18, "text": "line 18", "code": [["", "line 18"]]}, {"kind": "same", "old": 19, "new": 19, "text": "line 19", "code": [["", "line 19"]]}]}, {"kind": "more", "header": "11", "rows": []}], "notes": [{"number": 1, "side": "after", "start": 15, "where": "after line 15", "text": "n"}]}</script></div><div data-mithril="file-tree" data-copy="links"><noscript><pre class="vd-noscript">links</pre></noscript><script type="application/json">{"title": "", "summary": "3 files: 1 added, 2 unchanged", "collapse": null, "copy": "3 files: 1 added, 2 unchanged\nsrc/\n  pkg/\n    + mod.py\n  x.py\nother.py", "folders": [{"name": "src", "path": "src", "count": 2, "folders": [{"name": "pkg", "path": "src/pkg", "count": 1, "folders": [], "files": [{"name": "mod.py", "path": "src/pkg/mod.py", "change": "added", "was": "", "role": "", "note": "", "label": "added src/pkg/mod.py"}]}], "files": [{"name": "x.py", "path": "src/x.py", "change": "", "was": "", "role": "", "note": "", "label": "src/x.py"}]}], "files": [{"name": "other.py", "path": "other.py", "change": "", "was": "", "role": "", "note": "", "label": "other.py"}], "links": {"src/pkg/mod.py": "blk-s/1", "src/x.py": "blk-my-id"}}</script></div><div data-mithril="change-summary" data-copy="titled"><noscript><pre class="vd-noscript">titled</pre></noscript><script type="application/json">{"title": "What", "text": "1 file added", "copy": "What\n1 file added"}</script></div><div data-mithril="deps" data-copy="chain"><noscript><pre class="vd-noscript">chain</pre></noscript><script type="application/json">{"empty": false, "width": 132, "height": 190, "truncated": false, "edges": [{"d": "M66 40C66 60 66 60 66 80", "back": false}, {"d": "M66 40C66 95 66 95 66 150", "back": false}, {"d": "M66 110C66 130 66 130 66 150", "back": false}], "nodes": [{"known": true, "title": "a", "label": "a", "x": "10", "y": "10", "tx": "66", "ty": "29", "w": 112, "h": 30}, {"known": true, "title": "b", "label": "b", "x": "10", "y": "80", "tx": "66", "ty": "99", "w": 112, "h": 30}, {"known": true, "title": "c", "label": "c", "x": "10", "y": "150", "tx": "66", "ty": "169", "w": 112, "h": 30}]}</script></div>
 <nav class="doc-toc" aria-label="Contents"><details><summary>Contents (2)</summary><ol><li class="toc-l3"><a href="#vd-ctab-tabs-1-h">Code</a></li><li class="toc-l3"><a href="#vd-ctab-tabs-2-h">Checks</a></li></ol></details></nav>
 <div class="block heading" id="blk-every-block" data-anchor="every-block" data-hash="436264c1bdfa" data-block-type="heading"><h1 id="h-every-block">Every block</h1></div>
 <div class="block" id="blk-data-model" data-anchor="data-model" data-hash="77bc963b6705" data-block-type="visual"><div data-readonly data-mithril="data-model" data-block-id="data-model" data-copy="data-model = data-model(
@@ -2748,23 +2757,29 @@ components["callout"] = (() => {
 // Callout block as a component. Same DOM as blocks_render/callout.py.
 // A component file has no imports: it exports `view(m, props, components)` and may export helpers;
 // `components.shared` holds the helpers blocks have in common.
+// Each tone has a word and an icon of its own shape, drawn on a 16-unit box so no font is needed.
+const FILLED = { fill: 'currentColor' };
 const TONES = {
-  info: ['i', 'Info'],
-  decision: ['◆', 'Decision'],
-  risk: ['▲', 'Risk'],
-  warning: ['!', 'Warning'],
-  success: ['✓', 'Success']
+  info: ['Info', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 7.2v4' }], ['circle', { cx: '8', cy: '4.9', r: '0.9', ...FILLED }]]],
+  decision: ['Decision', [['path', { d: 'M8 1.5L14.5 8L8 14.5L1.5 8Z', ...FILLED }]]],
+  risk: ['Risk', [['path', { d: 'M8 2L14.5 13.5H1.5Z', ...FILLED }]]],
+  warning: ['Warning', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M8 4.4v4.3' }], ['circle', { cx: '8', cy: '11.2', r: '0.9', ...FILLED }]]],
+  success: ['Success', [['circle', { cx: '8', cy: '8', r: '6.5' }], ['path', { d: 'M5 8.2l2.1 2.1L11 5.8' }]]]
 };
+
+function icon(m, shapes) {
+  return m('svg.vd-callout-glyph', { viewBox: '0 0 16 16', 'aria-hidden': 'true', focusable: 'false' }, shapes.map(([tag, attrs]) => m(tag, attrs)));
+}
 
 function copyText(props) {
   return [props.title, props.text].filter((part) => part).join('\n');
 }
 
 function view(m, props, c) {
-  const [glyph, word] = TONES[props.tone];
+  const [word, shapes] = TONES[props.tone];
   const paragraphs = props.text.split(/\n\s*\n/).filter((p) => p.trim());
   return m(`aside.vb.callout.vd-callout.vd-callout-${props.tone}`, { 'data-copy': copyText(props) }, [
-    m('p.vd-callout-label', [m('span.vd-callout-glyph', { 'aria-hidden': 'true' }, glyph), ` ${word}`]),
+    m('p.vd-callout-label', [icon(m, shapes), ` ${word}`]),
     props.title === undefined ? null : m('p.vd-callout-title', props.title),
     paragraphs.map((p) => m('p.vd-callout-text', c.shared.inline(m, p.trim())))
   ]);
@@ -3572,7 +3587,7 @@ const SCALES = {
 const FIRST_COLUMN = 'Criterion';
 const TOTAL_LABEL = 'Weighted total';
 const NOT_RATED = 'Not rated';
-const LEVEL_TONES = { high: ['ok', '✓'], medium: ['warn', '▲'], low: ['bad', '✕'] };
+const LEVEL_TONES = { high: 'ok', medium: 'warn', low: 'bad' };
 
 function ratingScale(cell) {
   const word = typeof cell === 'string' ? cell.trim().toLowerCase() : '';
@@ -4276,13 +4291,30 @@ function classifyUrl(url) {
   return head.includes(':') || !/^[\x00-\x7f]*$/.test(stripped) ? 'text' : 'relative';
 }
 
-// [css modifier, glyph] of a status word; the word itself always shows.
+// The css modifier of a status word; the word itself always shows and the icon is STATUS_ICONS[modifier].
 function statusKind(text) {
   const word = text.trim().toLowerCase();
-  if (GOOD.includes(word)) return ['ok', '✓'];
-  if (WARN.includes(word)) return ['warn', '▲'];
-  if (BAD.includes(word)) return ['bad', '✕'];
-  return ['neutral', '●'];
+  if (GOOD.includes(word)) return 'ok';
+  if (WARN.includes(word)) return 'warn';
+  if (BAD.includes(word)) return 'bad';
+  return 'neutral';
+}
+
+// Status icons are drawn, never typed: a glyph needs a font the machine may lack. Each is [element, attributes] on a 12-unit box.
+const STATUS_ICONS = {
+  ok: [['path', { d: 'M2.5 6.5l2.5 2.5 4.5-5.5', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }]],
+  warn: [['path', { d: 'M6 1.5L11 10.5H1Z', stroke: 'none' }]],
+  bad: [['path', { d: 'M3 3l6 6M9 3l-6 6', fill: 'none', 'stroke-width': '1.8', 'stroke-linecap': 'round' }]],
+  neutral: [['circle', { cx: '6', cy: '6', r: '3', stroke: 'none' }]]
+};
+
+function statusIcon(m, kind) {
+  const shapes = STATUS_ICONS[kind] || STATUS_ICONS.neutral;
+  return m(
+    'svg.vb-status-glyph',
+    { viewBox: '0 0 12 12', 'aria-hidden': 'true', focusable: 'false' },
+    shapes.map(([tag, attrs]) => m(tag, attrs))
+  );
 }
 
 function linkParts(c, cell) {
@@ -4345,8 +4377,8 @@ function bar(m, c, cell, top) {
 
 function status(m, c, cell, extras) {
   const text = c.shared.pyStr(cell);
-  const [kind, glyph] = (extras.statusKind && extras.statusKind(text)) || statusKind(text);
-  return m(`span.vb-status.vb-status-${kind}`, [m('span.vb-status-glyph', { 'aria-hidden': 'true' }, glyph), text]);
+  const kind = (extras.statusKind && extras.statusKind(text)) || statusKind(text);
+  return m(`span.vb-status.vb-status-${kind}`, [statusIcon(m, kind), text]);
 }
 
 function cellView(m, c, cell, kind, top, extras) {
@@ -4428,7 +4460,8 @@ function tableView(m, props, c, extras) {
   ]);
   const body = [
     m('div.vb-scroll', { role: 'region', tabindex: '0', 'aria-label': name }, grid),
-    m('p.vb-alt.vb-foot', 'footnote' in props ? String(props.footnote) : size)
+    // The size count is for screen readers unless a filter is shown (40-table.css).
+    'footnote' in props ? m('p.vb-alt.vb-foot', String(props.footnote)) : m('p.vb-alt.vb-foot.vb-sr', size)
   ];
   return m(extras.root || 'div.vb.table', { 'data-copy': extras.copy ?? copyText(c, columns, rows, labels) }, [
     m('section.vb-card', ['caption' in props ? m('h4.vb-title', String(props.caption)) : null, body]),
