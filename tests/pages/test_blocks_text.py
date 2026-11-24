@@ -94,3 +94,28 @@ def test_matrix_component_scales_match_the_spec() -> None:
     assert _js_constant("matrix.js", "SCALES") == SCALES
     source = (STATIC / "matrix.js").read_text(encoding="utf-8")
     assert f"const FIRST_COLUMN = '{FIRST_COLUMN}';" in source
+
+
+@pytest.mark.parametrize(
+    "name,valid,required",
+    [
+        ("callout", {"tone": "info", "text": "hello"}, "text"),
+        ("code", {"language": "py", "source": "x"}, "source"),
+        (
+            "annotated-code",
+            {"filename": "f", "language": "py", "source": "x", "notes": []},
+            "filename",
+        ),
+    ],
+)
+def test_metadata_rejects_shape_errors(
+    name: str, valid: dict[str, object], required: str
+) -> None:
+    for props, field in [
+        ({**valid, "unexpected": 1}, "unexpected"),
+        ({k: v for k, v in valid.items() if k != required}, required),
+        ({**valid, required: 42}, required),
+    ]:
+        errors = check_props(name, props, 1)
+        assert len(errors) == 1
+        assert field in errors[0].message
