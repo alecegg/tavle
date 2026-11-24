@@ -12,7 +12,7 @@ Tavle is a UI component library for standalone pages and app surfaces. Its Pytho
 
 ## Checks
 
-Run `just test` for lint, Python tests and JavaScript tests. `just lint` checks Ruff, Pyright, Mollify and Fallow; `just hooks` installs the Git hooks. Mollify and Ruff use checked-in baselines for existing findings.
+Run `just test` for lint, Python tests and JavaScript tests. `just lint` checks Ruff, Pyright, Mollify and Fallow; `just hooks` installs the Git hooks: pre-commit runs `just lint` and pre-push runs `just test`. Mollify and Ruff use checked-in baselines for existing findings.
 
 Run `just mutate --only 'tavle.theme.merge.*'` to run mutmut over `src/tavle` in a throwaway copy under `$TMPDIR`; add `--fresh` to discard the cached results, and see `scripts/mutate.py` for the other options.
 
