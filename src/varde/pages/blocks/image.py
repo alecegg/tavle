@@ -10,8 +10,8 @@ import re
 from posixpath import splitext
 
 from varde.pages.blocks.image_header import EXTENSIONS
-from varde.pages.blocks.rules import Fault, check_keys, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 WIDTHS = ("narrow", "full")
 _SCHEME = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:|^//")
@@ -47,15 +47,20 @@ def src_fault(src: str) -> str | None:
     return None
 
 
+def _blank_faults(data: dict[str, object]) -> list[Fault]:
+    """A string field the metadata accepts but the page must not leave blank."""
+    return [
+        Fault("type", f"image: '{key}' must be a non-empty string")
+        for key in ("src", "alt", "caption")
+        if isinstance(data.get(key), str) and not str(data[key]).strip()
+    ]
+
+
 def validate_image(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"src", "alt"}, {"caption", "width"}, "image")
-    for key in ("src", "alt", "caption"):
-        faults += str_field(data, key, "image")
+    faults = _blank_faults(data)
     src = data.get("src")
     if isinstance(src, str) and src.strip() and (reason := src_fault(src)):
         faults.append(Fault("src", reason))
-    if "width" in data and data["width"] not in WIDTHS:
-        faults.append(Fault("type", f"image: width must be one of {', '.join(WIDTHS)}"))
     return faults
 
 
@@ -80,4 +85,10 @@ IMAGE = BlockSpec(
 )
 """,
     validate_image,
+    properties=(
+        PropertySpec("src", "string", required=True),
+        PropertySpec("alt", "string", required=True),
+        PropertySpec("caption", "string"),
+        PropertySpec("width", "string", enum=WIDTHS),
+    ),
 )
