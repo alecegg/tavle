@@ -6,9 +6,9 @@ from html import escape
 from pathlib import Path
 
 from varde.pages.render import split_frontmatter, strip_comments
-from varde.pages.theme.css import style_element, theme_css
 from varde.pages.theme.resolve import ResolvedTheme, resolve_theme
-from varde.pages.theme.tokens import ThemeError
+from varde.ui.theme.css import style_element, theme_css
+from varde.ui.theme.tokens import ThemeError
 
 
 @dataclass(frozen=True)

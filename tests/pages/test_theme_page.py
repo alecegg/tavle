@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from varde.pages.theme.page import page_theme, require_theme
-from varde.pages.theme.tokens import ThemeError
+from varde.ui.theme.tokens import ThemeError
 
 
 def test_no_theme(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
