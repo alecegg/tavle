@@ -45,3 +45,21 @@ describe('standalone export', () => {
     expect([...doc.querySelectorAll('img')].filter((img) => !img.src.startsWith('data:'))).toHaveLength(0);
   });
 });
+
+describe('deps node status', () => {
+  const classes = (status) => {
+    const host = document.createElement('div');
+    const node = { known: true, title: 't', label: 't', x: 0, y: 0, tx: 0, ty: 0, w: 10, h: 10, status };
+    m.render(host, components.deps.view(m, { width: 10, height: 10, edges: [], nodes: [node] }, components));
+    return host.querySelector('g.node').getAttribute('class');
+  };
+  it('tones a node from its status word', () => {
+    expect(classes('blocked')).toBe('node tone-bad');
+    expect(classes('done')).toBe('node tone-ok');
+    expect(classes('in progress')).toBe('node tone-warn');
+  });
+  it('leaves a node without a known status plain', () => {
+    expect(classes(undefined)).toBe('node');
+    expect(classes('someday')).toBe('node');
+  });
+});

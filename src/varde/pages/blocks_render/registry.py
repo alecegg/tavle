@@ -111,7 +111,9 @@ _PROPS: dict[str, Callable[[Props], Props]] = {
     "comment": comment_props,
     "ranking": ranking_props,
     "slider": slider_props,
-    "deps": lambda props: deps_layout(as_dict(props.get("edges"))),
+    "deps": lambda props: deps_layout(
+        as_dict(props.get("edges")), as_dict(props.get("status"))
+    ),
     "data-model": data_model_props,
     "endpoint": endpoint_props,
     "tabs": lambda props: container_props("tabs", props),

@@ -92,7 +92,9 @@ def _label(name: str) -> str:
     return name if len(name) <= _MAX_LABEL else name[: _MAX_LABEL - 1] + "…"
 
 
-def deps_layout(edges: Mapping[str, object]) -> dict[str, object]:
+def deps_layout(
+    edges: Mapping[str, object], status: Mapping[str, object] | None = None
+) -> dict[str, object]:
     """What the `deps` component draws: canvas size, arrow paths, positioned nodes."""
     graph, truncated = limit_graph(parse_deps(edges))
     if not graph:
@@ -122,7 +124,10 @@ def deps_layout(edges: Mapping[str, object]) -> dict[str, object]:
             for dep in deps
             if dep != task
         ],
-        "nodes": [_node_props(name, pos[name], name in graph) for name in layers],
+        "nodes": [
+            _node_props(name, pos[name], name in graph, (status or {}).get(name))
+            for name in layers
+        ],
     }
 
 
@@ -139,8 +144,10 @@ def _edge_path(
     return {"d": path, "back": not forward}
 
 
-def _node_props(name: str, at: tuple[float, float], known: bool) -> dict[str, object]:
-    return {
+def _node_props(
+    name: str, at: tuple[float, float], known: bool, status: object
+) -> dict[str, object]:
+    result = {
         "known": known,
         "title": name + ("" if known else " (not defined)"),
         "label": _label(name),
@@ -151,3 +158,7 @@ def _node_props(name: str, at: tuple[float, float], known: bool) -> dict[str, ob
         "w": _NODE_W,
         "h": _NODE_H,
     }
+    if isinstance(status, str):
+        result["status"] = status
+        result["title"] += f": {status}"
+    return result

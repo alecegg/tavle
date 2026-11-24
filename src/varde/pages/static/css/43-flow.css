@@ -21,3 +21,7 @@
 }
 .vb-readout { min-block-size: 1.5em; margin-block: 0.3em 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .flow .vd-detail { min-block-size: 1.5em; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
+
+.dep-graph .node.tone-ok rect { fill: var(--vd-tone-success-tint); stroke: var(--vd-tone-success-edge); }
+.dep-graph .node.tone-warn rect { fill: var(--vd-tone-warning-tint); stroke: var(--vd-tone-warning-edge); }
+.dep-graph .node.tone-bad rect { fill: var(--vd-tone-risk-tint); stroke: var(--vd-tone-risk-edge); }

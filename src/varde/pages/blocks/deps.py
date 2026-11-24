@@ -28,18 +28,54 @@ def validate_deps(data: dict[str, object]) -> list[Fault]:
             continue
         for need in needs:
             faults += _name_fault(need, f"deps.edges.{task}")
+    return faults + _status_faults(edges, data.get("status"))
+
+
+def _named_tasks(edges: dict[object, object]) -> set[object]:
+    needed = {
+        n
+        for needs in edges.values()
+        if isinstance(needs, list)
+        for n in needs
+        if isinstance(n, str)
+    }
+    return set(edges) | needed
+
+
+def _status_faults(edges: dict[object, object], status: object) -> list[Fault]:
+    """A status names a task in the graph and is a word."""
+    if not isinstance(status, dict):
+        return []  # absent or not a table: the properties report it
+    tasks = _named_tasks(edges)
+    faults = [
+        Fault("value", f"deps.status.{name}: task is not in edges")
+        for name in status
+        if name not in tasks
+    ]
+    faults += [
+        Fault("type", f"deps.status.{name} must be text")
+        for name, word in status.items()
+        if not isinstance(word, str)
+    ]
     return faults
 
 
 DEPS = BlockSpec(
     "deps",
     "A task dependency graph drawn from edges",
-    ("edges: a table mapping each task id to the list of tasks it depends on.",),
+    (
+        "edges: a table mapping each task id to the list of tasks it depends on.",
+        "status: an optional table mapping task ids to status words.",
+    ),
     r"""deps = deps(
   edges: {"a": [], "b": ["a"], "c": ["a", "b"]},
+  status: {"a": "done", "b": "in progress"},
 )
 """,
     validate_deps,
     block_type="status",
-    properties=(PropertySpec("edges", "object", required=True),),
+    properties=(
+        PropertySpec("edges", "object", required=True),
+        PropertySpec("status", "object"),
+    ),
 )
