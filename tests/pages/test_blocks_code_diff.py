@@ -1,6 +1,6 @@
 """Code and diff blocks render client-side: registration, props, hosts, page links.
 
-The component DOM is checked in `tests/ui/components/code_diff.test.js` against
+The component DOM is checked in `tavle tests/components/code_diff.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts, and the server-side logic (lexer,
@@ -17,27 +17,28 @@ import urllib.request
 from pathlib import Path
 
 import pytest
-
-from varde.pages.render import render_page
-from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props
-from varde.ui.blocks.change_summary import EMPTY, UNCOUNTED
-from varde.ui.blocks_render.annotated_code import annotated_props
-from varde.ui.blocks_render.change_summary import change_summary_props
-from varde.ui.blocks_render.code import Panel, code_block_props, code_props, tokenize
-from varde.ui.blocks_render.diff import diff_props
-from varde.ui.blocks_render.file_tree import (
+from tavle.blocks import check_props
+from tavle.blocks.change_summary import EMPTY, UNCOUNTED
+from tavle.blocks_render.annotated_code import annotated_props
+from tavle.blocks_render.change_summary import change_summary_props
+from tavle.blocks_render.code import Panel, code_block_props, code_props, tokenize
+from tavle.blocks_render.diff import diff_props
+from tavle.blocks_render.file_tree import (
     code_titles,
     file_links,
     file_tree_props,
     link_file_trees,
 )
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.components import component_bundle, host_props, mount_block
-from varde.ui.graph import deps_layout
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.components import component_bundle, host_props, mount_block
+from tavle.graph import deps_layout
+from ui_paths import UI_FIXTURES
+
+from varde.pages.render import render_page
+from varde.pages.serve import PageServer
 
 TESTS = Path(__file__).parent
-FIXTURES = TESTS.parent / "ui" / "components" / "fixtures"
+FIXTURES = UI_FIXTURES
 WIDGETS = TESTS / "fixtures" / "widgets"
 BLOCKS = ("code", "annotated-code", "diff", "file-tree", "change-summary", "deps")
 SAMPLES = {
@@ -88,10 +89,10 @@ def test_fixture_inputs_still_produce_the_recorded_props(
     block: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # the "big" and "truncated" cases were recorded with small caps
-    monkeypatch.setattr("varde.ui.blocks.diff_rows.MAX_ROWS", 20)
-    monkeypatch.setattr("varde.ui.blocks_render.diff.MAX_ROWS", 20)
-    monkeypatch.setattr("varde.ui.graph._MAX_NODES", 12)
-    monkeypatch.setattr("varde.ui.graph._MAX_EDGES", 10)
+    monkeypatch.setattr("tavle.blocks.diff_rows.MAX_ROWS", 20)
+    monkeypatch.setattr("tavle.blocks_render.diff.MAX_ROWS", 20)
+    monkeypatch.setattr("tavle.graph._MAX_NODES", 12)
+    monkeypatch.setattr("tavle.graph._MAX_EDGES", 10)
     cases = _fixture(block)
     assert len(cases) >= 5
     for case in cases:

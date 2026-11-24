@@ -5,16 +5,17 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks.change_summary import (
+from tavle.blocks import check_props
+from tavle.blocks.change_summary import (
     EMPTY,
     collect_markers,
     markers_of,
     sentence,
     summarize,
 )
-from varde.ui.blocks_render.registry import COMPONENTS
+from tavle.blocks_render.registry import COMPONENTS
+
+from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SUMMARY = 'k = change-summary(title: "T")\n'

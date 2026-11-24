@@ -1,6 +1,6 @@
 """Input blocks render client-side: registration, props, hosts, read-only, validation.
 
-The component DOM is checked in `tests/ui/components/inputs.test.js` against
+The component DOM is checked in `tavle tests/components/inputs.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the statements render hosts whose no-script fallback is their
@@ -16,19 +16,20 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from tavle.blocks.check import COMPONENT_SPECS, check_props
+from tavle.blocks_render.inputs import choice_props, form_props
+from tavle.blocks_render.inputs_ordered import ranking_props, slider_props
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.components import component_bundle
+from tavle.shell import make_read_only
 from ui_fence import block_host, example_fence
+from ui_paths import UI_FIXTURES
 
 from varde.pages.page_check import check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
-from varde.ui.blocks.check import COMPONENT_SPECS, check_props
-from varde.ui.blocks_render.inputs import choice_props, form_props
-from varde.ui.blocks_render.inputs_ordered import ranking_props, slider_props
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.components import component_bundle
-from varde.ui.shell import make_read_only
 
-FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
+FIXTURES = UI_FIXTURES
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 DOC = (

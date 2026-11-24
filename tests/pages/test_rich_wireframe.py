@@ -12,24 +12,24 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
+from tavle import blocks
+from tavle.blocks import check_props
+from tavle.blocks.screens import KINDS, SURFACES
+from tavle.blocks_render import screens
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.blocks_render.screens import (
+    copy_text,
+)
+from tavle.blocks_render.screens import (
+    ui_states_props as _ui_states_props,
+)
+from tavle.blocks_render.screens import (
+    wireframe_props as _wireframe_props,
+)
 
 from varde.pages import page_check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
-from varde.ui import blocks
-from varde.ui.blocks import check_props
-from varde.ui.blocks.screens import KINDS, SURFACES
-from varde.ui.blocks_render import screens
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.blocks_render.screens import (
-    copy_text,
-)
-from varde.ui.blocks_render.screens import (
-    ui_states_props as _ui_states_props,
-)
-from varde.ui.blocks_render.screens import (
-    wireframe_props as _wireframe_props,
-)
 
 
 def wireframe_props(data: dict[str, Any]) -> Any:

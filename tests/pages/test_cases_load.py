@@ -6,8 +6,7 @@
 from __future__ import annotations
 
 from cases_loader import load_cases
-
-from varde.ui.blocks import COMPONENT_SPECS
+from tavle.blocks import COMPONENT_SPECS
 
 CASES = load_cases()
 

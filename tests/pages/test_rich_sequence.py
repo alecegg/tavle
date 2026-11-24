@@ -12,22 +12,22 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-
-from varde.pages.page_check import check
-from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.blocks_render.sequence import (
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.blocks_render.sequence import (
     sequence_props as _sequence_props,
 )
-from varde.ui.blocks_render.sequence import (
+from tavle.blocks_render.sequence import (
     step_text,
 )
-from varde.ui.blocks_render.sequence_layout import (
+from tavle.blocks_render.sequence_layout import (
     CHAR_W,
     layout,
     place_actors,
 )
+
+from varde.pages.page_check import check
+from varde.pages.render import render_page
 
 
 def sequence_props(data: dict[str, Any]) -> Any:
@@ -35,7 +35,7 @@ def sequence_props(data: dict[str, Any]) -> Any:
 
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
-STATIC = Path(str(files("varde.ui").joinpath("static")))
+STATIC = Path(str(files("tavle").joinpath("static")))
 
 
 esc = htmllib.escape

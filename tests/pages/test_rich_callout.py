@@ -1,17 +1,18 @@
 """The callout block: spec, registration and its client-side host.
 
 Tones, escaping, Copy text and paragraphs are checked in
-`tests/ui/components/callout.test.js` against the former Python renderer's HTML.
+`tavle tests/components/callout.test.js` against the former Python renderer's HTML.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 

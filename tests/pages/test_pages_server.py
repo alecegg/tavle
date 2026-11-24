@@ -15,6 +15,7 @@ from varde.pages import serve as serve_mod
 from varde.pages import server_parts
 from varde.pages.comments import append_reply, comments_path, fold, read_rows
 from varde.pages.serve import PageServer
+from varde.pages.template import page_scripts
 
 DOC = "---\nstatus: todo\n---\n\n# Title\n\nHello **world**.\n\n## Part\n\nSecond.\n"
 REQUIRED_HEADERS = {
@@ -114,7 +115,7 @@ def test_page_has_headers_token_and_first_party_assets(running: Running) -> None
     assert '<script src="/static/app.js" defer></script>' in text
     assert '<script src="/static/blocks.js" defer></script>' in text
     assert '<script src="/static/recap.js" defer></script>' in text
-    assert text.count("<script") == 6 and " style=" not in text
+    assert text.count("<script") == len(page_scripts()) and " style=" not in text
     assert "Hello <strong>world</strong>" in text
 
 
@@ -322,8 +323,9 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
     wheel = next(out.glob("varde-*.whl"))
     names = zipfile.ZipFile(wheel).namelist()
-    for asset in ("app.js", "css/00-tokens.css", "css/50-blocks.css"):
-        assert f"varde/{'pages' if asset == 'app.js' else 'ui'}/static/{asset}" in names
+    # The component CSS and scripts ship in the UI library's own wheel.
+    for asset in ("app.js", "page.js"):
+        assert f"varde/pages/static/{asset}" in names
 
 
 def test_stalled_post_body_times_out(running: Running, monkeypatch) -> None:

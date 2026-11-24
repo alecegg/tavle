@@ -255,8 +255,9 @@ def test_validate_answer_allows_newlines_and_tabs_in_text() -> None:
 def test_validate_answer_rejects_control_characters_in_string_values(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    from tavle.blocks.spec import AnswerSchema
+
     from varde.pages import answers
-    from varde.ui.blocks.spec import AnswerSchema
 
     schema = AnswerSchema("string", ("text",), ())
     monkeypatch.setattr(answers, "answer_schema", lambda doc, item: schema)
@@ -270,8 +271,9 @@ def test_validate_answer_rejects_control_characters_in_string_values(
 def test_number_answers_must_be_finite(
     monkeypatch: pytest.MonkeyPatch, bad: object
 ) -> None:
+    from tavle.blocks.spec import AnswerSchema
+
     from varde.pages import answers
-    from varde.ui.blocks.spec import AnswerSchema
 
     schema = AnswerSchema("number", (), ())
     monkeypatch.setattr(answers, "answer_schema", lambda doc, item: schema)

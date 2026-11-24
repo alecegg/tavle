@@ -5,11 +5,12 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 
@@ -62,7 +63,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
     assert "style=" not in body and "vb-error" not in body
 
 
-STATIC = Path(__file__).parents[2] / "src" / "varde" / "ui" / "static"
+STATIC = UI_STATIC_DIR
 
 
 def test_sentence_value_is_marked_long_and_set_below_heading_size() -> None:

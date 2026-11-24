@@ -1,6 +1,6 @@
 """Text and reference blocks render client-side: registration, hosts, fixtures.
 
-The component DOM is checked in `tests/ui/components/blocks_text.test.js`
+The component DOM is checked in `tavle tests/components/blocks_text.test.js`
 against `components/fixtures/<block>.json`, the HTML the former Python renderers
 produced. These tests keep the Python side of that contract: the fixtures hold
 valid props, the blocks render as hosts, and the facts the components copy from
@@ -14,18 +14,19 @@ import re
 from pathlib import Path
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks.decision import OPTIONS
+from tavle.blocks.option_matrix import FIRST_COLUMN, SCALES
+from tavle.blocks_render.decision import LABELS, VERDICT_OF
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.components import component_bundle
+from ui_paths import UI_FIXTURES, UI_STATIC_DIR
 
 from varde.pages.render import classify_url, render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks.decision import OPTIONS
-from varde.ui.blocks.option_matrix import FIRST_COLUMN, SCALES
-from varde.ui.blocks_render.decision import LABELS, VERDICT_OF
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.components import component_bundle
 
 TESTS = Path(__file__).parent
-FIXTURES = TESTS.parent / "ui" / "components" / "fixtures"
-STATIC = TESTS.parents[1] / "src" / "varde" / "ui" / "static" / "components"
+FIXTURES = UI_FIXTURES
+STATIC = UI_STATIC_DIR / "components"
 TEXT_BLOCKS = (
     "checklist",
     "decision",

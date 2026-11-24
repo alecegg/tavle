@@ -5,13 +5,14 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks.change import CHANGES, change_rule_faults
+from tavle.blocks_render.backend import data_model_props, endpoint_props
+from tavle.blocks_render.change import copy_line
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks.change import CHANGES, change_rule_faults
-from varde.ui.blocks_render.backend import data_model_props, endpoint_props
-from varde.ui.blocks_render.change import copy_line
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 PLAIN_MODEL: dict[str, object] = {
@@ -145,9 +146,7 @@ def test_fixtures_validate_and_render_without_errors(name: str) -> None:
 
 
 def test_change_has_no_inline_start_border() -> None:
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/47-change.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/47-change.css").read_text()
     assert "border-inline-start" not in css
     assert "border-left" not in css
 

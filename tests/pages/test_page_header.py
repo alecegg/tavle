@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.header import (
     count_words,
@@ -167,9 +168,7 @@ def test_fixtures_render_strip() -> None:
 def test_iso_dates_are_wrapped_so_they_cannot_split_at_a_hyphen() -> None:
     head = _header("status: todo\nstatus_at: 2026-11-04T09:15 note")
     assert 'status_at: <span class="vd-date">2026-11-04</span>T09:15 note' in head
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/50-blocks.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/50-blocks.css").read_text()
     assert ".vd-date { white-space: nowrap; }" in css
 
 

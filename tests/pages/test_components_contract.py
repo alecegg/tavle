@@ -1,7 +1,7 @@
 """Component contract: mount hosts, the bundle, and callout as a client-side block.
 
 `fixtures/callout.json` holds the HTML of the former Python callout renderer as a
-golden; Vitest (`tests/ui/components/*.test.js`) checks the component against
+golden; Vitest (`tavle tests/components/*.test.js`) checks the component against
 it. The standalone export fixture is regenerated with
 `VARDE_REGEN_FIXTURES=1 uv run pytest tests/pages`.
 """
@@ -13,16 +13,17 @@ from pathlib import Path
 
 import pytest
 from cases_loader import Case, load_cases
+from tavle.blocks.check import check_props
+from tavle.blocks_render import render_block
+from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
+from tavle.components import component_bundle, mount_block
+from ui_paths import UI_FIXTURES, UI_STATIC_DIR
 
 from varde.pages.assemble import assemble_static
 from varde.pages.render import render_page
-from varde.ui.blocks.check import check_props
-from varde.ui.blocks_render import render_block
-from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
-from varde.ui.components import component_bundle, mount_block
 
-FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
-COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/ui/static/components"
+FIXTURES = UI_FIXTURES
+COMPONENT_FILES = UI_STATIC_DIR / "components"
 REGEN = os.environ.get("VARDE_REGEN_FIXTURES") == "1"
 CASES = load_cases()
 VALID_CASES = [case for case in CASES if case.valid]

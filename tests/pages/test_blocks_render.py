@@ -5,10 +5,10 @@ from __future__ import annotations
 import re
 
 import pytest
+from tavle import blocks
 from ui_fence import example_fence, ui_fence
 
 from varde.pages.render import render_page
-from varde.ui import blocks
 
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 JSON_PROPS = re.compile(r'<script type="application/json">.*?</script>', re.DOTALL)

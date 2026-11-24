@@ -12,18 +12,15 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-
-from varde.pages.page_check import check
-from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.diagram_layout import (
+from tavle.blocks import check_props
+from tavle.blocks_render.diagram_layout import (
     EdgeSpec,
     layout_graph,
     loop_room,
 )
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.blocks_render.state import state_props as _state_props
-from varde.ui.blocks_render.state_graph import (
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.blocks_render.state import state_props as _state_props
+from tavle.blocks_render.state_graph import (
     graph_specs,
     loop_labels,
     states_of,
@@ -32,13 +29,16 @@ from varde.ui.blocks_render.state_graph import (
     unreachable_ids,
 )
 
+from varde.pages.page_check import check
+from varde.pages.render import render_page
+
 
 def state_props(data: dict[str, Any]) -> Any:
     return _state_props(data)
 
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
-STATIC = Path(str(files("varde.ui").joinpath("static")))
+STATIC = Path(str(files("tavle").joinpath("static")))
 
 
 esc = htmllib.escape

@@ -6,13 +6,14 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 from varde.pages.toc import toc_entries, toc_html
 
 CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pages/static/css"
-UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+UI_CSS_DIR = UI_STATIC_DIR / "css"
 
 
 def _nav(*headings: tuple[int, str, str]) -> str:

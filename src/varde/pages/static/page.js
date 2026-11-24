@@ -17,7 +17,7 @@
 // scroll; contents-nav jumps use `scrollIntoView` and so reach whichever scrolls. Popups, dialogs and
 // the copy buffer are appended inside the shadow root. The component bundle (`components.js`) boots
 // on the document only; the host mounts client-side blocks in its root itself.
-const PARTS = ['./app.js', './blocks.js', './inputs_runtime.js', './recap.js', './inputs_ordered.js'];
+const PARTS = ['./app.js', './blocks.js', './inputs_fields.js', './inputs_widgets.js', './inputs_runtime.js', './recap.js', './inputs_ordered.js'];
 
 export async function mountPage(root, { apiBase = '', apiQuery = '', pageUrl = '/', token = '', refresh, readOnly = false } = {}) {
   await Promise.all(PARTS.map((part) => import(part)));

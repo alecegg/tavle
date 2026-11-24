@@ -12,21 +12,22 @@ from typing import Any
 
 import pytest
 from scene_html import svg_html
-
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props, type_text
-from varde.ui.blocks.charts import CHART, MAX_SERIES
-from varde.ui.blocks_render.chart_model import build_model, copy_text
-from varde.ui.blocks_render.chart_scale import (
+from tavle.blocks import check_props, type_text
+from tavle.blocks.charts import CHART, MAX_SERIES
+from tavle.blocks_render.chart_model import build_model, copy_text
+from tavle.blocks_render.chart_scale import (
     compact,
     fmt,
     nice_ticks,
     thin_step,
 )
-from varde.ui.blocks_render.charts import chart_props as _chart_props
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.lines import parse_lines
+from tavle.blocks_render.charts import chart_props as _chart_props
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.lines import parse_lines
+from ui_paths import UI_STATIC_DIR
+
+from varde.pages.page_check import PAGE_SPECS
+from varde.pages.serve import PageServer
 
 
 def chart_props(data: dict[str, Any]) -> Any:
@@ -262,12 +263,12 @@ def test_two_hundred_points_and_twelve_series_render_fast_and_thin_labels() -> N
     assert len(chart_props(data)["table"]["rows"]) == 200
 
 
-CSS = Path(__file__).parents[2].joinpath("src/varde/ui/static/css/41-chart.css")
+CSS = UI_STATIC_DIR / "css/41-chart.css"
 FONT_SIZE = r"font-size: calc\(var\(--vd-text-(?:xs|md)\) \* var\(--vb-k\)\)"
 
 
 def test_label_text_is_small_and_scaled_to_a_fixed_rendered_size() -> None:
-    from varde.ui.blocks_render.chart_draw import W
+    from tavle.blocks_render.chart_draw import W
 
     css = CSS.read_text()
     for name in ("vb-tick", "vb-end", "vb-pct", "vb-note-label", "vb-ev-no"):

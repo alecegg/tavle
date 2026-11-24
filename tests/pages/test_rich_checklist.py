@@ -6,11 +6,12 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 
@@ -58,18 +59,14 @@ def test_fixture_family_exists(name: str) -> None:
 
 
 def test_status_has_no_inline_start_border() -> None:
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/54-checklist.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/54-checklist.css").read_text()
     rules = [part.split("}", 1)[0] for part in css.split(".vd-checklist-item {")[1:]]
     assert rules
     assert all("border-inline-start" not in rule for rule in rules)
 
 
 def test_progress_remainder_is_the_quiet_line_colour() -> None:
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/54-checklist.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/54-checklist.css").read_text()
     screen = css.split("@media (forced-colors: active)", 1)[0]
 
     def rule(selector: str) -> str:

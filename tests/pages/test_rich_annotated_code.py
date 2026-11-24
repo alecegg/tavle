@@ -8,13 +8,13 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.annotated_code import (
+from tavle.blocks import check_props
+from tavle.blocks_render.annotated_code import (
     read_notes,
 )
+from ui_paths import UI_ROOT
 
-UI = Path(__file__).parents[2] / "src" / "varde" / "ui"
+UI = UI_ROOT
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SOURCE = "".join(f"l{i} = {i}\n" for i in range(1, 41))
 

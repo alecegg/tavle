@@ -1,4 +1,5 @@
 import pytest
+from tavle.blocks_render.registry import COMPONENTS
 
 from varde.pages.actions import (
     ALLOWED_KINDS,
@@ -7,7 +8,6 @@ from varde.pages.actions import (
     kind_allowed,
     menu_entries,
 )
-from varde.ui.blocks_render.registry import COMPONENTS
 
 ROW_ENTRY_KIND = {"comment": "comment", "suggest": "suggestion"}
 FLAGS = [(e, p) for e in (True, False) for p in (True, False)]

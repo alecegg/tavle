@@ -11,18 +11,18 @@ from typing import Any
 
 import pytest
 from scene_html import svg_html
-
-from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props
-from varde.ui.blocks.chart_notes import MAX_NOTES
-from varde.ui.blocks_render.chart_events import hatch_path, place_pins
-from varde.ui.blocks_render.chart_model import (
+from tavle.blocks import check_props
+from tavle.blocks.chart_notes import MAX_NOTES
+from tavle.blocks_render.chart_events import hatch_path, place_pins
+from tavle.blocks_render.chart_model import (
     Event,
     build_model,
     copy_text,
 )
-from varde.ui.blocks_render.charts import chart_props as _chart_props
-from varde.ui.lines import parse_lines
+from tavle.blocks_render.charts import chart_props as _chart_props
+from tavle.lines import parse_lines
+
+from varde.pages.serve import PageServer
 
 
 def chart_props(data: dict[str, Any]) -> Any:

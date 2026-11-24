@@ -1,6 +1,6 @@
 """Chart, diagram and image blocks render client-side: registration, props, hosts, copy.
 
-The component DOM is checked in `tests/ui/components/charts_diagrams.test.js` against
+The component DOM is checked in `tavle tests/components/charts_diagrams.test.js` against
 `components/fixtures/<block>.json`, the HTML the former Python renderers produced.
 These tests keep the Python side of that contract: the fixture inputs still produce
 the recorded props, the blocks render as hosts with their source as the no-script
@@ -11,27 +11,27 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping
-from pathlib import Path
 from typing import Any
 
 import pytest
+from tavle.blocks import COMPONENT_SPECS, check_props
+from tavle.blocks_render.charts import chart_props
+from tavle.blocks_render.diagrams import diagram_props
+from tavle.blocks_render.flow import flow_props
+from tavle.blocks_render.image import image_props
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.blocks_render.screen_flow import screen_flow_props
+from tavle.blocks_render.screens import ui_states_props, wireframe_props
+from tavle.blocks_render.sequence import sequence_props
+from tavle.blocks_render.state import state_props
+from tavle.components import component_bundle, mount_block
+from tavle.lines.parse import parse_lines
+from tavle.media import Media
+from ui_paths import UI_FIXTURES
 
 from varde.pages.render import render_page
-from varde.ui.blocks import COMPONENT_SPECS, check_props
-from varde.ui.blocks_render.charts import chart_props
-from varde.ui.blocks_render.diagrams import diagram_props
-from varde.ui.blocks_render.flow import flow_props
-from varde.ui.blocks_render.image import image_props
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.blocks_render.screen_flow import screen_flow_props
-from varde.ui.blocks_render.screens import ui_states_props, wireframe_props
-from varde.ui.blocks_render.sequence import sequence_props
-from varde.ui.blocks_render.state import state_props
-from varde.ui.components import component_bundle, mount_block
-from varde.ui.lines.parse import parse_lines
-from varde.ui.media import Media
 
-FIXTURES = Path(__file__).parent.parent / "ui" / "components" / "fixtures"
+FIXTURES = UI_FIXTURES
 PROPS = {
     "chart": chart_props,
     "diagram": diagram_props,

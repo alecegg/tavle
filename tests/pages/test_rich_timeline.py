@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from ui_paths import UI_STATIC_DIR
+
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 
@@ -56,9 +58,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
 
 
 def test_status_has_no_inline_start_border() -> None:
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/59-timeline.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/59-timeline.css").read_text()
     rules = [part.split("}", 1)[0] for part in css.split(".vd-timeline-body {")[1:]]
     assert rules
     assert all("border-inline-start" not in rule for rule in rules)

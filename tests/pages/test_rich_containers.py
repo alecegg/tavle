@@ -9,17 +9,18 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.components import host_props
+from ui_paths import UI_STATIC_DIR
 
 from varde.pages.assemble import assemble_page, assemble_static
 from varde.pages.page_check import check
 from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.components import host_props
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105
-SHARED_JS = Path(__file__).parents[2] / "src/varde/ui/static/components/shared.js"
+SHARED_JS = UI_STATIC_DIR / "components/shared.js"
 MAIN = re.compile(r'<main data-role="page">(.*)</main>', re.DOTALL)
 
 
@@ -468,9 +469,7 @@ def test_held_include_error_card_moves_into_its_slot(
 
 
 def test_only_the_neutral_column_separator_keeps_an_inline_start_border() -> None:
-    css = (
-        Path(__file__).parents[2] / "src/varde/ui/static/css/55-containers.css"
-    ).read_text()
+    css = (UI_STATIC_DIR / "css/55-containers.css").read_text()
     edged = [
         line.split("{")[0].strip()
         for line in css.splitlines()

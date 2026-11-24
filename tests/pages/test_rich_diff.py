@@ -9,15 +9,15 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-
-from varde.pages.page_check import PAGE_SPECS, check
-from varde.ui.blocks import check_props, type_text
-from varde.ui.blocks.diff_rows import (
+from tavle.blocks import check_props, type_text
+from tavle.blocks.diff_rows import (
     diff_rows,
     text_lines,
 )
 
-UI = Path(str(files("varde.ui")))
+from varde.pages.page_check import PAGE_SPECS, check
+
+UI = Path(str(files("tavle")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 BEFORE = "".join(f"line {i}\n" for i in range(1, 31))
 AFTER = BEFORE.replace("line 15\n", "line fifteen\n")

@@ -16,6 +16,8 @@ from varde.ui import UI_STATIC, css_files, join_css
 _SCRIPT_ORDER = (
     "app.js",
     "blocks.js",
+    "inputs_fields.js",
+    "inputs_widgets.js",
     "inputs_runtime.js",
     "recap.js",
     "inputs_ordered.js",
@@ -59,7 +61,7 @@ def static_scripts() -> tuple[str, ...]:
     return (*known, *(name for name in found if name not in known))
 
 
-BUNDLE_SCRIPT = "components.js"  # built by `varde.ui.components`, not a file
+BUNDLE_SCRIPT = "components.js"  # built by the UI bundle, not a file
 
 
 def page_scripts() -> tuple[str, ...]:

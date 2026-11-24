@@ -4,10 +4,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from tavle.blocks import check_props
+from tavle.blocks_render.registry import COMPONENTS
+from ui_paths import UI_STATIC_DIR
+
 from varde.pages.page_check import check
 from varde.pages.render import render_page
-from varde.ui.blocks import check_props
-from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 
@@ -73,7 +75,7 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
 
 
 def test_risk_styles_have_no_status_edge_border() -> None:
-    css = Path("src/varde/ui/static/css/61-risk.css").read_text()
+    css = (UI_STATIC_DIR / "css/61-risk.css").read_text()
     assert "border-inline-start" not in css
 
 

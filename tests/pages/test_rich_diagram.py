@@ -10,28 +10,28 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props, type_text
-from varde.ui.blocks.diagrams import DIAGRAM, MAX_EDGES, MAX_NODES
-from varde.ui.blocks_render.diagram_layout import (
+from tavle.blocks import check_props, type_text
+from tavle.blocks.diagrams import DIAGRAM, MAX_EDGES, MAX_NODES
+from tavle.blocks_render.diagram_layout import (
     Box,
     EdgeSpec,
     Layout,
     NodeSpec,
     layout_graph,
 )
-from varde.ui.blocks_render.diagrams import (
+from tavle.blocks_render.diagrams import (
     collapse,
     copy_text,
     diagram_states,
 )
-from varde.ui.blocks_render.diagrams import (
+from tavle.blocks_render.diagrams import (
     diagram_props as _diagram_props,
 )
-from varde.ui.blocks_render.registry import COMPONENTS
-from varde.ui.lines import parse_lines
+from tavle.blocks_render.registry import COMPONENTS
+from tavle.lines import parse_lines
+
+from varde.pages.page_check import PAGE_SPECS
+from varde.pages.serve import PageServer
 
 
 def diagram_props(data: dict[str, Any]) -> Any:

@@ -11,12 +11,12 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from tavle.blocks import check_props
+from tavle.blocks.tables import numeric
 
 from varde.pages.serve import PageServer
-from varde.ui.blocks import check_props
-from varde.ui.blocks.tables import numeric
 
-UI = Path(str(files("varde.ui")))
+UI = Path(str(files("tavle")))
 CSS = re.sub(
     r"/\*.*?\*/",
     "",

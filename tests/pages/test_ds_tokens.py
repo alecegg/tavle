@@ -7,9 +7,10 @@ from importlib.resources import files
 from pathlib import Path
 
 import pytest
+from ui_paths import UI_STATIC_DIR
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
-UI_CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/ui/static/css"
+UI_CSS_DIR = UI_STATIC_DIR / "css"
 CSS_FILES = sorted(
     [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
 )

@@ -1,6 +1,6 @@
 """A standalone export of component blocks has all code inline, no remote reference.
 
-The browser run of this export is `tests/ui/components/callout.test.js`.
+The browser run of this export is `tavle tests/components/callout.test.js`.
 """
 
 import base64
@@ -8,15 +8,15 @@ import json
 import re
 from pathlib import Path
 
+from tavle.blocks import COMPONENT_SPECS
+from tavle.components import export_page, mount_block
+from tavle.shell import make_read_only
 from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 
 from varde.pages.assemble import include_ctx
 from varde.pages.page_check import PAGE_SPECS
 from varde.pages.render import render_page
 from varde.pages.template import page_css
-from varde.ui.blocks import COMPONENT_SPECS
-from varde.ui.components import export_page, mount_block
-from varde.ui.shell import make_read_only
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
 CODE_DIFF_CASES = {
