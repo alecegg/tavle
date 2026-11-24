@@ -24,8 +24,12 @@ class PropertySpec:
     items: PropertyType | None = None
     fields: tuple[PropertySpec, ...] = ()
     answer_schema: AnswerSchema | None = None
+    # a blank string or an empty list faults; applies to this value, not list items
+    nonempty: bool = False
 
     def __post_init__(self) -> None:
+        if self.nonempty and self.type not in ("string", "list"):
+            raise ValueError("nonempty requires a string or a list")
         if self.items is not None and self.type != "list":
             raise ValueError("items requires a list")
         if self.fields and not (

@@ -203,6 +203,10 @@ def _property_faults(
     return faults
 
 
+def _is_empty(value: object) -> bool:
+    return value == [] or (isinstance(value, str) and not value.strip())
+
+
 def _value_faults(
     value: object, kind: PropertyType, path: str, prop: PropertySpec
 ) -> list[Fault]:
@@ -221,6 +225,8 @@ def _value_faults(
     if not valid[kind]():
         return [Fault("type", f"'{path}' must be {kind}")]
     faults: list[Fault] = []
+    if prop.nonempty and _is_empty(value):
+        return [Fault("type", f"'{path}' must not be empty")]
     if kind == "string" and prop.enum and value not in prop.enum:
         faults.append(Fault("type", f"'{path}' must be one of {', '.join(prop.enum)}"))
     if kind == "object" and isinstance(value, dict) and prop.fields:
