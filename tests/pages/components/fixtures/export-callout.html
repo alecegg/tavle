@@ -1592,6 +1592,11 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 .vd-checklist { --vd-check-edge: var(--vd-border); margin-block: var(--vd-density-gap); min-inline-size: 0; }
 .vd-checklist-title { margin: 0 0 var(--vd-space-2); font-weight: 650; overflow-wrap: anywhere; }
 .vd-checklist-progress { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-1) var(--vd-space-3); margin-block-end: var(--vd-space-2); }
+/* the unfinished part is the quiet line colour, the done part the success tone */
+.vd-checklist-bar { appearance: none; inline-size: min(100%, 16rem); block-size: 0.5rem; border: 0; border-radius: var(--vd-radius-full); background: var(--vd-line); overflow: hidden; }
+.vd-checklist-bar::-webkit-progress-bar { background: var(--vd-line); }
+.vd-checklist-bar::-webkit-progress-value { background: var(--vd-tone-success-edge); }
+.vd-checklist-bar::-moz-progress-bar { background: var(--vd-tone-success-edge); }
 .vd-checklist-bar { flex: 1 1 8rem; min-inline-size: 8rem; block-size: 0.75rem; accent-color: var(--vd-tone-success-edge); }
 .vd-checklist-count { margin: 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); white-space: nowrap; }
 .vd-checklist-list { margin: 0; padding: 0; list-style: none; min-inline-size: 0; }
@@ -1609,7 +1614,9 @@ td.vd-diff-empty { background: var(--vd-surface-sunk); }
 @media (forced-colors: active) {
   .vd-checklist-state { border-color: ButtonBorder; background: none; color: ButtonText; }
   .vd-checklist-item { border-block-end-color: CanvasText; outline: 1px solid CanvasText; }
-  .vd-checklist-bar { accent-color: Highlight; }
+  .vd-checklist-bar { border: 1px solid CanvasText; }
+  .vd-checklist-bar::-webkit-progress-value { background: Highlight; }
+  .vd-checklist-bar::-moz-progress-bar { background: Highlight; }
 }
 @media print {
   .vd-checklist, .vd-checklist-list, .vd-checklist-item, .vd-checklist-text { overflow: visible; }
