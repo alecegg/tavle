@@ -8,7 +8,7 @@ from varde.ui.blocks import COMPONENT_SPECS, check_props
 from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.ui.components import component_bundle
 
-COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"
+COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/ui/static/components"
 
 
 def test_component_registry_matches_the_specs() -> None:

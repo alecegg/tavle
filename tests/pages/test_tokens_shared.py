@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-TOKENS = files("varde.pages").joinpath("static", "css", "00-tokens.css")
+TOKENS = files("varde.ui").joinpath("static", "css", "00-tokens.css")
 CSS = Path(str(TOKENS)).read_text()
 
 

@@ -9,11 +9,9 @@ import html
 import json
 import re
 from collections.abc import Callable
-from importlib.resources import files
 
-from varde.ui.shell import HOST_ATTR, standalone_shell
+from varde.ui.shell import HOST_ATTR, UI_STATIC, standalone_shell
 
-_STATIC = files("varde.pages").joinpath("static")
 _EXPORT = re.compile(r"^export ", re.MULTILINE)
 _IMPORT = re.compile(r"^import\s", re.MULTILINE)
 _EXPORT_FORM = re.compile(r"^export (?!(function|const|class)\b)", re.MULTILINE)
@@ -109,7 +107,7 @@ def _module(source: str) -> str:
 
 def component_bundle() -> str:
     """Mithril, all components and the boot call as one classic script."""
-    components = _STATIC.joinpath("components")
+    components = UI_STATIC.joinpath("components")
     names = sorted(
         entry.name.removesuffix(".js")
         for entry in components.iterdir()
@@ -117,7 +115,7 @@ def component_bundle() -> str:
     )
     mount = components.joinpath("mount.js").read_text(encoding="utf-8")
     parts = [
-        _STATIC.joinpath("vendor", "mithril.js").read_text(encoding="utf-8"),
+        UI_STATIC.joinpath("vendor", "mithril.js").read_text(encoding="utf-8"),
         "(() => {\nconst components = {};",
         *(
             f"components[{json.dumps(name)}] = "
@@ -133,11 +131,14 @@ def component_bundle() -> str:
     return "\n".join(parts)
 
 
-def export_page(title: str, main: str) -> str:
-    """Self-contained page: stylesheet inline, and the bundle when a block needs it."""
+def export_page(title: str, main: str, css: str) -> str:
+    """Self-contained page: `css` inline, and the bundle when a block needs it.
+
+    A host passes `static_css()` or its own stylesheet merged with `css_files()`.
+    """
     if f"{HOST_ATTR}=" not in main:
-        return standalone_shell(title, main)
+        return standalone_shell(title, main, css)
     bundle = component_bundle()
     if "</script" in bundle.lower():
         raise ValueError("the component bundle must not contain a closing script tag")
-    return standalone_shell(title, f"{main}<script>{bundle}</script>")
+    return standalone_shell(title, f"{main}<script>{bundle}</script>", css)

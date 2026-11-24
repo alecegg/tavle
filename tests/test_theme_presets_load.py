@@ -23,7 +23,7 @@ def test_unknown_preset() -> None:
 
 
 def test_palette_matches_css() -> None:
-    css = files("varde.pages").joinpath("static/css/00-tokens.css").read_text()
+    css = files("varde.ui").joinpath("static/css/00-tokens.css").read_text()
     light, dark = css.split("@media (prefers-color-scheme: dark)", 1)
     layer = load_preset("varde")
     mapping = {

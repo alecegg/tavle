@@ -23,7 +23,7 @@ def test_shared_defaults_and_coverage() -> None:
         "page-width": 60,
     }
     result = derive_shape(tokens)
-    css = Path("src/varde/pages/static/css/00-tokens.css").read_text()
+    css = Path("src/varde/ui/static/css/00-tokens.css").read_text()
     for name, value in result.items():
         if name.startswith("--vd-font-"):
             continue

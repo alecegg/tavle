@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-PAGES = Path(__file__).resolve().parents[2] / "src/varde/pages"
-CSS = (PAGES / "static/css/23-decision.css").read_text()
+UI = Path(__file__).resolve().parents[2] / "src/varde/ui"
+CSS = (UI / "static/css/23-decision.css").read_text()
 
 
 def test_diff_scrolls_and_is_keyboard_reachable() -> None:

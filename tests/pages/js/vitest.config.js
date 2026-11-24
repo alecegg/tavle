@@ -3,7 +3,7 @@ import { defineConfig } from 'vitest/config';
 
 const componentTests = fileURLToPath(new URL('../components', import.meta.url));
 const jsdom = fileURLToPath(import.meta.resolve('jsdom'));
-const pagesStatic = fileURLToPath(new URL('../../../src/varde/pages/static', import.meta.url));
+const pagesStatic = fileURLToPath(new URL('../../../src/varde/ui/static', import.meta.url));
 
 export default defineConfig({
   test: {
