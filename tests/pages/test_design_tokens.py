@@ -158,6 +158,38 @@ def test_token_table_covers_the_design_language() -> None:
         assert query in css
 
 
+FLOW_TOKENS = ("--vd-flow-block", "--vd-flow-before-heading", "--vd-flow-after-heading")
+
+
+def _space_step(name: str) -> int:
+    """Index on the `--vd-space-N` scale that flow token `name` points at."""
+    tokens = _tokens("light")
+    match = re.fullmatch(r"var\(--vd-space-(\d+)\)", tokens[name].strip())
+    assert match, f"{name} must be a --vd-space-N step, got {tokens[name]!r}"
+    return int(match.group(1))
+
+
+def test_flow_tokens_use_the_space_scale() -> None:
+    for name in FLOW_TOKENS:
+        assert _space_step(name) >= 1
+
+
+def test_flow_leaves_more_room_before_a_heading_than_after_it() -> None:
+    assert _space_step("--vd-flow-before-heading") > _space_step(
+        "--vd-flow-after-heading"
+    )
+    assert _space_step("--vd-flow-before-heading") > _space_step("--vd-flow-block")
+
+
+def test_base_applies_the_flow_tokens_to_the_page_blocks() -> None:
+    base = (CSS_DIR / "01-base.css").read_text()
+    for name in FLOW_TOKENS:
+        assert f"margin-block-start: var({name})" in base
+    assert "main > .block + .block.heading" in base
+    assert "main > .block.heading + .block" in base
+    assert "main > .block > [data-mithril] > * { margin-block: 0; }" in base
+
+
 def test_part_files_exist_and_load_in_order() -> None:
     names = sorted(p.stem for p in CSS_DIR.glob("*.css"))
     assert names == list(PART_NAMES)
