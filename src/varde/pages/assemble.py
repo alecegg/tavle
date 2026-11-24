@@ -27,7 +27,8 @@ from varde.pages.render import (
     render_page,
     strip_comments,
 )
-from varde.pages.template import make_read_only, page_shell
+from varde.pages.shell import make_read_only
+from varde.pages.template import page_shell
 from varde.pages.theme.page import page_theme, require_theme
 from varde.ui.lines import parse_lines
 

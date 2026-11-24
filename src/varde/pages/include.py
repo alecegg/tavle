@@ -30,7 +30,7 @@ from varde.pages.select import (
     region,
     select_blocks,
 )
-from varde.pages.template import make_read_only
+from varde.pages.shell import make_read_only
 from varde.ui.lines import Statement
 
 MAX_SOURCE_BYTES = 1_000_000

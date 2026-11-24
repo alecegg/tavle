@@ -7,6 +7,8 @@ import re
 from functools import cache
 from importlib.resources import files
 
+from varde.pages.shell import static_css
+
 # Load order for the known scripts (`recap.js` hosts `window.varde` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other
 # `static/*.js` follows alphabetically.
@@ -16,13 +18,6 @@ _SCRIPT_ORDER = (
     "recap.js",
     "inputs_ordered.js",
 )
-HOST_ATTR = "data-mithril"  # marks a client-side block host (see `components`)
-_INPUT_TAGS = tuple(
-    (f"<{tag} ", f"<{tag} disabled ")
-    for tag in ("button", "textarea", "input", "select")
-)
-
-
 _MODULE_SYNTAX = re.compile(r"^(import|export)\s", re.MULTILINE)
 
 
@@ -52,34 +47,6 @@ def page_scripts() -> tuple[str, ...]:
     are not ES modules (those are imported, not tagged)."""
     classic = (name for name in static_scripts() if not _is_es_module(name))
     return (BUNDLE_SCRIPT, *classic)
-
-
-TOKENS_CSS = (  # mollify: ignore[hardcoded-secret] a CSS file name, not a credential
-    "00-tokens.css"  # the design tokens; a host page that owns its own skips it
-)
-
-
-def static_css(skip: tuple[str, ...] = ()) -> str:
-    """Page stylesheet: `static/css/*.css` concatenated in name order, minus `skip`."""
-    parts = sorted(
-        (
-            entry
-            for entry in files("varde.pages").joinpath("static", "css").iterdir()
-            if entry.name.endswith(".css") and entry.name not in skip
-        ),
-        key=lambda entry: entry.name,
-    )
-    return "\n".join(entry.read_text(encoding="utf-8") for entry in parts)
-
-
-def make_read_only(body: str) -> str:
-    """Disable input widgets. Agent text is escaped, so these tags are host-made.
-
-    A client-side block host is marked `data-readonly`; mounting disables its controls.
-    """
-    for tag, disabled in _INPUT_TAGS:
-        body = body.replace(tag, disabled)
-    return body.replace(f"<div {HOST_ATTR}=", f"<div data-readonly {HOST_ATTR}=")
 
 
 def _served_head(token: str | None, title_tag: str) -> str:

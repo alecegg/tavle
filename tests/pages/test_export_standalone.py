@@ -15,7 +15,7 @@ from varde.pages.blocks import COMPONENT_SPECS
 from varde.pages.components import export_page, mount_block
 from varde.pages.page_check import PAGE_SPECS
 from varde.pages.render import render_page
-from varde.pages.template import make_read_only
+from varde.pages.shell import make_read_only
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
 CODE_DIFF_CASES = {

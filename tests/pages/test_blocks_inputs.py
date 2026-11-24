@@ -26,7 +26,7 @@ from varde.pages.components import component_bundle
 from varde.pages.page_check import check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
-from varde.pages.template import make_read_only
+from varde.pages.shell import make_read_only
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")

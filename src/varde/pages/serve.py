@@ -51,13 +51,9 @@ from varde.pages.server_parts import (
     watch_files,
     write_event_stream,
 )
+from varde.pages.shell import TOKENS_CSS, static_css
 from varde.pages.store import EDIT_OFF, sources_for, store_comment
-from varde.pages.template import (
-    BUNDLE_SCRIPT,
-    TOKENS_CSS,
-    static_css,
-    static_scripts,
-)
+from varde.pages.template import BUNDLE_SCRIPT, static_scripts
 from varde.pages.theme.css import theme_css
 from varde.pages.theme.page import doc_theme
 from varde.pages.theme.tokens import ThemeError
