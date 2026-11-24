@@ -89,6 +89,7 @@
   --vd-measure: 72ch;
   --vd-leading-body: 1.55;
   --vd-leading-heading: 1.25;
+  --vd-title-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
   --vd-heading-1: clamp(1.375rem, 1.1rem + 1.2vw, 1.5rem);
   --vd-heading-2: clamp(1.25rem, 1.05rem + 0.9vw, 1.375rem);
   --vd-heading-3: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
