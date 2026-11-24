@@ -273,18 +273,14 @@ def resolve_includes(text: str, root: Path) -> dict[str, IncludedPart]:
 
 
 def include_errors(text: str, root: Path | None = None) -> list[tuple[int, str, str]]:
-    """`(line, rule, message)` for the page's includes.
+    """`(line, rule, message)` for includes that do not resolve under `root`.
 
-    Without `root` only statements are checked; with it each source and
-    selector must resolve, and an include inside an included part is reported.
+    The page check reports faults in the statements themselves, so a page
+    with such a fault (or no `root`) gets nothing here.
     """
-    errors = [
-        (line, fault.rule, fault.message)
-        for line, statement in _include_statements(text)
-        for fault in check_props("include", statement.props, line)
-    ]
-    if errors or root is None:
-        return errors
+    statements = _include_statements(text)
+    if root is None or any(check_props("include", s.props, n) for n, s in statements):
+        return []
     try:
         parts = resolve_includes(text, root)
     except IncludeError as error:
