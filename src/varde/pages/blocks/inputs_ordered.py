@@ -7,18 +7,22 @@ renderers and answer schemas live in `blocks_render.inputs_ordered`. Pure functi
 import math
 
 from varde.pages.blocks.inputs import (
+    LABEL,
     MAX_LABEL,
     MAX_OPTIONS,
     MAX_VALUE_JSON,
+    QUESTION,
     allowed_value,
     finite,
     option_faults,
     option_label_value,
+    option_list,
     text_fault,
 )
-from varde.pages.blocks.rules import Fault, check_keys, duplicates, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, duplicates, is_number
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
+BOUND_KEYS = frozenset({"min", "max", "step"})
 MIN_ITEMS = 2
 MAX_STEPS = 10000  # positions a slider can take; keeps the control usable
 STEP_TOLERANCE = 1e-9  # in steps; absorbs float error such as 0.1 * 3
@@ -27,9 +31,9 @@ ULPS = 2  # float spacing allowed on top, so a huge min with a small step works
 
 def _items_faults(data: dict[str, object]) -> list[Fault]:
     items = data.get("items")
-    if "items" not in data:
-        return []
-    if not isinstance(items, list) or not MIN_ITEMS <= len(items) <= MAX_OPTIONS:
+    if not isinstance(items, list) or not items:
+        return []  # the metadata reports a missing, mistyped or empty list
+    if not MIN_ITEMS <= len(items) <= MAX_OPTIONS:
         message = f"ranking.items must be a list of {MIN_ITEMS}-{MAX_OPTIONS}"
         return [Fault("type", message)]
     faults: list[Fault] = []
@@ -55,8 +59,7 @@ def _items_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_ranking(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"question", "items"}, set(), "ranking")
-    return faults + str_field(data, "question", "ranking") + _items_faults(data)
+    return _items_faults(data)
 
 
 def slider_bounds(data: dict[str, object]) -> tuple[float, float, float]:
@@ -65,12 +68,18 @@ def slider_bounds(data: dict[str, object]) -> tuple[float, float, float]:
 
 
 def _bound_faults(data: dict[str, object]) -> list[Fault]:
+    numbers = {k: data[k] for k in BOUND_KEYS if is_number(data.get(k))}
     faults = [
         Fault("type", f"slider.{key} must be a finite number")
-        for key in ("min", "max", "step")
-        if key in data and not finite(data[key])
+        for key, value in numbers.items()
+        if not finite(value)
     ]
-    if faults or not {"min", "max"} <= data.keys():
+    # a wrong type or a missing key is the metadata's to report, once
+    if (
+        faults
+        or len(numbers) < len(BOUND_KEYS & data.keys())
+        or not {"min", "max"} <= numbers.keys()
+    ):
         return faults
     low, high, step = slider_bounds(data)
     if low >= high:
@@ -84,21 +93,20 @@ def _bound_faults(data: dict[str, object]) -> list[Fault]:
 
 def _labels_faults(data: dict[str, object]) -> list[Fault]:
     labels = data.get("labels")
-    if "labels" not in data:
-        return []
-    if not isinstance(labels, list) or len(labels) != 2:
+    if not isinstance(labels, list):
+        return []  # the metadata reports a mistyped list
+    if len(labels) != 2:
         return [Fault("type", "slider.labels must be two texts: low end, high end")]
     return [
         fault
         for label in labels
+        if isinstance(label, str)
         for fault in text_fault(label, "slider.labels", MAX_LABEL)
     ]
 
 
 def validate_slider(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"label", "min", "max"}, {"step", "labels"}, "slider")
-    faults += str_field(data, "label", "slider")
-    return faults + _bound_faults(data) + _labels_faults(data)
+    return _bound_faults(data) + _labels_faults(data)
 
 
 def ranking_value(value: object, allowed: tuple[str, ...]) -> bool:
@@ -138,6 +146,7 @@ RANKING = BlockSpec(
 """,
     validate_ranking,
     block_type="widget",
+    properties=(QUESTION, option_list("items")),
 )
 
 SLIDER = BlockSpec(
@@ -160,4 +169,11 @@ SLIDER = BlockSpec(
 """,
     validate_slider,
     block_type="widget",
+    properties=(
+        LABEL,
+        PropertySpec("min", "number", required=True),
+        PropertySpec("max", "number", required=True),
+        PropertySpec("step", "number"),
+        PropertySpec("labels", "list", items="string"),
+    ),
 )

@@ -7,14 +7,8 @@ renderers and answer schemas live in `blocks_render.inputs`. Pure functions.
 import math
 import re
 
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    is_number,
-    str_field,
-)
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, check_keys, duplicates, is_number
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 from varde.pages.validation import CONTROLS, MAX_ITEM
 
 MAX_OPTIONS = 50
@@ -31,6 +25,17 @@ _TYPE_KEYS = {
     "select": {"options"},
     "checkbox": set(),
 }
+ALL_TYPE_KEYS = set().union(*_TYPE_KEYS.values())
+
+# Properties shared by the input widgets: `inputs_ordered` reuses them.
+QUESTION = PropertySpec("question", "string", required=True, nonempty=True)
+LABEL = PropertySpec("label", "string", required=True, nonempty=True)
+SUBMIT = PropertySpec("submit", "string", nonempty=True)
+
+
+def option_list(name: str) -> PropertySpec:
+    """Options are a string or a table (so `any`); limits are checked in code."""
+    return PropertySpec(name, "list", required=True, items="any", nonempty=True)
 
 
 MAX_LIST = 100
@@ -65,15 +70,25 @@ def finite(value: object) -> bool:
         return False
 
 
-def text_fault(value: object, where: str, limit: int) -> list[Fault]:
-    """A fault unless `value` is a non-empty string within `limit`, no controls."""
+def limit_fault(value: object, where: str, limit: int) -> list[Fault]:
+    """A fault for a non-blank string over `limit` or holding controls.
+
+    Other values are left to the property metadata, which reports them once.
+    """
     if not isinstance(value, str) or not value.strip():
-        return [Fault("type", f"{where} must be a non-empty string")]
+        return []
     if len(value) > limit or CONTROLS.search(value):
         return [
             Fault("type", f"{where} must be at most {limit} characters, no controls")
         ]
     return []
+
+
+def text_fault(value: object, where: str, limit: int) -> list[Fault]:
+    """A fault unless `value` is a non-empty string within `limit`, no controls."""
+    if not isinstance(value, str) or not value.strip():
+        return [Fault("type", f"{where} must be a non-empty string")]
+    return limit_fault(value, where, limit)
 
 
 def option_label_value(option: object) -> tuple[str, str]:
@@ -85,6 +100,7 @@ def option_label_value(option: object) -> tuple[str, str]:
 
 
 def option_faults(option: object, where: str) -> list[Fault]:
+    """Faults of one option, which takes two shapes (so the metadata says `any`)."""
     if isinstance(option, str):
         return text_fault(option, where, MAX_VALUE)
     if not isinstance(option, dict):
@@ -101,9 +117,9 @@ def option_faults(option: object, where: str) -> list[Fault]:
 
 def _options_faults(data: dict[str, object]) -> list[Fault]:
     options = data.get("options")
-    if "options" not in data:
-        return []
-    if not isinstance(options, list) or not 0 < len(options) <= MAX_OPTIONS:
+    if not isinstance(options, list) or not options:
+        return []  # the metadata reports a missing, mistyped or empty list
+    if len(options) > MAX_OPTIONS:
         return [Fault("type", f"choice.options must be a list of 1-{MAX_OPTIONS}")]
     faults: list[Fault] = []
     for index, option in enumerate(options, start=1):
@@ -127,83 +143,86 @@ def _option_set_faults(options: list[object]) -> list[Fault]:
     return faults
 
 
-def _flag_faults(
-    data: dict[str, object], keys: tuple[str, ...], where: str
-) -> list[Fault]:
-    return [
-        Fault("type", f"{where}.{key} must be true or false")
-        for key in keys
-        if key in data and not isinstance(data[key], bool)
-    ]
-
-
 def validate_choice(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(
-        data, {"question", "options"}, {"multiple", "comment"}, "choice"
-    )
-    faults += str_field(data, "question", "choice")
-    faults += _flag_faults(data, ("multiple", "comment"), "choice")
-    return faults + _options_faults(data)
+    return _options_faults(data)
 
 
-def validate_comment(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"label"}, {"submit"}, "comment")
-    return (
-        faults
-        + str_field(data, "label", "comment")
-        + str_field(data, "submit", "comment")
-    )
+def no_faults(data: dict[str, object]) -> list[Fault]:
+    """For a widget whose properties say everything its props must satisfy."""
+    return []
 
 
-def _limit_fault(value: object, where: str, low: int, high: int) -> list[Fault]:
-    ok = isinstance(value, int) and not isinstance(value, bool) and low <= value <= high
-    return [] if ok else [Fault("type", f"{where} must be a whole number {low}-{high}")]
+def _maxlength(field: dict[str, object]) -> int | None:
+    """The field's maxlength when it is a whole number, else None."""
+    value = field.get("maxlength")
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def _maxlength_faults(field: dict[str, object], where: str) -> list[Fault]:
+    value = _maxlength(field)  # a wrong type is the metadata's to report
+    if value is None or 1 <= value <= MAX_VALUE:
+        return []
+    return [Fault("type", f"{where}.maxlength must be a whole number 1-{MAX_VALUE}")]
 
 
 def _bound_faults(field: dict[str, object], where: str) -> list[Fault]:
-    faults: list[Fault] = []
-    for key in ("min", "max"):
-        value = field.get(key)
-        if key in field and not finite(value):
-            faults.append(Fault("type", f"{where}.{key} must be a finite number"))
-    low, high = field.get("min"), field.get("max")
-    if is_number(low) and is_number(high) and low > high:  # type: ignore[operator]
+    bounds = {k: field[k] for k in ("min", "max") if is_number(field.get(k))}
+    faults = [
+        Fault("type", f"{where}.{key} must be a finite number")
+        for key, value in bounds.items()
+        if not finite(value)
+    ]
+    if faults or len(bounds) < len(("min", "max")):
+        return faults
+    if bounds["min"] > bounds["max"]:  # type: ignore[operator]
         faults.append(Fault("range", f"{where}: min is above max"))
     return faults
 
 
 def _select_faults(field: dict[str, object], where: str) -> list[Fault]:
-    options = field.get("options")
     if "options" not in field:
         return [Fault("missing-key", f"{where}: select needs 'options'")]
-    if not isinstance(options, list) or not 0 < len(options) <= MAX_OPTIONS:
+    options = field["options"]
+    if not isinstance(options, list) or not options:
+        return []  # the metadata reports a mistyped or empty list
+    if len(options) > MAX_OPTIONS:
         return [Fault("type", f"{where}.options must be a list of 1-{MAX_OPTIONS}")]
-    faults: list[Fault] = []
-    for option in options:
-        faults += text_fault(option, f"{where}.options", MAX_VALUE)
     names = [o for o in options if isinstance(o, str)]
+    faults: list[Fault] = []
+    for name in names:
+        faults += text_fault(name, f"{where}.options", MAX_VALUE)
     return faults + [
         Fault("option-duplicate", f"{where}.options: '{o}' is listed twice")
         for o in duplicates(names)
     ]
 
 
+def _misplaced_key_faults(
+    field: dict[str, object], kind: str, where: str
+) -> list[Fault]:
+    """Keys the metadata allows on some field type but not on this one."""
+    misplaced = (ALL_TYPE_KEYS & field.keys()) - _TYPE_KEYS[kind]
+    return [
+        Fault("unknown-key", f"{where}: unknown key '{k}'") for k in sorted(misplaced)
+    ]
+
+
+def _name_faults(name: object, where: str) -> list[Fault]:
+    if not isinstance(name, str) or not name.strip() or FIELD_NAME.match(name):
+        return []  # a wrong type or blank name is the metadata's to report
+    return [Fault("type", f"{where}.name must match {FIELD_NAME.pattern}")]
+
+
 def _field_faults(field: object, index: int) -> list[Fault]:
     where = f"form.fields[{index}]"
-    if not isinstance(field, dict):
-        return [Fault("type", f"{where} must be a table")]
-    kind = field.get("type")
-    if kind not in FIELD_TYPES:
-        return [Fault("type", f"{where}.type must be one of {', '.join(FIELD_TYPES)}")]
-    optional = {"required", *_TYPE_KEYS[kind]}
-    faults = check_keys(field, {"name", "label", "type"}, optional, where)
-    faults += text_fault(field.get("label"), f"{where}.label", MAX_LABEL)
-    name = field.get("name")
-    if not (isinstance(name, str) and FIELD_NAME.match(name)):
-        faults.append(Fault("type", f"{where}.name must match {FIELD_NAME.pattern}"))
-    faults += _flag_faults(field, ("required",), where)
-    if kind == "text" and "maxlength" in field:
-        faults += _limit_fault(field["maxlength"], f"{where}.maxlength", 1, MAX_VALUE)
+    kind = field.get("type") if isinstance(field, dict) else None
+    if not isinstance(field, dict) or kind not in FIELD_TYPES:
+        return []  # the metadata reports a non-table or an unknown type
+    faults = _misplaced_key_faults(field, kind, where)
+    faults += limit_fault(field.get("label"), f"{where}.label", MAX_LABEL)
+    faults += _name_faults(field.get("name"), where)
+    if kind == "text":
+        faults += _maxlength_faults(field, where)
     if kind == "number":
         faults += _bound_faults(field, where)
     if kind == "select":
@@ -215,7 +234,7 @@ def _field_json_bound(field: dict[str, object]) -> int:
     """Most JSON characters one field's value can take: quotes, escapes, key."""
     kind = field.get("type")
     if kind == "text":
-        longest = int(field.get("maxlength", MAX_VALUE))  # type: ignore[call-overload]
+        longest = _maxlength(field) or MAX_VALUE
     elif kind == "select":
         options = field.get("options")
         names = options if isinstance(options, list) else []
@@ -242,7 +261,9 @@ def _size_faults(fields: list[object]) -> list[Fault]:
 
 
 def _fields_faults(fields: object) -> list[Fault]:
-    if not isinstance(fields, list) or not 0 < len(fields) <= MAX_FIELDS:
+    if not isinstance(fields, list) or not fields:
+        return []  # the metadata reports a missing, mistyped or empty list
+    if len(fields) > MAX_FIELDS:
         return [Fault("type", f"form.fields must be a list of 1-{MAX_FIELDS}")]
     faults: list[Fault] = []
     for index, field in enumerate(fields, start=1):
@@ -256,11 +277,7 @@ def _fields_faults(fields: object) -> list[Fault]:
 
 
 def validate_form(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"fields"}, {"title", "submit"}, "form")
-    faults += str_field(data, "title", "form") + str_field(data, "submit", "form")
-    if "fields" not in data:
-        return faults
-    return faults + _fields_faults(data.get("fields"))
+    return _fields_faults(data.get("fields"))
 
 
 def _text_value(field: dict[str, object], value: object) -> None:
@@ -343,6 +360,12 @@ CHOICE = BlockSpec(
 """,
     validate_choice,
     block_type="widget",
+    properties=(
+        QUESTION,
+        option_list("options"),
+        PropertySpec("multiple", "boolean"),
+        PropertySpec("comment", "boolean"),
+    ),
 )
 
 FORM = BlockSpec(
@@ -371,6 +394,27 @@ FORM = BlockSpec(
 """,
     validate_form,
     block_type="widget",
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        SUBMIT,
+        PropertySpec(
+            "fields",
+            "list",
+            required=True,
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("name", "string", required=True, nonempty=True),
+                LABEL,
+                PropertySpec("type", "string", required=True, enum=FIELD_TYPES),
+                PropertySpec("required", "boolean"),
+                PropertySpec("maxlength", "integer"),
+                PropertySpec("min", "number"),
+                PropertySpec("max", "number"),
+                PropertySpec("options", "list", items="string", nonempty=True),
+            ),
+        ),
+    ),
 )
 
 COMMENT = BlockSpec(
@@ -385,6 +429,7 @@ COMMENT = BlockSpec(
   submit: "Send",
 )
 """,
-    validate_comment,
+    no_faults,
     block_type="widget",
+    properties=(LABEL, SUBMIT),
 )
