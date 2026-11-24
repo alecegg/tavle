@@ -15,11 +15,9 @@ from varde.pages.blocks.decision import DECISION
 from varde.pages.blocks.deps import DEPS
 from varde.pages.blocks.diagrams import DIAGRAM
 from varde.pages.blocks.diff import DIFF
-from varde.pages.blocks.fences import find_fences, ui_results
 from varde.pages.blocks.file_tree import FILE_TREE
 from varde.pages.blocks.flow import FLOW
 from varde.pages.blocks.image import IMAGE
-from varde.pages.blocks.include import INCLUDE
 from varde.pages.blocks.inputs import CHOICE, COMMENT, FORM
 from varde.pages.blocks.inputs_ordered import RANKING, SLIDER
 from varde.pages.blocks.option_matrix import MATRIX
@@ -40,6 +38,8 @@ from varde.pages.blocks.state import STATE
 from varde.pages.blocks.stats import STATS
 from varde.pages.blocks.tables import TABLE
 from varde.pages.blocks.timeline import TIMELINE
+from varde.pages.fences import find_fences, ui_results
+from varde.pages.include_statement import INCLUDE
 from varde.ui.lines.parse import ID_RULE
 
 SPECS: dict[str, BlockSpec] = {
