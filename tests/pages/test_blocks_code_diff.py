@@ -345,7 +345,7 @@ def test_metadata_rejects_shape_errors(
     elif field == "path":
         cases.append(({**valid, "entries": [{"path": 3}]}, "path"))
         cases.append(({**valid, "entries": [{}]}, "path"))
-        cases.append(({**valid, "entries": [{"path": "a", "x": 1}]}, "entries[0].x"))
+        cases.append(({**valid, "entries": [{"path": "a", "x": 1}]}, "entries[1].x"))
     else:
         cases.append(({**valid, "entries": [{"path": "a", "change": "moved"}]}, field))
         cases.append(({**valid, "entries": [{"path": "a", "change": 3}]}, field))
@@ -503,7 +503,7 @@ _ENTRY = {"path": "a.py"}
                 "source": "x",
                 "notes": [{"lines": 1, "note": " "}],
             },
-            "notes[0].note",
+            "notes[1].note",
         ),
         (
             "annotated-code",
@@ -513,7 +513,7 @@ _ENTRY = {"path": "a.py"}
                 "source": "x",
                 "notes": [{"lines": 1, "note": "n", "label": ""}],
             },
-            "notes[0].label",
+            "notes[1].label",
         ),
         ("diff", {"before": "a", "after": "b", "filename": ""}, "filename"),
         (
@@ -523,16 +523,16 @@ _ENTRY = {"path": "a.py"}
                 "after": "b",
                 "notes": [{"side": "after", "lines": 1, "note": ""}],
             },
-            "notes[0].note",
+            "notes[1].note",
         ),
         ("file-tree", {"entries": []}, "entries"),
         ("file-tree", {"entries": [_ENTRY], "title": ""}, "title"),
-        ("file-tree", {"entries": [{"path": ""}]}, "entries[0].path"),
-        ("file-tree", {"entries": [{**_ENTRY, "note": " "}]}, "entries[0].note"),
+        ("file-tree", {"entries": [{"path": ""}]}, "entries[1].path"),
+        ("file-tree", {"entries": [{**_ENTRY, "note": " "}]}, "entries[1].note"),
         (
             "file-tree",
             {"entries": [{**_ENTRY, "change": "modified", "was": ""}]},
-            "entries[0].was",
+            "entries[1].was",
         ),
     ],
 )

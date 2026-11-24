@@ -227,25 +227,25 @@ def screen_without(key: str) -> dict[str, Any]:
         ({"desc": ""}, "'desc' must not be empty"),
         ({"screens": "a"}, "'screens' must be list"),
         ({"screens": []}, "'screens' must not be empty"),
-        ({"screens": ["a"]}, "'screens[0]' must be object"),
-        ({"screens": [screen_without("id")]}, "missing required key 'screens[0].id'"),
+        ({"screens": ["a"]}, "'screens[1]' must be object"),
+        ({"screens": [screen_without("id")]}, "missing required key 'screens[1].id'"),
         (
             {"screens": [screen_without("grid")]},
-            "missing required key 'screens[0].grid'",
+            "missing required key 'screens[1].grid'",
         ),
         (
             {"screens": [screen("a", surface="watch")]},
-            "'screens[0].surface' must be one of browser, phone, tablet",
+            "'screens[1].surface' must be one of browser, phone, tablet",
         ),
-        ({"screens": [{**screen("a"), "x": 1}]}, "unknown key 'screens[0].x'"),
-        ({"screens": [{**screen("a"), "id": 3}]}, "'screens[0].id' must be string"),
+        ({"screens": [{**screen("a"), "x": 1}]}, "unknown key 'screens[1].x'"),
+        ({"screens": [{**screen("a"), "id": 3}]}, "'screens[1].id' must be string"),
         (
             {"screens": [{**screen("a"), "title": " "}]},
-            "'screens[0].title' must not be empty",
+            "'screens[1].title' must not be empty",
         ),
         (
             {"screens": [{**screen("a"), "grid": []}]},
-            "'screens[0].grid' must not be empty",
+            "'screens[1].grid' must not be empty",
         ),
         (
             {"screens": [{**screen("a"), "regions": {}}]},
@@ -257,15 +257,15 @@ def screen_without(key: str) -> dict[str, Any]:
         ),
         (
             {"screens": [{**screen("a"), "notes": [{"region": "H"}]}]},
-            "missing required key 'screens[0].notes[0].text'",
+            "missing required key 'screens[1].notes[1].text'",
         ),
         ({"steps": {}}, "'steps' must be list"),
-        ({"steps": ["a"]}, "'steps[0]' must be object"),
-        ({"steps": [{"from": "a"}]}, "missing required key 'steps[0].to'"),
-        ({"steps": [{"from": 3, "to": "b"}]}, "'steps[0].from' must be string"),
+        ({"steps": ["a"]}, "'steps[1]' must be object"),
+        ({"steps": [{"from": "a"}]}, "missing required key 'steps[1].to'"),
+        ({"steps": [{"from": 3, "to": "b"}]}, "'steps[1].from' must be string"),
         (
             {"steps": [{"from": "a", "to": "b", "x": 1}, {"from": "b", "to": "c"}]},
-            "unknown key 'steps[0].x'",
+            "unknown key 'steps[1].x'",
         ),
         (
             {
@@ -274,26 +274,26 @@ def screen_without(key: str) -> dict[str, Any]:
                     {"from": "b", "to": "c"},
                 ]
             },
-            "'steps[0].label' must not be empty",
+            "'steps[1].label' must not be empty",
         ),
         ({"lanes": []}, "'lanes' must not be empty"),
-        ({"lanes": ["a"]}, "'lanes[0]' must be object"),
+        ({"lanes": ["a"]}, "'lanes[1]' must be object"),
         (
             {"lanes": [{"screens": ["a", "b", "c"]}]},
-            "missing required key 'lanes[0].title'",
+            "missing required key 'lanes[1].title'",
         ),
-        ({"lanes": [{"title": "T"}]}, "missing required key 'lanes[0].screens'"),
+        ({"lanes": [{"title": "T"}]}, "missing required key 'lanes[1].screens'"),
         (
             {"lanes": [{"title": " ", "screens": ["a", "b", "c"]}]},
-            "'lanes[0].title' must not be empty",
+            "'lanes[1].title' must not be empty",
         ),
         (
             {"lanes": [{"title": "T", "screens": ["a", "b", 3]}]},
-            "'lanes[0].screens[2]' must be string",
+            "'lanes[1].screens[3]' must be string",
         ),
         (
             {"lanes": [{"title": "T", "screens": []}]},
-            "'lanes[0].screens' must not be empty",
+            "'lanes[1].screens' must not be empty",
         ),
     ],
 )

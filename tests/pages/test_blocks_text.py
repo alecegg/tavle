@@ -131,9 +131,9 @@ def test_recap_metadata_rejects_shape_errors() -> None:
         ({**valid, "unexpected": 1}, "unexpected"),
         ({}, "rows"),
         ({"rows": 42}, "rows"),
-        ({"rows": [{**RECAP_ROW, "unexpected": 1}]}, "rows[0].unexpected"),
-        ({"rows": [{"file": "a.py", "status": "M"}]}, "rows[0].hunk"),
-        ({"rows": [{**RECAP_ROW, "file": 3}]}, "rows[0].file"),
+        ({"rows": [{**RECAP_ROW, "unexpected": 1}]}, "rows[1].unexpected"),
+        ({"rows": [{"file": "a.py", "status": "M"}]}, "rows[1].hunk"),
+        ({"rows": [{**RECAP_ROW, "file": 3}]}, "rows[1].file"),
     ]:
         errors = check_props("recap", props, 1)
         assert len(errors) == 1

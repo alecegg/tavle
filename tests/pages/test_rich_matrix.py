@@ -92,11 +92,11 @@ def test_fixture_family_exists(name: str) -> None:
         ({"options": []}, "'options' must not be empty"),
         (
             {"options": [{"id": "a"}, {"id": "b", "label": "B"}]},
-            "missing required key 'options[0].label'",
+            "missing required key 'options[1].label'",
         ),
         (
             {"criteria": [{"id": "x", "label": ""}, {"id": "y", "label": "S"}]},
-            "'criteria[0].label' must not be empty",
+            "'criteria[1].label' must not be empty",
         ),
         ({"recommended": ""}, "'recommended' must not be empty"),
     ],

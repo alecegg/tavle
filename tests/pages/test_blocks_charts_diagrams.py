@@ -143,8 +143,8 @@ def test_chart_example_passes_and_a_shape_mistake_gets_one_fault() -> None:
         ({**_CHART, "decimals": "2"}, "decimals"),
         ({**_CHART, "decimals": 9}, "decimals"),
         ({**_CHART, "kind": "pie"}, "kind"),
-        ({**_CHART, "series": [{"name": "s", "values": [1, "x"]}]}, "values[1]"),
-        ({**_CHART, "series": [{"values": [1, 2]}]}, "series[0].name"),
+        ({**_CHART, "series": [{"name": "s", "values": [1, "x"]}]}, "values[2]"),
+        ({**_CHART, "series": [{"values": [1, 2]}]}, "series[1].name"),
         (
             {
                 **_CHART,
@@ -163,14 +163,14 @@ def test_chart_example_passes_and_a_shape_mistake_gets_one_fault() -> None:
 def test_chart_note_metadata_and_rules_check_a_note_once() -> None:
     assert check_props("chart", {**_CHART, "notes": [_CHART_NOTE]}, 1) == []
     cases: list[tuple[list[object], str]] = [
-        ([{**_CHART_NOTE, "unexpected": 1}], "notes[0].unexpected"),
-        ([{"x": "a"}], "notes[0].label"),
-        ([{**_CHART_NOTE, "label": 3}], "notes[0].label"),
-        ([{**_CHART_NOTE, "tone": "loud"}], "notes[0].tone"),
+        ([{**_CHART_NOTE, "unexpected": 1}], "notes[1].unexpected"),
+        ([{"x": "a"}], "notes[1].label"),
+        ([{**_CHART_NOTE, "label": 3}], "notes[1].label"),
+        ([{**_CHART_NOTE, "tone": "loud"}], "notes[1].tone"),
         ([{"label": "n", "from": "a"}], "notes[1]: missing required key 'to'"),
         ([{**_CHART_NOTE, "x": "nope"}], "notes[1].x"),
         ([], "'notes' must not be empty"),
-        (["x"], "notes[0]"),
+        (["x"], "notes[1]"),
     ]
     for notes, field in cases:
         errors = check_props("chart", {**_CHART, "notes": notes}, 1)
@@ -210,24 +210,24 @@ _FAMILY_FAULTS: list[tuple[str, dict[str, object], str]] = [
     (
         "diagram",
         {**_DIAGRAM, "nodes": [{"id": "a", "label": "A", "size": 1}]},
-        "unknown key 'nodes[0].size'",
+        "unknown key 'nodes[1].size'",
     ),
     (
         "diagram",
         {**_DIAGRAM, "edges": [{"from": "a"}]},
-        "missing required key 'edges[0].to'",
+        "missing required key 'edges[1].to'",
     ),
     (
         "diagram",
         {**_DIAGRAM, "edges": [{"from": "a", "to": 2}]},
-        "'edges[0].to' must be string",
+        "'edges[1].to' must be string",
     ),
     ("diagram", {**_DIAGRAM, "nodes": []}, "'nodes' must not be empty"),
     ("flow", {**_FLOW, "extra": 1}, "unknown key 'extra'"),
     ("flow", {"title": "t"}, "missing required key 'step'"),
     ("flow", {"step": "a"}, "'step' must be list"),
-    ("flow", {"step": [{"id": "a"}]}, "missing required key 'step[0].text'"),
-    ("flow", {"step": [{"id": "a", "text": "A", "next": "b"}]}, "'step[0].next'"),
+    ("flow", {"step": [{"id": "a"}]}, "missing required key 'step[1].text'"),
+    ("flow", {"step": [{"id": "a", "text": "A", "next": "b"}]}, "'step[1].next'"),
     ("flow", {"step": []}, "'step' must not be empty"),
     ("state", {**_STATE, "extra": 1}, "unknown key 'extra'"),
     ("state", {"states": _STATE["states"]}, "missing required key 'desc'"),
@@ -238,12 +238,12 @@ _FAMILY_FAULTS: list[tuple[str, dict[str, object], str]] = [
             **_STATE,
             "states": [*_STATE["states"], {"id": "b", "label": "B", "kind": "loud"}],
         },
-        "'states[1].kind' must be one of",
+        "'states[2].kind' must be one of",
     ),
     (
         "state",
         {**_STATE, "transitions": [{"from": "a"}]},
-        "missing required key 'transitions[0].to'",
+        "missing required key 'transitions[1].to'",
     ),
     ("state", {**_STATE, "states": []}, "'states' must not be empty"),
     ("sequence", {**_SEQUENCE, "extra": 1}, "unknown key 'extra'"),
@@ -256,12 +256,12 @@ _FAMILY_FAULTS: list[tuple[str, dict[str, object], str]] = [
     (
         "sequence",
         {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": "t", "kind": "x"}]},
-        "'steps[0].kind' must be one of",
+        "'steps[1].kind' must be one of",
     ),
     (
         "sequence",
         {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": 1}]},
-        "'steps[0].text' must be string",
+        "'steps[1].text' must be string",
     ),
     ("sequence", {**_SEQUENCE, "steps": []}, "'steps' must not be empty"),
 ]
@@ -283,38 +283,38 @@ _EMPTY_VALUES: list[tuple[str, dict[str, object], str]] = [
     ("chart", {**_CHART, "desc": ""}, "desc"),
     ("chart", {**_CHART, "right_unit": ""}, "right_unit"),
     ("chart", {**_CHART, "series": []}, "series"),
-    ("chart", {**_CHART, "series": [{"name": "", "values": [1, 2]}]}, "series[0].name"),
-    ("chart", {**_CHART, "series": [{"name": "s", "values": []}]}, "series[0].values"),
-    ("chart", {**_CHART, "notes": [{**_CHART_NOTE, "label": ""}]}, "notes[0].label"),
+    ("chart", {**_CHART, "series": [{"name": "", "values": [1, 2]}]}, "series[1].name"),
+    ("chart", {**_CHART, "series": [{"name": "s", "values": []}]}, "series[1].values"),
+    ("chart", {**_CHART, "notes": [{**_CHART_NOTE, "label": ""}]}, "notes[1].label"),
     ("diagram", {**_DIAGRAM, "title": ""}, "title"),
     ("diagram", {**_DIAGRAM, "edges": []}, "edges"),
     ("diagram", {**_DIAGRAM, "groups": []}, "groups"),
     (
         "diagram",
         {"kind": "graph", "nodes": [{"id": "a", "label": ""}]},
-        "nodes[0].label",
+        "nodes[1].label",
     ),
     (
         "diagram",
         {**_DIAGRAM, "edges": [{"from": "a", "to": "a", "label": " "}]},
-        "edges[0].label",
+        "edges[1].label",
     ),
     ("flow", {**_FLOW, "title": ""}, "title"),
-    ("flow", {"step": [{"id": "a", "text": ""}]}, "step[0].text"),
-    ("flow", {"step": [{"id": "a", "text": "A", "next": []}]}, "step[0].next"),
+    ("flow", {"step": [{"id": "a", "text": ""}]}, "step[1].text"),
+    ("flow", {"step": [{"id": "a", "text": "A", "next": []}]}, "step[1].next"),
     ("state", {**_STATE, "desc": " "}, "desc"),
     ("state", {**_STATE, "transitions": []}, "transitions"),
     (
         "state",
         {**_STATE, "transitions": [{"from": "a", "to": "a", "guard": ""}]},
-        "transitions[0].guard",
+        "transitions[1].guard",
     ),
     ("sequence", {**_SEQUENCE, "desc": ""}, "desc"),
     ("sequence", {**_SEQUENCE, "actors": []}, "actors"),
     (
         "sequence",
         {**_SEQUENCE, "steps": [{"from": "a", "to": "a", "text": "t", "group": ""}]},
-        "steps[0].group",
+        "steps[1].group",
     ),
 ]
 
