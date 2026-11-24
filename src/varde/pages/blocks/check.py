@@ -242,7 +242,8 @@ def _value_faults(
         element = PropertySpec(
             prop.name, prop.items, enum=prop.enum, fields=prop.fields
         )
-        for index, item in enumerate(value):
+        # 1-based, as every widget message counts
+        for index, item in enumerate(value, 1):
             faults += _value_faults(item, prop.items, f"{path}[{index}]", element)
     return faults
 

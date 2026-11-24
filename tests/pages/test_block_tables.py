@@ -43,12 +43,12 @@ def test_table_declares_its_shape_and_each_mistake_gets_one_fault() -> None:
         ({**_TABLE, "unexpected": 1}, "unexpected"),
         ({"columns": ["a"]}, "rows"),
         ({**_TABLE, "columns": "a"}, "columns"),
-        ({**_TABLE, "columns": ["a", 2]}, "columns[1]"),
-        ({**_TABLE, "rows": ["x"]}, "'rows[0]' must be list"),
+        ({**_TABLE, "columns": ["a", 2]}, "columns[2]"),
+        ({**_TABLE, "rows": ["x"]}, "'rows[1]' must be list"),
         ({**_TABLE, "stack": 1}, "stack"),
         ({**_TABLE, "types": "x"}, "types"),
-        ({**_TABLE, "groups": [{"label": "g"}]}, "groups[0].rows"),
-        ({**_TABLE, "groups": [{"label": "g", "rows": "1"}]}, "groups[0].rows"),
+        ({**_TABLE, "groups": [{"label": "g"}]}, "groups[1].rows"),
+        ({**_TABLE, "groups": [{"label": "g", "rows": "1"}]}, "groups[1].rows"),
         ({**_TABLE, "groups": [{"label": "g", "rows": 2}]}, "groups cover 2 rows"),
     ]
     for props, field in cases:
@@ -62,8 +62,8 @@ def test_stats_declares_its_shape_and_each_mistake_gets_one_fault() -> None:
         ({**_STATS, "unexpected": 1}, "unexpected"),
         ({}, "item"),
         ({"item": "x"}, "item"),
-        ({"item": [{"value": 1}, second]}, "item[0].label"),
-        ({"item": [{"label": "a"}, second]}, "item[0].value"),
+        ({"item": [{"value": 1}, second]}, "item[1].label"),
+        ({"item": [{"label": "a"}, second]}, "item[1].value"),
         ({"item": [{**first, "tone": "loud"}, second]}, "tone"),
         ({"item": [{**first, "decimals": "2"}, second]}, "decimals"),
         ({"item": [{**first, "decimals": 9}, second]}, "decimals"),
@@ -80,7 +80,7 @@ def test_table_rows_are_checked_once_each_as_lists() -> None:
     mixed = {"columns": ["a", "b"], "rows": [["x", 1], ["y", 2.5]]}
     assert check_props("table", mixed, 1) == []
     errors = check_props("table", {**_TABLE, "rows": [["1", "2"], "x"]}, 1)
-    assert [e.message for e in errors] == ["'rows[1]' must be list"]
+    assert [e.message for e in errors] == ["'rows[2]' must be list"]
 
 
 _EMPTY_VALUES: list[tuple[str, dict[str, object], str]] = [
@@ -89,9 +89,9 @@ _EMPTY_VALUES: list[tuple[str, dict[str, object], str]] = [
     ("table", {**_TABLE, "columns": []}, "columns"),
     ("table", {**_TABLE, "rows": []}, "rows"),
     ("table", {**_TABLE, "groups": []}, "groups"),
-    ("table", {**_TABLE, "groups": [{"label": "", "rows": 1}]}, "groups[0].label"),
-    ("stats", {"item": [{**_FIRST, "label": ""}, _SECOND]}, "item[0].label"),
-    ("stats", {"item": [{**_FIRST, "note": " "}, _SECOND]}, "item[0].note"),
+    ("table", {**_TABLE, "groups": [{"label": "", "rows": 1}]}, "groups[1].label"),
+    ("stats", {"item": [{**_FIRST, "label": ""}, _SECOND]}, "item[1].label"),
+    ("stats", {"item": [{**_FIRST, "note": " "}, _SECOND]}, "item[1].note"),
 ]
 
 
