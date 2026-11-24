@@ -30,12 +30,12 @@
 .vw-region.vw-hot .vw-box { stroke: var(--vd-accent); stroke-width: 3; }
 .vw-region.vw-sel .vw-box { stroke: var(--vd-accent); stroke-width: 4; stroke-dasharray: none; }
 .vw-notes { margin: 0 0 var(--vd-space-2); padding-inline-start: var(--vd-space-5); }
-.vw-note { margin-block: var(--vd-space-1); padding-inline-start: var(--vd-space-1); border-inline-start: 3px solid transparent; overflow-wrap: anywhere; }
-.vw-note-on { border-inline-start-color: var(--vd-accent); font-weight: 600; }
+.vw-note { margin-block: var(--vd-space-1); padding-inline: var(--vd-space-1); border-radius: var(--vd-radius-s); overflow-wrap: anywhere; }
+.vw-note-on { background: var(--vd-selected); font-weight: 600; }
 .vw-detail { min-block-size: 1.5em; margin-block: var(--vd-space-1) var(--vd-space-2); color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .wireframe .vb-data > summary { display: flex; align-items: center; min-block-size: 44px; cursor: pointer; }
 .wireframe .vb-flowbar { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-block: 0 0.4rem; }
-.vb-state { border: 1px solid var(--vd-border); border-inline-start: 3px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); padding: var(--vd-space-2) var(--vd-space-3); min-inline-size: 0; background: var(--vd-surface-sunk); }
+.vb-state { border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); padding: var(--vd-space-2) var(--vd-space-3); min-inline-size: 0; background: var(--vd-surface-sunk); }
 .vb-state:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
 .vb-state h5 { margin: 0 0 0.2em; font-size: var(--vd-text-sm); color: var(--vd-text-secondary); text-transform: uppercase; }
 .vb-state p { margin: 0; }
@@ -59,7 +59,7 @@
   .vw-region:focus-visible { outline-color: Highlight; }
   .vw-view, .vb-tab, .vb-state { border-color: ButtonText; }
   .vb-tab[aria-selected="true"] { border-color: Highlight; background: ButtonFace; color: ButtonText; }
-  .vw-note-on { border-inline-start-color: Highlight; }
+  .vw-note-on { outline: 2px solid Highlight; background: none; }
 }
 @media print {
   .vw-view { max-block-size: none; overflow: visible; }

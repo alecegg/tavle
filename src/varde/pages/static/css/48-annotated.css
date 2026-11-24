@@ -17,7 +17,7 @@
 .vd-annotated-k-warn { --vd-pin-edge: var(--vd-tone-warning-edge); }
 .vd-annotated-k-change { --vd-pin-edge: var(--vd-tone-decision-edge); }
 .vd-annotated-pin:focus-visible, .vd-annotated-back:focus-visible, .vd-annotated-note:focus-visible, .vd-annotated-fold-row:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -3px; }
-.vd-code-line[data-active] { background: var(--vd-tone-info-tint); border-inline-start-color: var(--vd-tone-info-edge); }
+.vd-code-line[data-active] { background: var(--vd-tone-info-tint); outline: 2px solid var(--vd-tone-info-edge); outline-offset: -2px; }
 .vd-annotated-fold > summary { list-style: none; }
 .vd-annotated-fold > summary::-webkit-details-marker { display: none; }
 .vd-annotated-fold-row { display: flex; align-items: center; min-block-size: 44px; box-sizing: border-box; padding-inline: var(--vd-space-3); border-block: 1px dashed var(--vd-border-interactive); background: var(--vd-surface-subtle, transparent); color: var(--vd-text); font-family: var(--vd-font-ui, inherit); font-size: var(--vd-label-size); cursor: pointer; user-select: none; -webkit-user-select: none; white-space: normal; }
@@ -44,7 +44,7 @@
   .vd-annotated-pin::before, .vd-annotated-back { border-color: CanvasText; }
   .vd-annotated-note { border: 1px solid CanvasText; background: none; }
   .vd-annotated-fold-row { border-block-color: CanvasText; }
-  .vd-code-line[data-active] { background: none; border-inline-start-color: Highlight; }
+  .vd-code-line[data-active] { background: none; outline-color: Highlight; }
   .vd-annotated-pin:focus-visible, .vd-annotated-back:focus-visible, .vd-annotated-fold-row:focus-visible { outline-color: Highlight; }
 }
 @media print {
