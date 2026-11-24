@@ -9,8 +9,8 @@ This module holds only the pure statement checks and the selector grammar
 import re
 from dataclasses import dataclass
 
-from varde.pages.blocks.rules import Fault, check_keys
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 ANCHOR = re.compile(r"^[a-z0-9-]+(/[0-9]+)?$")
 TASK_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
@@ -46,20 +46,16 @@ def parse_selector(text: str) -> Selector:
     )
 
 
-def include_faults(props: dict[str, object]) -> list[Fault]:
-    """Faults in one `include` statement's props."""
-    faults = check_keys(dict(props), {"source", "select"}, {"title"}, "include")
-    for key in ("source", "select", "title"):
-        value = props.get(key)
-        if key in props and not (isinstance(value, str) and value.strip()):
-            faults.append(Fault("type", f"include.{key} must be a non-empty string"))
+def _selector_faults(props: dict[str, object]) -> list[Fault]:
+    """The one rule the properties cannot state: `select` must parse."""
     selector = props.get("select")
-    if isinstance(selector, str) and selector.strip():
-        try:
-            parse_selector(selector)
-        except SelectorError as error:
-            faults.append(Fault("selector", str(error)))
-    return faults
+    if not (isinstance(selector, str) and selector.strip()):
+        return []  # absent, blank or not text: the properties report it
+    try:
+        parse_selector(selector)
+    except SelectorError as error:
+        return [Fault("selector", str(error))]
+    return []
 
 
 INCLUDE = BlockSpec(
@@ -75,6 +71,11 @@ INCLUDE = BlockSpec(
   select: "acceptance",
 )
 """,
-    include_faults,
+    _selector_faults,
     block_type="part",
+    properties=(
+        PropertySpec("source", "string", required=True, nonempty=True),
+        PropertySpec("select", "string", required=True, nonempty=True),
+        PropertySpec("title", "string", nonempty=True),
+    ),
 )

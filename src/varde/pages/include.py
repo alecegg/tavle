@@ -19,8 +19,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from varde.base.ui_lines import Statement
+from varde.pages.blocks import check_props
 from varde.pages.blocks.fences import ui_statements
-from varde.pages.blocks.include import include_faults
 from varde.pages.select import (
     Selector,
     SelectorError,
@@ -87,7 +87,7 @@ def find_includes(text: str) -> list[IncludeRef]:
     """Every `include` statement on the page; raises IncludeError."""
     refs: list[IncludeRef] = []
     for line, statement in _include_statements(text):
-        faults = include_faults(statement.props)
+        faults = check_props("include", statement.props, line)
         if faults:
             raise IncludeError(line, faults[0].message)
         if any(ref.id == statement.id for ref in refs):
@@ -281,7 +281,7 @@ def include_errors(text: str, root: Path | None = None) -> list[tuple[int, str, 
     errors = [
         (line, fault.rule, fault.message)
         for line, statement in _include_statements(text)
-        for fault in include_faults(statement.props)
+        for fault in check_props("include", statement.props, line)
     ]
     if errors or root is None:
         return errors

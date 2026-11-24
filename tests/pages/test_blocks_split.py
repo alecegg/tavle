@@ -56,3 +56,20 @@ def test_block_scripts_are_es_modules_imported_by_blocks_js() -> None:
         "recap.js",
         "inputs_ordered.js",
     )
+
+
+def test_include_property_faults_are_single_and_name_the_field() -> None:
+    ok: dict[str, object] = {"source": "plan.md", "select": "acceptance"}
+    cases: list[tuple[dict[str, object], str]] = [
+        ({**ok, "extra": 1}, "extra"),
+        ({"select": "acceptance"}, "source"),
+        ({**ok, "source": 3}, "source"),
+        ({**ok, "select": " "}, "select"),
+        ({**ok, "title": ""}, "title"),
+        ({**ok, "select": "nope"}, "selector"),
+    ]
+    assert check_props("include", {**ok, "title": "T"}, 1) == []
+    for data, field in cases:
+        faults = check_props("include", data, 1)
+        assert len(faults) == 1, (data, faults)
+        assert field in faults[0].message

@@ -100,7 +100,7 @@ def test_wireframe_ui_states_flow_table_chart_shapes():
 
 def test_invalid_block_renders_error_card_with_errors():
     out = page("endpoint", 'method = "GET"\npath = "/x"\n[[responses]]\nstatus = 200\n')
-    assert "vb-error" in out and "endpoint-auth" in out
+    assert "vb-error" in out and "missing-key" in out
 
 
 def test_parse_error_renders_one_error_card():

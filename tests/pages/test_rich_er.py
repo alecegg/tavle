@@ -9,7 +9,7 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import type_text
+from varde.pages.blocks import check_props, type_text
 from varde.pages.blocks.backend import validate_data_model
 from varde.pages.blocks_render import render_block
 from varde.pages.blocks_render.backend import data_model_props
@@ -208,9 +208,8 @@ def test_thirty_entities_pass_and_thirty_one_fault() -> None:
 
 
 def test_unknown_layout_and_unknown_entity_fault() -> None:
-    assert [f.rule for f in validate_data_model(model(entity("a"), layout="ring"))] == [
-        "type"
-    ]
+    ring = check_props("data-model", model(entity("a"), layout="ring"), 1)
+    assert [e.rule for e in ring] == ["type"]  # the layout enum is a property
     bad = model(entity("a", ("ghost", "one-to-one")), layout="graph")
     assert [f.rule for f in validate_data_model(bad)] == ["relation-target"]
 

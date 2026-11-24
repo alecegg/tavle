@@ -68,6 +68,38 @@ def test_registered_components_and_shape_faults() -> None:
         assert check_props(name, data, 1), (name, data)
 
 
+def test_container_property_faults_are_single_and_name_the_field() -> None:
+    cases: list[tuple[str, dict[str, object], str]] = [
+        ("tabs", {"tab": [{"label": "A", "blocks": ["a"], "x": 1}]}, "tab[1].x"),
+        ("tabs", {"tab": [{"label": "A"}]}, "tab[1].blocks"),
+        ("tabs", {"tab": [{"blocks": ["a"]}]}, "tab[1].label"),
+        ("tabs", {}, "tab"),
+        ("tabs", {"tab": "x"}, "tab"),
+        ("tabs", {"tab": [3]}, "tab[1]"),
+        ("tabs", {"tab": [{"label": " ", "blocks": ["a"]}]}, "tab[1].label"),
+        ("tabs", {"tab": [{"label": "A", "blocks": []}]}, "tab[1].blocks"),
+        ("tabs", {"tab": [{"label": "A", "blocks": ["Bad Id"]}]}, "blocks[1]"),
+        ("columns", {"col": [{"blocks": ["a"], "x": 1}]}, "col[1].x"),
+        ("columns", {"col": [{}]}, "col[1].blocks"),
+        ("columns", {"col": [{"label": 1, "blocks": ["a"]}]}, "col[1].label"),
+        ("columns", {"col": [{"label": "", "blocks": ["a"]}]}, "col[1].label"),
+        ("columns", {"col": []}, "col"),
+    ]
+    for name, data, field in cases:
+        faults = check_props(name, data, 1)
+        assert len(faults) == 1, (name, data, faults)
+        assert field in faults[0].message
+
+
+def test_container_limits_stay_with_the_validator() -> None:
+    panels = [{"label": "A", "blocks": ["a"]}] * 13
+    faults = check_props("tabs", {"tab": panels}, 1)
+    assert [f.rule for f in faults] == ["limit"]
+    ids = [f"b{n}" for n in range(201)]
+    held = check_props("columns", {"col": [{"blocks": ids}]}, 1)
+    assert [f.rule for f in held] == ["limit"]
+
+
 def test_document_faults_name_each_case() -> None:
     page = statements(CALL, CALL_B, INPUT)
     assert rules(page + statements(tabs(panel("A", "a")))) == []

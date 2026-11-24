@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from varde.pages.blocks import check, check_props
-from varde.pages.blocks.change import CHANGES, change_faults
+from varde.pages.blocks.change import CHANGES, change_rule_faults
 from varde.pages.blocks_render.backend import data_model_props, endpoint_props
 from varde.pages.blocks_render.change import copy_line
 from varde.pages.render import render_page
@@ -38,16 +38,27 @@ def model_with(field: object) -> dict[str, object]:
     }
 
 
-def test_enum_and_was_rules() -> None:
-    assert change_faults({"change": "added"}, "x") == []
-    assert change_faults({"change": "renamed", "was": "a"}, "x") == []
-    assert change_faults({"change": "modified", "was": "a"}, "x") == []
-    unknown = change_faults({"change": "moved"}, "x")
-    assert unknown and all(c in unknown[0].message for c in CHANGES)
-    assert change_faults({"change": "renamed"}, "x")
-    assert change_faults({"change": "removed", "was": "a"}, "x")
-    assert change_faults({"was": "a"}, "x")
-    assert change_faults({"change": "modified", "was": ""}, "x")
+def test_was_rules() -> None:
+    assert change_rule_faults({"change": "added"}, "x") == []
+    assert change_rule_faults({"change": "renamed", "was": "a"}, "x") == []
+    assert change_rule_faults({"change": "modified", "was": "a"}, "x") == []
+    assert change_rule_faults({"change": "renamed"}, "x")
+    assert change_rule_faults({"change": "removed", "was": "a"}, "x")
+    assert change_rule_faults({"was": "a"}, "x")
+
+
+def test_enum_and_blank_was_come_from_the_properties() -> None:
+    response = {"status": 200, "change": "moved"}
+    unknown = check_props("endpoint", {**PLAIN_ENDPOINT, "responses": [response]}, 1)
+    assert len(unknown) == 1
+    assert "responses[1].change" in unknown[0].message
+    assert all(c in unknown[0].message for c in CHANGES)
+    blank = {"status": 200, "change": "modified", "was": ""}
+    faults = check_props("endpoint", {**PLAIN_ENDPOINT, "responses": [blank]}, 1)
+    assert len(faults) == 1 and "responses[1].was" in faults[0].message
+    field = model_with({"type": "t", "change": "modified", "was": " "})
+    faults = check_props("data-model", field, 1)
+    assert len(faults) == 1 and "'was'" in faults[0].message
 
 
 def test_spec_checks_every_place_a_change_can_sit() -> None:
@@ -138,3 +149,74 @@ def test_change_has_no_inline_start_border() -> None:
     ).read_text()
     assert "border-inline-start" not in css
     assert "border-left" not in css
+
+
+ENTITY: dict[str, object] = {"name": "a", "key": "id", "fields": {"id": "uuid"}}
+RELATION = {"to": "a", "kind": "one-to-one"}
+RESPONSE = {"status": 200}
+
+
+def entity_with(**changes: object) -> dict[str, object]:
+    return {"entity": [{**ENTITY, **changes}]}
+
+
+def without(table: dict[str, object], key: str) -> dict[str, object]:
+    return {k: v for k, v in table.items() if k != key}
+
+
+def test_data_model_property_faults_are_single_and_name_the_field() -> None:
+    cases: list[tuple[dict[str, object], str]] = [
+        (entity_with(extra=1), "entity[1].extra"),
+        ({"entity": [without(ENTITY, "key")]}, "entity[1].key"),
+        (entity_with(key=1), "entity[1].key"),
+        (entity_with(name=" "), "entity[1].name"),
+        (entity_with(fields="x"), "entity[1].fields"),
+        (entity_with(relations={}), "entity[1].relations"),
+        (entity_with(relations=[{"to": "a"}]), "entity[1].relations[1].kind"),
+        (entity_with(relations=[{**RELATION, "kind": "some"}]), "relations[1].kind"),
+        (entity_with(relations=[{**RELATION, "to": ""}]), "relations[1].to"),
+        ({**entity_with(), "layout": "ring"}, "layout"),
+        ({"entity": []}, "entity"),
+        ({}, "entity"),
+    ]
+    for data, field in cases:
+        faults = check_props("data-model", data, 1)
+        assert len(faults) == 1, (data, faults)
+        assert field in faults[0].message
+
+
+def test_endpoint_property_faults_are_single_and_name_the_field() -> None:
+    cases: list[tuple[dict[str, object], str]] = [
+        ({**PLAIN_ENDPOINT, "extra": 1}, "extra"),
+        (without(PLAIN_ENDPOINT, "auth"), "auth"),
+        ({**PLAIN_ENDPOINT, "auth": 1}, "auth"),
+        ({**PLAIN_ENDPOINT, "path": " "}, "path"),
+        ({**PLAIN_ENDPOINT, "path": "x"}, "path"),
+        ({**PLAIN_ENDPOINT, "method": "FETCH"}, "method"),
+        ({**PLAIN_ENDPOINT, "request": []}, "request"),
+        ({**PLAIN_ENDPOINT, "request": {}}, "request"),
+        ({**PLAIN_ENDPOINT, "responses": []}, "responses"),
+        ({**PLAIN_ENDPOINT, "responses": [{**RESPONSE, "x": 1}]}, "responses[1].x"),
+        ({**PLAIN_ENDPOINT, "responses": [{"body": "b"}]}, "responses[1].status"),
+        ({**PLAIN_ENDPOINT, "responses": [{"status": "200"}]}, "responses[1].status"),
+        ({**PLAIN_ENDPOINT, "responses": [{"status": 99}]}, "responses[1].status"),
+        ({**PLAIN_ENDPOINT, "responses": [{**RESPONSE, "body": " "}]}, "body"),
+    ]
+    for data, field in cases:
+        faults = check_props("endpoint", data, 1)
+        assert len(faults) == 1, (data, faults)
+        assert field in faults[0].message
+
+
+def test_request_and_field_items_keep_their_own_checks() -> None:
+    cases = [
+        {"q": {"type": "t", "x": 1}},
+        {"q": {"change": "added"}},
+        {"q": {"type": ""}},
+        {"q": {"type": "t", "change": "moved"}},
+        {"q": 3},
+    ]
+    for request in cases:
+        faults = check_props("endpoint", {**PLAIN_ENDPOINT, "request": request}, 1)
+        assert len(faults) == 1, (request, faults)
+        assert "endpoint.request.q" in faults[0].message
