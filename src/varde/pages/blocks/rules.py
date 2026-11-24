@@ -7,6 +7,7 @@ from dataclasses import dataclass
 class Fault:
     rule: str
     message: str
+    path: str = ""  # property path such as `rows[2].name`; empty when unknown
 
 
 def type_name(value: object) -> str:

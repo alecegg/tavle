@@ -94,6 +94,8 @@ class BlockError:
     line: int  # 1-based document line
     rule: str
     message: str
+    statement_id: str = ""  # the `ui` statement id; empty when none applies
+    path: str = ""  # property path such as `rows[2].name`; empty when none applies
 
     def text(self) -> str:
         return f"line {self.line}: {self.rule}: {self.message}"
@@ -108,7 +110,7 @@ def _covers_faults(data: dict[str, object]) -> list[Fault]:
     )
     if ok:
         return []
-    return [Fault("covers", "covers must be a list of block ids")]
+    return [Fault("covers", "covers must be a list of block ids", "covers")]
 
 
 # Fence languages that held page data before the line syntax: the TOML typed
@@ -140,7 +142,7 @@ def _duplicate_id(
         message = (
             f"id '{ident}' is already used by the statement at line {first_seen[ident]}"
         )
-        return [BlockError(line, "id-duplicate", message)]
+        return [BlockError(line, "id-duplicate", message, ident)]
     first_seen[ident] = line
     return []
 
@@ -161,12 +163,14 @@ def _ui_errors(doc_text: str, root: Path | None) -> list[BlockError]:
         for statement in result.statements:
             line = fence_line + statement.line
             errors += _duplicate_id(statement.id, line, first_seen)
-            errors += check_props(statement.component, statement.props, line)
+            errors += check_props(
+                statement.component, statement.props, line, statement.id
+            )
             held.append((line, statement.component, statement.id, statement.props))
     errors += [BlockError(*found) for found in container_errors(held, INPUT_COMPONENTS)]
     found = include_errors(doc_text, root) + heading_id_errors(doc_text)
     errors += [BlockError(line, rule, message) for line, rule, message in found]
-    return list(dict.fromkeys(errors))  # include faults arrive from both validators
+    return errors
 
 
 def _custom_errors(doc_text: str) -> list[BlockError]:
@@ -196,14 +200,16 @@ def _property_faults(
     for key in sorted(data.keys() - names):
         path = f"{prefix}{key}"
         if extra_keys is None:
-            faults.append(Fault("unknown-key", f"unknown key '{path}'"))
+            faults.append(Fault("unknown-key", f"unknown key '{path}'", path))
             continue
         faults += _value_faults(data[key], extra_keys.type, path, extra_keys)
     for prop in properties:
         path = f"{prefix}{prop.name}"
         if prop.name not in data:
             if prop.required:
-                faults.append(Fault("missing-key", f"missing required key '{path}'"))
+                faults.append(
+                    Fault("missing-key", f"missing required key '{path}'", path)
+                )
             continue
         faults += _value_faults(data[prop.name], prop.type, path, prop)
     return faults
@@ -229,12 +235,13 @@ def _value_faults(
         "any": lambda: True,
     }
     if not valid[kind]():
-        return [Fault("type", f"'{path}' must be {kind}")]
+        return [Fault("type", f"'{path}' must be {kind}", path)]
     faults: list[Fault] = []
     if prop.nonempty and _is_empty(value):
-        return [Fault("type", f"'{path}' must not be empty")]
+        return [Fault("type", f"'{path}' must not be empty", path)]
     if kind == "string" and prop.enum and value not in prop.enum:
-        faults.append(Fault("type", f"'{path}' must be one of {', '.join(prop.enum)}"))
+        message = f"'{path}' must be one of {', '.join(prop.enum)}"
+        faults.append(Fault("type", message, path))
     if kind == "object" and isinstance(value, dict) and prop.fields:
         faults += _property_faults(value, prop.fields, f"{path}.")
     if kind == "list" and isinstance(value, list) and prop.items:
@@ -249,18 +256,18 @@ def _value_faults(
 
 
 def check_props(
-    component: str, props: dict[str, object], line: int
+    component: str, props: dict[str, object], line: int, statement_id: str = ""
 ) -> list[BlockError]:
     """Errors for one parsed statement's props (parsed from a `ui` statement)."""
     spec = COMPONENT_SPECS.get(component)
     if spec is None:
         known = ", ".join(sorted(COMPONENT_SPECS))
         message = f"unknown component '{component}'; known: {known}"
-        return [BlockError(line, "component-unknown", message)]
+        return [BlockError(line, "component-unknown", message, statement_id)]
     data = dict(props)
     faults = _covers_faults(data)
     data.pop("covers", None)
     if spec.properties:
         faults += _property_faults(data, spec.properties, extra_keys=spec.extra_keys)
-    faults += spec.validate(data)
-    return [BlockError(line, f.rule, f.message) for f in faults]
+    faults += spec.validate(data)  # widget validators locate no property path
+    return [BlockError(line, f.rule, f.message, statement_id, f.path) for f in faults]
