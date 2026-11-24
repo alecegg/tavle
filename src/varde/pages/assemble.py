@@ -29,6 +29,7 @@ from varde.pages.render import (
     strip_comments,
 )
 from varde.pages.template import make_read_only, page_shell
+from varde.pages.theme.page import page_theme, require_theme
 
 
 def answer_attrs(comment: dict[str, Any]) -> str:
@@ -176,7 +177,11 @@ def _served_main(doc: Path) -> tuple[str, dict[str, Path]]:
     ctx, sources = include_ctx(text, doc)
     page = parse_page_stream(text, doc.name, ctx)
     threads = render_threads(page, mark_latest_decisions(fold(read_rows(doc))))
-    return f'<main data-role="page">{page.body}{threads}</main>', sources
+    theme = page_theme(doc, text)
+    return (
+        f'<main data-role="page">{theme.style}{theme.error}{page.body}{threads}</main>',
+        sources,
+    )
 
 
 def assemble(doc: Path, *, token: str, api_base: str = "") -> AssembledPage:
@@ -201,5 +206,6 @@ def assemble_static(doc: Path) -> str:
     """
     text = read_markdown(doc)
     page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
-    main = f'<main data-role="page">{make_read_only(page.body)}</main>'
+    style = require_theme(doc, text)
+    main = f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
     return export_page(doc.name, main)
