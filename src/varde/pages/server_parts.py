@@ -9,9 +9,6 @@ from collections.abc import Collection, Sequence
 from io import BufferedIOBase
 from pathlib import Path
 
-from varde.ui.shell import TOKENS_CSS, UI_STATIC
-
-VENDOR_ASSETS = frozenset({"mithril.js"})
 MAX_BODY = 64 * 1024
 MAX_STREAMS = 16
 READ_TIMEOUT = 10
@@ -54,17 +51,6 @@ def is_json_type(content_type: str | None) -> bool:
     if media.strip().lower() != "application/json":
         return False
     return params.strip().lower() in {"", "charset=utf-8"}
-
-
-def vendor_asset(name: str) -> bytes:
-    """Bytes of a vendored script; any name off the allowlist raises ValueError."""
-    if name not in VENDOR_ASSETS:
-        raise ValueError(f"unknown vendor asset: {name!r}")
-    return UI_STATIC.joinpath("vendor", name).read_bytes()
-
-
-def token_css() -> str:
-    return UI_STATIC.joinpath("css", TOKENS_CSS).read_text(encoding="utf-8")
 
 
 class Broadcaster:

@@ -4,8 +4,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
-
 from varde.pages.server_parts import (
     SECURITY_HEADERS,
     Broadcaster,
@@ -13,29 +11,10 @@ from varde.pages.server_parts import (
     host_allowed,
     new_token,
     origin_allowed,
-    token_css,
     token_matches,
-    vendor_asset,
 )
 
 ORIGINS = {"http://127.0.0.1:8000"}
-
-
-def test_vendor_asset_returns_mithril() -> None:
-    assert b"m" in vendor_asset("mithril.js")
-    assert len(vendor_asset("mithril.js")) > 1000
-
-
-@pytest.mark.parametrize(
-    "name", ["mithril.LICENSE", "../app.js", "vendor/mithril.js", "", "/etc/passwd"]
-)
-def test_vendor_asset_rejects_other_names(name: str) -> None:
-    with pytest.raises(ValueError, match="unknown vendor asset"):
-        vendor_asset(name)
-
-
-def test_token_css_has_known_token() -> None:
-    assert "--vd-ink" in token_css()
 
 
 def test_tokens_are_unique_and_compared_exactly() -> None:
