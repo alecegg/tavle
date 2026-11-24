@@ -12,9 +12,11 @@ from varde.base.browser_args import BROWSER_ARGS
 from .driver import Matrix
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def matrix_launch() -> Iterator[Callable[[], Any]]:
     """Launch a browser; the caller closes it (single-process dies with its page)."""
+    # Module scope: a live sync Playwright blocks any other in the same worker
+    # (the design probe starts its own), so it must not outlive the module.
     try:
         from playwright.sync_api import Error as PlaywrightError
         from playwright.sync_api import sync_playwright
@@ -37,7 +39,7 @@ def matrix_launch() -> Iterator[Callable[[], Any]]:
         playwright.stop()
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def matrix(matrix_launch: Callable[[], Any]) -> Iterator[Matrix]:
     holder = Matrix(matrix_launch)
     yield holder
