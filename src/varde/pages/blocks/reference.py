@@ -1,9 +1,9 @@
 """Help text and JSON catalog for the component vocabulary, built from the specs."""
 
+from collections.abc import Mapping
 from dataclasses import asdict
 
-from varde.pages.blocks.check import COMPONENT_SPECS
-from varde.pages.blocks.spec import PropertySpec
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def _indented(text: str, depth: int = 1) -> str:
@@ -32,35 +32,35 @@ def _property_lines(rows: list[tuple[str, PropertySpec]]) -> list[str]:
     return lines
 
 
-def _field_lines(name: str) -> list[str]:
+def _field_lines(specs: Mapping[str, BlockSpec], name: str) -> list[str]:
     """The generated field lines of a component: its properties, then any extra key."""
-    spec = COMPONENT_SPECS[name]
+    spec = specs[name]
     rows = [(prop.name, prop) for prop in spec.properties]
     if spec.extra_keys:
         rows.append((f"<{spec.extra_keys.name}>", spec.extra_keys))
     return _property_lines(rows) if rows else []
 
 
-def type_text(name: str) -> str:
-    spec = COMPONENT_SPECS[name]
+def type_text(specs: Mapping[str, BlockSpec], name: str) -> str:
+    spec = specs[name]
     sections = [f"{spec.name} - {spec.summary}"]
     if spec.properties or spec.extra_keys:
-        sections.append("Fields:\n" + _indented("\n".join(_field_lines(name))))
+        sections.append("Fields:\n" + _indented("\n".join(_field_lines(specs, name))))
     if spec.notes:
         sections.append("Details:\n" + _indented("\n".join(spec.notes)))
     sections.append(f"Line syntax (in a ```ui fence):\n{_indented(spec.example)}")
     return "\n\n".join(sections) + "\n"
 
 
-def index_text() -> str:
+def index_text(specs: Mapping[str, BlockSpec]) -> str:
     """One line per component; `type_text` gives a component's fields."""
-    lines = [
-        f"{name} - {COMPONENT_SPECS[name].summary}" for name in sorted(COMPONENT_SPECS)
-    ]
+    lines = [f"{name} - {specs[name].summary}" for name in sorted(specs)]
     return "\n".join(lines) + "\n\nFields and an example: varde pages blocks <TYPE>\n"
 
 
-def catalog(names: tuple[str, ...] = ()) -> list[dict[str, object]]:
+def catalog(
+    specs: Mapping[str, BlockSpec], names: tuple[str, ...] = ()
+) -> list[dict[str, object]]:
     """The metadata of the named components (all when none is named), as plain data.
 
     Each entry holds name, summary, block_type, properties and extra_keys; a
@@ -75,5 +75,5 @@ def catalog(names: tuple[str, ...] = ()) -> list[dict[str, object]]:
             "properties": [asdict(prop) for prop in spec.properties],
             "extra_keys": asdict(spec.extra_keys) if spec.extra_keys else None,
         }
-        for spec in (COMPONENT_SPECS[name] for name in names or sorted(COMPONENT_SPECS))
+        for spec in (specs[name] for name in names or sorted(specs))
     ]
