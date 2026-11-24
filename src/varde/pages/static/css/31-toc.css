@@ -1,5 +1,5 @@
-/* Contents nav (pages/toc.py): a <details> below 64rem, a sticky rail from 64rem (rail rules: 01-base).
-   Links are 44px hit areas; the active link carries a tint and bold weight. */
+/* Contents nav (pages/toc.py): a sticky bar below 64rem, a sticky rail from 64rem (rail rules: 01-base).
+   Links are 44px hit areas; the current link carries a tint and bold weight, never an edge bar. */
 :root, :host { scroll-padding-block-start: var(--vd-space-9); }
 .block, h1, h2, h3, h4, h5, h6 { scroll-margin-block-start: var(--vd-space-9); }
 .doc-toc summary { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
@@ -10,6 +10,10 @@
 .doc-toc summary:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
 .doc-toc .toc-l3 a { padding-inline-start: var(--vd-space-6); color: var(--vd-text-secondary); }
 .doc-toc a[aria-current="location"] { background: var(--vd-selected); font-weight: 700; color: var(--vd-text); }
+@container vd-doc (width < 64rem) {
+  .doc-toc { position: sticky; inset-block-start: 0; z-index: 10; background: var(--vd-surface); max-block-size: 100dvh; overflow-y: auto; }
+  .doc-toc details[open] ol { border-block-end: 1px solid var(--vd-border); }
+}
 @container vd-doc (min-width: 64rem) {
   .doc-toc summary { display: none; }
   .doc-toc details::details-content { content-visibility: visible; display: block; }

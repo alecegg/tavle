@@ -360,11 +360,13 @@ def test_interact_every_tab_entry_targets_a_drawn_heading_and_selects_its_tab(
     ]
     assert page.locator(".vd-ctabs > .vd-containers-alt").count() == 0
     for index in (2, 1, 0):
+        # following a contents link closes the contents bar below the rail width
+        page.locator(".doc-toc details").evaluate("(el) => { el.open = true; }")
         link = links.nth(index)
         target = link.get_attribute("href")[1:]
         assert page.locator(f'[id="{target}"]').count() == 1
         link.click()
-        assert selected(page) == link.inner_text()
+        assert selected(page) == link.text_content()  # the closed bar hides the link
         panel_ = page.locator('.vd-ctabs-panel[role="tabpanel"]').nth(index)
         assert panel_.is_visible()
 
