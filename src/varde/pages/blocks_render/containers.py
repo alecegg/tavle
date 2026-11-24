@@ -21,6 +21,7 @@ from varde.pages.blocks.containers import CONTAINERS, HOLD_KEYS, Statements, hel
 from varde.pages.blocks_render.common import as_dict, as_list, esc
 from varde.pages.components import mount_block
 
+TAB_LEVEL = 3  # a tab's contents entry sits under the section the block is in
 _COPY = re.compile(r' data-copy="([^"]*)"')
 _TAG = re.compile(r"<[^>]*>")
 # Page-check rules the render does not apply: a block that is placed (an include's
@@ -57,6 +58,22 @@ def container_props(kind: str, props: dict[str, object]) -> dict[str, object]:
         ],
         "copy": "",
     }
+
+
+def tab_headings(props: Mapping[str, object], ident: str) -> list[tuple[int, str, str]]:
+    """(level, label, heading id) per labelled panel of a valid `tabs` block.
+
+    The page's contents lists tab names, so the block draws no index of its own. The
+    id is the panel heading `static/components/shared.js` gives the n-th panel.
+    """
+    if check_props("tabs", dict(props), 0):
+        return []  # an error card draws no panels
+    panels = container_props("tabs", dict(props))["panels"]
+    return [
+        (TAB_LEVEL, p["label"], f"vd-ctab-{ident}-{n}-h")
+        for n, p in enumerate(as_list(panels), start=1)
+        if p["label"]
+    ]
 
 
 # --- filling ----------------------------------------------------------------

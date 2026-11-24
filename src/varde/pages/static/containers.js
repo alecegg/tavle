@@ -60,5 +60,11 @@ export function enhanceContainers(block) {
   region.append(list);
   block.prepend(region);
   block.classList.add('vd-ctabs-on');
-  select(tabs, panels, 0);
+  select(tabs, panels, Math.max(0, panels.findIndex((panel) => hashTarget(panel))));
+}
+
+// A page opened at a panel's fragment (a contents link) starts on that panel.
+function hashTarget(panel) {
+  const id = decodeURIComponent(location.hash.slice(1));
+  return id !== '' && panel.querySelector(`[id="${CSS.escape(id)}"]`) !== null;
 }
