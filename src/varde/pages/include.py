@@ -18,7 +18,6 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde.pages.blocks import props_errors
 from varde.pages.fences import ui_statements
 from varde.pages.include_statement import INCLUDE
 from varde.pages.select import (
@@ -30,8 +29,9 @@ from varde.pages.select import (
     region,
     select_blocks,
 )
-from varde.pages.shell import make_read_only
+from varde.ui.blocks import props_errors
 from varde.ui.lines import Statement
+from varde.ui.shell import make_read_only
 
 MAX_SOURCE_BYTES = 1_000_000
 _SECRET_NAMES = ("*.env*", "*secret*", "*credential*", "*token*")

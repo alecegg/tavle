@@ -13,7 +13,6 @@ from varde.pages.comments import (
     mark_latest_decisions,
     read_rows,
 )
-from varde.pages.components import export_page
 from varde.pages.include import (
     IncludeError,
     find_includes,
@@ -27,10 +26,11 @@ from varde.pages.render import (
     render_page,
     strip_comments,
 )
-from varde.pages.shell import make_read_only
 from varde.pages.template import page_shell
 from varde.pages.theme.page import page_theme, require_theme
+from varde.ui.components import export_page
 from varde.ui.lines import parse_lines
+from varde.ui.shell import make_read_only
 
 
 def answer_attrs(comment: dict[str, Any]) -> str:

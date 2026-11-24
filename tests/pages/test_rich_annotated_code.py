@@ -9,8 +9,8 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.annotated_code import (
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.annotated_code import (
     read_notes,
 )
 

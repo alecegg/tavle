@@ -18,22 +18,22 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks.change_summary import EMPTY, UNCOUNTED
-from varde.pages.blocks_render.annotated_code import annotated_props
-from varde.pages.blocks_render.change_summary import change_summary_props
-from varde.pages.blocks_render.code import Panel, code_block_props, code_props, tokenize
-from varde.pages.blocks_render.diff import diff_props
-from varde.pages.blocks_render.file_tree import (
+from varde.pages.render import render_page
+from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks.change_summary import EMPTY, UNCOUNTED
+from varde.ui.blocks_render.annotated_code import annotated_props
+from varde.ui.blocks_render.change_summary import change_summary_props
+from varde.ui.blocks_render.code import Panel, code_block_props, code_props, tokenize
+from varde.ui.blocks_render.diff import diff_props
+from varde.ui.blocks_render.file_tree import (
     code_titles,
     file_links,
     file_tree_props,
     link_file_trees,
 )
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.components import component_bundle, host_props, mount_block
-from varde.pages.render import render_page
-from varde.pages.serve import PageServer
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.components import component_bundle, host_props, mount_block
 from varde.ui.graph import deps_layout
 
 TESTS = Path(__file__).parent
@@ -88,8 +88,8 @@ def test_fixture_inputs_still_produce_the_recorded_props(
     block: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     # the "big" and "truncated" cases were recorded with small caps
-    monkeypatch.setattr("varde.pages.blocks.diff_rows.MAX_ROWS", 20)
-    monkeypatch.setattr("varde.pages.blocks_render.diff.MAX_ROWS", 20)
+    monkeypatch.setattr("varde.ui.blocks.diff_rows.MAX_ROWS", 20)
+    monkeypatch.setattr("varde.ui.blocks_render.diff.MAX_ROWS", 20)
     monkeypatch.setattr("varde.ui.graph._MAX_NODES", 12)
     monkeypatch.setattr("varde.ui.graph._MAX_EDGES", 10)
     cases = _fixture(block)

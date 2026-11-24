@@ -16,20 +16,20 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import COMPONENT_SPECS, check_props
-from varde.pages.blocks_render.charts import chart_props
-from varde.pages.blocks_render.diagrams import diagram_props
-from varde.pages.blocks_render.flow import flow_props
-from varde.pages.blocks_render.image import image_props
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.blocks_render.screen_flow import screen_flow_props
-from varde.pages.blocks_render.screens import ui_states_props, wireframe_props
-from varde.pages.blocks_render.sequence import sequence_props
-from varde.pages.blocks_render.state import state_props
-from varde.pages.components import component_bundle, mount_block
-from varde.pages.media import Media
 from varde.pages.render import render_page
+from varde.ui.blocks import COMPONENT_SPECS, check_props
+from varde.ui.blocks_render.charts import chart_props
+from varde.ui.blocks_render.diagrams import diagram_props
+from varde.ui.blocks_render.flow import flow_props
+from varde.ui.blocks_render.image import image_props
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.blocks_render.screen_flow import screen_flow_props
+from varde.ui.blocks_render.screens import ui_states_props, wireframe_props
+from varde.ui.blocks_render.sequence import sequence_props
+from varde.ui.blocks_render.state import state_props
+from varde.ui.components import component_bundle, mount_block
 from varde.ui.lines.parse import parse_lines
+from varde.ui.media import Media
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 PROPS = {

@@ -9,23 +9,23 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props, type_text
-from varde.pages.blocks.backend import validate_data_model
-from varde.pages.blocks_render import render_block
-from varde.pages.blocks_render.backend import data_model_props
-from varde.pages.blocks_render.er import (
+from varde.pages.page_check import PAGE_SPECS
+from varde.pages.render import render_page
+from varde.ui.blocks import check_props, type_text
+from varde.ui.blocks.backend import validate_data_model
+from varde.ui.blocks_render import render_block
+from varde.ui.blocks_render.backend import data_model_props
+from varde.ui.blocks_render.er import (
     declared_relations,
     inferred_relations,
     relation_text,
 )
-from varde.pages.blocks_render.er_layout import (
+from varde.ui.blocks_render.er_layout import (
     BOX_W,
     edges_cross_boxes,
     place,
     route,
 )
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 JSON_PROPS = re.compile(r'<script type="application/json">.*?</script>', re.DOTALL)

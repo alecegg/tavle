@@ -11,11 +11,11 @@ from typing import Any
 import pytest
 
 from varde.pages.assemble import assemble_page, assemble_static
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.components import host_props
 from varde.pages.page_check import check
 from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.components import host_props
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105

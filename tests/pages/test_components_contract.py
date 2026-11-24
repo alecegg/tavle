@@ -15,11 +15,11 @@ import pytest
 from cases_loader import Case, load_cases
 
 from varde.pages.assemble import assemble_static
-from varde.pages.blocks.check import check_props
-from varde.pages.blocks_render import render_block
-from varde.pages.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
-from varde.pages.components import component_bundle, mount_block
 from varde.pages.render import render_page
+from varde.ui.blocks.check import check_props
+from varde.ui.blocks_render import render_block
+from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
+from varde.ui.components import component_bundle, mount_block
 
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"

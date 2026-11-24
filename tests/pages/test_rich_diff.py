@@ -10,12 +10,12 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props, type_text
-from varde.pages.blocks.diff_rows import (
+from varde.pages.page_check import PAGE_SPECS, check
+from varde.ui.blocks import check_props, type_text
+from varde.ui.blocks.diff_rows import (
     diff_rows,
     text_lines,
 )
-from varde.pages.page_check import PAGE_SPECS, check
 
 PAGES = Path(str(files("varde.pages")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

@@ -7,8 +7,8 @@ from typing import Any
 
 import pytest
 
-from varde.pages import blocks
 from varde.pages.page_check import PAGE_SPECS
+from varde.ui import blocks
 
 FIELD_LINE = re.compile(r"^( *)(\S+) +(required|optional) +(.+)$")
 

@@ -13,19 +13,19 @@ from typing import Any
 import pytest
 from scene_html import svg_html
 
-from varde.pages.blocks import check_props, type_text
-from varde.pages.blocks.charts import CHART, MAX_SERIES
-from varde.pages.blocks_render.chart_model import build_model, copy_text
-from varde.pages.blocks_render.chart_scale import (
+from varde.pages.page_check import PAGE_SPECS
+from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props, type_text
+from varde.ui.blocks.charts import CHART, MAX_SERIES
+from varde.ui.blocks_render.chart_model import build_model, copy_text
+from varde.ui.blocks_render.chart_scale import (
     compact,
     fmt,
     nice_ticks,
     thin_step,
 )
-from varde.pages.blocks_render.charts import chart_props as _chart_props
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.serve import PageServer
+from varde.ui.blocks_render.charts import chart_props as _chart_props
+from varde.ui.blocks_render.registry import COMPONENTS
 from varde.ui.lines import parse_lines
 
 
@@ -267,7 +267,7 @@ FONT_SIZE = r"font-size: calc\(var\(--vd-text-(?:xs|md)\) \* var\(--vb-k\)\)"
 
 
 def test_label_text_is_small_and_scaled_to_a_fixed_rendered_size() -> None:
-    from varde.pages.blocks_render.chart_draw import W
+    from varde.ui.blocks_render.chart_draw import W
 
     css = CSS.read_text()
     for name in ("vb-tick", "vb-end", "vb-pct", "vb-note-label", "vb-ev-no"):

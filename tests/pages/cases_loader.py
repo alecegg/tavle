@@ -13,8 +13,8 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde.pages.blocks_render.registry import PAGE_STATEMENTS
 from varde.pages.fences import ui_statements
+from varde.ui.blocks_render.registry import PAGE_STATEMENTS
 
 CASES = Path(__file__).parent / "cases"
 MATRIX = Path(__file__).parent / "fixtures" / "widgets"

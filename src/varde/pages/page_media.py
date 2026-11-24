@@ -3,7 +3,7 @@
 from pathlib import Path
 
 from varde.pages.fences import ui_statements
-from varde.pages.media import Media, Problem, probe
+from varde.ui.media import Media, Problem, probe
 
 
 def page_media(

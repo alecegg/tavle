@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.shell import static_css
 from varde.pages.template import page_shell
+from varde.ui.shell import static_css
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
 PART_NAMES = (

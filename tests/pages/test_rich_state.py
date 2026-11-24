@@ -13,15 +13,17 @@ from typing import Any
 import pytest
 from scene_html import shapes_html
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.diagram_layout import (
+from varde.pages.page_check import check
+from varde.pages.render import render_page
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.diagram_layout import (
     EdgeSpec,
     layout_graph,
     loop_room,
 )
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.blocks_render.state import state_props as _state_props
-from varde.pages.blocks_render.state_graph import (
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.blocks_render.state import state_props as _state_props
+from varde.ui.blocks_render.state_graph import (
     graph_specs,
     loop_labels,
     states_of,
@@ -29,8 +31,6 @@ from varde.pages.blocks_render.state_graph import (
     transitions_of,
     unreachable_ids,
 )
-from varde.pages.page_check import check
-from varde.pages.render import render_page
 
 
 def state_props(data: dict[str, Any]) -> Any:

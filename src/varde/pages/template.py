@@ -7,7 +7,7 @@ import re
 from functools import cache
 from importlib.resources import files
 
-from varde.pages.shell import static_css
+from varde.ui.shell import static_css
 
 # Load order for the known scripts (`recap.js` hosts `window.varde` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other
@@ -39,7 +39,7 @@ def static_scripts() -> tuple[str, ...]:
     return (*known, *(name for name in found if name not in known))
 
 
-BUNDLE_SCRIPT = "components.js"  # built by `varde.pages.components`, not a file
+BUNDLE_SCRIPT = "components.js"  # built by `varde.ui.components`, not a file
 
 
 def page_scripts() -> tuple[str, ...]:

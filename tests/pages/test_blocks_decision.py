@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from ui_fence import example_fence, ui_fence
 
-from varde.pages import blocks, page_check
+from varde.pages import page_check
 from varde.pages.page_check import PAGE_SPECS
+from varde.ui import blocks
 
 VALID = 'question = "Ship it?"\n'
 

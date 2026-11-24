@@ -12,9 +12,9 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks.tables import numeric
 from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks.tables import numeric
 
 PAGES = Path(str(files("varde.pages")))
 CSS = re.sub(

@@ -11,11 +11,11 @@ from typing import Any
 
 import pytest
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.code import (
+from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.code import (
     ALIASES,
 )
-from varde.pages.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SAMPLES = {

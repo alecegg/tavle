@@ -12,16 +12,16 @@ from typing import Any
 import pytest
 from scene_html import svg_html
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks.chart_notes import MAX_NOTES
-from varde.pages.blocks_render.chart_events import hatch_path, place_pins
-from varde.pages.blocks_render.chart_model import (
+from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks.chart_notes import MAX_NOTES
+from varde.ui.blocks_render.chart_events import hatch_path, place_pins
+from varde.ui.blocks_render.chart_model import (
     Event,
     build_model,
     copy_text,
 )
-from varde.pages.blocks_render.charts import chart_props as _chart_props
-from varde.pages.serve import PageServer
+from varde.ui.blocks_render.charts import chart_props as _chart_props
 from varde.ui.lines import parse_lines
 
 

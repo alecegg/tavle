@@ -14,23 +14,23 @@ from typing import Any
 import pytest
 from scene_html import shapes_html
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks.screen_flow import MAX_SCREENS, MAX_STEPS
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.blocks_render.screen_flow import (
-    alternative_lines,
-    copy_text,
-)
-from varde.pages.blocks_render.screen_flow import (
-    screen_flow_props as _screen_flow_props,
-)
-from varde.pages.blocks_render.screen_flow_layout import (
-    Screen,
-    plan_flow,
-)
 from varde.pages.page_check import check
 from varde.pages.render import render_page
 from varde.pages.serve import PageServer
+from varde.ui.blocks import check_props
+from varde.ui.blocks.screen_flow import MAX_SCREENS, MAX_STEPS
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.blocks_render.screen_flow import (
+    alternative_lines,
+    copy_text,
+)
+from varde.ui.blocks_render.screen_flow import (
+    screen_flow_props as _screen_flow_props,
+)
+from varde.ui.blocks_render.screen_flow_layout import (
+    Screen,
+    plan_flow,
+)
 
 
 def screen_flow_props(data: dict[str, Any]) -> Any:

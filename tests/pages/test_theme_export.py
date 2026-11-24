@@ -6,7 +6,7 @@ from pathlib import Path
 from test_export_standalone import every_block_page
 
 from varde.pages.assemble import assemble_static
-from varde.pages.components import export_page
+from varde.ui.components import export_page
 
 
 def test_every_block_export_with_and_without_theme(tmp_path: Path, monkeypatch) -> None:

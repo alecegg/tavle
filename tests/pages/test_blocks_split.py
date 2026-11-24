@@ -1,12 +1,12 @@
 """The block code split by kind keeps every existing render output unchanged."""
 
-from varde.pages.blocks import SPECS, check_props, props_errors
-from varde.pages.blocks import charts as chart_spec
-from varde.pages.blocks import diagrams as diagram_spec
-from varde.pages.blocks import flow as flow_spec
-from varde.pages.blocks import tables as table_spec
-from varde.pages.blocks_render import diagrams, flow, registry
 from varde.pages.include_statement import INCLUDE
+from varde.ui.blocks import SPECS, check_props, props_errors
+from varde.ui.blocks import charts as chart_spec
+from varde.ui.blocks import diagrams as diagram_spec
+from varde.ui.blocks import flow as flow_spec
+from varde.ui.blocks import tables as table_spec
+from varde.ui.blocks_render import diagrams, flow, registry
 
 TABLE = {
     "columns": ["a", "b<"],

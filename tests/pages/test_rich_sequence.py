@@ -13,21 +13,21 @@ from typing import Any
 import pytest
 from scene_html import shapes_html
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.blocks_render.sequence import (
+from varde.pages.page_check import check
+from varde.pages.render import render_page
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.blocks_render.sequence import (
     sequence_props as _sequence_props,
 )
-from varde.pages.blocks_render.sequence import (
+from varde.ui.blocks_render.sequence import (
     step_text,
 )
-from varde.pages.blocks_render.sequence_layout import (
+from varde.ui.blocks_render.sequence_layout import (
     CHAR_W,
     layout,
     place_actors,
 )
-from varde.pages.page_check import check
-from varde.pages.render import render_page
 
 
 def sequence_props(data: dict[str, Any]) -> Any:

@@ -14,9 +14,9 @@ import pytest
 from ui_fence import statement_text
 
 from varde.pages.assemble import assemble_static
-from varde.pages.components import component_bundle
 from varde.pages.render import classify_url, render_page
 from varde.pages.serve import PageServer
+from varde.ui.components import component_bundle
 
 VECTORS = json.loads(
     (Path(__file__).parent / "fixtures/url-vectors.json").read_text(encoding="utf-8")

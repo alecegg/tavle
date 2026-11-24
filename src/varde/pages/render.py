@@ -8,37 +8,37 @@ from dataclasses import dataclass, field, replace
 
 from varde.pages.actions import component_block_type
 from varde.pages.anchors import AnchorState, block_hash
-from varde.pages.blocks.change_summary import Marker, collect_markers
-from varde.pages.blocks.check import check_props, props_errors
-from varde.pages.blocks_render import (
-    error_card,
-    errors_card,
-    mount_client_block,
-    render_block,
-)
-from varde.pages.blocks_render.change_summary import change_summary_props
-from varde.pages.blocks_render.code import code_props
-from varde.pages.blocks_render.containers import (
-    Filled,
-    Placed,
-    fill_containers,
-    tab_headings,
-)
-from varde.pages.blocks_render.file_tree import (
-    code_titles,
-    link_file_trees,
-    target_id,
-)
-from varde.pages.blocks_render.image import image_props, render_refused
 from varde.pages.header import count_words, header_html
 from varde.pages.include_statement import INCLUDE
 from varde.pages.markdown_syntax import FENCE as _FENCE
 from varde.pages.markdown_syntax import HEADING as _HEADING
 from varde.pages.markdown_syntax import FenceScanner, fence_closes
-from varde.pages.media import Media, Problem
 from varde.pages.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
 from varde.pages.toc import toc_entries, toc_html
+from varde.ui.blocks.change_summary import Marker, collect_markers
+from varde.ui.blocks.check import check_props, props_errors
+from varde.ui.blocks_render import (
+    error_card,
+    errors_card,
+    mount_client_block,
+    render_block,
+)
+from varde.ui.blocks_render.change_summary import change_summary_props
+from varde.ui.blocks_render.code import code_props
+from varde.ui.blocks_render.containers import (
+    Filled,
+    Placed,
+    fill_containers,
+    tab_headings,
+)
+from varde.ui.blocks_render.file_tree import (
+    code_titles,
+    link_file_trees,
+    target_id,
+)
+from varde.ui.blocks_render.image import image_props, render_refused
 from varde.ui.lines import ParseError, Statement, parse_lines
+from varde.ui.media import Media, Problem
 
 
 @dataclass(frozen=True)

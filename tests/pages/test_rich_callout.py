@@ -8,10 +8,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks_render.registry import COMPONENTS
 from varde.pages.page_check import check
 from varde.pages.render import render_page
+from varde.ui.blocks import check_props
+from varde.ui.blocks_render.registry import COMPONENTS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 

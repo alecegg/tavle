@@ -15,13 +15,13 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.blocks import check_props
-from varde.pages.blocks.decision import OPTIONS
-from varde.pages.blocks.option_matrix import FIRST_COLUMN, SCALES
-from varde.pages.blocks_render.decision import LABELS, VERDICT_OF
-from varde.pages.blocks_render.registry import COMPONENTS
-from varde.pages.components import component_bundle
 from varde.pages.render import classify_url, render_page
+from varde.ui.blocks import check_props
+from varde.ui.blocks.decision import OPTIONS
+from varde.ui.blocks.option_matrix import FIRST_COLUMN, SCALES
+from varde.ui.blocks_render.decision import LABELS, VERDICT_OF
+from varde.ui.blocks_render.registry import COMPONENTS
+from varde.ui.components import component_bundle
 
 TESTS = Path(__file__).parent
 FIXTURES = TESTS / "components" / "fixtures"

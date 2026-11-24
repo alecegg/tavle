@@ -20,14 +20,12 @@ from varde.pages.comments import (
     mark_applied,
     read_rows,
 )
-from varde.pages.components import component_bundle
 from varde.pages.edit import (
     EditError,
     accept_replacement,
     apply_edit,
     read_block,
 )
-from varde.pages.media import Problem, load
 from varde.pages.netbind import (
     LOOPBACK,
     allowed_hosts,
@@ -51,13 +49,15 @@ from varde.pages.server_parts import (
     watch_files,
     write_event_stream,
 )
-from varde.pages.shell import TOKENS_CSS, static_css
 from varde.pages.store import EDIT_OFF, sources_for, store_comment
 from varde.pages.template import BUNDLE_SCRIPT, static_scripts
 from varde.pages.theme.css import theme_css
 from varde.pages.theme.page import doc_theme
 from varde.pages.theme.tokens import ThemeError
 from varde.pages.validation import parse_json_object, strings
+from varde.ui.components import component_bundle
+from varde.ui.media import Problem, load
+from varde.ui.shell import TOKENS_CSS, static_css
 
 # `app.css` without the tokens: the host page that mounts a page owns them
 INLINE_CSS = "app-inline.css"
