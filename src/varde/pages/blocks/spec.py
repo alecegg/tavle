@@ -4,18 +4,34 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from dataclasses import dataclass
+from typing import Literal
 
 from varde.pages.blocks.rules import Fault
+
+PropertyType = Literal["string", "integer", "number", "boolean", "list", "object", "id"]
 
 
 @dataclass(frozen=True)
 class PropertySpec:
     name: str
-    type: str
+    type: PropertyType
     required: bool = False
     enum: tuple[str, ...] = ()
-    child: str | None = None
+    items: PropertyType | None = None
+    fields: tuple[PropertySpec, ...] = ()
     answer_schema: AnswerSchema | None = None
+
+    def __post_init__(self) -> None:
+        if self.items is not None and self.type != "list":
+            raise ValueError("items requires a list")
+        if self.fields and not (
+            self.type == "object" or (self.type == "list" and self.items == "object")
+        ):
+            raise ValueError("fields requires an object or list of objects")
+        if self.enum and not (
+            self.type == "string" or (self.type == "list" and self.items == "string")
+        ):
+            raise ValueError("enum requires a string or list of strings")
 
 
 @dataclass(frozen=True)

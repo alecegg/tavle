@@ -30,7 +30,13 @@ from varde.pages.blocks.rules import Fault
 from varde.pages.blocks.screen_flow import SCREEN_FLOW
 from varde.pages.blocks.screens import UI_STATES, WIREFRAME
 from varde.pages.blocks.sequence import SEQUENCE
-from varde.pages.blocks.spec import INPUT_BLOCK_TYPES, WIDGET, BlockSpec
+from varde.pages.blocks.spec import (
+    INPUT_BLOCK_TYPES,
+    WIDGET,
+    BlockSpec,
+    PropertySpec,
+    PropertyType,
+)
 from varde.pages.blocks.state import STATE
 from varde.pages.blocks.stats import STATS
 from varde.pages.blocks.tables import TABLE
@@ -179,6 +185,51 @@ def check(doc_text: str, root: Path | None = None) -> list[BlockError]:
     return sorted(errors, key=lambda error: error.line)
 
 
+def _property_faults(
+    data: dict[str, object], properties: tuple[PropertySpec, ...], prefix: str = ""
+) -> list[Fault]:
+    names = {prop.name for prop in properties}
+    faults = [
+        Fault("unknown-key", f"unknown key '{prefix}{key}'")
+        for key in sorted(data.keys() - names)
+    ]
+    for prop in properties:
+        path = f"{prefix}{prop.name}"
+        if prop.name not in data:
+            if prop.required:
+                faults.append(Fault("missing-key", f"missing required key '{path}'"))
+            continue
+        faults += _value_faults(data[prop.name], prop.type, path, prop)
+    return faults
+
+
+def _value_faults(
+    value: object, kind: PropertyType, path: str, prop: PropertySpec
+) -> list[Fault]:
+    valid = {
+        "string": lambda: isinstance(value, str),
+        "integer": lambda: isinstance(value, int) and not isinstance(value, bool),
+        "number": lambda: (
+            isinstance(value, int | float) and not isinstance(value, bool)
+        ),
+        "boolean": lambda: isinstance(value, bool),
+        "list": lambda: isinstance(value, list),
+        "object": lambda: isinstance(value, dict),
+        "id": lambda: isinstance(value, str) and bool(ID_RULE.fullmatch(value)),
+    }
+    if not valid[kind]():
+        return [Fault("type", f"'{path}' must be {kind}")]
+    faults: list[Fault] = []
+    if kind == "string" and prop.enum and value not in prop.enum:
+        faults.append(Fault("type", f"'{path}' must be one of {', '.join(prop.enum)}"))
+    if kind == "object" and isinstance(value, dict) and prop.fields:
+        faults += _property_faults(value, prop.fields, f"{path}.")
+    if kind == "list" and isinstance(value, list) and prop.items:
+        for index, item in enumerate(value):
+            faults += _value_faults(item, prop.items, f"{path}[{index}]", prop)
+    return faults
+
+
 def check_props(
     component: str, props: dict[str, object], line: int
 ) -> list[BlockError]:
@@ -191,5 +242,7 @@ def check_props(
     data = dict(props)
     faults = _covers_faults(data)
     data.pop("covers", None)
+    if spec.properties:
+        faults += _property_faults(data, spec.properties)
     faults += spec.validate(data)
     return [BlockError(line, f.rule, f.message) for f in faults]
