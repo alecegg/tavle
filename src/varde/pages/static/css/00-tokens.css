@@ -26,6 +26,14 @@
   --vd-line: hsl(0 0% 90%);
   --vd-fill: hsl(0 0% 95%);
 
+  --vd-heading-weight: 700;
+  --vd-title-weight: 750;
+  --vd-heading-tracking: -0.01em;
+  --vd-title-tracking: -0.02em;
+  --vd-heading-case: none;
+  --vd-heading-color: var(--vd-text);
+  --vd-heading-mark-size: 0.5em;
+
   /* text */
   --vd-text: var(--vd-ink);
   --vd-text-secondary: var(--vd-ink-70);

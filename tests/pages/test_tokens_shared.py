@@ -208,3 +208,25 @@ def test_neutral_family_has_a_hue_and_the_accents_are_two_hues(scheme: str) -> N
         for name in ("--vd-accent", "--vd-accent-2")
     }
     assert len(hues) == 2
+
+
+def test_heading_tokens_are_shared_across_schemes() -> None:
+    names = (
+        "heading-weight",
+        "title-weight",
+        "heading-tracking",
+        "title-tracking",
+        "heading-case",
+        "heading-color",
+        "heading-mark-size",
+    )
+    light = _declarations(_body(":root, :host"))
+    for name in names:
+        token = f"--vd-{name}"
+        assert token in light
+        assert CSS.count(f"{token}:") == 1
+        for selector in (
+            "@media (prefers-color-scheme: dark)",
+            ':root[data-theme="dark"]',
+        ):
+            assert token not in _declarations(_body(selector))
