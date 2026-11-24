@@ -17,7 +17,7 @@ TOKENS_CSS = (  # mollify: ignore[hardcoded-secret] a CSS file name, not a crede
 )
 
 
-UI_STATIC = files("varde.ui").joinpath("static")
+UI_STATIC = files("tavle").joinpath("static")
 VENDOR_ASSETS = frozenset({"mithril.js"})
 
 

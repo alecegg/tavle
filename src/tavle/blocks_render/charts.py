@@ -6,9 +6,9 @@ adds the tooltip, the live readout, the legend toggles and keyboard reading on t
 of the mounted markup.
 """
 
-from varde.ui.blocks_render.chart_draw import draw, symbol
-from varde.ui.blocks_render.chart_events import events_props, events_sentence
-from varde.ui.blocks_render.chart_model import (
+from ..blocks_render.chart_draw import draw, symbol
+from ..blocks_render.chart_events import events_props, events_sentence
+from ..blocks_render.chart_model import (
     Model,
     Series,
     build_model,
@@ -20,8 +20,8 @@ from varde.ui.blocks_render.chart_model import (
     show,
     summary,
 )
-from varde.ui.blocks_render.chart_scale import fmt
-from varde.ui.blocks_render.svg import Shape, el, view_box
+from ..blocks_render.chart_scale import fmt
+from ..blocks_render.svg import Shape, el, view_box
 
 __all__ = ["chart_props", "copy_text", "fmt"]
 

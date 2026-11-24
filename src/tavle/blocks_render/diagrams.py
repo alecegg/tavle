@@ -9,8 +9,8 @@ The first state (nothing collapsed) is what a static export shows.
 import math
 from collections.abc import Mapping
 
-from varde.ui.blocks_render.common import as_dict, as_list
-from varde.ui.blocks_render.diagram_layout import (
+from ..blocks_render.common import as_dict, as_list
+from ..blocks_render.diagram_layout import (
     FRAME_HEAD,
     MIN_H,
     Box,
@@ -22,7 +22,7 @@ from varde.ui.blocks_render.diagram_layout import (
     PlacedNode,
     layout_graph,
 )
-from varde.ui.blocks_render.svg import Shape, el, f1, view_box
+from ..blocks_render.svg import Shape, el, f1, view_box
 
 HEAD_LEN, HEAD_HALF = 10.0, 5.0
 GROUP_CLASSES = 3

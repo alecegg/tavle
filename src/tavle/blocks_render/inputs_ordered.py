@@ -6,10 +6,10 @@ them and posts one `answer` row, and the server checks that row again. A ranking
 sends the item values in order; a slider sends one number.
 """
 
-from varde.ui.blocks.inputs import option_label_value
-from varde.ui.blocks.inputs_ordered import slider_bounds
-from varde.ui.blocks.spec import AnswerSchema
-from varde.ui.blocks_render.common import as_dict, as_list
+from ..blocks.inputs import option_label_value
+from ..blocks.inputs_ordered import slider_bounds
+from ..blocks.spec import AnswerSchema
+from ..blocks_render.common import as_dict, as_list
 
 Props = dict[str, object]
 

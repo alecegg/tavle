@@ -1,12 +1,12 @@
 """Block type for changed files: file-tree."""
 
-from varde.ui.blocks.change import (
+from ..blocks.change import (
     CHANGE_NOTES,
     CHANGE_PROPERTIES,
     change_rule_faults,
 )
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 
 def path_faults(path: object, where: str) -> list[Fault]:

@@ -7,9 +7,9 @@ renderers and answer schemas live in `blocks_render.inputs`. Pure functions.
 import math
 import re
 
-from varde.ui.blocks.rules import Fault, check_keys, duplicates, is_number
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
-from varde.ui.limits import CONTROLS, MAX_ITEM
+from ..blocks.rules import Fault, check_keys, duplicates, is_number
+from ..blocks.spec import BlockSpec, PropertySpec
+from ..limits import CONTROLS, MAX_ITEM
 
 MAX_OPTIONS = 50
 MAX_FIELDS = 30

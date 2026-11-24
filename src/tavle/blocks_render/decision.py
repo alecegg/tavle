@@ -3,10 +3,10 @@
 The block itself renders client-side (`static/components/decision.js`).
 """
 
-from varde.ui.blocks.decision import OPTIONS
-from varde.ui.blocks.spec import AnswerSchema
-from varde.ui.blocks_render.common import as_list
-from varde.ui.blocks_render.inputs import choice_values
+from ..blocks.decision import OPTIONS
+from ..blocks.spec import AnswerSchema
+from ..blocks_render.common import as_list
+from ..blocks_render.inputs import choice_values
 
 VERDICT_OF = {"approve": "approved", "deny": "denied", "comment": "commented"}
 LABELS = {"approve": "Approve", "deny": "Deny", "comment": "Comment"}

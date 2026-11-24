@@ -11,16 +11,16 @@ tokens in `60-state.css`.
 
 from dataclasses import replace
 
-from varde.ui.blocks_render.common import count_noun
-from varde.ui.blocks_render.diagram_layout import (
+from ..blocks_render.common import count_noun
+from ..blocks_render.diagram_layout import (
     Box,
     Layout,
     PlacedEdge,
     PlacedNode,
     layout_graph,
 )
-from varde.ui.blocks_render.diagrams import _head, _text
-from varde.ui.blocks_render.state_graph import (
+from ..blocks_render.diagrams import _head, _text
+from ..blocks_render.state_graph import (
     KIND_WORDS,
     Props,
     free_id,
@@ -31,10 +31,10 @@ from varde.ui.blocks_render.state_graph import (
     transitions_of,
     unreachable_ids,
 )
-from varde.ui.blocks_render.state_graph import (
+from ..blocks_render.state_graph import (
     graph_specs as specs,
 )
-from varde.ui.blocks_render.svg import Shape, el, f1, view_box
+from ..blocks_render.svg import Shape, el, f1, view_box
 
 DOT_R = 8.0
 RING = 4.0

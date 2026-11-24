@@ -1,7 +1,7 @@
 """The shared change vocabulary: `change` and `was` on a row, field or entity."""
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import PropertySpec
 
 CHANGES = ("added", "modified", "removed", "renamed")
 _ALLOWED = ", ".join(CHANGES)

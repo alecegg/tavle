@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from varde.ui.shell import token_css, vendor_asset
+from tavle.shell import token_css, vendor_asset
 
 
 def test_vendor_asset_returns_mithril() -> None:

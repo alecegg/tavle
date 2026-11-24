@@ -1,9 +1,9 @@
 """Block type for a before and after text diff: diff."""
 
-from varde.ui.blocks.annotated_code import parse_range
-from varde.ui.blocks.diff_rows import MAX_ROWS, patch_rows, text_lines
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.annotated_code import parse_range
+from ..blocks.diff_rows import MAX_ROWS, patch_rows, text_lines
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 MODES = ("unified", "split")
 SIDES = ("before", "after")

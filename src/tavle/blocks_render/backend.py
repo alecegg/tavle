@@ -6,14 +6,14 @@ builds the cards and tables.
 
 from collections.abc import Mapping
 
-from varde.ui.blocks_render.change import (
+from ..blocks_render.change import (
     change_of,
     copy_line,
     field_props,
     legend_text,
 )
-from varde.ui.blocks_render.common import as_dict, as_list, count_noun
-from varde.ui.blocks_render.er import graph_props
+from ..blocks_render.common import as_dict, as_list, count_noun
+from ..blocks_render.er import graph_props
 
 # One changed row: (change, name used in the Copy text, was).
 Changed = list[tuple[str, str, str]]

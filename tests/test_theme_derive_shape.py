@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-from varde.ui.theme.derive_shape import FIXED_TOKENS, derive_shape
+from tavle.theme.derive_shape import FIXED_TOKENS, derive_shape
 
 
 def test_shared_defaults_and_coverage() -> None:
@@ -23,7 +23,7 @@ def test_shared_defaults_and_coverage() -> None:
         "page-width": 60,
     }
     result = derive_shape(tokens)
-    css = Path("src/varde/ui/static/css/00-tokens.css").read_text()
+    css = Path("src/tavle/static/css/00-tokens.css").read_text()
     for name, value in result.items():
         if name.startswith("--vd-font-"):
             continue

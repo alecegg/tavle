@@ -1,9 +1,9 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
-const componentTests = fileURLToPath(new URL('../components', import.meta.url));
+const componentTests = fileURLToPath(new URL('./tests/components', import.meta.url));
 const jsdom = fileURLToPath(import.meta.resolve('jsdom'));
-const uiStatic = fileURLToPath(new URL('../../../src/varde/ui/static', import.meta.url));
+const uiStatic = fileURLToPath(new URL('./src/tavle/static', import.meta.url));
 
 export default defineConfig({
   test: {

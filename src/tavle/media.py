@@ -12,8 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from posixpath import splitext
 
-from varde.ui.blocks.image import src_fault
-from varde.ui.blocks.image_header import EXTENSIONS, MIME, read_header
+from .blocks.image import src_fault
+from .blocks.image_header import EXTENSIONS, MIME, read_header
 
 MAX_BYTES = 5 * 1024 * 1024
 EMBED_BYTES = 1024 * 1024  # export inlines a file only up to this size

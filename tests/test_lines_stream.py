@@ -2,8 +2,8 @@
 
 import pytest
 
-from varde.ui.lines import parse_lines
-from varde.ui.lines.grammar import EXAMPLES
+from tavle.lines import parse_lines
+from tavle.lines.grammar import EXAMPLES
 
 
 def _stream(text):

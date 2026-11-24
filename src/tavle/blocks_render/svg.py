@@ -6,7 +6,7 @@ no `style=` attribute, no fixed width, every text from props escaped.
 
 from typing import Any
 
-from varde.ui.blocks_render.common import esc
+from ..blocks_render.common import esc
 
 # A drawn element the browser builds: [tag, attributes, text or child shapes].
 Shape = list[Any]

@@ -1,6 +1,6 @@
 import pytest
 
-from varde.ui.theme.tokens import (
+from tavle.theme.tokens import (
     FONT_STACKS,
     TOKENS,
     ThemeError,

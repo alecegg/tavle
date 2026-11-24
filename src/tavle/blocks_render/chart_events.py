@@ -9,14 +9,14 @@ The drawing is shapes (`svg.el`); `static/components/chart.js` builds the DOM.
 
 from dataclasses import dataclass
 
-from varde.ui.blocks_render.chart_model import (
+from ..blocks_render.chart_model import (
     Event,
     Model,
     where,
 )
-from varde.ui.blocks_render.chart_scale import CHAR
-from varde.ui.blocks_render.common import count_noun
-from varde.ui.blocks_render.svg import Shape, el, ellipsize, f1
+from ..blocks_render.chart_scale import CHAR
+from ..blocks_render.common import count_noun
+from ..blocks_render.svg import Shape, el, ellipsize, f1
 
 ROW = 28.0
 PIN = 22.0  # pin width; its height is 20 (square) or 22 (circle)

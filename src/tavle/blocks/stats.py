@@ -1,7 +1,7 @@
 """Block type for a headline strip of numbers: stats."""
 
-from varde.ui.blocks.rules import Fault, is_number
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, is_number
+from ..blocks.spec import BlockSpec, PropertySpec
 
 DIRECTIONS = ("up", "down", "flat")
 GOODS = ("up", "down")

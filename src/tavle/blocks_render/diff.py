@@ -9,8 +9,8 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from varde.ui.blocks.annotated_code import parse_range
-from varde.ui.blocks.diff_rows import (
+from ..blocks.annotated_code import parse_range
+from ..blocks.diff_rows import (
     MAX_ROWS,
     Block,
     Row,
@@ -21,7 +21,7 @@ from varde.ui.blocks.diff_rows import (
     text_lines,
     unified_text,
 )
-from varde.ui.blocks_render.code import CLASS_OF, split_lines, tokenize
+from ..blocks_render.code import CLASS_OF, split_lines, tokenize
 
 MAX_DIGIT_CLASS = 6
 

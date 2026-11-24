@@ -9,9 +9,9 @@ is opened.
 import re
 from posixpath import splitext
 
-from varde.ui.blocks.image_header import EXTENSIONS
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.image_header import EXTENSIONS
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 WIDTHS = ("narrow", "full")
 _SCHEME = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:|^//")

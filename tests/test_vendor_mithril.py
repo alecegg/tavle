@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-VENDORED = REPO / "src/varde/ui/static/vendor/mithril.js"
+VENDORED = REPO / "src/tavle/static/vendor/mithril.js"
 LICENCES = REPO / "docs/third-party-licences.md"
 ROW = re.compile(
     r"^\| `([^`]+mithril\.js)` \| (\S+) \| (\S+) \| `([0-9a-f]{64})` \|$",

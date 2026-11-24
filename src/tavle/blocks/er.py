@@ -1,6 +1,6 @@
 """Checks for the data-model `layout` prop: `list` (default) or `graph`."""
 
-from varde.ui.blocks.rules import Fault, tables
+from ..blocks.rules import Fault, tables
 
 LAYOUTS = ("list", "graph")
 MAX_GRAPH_ENTITIES = 30

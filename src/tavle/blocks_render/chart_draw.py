@@ -13,8 +13,8 @@ import math
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from varde.ui.blocks_render.chart_events import draw_events, events_top
-from varde.ui.blocks_render.chart_model import (
+from ..blocks_render.chart_events import draw_events, events_top
+from ..blocks_render.chart_model import (
     Model,
     Series,
     colour,
@@ -23,14 +23,14 @@ from varde.ui.blocks_render.chart_model import (
     reading,
     show,
 )
-from varde.ui.blocks_render.chart_scale import (
+from ..blocks_render.chart_scale import (
     CHAR,
     compact,
     nice_ticks,
     thin_step,
     tick_decimals,
 )
-from varde.ui.blocks_render.svg import Shape, el, ellipsize, f1
+from ..blocks_render.svg import Shape, el, ellipsize, f1
 
 W, H = 360.0, 220.0  # W is also --vb-w in 41-chart.css
 GLYPH_SPREAD = 1.1  # wide glyphs make real labels up to this much wider than CHAR says

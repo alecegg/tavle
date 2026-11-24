@@ -2,9 +2,9 @@
 
 import math
 
-from varde.ui.blocks.chart_notes import NOTE_PROPERTIES, note_rule_faults
-from varde.ui.blocks.rules import Fault, is_number, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.chart_notes import NOTE_PROPERTIES, note_rule_faults
+from ..blocks.rules import Fault, is_number, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 _CHART_KINDS = ("bar", "line", "area", "scatter", "donut", "sparkline", "combo")
 MAX_SERIES = 12

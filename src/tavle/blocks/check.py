@@ -3,42 +3,42 @@
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-from varde.ui.blocks.annotated_code import ANNOTATED_CODE
-from varde.ui.blocks.backend import DATA_MODEL, ENDPOINT
-from varde.ui.blocks.callout import CALLOUT
-from varde.ui.blocks.change_summary import CHANGE_SUMMARY
-from varde.ui.blocks.charts import CHART
-from varde.ui.blocks.checklist import CHECKLIST
-from varde.ui.blocks.code import CODE
-from varde.ui.blocks.containers import COLUMNS, TABS
-from varde.ui.blocks.decision import DECISION
-from varde.ui.blocks.deps import DEPS
-from varde.ui.blocks.diagrams import DIAGRAM
-from varde.ui.blocks.diff import DIFF
-from varde.ui.blocks.file_tree import FILE_TREE
-from varde.ui.blocks.flow import FLOW
-from varde.ui.blocks.image import IMAGE
-from varde.ui.blocks.inputs import CHOICE, COMMENT, FORM
-from varde.ui.blocks.inputs_ordered import RANKING, SLIDER
-from varde.ui.blocks.option_matrix import MATRIX
-from varde.ui.blocks.recap import RECAP
-from varde.ui.blocks.risk import RISK
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.screen_flow import SCREEN_FLOW
-from varde.ui.blocks.screens import UI_STATES, WIREFRAME
-from varde.ui.blocks.sequence import SEQUENCE
-from varde.ui.blocks.spec import (
+from ..blocks.annotated_code import ANNOTATED_CODE
+from ..blocks.backend import DATA_MODEL, ENDPOINT
+from ..blocks.callout import CALLOUT
+from ..blocks.change_summary import CHANGE_SUMMARY
+from ..blocks.charts import CHART
+from ..blocks.checklist import CHECKLIST
+from ..blocks.code import CODE
+from ..blocks.containers import COLUMNS, TABS
+from ..blocks.decision import DECISION
+from ..blocks.deps import DEPS
+from ..blocks.diagrams import DIAGRAM
+from ..blocks.diff import DIFF
+from ..blocks.file_tree import FILE_TREE
+from ..blocks.flow import FLOW
+from ..blocks.image import IMAGE
+from ..blocks.inputs import CHOICE, COMMENT, FORM
+from ..blocks.inputs_ordered import RANKING, SLIDER
+from ..blocks.option_matrix import MATRIX
+from ..blocks.recap import RECAP
+from ..blocks.risk import RISK
+from ..blocks.rules import Fault
+from ..blocks.screen_flow import SCREEN_FLOW
+from ..blocks.screens import UI_STATES, WIREFRAME
+from ..blocks.sequence import SEQUENCE
+from ..blocks.spec import (
     INPUT_BLOCK_TYPES,
     WIDGET,
     BlockSpec,
     PropertySpec,
     PropertyType,
 )
-from varde.ui.blocks.state import STATE
-from varde.ui.blocks.stats import STATS
-from varde.ui.blocks.tables import TABLE
-from varde.ui.blocks.timeline import TIMELINE
-from varde.ui.lines.parse import ID_RULE
+from ..blocks.state import STATE
+from ..blocks.stats import STATS
+from ..blocks.tables import TABLE
+from ..blocks.timeline import TIMELINE
+from ..lines.parse import ID_RULE
 
 SPECS: dict[str, BlockSpec] = {
     s.name: s

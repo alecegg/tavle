@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-UI = Path(__file__).resolve().parents[2] / "src/varde/ui"
+UI = Path(__file__).resolve().parents[2] / "src/tavle"
 CSS = (UI / "static/css/23-decision.css").read_text()
 
 

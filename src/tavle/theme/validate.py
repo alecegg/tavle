@@ -5,9 +5,9 @@ from collections.abc import Mapping
 from itertools import combinations
 from typing import cast
 
-from varde.ui.contrast import RGBA, composite, contrast_ratio
-from varde.ui.theme.derive_colour import derive_colour
-from varde.ui.theme.tokens import ThemeError
+from ..contrast import RGBA, composite, contrast_ratio
+from ..theme.derive_colour import derive_colour
+from ..theme.tokens import ThemeError
 
 STATUS = ("success", "warning", "danger", "info", "decision")
 PAIRS = (

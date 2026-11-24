@@ -1,7 +1,7 @@
 """Block type for asking the user to approve, deny or comment."""
 
-from varde.ui.blocks.rules import Fault, duplicates
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates
+from ..blocks.spec import BlockSpec, PropertySpec
 
 OPTIONS = ("approve", "deny", "comment")
 

@@ -1,7 +1,7 @@
 """Block type for a sequence diagram: actors, ordered steps, optional groups."""
 
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("call", "return", "async", "note")
 MAX_ACTORS = 12

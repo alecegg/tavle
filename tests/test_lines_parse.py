@@ -2,8 +2,8 @@
 
 import pytest
 
-from varde.ui.lines import Ref, parse_lines
-from varde.ui.lines.grammar import EXAMPLES
+from tavle.lines import Ref, parse_lines
+from tavle.lines.grammar import EXAMPLES
 
 
 @pytest.mark.parametrize("example", EXAMPLES)

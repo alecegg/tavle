@@ -2,8 +2,8 @@
 
 import re
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("info", "warn", "change")
 MAX_NOTES = 40

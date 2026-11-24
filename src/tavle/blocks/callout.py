@@ -1,7 +1,7 @@
 """Block type for settled notes: callout."""
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 TONES = ("info", "decision", "risk", "warning", "success")
 

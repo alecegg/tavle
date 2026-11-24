@@ -1,9 +1,9 @@
 """Block type for source listings: code."""
 
-from varde.ui.blocks.rules import (
+from ..blocks.rules import (
     Fault,
 )
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.spec import BlockSpec, PropertySpec
 
 
 def _is_line(value: object) -> bool:

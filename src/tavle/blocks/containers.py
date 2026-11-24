@@ -7,8 +7,8 @@ document-level `container_errors` checks the ids against the whole page.
 
 from collections.abc import Iterator, Sequence
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 MAX_PANELS = {"tabs": 12, "columns": 4}
 MAX_HELD = 200

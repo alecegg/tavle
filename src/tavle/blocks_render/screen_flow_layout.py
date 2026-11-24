@@ -10,8 +10,8 @@ gap beside the connector. No I/O, no HTML.
 from collections.abc import Sequence
 from dataclasses import dataclass
 
-from varde.ui.blocks_render.diagram_layout import Box, assign_layers
-from varde.ui.blocks_render.svg import clip_lines
+from ..blocks_render.diagram_layout import Box, assign_layers
+from ..blocks_render.svg import clip_lines
 
 Size = tuple[float, float]
 Point = tuple[float, float]

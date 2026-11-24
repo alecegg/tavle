@@ -1,6 +1,6 @@
 """Pure helpers of the shared SVG kit."""
 
-from varde.ui.blocks_render import svg
+from tavle.blocks_render import svg
 
 
 def test_series_differentiators_cycle_and_differ() -> None:

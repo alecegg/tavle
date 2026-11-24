@@ -1,7 +1,7 @@
 """Block type for tabular data: table."""
 
-from varde.ui.blocks.rules import Fault, duplicates, is_number, str_map, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, is_number, str_map, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 COLUMN_TYPES = ("text", "number", "status", "bar", "link")
 NUMERIC_TYPES = ("number", "bar")

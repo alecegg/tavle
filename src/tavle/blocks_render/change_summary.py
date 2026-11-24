@@ -6,7 +6,7 @@ as `text`; the component shows it and copies it.
 
 from collections.abc import Iterable
 
-from varde.ui.blocks.change_summary import UNCOUNTED, Marker, sentence
+from ..blocks.change_summary import UNCOUNTED, Marker, sentence
 
 
 def change_summary_props(

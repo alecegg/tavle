@@ -1,11 +1,11 @@
 """Block type for a decision matrix: matrix (options as columns, criteria as rows)."""
 
-from varde.ui.blocks.rules import (
+from ..blocks.rules import (
     Fault,
     duplicates,
     tables,
 )
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.spec import BlockSpec, PropertySpec
 
 SCALES = {
     "verdict": {"yes": 2, "partial": 1, "no": 0},

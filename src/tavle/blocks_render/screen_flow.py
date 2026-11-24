@@ -14,14 +14,14 @@ import zlib
 from collections.abc import Mapping, Sequence
 from typing import Any
 
-from varde.ui.blocks_render.common import (
+from ..blocks_render.common import (
     as_dict,
     as_list,
     count_noun,
 )
-from varde.ui.blocks_render.diagram_layout import Box
-from varde.ui.blocks_render.diagrams import _head, _text
-from varde.ui.blocks_render.screen_flow_layout import (
+from ..blocks_render.diagram_layout import Box
+from ..blocks_render.diagrams import _head, _text
+from ..blocks_render.screen_flow_layout import (
     CAPTION_H,
     Band,
     Link,
@@ -30,8 +30,8 @@ from varde.ui.blocks_render.screen_flow_layout import (
     Tile,
     plan_flow,
 )
-from varde.ui.blocks_render.screens import _notes, _used, frame_shape, frame_size
-from varde.ui.blocks_render.svg import Shape, clip_lines, el, f1, view_box
+from ..blocks_render.screens import _notes, _used, frame_shape, frame_size
+from ..blocks_render.svg import Shape, clip_lines, el, f1, view_box
 
 Props = Mapping[str, Any]
 SCALE = 1.0

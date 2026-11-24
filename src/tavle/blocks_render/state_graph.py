@@ -8,12 +8,12 @@ text-alternative helpers.
 
 from collections.abc import Mapping, Sequence
 
-from varde.ui.blocks_render.common import as_dict, as_list
-from varde.ui.blocks_render.diagram_layout import (
+from ..blocks_render.common import as_dict, as_list
+from ..blocks_render.diagram_layout import (
     EdgeSpec,
     NodeSpec,
 )
-from varde.ui.blocks_render.svg import ellipsize
+from ..blocks_render.svg import ellipsize
 
 Props = Mapping[str, object]
 KIND_WORDS = {

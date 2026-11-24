@@ -1,7 +1,7 @@
 """Block type for structure: diagram (a graph or tree of nodes and edges)."""
 
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("graph", "tree")
 SHAPES = ("box", "rounded", "cylinder", "diamond")

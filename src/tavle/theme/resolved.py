@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from varde.ui.contrast import RGBA
+from ..contrast import RGBA
 
 
 @dataclass

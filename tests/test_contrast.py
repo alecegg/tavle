@@ -2,7 +2,7 @@
 
 import pytest
 
-from varde.ui.contrast import (
+from tavle.contrast import (
     composite,
     contrast_ratio,
     fails_threshold,

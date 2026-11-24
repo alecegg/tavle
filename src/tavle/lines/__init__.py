@@ -1,6 +1,6 @@
 """Line syntax for page components: grammar and pure parser."""
 
-from varde.ui.lines.parse import (
+from ..lines.parse import (
     ParseError,
     ParseResult,
     Ref,

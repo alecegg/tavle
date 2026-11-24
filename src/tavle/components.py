@@ -10,7 +10,7 @@ import json
 import re
 from collections.abc import Callable
 
-from varde.ui.shell import HOST_ATTR, UI_STATIC, standalone_shell
+from .shell import HOST_ATTR, UI_STATIC, standalone_shell
 
 _EXPORT = re.compile(r"^export ", re.MULTILINE)
 _IMPORT = re.compile(r"^import\s", re.MULTILINE)

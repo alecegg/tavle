@@ -1,7 +1,7 @@
 """Block type for a risk matrix: likelihood by impact with a mitigation list."""
 
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 LEVELS = ("low", "medium", "high")
 MAX_ITEMS = 200

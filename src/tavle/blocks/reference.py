@@ -3,7 +3,7 @@
 from collections.abc import Mapping
 from dataclasses import asdict
 
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.spec import BlockSpec, PropertySpec
 
 
 def _indented(text: str, depth: int = 1) -> str:

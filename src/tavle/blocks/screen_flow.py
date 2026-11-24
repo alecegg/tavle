@@ -1,8 +1,8 @@
 """Block type for a multi-screen wireframe flow: screens, steps and optional lanes."""
 
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.screens import FRAME_PROPERTIES, SURFACE, frame_faults
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.screens import FRAME_PROPERTIES, SURFACE, frame_faults
+from ..blocks.spec import BlockSpec, PropertySpec
 
 MAX_SCREENS = 12
 MAX_STEPS = 20
@@ -126,7 +126,7 @@ def _pairs(data: dict[str, object], ids: list[str]) -> list[tuple[str, str]]:
 def _flow_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
     """Cycles, then lanes and ranks: a step joins neighbouring ranks of one lane."""
     # Imported here: the renderer package imports this one at load time.
-    from varde.ui.blocks_render.diagram_layout import (
+    from ..blocks_render.diagram_layout import (
         assign_layers,
         back_edges,
     )

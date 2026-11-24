@@ -6,9 +6,9 @@ The widgets render in the browser (`static/components/{choice,form,comment}.js`)
 the only strings the client sends back, and the server checks them again.
 """
 
-from varde.ui.blocks.inputs import option_label_value
-from varde.ui.blocks.spec import AnswerSchema
-from varde.ui.blocks_render.common import as_dict, as_list
+from ..blocks.inputs import option_label_value
+from ..blocks.spec import AnswerSchema
+from ..blocks_render.common import as_dict, as_list
 
 Props = dict[str, object]
 MAX_NOTE = 8000  # the server's cap on an answer's text

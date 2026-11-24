@@ -9,8 +9,8 @@ without the picture. A refused image stays an error card built here.
 
 from urllib.parse import quote
 
-from varde.ui.blocks_render.common import card, esc
-from varde.ui.media import Media
+from ..blocks_render.common import card, esc
+from ..media import Media
 
 NOT_EMBEDDED = "Image not embedded in this export."
 OPEN_LABEL = "Open image full size"

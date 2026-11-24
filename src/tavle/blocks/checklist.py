@@ -1,7 +1,7 @@
 """Block type for a static checklist with progress: checklist."""
 
-from varde.ui.blocks.rules import Fault, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 STATUSES = ("done", "open", "blocked")
 MAX_ITEMS = 500

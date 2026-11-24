@@ -12,19 +12,19 @@ import hashlib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from varde.ui.blocks_render.change import (
+from ..blocks_render.change import (
     GLYPHS,
     change_of,
     copy_line,
     field_props,
     legend_text,
 )
-from varde.ui.blocks_render.common import (
+from ..blocks_render.common import (
     as_dict,
     as_list,
     count_noun,
 )
-from varde.ui.blocks_render.er_layout import (
+from ..blocks_render.er_layout import (
     BOX_W,
     HEAD_H,
     ROW_H,
@@ -36,7 +36,7 @@ from varde.ui.blocks_render.er_layout import (
     route,
     visible_rows,
 )
-from varde.ui.blocks_render.svg import Shape, el
+from ..blocks_render.svg import Shape, el
 
 TEXT_CHARS = 30
 ENDS = {

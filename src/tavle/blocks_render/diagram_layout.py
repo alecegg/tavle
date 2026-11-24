@@ -13,7 +13,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from itertools import pairwise
 
-from varde.ui.blocks_render.svg import wrap_text
+from ..blocks_render.svg import wrap_text
 
 CHAR_W = 7.0
 LINE_H = 16.0

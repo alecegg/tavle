@@ -42,22 +42,22 @@ with JSON-like values and references to earlier ids. Props are not.
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from varde.ui.blocks import COMPONENT_SPECS
-from varde.ui.blocks.spec import AnswerSchema, BlockSpec
-from varde.ui.blocks_render.annotated_code import annotated_props
-from varde.ui.blocks_render.backend import data_model_props, endpoint_props
-from varde.ui.blocks_render.change_summary import change_summary_props
-from varde.ui.blocks_render.charts import chart_props
-from varde.ui.blocks_render.code import code_block_props
-from varde.ui.blocks_render.common import as_dict
-from varde.ui.blocks_render.containers import container_props
-from varde.ui.blocks_render.decision import decision_answer_schema
-from varde.ui.blocks_render.diagrams import diagram_props
-from varde.ui.blocks_render.diff import diff_props
-from varde.ui.blocks_render.file_tree import file_tree_props
-from varde.ui.blocks_render.flow import flow_props
-from varde.ui.blocks_render.image import image_props
-from varde.ui.blocks_render.inputs import (
+from ..blocks import COMPONENT_SPECS
+from ..blocks.spec import AnswerSchema, BlockSpec
+from ..blocks_render.annotated_code import annotated_props
+from ..blocks_render.backend import data_model_props, endpoint_props
+from ..blocks_render.change_summary import change_summary_props
+from ..blocks_render.charts import chart_props
+from ..blocks_render.code import code_block_props
+from ..blocks_render.common import as_dict
+from ..blocks_render.containers import container_props
+from ..blocks_render.decision import decision_answer_schema
+from ..blocks_render.diagrams import diagram_props
+from ..blocks_render.diff import diff_props
+from ..blocks_render.file_tree import file_tree_props
+from ..blocks_render.flow import flow_props
+from ..blocks_render.image import image_props
+from ..blocks_render.inputs import (
     choice_answer_schema,
     choice_props,
     comment_answer_schema,
@@ -65,17 +65,17 @@ from varde.ui.blocks_render.inputs import (
     form_answer_schema,
     form_props,
 )
-from varde.ui.blocks_render.inputs_ordered import (
+from ..blocks_render.inputs_ordered import (
     ranking_answer_schema,
     ranking_props,
     slider_answer_schema,
     slider_props,
 )
-from varde.ui.blocks_render.screen_flow import screen_flow_props
-from varde.ui.blocks_render.screens import ui_states_props, wireframe_props
-from varde.ui.blocks_render.sequence import sequence_props
-from varde.ui.blocks_render.state import state_props
-from varde.ui.graph import deps_layout
+from ..blocks_render.screen_flow import screen_flow_props
+from ..blocks_render.screens import ui_states_props, wireframe_props
+from ..blocks_render.sequence import sequence_props
+from ..blocks_render.state import state_props
+from ..graph import deps_layout
 
 Props = dict[str, object]
 

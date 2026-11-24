@@ -9,8 +9,8 @@ through `data-step`. Colours come only from `--vd-*` tokens in `57-sequence.css`
 
 from collections.abc import Mapping
 
-from varde.ui.blocks_render.common import as_list, count_noun
-from varde.ui.blocks_render.sequence_layout import (
+from ..blocks_render.common import as_list, count_noun
+from ..blocks_render.sequence_layout import (
     CHAR_W,
     HEAD_H,
     LINE_H,
@@ -23,7 +23,7 @@ from varde.ui.blocks_render.sequence_layout import (
     layout,
     text_lines,
 )
-from varde.ui.blocks_render.svg import Shape, el
+from ..blocks_render.svg import Shape, el
 
 Props = Mapping[str, object]
 KIND_WORDS = {"call": "", "return": " (return)", "async": " (async)"}

@@ -1,0 +1,22 @@
+[project]
+name = "tavle"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "tavle"
+module-root = "src"
+
+[dependency-groups]
+dev = ["pytest>=8,<9", "pytest-timeout>=2.3,<3", "ruff", "pyright[nodejs]", "playwright>=1.50,<2"]
+
+[tool.pytest.ini_options]
+markers = ["slow: slow tests"]
+
+[tool.ruff.lint]
+extend-select = ["E731"]

@@ -1,14 +1,14 @@
 """Block types for data and interfaces: data-model, endpoint."""
 
-from varde.ui.blocks.change import (
+from ..blocks.change import (
     CHANGE_NOTES,
     CHANGE_PROPERTIES,
     CHANGES,
     change_rule_faults,
 )
-from varde.ui.blocks.er import LAYOUT_NOTE, LAYOUTS, layout_faults
-from varde.ui.blocks.rules import Fault, check_keys, duplicates, str_field, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.er import LAYOUT_NOTE, LAYOUTS, layout_faults
+from ..blocks.rules import Fault, check_keys, duplicates, str_field, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 _RELATION_KINDS = ("one-to-one", "one-to-many", "many-to-one", "many-to-many")
 _CHANGE_NOTE = (

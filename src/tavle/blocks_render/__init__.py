@@ -1,9 +1,9 @@
 """First-party HTML for the components; invalid blocks render an error card."""
 
-from varde.ui.blocks import SPECS, check_props
-from varde.ui.blocks_render.common import card, esc
-from varde.ui.blocks_render.registry import COMPONENTS, Component
-from varde.ui.components import mount_block
+from ..blocks import SPECS, check_props
+from ..blocks_render.common import card, esc
+from ..blocks_render.registry import COMPONENTS, Component
+from ..components import mount_block
 
 
 def error_card(title: str, lines: list[str]) -> str:

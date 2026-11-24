@@ -5,8 +5,8 @@ from importlib.resources import files
 
 import pytest
 
-from varde.ui.theme.presets import PRESET_NAMES, load_preset
-from varde.ui.theme.tokens import TOKENS, ThemeError
+from tavle.theme.presets import PRESET_NAMES, load_preset
+from tavle.theme.tokens import TOKENS, ThemeError
 
 
 def test_varde_complete() -> None:
@@ -23,7 +23,7 @@ def test_unknown_preset() -> None:
 
 
 def test_palette_matches_css() -> None:
-    css = files("varde.ui").joinpath("static/css/00-tokens.css").read_text()
+    css = files("tavle").joinpath("static/css/00-tokens.css").read_text()
     light, dark = css.split("@media (prefers-color-scheme: dark)", 1)
     layer = load_preset("varde")
     mapping = {

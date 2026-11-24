@@ -5,7 +5,7 @@ from __future__ import annotations
 import colorsys
 from collections.abc import Mapping
 
-from varde.ui.contrast import RGBA, composite, contrast_ratio
+from ..contrast import RGBA, composite, contrast_ratio
 
 
 def _rgba(value: str, alpha: float = 1) -> RGBA:

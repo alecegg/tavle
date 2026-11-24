@@ -6,14 +6,14 @@ of steps stays in the page as the text alternative; `static/components/flow.js`
 builds the DOM; `static/flow.js` adds the dependency highlight and pan and zoom.
 """
 
-from varde.ui.blocks_render.common import as_dict, as_list
-from varde.ui.blocks_render.diagram_layout import (
+from ..blocks_render.common import as_dict, as_list
+from ..blocks_render.diagram_layout import (
     MIN_H,
     EdgeSpec,
     NodeSpec,
     layout_graph,
 )
-from varde.ui.blocks_render.diagrams import state_view
+from ..blocks_render.diagrams import state_view
 
 
 def _steps(data: dict[str, object]) -> list[dict[str, object]]:

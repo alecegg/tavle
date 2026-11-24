@@ -5,11 +5,11 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from varde.ui.blocks.annotated_code import (
+from ..blocks.annotated_code import (
     parse_range,
     source_line_count,
 )
-from varde.ui.blocks_render.code import Panel, code_props
+from ..blocks_render.code import Panel, code_props
 
 CONTEXT = 3  # unannotated lines kept on each side of a note
 MIN_FOLD = 4  # shortest quiet stretch worth a "lines hidden" row

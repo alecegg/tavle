@@ -6,7 +6,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Literal
 
-from varde.ui.blocks.rules import Fault
+from ..blocks.rules import Fault
 
 # `any` checks presence only; the widget's own validator checks a value that may
 # take more than one shape (for example a line given as n or "a-b").

@@ -1,7 +1,7 @@
 """Block types for screens: wireframe, ui-states."""
 
-from varde.ui.blocks.rules import Fault, str_map
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, str_map
+from ..blocks.spec import BlockSpec, PropertySpec
 
 _REQUIRED_STATES = ("empty", "loading", "error")
 _BLANK = " ."

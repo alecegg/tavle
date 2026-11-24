@@ -9,12 +9,12 @@ title of a `code` block links to it: once the page knows its blocks,
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 
-from varde.ui.blocks_render.change import (
+from ..blocks_render.change import (
     GLYPHS,
     change_of,
 )
-from varde.ui.blocks_render.common import as_list
-from varde.ui.components import host_props, map_host_props
+from ..blocks_render.common import as_list
+from ..components import host_props, map_host_props
 
 Entry = Mapping[str, object]
 

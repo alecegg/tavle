@@ -8,7 +8,7 @@ row whose height follows its wrapped text; groups are frames over runs of rows.
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
-from varde.ui.blocks_render.svg import clip_lines
+from ..blocks_render.svg import clip_lines
 
 Props = Mapping[str, object]
 

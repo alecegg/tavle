@@ -6,7 +6,7 @@ renderers and answer schemas live in `blocks_render.inputs_ordered`. Pure functi
 
 import math
 
-from varde.ui.blocks.inputs import (
+from ..blocks.inputs import (
     LABEL,
     MAX_LABEL,
     MAX_OPTIONS,
@@ -19,8 +19,8 @@ from varde.ui.blocks.inputs import (
     option_list,
     text_fault,
 )
-from varde.ui.blocks.rules import Fault, duplicates, is_number
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, is_number
+from ..blocks.spec import BlockSpec, PropertySpec
 
 BOUND_KEYS = frozenset({"min", "max", "step"})
 MIN_ITEMS = 2

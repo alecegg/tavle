@@ -9,8 +9,8 @@ and region selection.
 
 import zlib
 
-from varde.ui.blocks_render.common import as_dict, as_list
-from varde.ui.blocks_render.svg import Shape, el, wrap_text
+from ..blocks_render.common import as_dict, as_list
+from ..blocks_render.svg import Shape, el, wrap_text
 
 Frame = dict[str, object]
 Bounds = tuple[int, int, int, int]

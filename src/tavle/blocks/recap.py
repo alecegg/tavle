@@ -1,7 +1,7 @@
 """Component `recap`: a plan-to-change recap; props are the recap's JSON keys."""
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 
 def validate_recap(data: dict[str, object]) -> list[Fault]:

@@ -1,7 +1,7 @@
 """Block type for a state machine: states and labelled transitions."""
 
-from varde.ui.blocks.rules import Fault, duplicates, tables
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault, duplicates, tables
+from ..blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("initial", "normal", "final", "error")
 MAX_STATES = 40

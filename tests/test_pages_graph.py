@@ -1,6 +1,6 @@
 import re
 
-from varde.ui.shell import static_css
+from tavle.shell import static_css
 
 
 def edges(text: str) -> dict[str, list[str]]:

@@ -4,9 +4,9 @@ from typing import cast
 
 import pytest
 
-from varde.ui.theme.presets import PRESET_NAMES, load_preset
-from varde.ui.theme.tokens import TOKENS
-from varde.ui.theme.validate import validate_theme
+from tavle.theme.presets import PRESET_NAMES, load_preset
+from tavle.theme.tokens import TOKENS
+from tavle.theme.validate import validate_theme
 
 
 @pytest.mark.parametrize("name", PRESET_NAMES)

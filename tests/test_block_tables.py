@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from varde.ui.blocks import COMPONENT_SPECS, check_props
-from varde.ui.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
-from varde.ui.components import component_bundle
+from tavle.blocks import COMPONENT_SPECS, check_props
+from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
+from tavle.components import component_bundle
 
-COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/ui/static/components"
+COMPONENT_FILES = Path(__file__).parents[2] / "src/tavle/static/components"
 
 
 def test_component_registry_matches_the_specs() -> None:

@@ -6,9 +6,9 @@
 
 from collections.abc import Iterable, Mapping
 
-from varde.ui.blocks.change import CHANGES
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.change import CHANGES
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 Marker = tuple[str, str]  # (kind, change)
 KINDS = {

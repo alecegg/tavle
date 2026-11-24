@@ -6,8 +6,8 @@ checks what the metadata cannot express.
 
 import math
 
-from varde.ui.blocks.rules import Fault, is_number, tables
-from varde.ui.blocks.spec import PropertySpec
+from ..blocks.rules import Fault, is_number, tables
+from ..blocks.spec import PropertySpec
 
 MAX_NOTES = 12
 TONES = ("info", "decision", "risk", "warning", "success")

@@ -1,7 +1,7 @@
 """Block type for phases and milestones: timeline."""
 
-from varde.ui.blocks.rules import Fault
-from varde.ui.blocks.spec import BlockSpec, PropertySpec
+from ..blocks.rules import Fault
+from ..blocks.spec import BlockSpec, PropertySpec
 
 ORIENTATIONS = ("vertical", "horizontal")
 STATUSES = ("done", "active", "planned", "blocked")

@@ -1,6 +1,6 @@
 """Derive shared presentation declarations from validated theme tokens."""
 
-from varde.ui.theme.tokens import FONT_STACKS
+from ..theme.tokens import FONT_STACKS
 
 FIXED_TOKENS = frozenset(
     {

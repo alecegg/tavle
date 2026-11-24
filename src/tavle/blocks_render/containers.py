@@ -16,10 +16,10 @@ import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-from varde.ui.blocks.check import INPUT_COMPONENTS, check_props
-from varde.ui.blocks.containers import CONTAINERS, HOLD_KEYS, Statements, held_faults
-from varde.ui.blocks_render.common import as_dict, as_list, esc
-from varde.ui.components import mount_block
+from ..blocks.check import INPUT_COMPONENTS, check_props
+from ..blocks.containers import CONTAINERS, HOLD_KEYS, Statements, held_faults
+from ..blocks_render.common import as_dict, as_list, esc
+from ..components import mount_block
 
 TAB_LEVEL = 3  # a tab's contents entry sits under the section the block is in
 _COPY = re.compile(r' data-copy="([^"]*)"')

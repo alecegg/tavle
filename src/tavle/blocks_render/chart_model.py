@@ -2,9 +2,9 @@
 
 from dataclasses import dataclass, field
 
-from varde.ui.blocks_render.chart_scale import fmt, raw
-from varde.ui.blocks_render.common import as_dict, as_list
-from varde.ui.blocks_render.svg import dash, marker_shape
+from ..blocks_render.chart_scale import fmt, raw
+from ..blocks_render.common import as_dict, as_list
+from ..blocks_render.svg import dash, marker_shape
 
 COLOURS = 6
 
