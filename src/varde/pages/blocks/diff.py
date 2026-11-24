@@ -2,8 +2,8 @@
 
 from varde.pages.blocks.annotated_code import parse_range
 from varde.pages.blocks.diff_rows import MAX_ROWS, patch_rows, text_lines
-from varde.pages.blocks.rules import Fault, check_keys, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 MODES = ("unified", "split")
 SIDES = ("before", "after")
@@ -11,11 +11,7 @@ MAX_NOTES = 40
 
 
 def _text_faults(data: dict[str, object]) -> list[Fault]:
-    faults = [
-        Fault("type", f"diff: '{key}' must be a string")
-        for key in ("before", "after", "patch")
-        if key in data and not isinstance(data[key], str)
-    ]
+    faults: list[Fault] = []
     if "patch" in data and ("before" in data or "after" in data):
         faults.append(Fault("input", "diff: give patch or before and after"))
     if "patch" not in data and not ("before" in data and "after" in data):
@@ -46,30 +42,22 @@ def _side_total(data: dict[str, object], side: str) -> int | None:
 
 
 def _note_faults(note: object, where: str, data: dict[str, object]) -> list[Fault]:
-    if not isinstance(note, dict):
-        return [Fault("type", f"{where} must be a table")]
-    faults = check_keys(note, {"side", "lines", "note"}, set(), where)
-    faults += str_field(note, "note", where)
-    side = note.get("side")
-    if "side" in note and side not in SIDES:
-        faults.append(Fault("type", f"{where}: side must be before or after"))
-    if "lines" not in note:
-        return faults
+    if not isinstance(note, dict) or "lines" not in note:
+        return []
     span = parse_range(note["lines"])
     if span is None:
-        return faults + [Fault("type", f"{where}: lines must be n or 'from-to'")]
+        return [Fault("type", f"{where}: lines must be n or 'from-to'")]
+    side = note.get("side")
     total = _side_total(data, side) if isinstance(side, str) else None
     if total is not None and span[1] > total:
-        faults.append(
-            Fault("range", f"{where}: lines {span[0]}-{span[1]} pass line {total}")
-        )
-    return faults
+        return [Fault("range", f"{where}: lines {span[0]}-{span[1]} pass line {total}")]
+    return []
 
 
 def _notes_faults(data: dict[str, object]) -> list[Fault]:
-    notes = data["notes"]
+    notes = data.get("notes")
     if not isinstance(notes, list):
-        return [Fault("type", "diff: 'notes' must be a list of tables")]
+        return []
     faults: list[Fault] = []
     if len(notes) > MAX_NOTES:
         faults.append(Fault("limit", f"diff: at most {MAX_NOTES} notes"))
@@ -79,18 +67,7 @@ def _notes_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_diff(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(
-        data,
-        set(),
-        {"filename", "before", "after", "patch", "mode", "language", "notes"},
-        "diff",
-    )
-    for key in ("filename", "language"):
-        faults += str_field(data, key, "diff")
-    if "mode" in data and data["mode"] not in MODES:
-        faults.append(Fault("type", "diff: mode must be unified or split"))
-    faults += _text_faults(data) + _limit_faults(data)
-    return faults + (_notes_faults(data) if "notes" in data else [])
+    return _text_faults(data) + _limit_faults(data) + _notes_faults(data)
 
 
 DIFF = BlockSpec(
@@ -119,4 +96,22 @@ DIFF = BlockSpec(
 """,
     validate_diff,
     block_type="code",
+    properties=(
+        PropertySpec("filename", "string"),
+        PropertySpec("before", "string"),
+        PropertySpec("after", "string"),
+        PropertySpec("patch", "string"),
+        PropertySpec("mode", "string", enum=MODES),
+        PropertySpec("language", "string"),
+        PropertySpec(
+            "notes",
+            "list",
+            items="object",
+            fields=(
+                PropertySpec("side", "string", required=True, enum=SIDES),
+                PropertySpec("lines", "any", required=True),
+                PropertySpec("note", "string", required=True),
+            ),
+        ),
+    ),
 )

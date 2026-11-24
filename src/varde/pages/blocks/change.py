@@ -1,6 +1,7 @@
 """The shared change vocabulary: `change` and `was` on a row, field or entity."""
 
 from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import PropertySpec
 
 CHANGES = ("added", "modified", "removed", "renamed")
 _ALLOWED = ", ".join(CHANGES)
@@ -10,26 +11,23 @@ CHANGE_FIELDS = (
 )
 
 
-def _was_faults(data: dict[str, object], where: str) -> list[Fault]:
-    if "was" not in data:
-        return []
-    faults: list[Fault] = []
-    was = data.get("was")
-    if not (isinstance(was, str) and was.strip()):
-        faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
-    if "change" not in data:
-        faults.append(Fault("change", f"{where}: was needs a change ({_ALLOWED})"))
-    return faults
+# The metadata of `change` and `was`, for every table that carries them.
+CHANGE_PROPERTIES = (
+    PropertySpec("change", "string", enum=CHANGES),
+    PropertySpec("was", "string"),
+)
 
 
-def change_faults(data: dict[str, object], where: str) -> list[Fault]:
-    """Faults for the optional `change` and `was` keys of one table."""
+def change_rule_faults(data: dict[str, object], where: str) -> list[Fault]:
+    """Cross-field rules of `change` and `was`; type and enum faults are not here."""
     faults: list[Fault] = []
     change = data.get("change")
     has_was = "was" in data
-    if "change" in data and change not in CHANGES:
-        faults.append(Fault("change", f"{where}: change must be one of {_ALLOWED}"))
-    faults += _was_faults(data, where)
+    was = data.get("was")
+    if isinstance(was, str) and not was.strip():
+        faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
+    if has_was and "change" not in data:
+        faults.append(Fault("change", f"{where}: was needs a change ({_ALLOWED})"))
     if change == "renamed" and not has_was:
         faults.append(
             Fault("change", f"{where}: renamed needs was (the previous name)")
@@ -37,3 +35,14 @@ def change_faults(data: dict[str, object], where: str) -> list[Fault]:
     if change in ("added", "removed") and has_was:
         faults.append(Fault("change", f"{where}: {change} cannot have was"))
     return faults
+
+
+def change_faults(data: dict[str, object], where: str) -> list[Fault]:
+    """All faults for the optional `change` and `was` keys of a table with no
+    property metadata (`backend` until it declares them)."""
+    faults: list[Fault] = []
+    if "change" in data and data["change"] not in CHANGES:
+        faults.append(Fault("change", f"{where}: change must be one of {_ALLOWED}"))
+    if "was" in data and not isinstance(data["was"], str):
+        faults.append(Fault("type", f"{where}: 'was' must be a non-empty string"))
+    return faults + change_rule_faults(data, where)

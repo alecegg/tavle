@@ -1,20 +1,19 @@
 """Block type for changed files: file-tree."""
 
-from varde.pages.blocks.change import CHANGE_FIELDS, change_faults
-from varde.pages.blocks.rules import (
-    Fault,
-    check_keys,
-    duplicates,
-    str_field,
-    tables,
-    tables_fault,
+from varde.pages.blocks.change import (
+    CHANGE_FIELDS,
+    CHANGE_PROPERTIES,
+    change_rule_faults,
 )
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault, duplicates, tables
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def path_faults(path: object, where: str) -> list[Fault]:
     """A path is `a/b/c`: no empty, `.` or `..` part, no leading or trailing slash."""
-    if not isinstance(path, str) or not path.strip():
+    if not isinstance(path, str):
+        return []
+    if not path.strip():
         return [Fault("type", f"{where}: 'path' must be a non-empty string")]
     if any(part in ("", ".", "..") for part in path.split("/")):
         return [
@@ -39,25 +38,21 @@ def _folder_faults(paths: list[str]) -> list[Fault]:
 
 
 def _entry_faults(entry: dict[str, object], where: str) -> list[Fault]:
-    faults = check_keys(entry, {"path"}, {"change", "was", "note", "role"}, where)
-    faults += path_faults(entry.get("path"), where) if "path" in entry else []
-    faults += str_field(entry, "note", where) + str_field(entry, "role", where)
-    return faults + change_faults(entry, where)
+    faults = path_faults(entry["path"], where) if "path" in entry else []
+    return faults + change_rule_faults(entry, where)
 
 
 def _collapse_faults(data: dict[str, object]) -> list[Fault]:
     collapse = data.get("collapse")
-    if "collapse" not in data:
-        return []
-    if isinstance(collapse, int) and not isinstance(collapse, bool) and collapse >= 0:
+    if not isinstance(collapse, int) or isinstance(collapse, bool) or collapse >= 0:
         return []
     return [Fault("type", "file-tree: 'collapse' must be a whole number, 0 or more")]
 
 
 def validate_file_tree(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"entries"}, {"title", "collapse"}, "file-tree")
-    faults += str_field(data, "title", "file-tree") + _collapse_faults(data)
-    faults += tables_fault(data, "entries", "file-tree")
+    faults = _collapse_faults(data)
+    if data.get("entries") == []:
+        faults.append(Fault("type", "file-tree: 'entries' must not be empty"))
     entries = tables(data, "entries", "file-tree")
     for n, entry in enumerate(entries, 1):
         faults += _entry_faults(entry, f"file-tree.entries[{n}]")
@@ -95,4 +90,20 @@ FILE_TREE = BlockSpec(
 )
 """,
     validate_file_tree,
+    properties=(
+        PropertySpec("title", "string"),
+        PropertySpec("collapse", "integer"),
+        PropertySpec(
+            "entries",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("path", "string", required=True),
+                PropertySpec("note", "string"),
+                PropertySpec("role", "string"),
+                *CHANGE_PROPERTIES,
+            ),
+        ),
+    ),
 )
