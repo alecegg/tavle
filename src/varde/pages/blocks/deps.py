@@ -1,7 +1,7 @@
 """Component `deps`: a task dependency graph; props are the edges."""
 
-from varde.pages.blocks.rules import Fault, check_keys
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 _FORBIDDEN = (":", ",", "\n", "#")
 
@@ -17,12 +17,10 @@ def _name_fault(name: object, where: str) -> list[Fault]:
 
 
 def validate_deps(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"edges"}, set(), "deps")
     edges = data.get("edges")
-    if "edges" not in data:
-        return faults
     if not isinstance(edges, dict):
-        return faults + [Fault("type", "deps.edges must be a table of lists")]
+        return []  # absent or not a table: the properties report it
+    faults: list[Fault] = []
     for task, needs in edges.items():
         faults += _name_fault(task, "deps.edges")
         if not isinstance(needs, list):
@@ -43,4 +41,5 @@ DEPS = BlockSpec(
 """,
     validate_deps,
     block_type="status",
+    properties=(PropertySpec("edges", "object", required=True),),
 )

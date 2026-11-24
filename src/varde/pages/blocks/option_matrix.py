@@ -2,13 +2,10 @@
 
 from varde.pages.blocks.rules import (
     Fault,
-    check_keys,
     duplicates,
-    str_field,
     tables,
-    tables_fault,
 )
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 SCALES = {
     "verdict": {"yes": 2, "partial": 1, "no": 0},
@@ -25,16 +22,6 @@ def rating_scale(cell: object) -> str | None:
     return next((name for name, words in SCALES.items() if word in words), None)
 
 
-def _entry_faults(data: dict[str, object], key: str, extra: set[str]) -> list[Fault]:
-    faults = tables_fault(data, key, "matrix")
-    for n, entry in enumerate(tables(data, key, "matrix"), 1):
-        where = f"matrix.{key}[{n}]"
-        faults += check_keys(entry, {"id", "label"}, extra, where)
-        for field in ("id", "label", *sorted(extra - {"weight"})):
-            faults += str_field(entry, field, where)
-    return faults
-
-
 def _unique_faults(data: dict[str, object], key: str, field: str) -> list[Fault]:
     names = [str(e.get(field)) for e in tables(data, key, "matrix") if field in e]
     return [
@@ -44,7 +31,7 @@ def _unique_faults(data: dict[str, object], key: str, field: str) -> list[Fault]
 
 
 def _option_faults(data: dict[str, object]) -> list[Fault]:
-    faults = _entry_faults(data, "options", {"note"})
+    faults: list[Fault] = []
     options = tables(data, "options", "matrix")
     if len(options) > MAX_OPTIONS:
         faults.append(Fault("limit", f"matrix: at most {MAX_OPTIONS} options"))
@@ -78,8 +65,7 @@ def _weight_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def _criteria_faults(data: dict[str, object]) -> list[Fault]:
-    faults = _entry_faults(data, "criteria", {"weight"})
-    faults += _weight_faults(data)
+    faults = _weight_faults(data)
     if len(tables(data, "criteria", "matrix")) > MAX_CRITERIA:
         faults.append(Fault("limit", f"matrix: at most {MAX_CRITERIA} criteria"))
     return faults + _unique_faults(data, "criteria", "id")
@@ -136,27 +122,33 @@ def _grid_faults(data: dict[str, object]) -> list[Fault]:
 def _recommended_faults(data: dict[str, object]) -> list[Fault]:
     if "recommended" not in data:
         return []
-    faults = str_field(data, "recommended", "matrix")
+    value = data["recommended"]
+    if not isinstance(value, str) or not value.strip():
+        return []  # the properties report a wrong type or a blank value
     ids = [o.get("id") for o in tables(data, "options", "matrix")]
-    if not faults and data["recommended"] not in ids:
-        faults.append(
-            Fault(
-                "recommended",
-                f"matrix.recommended: no option with id '{data['recommended']}'",
-            )
-        )
-    return faults
+    if value in ids:
+        return []
+    return [Fault("recommended", f"matrix.recommended: no option with id '{value}'")]
+
+
+def _entries_shaped(data: dict[str, object], key: str) -> bool:
+    """True when every entry is a table whose id and label are non-blank strings."""
+    entries = data.get(key)
+    if not isinstance(entries, list) or not entries:
+        return False
+    return all(
+        isinstance(e, dict)
+        and all(isinstance(e.get(f), str) and e[f].strip() for f in ("id", "label"))
+        for e in entries
+    )
 
 
 def validate_matrix(data: dict[str, object]) -> list[Fault]:
-    required = {"options", "criteria", "cells"}
-    faults = check_keys(data, required, {"title", "recommended"}, "matrix")
-    faults += str_field(data, "title", "matrix")
-    if "options" in data:
-        faults += _option_faults(data)
-    if "criteria" in data:
-        faults += _criteria_faults(data)
-    if required <= data.keys() and not faults:
+    faults = _option_faults(data) + _criteria_faults(data)
+    # The grid is checked against well-formed options and criteria only, so a
+    # malformed entry gives its own property fault and no grid faults besides.
+    shaped = _entries_shaped(data, "options") and _entries_shaped(data, "criteria")
+    if shaped and "cells" in data and not faults:
         faults += _grid_faults(data)
     return faults + _recommended_faults(data)
 
@@ -191,4 +183,33 @@ MATRIX = BlockSpec(
 )
 """,
     validate_matrix,
+    properties=(
+        PropertySpec("title", "string", nonempty=True),
+        PropertySpec(
+            "options",
+            "list",
+            required=True,
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
+                PropertySpec("note", "string", nonempty=True),
+            ),
+        ),
+        PropertySpec(
+            "criteria",
+            "list",
+            required=True,
+            items="object",
+            nonempty=True,
+            fields=(
+                PropertySpec("id", "string", required=True, nonempty=True),
+                PropertySpec("label", "string", required=True, nonempty=True),
+                PropertySpec("weight", "any"),
+            ),
+        ),
+        PropertySpec("cells", "any", required=True),
+        PropertySpec("recommended", "string", nonempty=True),
+    ),
 )
