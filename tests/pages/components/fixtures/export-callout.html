@@ -1240,6 +1240,10 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-readout { min-block-size: 1.5em; margin-block: 0.3em 0; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 .flow .vd-detail { min-block-size: 1.5em; color: var(--vd-text-secondary); font-size: var(--vd-text-sm); }
 
+.dep-graph .node.tone-ok rect { fill: var(--vd-tone-success-tint); stroke: var(--vd-tone-success-edge); }
+.dep-graph .node.tone-warn rect { fill: var(--vd-tone-warning-tint); stroke: var(--vd-tone-warning-edge); }
+.dep-graph .node.tone-bad rect { fill: var(--vd-tone-risk-tint); stroke: var(--vd-tone-risk-edge); }
+
 /* Wireframe and ui-states blocks. Tokens only; selection and kinds never rely on colour alone. */
 .vw-frames { display: block; }
 .vw-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--vd-space-3); }
@@ -2320,11 +2324,13 @@ rollout,band,before to after,warning"><noscript><pre class="vd-noscript">chart =
     {&quot;file&quot;: &quot;a.py&quot;, &quot;status&quot;: &quot;modified&quot;, &quot;hunk&quot;: &quot;@@ -1 +1 @@&quot;, &quot;tasks&quot;: [&quot;t1&quot;]},
   ],
 )</pre></noscript><script type="application/json">{"plan": "demo", "base": "main", "head": "work", "summary": {"modified": 1}, "rows": [{"file": "a.py", "status": "modified", "hunk": "@@ -1 +1 @@", "tasks": ["t1"]}]}</script></div></div>
-<div class="block" id="blk-deps" data-anchor="deps" data-hash="f7466bc3463a" data-block-type="status"><div data-readonly data-mithril="deps" data-block-id="deps" data-copy="deps = deps(
+<div class="block" id="blk-deps" data-anchor="deps" data-hash="fe1be65bc230" data-block-type="status"><div data-readonly data-mithril="deps" data-block-id="deps" data-copy="deps = deps(
   edges: {&quot;a&quot;: [], &quot;b&quot;: [&quot;a&quot;], &quot;c&quot;: [&quot;a&quot;, &quot;b&quot;]},
+  status: {&quot;a&quot;: &quot;done&quot;, &quot;b&quot;: &quot;in progress&quot;},
 )"><noscript><pre class="vd-noscript">deps = deps(
   edges: {&quot;a&quot;: [], &quot;b&quot;: [&quot;a&quot;], &quot;c&quot;: [&quot;a&quot;, &quot;b&quot;]},
-)</pre></noscript><script type="application/json">{"empty": false, "width": 132, "height": 190, "truncated": false, "edges": [{"d": "M66 40C66 60 66 60 66 80", "back": false}, {"d": "M66 40C66 95 66 95 66 150", "back": false}, {"d": "M66 110C66 130 66 130 66 150", "back": false}], "nodes": [{"known": true, "title": "a", "label": "a", "x": "10", "y": "10", "tx": "66", "ty": "29", "w": 112, "h": 30}, {"known": true, "title": "b", "label": "b", "x": "10", "y": "80", "tx": "66", "ty": "99", "w": 112, "h": 30}, {"known": true, "title": "c", "label": "c", "x": "10", "y": "150", "tx": "66", "ty": "169", "w": 112, "h": 30}]}</script></div></div>
+  status: {&quot;a&quot;: &quot;done&quot;, &quot;b&quot;: &quot;in progress&quot;},
+)</pre></noscript><script type="application/json">{"empty": false, "width": 132, "height": 190, "truncated": false, "edges": [{"d": "M66 40C66 60 66 60 66 80", "back": false}, {"d": "M66 40C66 95 66 95 66 150", "back": false}, {"d": "M66 110C66 130 66 130 66 150", "back": false}], "nodes": [{"known": true, "title": "a: done", "label": "a", "x": "10", "y": "10", "tx": "66", "ty": "29", "w": 112, "h": 30, "status": "done"}, {"known": true, "title": "b: in progress", "label": "b", "x": "10", "y": "80", "tx": "66", "ty": "99", "w": 112, "h": 30, "status": "in progress"}, {"known": true, "title": "c", "label": "c", "x": "10", "y": "150", "tx": "66", "ty": "169", "w": 112, "h": 30}]}</script></div></div>
 <div class="block" id="blk-diagram" data-anchor="diagram" data-hash="a1864780d08f" data-block-type="visual"><div data-readonly data-mithril="diagram" data-block-id="diagram" data-copy="Request path (graph with 4 nodes and 3 edges)
 Nodes:
 - User [rounded]
@@ -3175,15 +3181,16 @@ return { view };
 components["deps"] = (() => {
 // Task dependency graph: the server lays the nodes out; this draws them as inline SVG.
 // Props: empty, or width, height, truncated, edges ({d, back}) and nodes ({known, title, label, x, y, tx, ty, w, h}).
-function node(m, n) {
-  return m('g', { class: n.known ? 'node' : 'node missing' }, [
+function node(m, n, c) {
+  const tone = n.status ? c.table.statusKind(n.status) : 'neutral';
+  return m('g', { class: `${n.known ? 'node' : 'node missing'}${tone === 'neutral' ? '' : ` tone-${tone}`}` }, [
     m('title', n.title),
     m('rect', { x: n.x, y: n.y, width: String(n.w), height: String(n.h), rx: '4' }),
     m('text', { x: n.tx, y: n.ty, 'text-anchor': 'middle' }, n.label)
   ]);
 }
 
-function view(m, props) {
+function view(m, props, c) {
   if (props.empty) return m('p.graph-empty', 'No dependencies listed.');
   const arrow = m('marker', { id: 'dep-arrow', viewBox: '0 0 8 8', refX: '7', refY: '4', markerWidth: '8', markerHeight: '8', orient: 'auto' },
     m('path.arrow', { d: 'M0 0L8 4L0 8z' }));
@@ -3199,7 +3206,7 @@ function view(m, props) {
   }, [
     m('defs', arrow),
     props.edges.map((edge) => m('path', { class: edge.back ? 'edge back' : 'edge', d: edge.d, 'marker-end': 'url(#dep-arrow)' })),
-    props.nodes.map((n) => node(m, n))
+    props.nodes.map((n) => node(m, n, c))
   ]);
   return [
     m('div.scroll', graph),
