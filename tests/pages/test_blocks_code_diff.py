@@ -543,3 +543,17 @@ def test_blank_text_and_empty_lists_fault_once(
     assert [(e.rule, e.message) for e in errors] == [
         ("type", f"'{path}' must not be empty")
     ]
+
+
+@pytest.mark.parametrize(
+    ("data", "message"),
+    [
+        ({}, "missing required key 'edges'"),
+        ({"edges": {}, "x": 1}, "unknown key 'x'"),
+        ({"edges": ["a"]}, "'edges' must be object"),
+    ],
+)
+def test_deps_shape_mistake_gives_one_fault(
+    data: dict[str, object], message: str
+) -> None:
+    assert [e.message for e in check_props("deps", data, 1)] == [message]

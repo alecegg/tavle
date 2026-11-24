@@ -81,3 +81,25 @@ def test_stress_page_has_the_edge_cases() -> None:
 @pytest.mark.parametrize("name", ["rich-matrix", "rich-matrix-stress"])
 def test_fixture_family_exists(name: str) -> None:
     assert (FIXTURES / f"{name}.md").exists()
+
+
+@pytest.mark.parametrize(
+    ("change", "message"),
+    [
+        ({"extra": 1}, "unknown key 'extra'"),
+        ({"title": " "}, "'title' must not be empty"),
+        ({"options": "a"}, "'options' must be list"),
+        ({"options": []}, "'options' must not be empty"),
+        (
+            {"options": [{"id": "a"}, {"id": "b", "label": "B"}]},
+            "missing required key 'options[0].label'",
+        ),
+        (
+            {"criteria": [{"id": "x", "label": ""}, {"id": "y", "label": "S"}]},
+            "'criteria[0].label' must not be empty",
+        ),
+        ({"recommended": ""}, "'recommended' must not be empty"),
+    ],
+)
+def test_one_mistake_gives_one_fault(change: dict[str, Any], message: str) -> None:
+    assert [e.message for e in check_props("matrix", sample(**change), 1)] == [message]
