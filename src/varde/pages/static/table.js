@@ -1,7 +1,9 @@
-// table and data-model: sort, filter, wrap toggle, scroll hint, relations.
+// table and data-model: sort, filter, row cap, wrap toggle, scroll hint, relations.
 import { make, control, keepInside, whileConnected } from './dom.js';
 
 const MIN_ROWS_FOR_FILTER = 3;
+// A longer table shows this many rows and a toggle that names the total; a scroll region would cut a row in half.
+const COLLAPSED_ROWS = 12;
 
 function cellValue(row, column) {
   const cell = row.cells[column];
@@ -40,6 +42,7 @@ function applySort(table, state, column, direction) {
     th.setAttribute('aria-sort', active ? (direction === 1 ? 'ascending' : 'descending') : 'none');
   });
   if (state.picker) state.picker.value = direction === 0 ? '' : column + ':' + direction;
+  showRows(table, state);
 }
 
 function cycleSort(table, state, column) {
@@ -49,7 +52,7 @@ function cycleSort(table, state, column) {
 
 function makeSortable(table) {
   const original = new Map(Array.from(table.tBodies, (body) => [body, dataRows(body)]));
-  const state = { column: -1, direction: 0, original, picker: null };
+  const state = { column: -1, direction: 0, original, picker: null, needle: '', expanded: false, more: null };
   table.tHead.querySelectorAll('th').forEach((th, index) => {
     if (!th.textContent.trim()) return;
     const button = make('button', 'vb-sort');
@@ -82,23 +85,54 @@ function sortPicker(table, state) {
   return label;
 }
 
-function filterRows(table, needle) {
-  let shown = 0;
+// Shows the rows that match the filter, in their current order, up to the cap unless expanded.
+// Returns the match count; the group header of a body with nothing shown hides.
+function showRows(table, state) {
+  let matched = 0;
   for (const body of table.tBodies) {
     let visible = 0;
     for (const row of dataRows(body)) {
-      const hit = !needle || row.textContent.toLowerCase().includes(needle);
-      row.hidden = !hit;
-      if (hit) visible += 1;
+      const hit = !state.needle || row.textContent.toLowerCase().includes(state.needle);
+      if (hit) matched += 1;
+      row.hidden = !hit || (!state.expanded && matched > COLLAPSED_ROWS);
+      if (!row.hidden) visible += 1;
     }
     const head = body.querySelector('.vb-group-head');
     if (head) head.hidden = visible === 0;
-    shown += visible;
   }
-  return shown;
+  if (state.more) updateMore(state, matched);
+  return matched;
 }
 
-function filterField(table, total) {
+function updateMore(state, matched) {
+  const button = state.more.firstElementChild;
+  state.more.hidden = matched <= COLLAPSED_ROWS;
+  button.textContent = state.expanded ? 'Show first ' + COLLAPSED_ROWS + ' rows' : 'Show all ' + matched + ' rows';
+  button.setAttribute('aria-expanded', String(state.expanded));
+}
+
+function moreToggle(table, state) {
+  const wrap = make('div', 'vb-more');
+  wrap.append(control('', () => {
+    state.expanded = !state.expanded;
+    showRows(table, state);
+  }, 'vb-ctl vb-more-toggle'));
+  state.more = wrap;
+  // Print every row: a printed page has no toggle to press.
+  let wasExpanded = false;
+  window.addEventListener('beforeprint', () => {
+    wasExpanded = state.expanded;
+    state.expanded = true;
+    showRows(table, state);
+  });
+  window.addEventListener('afterprint', () => {
+    state.expanded = wasExpanded;
+    showRows(table, state);
+  });
+  return wrap;
+}
+
+function filterField(table, state, total) {
   const input = make('input', 'vb-filter');
   input.type = 'search';
   input.placeholder = 'Filter rows';
@@ -106,9 +140,9 @@ function filterField(table, total) {
   const status = make('span', 'vb-filter-status');
   status.setAttribute('aria-live', 'polite');
   input.addEventListener('input', () => {
-    const needle = input.value.trim().toLowerCase();
-    const shown = filterRows(table, needle);
-    status.textContent = needle ? shown + ' of ' + total + ' rows' : '';
+    state.needle = input.value.trim().toLowerCase();
+    const matched = showRows(table, state);
+    status.textContent = state.needle ? matched + ' of ' + total + ' rows' : '';
   });
   return [input, status];
 }
@@ -132,14 +166,10 @@ function scrollHint(region) {
   return hint;
 }
 
-// Chromium does not scroll to a focused control in the sticky header, so do it here.
-function keepFocusVisible(table, region) {
+// Chromium does not scroll sideways to a focused control in a sticky first column, so do it here.
+function keepFocusVisible(region) {
   region.addEventListener('focusin', (event) => {
-    const target = event.target;
-    if (target === region) return;
-    const inHead = table.tHead.contains(target);
-    const header = table.tHead.getBoundingClientRect().height;
-    keepInside(region, target, { insetTop: inHead ? 0 : header, vertical: !inHead });
+    if (event.target !== region) keepInside(region, event.target, { vertical: false });
   });
 }
 
@@ -147,13 +177,14 @@ function addToolbar(table, state) {
   const region = table.closest('.vb-scroll');
   if (!region) return;
   const total = Array.from(table.tBodies).reduce((sum, body) => sum + dataRows(body).length, 0);
-  keepFocusVisible(table, region);
+  keepFocusVisible(region);
   const bar = make('div', 'vb-filterbar');
-  if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, total));
+  if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, state, total));
   if (table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
   bar.append(wrapToggle(region), scrollHint(region));
-  // After the region: rows scrolled out of it keep their boxes above, so a bar above would sit under them.
   region.after(bar);
+  if (total > COLLAPSED_ROWS) region.after(moreToggle(table, state));
+  showRows(table, state);
 }
 
 function collapseRelations(list) {
