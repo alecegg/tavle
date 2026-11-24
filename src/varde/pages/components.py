@@ -11,7 +11,7 @@ import re
 from collections.abc import Callable
 from importlib.resources import files
 
-from varde.pages.template import HOST_ATTR, page_shell
+from varde.pages.shell import HOST_ATTR, standalone_shell
 
 _STATIC = files("varde.pages").joinpath("static")
 _EXPORT = re.compile(r"^export ", re.MULTILINE)
@@ -136,8 +136,8 @@ def component_bundle() -> str:
 def export_page(title: str, main: str) -> str:
     """Self-contained page: stylesheet inline, and the bundle when a block needs it."""
     if f"{HOST_ATTR}=" not in main:
-        return page_shell(title, main, None)
+        return standalone_shell(title, main)
     bundle = component_bundle()
     if "</script" in bundle.lower():
         raise ValueError("the component bundle must not contain a closing script tag")
-    return page_shell(title, f"{main}<script>{bundle}</script>", None)
+    return standalone_shell(title, f"{main}<script>{bundle}</script>")
