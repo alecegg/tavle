@@ -63,3 +63,20 @@ def test_status_has_no_inline_start_border() -> None:
     rules = [part.split("}", 1)[0] for part in css.split(".vd-checklist-item {")[1:]]
     assert rules
     assert all("border-inline-start" not in rule for rule in rules)
+
+
+def test_progress_remainder_is_the_quiet_line_colour() -> None:
+    css = (
+        Path(__file__).parents[2] / "src/varde/pages/static/css/54-checklist.css"
+    ).read_text()
+    screen = css.split("@media (forced-colors: active)", 1)[0]
+
+    def rule(selector: str) -> str:
+        return screen.split(selector + " {", 1)[1].split("}", 1)[0]
+
+    assert "background: var(--vd-line)" in rule(".vd-checklist-bar")
+    assert "background: var(--vd-line)" in rule(
+        ".vd-checklist-bar::-webkit-progress-bar"
+    )
+    for value in ("::-webkit-progress-value", "::-moz-progress-bar"):
+        assert "var(--vd-tone-success-edge)" in rule(".vd-checklist-bar" + value)
