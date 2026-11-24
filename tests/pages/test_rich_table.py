@@ -556,3 +556,27 @@ def test_interact_phone_sort_label_stays_on_one_line_inside_the_card(
     )
     assert box["labelHeight"] <= 50
     assert box["selectRight"] <= box["barRight"] + 0.5
+
+
+@pytest.mark.slow
+def test_interact_overflow_has_one_scroll_container_and_fades_the_hidden_edge(
+    shared_page: Any, tmp_path: Path
+) -> None:
+    with _serving(tmp_path, WIDE) as server:
+        _open(shared_page, server, width=320)
+        region = shared_page.locator(".vb-scroll")
+        assert region.evaluate("e => e.scrollWidth > e.clientWidth")
+        assert region.evaluate("e => getComputedStyle(e).overflowX") == "auto"
+        assert (
+            shared_page.locator(".vb-card").evaluate(
+                "e => getComputedStyle(e).overflowX"
+            )
+            == "visible"
+        )
+        assert region.evaluate("e => e.className") == "vb-scroll vb-more-end"
+        assert "gradient" in region.evaluate("e => getComputedStyle(e).maskImage")
+        region.evaluate("e => { e.scrollLeft = e.scrollWidth; }")
+        shared_page.wait_for_function(
+            "() => document.querySelector('.vb-scroll').className"
+            " === 'vb-scroll vb-more-start'"
+        )
