@@ -14,7 +14,6 @@ from posixpath import splitext
 
 from varde.pages.blocks.image import src_fault
 from varde.pages.blocks.image_header import EXTENSIONS, MIME, read_header
-from varde.pages.fences import ui_statements
 
 MAX_BYTES = 5 * 1024 * 1024
 EMBED_BYTES = 1024 * 1024  # export inlines a file only up to this size
@@ -81,15 +80,3 @@ def probe(src: str, root: Path, *, embed: bool = False) -> Media | Problem:
         f"data:{mime};base64,{base64.b64encode(data).decode('ascii')}" if inline else ""
     )
     return Media(src, mime, size[0], size[1], len(data), url)
-
-
-def page_media(
-    text: str, doc: Path, *, embed: bool = False
-) -> dict[str, Media | Problem]:
-    """Probe every distinct, well-formed `src` of the page's image statements."""
-    found: dict[str, Media | Problem] = {}
-    for _, statement in ui_statements(text):
-        src = statement.props.get("src")
-        if statement.component == "image" and isinstance(src, str) and src not in found:
-            found[src] = probe(src, doc.parent, embed=embed)
-    return found

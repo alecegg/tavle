@@ -75,7 +75,7 @@ from varde.pages.blocks_render.screen_flow import screen_flow_props
 from varde.pages.blocks_render.screens import ui_states_props, wireframe_props
 from varde.pages.blocks_render.sequence import sequence_props
 from varde.pages.blocks_render.state import state_props
-from varde.pages.graph import deps_layout
+from varde.ui.graph import deps_layout
 
 Props = dict[str, object]
 
