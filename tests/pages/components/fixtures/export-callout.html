@@ -78,8 +78,12 @@
   --vd-text-lg: 1.125rem;
   --vd-text-xl: 1.25rem;
   --vd-text-2xl: 1.5rem;
-  --vd-font-body: system-ui, sans-serif;
-  --vd-font-mono: ui-monospace, monospace;
+  /* system stacks only (no web fonts, no requests). Named sans families come before system-ui because a host whose
+     system-ui or sans-serif alias resolves to a monospace face would otherwise render the whole page in mono. */
+  --vd-font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Liberation Sans", system-ui, sans-serif;
+  --vd-font-heading: var(--vd-font-body);
+  --vd-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --vd-measure: 72ch;
   --vd-leading-body: 1.55;
   --vd-leading-heading: 1.25;
   --vd-heading-1: clamp(1.375rem, 1.1rem + 1.2vw, 1.5rem);
@@ -409,7 +413,8 @@ h3 { font-size: var(--vd-heading-3); }
 p, ul, ol, blockquote { margin-block: 0.5em; }
 blockquote { border-inline-start: 3px solid var(--vd-border); padding-inline-start: 0.8em; color: var(--vd-text-secondary); }
 hr { border: 0; border-block-start: 1px solid var(--vd-border); }
-code { font-family: var(--vd-font-mono); font-size: 0.92em; background: var(--vd-surface-sunk); padding-inline: 0.25em; border-radius: var(--vd-radius-s); }
+code, pre { font-family: var(--vd-font-mono); }
+code { font-size: 0.92em; background: var(--vd-surface-sunk); padding-inline: 0.25em; border-radius: var(--vd-radius-s); }
 pre { overflow-x: auto; max-inline-size: 100%; padding: 0.7em; background: var(--vd-fill); border-radius: var(--vd-code-radius); }
 pre code { background: none; padding: 0; }
 table { border-collapse: collapse; display: block; overflow-x: auto; max-inline-size: 100%; }
@@ -431,12 +436,12 @@ main { padding-block: var(--vd-space-6) var(--vd-space-9); padding-inline-start:
 
 /* header and status line */
 .doc-header { border-block-end: 1px solid var(--vd-border); margin-block-end: var(--vd-space-5); padding-block-end: var(--vd-space-2); }
-.doc-name { font-size: var(--vd-text-xl); font-weight: 650; line-height: var(--vd-leading-heading); margin: 0; }
+.doc-name { font-family: var(--vd-font-heading); font-size: var(--vd-text-xl); font-weight: 700; line-height: var(--vd-leading-heading); margin: 0; }
 .status { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); margin-block: var(--vd-space-1) 0; }
 .task.done { color: var(--vd-text-secondary); }
 
 /* markdown typography */
-h1, h2, h3, h4, h5, h6 { font-weight: 650; margin-block: var(--vd-space-7) var(--vd-space-2); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--vd-font-heading); font-weight: 700; letter-spacing: -0.01em; margin-block: var(--vd-space-7) var(--vd-space-2); }
 h4, h5, h6 { font-size: var(--vd-text-md); }
 h1:first-child, h2:first-child { margin-block-start: 0; }
 p, ul, ol, blockquote, pre, table { margin-block: var(--vd-space-3); }
@@ -447,12 +452,13 @@ blockquote { margin-inline: 0; padding: var(--vd-space-2) var(--vd-space-4); bor
 blockquote > :first-child { margin-block-start: 0; }
 blockquote > :last-child { margin-block-end: 0; }
 hr { margin-block: var(--vd-space-6); }
+main > .block > :is(p, ul, ol, blockquote) { max-inline-size: var(--vd-measure); } /* prose keeps a readable line length; tables, code and charts use the column */
 code { font-size: var(--vd-text-sm); padding-inline: var(--vd-space-1); }
 pre { padding: var(--vd-space-3) var(--vd-space-4); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); font-size: var(--vd-text-sm); line-height: var(--vd-leading-body); }
 pre code { font-size: inherit; }
 main :is(p, li, td, dd, blockquote) a { padding-block: var(--vd-space-1); padding-inline: var(--vd-space-1); } /* inline links reach the 24px target; padding does not move the line */
 .scroll { padding: var(--vd-space-2); } /* room for the focus ring inside the scroller */
-th, td { padding: var(--vd-space-2) var(--vd-space-3); vertical-align: top; }
+th, td { padding: var(--vd-space-2) var(--vd-space-3); vertical-align: top; font-variant-numeric: tabular-nums; }
 th { background: var(--vd-surface-sunk); font-weight: 600; }
 
 /* blocks and the changed-block flash */
@@ -1327,7 +1333,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
 .vd-callout-warning { --vd-callout-edge: var(--vd-tone-warning-edge); --vd-callout-tint: var(--vd-tone-warning-tint); --vd-callout-tint-2: var(--vd-tone-warning-tint-2); --vd-callout-text: var(--vd-tone-warning-text); }
 .vd-callout-success { --vd-callout-edge: var(--vd-tone-success-edge); --vd-callout-tint: var(--vd-tone-success-tint); --vd-callout-tint-2: var(--vd-tone-success-tint-2); --vd-callout-text: var(--vd-tone-success-text); }
 .vd-callout-label { margin: 0 0 var(--vd-space-1); color: var(--vd-callout-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-callout-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-weight: 700; }
+.vd-callout-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-family: var(--vd-font-mono); font-weight: 700; }
 .vd-callout-title { margin: 0 0 var(--vd-space-1); font-weight: 650; }
 .vd-callout-text { margin: 0 0 var(--vd-space-2); }
 .vd-callout-text:last-child { margin-block-end: 0; }
@@ -1396,7 +1402,7 @@ tr[hidden], .vb-scrollhint[hidden] { display: none; }
 .vd-annotated-back { flex: none; display: flex; align-items: center; justify-content: center; min-inline-size: 44px; min-block-size: 44px; box-sizing: border-box; border: 2px solid var(--vd-note-edge); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-text); font-weight: 700; text-decoration: none; }
 .vd-annotated-body { min-inline-size: 0; }
 .vd-annotated-meta { margin: 0 0 var(--vd-space-1); color: var(--vd-note-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-annotated-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-weight: 700; }
+.vd-annotated-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-family: var(--vd-font-mono); font-weight: 700; }
 .vd-annotated-label { display: block; font-weight: 650; }
 .vd-annotated-text { margin: 0; }
 @container vd-doc (min-width: 44rem) {
