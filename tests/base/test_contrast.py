@@ -2,7 +2,7 @@
 
 import pytest
 
-from varde.design.contrast import (
+from varde.base.contrast import (
     composite,
     contrast_ratio,
     fails_threshold,
