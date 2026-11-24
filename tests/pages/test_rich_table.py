@@ -305,31 +305,15 @@ def test_interact_short_table_shows_every_row_with_no_toggle(
 
 
 @pytest.mark.slow
-def test_interact_wrap_toggle_by_keyboard(shared_page: Any, tmp_path: Path) -> None:
-    page = shared_page
-    with _serving(tmp_path, WIDE) as server:
-        _open(page, server, width=320)
-        button = page.locator(".vb-wrap-toggle")
-        assert button.is_visible()
-        assert button.get_attribute("aria-pressed") == "true"
-        button.focus()
-        page.keyboard.press("Enter")
-        assert button.get_attribute("aria-pressed") == "false"
-        assert "vb-nowrap" in page.locator(".vb-scroll").get_attribute("class")
-        page.keyboard.press("Space")
-        assert "vb-nowrap" not in page.locator(".vb-scroll").get_attribute("class")
-
-
-@pytest.mark.slow
-def test_interact_wrap_toggle_shows_only_when_the_table_overflows(
+def test_interact_scroll_hint_shows_only_when_the_table_overflows(
     shared_page: Any, tmp_path: Path
 ) -> None:
     page = shared_page
     with _serving(tmp_path, WIDE) as server:
         _open(page, server, width=320)
-        assert page.locator(".vb-wrap-toggle").is_visible()
+        assert page.locator(".vb-scrollhint").is_visible()
         page.set_viewport_size({"width": 1800, "height": 700})
-        page.wait_for_function("() => document.querySelector('.vb-wrap-toggle').hidden")
+        page.wait_for_function("() => document.querySelector('.vb-scrollhint').hidden")
 
 
 @pytest.mark.slow
@@ -429,7 +413,7 @@ def test_interact_small_table_shows_no_chrome(shared_page: Any, tmp_path: Path) 
     with _serving(tmp_path, SMALL) as server:
         _open_page(page, server)
         assert (
-            page.locator(".vb-sort, .vb-filter, .vb-wrap-toggle").evaluate_all(
+            page.locator(".vb-sort, .vb-filter, .vb-scrollhint").evaluate_all(
                 "nodes => nodes.filter(n => n.offsetParent !== null)"
             )
             == []

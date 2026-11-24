@@ -36,13 +36,13 @@ vb-ctl vb-data vb-data-grid vb-data-scroll vb-dense vb-dot vb-end vb-error vb-fi
 vb-filter-status vb-filterbar vb-flow vb-flowbar vb-foot vb-grid vb-group-head
 vb-badge-key vb-hash vb-hit vb-key vb-key-mark vb-last vb-legend vb-line
 vb-method vb-na vb-name
-vb-next vb-note vb-note-label vb-nowrap vb-num vb-off vb-on vb-open vb-pct vb-plot
+vb-next vb-note vb-note-label vb-num vb-off vb-on vb-open vb-pct vb-plot
 vb-r1 vb-r2 vb-r3 vb-r4 vb-r5 vb-readout vb-region vb-rel vb-relations vb-s0 vb-s1
 vb-s2 vb-s3 vb-s4 vb-s5 vb-scroll vb-scrollhint vb-series-toggle vb-slice
 vb-slice-key vb-sort vb-sortpick vb-sortselect vb-spark vb-state vb-status
 vb-status-bad vb-status-neutral vb-status-ok vb-status-warn vb-step vb-sym vb-tab
 vb-table vb-table-stack vb-table-sticky vb-tabs vb-tick vb-tip vb-tip-box
-vb-tip-text vb-title vb-wire vb-wrap-toggle vd-cap vd-chev vd-dashed vd-detail
+vb-tip-text vb-title vb-wire vd-cap vd-chev vd-dashed vd-detail
 vd-dim vd-dotted vd-edge vd-elabel vd-elabel-bg vd-frame vd-g1 vd-g2 vd-g3
 vd-group-head vd-group-label vd-head vd-head-hit vd-hot vd-label vd-line vd-near
 vd-node vd-sel vd-shape vd-super vd-svg vd-view vf-down vf-up vw-bar vw-bezel vw-box
