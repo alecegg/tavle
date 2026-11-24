@@ -4,7 +4,7 @@ import hashlib
 import re
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[1]
 VENDORED = REPO / "src/tavle/static/vendor/mithril.js"
 LICENCES = REPO / "docs/third-party-licences.md"
 ROW = re.compile(

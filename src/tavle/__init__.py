@@ -77,6 +77,7 @@ from .theme.derive_shape import derive_shape as derive_shape
 from .theme.layers import Layer as Layer
 from .theme.layers import parse_frontmatter as parse_frontmatter
 from .theme.layers import parse_toml as parse_toml
+from .theme.merge import resolve_layers as resolve_layers
 from .theme.presets import PRESET_NAMES as PRESET_NAMES
 from .theme.presets import load_preset as load_preset
 from .theme.resolved import ResolvedTheme as ResolvedTheme

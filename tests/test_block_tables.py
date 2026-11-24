@@ -8,7 +8,7 @@ from tavle.blocks import COMPONENT_SPECS, check_props
 from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from tavle.components import component_bundle
 
-COMPONENT_FILES = Path(__file__).parents[2] / "src/tavle/static/components"
+COMPONENT_FILES = Path(__file__).parents[1] / "src/tavle/static/components"
 
 
 def test_component_registry_matches_the_specs() -> None:
