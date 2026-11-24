@@ -26,40 +26,41 @@ _PAGE_NAME = re.compile(
 )
 _WORD = re.compile(r"[^\W_]", re.UNICODE)
 
-# status word -> (tone, glyph); tones are the five ds-tokens triples
+# status word -> (tone, icon); tones are the five ds-tokens triples.
+# The icon names a css shape in 65-header.css.
 _STATUS: dict[str, tuple[str, str]] = {
-    "todo": ("decision", "○"),
-    "backlog": ("decision", "○"),
-    "planned": ("decision", "○"),
-    "draft": ("decision", "○"),
-    "proposed": ("decision", "○"),
-    "in-progress": ("info", "◐"),
-    "in_progress": ("info", "◐"),
-    "active": ("info", "◐"),
-    "building": ("info", "◐"),
-    "running": ("info", "◐"),
-    "review": ("warning", "▲"),
-    "in-review": ("warning", "▲"),
-    "pending": ("warning", "▲"),
-    "paused": ("warning", "▲"),
-    "on-hold": ("warning", "▲"),
-    "blocked": ("risk", "✕"),
-    "failed": ("risk", "✕"),
-    "rejected": ("risk", "✕"),
-    "abandoned": ("risk", "✕"),
-    "cancelled": ("risk", "✕"),
-    "done": ("success", "✓"),
-    "complete": ("success", "✓"),
-    "completed": ("success", "✓"),
-    "approved": ("success", "✓"),
-    "merged": ("success", "✓"),
-    "concluded": ("success", "✓"),
+    "todo": ("decision", "ring"),
+    "backlog": ("decision", "ring"),
+    "planned": ("decision", "ring"),
+    "draft": ("decision", "ring"),
+    "proposed": ("decision", "ring"),
+    "in-progress": ("info", "half"),
+    "in_progress": ("info", "half"),
+    "active": ("info", "half"),
+    "building": ("info", "half"),
+    "running": ("info", "half"),
+    "review": ("warning", "triangle"),
+    "in-review": ("warning", "triangle"),
+    "pending": ("warning", "triangle"),
+    "paused": ("warning", "triangle"),
+    "on-hold": ("warning", "triangle"),
+    "blocked": ("risk", "cross"),
+    "failed": ("risk", "cross"),
+    "rejected": ("risk", "cross"),
+    "abandoned": ("risk", "cross"),
+    "cancelled": ("risk", "cross"),
+    "done": ("success", "check"),
+    "complete": ("success", "check"),
+    "completed": ("success", "check"),
+    "approved": ("success", "check"),
+    "merged": ("success", "check"),
+    "concluded": ("success", "check"),
 }
-_NEUTRAL = ("neutral", "•")
+_NEUTRAL = ("neutral", "dot")
 
 
 def status_tone(status: str) -> tuple[str, str]:
-    """Tone name and glyph for a status word; unknown words are neutral."""
+    """Tone name and icon name for a status word; unknown words are neutral."""
     return _STATUS.get(status.strip().lower(), _NEUTRAL)
 
 
@@ -116,10 +117,10 @@ def _title(text: str) -> str:
 
 
 def header_chip(status: str) -> str:
-    tone, glyph = status_tone(status)
+    tone, icon = status_tone(status)
     return (
         f'<li class="vd-hdr-chip vd-hdr-{tone}">'
-        f'<span class="vd-hdr-glyph" aria-hidden="true">{glyph}</span>'
+        f'<span class="vd-hdr-glyph vd-hdr-glyph-{icon}" aria-hidden="true"></span>'
         f'<span class="status">{html.escape(status)}</span></li>'
     )
 

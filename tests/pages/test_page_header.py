@@ -24,21 +24,24 @@ def _header(front: str, body: str = "# T\n\ntext\n", name: str = "p.md") -> str:
 
 
 @pytest.mark.parametrize(
-    ("status", "tone", "glyph"),
+    ("status", "tone", "icon"),
     [
-        ("todo", "decision", "○"),
-        ("in-progress", "info", "◐"),
-        ("review", "warning", "▲"),
-        ("blocked", "risk", "✕"),
-        ("DONE", "success", "✓"),
-        ("mystery", "neutral", "•"),
+        ("todo", "decision", "ring"),
+        ("in-progress", "info", "half"),
+        ("review", "warning", "triangle"),
+        ("blocked", "risk", "cross"),
+        ("DONE", "success", "check"),
+        ("mystery", "neutral", "dot"),
     ],
 )
-def test_chip_glyph_word_and_tone(status: str, tone: str, glyph: str) -> None:
-    assert status_tone(status) == (tone, glyph)
+def test_chip_icon_word_and_tone(status: str, tone: str, icon: str) -> None:
+    assert status_tone(status) == (tone, icon)
     head = _header(f"status: {status}")
     assert f"vd-hdr-chip vd-hdr-{tone}" in head
-    assert f'aria-hidden="true">{glyph}</span>' in head
+    assert (
+        f'<span class="vd-hdr-glyph vd-hdr-glyph-{icon}" aria-hidden="true"></span>'
+        in head
+    )
     assert f'<span class="status">{status}</span>' in head
 
 

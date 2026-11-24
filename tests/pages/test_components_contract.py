@@ -95,7 +95,7 @@ def test_callout_statement_renders_a_host_with_its_source_as_fallback() -> None:
 def test_every_block_but_page_statements_is_a_bundled_component() -> None:
     blocks = set(COMPONENTS) - PAGE_STATEMENTS
     bundled = set(re.findall(r'components\["([^"]+)"\]', component_bundle()))
-    assert blocks == bundled - {"shared"}
+    assert blocks == bundled - {"shared", "icons"}
 
 
 SOURCE = 'n = callout(tone: "info", title: "A & B", text: "Hi <b>")'
