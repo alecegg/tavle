@@ -98,7 +98,7 @@ def test_adapter_output_equals_flow_input() -> None:
         ("run", "run"),
     ]
     assert edges[2].label == "finish [ok]" and len(moves) == 5
-    assert nodes[4].label == "✕ Failed"
+    assert nodes[4].label == "Failed"
 
 
 def test_self_loops_merge_per_state_and_loop_back_is_routed() -> None:
@@ -157,7 +157,7 @@ def test_kinds_have_shapes_and_words_not_only_colour() -> None:
     html = render_state(sample())
     assert "vd-state-dot" in html and "<title>initial state marker</title>" in html
     assert html.count("vd-state-ring") == 1  # final: double border
-    assert "<title>Failed, error state</title>" in html and "✕ Failed" in html
+    assert "<title>Failed, error state</title>" in html and ">Failed<" in html
     assert "<title>Idle, initial state</title>" in html
     assert '<li class="vd-state-item">Idle (initial state)</li>' in html
 
