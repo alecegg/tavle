@@ -5,7 +5,7 @@
 .vd-callout-warning { --vd-callout-edge: var(--vd-tone-warning-edge); --vd-callout-tint: var(--vd-tone-warning-tint); --vd-callout-tint-2: var(--vd-tone-warning-tint-2); --vd-callout-text: var(--vd-tone-warning-text); }
 .vd-callout-success { --vd-callout-edge: var(--vd-tone-success-edge); --vd-callout-tint: var(--vd-tone-success-tint); --vd-callout-tint-2: var(--vd-tone-success-tint-2); --vd-callout-text: var(--vd-tone-success-text); }
 .vd-callout-label { margin: 0 0 var(--vd-space-1); color: var(--vd-callout-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-callout-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-weight: 700; }
+.vd-callout-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-family: var(--vd-font-mono); font-weight: 700; }
 .vd-callout-title { margin: 0 0 var(--vd-space-1); font-weight: 650; }
 .vd-callout-text { margin: 0 0 var(--vd-space-2); }
 .vd-callout-text:last-child { margin-block-end: 0; }

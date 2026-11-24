@@ -33,7 +33,7 @@
 .vd-annotated-back { flex: none; display: flex; align-items: center; justify-content: center; min-inline-size: 44px; min-block-size: 44px; box-sizing: border-box; border: 2px solid var(--vd-note-edge); border-radius: var(--vd-radius-full); background: var(--vd-surface); color: var(--vd-text); font-weight: 700; text-decoration: none; }
 .vd-annotated-body { min-inline-size: 0; }
 .vd-annotated-meta { margin: 0 0 var(--vd-space-1); color: var(--vd-note-text); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
-.vd-annotated-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-weight: 700; }
+.vd-annotated-glyph { display: inline-block; inline-size: 1.25em; text-align: center; font-family: var(--vd-font-mono); font-weight: 700; }
 .vd-annotated-label { display: block; font-weight: 650; }
 .vd-annotated-text { margin: 0; }
 @container vd-doc (min-width: 44rem) {
