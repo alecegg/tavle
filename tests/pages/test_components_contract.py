@@ -12,8 +12,11 @@ import re
 from pathlib import Path
 
 import pytest
+from cases_loader import Case, load_cases
 
 from varde.pages.assemble import assemble_static
+from varde.pages.blocks.check import check_props
+from varde.pages.blocks_render import render_block
 from varde.pages.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from varde.pages.components import component_bundle, mount_block
 from varde.pages.render import render_page
@@ -21,6 +24,9 @@ from varde.pages.render import render_page
 FIXTURES = Path(__file__).parent / "components" / "fixtures"
 COMPONENT_FILES = Path(__file__).parents[2] / "src/varde/pages/static/components"
 REGEN = os.environ.get("VARDE_REGEN_FIXTURES") == "1"
+CASES = load_cases()
+VALID_CASES = [case for case in CASES if case.valid]
+INVALID_CASES = [case for case in CASES if not case.valid]
 
 CALLOUTS: dict[str, dict[str, object]] = {
     "tones-info": {"tone": "info", "text": "Plain note."},
@@ -118,3 +124,21 @@ def test_standalone_export_noscript_is_the_markdown_source(tmp_path: Path) -> No
     page = assemble_static(doc)
     assert noscript_text(page) == SOURCE
     assert "window.m=" in page
+
+
+@pytest.mark.parametrize("case", VALID_CASES, ids=lambda c: c.name)
+def test_valid_case_validates_and_renders(case: Case) -> None:
+    errors = check_props(case.component, case.props, 1)
+    assert errors == [], [e.text() for e in errors]
+    rendered = render_block(case.component, case.props, "b1", 1)
+    assert " block has " not in rendered, rendered
+
+
+@pytest.mark.parametrize("case", INVALID_CASES, ids=lambda c: c.name)
+def test_invalid_case_reports_its_rule(case: Case) -> None:
+    errors = check_props(case.component, case.props, 1)
+    found = sorted({(e.rule, e.path) for e in errors})
+    matched = [e for e in errors if e.rule == case.rule and case.path in ("", e.path)]
+    assert matched, f"expected {case.rule} {case.path!r}; got {found}"
+    rendered = render_block(case.component, case.props, "b1", 1)
+    assert f"{case.component} block has " in rendered
