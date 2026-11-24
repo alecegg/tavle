@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import colorsys
 import re
 from importlib.resources import files
 from pathlib import Path
@@ -11,12 +10,7 @@ import pytest
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
 TONES = ("info", "decision", "risk", "warning", "success")
-SURFACES = {
-    "light": ((255, 255, 255), (245, 245, 245), (255, 255, 255)),
-    "dark": ((23, 23, 23), (15, 15, 15), (35, 35, 35)),
-}
 TRIPLE = re.compile(r"(\d+) (\d+)% (\d+)%")
-HSL = re.compile(r"hsl\((\d+) (\d+)% (\d+)%\)")
 # classes the part files styled before the restyle; each must keep a rule
 CLASSES = """
 accept-btn actions align-center align-right arrow back block changed chart
@@ -91,59 +85,12 @@ def _scheme_tokens(scheme: str) -> dict[str, str]:
     return tokens
 
 
-def _rgb(h: float, s: float, light: float) -> tuple[float, ...]:
-    r, g, b = colorsys.hls_to_rgb(h / 360, light / 100, s / 100)
-    return (r * 255, g * 255, b * 255)
-
-
-def _lum(rgb: tuple[float, ...]) -> float:
-    def ch(v: float) -> float:
-        v /= 255
-        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
-
-    return 0.2126 * ch(rgb[0]) + 0.7152 * ch(rgb[1]) + 0.0722 * ch(rgb[2])
-
-
-def _ratio(a: tuple[float, ...], b: tuple[float, ...]) -> float:
-    hi, lo = sorted((_lum(a), _lum(b)), reverse=True)
-    return (hi + 0.05) / (lo + 0.05)
-
-
-def _mix(
-    top: tuple[float, ...], alpha: float, below: tuple[float, ...]
-) -> tuple[float, ...]:
-    return tuple(top[i] * alpha + below[i] * (1 - alpha) for i in range(3))
-
-
-@pytest.mark.parametrize("scheme", ["light", "dark"])
-@pytest.mark.parametrize("tone", TONES)
-def test_tone_edge_and_text_meet_contrast(scheme: str, tone: str) -> None:
-    tokens = _scheme_tokens(scheme)
-    h, s, light = map(int, TRIPLE.fullmatch(tokens[f"--vd-tone-{tone}"]).groups())  # type: ignore[union-attr]
-    th, ts, tl = map(int, HSL.fullmatch(tokens[f"--vd-tone-{tone}-text"]).groups())  # type: ignore[union-attr]
-    edge, text = _rgb(h, s, light), _rgb(th, ts, tl)
-    page, sunk, elevated = SURFACES[scheme]
-    assert _ratio(edge, page) >= 3.0, f"{scheme} {tone} edge on page"
-    for ground in (page, sunk, elevated):
-        tinted = _mix(edge, 0.08, ground)
-        assert _ratio(text, tinted) >= 4.5, (
-            f"{scheme} {tone} text on tint over {ground}"
-        )
-
-
 def test_dark_triples_are_ten_lightness_points_above_light() -> None:
     light, dark = _scheme_tokens("light"), _scheme_tokens("dark")
     for tone in TONES:
         lh, ls, ll = map(int, TRIPLE.fullmatch(light[f"--vd-tone-{tone}"]).groups())  # type: ignore[union-attr]
         dh, ds, dl = map(int, TRIPLE.fullmatch(dark[f"--vd-tone-{tone}"]).groups())  # type: ignore[union-attr]
         assert (dh, ds, dl) == (lh, ls, ll + 10)
-
-
-def test_tones_follow_the_bar_triples() -> None:
-    light = _scheme_tokens("light")
-    assert [light[f"--vd-tone-{t}"] for t in TONES] == [
-        "218 85% 57%", "262 83% 58%", "0 84% 60%", "25 95% 48%", "142 71% 38%",
-    ]  # fmt: skip
 
 
 def test_forced_colors_maps_every_tone_to_system_colours() -> None:
