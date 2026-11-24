@@ -246,3 +246,20 @@ def test_served_route_returns_the_concatenation() -> None:
     from varde.pages.serve import static_body
 
     assert static_body("app.css") == static_css().encode("utf-8")
+
+
+def test_heading_tokens_keep_default_values_and_drive_chrome() -> None:
+    expected = {
+        "heading-weight": "700",
+        "title-weight": "750",
+        "heading-tracking": "-0.01em",
+        "title-tracking": "-0.02em",
+        "heading-case": "none",
+        "heading-color": "var(--vd-text)",
+        "heading-mark-size": "0.5em",
+    }
+    tokens = _tokens("light")
+    chrome = (CSS_DIR / "10-chrome.css").read_text()
+    for name, value in expected.items():
+        assert tokens[f"--vd-{name}"] == value
+        assert f"var(--vd-{name})" in chrome

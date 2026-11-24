@@ -193,7 +193,8 @@ def test_headings_use_their_font_token_and_are_bolder_than_body() -> None:
     heading = re.search(r"\nh1, h2, h3, h4, h5, h6 \{([^}]*)\}", "\n" + chrome)
     assert heading
     assert "font-family: var(--vd-font-heading)" in heading.group(1)
-    assert re.search(r"font-weight:\s*(\d+)", heading.group(1)).group(1) == "700"  # type: ignore[union-attr]
+    assert "font-weight: var(--vd-heading-weight)" in heading.group(1)
+    assert _root_tokens()["--vd-heading-weight"] == "700"
     assert _families(_root_tokens()["--vd-font-heading"]) == ["var(--vd-font-body)"]
     assert re.search(r"\.doc-name \{[^}]*font-family: var\(--vd-font-heading\)", chrome)
 
