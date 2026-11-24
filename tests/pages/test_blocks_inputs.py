@@ -16,8 +16,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from ui_fence import block_host
+from ui_fence import block_host, example_fence
 
+from varde.pages.blocks.check import COMPONENT_SPECS, check, check_props
 from varde.pages.blocks_render.inputs import choice_props, form_props
 from varde.pages.blocks_render.inputs_ordered import ranking_props, slider_props
 from varde.pages.blocks_render.registry import COMPONENTS
@@ -203,3 +204,105 @@ def test_live_update_keeps_what_the_reader_entered_and_remounts_changed_blocks(
     assert box.input_value() == "draft"
     page.locator(".choice-send").click()
     assert "Pick an option" in page.locator(".choice-error").inner_text()
+
+
+_CHOICE = {"question": "Q", "options": ["a"]}
+_FIELD = {"name": "n", "label": "L", "type": "text"}
+_FORM = {"fields": [_FIELD]}
+_COMMENT = {"label": "L"}
+_RANKING = {"question": "Q", "items": ["a", "b"]}
+_SLIDER = {"label": "L", "min": 0, "max": 5}
+
+
+def _without(props: dict[str, Any], key: str) -> dict[str, Any]:
+    return {k: v for k, v in props.items() if k != key}
+
+
+def _in_field(**changes: Any) -> dict[str, Any]:
+    return {"fields": [{**_FIELD, **changes}]}
+
+
+PROPERTY_CASES = [
+    # an unknown field
+    ("choice", {**_CHOICE, "extra": 1}, "extra"),
+    ("form", {**_FORM, "extra": 1}, "extra"),
+    ("form", _in_field(extra=1), "extra"),
+    ("comment", {**_COMMENT, "extra": 1}, "extra"),
+    ("ranking", {**_RANKING, "extra": 1}, "extra"),
+    ("slider", {**_SLIDER, "extra": 1}, "extra"),
+    # a missing required field
+    ("choice", _without(_CHOICE, "question"), "question"),
+    ("choice", _without(_CHOICE, "options"), "options"),
+    ("form", {}, "fields"),
+    ("form", {"fields": [_without(_FIELD, "label")]}, "label"),
+    ("form", {"fields": [_without(_FIELD, "name")]}, "name"),
+    ("form", {"fields": [_without(_FIELD, "type")]}, "type"),
+    ("comment", {}, "label"),
+    ("ranking", _without(_RANKING, "items"), "items"),
+    ("slider", _without(_SLIDER, "min"), "min"),
+    ("slider", _without(_SLIDER, "label"), "label"),
+    # a wrong type
+    ("choice", {**_CHOICE, "question": 1}, "question"),
+    ("choice", {**_CHOICE, "options": "a"}, "options"),
+    ("choice", {**_CHOICE, "multiple": "yes"}, "multiple"),
+    ("form", {"fields": "x"}, "fields"),
+    ("form", {"fields": ["x"]}, "fields[1]"),
+    ("form", _in_field(label=1), "label"),
+    ("form", _in_field(required="yes"), "required"),
+    ("form", _in_field(maxlength="9"), "maxlength"),
+    ("form", _in_field(maxlength=None), "maxlength"),
+    ("form", _in_field(type="date"), "type"),
+    ("comment", {"label": 1}, "label"),
+    ("ranking", {**_RANKING, "items": "ab"}, "items"),
+    ("slider", {**_SLIDER, "min": "a"}, "min"),
+    ("slider", {**_SLIDER, "step": True}, "step"),
+    ("slider", {**_SLIDER, "labels": "ab"}, "labels"),
+    ("slider", {**_SLIDER, "labels": ["a", 1]}, "labels"),
+    ("form", _in_field(type="number", min="a"), "min"),
+    ("form", _in_field(type="select", options="ab"), "options"),
+    ("form", _in_field(type="select", options=["a", 1]), "options"),
+    # a blank value
+    ("choice", {**_CHOICE, "question": " "}, "question"),
+    ("choice", {**_CHOICE, "options": []}, "options"),
+    ("form", {"fields": []}, "fields"),
+    ("form", {**_FORM, "title": " "}, "title"),
+    ("form", {**_FORM, "submit": ""}, "submit"),
+    ("form", _in_field(label=" "), "label"),
+    ("form", _in_field(name=""), "name"),
+    ("form", _in_field(type="select", options=[]), "options"),
+    ("form", _in_field(type="select", options=["a", " "]), "options"),
+    ("comment", {"label": " "}, "label"),
+    ("comment", {**_COMMENT, "submit": " "}, "submit"),
+    ("ranking", {**_RANKING, "question": ""}, "question"),
+    ("ranking", {**_RANKING, "items": []}, "items"),
+    ("slider", {**_SLIDER, "label": " "}, "label"),
+    ("slider", {**_SLIDER, "labels": ["a", " "]}, "labels"),
+    # a mistake only the widget sees: still one fault
+    ("form", _in_field(min=1), "min"),
+    ("form", _in_field(maxlength=0), "maxlength"),
+    ("form", _in_field(name="A b"), "name"),
+    ("form", _in_field(label="x" * 300), "label"),
+    ("form", _in_field(type="number", min=float("inf")), "min"),
+    ("form", _in_field(type="number", min=5, max=1), "min"),
+    ("form", _in_field(type="select"), "options"),
+    ("choice", {**_CHOICE, "options": ["a", "a"]}, "options"),
+    ("ranking", {**_RANKING, "items": ["a"]}, "items"),
+    ("slider", {**_SLIDER, "min": float("nan")}, "min"),
+    ("slider", {**_SLIDER, "step": float("inf")}, "step"),
+    ("slider", {**_SLIDER, "labels": ["a"]}, "labels"),
+    ("slider", {**_SLIDER, "min": 9}, "min"),
+]
+
+
+@pytest.mark.parametrize(("block", "props", "field"), PROPERTY_CASES)
+def test_a_property_mistake_gets_one_fault_naming_the_field(
+    block: str, props: dict[str, Any], field: str
+) -> None:
+    faults = check_props(block, props, 1)
+    assert len(faults) == 1, faults
+    assert field in faults[0].message
+
+
+@pytest.mark.parametrize("block", BLOCKS)
+def test_each_example_is_valid(block: str) -> None:
+    assert check(example_fence(COMPONENT_SPECS[block].example)) == []
