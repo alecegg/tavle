@@ -2,8 +2,8 @@
 
 import re
 
-from varde.pages.blocks.rules import Fault, check_keys, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 KINDS = ("info", "warn", "change")
 MAX_NOTES = 40
@@ -31,15 +31,9 @@ def parse_range(value: object) -> tuple[int, int] | None:
 
 
 def _note_faults(note: object, where: str, total: int) -> list[Fault]:
-    if not isinstance(note, dict):
-        return [Fault("type", f"{where} must be a table")]
-    faults = check_keys(note, {"lines", "note"}, {"label", "kind"}, where)
-    for key in ("note", "label"):
-        faults += str_field(note, key, where)
-    if "kind" in note and note["kind"] not in KINDS:
-        faults.append(Fault("type", f"{where}: kind must be one of {', '.join(KINDS)}"))
-    if "lines" not in note:
-        return faults
+    if not isinstance(note, dict) or "lines" not in note:
+        return []
+    faults: list[Fault] = []
     span = parse_range(note["lines"])
     if span is None:
         return faults + [Fault("type", f"{where}: lines must be n or 'from-to'")]
@@ -69,7 +63,7 @@ def _crowded_faults(notes: list[object]) -> list[Fault]:
 def _notes_faults(data: dict[str, object]) -> list[Fault]:
     notes = data.get("notes")
     if not isinstance(notes, list):
-        return [Fault("type", "annotated-code: 'notes' must be a list of tables")]
+        return []
     faults: list[Fault] = []
     if len(notes) > MAX_NOTES:
         faults.append(Fault("limit", f"annotated-code: at most {MAX_NOTES} notes"))
@@ -81,17 +75,7 @@ def _notes_faults(data: dict[str, object]) -> list[Fault]:
 
 
 def validate_annotated_code(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(
-        data,
-        {"filename", "language", "source", "notes"},
-        {"collapse"},
-        "annotated-code",
-    )
-    for key in ("filename", "language", "source"):
-        faults += str_field(data, key, "annotated-code")
-    if "collapse" in data and not isinstance(data["collapse"], bool):
-        faults.append(Fault("type", "annotated-code: 'collapse' must be true or false"))
-    return faults + (_notes_faults(data) if "notes" in data else [])
+    return _notes_faults(data)
 
 
 ANNOTATED_CODE = BlockSpec(
@@ -116,4 +100,22 @@ ANNOTATED_CODE = BlockSpec(
 )
 """,
     validate_annotated_code,
+    properties=(
+        PropertySpec("filename", "string", required=True),
+        PropertySpec("language", "string", required=True),
+        PropertySpec("source", "string", required=True),
+        PropertySpec("collapse", "boolean"),
+        PropertySpec(
+            "notes",
+            "list",
+            required=True,
+            items="object",
+            fields=(
+                PropertySpec("lines", "any", required=True),
+                PropertySpec("note", "string", required=True),
+                PropertySpec("label", "string"),
+                PropertySpec("kind", "string", enum=KINDS),
+            ),
+        ),
+    ),
 )

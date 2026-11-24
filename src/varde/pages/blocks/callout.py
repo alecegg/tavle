@@ -1,18 +1,13 @@
 """Block type for settled notes: callout."""
 
-from varde.pages.blocks.rules import Fault, check_keys, str_field
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.rules import Fault
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 TONES = ("info", "decision", "risk", "warning", "success")
 
 
 def validate_callout(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(data, {"tone", "text"}, {"title"}, "callout")
-    faults += str_field(data, "text", "callout") + str_field(data, "title", "callout")
-    tone = data.get("tone")
-    if "tone" in data and tone not in TONES:
-        faults.append(Fault("tone", f"callout: tone must be one of {', '.join(TONES)}"))
-    return faults
+    return []
 
 
 CALLOUT = BlockSpec(
@@ -30,4 +25,9 @@ CALLOUT = BlockSpec(
 )
 """,
     validate_callout,
+    properties=(
+        PropertySpec("tone", "string", required=True, enum=TONES),
+        PropertySpec("text", "string", required=True),
+        PropertySpec("title", "string"),
+    ),
 )

@@ -2,10 +2,8 @@
 
 from varde.pages.blocks.rules import (
     Fault,
-    check_keys,
-    str_field,
 )
-from varde.pages.blocks.spec import BlockSpec
+from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 
 def _is_line(value: object) -> bool:
@@ -40,24 +38,8 @@ def _mark_faults(data: dict[str, object]) -> list[Fault]:
     return [Fault("type", "code: 'mark' must be a list of line numbers or [from, to]")]
 
 
-def _flag_faults(data: dict[str, object]) -> list[Fault]:
-    return [
-        Fault("type", f"code: '{key}' must be true or false")
-        for key in ("wrap", "numbers")
-        if key in data and not isinstance(data[key], bool)
-    ]
-
-
 def validate_code(data: dict[str, object]) -> list[Fault]:
-    faults = check_keys(
-        data,
-        {"language", "source"},
-        {"title", "lines", "wrap", "numbers", "mark"},
-        "code",
-    )
-    for key in ("language", "source", "title"):
-        faults += str_field(data, key, "code")
-    return faults + _lines_faults(data) + _mark_faults(data) + _flag_faults(data)
+    return _lines_faults(data) + _mark_faults(data)
 
 
 CODE = BlockSpec(
@@ -81,4 +63,13 @@ CODE = BlockSpec(
 """,
     validate_code,
     block_type="code",
+    properties=(
+        PropertySpec("language", "string", required=True),
+        PropertySpec("source", "string", required=True),
+        PropertySpec("title", "string"),
+        PropertySpec("lines", "any"),
+        PropertySpec("wrap", "boolean"),
+        PropertySpec("numbers", "boolean"),
+        PropertySpec("mark", "any"),
+    ),
 )
