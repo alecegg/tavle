@@ -28,11 +28,9 @@ FLOW = BlockSpec(
     "flow",
     "Steps and the steps that can follow each",
     (
-        "title        optional text",
-        "step: list of {id, text, next}, one per step",
-        "  id    unique step name",
-        "  text  what happens",
-        "  next  optional list of step ids; several entries are branches",
+        "title: text.",
+        "step: one per step; id is a unique step name; text is what happens; next",
+        "  lists step ids, and several entries are branches.",
     ),
     r"""flow = flow(
   title: "Checkout",

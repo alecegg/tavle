@@ -5,9 +5,9 @@ from varde.pages.blocks.spec import PropertySpec
 
 CHANGES = ("added", "modified", "removed", "renamed")
 _ALLOWED = ", ".join(CHANGES)
-CHANGE_FIELDS = (
-    "change  optional: added, modified, removed or renamed",
-    "was     optional previous name, type or value; required for renamed only",
+CHANGE_NOTES = (
+    "change: added, modified, removed or renamed.",
+    "was: the previous name, type or value; required for renamed only.",
 )
 
 

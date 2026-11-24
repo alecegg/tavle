@@ -35,12 +35,11 @@ CHECKLIST = BlockSpec(
     "checklist",
     "A static checklist with a state word per item and a progress count",
     (
-        "title  optional heading",
-        "items  list of {label, id, checked, note, status}, up to 500; label is",
-        "       plain text with `code` spans; note shows muted under the label",
-        "       status is done, open (default) or blocked; checked: true means done",
-        "       and must agree with status",
-        "  Shows the count as 'N of M done' beside a progress bar. Not interactive.",
+        "title: heading.",
+        "items: up to 500. label is plain text with `code` spans; note shows muted",
+        "  under the label; status defaults to open; checked: true means done and",
+        "  must agree with status.",
+        "Shows the count as 'N of M done' beside a progress bar. Not interactive.",
     ),
     r"""checklist = checklist(
   title: "Acceptance",

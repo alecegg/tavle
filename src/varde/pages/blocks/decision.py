@@ -21,12 +21,10 @@ DECISION = BlockSpec(
     "decision",
     "A question the user answers with approve, deny or a comment",
     (
-        "question  required text",
-        "options   optional list of approve, deny, comment; default all three",
-        "evidence  optional list of {label, text} rows",
-        "  label  optional short label",
-        "  text   the row's text",
-        "diff      optional text, shown preformatted",
+        "question: the text asked.",
+        "options: default is all three of approve, deny and comment.",
+        "evidence: rows of {label, text}; label is a short label.",
+        "diff: shown preformatted.",
     ),
     r"""decision = decision(
   question: "Accept the shorter build-skill intro?",

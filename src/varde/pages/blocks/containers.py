@@ -151,12 +151,12 @@ TABS = BlockSpec(
     "tabs",
     "Tabs that show other blocks of the page, one panel at a time",
     (
-        "tab  list of {label, blocks}, 1 to 12; label is the tab text, blocks the ids",
-        "     of other statements to show in that panel (up to 200 ids in all)",
-        "  A held block is shown once, in its panel, with its own menu. A block is",
-        "  held by one container only, and containers do not nest. Input blocks",
-        "  (choice, form, comment, ranking, slider, decision) cannot be held in tabs.",
-        "  Without script and in print every panel shows, stacked under its label.",
+        "tab: 1 to 12; label is the tab text, blocks the ids of other statements to",
+        "  show in that panel (up to 200 ids in all).",
+        "A held block is shown once, in its panel, with its own menu. A block is",
+        "held by one container only, and containers do not nest. Input blocks",
+        "(choice, form, comment, ranking, slider, decision) cannot be held in tabs.",
+        "Without script and in print every panel shows, stacked under its label.",
     ),
     r"""tabs = tabs(
   tab: [
@@ -173,10 +173,10 @@ COLUMNS = BlockSpec(
     "columns",
     "Side-by-side columns that show other blocks of the page",
     (
-        "col  list of {label, blocks}, 1 to 4; label is optional text above a column,",
-        "     blocks the ids of other statements to show there",
-        "  Columns stack below 44rem. A held block is shown once, with its own menu;",
-        "  a block is held by one container only and containers do not nest.",
+        "col: 1 to 4; label is text above a column, blocks the ids of other",
+        "  statements to show there.",
+        "Columns stack below 44rem. A held block is shown once, with its own menu;",
+        "a block is held by one container only and containers do not nest.",
     ),
     r"""columns = columns(
   col: [

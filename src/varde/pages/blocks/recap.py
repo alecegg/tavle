@@ -12,11 +12,11 @@ RECAP = BlockSpec(
     "recap",
     "A plan's changed files, drift flags and review buttons",
     (
-        "rows      list of changed files: file, status, hunk (and optional",
-        "          tasks, blocks, drift, added, removed, shared, binary, truncated)",
-        "plan, base, head  optional text for the heading",
-        "summary   optional {name: count}",
-        "untouched, unverified  optional drift lists",
+        "rows: the changed files: file, status and hunk, and optionally tasks,",
+        "  blocks, drift, added, removed, shared, binary and truncated.",
+        "plan, base, head: text for the heading.",
+        "summary: {name: count}.",
+        "untouched, unverified: drift lists.",
     ),
     r"""recap = recap(
   plan: "demo",

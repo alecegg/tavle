@@ -84,14 +84,12 @@ STATS = BlockSpec(
     "stats",
     "A strip of 2 to 6 headline numbers with an optional change",
     (
-        "item   list of {label, value, delta, direction, good, tone, note, decimals},",
-        "       2 to 6; value is text or a number (numbers get thousands separators;",
-        "       decimals sets the places); delta is text or a number, shown as",
-        "       'up 12%' with an arrow; direction is up, down or flat (else the",
-        "       sign of delta); good says which direction is good (up or down), so",
-        "       a good move reads green and a bad one red; flat is neutral;",
-        "       tone overrides: neutral, info, decision, risk, warning or success",
-        "  The word up, down or flat is always in the text, never colour alone.",
+        "item: 2 to 6. value is text or a number (numbers get thousands separators;",
+        "  decimals sets the places); delta is text or a number, shown as 'up 12%'",
+        "  with an arrow; direction is up, down or flat (else the sign of delta);",
+        "  good says which direction is good (up or down), so a good move reads",
+        "  green and a bad one red; flat is neutral; tone overrides the colour.",
+        "The word up, down or flat is always in the text, never colour alone.",
     ),
     r"""stats = stats(
   item: [

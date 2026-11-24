@@ -34,7 +34,7 @@ def validate_deps(data: dict[str, object]) -> list[Fault]:
 DEPS = BlockSpec(
     "deps",
     "A task dependency graph drawn from edges",
-    ("edges  table mapping each task id to the list of tasks it depends on",),
+    ("edges: a table mapping each task id to the list of tasks it depends on.",),
     r"""deps = deps(
   edges: {"a": [], "b": ["a"], "c": ["a", "b"]},
 )

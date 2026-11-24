@@ -101,7 +101,7 @@ CHANGE_SUMMARY = BlockSpec(
     "change-summary",
     "One generated line counting the change markers on the page",
     (
-        "title  optional short heading",
+        "title: short heading.",
         "No other field: the line counts the `change` markers of data-model,",
         "endpoint and file-tree blocks on the same page, for example",
         "'2 files added, 1 endpoint changed, 1 field removed'. A page without",

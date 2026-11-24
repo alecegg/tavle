@@ -1,7 +1,7 @@
 """Block type for changed files: file-tree."""
 
 from varde.pages.blocks.change import (
-    CHANGE_FIELDS,
+    CHANGE_NOTES,
     CHANGE_PROPERTIES,
     change_rule_faults,
 )
@@ -64,14 +64,13 @@ FILE_TREE = BlockSpec(
     "file-tree",
     "Changed files as a folder tree with change markers, notes and link to code",
     (
-        "title     optional heading",
-        "entries   list of tables, one per file; a path appears once",
-        "  path    `dir/file.ext`, no leading slash",
-        "  note    optional short text shown on the same row",
-        "  role    optional label such as test or config",
-        *(f"  {line}" for line in CHANGE_FIELDS),
-        "          a renamed file sits at its new path; `was` is the old path",
-        "collapse  optional: close folders deeper than this many levels (default none)",
+        "title: heading.",
+        "entries: one per file; a path appears once. path is `dir/file.ext` with no",
+        "  leading slash; note is short text shown on the same row; role is a label",
+        "  such as test or config.",
+        *CHANGE_NOTES,
+        "A renamed file sits at its new path; `was` is the old path.",
+        "collapse: closes folders deeper than this many levels (default none).",
         "A file whose path ends with the title of a `code` block links to that block.",
     ),
     r"""file-tree = file-tree(

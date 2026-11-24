@@ -1,7 +1,7 @@
 """Block types for data and interfaces: data-model, endpoint."""
 
 from varde.pages.blocks.change import (
-    CHANGE_FIELDS,
+    CHANGE_NOTES,
     CHANGE_PROPERTIES,
     CHANGES,
     change_rule_faults,
@@ -12,8 +12,8 @@ from varde.pages.blocks.spec import BlockSpec, PropertySpec
 
 _RELATION_KINDS = ("one-to-one", "one-to-many", "many-to-one", "many-to-many")
 _CHANGE_NOTE = (
-    "Change (optional on an entity, field, endpoint, parameter or response):",
-    *(f"  {line}" for line in CHANGE_FIELDS),
+    "Change markers, optional on an entity, field, endpoint, parameter or response:",
+    *(f"  {line}" for line in CHANGE_NOTES),
 )
 _METHODS = ("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS")
 
@@ -125,13 +125,9 @@ DATA_MODEL = BlockSpec(
     "data-model",
     "Entities with a key and relations to other entities",
     (
-        "entity: list of {name, key, fields, relations}, one per entity",
-        "  name       entity name (unique)",
-        "  key        field that identifies a row; must be in fields",
-        "  fields     {field name: type text, or {type, change, was}}",
-        "  relations  optional list of {to, kind}",
-        "    to    name of another entity in this block",
-        "    kind  one-to-one, one-to-many, many-to-one, many-to-many",
+        "entity: one per entity; name is unique; key names the field that identifies",
+        "  a row and must be in fields; fields maps a field name to a type text, or",
+        "  to {type, change, was}; relations.to names another entity in this block.",
         *LAYOUT_NOTE,
         *_CHANGE_NOTE,
     ),
@@ -182,12 +178,11 @@ ENDPOINT = BlockSpec(
     "endpoint",
     "One HTTP endpoint with its auth rule and responses",
     (
-        "method      GET, POST, PUT, PATCH, DELETE, HEAD or OPTIONS",
-        "path        starts with /",
-        'auth        required; "none" must be written to mean public',
-        "summary     optional one line",
-        "request     optional {parameter: type text, or {type, change, was}}",
-        "responses   list of {status, body, change, was}; status 100-599",
+        "path: starts with /.",
+        'auth: required; "none" must be written to mean public.',
+        "summary: one line.",
+        "request: maps a parameter to a type text, or to {type, change, was}.",
+        "responses: status is 100-599.",
         *_CHANGE_NOTE,
     ),
     r"""endpoint = endpoint(

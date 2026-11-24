@@ -6,8 +6,8 @@ LAYOUTS = ("list", "graph")
 MAX_GRAPH_ENTITIES = 30
 
 LAYOUT_NOTE = (
-    "layout  optional: list (default) or graph; graph draws the relations as",
-    f"        lines between entity boxes, up to {MAX_GRAPH_ENTITIES} entities",
+    "layout: list (default) or graph; graph draws the relations as lines",
+    f"  between entity boxes, up to {MAX_GRAPH_ENTITIES} entities.",
 )
 
 

@@ -14,9 +14,9 @@ CALLOUT = BlockSpec(
     "callout",
     "A tinted note with a tone, a label and plain text",
     (
-        "tone   info, decision, risk, warning or success; the label shows its word",
-        "title  optional short heading",
-        "text   plain text; a blank line starts a paragraph, `code` marks inline code",
+        "tone: the label shows its word.",
+        "title: short heading.",
+        "text: plain text; a blank line starts a paragraph, `code` marks inline code.",
     ),
     r"""callout = callout(
   tone: "decision",

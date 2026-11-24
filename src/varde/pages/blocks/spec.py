@@ -45,7 +45,9 @@ class PropertySpec:
 class BlockSpec:
     name: str
     summary: str
-    fields: tuple[str, ...]  # one help line per field
+    # prose the help prints under "Details": meaning, defaults and behaviour that
+    # `properties` cannot hold; the field lines themselves come from `properties`
+    notes: tuple[str, ...]
     example: str  # one `ui` statement that validates; its id is the type name
     validate: Callable[[dict[str, object]], list[Fault]]
     # The page block type the component renders as (`data-block-type`): `widget`

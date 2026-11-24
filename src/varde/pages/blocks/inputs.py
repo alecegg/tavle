@@ -343,11 +343,11 @@ CHOICE = BlockSpec(
     "choice",
     "A question answered by picking one option, or several",
     (
-        "question  required text",
-        "options   required list: a string, or a table (label, detail, value)",
-        "          recommended: true on one table shows a Recommended badge",
-        "multiple  optional true to allow several picks; default one",
-        "comment   optional true to add a free-text box",
+        "question: the text asked.",
+        "options: each is a string, or a table (label, detail, value); recommended:",
+        "  true on one table shows a Recommended badge.",
+        "multiple: true allows several picks; default one.",
+        "comment: true adds a free-text box.",
     ),
     r"""choice = choice(
   question: "Which database?",
@@ -372,13 +372,13 @@ FORM = BlockSpec(
     "form",
     "Several fields (text, number, select, checkbox) sent with one submit",
     (
-        "title    optional text",
-        "submit   optional button label; default Submit",
-        "fields: list of {name, label, type, ...}; type text|number|select|checkbox",
-        "  required  optional true; a checkbox must then be ticked",
-        "  maxlength  text only, up to 600",
-        "  min, max   number only, finite bounds",
-        "  options    select only, list of text; a blank choice comes first",
+        "title: text.",
+        "submit: button label; default Submit.",
+        "fields: one table per field; beyond name, label and type:",
+        "  required: true; a checkbox must then be ticked",
+        "  maxlength: text only, up to 600",
+        "  min, max: number only, finite bounds",
+        "  options: select only, a list of text; a blank choice comes first",
     ),
     r"""form = form(
   title: "Rollout settings",
@@ -421,8 +421,8 @@ COMMENT = BlockSpec(
     "comment",
     "A free-text box whose text is stored as the page's answer",
     (
-        "label   required text shown above the box",
-        "submit  optional button label; default Send",
+        "label: text shown above the box.",
+        "submit: button label; default Send.",
     ),
     r"""comment = comment(
   label: "Anything we missed?",

@@ -131,9 +131,9 @@ RANKING = BlockSpec(
     "ranking",
     "A list the reader puts in order; the answer is the ids in ranked order",
     (
-        "question  required text",
-        "items     required list of 2-50: a string, or a table (label, detail, value)",
-        "          the list starts in the order given; drag, or use the move buttons",
+        "question: the text asked.",
+        "items: 2-50; each is a string, or a table (label, detail, value). The list",
+        "  starts in the order given; drag, or use the move buttons.",
     ),
     r"""ranking = ranking(
   question: "Order by urgency",
@@ -153,11 +153,10 @@ SLIDER = BlockSpec(
     "slider",
     "A number picked on a range; the answer is one number on a step",
     (
-        "label   required text",
-        "min     required finite number",
-        "max     required finite number above min",
-        "step    optional number above 0, default 1; answers are min plus whole steps",
-        "labels  optional two texts shown at the low and high end",
+        "label: text.",
+        "min: a finite number. max: a finite number above min.",
+        "step: a number above 0, default 1; answers are min plus whole steps.",
+        "labels: two texts shown at the low and high end.",
     ),
     r"""slider = slider(
   label: "Confidence",
