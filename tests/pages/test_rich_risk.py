@@ -74,3 +74,17 @@ def test_stress_fixture_validates_and_stays_escaped() -> None:
 def test_risk_styles_have_no_status_edge_border() -> None:
     css = Path("src/varde/pages/static/css/61-risk.css").read_text()
     assert "border-inline-start" not in css
+
+
+def test_property_faults_are_single_and_name_the_field() -> None:
+    row = {"id": "R", "label": "L", "likelihood": "low", "impact": "low"}
+    cases = (
+        ({**row, "extra": 1}, "extra"),
+        ({k: v for k, v in row.items() if k != "label"}, "label"),
+        ({**row, "label": 1}, "label"),
+        ({**row, "label": " "}, "label"),
+    )
+    for item, field in cases:
+        faults = check_props("risks", {"item": [item]}, 1)
+        assert len(faults) == 1
+        assert field in faults[0].message

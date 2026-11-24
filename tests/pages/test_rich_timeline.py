@@ -61,3 +61,17 @@ def test_status_has_no_inline_start_border() -> None:
     rules = [part.split("}", 1)[0] for part in css.split(".vd-timeline-body {")[1:]]
     assert rules
     assert all("border-inline-start" not in rule for rule in rules)
+
+
+def test_property_faults_are_single_and_name_the_field() -> None:
+    row = {"when": "W", "label": "L", "status": "done"}
+    cases = (
+        ({**row, "extra": 1}, "extra"),
+        ({k: v for k, v in row.items() if k != "label"}, "label"),
+        ({**row, "label": 1}, "label"),
+        ({**row, "label": " "}, "label"),
+    )
+    for item, field in cases:
+        faults = check_props("timeline", {"item": [item]}, 1)
+        assert len(faults) == 1
+        assert field in faults[0].message
