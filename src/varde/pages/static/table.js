@@ -166,27 +166,15 @@ function filterField(table, state, total) {
   return [input, status];
 }
 
-function wrapToggle(region) {
-  const button = control('Wrap text', () => {
-    const wrapped = region.classList.toggle('vb-nowrap');
-    button.setAttribute('aria-pressed', String(!wrapped));
-  }, 'vb-ctl vb-wrap-toggle');
-  button.setAttribute('aria-pressed', 'true');
-  return button;
-}
-
-// The scroll hint and the wrap toggle show only while the table is wider than its region;
-// the toggle also stays while text is unwrapped, so the reader can wrap it again.
-function trackOverflow(region, hint, toggle) {
+// The scroll hint shows only while the table is wider than its region.
+function trackOverflow(region, hint) {
   const update = () => {
     const overflowing = region.scrollWidth > region.clientWidth + 1;
     hint.hidden = !overflowing;
-    toggle.hidden = !overflowing && !region.classList.contains('vb-nowrap');
   };
   update();
   whileConnected(region, 'resize', update);
   region.addEventListener('click', update);
-  toggle.addEventListener('click', update);
   if (typeof ResizeObserver === 'function') new ResizeObserver(update).observe(region);
 }
 
@@ -207,11 +195,10 @@ function addToolbar(table, state, total) {
   keepFocusVisible(region);
   const bar = make('div', 'vb-filterbar');
   const hint = make('span', 'vb-scrollhint', 'Scrolls sideways');
-  const toggle = wrapToggle(region);
   if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, state, total));
   if (state.sortable && table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
-  bar.append(toggle, hint);
-  trackOverflow(region, hint, toggle);
+  bar.append(hint);
+  trackOverflow(region, hint);
   region.after(bar);
   if (collapses(total)) region.after(moreToggle(table, state));
   showRows(table, state);
