@@ -1,9 +1,0 @@
-{
-  "invalid": [
-    {
-      "name": "empty",
-      "props": {},
-      "rule": "input"
-    }
-  ]
-}

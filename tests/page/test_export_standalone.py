@@ -3,19 +3,15 @@
 The browser run of this export is `tavle tests/components/callout.test.js`.
 """
 
-import base64
 import json
 import re
 from pathlib import Path
 
+from every_block_page import every_block_page
 from tavle.blocks import COMPONENT_SPECS
 from tavle.components import export_page, mount_block
-from tavle.shell import make_read_only
 from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 
-from varde.pagelib.page.assemble import include_ctx
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pagelib.page.render import render_page
 from varde.pagelib.page.template import page_css
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
@@ -36,30 +32,6 @@ def _code_diff_hosts() -> str:
         props = next(case["props"] for case in cases if case["name"] == name)
         hosts.append(mount_block(block, props, name))
     return "".join(hosts)
-
-
-PIXEL = base64.b64decode(
-    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-)
-
-
-def every_block_page(root: Path) -> str:
-    """The exported body of a page holding each block type's spec example.
-
-    The examples hold each other by id (the tabs hold `code`), the `include` names a
-    plan beside the page, and the `image` names a file under `img/`.
-    """
-    (root / "img").mkdir(exist_ok=True)
-    (root / "img" / "login-screen.png").write_bytes(PIXEL)
-    (root / "plan.md").write_text(
-        "# Plan\n\n## Acceptance criteria\n\n- works\n", "utf-8"
-    )
-    fences = (f"```ui\n{spec.example.strip()}\n```\n" for spec in PAGE_SPECS.values())
-    doc = root / "all.md"
-    doc.write_text("# Every block\n\n" + "\n".join(fences), encoding="utf-8")
-    text = doc.read_text(encoding="utf-8")
-    page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
-    return make_read_only(page.body)
 
 
 def export_document(root: Path) -> str:

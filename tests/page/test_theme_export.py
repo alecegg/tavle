@@ -3,8 +3,8 @@
 import re
 from pathlib import Path
 
+from every_block_page import every_block_page
 from tavle.components import export_page
-from test_export_standalone import every_block_page
 
 from varde.pagelib.page.assemble import assemble_static
 from varde.pagelib.page.template import page_css

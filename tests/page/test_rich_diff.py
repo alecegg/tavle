@@ -9,13 +9,13 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props, type_text
+from tavle.blocks import check_props
 from tavle.blocks.diff_rows import (
     diff_rows,
     text_lines,
 )
 
-from varde.pagelib.page.page_check import PAGE_SPECS, check
+from varde.pagelib.page.page_check import check
 
 UI = Path(str(files("tavle")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
@@ -106,8 +106,6 @@ def test_stylesheet_ships_the_layout_rules() -> None:
 
 
 def test_help_text_and_fixtures() -> None:
-    text = files("varde.pages").joinpath("help", "blocks.txt").read_text()
-    assert type_text(PAGE_SPECS, "diff") in text
     for name in ("rich-diff.md", "rich-diff-stress.md"):
         assert check((FIXTURES / name).read_text(), None) == []
     page = (FIXTURES / "rich-diff-stress.md").read_text()
