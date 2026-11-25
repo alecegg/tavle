@@ -59,7 +59,7 @@ function cycleSort(table, state, column) {
 
 function tableState(table, sortable) {
   const original = new Map(Array.from(table.tBodies, (body) => [body, dataRows(body)]));
-  return { column: -1, direction: 0, original, picker: null, needle: '', expanded: false, more: null, sortable };
+  return { column: -1, direction: 0, original, picker: null, needle: '', expanded: false, more: null, sortable, hideDone: table.dataset.hideDone === 'true', doneStatus: null };
 }
 
 function addSortButtons(table, state) {
@@ -95,11 +95,11 @@ function sortPicker(table, state) {
 }
 
 // Maps each data row to whether it matches the filter text.
-function matchingRows(table, needle) {
+function matchingRows(table, needle, hideDone) {
   const hits = new Map();
   for (const body of table.tBodies) {
     for (const row of dataRows(body)) {
-      hits.set(row, !needle || row.textContent.toLowerCase().includes(needle));
+      hits.set(row, (!needle || row.textContent.toLowerCase().includes(needle)) && !(hideDone && row.dataset.done === 'true'));
     }
   }
   return hits;
@@ -109,11 +109,15 @@ function matchingRows(table, needle) {
 // collapses and is not expanded. Returns the match count; the group header of a body with nothing
 // shown hides.
 function showRows(table, state) {
-  const hits = matchingRows(table, state.needle);
+  const hits = matchingRows(table, state.needle, state.hideDone);
   const matched = Array.from(hits.values()).filter(Boolean).length;
   const capped = !state.expanded && collapses(matched);
   showMatchingBodies(table, hits, capped);
   if (state.more) updateMore(state, matched);
+  if (state.doneStatus) {
+    const hidden = state.hideDone ? table.querySelectorAll('tbody tr[data-done="true"]').length : 0;
+    state.doneStatus.textContent = hidden + ' done hidden';
+  }
   return matched;
 }
 
@@ -213,6 +217,18 @@ function totalProgress(table) {
   return wrap;
 }
 
+// The "Hide done" switch and its hidden-row count; showRows keeps the count current.
+function hideDoneSwitch(table, state) {
+  const label = make('label', 'vb-hide-done');
+  const input = make('input');
+  input.type = 'checkbox';
+  input.checked = state.hideDone;
+  input.addEventListener('change', () => { state.hideDone = input.checked; showRows(table, state); });
+  state.doneStatus = make('span', 'vb-done-status');
+  label.append(input, ' Hide done');
+  return [label, state.doneStatus];
+}
+
 function addToolbar(table, state, total) {
   const region = table.closest('.vb-scroll');
   if (!region) return;
@@ -221,6 +237,7 @@ function addToolbar(table, state, total) {
   const hint = make('span', 'vb-scrollhint', 'Scrolls sideways');
   if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, state, total));
   if (state.sortable && table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
+  if (table.hasAttribute('data-hide-done')) bar.append(...hideDoneSwitch(table, state));
   const progress = totalProgress(table);
   if (progress) bar.append(progress);
   bar.append(hint);

@@ -98,9 +98,14 @@ function progress(m, c, cell) {
   return [barGraphic(m, c, done, total), m('span.vb-bar-num', `${done} of ${total}`)];
 }
 
+function cellStatusKind(c, cell, extras) {
+  const text = c.shared.pyStr(cell);
+  return (extras.statusKind && extras.statusKind(text)) || statusKind(text);
+}
+
 function status(m, c, cell, extras) {
   const text = c.shared.pyStr(cell);
-  const kind = (extras.statusKind && extras.statusKind(text)) || statusKind(text);
+  const kind = cellStatusKind(c, cell, extras);
   return m(`span.vb-status.vb-status-${kind}`, [c.icons.icon(m, STATUS_ICONS[kind] || STATUS_ICONS.neutral, 'vb-status-glyph'), text]);
 }
 
@@ -136,7 +141,8 @@ function rowCell(m, c, cell, index, spec) {
 }
 
 function row(m, c, cells, spec) {
-  return m('tr', cells.map((cell, index) => rowCell(m, c, cell, index, spec)));
+  const done = cells.some((cell, index) => spec.kinds[index] === 'status' && cellStatusKind(c, cell, spec.extras) === 'ok');
+  return m('tr', spec.hideDone ? { 'data-done': String(done) } : {}, cells.map((cell, index) => rowCell(m, c, cell, index, spec)));
 }
 
 function head(m, c, spec) {
@@ -186,6 +192,10 @@ function inferredKind(col, values) {
   return namedStatus || allStatusWords ? 'status' : 'text';
 }
 
+function hideDoneAttr(props) {
+  return Object.hasOwn(props, 'hide_done') ? String(props.hide_done) : null;
+}
+
 export function tableView(m, props, c, extras) {
   const columns = asList(props.columns);
   const rows = asList(props.rows).map(asList);
@@ -199,8 +209,8 @@ export function tableView(m, props, c, extras) {
   const sticky = props.sticky_column === true;
   const name = String(props.caption ?? 'Table');
   const size = `${rows.length} rows, ${columns.length} columns`;
-  const spec = { columns, kinds, tops: columnTops(rows, kinds), rowHeader: sticky, extras };
-  const grid = m(`table.vb-table${props.stack !== false ? '.vb-table-stack' : ''}${sticky ? '.vb-table-sticky' : ''}`, { 'aria-label': `${name} (${size})` }, [
+  const spec = { columns, kinds, tops: columnTops(rows, kinds), rowHeader: sticky, extras, hideDone: hideDoneAttr(props) !== null };
+  const grid = m(`table.vb-table${props.stack !== false ? '.vb-table-stack' : ''}${sticky ? '.vb-table-sticky' : ''}`, { 'aria-label': `${name} (${size})`, 'data-hide-done': hideDoneAttr(props) }, [
     head(m, c, spec),
     bodies(m, c, rows, labels, spec)
   ]);

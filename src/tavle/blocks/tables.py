@@ -144,6 +144,7 @@ TABLE = BlockSpec(
         "rows: each row has one cell per column.",
         "types: text, number, status, bar, progress or link; number and",
         "  bar cells are numbers; progress is [done, total]; links are URLs or pairs.",
+        "hide_done: show a switch to hide completed rows, initially on when true.",
         "sticky_column: keeps the first column in view.",
         "stack: defaults to true; false keeps the scrolling grid on phones.",
         "groups: row groups, each with a label and its rows.",
@@ -162,6 +163,7 @@ TABLE = BlockSpec(
         PropertySpec("rows", "list", required=True, nonempty=True, items="list"),
         PropertySpec("types", "object"),  # column names are the keys
         PropertySpec("footnote", "string", nonempty=True),
+        PropertySpec("hide_done", "boolean"),
         PropertySpec("sticky_column", "boolean"),
         PropertySpec("stack", "boolean"),
         PropertySpec(

@@ -82,3 +82,35 @@ def test_total_progress_includes_filtered_rows(tmp_path: Path) -> None:
         server.shutdown()
         server.server_close()
         thread.join(5)
+
+
+def test_hide_done_default_on(tmp_path: Path) -> None:
+    doc = tmp_path / "done.md"
+    doc.write_text(
+        "# Done\n\n```ui id=example\n"
+        'example = table(columns: ["Name", "Status"], hide_done: true, '
+        'rows: [["First", "done"], ["Second", "pending"], '
+        '["Third", "blocked"]])\n```\n'
+    )
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(args=BROWSER_ARGS)
+            try:
+                page = browser.new_page()
+                page.route("**/events", lambda route: route.abort())
+                page.goto(f"http://127.0.0.1:{server.port}/")
+                switch = page.get_by_label("Hide done")
+                assert switch.is_checked()
+                assert page.locator("tbody tr:visible").count() == 2
+                assert page.locator(".vb-done-status").inner_text() == "1 done hidden"
+                switch.uncheck()
+                assert page.locator("tbody tr:visible").count() == 3
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)
