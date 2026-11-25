@@ -25,6 +25,9 @@ _SCRIPT_ORDER = (
 _MODULE_SYNTAX = re.compile(r"^(import|export)\s", re.MULTILINE)
 
 
+# Name of the meta tag that carries the session token to page scripts.
+SESSION_META = "tavle-token"
+
 _HOST_STATIC = files("tavle.page").joinpath("static")
 
 
@@ -77,7 +80,7 @@ def _served_head(token: str | None, title_tag: str) -> str:
     )
     token_meta = ""
     if token is not None:
-        token_meta = f'<meta name="tavle-token" content="{html.escape(token)}">'
+        token_meta = f'<meta name="{SESSION_META}" content="{html.escape(token)}">'
     return (
         f"{token_meta}"
         f'{title_tag}<link rel="stylesheet" href="/static/app.css">{scripts}'
