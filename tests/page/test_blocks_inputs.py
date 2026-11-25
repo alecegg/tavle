@@ -179,6 +179,14 @@ LIVE = (
 )
 
 
+def _rewrite(doc: Path, text: str) -> None:
+    # The server thread can read between write_text's truncate and its write, and
+    # an empty page drops every block. Editors save by rename; so does this.
+    temp = doc.with_suffix(".tmp")
+    temp.write_text(text, encoding="utf-8")
+    temp.replace(doc)
+
+
 @pytest.fixture
 def live_site(tmp_path: Path, browser_session: Any) -> Any:
     doc = tmp_path / "page.md"
@@ -210,7 +218,7 @@ def test_live_update_keeps_what_the_reader_entered_and_remounts_changed_blocks(
     box.focus()
 
     # an edit elsewhere on the page: no widget changes, so none is touched
-    doc.write_text(LIVE.format(n=1).replace("Lead 1", "Lead 2"), encoding="utf-8")
+    _rewrite(doc, LIVE.format(n=1).replace("Lead 1", "Lead 2"))
     page.get_by_text("Lead 2.").wait_for()
     assert page.evaluate("document.activeElement.className") == "comment-text"
     assert page.evaluate("document.activeElement.dataset.same") == "yes"
@@ -219,7 +227,7 @@ def test_live_update_keeps_what_the_reader_entered_and_remounts_changed_blocks(
     assert page.locator("input[value='a']").is_checked()
 
     # one widget's own edit remounts that widget (fresh, as before); the others stay
-    doc.write_text(LIVE.format(n=3), encoding="utf-8")
+    _rewrite(doc, LIVE.format(n=3))
     page.get_by_text("b3", exact=True).wait_for()
     assert not page.locator("input[value='a']").is_checked()
     assert page.locator("[data-field='owner']").input_value() == "ann"
