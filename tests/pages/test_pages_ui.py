@@ -12,7 +12,8 @@ from typing import Any
 
 import pytest
 
-from varde.pages.assemble import assemble, parse_page_stream
+from varde.pages.assemble import parse_page_stream
+from varde.pages.assemble_served import assemble
 from varde.pages.comments import fold, read_rows
 from varde.pages.page_check import check
 from varde.pages.render import render_page

@@ -11,9 +11,7 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import parse_qs, unquote, urlsplit
 
-from varde.pages.assemble import (
-    assemble_page,
-)
+from varde.pages.assemble_served import assemble_page
 from varde.pages.comments import (
     comments_path,
     fold,
