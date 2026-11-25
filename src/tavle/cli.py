@@ -14,8 +14,7 @@ from .listings import (
     parse_port,
 )
 from .page.assemble import assemble_static, render_fragment
-from .page.page_check import check
-from .page.page_quality import quality_warnings
+from .page.page_quality import check_doc
 from .serve.netbind import LOOPBACK
 from .serve.serve import serve
 from .theme.layers import parse_toml
@@ -88,11 +87,7 @@ def run(args: argparse.Namespace) -> int:
             else "\n".join(map(comment_text, rows))
         )
         return 0
-    text = args.doc.read_text(encoding="utf-8")
-    errors = check(text, args.doc.parent)
-    tasks = args.doc.parent / "tasks"
-    task_ids = [path.stem for path in tasks.glob("*.md")]
-    warnings = quality_warnings(text, task_ids)
+    errors, warnings = check_doc(args.doc)
     if args.json:
         print(
             json.dumps(

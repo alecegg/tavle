@@ -11,6 +11,7 @@ FUNCTIONS = [
     "assemble_static",
     "render_fragment",
     "check",
+    "check_doc",
     "quality_warnings",
     "page_theme",
     "doc_theme",

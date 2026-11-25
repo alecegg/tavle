@@ -90,6 +90,7 @@ from .page.assemble import assemble_static as assemble_static
 from .page.assemble import render_fragment as render_fragment
 from .page.page_check import PAGE_SPECS as PAGE_SPECS
 from .page.page_check import check as check
+from .page.page_quality import check_doc as check_doc
 from .page.page_quality import quality_warnings as quality_warnings
 from .page.theme_page import ThemeLayers as ThemeLayers
 from .page.theme_page import doc_theme as doc_theme

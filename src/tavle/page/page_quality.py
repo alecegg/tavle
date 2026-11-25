@@ -7,12 +7,14 @@ fails on them. Prose rules read only prose lines (not fences or HTML comments).
 import re
 from collections.abc import Collection
 from dataclasses import dataclass
+from pathlib import Path
 
 from ..blocks.check import OPEN_CHOICES, BlockError
 from ..lines.parse import parse_lines
 from .fences import FenceSpan, dedent_lines, scan_fences
 from .markdown_syntax import HEADING as _HEADING
 from .markdown_syntax import slugify
+from .page_check import check
 from .render import split_frontmatter, strip_comments
 
 # One phrase per line, lower case.
@@ -207,3 +209,10 @@ def quality_warnings(doc_text: str, task_ids: Collection[str] = ()) -> list[Bloc
     found += covers_warnings(units, task_ids)
     found += bare_run_warnings(units, fields.get("type", ""))
     return sorted(found, key=lambda warning: warning.line)
+
+
+def check_doc(doc: Path) -> tuple[list[BlockError], list[BlockError]]:
+    """Return the page's (errors, warnings); task ids come from its `tasks/` folder."""
+    text = doc.read_text(encoding="utf-8")
+    task_ids = [path.stem for path in (doc.parent / "tasks").glob("*.md")]
+    return check(text, doc.parent), quality_warnings(text, task_ids)
