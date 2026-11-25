@@ -4,7 +4,7 @@
 // `createMenu(root)` keeps one menu's state per mounted page (the document or a shadow root);
 // createElement and textContent only. ENTRIES mirrors actions.menu_entries (allow_edit true; the
 // server refuses an edit it does not allow); a Python test fails on drift.
-import { overlayParent } from './dom.js';
+import { overlayParent } from '../../static/dom.js';
 
 export const ENTRIES = {"prose": ["comment", "suggest", "edit", "copy", "copy-link"], "heading": ["comment", "suggest", "edit", "copy", "copy-link"], "list": ["comment", "suggest", "edit", "copy", "copy-link"], "table": ["comment", "suggest", "edit", "copy", "copy-link"], "code": ["comment", "edit", "copy", "copy-link"], "widget": ["comment", "edit", "copy-link"], "decision": ["comment", "edit", "copy-link"], "visual": ["comment", "edit", "copy", "copy-link"], "status": ["comment", "edit", "copy-link"], "part": ["comment", "copy", "copy-link"], "error": ["comment", "edit", "copy", "copy-link"]};
 

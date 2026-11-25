@@ -1,7 +1,8 @@
 {
   "entry": [
     "src/tavle/static/**/*.js",
-    "tests/**/*.test.js"
+    "tests/**/*.test.js",
+    "src/tavle/page/static/*.js"
   ],
   "health": {
     "maxCyclomatic": 10,
