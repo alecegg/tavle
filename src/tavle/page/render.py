@@ -555,7 +555,7 @@ def _parse_table(lines: list[str], i: int) -> tuple[PagePart, int]:
         for r in rows
     )
     table = (
-        '<div class="scroll"><table class="vb-table-stack">'
+        '<div class="scroll vb"><table class="vb-table-stack">'
         f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>"
     )
     return PagePart("other", table, "\n".join(lines[i:j]), block_type="table"), j

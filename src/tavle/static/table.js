@@ -229,6 +229,22 @@ function hideDoneSwitch(table, state) {
   return [label, state.doneStatus];
 }
 
+function trackCards(table, region) {
+  if (!table.classList.contains('vb-table-stack')) return;
+  const update = () => {
+    const probe = table.cloneNode(true);
+    probe.classList.remove('vb-cards');
+    Object.assign(probe.style, { position: 'fixed', visibility: 'hidden', inlineSize: 'max-content', inset: '0 auto auto 0' });
+    document.body.append(probe);
+    const cards = window.matchMedia('(max-width: 40rem)').matches || probe.scrollWidth > region.clientWidth + 1;
+    probe.remove();
+    table.classList.toggle('vb-cards', cards);
+  };
+  update();
+  if (typeof ResizeObserver === 'function') new ResizeObserver(update).observe(region);
+  whileConnected(region, 'resize', update);
+}
+
 function addToolbar(table, state, total) {
   const region = table.closest('.vb-scroll');
   if (!region) return;
@@ -258,6 +274,9 @@ function collapseRelations(list) {
 }
 
 export function enhanceTables(block) {
+  for (const table of block.querySelectorAll('table.vb-table-stack')) {
+    trackCards(table, table.closest('.vb-scroll, .scroll') || table.parentElement);
+  }
   for (const table of block.querySelectorAll('table.vb-table')) {
     if (!table.tHead || !table.tBodies[0]) continue;
     const total = rowCount(table);

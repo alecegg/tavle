@@ -1004,30 +1004,28 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-sticky .vb-group-head th:first-child { position: static; border-inline-end: 0; }
 }
 /* Beats the stack mode's `tr { display: block }`, so a collapsed row stays hidden on phones too. */
-.vb-table tr[hidden], .vb-scrollhint[hidden] { display: none; }
-@media screen and (max-width: 40rem) {
-  .vb-table-stack { min-inline-size: 0; overflow: visible; inline-size: 100%; }
-  .scroll:has(> .vb-table-stack) { overflow: visible; }
-  .vb-table-stack thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
-  .vb-table-stack, .vb-table-stack tbody, .vb-table-stack tr { display: block; }
+.vb-table.vb-table-stack.vb-cards tr[hidden], .vb-table tr[hidden], .vb-scrollhint[hidden] { display: none; }
+  .vb-table-stack.vb-cards { min-inline-size: 0; overflow: visible; inline-size: 100%; }
+  .scroll:has(> .vb-table-stack.vb-cards) { overflow: hidden; }
+  .vb-table-stack.vb-cards thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+  .vb-table-stack.vb-cards, .vb-table-stack.vb-cards tbody, .vb-table-stack.vb-cards tr { display: block; }
   /* Row cards sit on the page, not inside the block card. */
-  .vb-card:has(.vb-table-stack) { border: 0; background: none; padding-inline: 0; }
-  .vb-scroll:has(> .vb-table-stack) { background: none; mask-image: none; overflow: visible; }
-  .vb-table-stack tbody tr:not(.vb-group-head):last-child { margin-block-end: 0; }
-  .vb-table-stack .vb-status, .vb-table-stack .vb-badge, .vb-table-stack code, .vb-table-stack .vb-bar-num { white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; }
-  .vb-table-stack tbody tr:not(.vb-group-head) { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); padding: var(--vd-space-2); margin-block-end: var(--vd-space-2); }
-  .vb-table-stack td, .vb-table-stack th { overflow-wrap: anywhere; white-space: normal; display: grid; grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); min-inline-size: 0; gap: var(--vd-space-2); position: static; text-align: start; }
-  .vb-table-stack td[data-label]::before, .vb-table-stack th[data-label]::before { content: attr(data-label); white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; font-weight: 600; color: var(--vd-text-secondary); }
-  .vb-table-stack .vb-group-head th { display: block; }
+  .vb-card:has(.vb-table-stack.vb-cards) { border: 0; background: none; padding-inline: 0; }
+  .vb-scroll:has(> .vb-table-stack.vb-cards) { background: none; mask-image: none; overflow: hidden; }
+  .vb-table-stack.vb-cards tbody tr:not(.vb-group-head):last-child { margin-block-end: 0; }
+  .vb-table-stack.vb-cards .vb-status, .vb-table-stack.vb-cards .vb-badge, .vb-table-stack.vb-cards code, .vb-table-stack.vb-cards .vb-bar-num { white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; }
+  .vb-table-stack.vb-cards tbody tr:not(.vb-group-head) { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); padding: var(--vd-space-2); margin-block-end: var(--vd-space-2); }
+  .vb-table-stack.vb-cards td, .vb-table-stack.vb-cards th { overflow-wrap: anywhere; white-space: normal; display: grid; grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); min-inline-size: 0; gap: var(--vd-space-2); position: static; text-align: start; }
+  .vb-table-stack.vb-cards td[data-label]::before, .vb-table-stack.vb-cards th[data-label]::before { content: attr(data-label); white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; font-weight: 600; color: var(--vd-text-secondary); }
+  .vb-table-stack.vb-cards .vb-group-head th { display: block; }
   /* The first cell titles its card; the last cell needs no divider. */
-  .vb-table-stack tbody tr:not(.vb-group-head) > :first-child { display: block; font-weight: 600; font-size: var(--vd-text-md); }
-  .vb-table-stack tbody tr:not(.vb-group-head) > :first-child::before { content: none; }
-  .vb-table-stack tbody tr > :last-child { border-block-end: 0; }
-  .vb-table-stack td a { justify-self: start; max-inline-size: 100%; }
-  .vb-table-stack .vb-num { text-align: start; }
-  .vb-table-stack.vb-table-sticky th:first-child, .vb-table-stack.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }
-  .vb-sortpick { display: flex; }
-}
+  .vb-table-stack.vb-cards tbody tr:not(.vb-group-head) > :first-child { display: block; font-weight: 600; font-size: var(--vd-text-md); }
+  .vb-table-stack.vb-cards tbody tr:not(.vb-group-head) > :first-child::before { content: none; }
+  .vb-table-stack.vb-cards tbody tr > :last-child { border-block-end: 0; }
+  .vb-table-stack.vb-cards td a { justify-self: start; max-inline-size: 100%; }
+  .vb-table-stack.vb-cards .vb-num { text-align: start; }
+  .vb-table-stack.vb-cards.vb-table-sticky th:first-child, .vb-table-stack.vb-cards.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }
+  .vb-filterbar:has(~ .vb-scroll > .vb-cards) .vb-sortpick { display: flex; }
 /* Hidden columns fade out at the edge they continue past (classes set by table.js); opaque cells hide a background shadow. A mask reads only alpha, so any opaque token works. */
 .vb-scroll.vb-more-end { mask-image: linear-gradient(to left, transparent, var(--vd-text) 3rem); }
 .vb-scroll.vb-more-start { mask-image: linear-gradient(to right, transparent, var(--vd-text) 3rem); }

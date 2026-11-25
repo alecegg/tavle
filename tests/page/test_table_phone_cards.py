@@ -101,9 +101,9 @@ def test_markdown_table_cards(tmp_path: Path, width: int) -> None:
                         "e => e.scrollWidth <= e.clientWidth"
                     )
                 else:
-                    assert (
-                        row.evaluate("e => getComputedStyle(e).display") == "table-row"
-                    )
+                    # The 240-character word cannot fit a 1024px grid, so the
+                    # table shows cards there too (plan-board 1.6).
+                    assert row.evaluate("e => getComputedStyle(e).display") == "block"
             finally:
                 browser.close()
     finally:
@@ -146,3 +146,81 @@ def test_long_status_and_code_wrap_instead_of_scrolling(
                 browser.close()
     finally:
         server.shutdown()
+
+
+def test_cards_follow_available_width(tmp_path: Path) -> None:
+    doc = tmp_path / "path.md"
+    doc.write_text(
+        "# Paths\n\n```ui id=paths\n"
+        'paths = table(columns: ["Name", "Path", "State", "Owner"], '
+        'rows: [["Task", "' + "a" * 60 + '", "Open", "Team"]])\n```\n'
+    )
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(args=BROWSER_ARGS)
+            try:
+                page = browser.new_page(viewport={"width": 700, "height": 900})
+                page.route("**/events", lambda route: route.abort())
+                page.goto(f"http://127.0.0.1:{server.port}/")
+                table = page.locator(".vb-table")
+                row = table.locator("tbody tr").first
+                assert row.evaluate("e => getComputedStyle(e).display") == "block"
+                assert page.locator(".vb-scroll").evaluate(
+                    "e => e.scrollWidth <= e.clientWidth"
+                )
+                assert page.evaluate(
+                    "document.documentElement.scrollWidth <= innerWidth"
+                )
+                page.set_viewport_size({"width": 1400, "height": 900})
+                page.wait_for_function(
+                    "() => getComputedStyle("
+                    "document.querySelector('.vb-table tbody tr'))"
+                    ".display === 'table-row'"
+                )
+                assert page.locator(".vb-scroll").evaluate(
+                    "e => e.scrollWidth <= e.clientWidth"
+                )
+                assert page.evaluate(
+                    "document.documentElement.scrollWidth <= innerWidth"
+                )
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)
+
+
+def test_no_javascript_table_scrolls_only_in_region(tmp_path: Path) -> None:
+    doc = tmp_path / "table.md"
+    doc.write_text(
+        "# Table\n\n| One | Two | Three | Four | Five |\n"
+        "| --- | --- | --- | --- | --- |\n"
+        "| Alpha | Beta | Gamma | Delta | Epsilon |\n"
+    )
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(args=BROWSER_ARGS)
+            try:
+                context = browser.new_context(
+                    viewport={"width": 320, "height": 900}, java_script_enabled=False
+                )
+                page = context.new_page()
+                page.goto(f"http://127.0.0.1:{server.port}/")
+                assert page.locator(".scroll").count() == 1
+                assert page.evaluate(
+                    "document.documentElement.scrollWidth <= innerWidth"
+                )
+                assert page.locator("table.vb-cards").count() == 0
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)

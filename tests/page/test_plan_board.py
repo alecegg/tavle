@@ -71,6 +71,7 @@ def test_total_progress_includes_filtered_rows(tmp_path: Path) -> None:
                 page.route("**/events", lambda route: route.abort())
                 page.goto(f"http://127.0.0.1:{server.port}/")
                 total = page.locator(".vb-total-progress")
+                total.wait_for()
                 assert total.count() == 1
                 assert "4 of 8" in total.inner_text()
                 assert total.locator("progress").evaluate("e => e.value / e.max") == 0.5

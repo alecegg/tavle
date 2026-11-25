@@ -24,8 +24,8 @@ ALLOW_EDGE_BORDERS = {
     (
         "40-table.css",
         (
-            ".vb-table-stack.vb-table-sticky th:first-child, "
-            ".vb-table-stack.vb-table-sticky td:first-child"
+            ".vb-table-stack.vb-cards.vb-table-sticky th:first-child, "
+            ".vb-table-stack.vb-cards.vb-table-sticky td:first-child"
         ),
     ): "Remove separator in stacked layout",
     (
