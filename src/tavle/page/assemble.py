@@ -79,13 +79,14 @@ def include_ctx(
     return ctx, {name: part.source.path for name, part in parts.items()}
 
 
-def assemble_static(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
-    """Self-contained export: no token or comments; inputs read-only.
-
-    The only script is the component bundle, inlined when a block needs it.
-    """
+def render_fragment(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
+    """Render the read-only page body with its theme for a host shell."""
     text = read_markdown(doc)
     page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
     style = require_theme(doc, text, theme_layers)
-    main = f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
-    return export_page(doc.name, main, page_css())
+    return f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
+
+
+def assemble_static(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
+    """Self-contained export with read-only inputs and an inline component bundle."""
+    return export_page(doc.name, render_fragment(doc, theme_layers), page_css())
