@@ -319,3 +319,52 @@ def test_browser_slider_valuetext_starts_unchosen(
     # the native value says the same, so the runtime drops aria-valuetext
     assert conf.locator(".slider-input").get_attribute("aria-valuetext") is None
     assert conf.locator(".slider-input").input_value() == "0"
+
+
+@pytest.mark.slow
+def test_browser_badges_show_rank_and_live_text_changes(
+    shared_page: Any,
+    site: tuple[PageServer, Path],
+) -> None:
+    server, _doc = site
+    page = shared_page
+    _open(page, server)
+    page.wait_for_selector(".ranking[data-hydrated]")
+    badges = page.eval_on_selector_all(
+        ".ranking-line",
+        "ls => ls.map(l => getComputedStyle(l, '::before').content)",
+    )
+    assert badges == ["counter(rank)"] * 3  # numbered by the CSS counter
+    seen = []
+    for label in ("Move a down", "Move a down", "Move a up"):
+        page.locator(f"[aria-label='{label}']").click()
+        page.wait_for_function(
+            "t => { const l = document.querySelector('.ranking-live');"
+            " return l.textContent && l.textContent !== t; }",
+            arg=seen[-1] if seen else "",
+        )
+        seen.append(page.locator(".ranking-live").text_content())
+    assert seen == [f"a is at position {n} of 3." for n in (2, 3, 2)]
+
+
+@pytest.mark.slow
+def test_browser_fill_readout_valuetext_and_csp(
+    shared_page: Any,
+    site: tuple[PageServer, Path],
+) -> None:
+    server, _doc = site
+    page = shared_page
+    problems: list[str] = []
+    page.on("console", lambda m: problems.append(m.text) if m.type == "error" else None)
+    _open(page, server)
+    page.wait_for_selector(".slider[data-hydrated]")
+    conf = page.locator(".slider", has=page.locator("[data-item='conf']"))
+    field = conf.locator(".slider-input")
+    assert field.get_attribute("aria-valuetext") == "Not chosen yet"
+    field.focus()
+    page.keyboard.press("End")
+    assert field.get_attribute("aria-valuetext") is None
+    assert conf.locator(".slider-value").inner_text() == "10"
+    fill = field.evaluate("e => e.style.getPropertyValue('--vd-fill')")
+    assert float(fill) == 1.0
+    assert not [p for p in problems if "Content Security Policy" in p]
