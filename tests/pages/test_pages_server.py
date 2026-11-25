@@ -325,7 +325,7 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
     names = zipfile.ZipFile(wheel).namelist()
     # The component CSS and scripts ship in the UI library's own wheel.
     for asset in ("app.js", "page.js"):
-        assert f"varde/pages/static/{asset}" in names
+        assert f"varde/pagelib/page/static/{asset}" in names
 
 
 def test_stalled_post_body_times_out(running: Running, monkeypatch) -> None:

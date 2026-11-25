@@ -11,7 +11,7 @@ from ui_paths import UI_STATIC_DIR
 
 from varde.pagelib.page.template import page_css, page_shell
 
-CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
+CSS_DIR = Path(str(files("varde.pagelib.page").joinpath("static", "css")))
 UI_CSS_DIR = UI_STATIC_DIR / "css"
 CSS_FILES = sorted(
     [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name

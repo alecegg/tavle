@@ -7,7 +7,7 @@ from pathlib import Path
 
 from ui_paths import UI_STATIC_DIR
 
-PAGE_STATIC = Path(__file__).parents[2] / "src/varde/pages/static"
+PAGE_STATIC = Path(__file__).parents[2] / "src/varde/pagelib/page/static"
 UI_STATIC = UI_STATIC_DIR
 
 

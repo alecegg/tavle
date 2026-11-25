@@ -12,8 +12,8 @@ from typing import Any
 import pytest
 from ui_fence import ui_fence
 
+from varde.pagelib.page import template
 from varde.pagelib.page.render import render_page
-from varde.pages import serve as pages_serve
 from varde.pages.comments import append_reply, fold, read_rows
 from varde.pages.serve import PageServer
 
@@ -196,7 +196,7 @@ def test_pages_decision_one_click(browser_session: Any, running) -> None:
 
 
 def test_pages_decision_buttons_disabled_while_posting() -> None:
-    js = (Path(pages_serve.__file__).parent / "static" / "recap.js").read_text()
+    js = (Path(template.__file__).parent / "static" / "recap.js").read_text()
     start = js.index("async function decide")
     body = js[start : js.index("function chooseDecision")]
     off, post, on = (

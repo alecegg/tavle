@@ -25,7 +25,7 @@ _SCRIPT_ORDER = (
 _MODULE_SYNTAX = re.compile(r"^(import|export)\s", re.MULTILINE)
 
 
-_HOST_STATIC = files("varde.pages").joinpath("static")
+_HOST_STATIC = files("varde.pagelib.page").joinpath("static")
 
 
 def static_file(name: str) -> Traversable:

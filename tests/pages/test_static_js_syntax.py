@@ -11,7 +11,7 @@ import pytest
 SRC = Path(__file__).parents[2] / "src/varde"
 # page scripts (varde.pages) and component enhancers (tavle), served together
 SCRIPTS = sorted(
-    [*(SRC / "pages/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
+    [*(SRC / "pagelib/page/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
 )
 NODE = shutil.which("node")
 

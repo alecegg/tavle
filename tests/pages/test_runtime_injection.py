@@ -24,7 +24,7 @@ VECTORS = json.loads(
 SRC = Path(__file__).parents[2] / "src/varde"
 # page scripts (varde.pages) and component enhancers (tavle), served together
 SCRIPTS = sorted(
-    [*(SRC / "pages/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
+    [*(SRC / "pagelib/page/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
 )
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 JS_URL = "javascript:alert(1)"

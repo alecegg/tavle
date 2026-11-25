@@ -11,7 +11,7 @@ from varde.pagelib.page.template import page_scripts, static_scripts
 
 
 def _menu_js() -> str:
-    return files("varde.pages").joinpath("static", "menu.js").read_text("utf-8")
+    return files("varde.pagelib.page").joinpath("static", "menu.js").read_text("utf-8")
 
 
 def _table() -> dict[str, list[str]]:
@@ -49,7 +49,7 @@ def test_menu_js_builds_nodes_without_html_parsing() -> None:
 
 
 def test_old_per_block_buttons_are_gone() -> None:
-    app = files("varde.pages").joinpath("static", "app.js").read_text("utf-8")
+    app = files("varde.pagelib.page").joinpath("static", "app.js").read_text("utf-8")
     old = "|".join(f"{name}-btn" for name in ("comment", "suggest", "edit"))
     assert not re.search(old, app)
 
