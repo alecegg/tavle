@@ -193,12 +193,14 @@ globalThis.tavlePageParts.app = (tree, ctx) => {
     const freshToken = parsed.querySelector('meta[name="tavle-token"]');
     if (!fresh || (!apiBase && !freshToken)) return;
     updateToken(freshToken);
-    const { createSync } = await import('./sync.js');
+    const { createSync, keepFocus } = await import('./sync.js');
     if (stopped || mine !== generation) return;
     sync ||= createSync(root, groupEnd, signature, threadSignature);
-    sync.syncBlocks(fresh);
-    sync.syncOthers(fresh);
-    decorate();
+    keepFocus(() => {
+      sync.syncBlocks(fresh);
+      sync.syncOthers(fresh);
+      decorate();
+    });
   }
 
   function scheduleRefresh() {

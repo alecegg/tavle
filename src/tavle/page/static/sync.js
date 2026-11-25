@@ -1,3 +1,13 @@
+// Moving a block with insertBefore blurs whatever it holds; an untouched
+// element the reader was typing in gets its focus back.
+export function keepFocus(update) {
+  const focused = document.activeElement;
+  update();
+  if (focused?.isConnected && document.activeElement !== focused) {
+    focused.focus({ preventScroll: true });
+  }
+}
+
 export function createSync(root, groupEnd, signature, initialThreadSignature) {
   let threadSignature = initialThreadSignature;
   // Bring the page's blocks in line with the fresh ones, touching a block only
