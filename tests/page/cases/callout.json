@@ -1,0 +1,29 @@
+{
+  "invalid": [
+    {
+      "name": "empty",
+      "props": {},
+      "rule": "missing-key",
+      "path": "tone"
+    },
+    {
+      "name": "unknown-key",
+      "props": {
+        "tone": "info",
+        "text": "x",
+        "bogus": 1
+      },
+      "rule": "unknown-key",
+      "path": "bogus"
+    },
+    {
+      "name": "tone-enum",
+      "props": {
+        "tone": "loud",
+        "text": "x"
+      },
+      "rule": "type",
+      "path": "tone"
+    }
+  ]
+}

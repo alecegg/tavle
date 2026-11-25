@@ -1,0 +1,20 @@
+{
+  "invalid": [
+    {
+      "name": "empty",
+      "props": {},
+      "rule": "missing-key",
+      "path": "label"
+    },
+    {
+      "name": "min-type",
+      "props": {
+        "label": "x",
+        "min": "0",
+        "max": 5
+      },
+      "rule": "type",
+      "path": "min"
+    }
+  ]
+}
