@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import json
 import os
 import re
 import shutil
@@ -115,6 +116,42 @@ def summary(grouped: dict[str, list[str]]) -> str:
         f"{status} {len(names)}" for status, names in sorted(grouped.items())
     )
     return f"mutants {total}: {parts}"
+
+
+STAT_KEYS = (
+    "killed",
+    "survived",
+    "no_tests",
+    "timeout",
+    "suspicious",
+    "segfault",
+    "skipped",
+    "total",
+)
+
+
+def counts(grouped: dict[str, list[str]]) -> dict[str, int]:
+    """Counts per stat key of the mutants this run judged.
+
+    mutmut's `export-cicd-stats` counts every generated mutant, so with `--only` its
+    total includes mutants the run never tested. The matched results do not.
+    """
+    found = {key: len(grouped.get(key.replace("_", " "), [])) for key in STAT_KEYS}
+    found["total"] = sum(len(names) for names in grouped.values())
+    return found
+
+
+def score(stats: dict[str, int]) -> int:
+    denominator = stats["total"] - stats["skipped"]
+    return 100 * stats["killed"] // denominator if denominator > 0 else 0
+
+
+def passes_floor(stats: dict[str, int], floor: int) -> bool:
+    return stats["skipped"] == 0 and score(stats) >= floor
+
+
+def effective_floor(floor: int, minimum: int) -> int:
+    return max(floor, minimum)
 
 
 def failed_tests(output: str) -> list[str]:
@@ -257,7 +294,7 @@ def report_mutmut_failure(output: str) -> None:
     print("mutate: mutmut failed:\n" + "\n".join(tail), file=sys.stderr)
 
 
-def run(work: Path, workers: int, patterns: list[str]) -> int:
+def run(work: Path, workers: int, patterns: list[str], minimum: int) -> int:
     signal.signal(signal.SIGTERM, lambda *_: sys.exit(143))
     try:
         done = mutate_in_copy(workers, work, patterns)
@@ -281,7 +318,15 @@ def run(work: Path, workers: int, patterns: list[str]) -> int:
     )
     print(f"mutate tavle: {summary(grouped)}")
     print(f"survivors: {survivors} (details: mutmut show <name> in {work})")
-    return 0 if done.returncode == 0 else 1
+    stats = counts(grouped)
+    floor = json.loads(
+        (REPO / "scripts" / "mutation-floors.json").read_text(encoding="utf-8")
+    )["python"]
+    print(", ".join(f"{key} {stats[key]}" for key in STAT_KEYS))
+    print(f"score {score(stats)}% (floor {effective_floor(floor, minimum)}%)")
+    return int(
+        done.returncode != 0 or not passes_floor(stats, effective_floor(floor, minimum))
+    )
 
 
 def slow_killer(work: Path, name: str) -> str:
@@ -332,6 +377,7 @@ def main() -> int:
         help="test and count only mutants whose names match this glob (repeatable)",
     )
     parser.add_argument("--clean", action="store_true", help="delete the copy and exit")
+    parser.add_argument("--min-score", type=int, default=0)
     args = parser.parse_args()
     if args.tag and not re.fullmatch(r"[A-Za-z0-9_-]+", args.tag):
         parser.error("tag must contain only letters, digits, underscores or hyphens")
@@ -344,7 +390,7 @@ def main() -> int:
         discard_copy(work)
     if args.slow:
         return run_slow(work, args.only)
-    return run(work, args.workers, args.only)
+    return run(work, args.workers, args.only, args.min_score)
 
 
 if __name__ == "__main__":

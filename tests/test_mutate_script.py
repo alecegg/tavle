@@ -20,7 +20,7 @@ def test_config_selects_fast_tests():
 def test_default_workers(monkeypatch):
     module = load_script()
     monkeypatch.setattr(sys, "argv", ["mutate.py"])
-    monkeypatch.setattr(module, "run", lambda work, workers, patterns: workers)
+    monkeypatch.setattr(module, "run", lambda work, workers, patterns, minimum: workers)
     assert module.main() == 2
 
 
@@ -50,3 +50,22 @@ def test_slow_prints_each_survivors_killer(tmp_path, monkeypatch, capsys):
         "tavle.a.x__mutmut_2: survived",
         "mutate tavle --slow: slow-only 1, survived 1",
     ]
+
+
+def test_score_and_floor():
+    module = load_script()
+    stats = {"killed": 1, "survived": 1, "timeout": 0, "skipped": 0, "total": 2}
+    assert module.score(stats) == 50
+    assert module.passes_floor(stats, 50)
+    assert not module.passes_floor(stats, 51)
+    assert module.score(stats | {"survived": 0, "timeout": 1}) == 50
+    assert not module.passes_floor(stats | {"skipped": 1}, 0)
+    assert module.effective_floor(50, 0) == 50
+
+
+def test_counts_judge_only_the_matched_mutants():
+    module = load_script()
+    grouped = {"killed": ["a", "b"], "no tests": ["c"], "not checked": ["d"]}
+    stats = module.counts(grouped)
+    assert (stats["killed"], stats["no_tests"], stats["total"]) == (2, 1, 4)
+    assert module.score(stats) == 50
