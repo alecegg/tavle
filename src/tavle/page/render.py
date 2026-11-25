@@ -751,14 +751,7 @@ class _Laid:
         )
 
 
-def _body_pieces(items: list[_Laid | str], titles: dict[str, str]) -> list[str]:
-    """The wrapped pieces: file links added, held blocks moved into their containers."""
-    linked = {
-        item.anchor: link_file_trees(item.wrapped(), titles)
-        for item in items
-        if isinstance(item, _Laid)
-    }
-    laid = [item for item in items if isinstance(item, _Laid)]
+def _fill_body_containers(laid: list[_Laid], linked: dict[str, str]):
     statements = [
         (0, item.part.component, item.part.block_id or "", dict(item.part.props))
         for item in laid
@@ -775,7 +768,14 @@ def _body_pieces(items: list[_Laid | str], titles: dict[str, str]) -> list[str]:
         for item in laid
         if item.part.component and item.part.block_id
     }
-    filled, taken = fill_containers(statements, placed)
+    return fill_containers(statements, placed)
+
+
+def _body_pieces(items: list[_Laid | str], titles: dict[str, str]) -> list[str]:
+    """The wrapped pieces: file links added, held blocks moved into their containers."""
+    laid = [item for item in items if isinstance(item, _Laid)]
+    linked = {item.anchor: link_file_trees(item.wrapped(), titles) for item in laid}
+    filled, taken = _fill_body_containers(laid, linked)
     pieces: list[str] = []
     for item in items:
         if isinstance(item, str):

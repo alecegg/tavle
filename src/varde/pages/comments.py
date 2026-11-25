@@ -114,7 +114,9 @@ def target_anchor(target: dict[str, Any]) -> str:
     if kind == "line":
         return f"line-{str(target['sha'])[:7].lower()}-{target['line']}"
     if kind == "candidate":
-        digest = hashlib.sha1(str(target["key"]).encode()).hexdigest()  # noqa: S324
+        digest = hashlib.sha1(
+            str(target["key"]).encode(), usedforsecurity=False
+        ).hexdigest()
         return f"candidate-{digest[:12]}"
     if kind == "report":
         return "report"
@@ -258,14 +260,20 @@ def _new_comment(row: dict[str, Any]) -> dict[str, Any]:
     return comment
 
 
+def _fold_reply(
+    comments: dict[str, dict[str, Any]], parent: str, row: dict[str, Any]
+) -> None:
+    if parent in comments and isinstance(row.get("text"), str):
+        comments[parent]["replies"].append(_reply_entry(row))
+        if row.get("status") in STATUSES:
+            comments[parent]["status"] = row["status"]
+
+
 def _fold_row(comments: dict[str, dict[str, Any]], row: dict[str, Any]) -> None:
     cid = row["id"]
     parent = row.get("reply_to")
     if isinstance(parent, str):
-        if parent in comments and isinstance(row.get("text"), str):
-            comments[parent]["replies"].append(_reply_entry(row))
-            if row.get("status") in STATUSES:
-                comments[parent]["status"] = row["status"]
+        _fold_reply(comments, parent, row)
     elif row.get("state") in {"open", "resolved"} and cid in comments:
         comments[cid]["state"] = row["state"]
         if isinstance(row.get("applied_by"), str):

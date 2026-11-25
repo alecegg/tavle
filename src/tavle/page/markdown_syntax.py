@@ -44,18 +44,21 @@ class FenceScanner:
         if self.opening is None:
             if allow_open:
                 self.opening, self.start = match, number
-        else:
-            opening = self.opening.group(2)
-            marker = match.group(2)
-            same = marker[0] == opening[0]
-            if self.policy == "words":
-                closes = same
-            elif self.policy == "markers":
-                closes = same and len(marker) >= len(opening)
-            else:
-                closes = fence_closes(line, self.opening)
-                if self.policy == "strict":
-                    closes = closes and not match.group(4).strip()
-            if closes:
-                self.opening = None
+        elif self._closes(line, match, self.opening):
+            self.opening = None
         return True
+
+    def _closes(
+        self, line: str, match: re.Match[str], opening_match: re.Match[str]
+    ) -> bool:
+        opening = opening_match.group(2)
+        marker = match.group(2)
+        same = marker[0] == opening[0]
+        if self.policy == "words":
+            return same
+        if self.policy == "markers":
+            return same and len(marker) >= len(opening)
+        closes = fence_closes(line, opening_match)
+        if self.policy == "strict":
+            closes = closes and not match.group(4).strip()
+        return closes
