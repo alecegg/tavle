@@ -2,6 +2,10 @@
 
 Tavle owns the component vocabulary for standalone pages and app surfaces. Python source is in `src/tavle`, JavaScript and CSS in `src/tavle/static`, and tests in `tests`. See the README Orientation for each area. OpenSpec changes live in `openspec/changes`.
 
+- `src/tavle/page`, `src/tavle/comments`, `src/tavle/serve`: Markdown page rendering, the comments log and the page server; each has its own README Orientation.
+- `src/tavle/listings.py` and `src/tavle/cli.py`: the `tavle` command (`export`, `render`, `serve`, `check`, `comments`) and its listings.
+- Bridge consumer: varde's `src/varde/ui.py` (in the varde repository) imports public names from `tavle/__init__.py`; keep those names exported when changing them.
+
 ## Checks
 
 Run `just test` for pytest, vitest, pyright and ruff. Run `openspec validate --all --strict` for OpenSpec changes. The library has no runtime dependencies and makes no model API calls.

@@ -2,6 +2,16 @@
 
 Tavle is a UI component library for standalone pages and app surfaces. Its Python half parses statements, validates component specs, prepares props, derives themes and builds standalone HTML. Its JavaScript half provides Mithril views and interaction enhancers, with shared CSS and theme tokens.
 
+## Standalone use
+
+Run `uv run tavle` in this checkout on a Markdown page. Each verb takes the page path (`doc`):
+
+1. `export`: write one self-contained HTML file. Example: `tavle export page.md --out page.html`
+2. `render`: print the page HTML fragment to stdout. Example: `tavle render page.md > fragment.html`
+3. `serve`: serve the page on a loopback port with live updates; it prints the URL. Example: `tavle serve page.md`
+4. `check`: print the page errors and warnings; exit 1 on errors. Example: `tavle check page.md --json`
+5. `comments`: list the comments recorded for the page. Example: `tavle comments page.md --json`
+
 ## Orientation
 
 - `src/tavle/lines`: statement grammar, parsing, identifiers and references.
@@ -9,6 +19,11 @@ Tavle is a UI component library for standalone pages and app surfaces. Its Pytho
 - `src/tavle/blocks_render`: prepared props, layout and drawing for components.
 - `src/tavle/theme`: theme tokens, presets, derivation and CSS.
 - `src/tavle/static`: Mithril views, interaction scripts, styles and vendored Mithril.
+- `src/tavle/page`: Markdown page rendering, includes, page checks, page themes and page chrome.
+- `src/tavle/comments`: the comments store, validation and file watching for a page.
+- `src/tavle/serve`: the loopback page server and the export of served pages.
+- `src/tavle/listings.py`: pure listings and formatting for the page commands.
+- `src/tavle/cli.py`: the `tavle` command: argument parsing and the five verbs.
 
 ## Checks
 
@@ -16,7 +31,7 @@ Run `just test` for lint, Python tests and JavaScript tests. `just lint` checks 
 
 Run `just mutate --only 'tavle.theme.merge.*'` to run mutmut over `src/tavle` in a throwaway copy under `$TMPDIR`; add `--fresh` to discard the cached results, and see `scripts/mutate.py` for the other options.
 
-Varde's import-linter checks its own package layers, which Tavle does not have. Its shell, skill, reference, license, PEX and deployment checks cover Varde-specific assets or executables.
+Layers are checked by `uv run lint-imports`; its contracts are owned by `[tool.importlinter]` in `pyproject.toml`.
 
 ## Rename
 
