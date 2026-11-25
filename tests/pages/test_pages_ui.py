@@ -12,11 +12,11 @@ from typing import Any
 
 import pytest
 
+from varde.pagelib.comments.comments import fold, read_rows
 from varde.pagelib.page.assemble import parse_page_stream
 from varde.pagelib.page.page_check import check
 from varde.pagelib.page.render import render_page
 from varde.pages.assemble_served import assemble
-from varde.pages.comments import fold, read_rows
 from varde.pages.serve import PageServer
 
 MIGRATE = Path(__file__).parent / "fixtures" / "migrate"

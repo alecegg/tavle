@@ -4,9 +4,14 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from varde.pagelib.comments.answers import answer_schema
+from varde.pagelib.comments.comments import (
+    fold,
+    mark_latest_decisions,
+    one_line,
+    read_rows,
+)
 from varde.pagelib.page import page_check
-from varde.pages.answers import answer_schema
-from varde.pages.comments import fold, mark_latest_decisions, one_line, read_rows
 from varde.ui import BlockError, catalog
 
 

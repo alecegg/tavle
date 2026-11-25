@@ -114,9 +114,8 @@ def target_anchor(target: dict[str, Any]) -> str:
     if kind == "line":
         return f"line-{str(target['sha'])[:7].lower()}-{target['line']}"
     if kind == "candidate":
-        digest = hashlib.sha1(
-            str(target["key"]).encode(), usedforsecurity=False
-        ).hexdigest()
+        key = str(target["key"]).encode()
+        digest = hashlib.new("sha1", key, usedforsecurity=False).hexdigest()
         return f"candidate-{digest[:12]}"
     if kind == "report":
         return "report"

@@ -10,13 +10,13 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.page.render import render_page
-from varde.pages.comments import (
+from varde.pagelib.comments.comments import (
     append_comment,
     comments_path,
     fold,
     read_rows,
 )
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 DOC = (

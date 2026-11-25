@@ -7,10 +7,8 @@ import time
 from collections.abc import Callable, Iterator
 from pathlib import Path
 
-from varde.pagelib.page.assemble import read_markdown
-from varde.pagelib.page.include import IncludeError, include_sources
-from varde.pages.answers import answer_value
-from varde.pages.comments import (
+from varde.pagelib.comments.answers import answer_value
+from varde.pagelib.comments.comments import (
     ANSWER_KINDS,
     fold,
     fold_with_sources,
@@ -18,6 +16,8 @@ from varde.pages.comments import (
     parse_interval,
     read_rows,
 )
+from varde.pagelib.page.assemble import read_markdown
+from varde.pagelib.page.include import IncludeError, include_sources
 
 
 def comment_line(comment: dict) -> str:
