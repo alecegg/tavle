@@ -1,0 +1,30 @@
+/* Contents nav (pages/toc.py): a sticky bar below 64rem, a sticky rail from 64rem (rail rules: 01-base).
+   Links are 44px hit areas; the current link carries a dot and bold weight, never an edge bar. */
+:root, :host { scroll-padding-block-start: var(--vd-space-9); }
+.block, h1, h2, h3, h4, h5, h6 { scroll-margin-block-start: var(--vd-space-9); }
+.doc-toc summary { display: flex; align-items: center; gap: var(--vd-space-2); min-block-size: 2.75rem; padding-inline: var(--vd-space-3); cursor: pointer; font-weight: 600; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-s); }
+.doc-toc .toc-here { min-inline-size: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 400; color: var(--vd-text-secondary); }
+.doc-toc .toc-here:not(:empty)::before { content: "\00b7\00a0"; }
+.doc-toc .toc-label { padding: var(--vd-space-2) var(--vd-space-3); font-size: var(--vd-label-size); font-weight: var(--vd-label-weight); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
+.doc-toc ol { list-style: none; margin: 0; padding: 0; }
+.doc-toc a { display: flex; align-items: center; min-block-size: 2.75rem; padding-inline: var(--vd-space-3); color: var(--vd-text); text-decoration: none; overflow-wrap: anywhere; }
+@media (hover: hover) { .doc-toc a:hover { background: var(--vd-hover); text-decoration: underline; } }
+.doc-toc a:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
+.doc-toc summary:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: -2px; }
+.doc-toc .toc-l3 a { padding-inline-start: var(--vd-space-6); color: var(--vd-text-secondary); }
+.doc-toc a[aria-current="location"] { font-weight: 700; color: var(--vd-text); }
+.doc-toc a[aria-current="location"]::before { content: ""; flex: none; inline-size: var(--vd-space-2); block-size: var(--vd-space-2); margin-inline-end: var(--vd-space-2); border-radius: 50%; background: var(--vd-accent-2); }
+@container vd-doc (width < 64rem) {
+  .doc-toc { position: sticky; inset-block-start: 0; z-index: 10; background: var(--vd-surface); max-block-size: 100dvh; overflow-y: auto; }
+  .doc-toc .toc-label { display: none; }
+  .doc-toc details[open] ol { border-block-end: 1px solid var(--vd-border); }
+}
+@container vd-doc (min-width: 64rem) {
+  .doc-toc summary { display: none; }
+  .doc-toc details::details-content { content-visibility: visible; display: block; }
+}
+@media (forced-colors: active) {
+  .doc-toc a[aria-current="location"] { outline: 2px solid Highlight; outline-offset: -2px; background: none; }
+  .doc-toc summary { border-color: CanvasText; }
+}
+@media print { .doc-toc { display: none; } }

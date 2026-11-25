@@ -1,0 +1,27 @@
+{
+  "invalid": [
+    {
+      "name": "empty",
+      "props": {},
+      "rule": "missing-key",
+      "path": "edges"
+    }
+  ],
+  "valid": [
+    {
+      "name": "chain",
+      "props": {
+        "edges": {
+          "a": [],
+          "b": [
+            "a"
+          ],
+          "c": [
+            "a",
+            "b"
+          ]
+        }
+      }
+    }
+  ]
+}

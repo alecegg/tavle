@@ -1,0 +1,12 @@
+{
+  "invalid": [
+    {
+      "name": "title-type",
+      "props": {
+        "title": 1
+      },
+      "rule": "type",
+      "path": "title"
+    }
+  ]
+}
