@@ -17,6 +17,7 @@ from varde.pagelib.comments.comments import (
     read_rows,
 )
 from varde.pagelib.page.render import render_page
+from varde.pagelib.serve import serve as serve_impl
 from varde.pagelib.serve.serve import PageServer
 
 DOC = (
@@ -351,7 +352,7 @@ def test_accept_marks_applied_under_the_lock_and_reports_failure(
         held.append(client.server.edit_lock.locked())
         raise OSError("disk full")
 
-    monkeypatch.setattr("varde.pagelib.serve.serve.mark_applied", failing)
+    monkeypatch.setattr(serve_impl, "mark_applied", failing)
     block = client.block(anchor)
     status, body = client.post(
         "/accept", {"comment_id": cid, "base_hash": block["hash"]}
