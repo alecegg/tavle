@@ -93,6 +93,7 @@ from .page.page_check import PAGE_SPECS as PAGE_SPECS
 from .page.page_check import check as check
 from .page.page_quality import check_doc as check_doc
 from .page.page_quality import quality_warnings as quality_warnings
+from .page.render import render_page as render_page
 from .page.template import SESSION_META as SESSION_META
 from .page.theme_page import ThemeLayers as ThemeLayers
 from .page.theme_page import doc_theme as doc_theme
