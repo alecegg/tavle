@@ -27,8 +27,7 @@ from varde.pages.render import (
     strip_comments,
 )
 from varde.pages.template import page_css, page_shell
-from varde.pages.theme.page import ThemeLayers, page_theme, require_theme
-from varde.pages.theme.resolve import file_layers
+from varde.pages.theme.page import ThemeLayers, no_layers, page_theme, require_theme
 from varde.ui import export_page, make_read_only, parse_lines
 
 
@@ -172,7 +171,7 @@ class AssembledPage:
 
 
 def _served_main(
-    doc: Path, theme_layers: ThemeLayers = file_layers
+    doc: Path, theme_layers: ThemeLayers = no_layers
 ) -> tuple[str, dict[str, Path]]:
     """The served page's `main` element, and the paths of its includes."""
     text = read_markdown(doc)
@@ -186,17 +185,21 @@ def _served_main(
     )
 
 
-def assemble(doc: Path, *, token: str, api_base: str = "") -> AssembledPage:
-    main, sources = _served_main(doc)
+def assemble(
+    doc: Path, *, token: str, api_base: str = "", theme_layers: ThemeLayers = no_layers
+) -> AssembledPage:
+    main, sources = _served_main(doc, theme_layers)
     return AssembledPage(page_shell(doc.name, main, token, api_base), sources)
 
 
-def assemble_page(doc: Path, *, token: str, api_base: str = "") -> str:
+def assemble_page(
+    doc: Path, *, token: str, api_base: str = "", theme_layers: ThemeLayers = no_layers
+) -> str:
     """Full served HTML for `doc`; see `page_shell` for `api_base`."""
-    return assemble(doc, token=token, api_base=api_base).html
+    return assemble(doc, token=token, api_base=api_base, theme_layers=theme_layers).html
 
 
-def assemble_static(doc: Path, theme_layers: ThemeLayers = file_layers) -> str:
+def assemble_static(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
     """Self-contained export: no token or comments; inputs read-only.
 
     The only script is the component bundle, inlined when a block needs it.

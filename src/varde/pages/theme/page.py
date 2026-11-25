@@ -7,7 +7,6 @@ from html import escape
 from pathlib import Path
 
 from varde.pages.render import split_frontmatter, strip_comments
-from varde.pages.theme.resolve import file_layers
 from varde.ui import (
     Layer,
     ResolvedTheme,
@@ -33,7 +32,7 @@ class PageTheme:
 
 
 def doc_theme(
-    doc: Path, text: str, theme_layers: ThemeLayers = file_layers
+    doc: Path, text: str, theme_layers: ThemeLayers = no_layers
 ) -> ResolvedTheme:
     """Resolve the theme for a page from its layers and front matter."""
     frontmatter, _ = split_frontmatter(strip_comments(text.splitlines()))
@@ -44,14 +43,14 @@ def doc_theme(
     return resolve_layers(layers)
 
 
-def require_theme(doc: Path, text: str, theme_layers: ThemeLayers = file_layers) -> str:
+def require_theme(doc: Path, text: str, theme_layers: ThemeLayers = no_layers) -> str:
     """Return the theme style, raising on invalid input."""
     theme = doc_theme(doc, text, theme_layers)
     return style_element(theme_css(theme)) if theme.active else ""
 
 
 def page_theme(
-    doc: Path, text: str, theme_layers: ThemeLayers = file_layers
+    doc: Path, text: str, theme_layers: ThemeLayers = no_layers
 ) -> PageTheme:
     """Return a theme style or a visible error for a served page."""
     try:

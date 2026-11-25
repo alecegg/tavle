@@ -50,7 +50,7 @@ from varde.pages.server_parts import (
 )
 from varde.pages.store import EDIT_OFF, sources_for, store_comment
 from varde.pages.template import BUNDLE_SCRIPT, page_css, static_file, static_scripts
-from varde.pages.theme.page import doc_theme
+from varde.pages.theme.page import ThemeLayers, doc_theme, no_layers
 from varde.pages.validation import parse_json_object, strings
 from varde.ui import TOKENS_CSS, Problem, ThemeError, component_bundle, load, theme_css
 
@@ -90,8 +90,10 @@ def parse_accept_body(raw: bytes) -> tuple[str, str]:
     return comment_id, base_hash
 
 
-def render_document(doc: Path, token: str, api_base: str = "") -> str:
-    return assemble_page(doc, token=token, api_base=api_base)
+def render_document(
+    doc: Path, token: str, api_base: str = "", theme_layers: ThemeLayers = no_layers
+) -> str:
+    return assemble_page(doc, token=token, api_base=api_base, theme_layers=theme_layers)
 
 
 class PageServer(ThreadingHTTPServer):
@@ -107,8 +109,10 @@ class PageServer(ThreadingHTTPServer):
         port: int = 0,
         host: str = LOOPBACK,
         allow_edit: bool = False,
+        theme_layers: ThemeLayers = no_layers,
     ) -> None:
         self.doc = doc
+        self.theme_layers = theme_layers
         self.host = classify_host(host)
         self.remote = not is_loopback(self.host)  # tests may override
         self.allow_edit = allow_edit
@@ -243,7 +247,11 @@ class PageHandler(BaseHTTPRequestHandler):
     def _send_theme(self) -> None:
         """The page's theme CSS; no theme or an invalid one is a 404."""
         try:
-            theme = doc_theme(self.app.doc, self.app.doc.read_text(encoding="utf-8"))
+            theme = doc_theme(
+                self.app.doc,
+                self.app.doc.read_text(encoding="utf-8"),
+                self.app.theme_layers,
+            )
         except ThemeError:
             theme = None
         if theme is None or not theme.active:
@@ -260,7 +268,9 @@ class PageHandler(BaseHTTPRequestHandler):
         self._reply(HTTPStatus.OK, found[0], found[1])
 
     def _send_page(self) -> None:
-        page = render_document(self.app.doc, self.app.token)
+        page = render_document(
+            self.app.doc, self.app.token, theme_layers=self.app.theme_layers
+        )
         self._reply(HTTPStatus.OK, page.encode(), "text/html; charset=utf-8")
 
     def _stream_events(self) -> None:
@@ -409,9 +419,10 @@ def serve(
     on_ready: Any = None,
     host: str = LOOPBACK,
     allow_edit: bool = False,
+    theme_layers: ThemeLayers = no_layers,
 ) -> None:
     """Serve `doc` in the foreground until interrupted."""
-    server = PageServer(doc, port, host, allow_edit)
+    server = PageServer(doc, port, host, allow_edit, theme_layers)
     try:
         if on_ready is not None:
             on_ready(server.url)
