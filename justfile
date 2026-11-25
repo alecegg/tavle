@@ -13,8 +13,16 @@ lint:
 
 test:
     just lint
-    uv run --locked pytest -q
+    uv run --locked pytest -q -n 3 -m 'not matrix_full'
     npx vitest run
+
+test-fast:
+    just lint
+    uv run --locked pytest -q -n 3 -m 'not slow and not matrix_full'
+    npx vitest run
+
+test-matrix:
+    uv run --locked pytest -q -n 3 -m matrix_full
 
 hooks:
     .githooks/install
