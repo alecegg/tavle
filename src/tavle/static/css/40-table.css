@@ -77,10 +77,17 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
   .vb-table-stack { min-inline-size: 0; }
   .vb-table-stack thead { visibility: hidden; position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
   .vb-table-stack, .vb-table-stack tbody, .vb-table-stack tr { display: block; }
-  .vb-table-stack tr { border-block-end: 2px solid var(--vd-border-interactive); }
-  .vb-table-stack td, .vb-table-stack th { display: grid; grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); min-inline-size: 0; gap: var(--vd-space-2); position: static; text-align: start; }
+  /* Row cards sit on the page, not inside the block card. */
+  .vb-card:has(.vb-table-stack) { border: 0; background: none; padding-inline: 0; }
+  .vb-table-stack .vb-status, .vb-table-stack .vb-badge, .vb-table-stack code, .vb-table-stack .vb-bar-num { white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; }
+  .vb-table-stack tbody tr:not(.vb-group-head) { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); padding: var(--vd-space-2); margin-block-end: var(--vd-space-2); }
+  .vb-table-stack td, .vb-table-stack th { overflow-wrap: anywhere; white-space: normal; display: grid; grid-template-columns: minmax(0, 8rem) minmax(0, 1fr); min-inline-size: 0; gap: var(--vd-space-2); position: static; text-align: start; }
   .vb-table-stack td[data-label]::before, .vb-table-stack th[data-label]::before { content: attr(data-label); white-space: normal; overflow-wrap: anywhere; min-inline-size: 0; font-weight: 600; color: var(--vd-text-secondary); }
   .vb-table-stack .vb-group-head th { display: block; }
+  /* The first cell titles its card; the last cell needs no divider. */
+  .vb-table-stack tbody tr:not(.vb-group-head) > :first-child { display: block; font-weight: 600; font-size: var(--vd-text-md); }
+  .vb-table-stack tbody tr:not(.vb-group-head) > :first-child::before { content: none; }
+  .vb-table-stack tbody tr > :last-child { border-block-end: 0; }
   .vb-table-stack td a { justify-self: start; max-inline-size: 100%; }
   .vb-table-stack .vb-num { text-align: start; }
   .vb-table-stack.vb-table-sticky th:first-child, .vb-table-stack.vb-table-sticky td:first-child { position: static; border-inline-end: 0; }

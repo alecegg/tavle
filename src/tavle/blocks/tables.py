@@ -134,7 +134,7 @@ TABLE = BlockSpec(
         "types: maps a column name to text, number, status, bar or link; number and",
         "  bar cells are numbers; a link cell is a URL or a [label, url] pair.",
         "sticky_column: keeps the first column in view.",
-        "stack: on phones shows each row as labelled pairs.",
+        "stack: defaults to true; false keeps the scrolling grid on phones.",
         "groups: row groups, each with a label and its rows.",
     ),
     r"""table = table(

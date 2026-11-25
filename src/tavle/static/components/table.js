@@ -183,7 +183,7 @@ export function tableView(m, props, c, extras) {
   const name = String(props.caption ?? 'Table');
   const size = `${rows.length} rows, ${columns.length} columns`;
   const spec = { columns, kinds, tops: columnTops(rows, kinds), rowHeader: sticky, extras };
-  const grid = m(`table.vb-table${props.stack === true ? '.vb-table-stack' : ''}${sticky ? '.vb-table-sticky' : ''}`, { 'aria-label': `${name} (${size})` }, [
+  const grid = m(`table.vb-table${props.stack !== false ? '.vb-table-stack' : ''}${sticky ? '.vb-table-sticky' : ''}`, { 'aria-label': `${name} (${size})` }, [
     head(m, c, spec),
     bodies(m, c, rows, labels, spec)
   ]);

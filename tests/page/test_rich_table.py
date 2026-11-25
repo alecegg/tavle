@@ -277,9 +277,10 @@ def test_interact_phone_table_keeps_the_toggle_and_one_frame(
         page.locator(".vb-scroll").evaluate("e => getComputedStyle(e).borderTopWidth")
         == "0px"
     )
+    # Stacked on a phone, the row cards are the frames; the block card has none.
     assert (
         page.locator(".vb-card").evaluate("e => getComputedStyle(e).borderTopWidth")
-        == "1px"
+        == "0px"
     )
 
 
@@ -362,6 +363,7 @@ def test_interact_phone_sorts_through_the_select_not_hidden_buttons(
 WIDE_ROW = (
     '["a-long-service-name", "team owning it", 1, 2, "ok", "https://example.com"]'
 )
+# The scrolling grid is opt-in on phones (`stack: false`); these tests cover it.
 WIDE = f"""# Wide
 
 ```ui id=wide
@@ -370,6 +372,7 @@ wide = table(
   types: {{"latency ms": "number", "load": "number"}},
   rows: [{", ".join([WIDE_ROW] * 5)}],
   sticky_column: true,
+  stack: false,
 )
 ```
 """
