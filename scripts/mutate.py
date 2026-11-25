@@ -47,9 +47,22 @@ COPY_EXCLUDES = (
 # Top-level copy entries that belong to the run, not the repository.
 RUN_STATE = frozenset({".venv", "mutants", "iso"})
 # Tests that cannot pass in a copy, as pytest node ids. Each entry needs its reason.
-UNSUPPORTED_IN_COPY: tuple[str, ...] = ()
+UNSUPPORTED_IN_COPY: tuple[str, ...] = (
+    # Installs a wheel of the copy into a clean venv; mutated code imports mutmut.
+    "tests/page/test_wheel_standalone.py::test_wheel_exports_standalone_page",
+)
+# Marker expressions: what mutmut runs per mutant, and what `--slow` tries on survivors.
+FAST_TESTS = "not slow and not matrix_full"
+# The full widget matrix is also `slow`; it is its own gate, not a mutant judge.
+SLOW_TESTS = "slow and not matrix_full"
 STATUS_LINE = re.compile(r"^\s*(?P<name>\S+): (?P<status>[a-z ]+?)\s*$")
 FAILED_LINE = re.compile(r"^FAILED (?P<test>\S+)", re.MULTILINE)
+
+
+def pytest_selection(marker: str) -> list[str]:
+    """pytest arguments that select `marker` and skip tests unsupported in a copy."""
+    deselects = [a for test in UNSUPPORTED_IN_COPY for a in ("--deselect", test)]
+    return ["-m", marker, *deselects]
 
 
 def mutmut_config(others: list[str]) -> str:
@@ -63,9 +76,7 @@ def mutmut_config(others: list[str]) -> str:
     copied too.
     """
     rows = ", ".join(f'"{entry}"' for entry in others)
-    skipped = ["-m", "not slow and not matrix_full"]
-    skipped += [arg for test in UNSUPPORTED_IN_COPY for arg in ("--deselect", test)]
-    deselects = ", ".join(f'"{arg}"' for arg in skipped)
+    deselects = ", ".join(f'"{arg}"' for arg in pytest_selection(FAST_TESTS))
     return (
         "\n[tool.mutmut]\n"
         'source_paths = ["src/tavle"]\n'
@@ -146,6 +157,10 @@ def isolated_env(work: Path) -> dict[str, str]:
             "UV_CACHE_DIR", str(Path.home() / ".cache" / "uv")
         ),
         "UV_OFFLINE": "1",
+        # Browser binaries only; slow tests need them and the copy's HOME is empty.
+        "PLAYWRIGHT_BROWSERS_PATH": os.environ.get(
+            "PLAYWRIGHT_BROWSERS_PATH", str(Path.home() / ".cache" / "ms-playwright")
+        ),
     }
 
 
@@ -269,9 +284,40 @@ def run(work: Path, workers: int, patterns: list[str]) -> int:
     return 0 if done.returncode == 0 else 1
 
 
+def slow_killer(work: Path, name: str) -> str:
+    """The first slow test that fails with mutant `name` active, or `survived`."""
+    command = [str(work / ".venv" / "bin" / "pytest"), "-x", "-q", "-n", "3"]
+    command += ["-p", "no:cacheprovider", *pytest_selection(SLOW_TESTS), "tests"]
+    env = isolated_env(work) | {"MUTANT_UNDER_TEST": name}
+    result = execute(command, work / "mutants", env, check=False)
+    failures = failed_tests(result.stdout + result.stderr)
+    return failures[0] if failures else "survived"
+
+
+def run_slow(work: Path, patterns: list[str]) -> int:
+    """Try each survivor of the last fast run in this copy against the slow tests."""
+    survivors = work / "survivors.txt"
+    if not survivors.exists():
+        print(f"mutate: no {survivors}; run without --slow first", file=sys.stderr)
+        return 2
+    names = survivors.read_text(encoding="utf-8").split()
+    names = matching({"survived": names}, patterns).get("survived", [])
+    killers = {name: slow_killer(work, name) for name in names}
+    for name, killer in killers.items():
+        print(f"{name}: {killer}")
+    killed = sum(killer != "survived" for killer in killers.values())
+    print(f"mutate tavle --slow: slow-only {killed}, survived {len(names) - killed}")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     parser.add_argument("--workers", type=int, default=2)
+    parser.add_argument(
+        "--slow",
+        action="store_true",
+        help="try the last run's survivors against the slow tests; print each killer",
+    )
     parser.add_argument(
         "--tag", default="", help="separate copy name, lets two runs overlap"
     )
@@ -296,6 +342,8 @@ def main() -> int:
         return 0
     if args.fresh:
         discard_copy(work)
+    if args.slow:
+        return run_slow(work, args.only)
     return run(work, args.workers, args.only)
 
 
