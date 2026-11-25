@@ -17,16 +17,16 @@ import html
 import re
 from dataclasses import dataclass
 
-from varde.pages.anchors import AnchorState, block_hash
-from varde.pages.include_statement import (
+from varde.pagelib.page.anchors import AnchorState, block_hash
+from varde.pagelib.page.include_statement import (
     Selector,
     SelectorError,
     parse_selector,
 )
-from varde.pages.markdown_syntax import FENCE as _FENCE
-from varde.pages.markdown_syntax import HEADING as _HEADING
-from varde.pages.markdown_syntax import FenceScanner
-from varde.pages.render import (
+from varde.pagelib.page.markdown_syntax import FENCE as _FENCE
+from varde.pagelib.page.markdown_syntax import HEADING as _HEADING
+from varde.pagelib.page.markdown_syntax import FenceScanner
+from varde.pagelib.page.render import (
     PageCtx,
     PagePart,
     RenderScope,

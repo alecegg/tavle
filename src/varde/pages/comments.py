@@ -13,8 +13,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from varde.pages.include import IncludeSource, read_source_text
-from varde.pages.select import read_source
+from varde.pagelib.page.include import IncludeSource, read_source_text
+from varde.pagelib.page.select import read_source
 from varde.ui import CONTROLS
 
 _KEPT_KEYS = (

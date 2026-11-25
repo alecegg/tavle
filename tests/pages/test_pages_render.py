@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages import render
-from varde.pages.render import render_inline, render_page
+from varde.pagelib.page import render
+from varde.pagelib.page.render import render_inline, render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "pages"
 GARBAGE = ("&lt;!--", "**", "&lt;div", "\x00", "```", "| ---")
@@ -300,7 +300,7 @@ def test_unregistered_type_with_id_stays_plain_code() -> None:
 
 
 def test_heading_slug_does_not_collide_with_earlier_block_id():
-    from varde.pages.render import render_page
+    from varde.pagelib.page.render import render_page
 
     page = render_page("```deps id=order\n```\n\n# Order\n", "d.md")
     anchors = [b.anchor for b in page.blocks]

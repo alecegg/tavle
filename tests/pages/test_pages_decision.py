@@ -12,9 +12,9 @@ from typing import Any
 import pytest
 from ui_fence import ui_fence
 
+from varde.pagelib.page.render import render_page
 from varde.pages import serve as pages_serve
 from varde.pages.comments import append_reply, fold, read_rows
-from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 
 HOSTILE = "<script>alert(1)</script>"

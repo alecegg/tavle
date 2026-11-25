@@ -26,7 +26,7 @@ from tavle.blocks_render.registry import COMPONENTS
 from tavle.lines import parse_lines
 from ui_paths import UI_STATIC_DIR
 
-from varde.pages.page_check import PAGE_SPECS
+from varde.pagelib.page.page_check import PAGE_SPECS
 from varde.pages.serve import PageServer
 
 

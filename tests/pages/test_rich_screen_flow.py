@@ -29,8 +29,8 @@ from tavle.blocks_render.screen_flow_layout import (
 )
 from ui_paths import UI_STATIC_DIR
 
-from varde.pages.page_check import check
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 

@@ -15,7 +15,7 @@ from tavle.blocks.diff_rows import (
     text_lines,
 )
 
-from varde.pages.page_check import PAGE_SPECS, check
+from varde.pagelib.page.page_check import PAGE_SPECS, check
 
 UI = Path(str(files("tavle")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

@@ -6,15 +6,15 @@ import textwrap
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field, replace
 
-from varde.pages.actions import component_block_type
-from varde.pages.anchors import AnchorState, block_hash
-from varde.pages.header import count_words, header_html
-from varde.pages.include_statement import INCLUDE
-from varde.pages.markdown_syntax import FENCE as _FENCE
-from varde.pages.markdown_syntax import HEADING as _HEADING
-from varde.pages.markdown_syntax import FenceScanner, fence_closes
-from varde.pages.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
-from varde.pages.toc import toc_entries, toc_html
+from varde.pagelib.page.actions import component_block_type
+from varde.pagelib.page.anchors import AnchorState, block_hash
+from varde.pagelib.page.header import count_words, header_html
+from varde.pagelib.page.include_statement import INCLUDE
+from varde.pagelib.page.markdown_syntax import FENCE as _FENCE
+from varde.pagelib.page.markdown_syntax import HEADING as _HEADING
+from varde.pagelib.page.markdown_syntax import FenceScanner, fence_closes
+from varde.pagelib.page.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
+from varde.pagelib.page.toc import toc_entries, toc_html
 from varde.ui import (
     Filled,
     Marker,

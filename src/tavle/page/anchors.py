@@ -3,7 +3,7 @@
 import hashlib
 from collections.abc import Collection
 
-from varde.pages.markdown_syntax import slugify
+from varde.pagelib.page.markdown_syntax import slugify
 
 
 def block_hash(source: str) -> str:

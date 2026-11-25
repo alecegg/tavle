@@ -7,11 +7,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from varde.pages.assemble import include_ctx, parse_page_stream, read_markdown
+from varde.pagelib.page.assemble import include_ctx, parse_page_stream, read_markdown
+from varde.pagelib.page.render import RenderedPage
+from varde.pagelib.page.template import page_shell
+from varde.pagelib.page.theme_page import ThemeLayers, no_layers, page_theme
 from varde.pages.comments import ANSWER_KINDS, fold, mark_latest_decisions, read_rows
-from varde.pages.render import RenderedPage
-from varde.pages.template import page_shell
-from varde.pages.theme.page import ThemeLayers, no_layers, page_theme
 
 
 def answer_attrs(comment: dict[str, Any]) -> str:

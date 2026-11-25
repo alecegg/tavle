@@ -29,7 +29,7 @@ from tavle.lines.parse import parse_lines
 from tavle.media import Media
 from ui_paths import UI_FIXTURES
 
-from varde.pages.render import render_page
+from varde.pagelib.page.render import render_page
 
 FIXTURES = UI_FIXTURES
 PROPS = {

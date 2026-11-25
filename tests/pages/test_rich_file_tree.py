@@ -14,7 +14,7 @@ from tavle.blocks_render.file_tree import (
     summary_text,
 )
 
-from varde.pages.page_check import PAGE_SPECS
+from varde.pagelib.page.page_check import PAGE_SPECS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 HOSTILE = '<img src=x onerror=alert(1)> "q" &amp; <script>alert(1)</script>'

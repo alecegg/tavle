@@ -12,11 +12,11 @@ from typing import Any
 
 import pytest
 
-from varde.pages.assemble import parse_page_stream
+from varde.pagelib.page.assemble import parse_page_stream
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 from varde.pages.assemble_served import assemble
 from varde.pages.comments import fold, read_rows
-from varde.pages.page_check import check
-from varde.pages.render import render_page
 from varde.pages.serve import PageServer
 
 MIGRATE = Path(__file__).parent / "fixtures" / "migrate"
@@ -229,7 +229,7 @@ def test_a_bad_widget_answer_is_refused_and_stores_nothing(
 def test_error_card_carries_the_fence_span_and_cannot_touch_other_text(
     tmp_path: Path,
 ) -> None:
-    from varde.pages import edit
+    from varde.pagelib.page import edit
 
     fence = [
         "```ui\n",
@@ -259,7 +259,7 @@ def test_served_and_edit_anchors_agree_after_an_include(tmp_path: Path) -> None:
         "```\n\nsecond\n\nthird\n",
         encoding="utf-8",
     )
-    from varde.pages.assemble import include_ctx, read_markdown
+    from varde.pagelib.page.assemble import include_ctx, read_markdown
 
     text = read_markdown(doc)
     served = [

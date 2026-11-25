@@ -19,8 +19,8 @@ from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
 from tavle.components import component_bundle, mount_block
 from ui_paths import UI_FIXTURES, UI_STATIC_DIR
 
-from varde.pages.assemble import assemble_static
-from varde.pages.render import render_page
+from varde.pagelib.page.assemble import assemble_static
+from varde.pagelib.page.render import render_page
 
 FIXTURES = UI_FIXTURES
 COMPONENT_FILES = UI_STATIC_DIR / "components"

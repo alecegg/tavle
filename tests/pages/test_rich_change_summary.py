@@ -15,7 +15,7 @@ from tavle.blocks.change_summary import (
 )
 from tavle.blocks_render.registry import COMPONENTS
 
-from varde.pages.render import render_page
+from varde.pagelib.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SUMMARY = 'k = change-summary(title: "T")\n'

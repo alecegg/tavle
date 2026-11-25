@@ -29,8 +29,8 @@ from tavle.blocks_render.state_graph import (
     unreachable_ids,
 )
 
-from varde.pages.page_check import check
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 
 
 def state_props(data: dict[str, Any]) -> Any:

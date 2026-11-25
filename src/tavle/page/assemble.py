@@ -4,21 +4,21 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from varde.pages.include import (
+from varde.pagelib.page.include import (
     IncludeError,
     find_includes,
     resolve_includes,
 )
-from varde.pages.markdown_syntax import FenceScanner
-from varde.pages.page_media import page_media
-from varde.pages.render import (
+from varde.pagelib.page.markdown_syntax import FenceScanner
+from varde.pagelib.page.page_media import page_media
+from varde.pagelib.page.render import (
     PageCtx,
     RenderedPage,
     render_page,
     strip_comments,
 )
-from varde.pages.template import page_css
-from varde.pages.theme.page import ThemeLayers, no_layers, require_theme
+from varde.pagelib.page.template import page_css
+from varde.pagelib.page.theme_page import ThemeLayers, no_layers, require_theme
 from varde.ui import export_page, make_read_only, parse_lines
 
 

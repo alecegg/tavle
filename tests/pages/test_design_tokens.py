@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from ui_paths import UI_STATIC_DIR
 
-from varde.pages.template import page_css, page_shell
+from varde.pagelib.page.template import page_css, page_shell
 
 CSS_DIR = Path(str(files("varde.pages").joinpath("static", "css")))
 UI_CSS_DIR = UI_STATIC_DIR / "css"

@@ -11,9 +11,9 @@ from typing import Any
 
 import pytest
 
-from varde.pages.render import render_page
+from varde.pagelib.page.render import render_page
+from varde.pagelib.page.template import page_scripts
 from varde.pages.serve import PageServer
-from varde.pages.template import page_scripts
 
 DOC = """# Plan
 

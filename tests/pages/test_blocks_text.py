@@ -22,7 +22,7 @@ from tavle.blocks_render.registry import COMPONENTS
 from tavle.components import component_bundle
 from ui_paths import UI_FIXTURES, UI_STATIC_DIR
 
-from varde.pages.render import classify_url, render_page
+from varde.pagelib.page.render import classify_url, render_page
 
 TESTS = Path(__file__).parent
 FIXTURES = UI_FIXTURES

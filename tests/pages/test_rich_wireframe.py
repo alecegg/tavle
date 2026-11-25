@@ -27,8 +27,8 @@ from tavle.blocks_render.screens import (
     wireframe_props as _wireframe_props,
 )
 
-from varde.pages import page_check
-from varde.pages.render import render_page
+from varde.pagelib.page import page_check
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 

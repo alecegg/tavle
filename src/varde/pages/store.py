@@ -7,17 +7,17 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from varde.pages.actions import kind_allowed
+from varde.pagelib.page.actions import kind_allowed
+from varde.pagelib.page.assemble import read_markdown
+from varde.pagelib.page.include import IncludeError, IncludeSource, include_sources
+from varde.pagelib.page.render import render_page
 from varde.pages.answers import answer_fields, validate_answer
-from varde.pages.assemble import read_markdown
 from varde.pages.comments import (
     ANSWER_KINDS,
     KINDS,
     append_comment,
     append_part_comment,
 )
-from varde.pages.include import IncludeError, IncludeSource, include_sources
-from varde.pages.render import render_page
 from varde.pages.validation import (
     MAX_QUOTE,
     parse_json_object,

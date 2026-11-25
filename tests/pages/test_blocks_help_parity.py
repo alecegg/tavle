@@ -8,7 +8,7 @@ from typing import Any
 import pytest
 from tavle import blocks
 
-from varde.pages.page_check import PAGE_SPECS
+from varde.pagelib.page.page_check import PAGE_SPECS
 
 FIELD_LINE = re.compile(r"^( *)(\S+) +(required|optional) +(.+)$")
 

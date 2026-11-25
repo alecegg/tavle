@@ -25,8 +25,8 @@ from tavle.shell import make_read_only
 from ui_fence import block_host, example_fence
 from ui_paths import UI_FIXTURES
 
-from varde.pages.page_check import check
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 FIXTURES = UI_FIXTURES

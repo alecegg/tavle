@@ -6,8 +6,8 @@ from importlib.resources import files
 
 import pytest
 
-from varde.pages.actions import BLOCK_TYPES, menu_entries
-from varde.pages.template import page_scripts, static_scripts
+from varde.pagelib.page.actions import BLOCK_TYPES, menu_entries
+from varde.pagelib.page.template import page_scripts, static_scripts
 
 
 def _menu_js() -> str:

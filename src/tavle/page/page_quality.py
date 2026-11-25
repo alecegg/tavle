@@ -8,10 +8,10 @@ import re
 from collections.abc import Collection
 from dataclasses import dataclass
 
-from varde.pages.fences import FenceSpan, dedent_lines, scan_fences
-from varde.pages.markdown_syntax import HEADING as _HEADING
-from varde.pages.markdown_syntax import slugify
-from varde.pages.render import (
+from varde.pagelib.page.fences import FenceSpan, dedent_lines, scan_fences
+from varde.pagelib.page.markdown_syntax import HEADING as _HEADING
+from varde.pagelib.page.markdown_syntax import slugify
+from varde.pagelib.page.render import (
     split_frontmatter,
     strip_comments,
 )

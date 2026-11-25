@@ -15,7 +15,7 @@ from pathlib import Path
 
 from tavle.blocks_render.registry import PAGE_STATEMENTS
 
-from varde.pages.fences import ui_statements
+from varde.pagelib.page.fences import ui_statements
 
 CASES = Path(__file__).parent / "cases"
 MATRIX = Path(__file__).parent / "fixtures" / "widgets"

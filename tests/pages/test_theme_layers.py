@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from varde.pages.theme.page import doc_theme, no_layers
+from varde.pagelib.page.theme_page import doc_theme, no_layers
 from varde.ui import parse_toml
 
 

@@ -24,8 +24,8 @@ from tavle.blocks_render.er_layout import (
     route,
 )
 
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import PAGE_SPECS
+from varde.pagelib.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 JSON_PROPS = re.compile(r'<script type="application/json">.*?</script>', re.DOTALL)

@@ -34,7 +34,7 @@ from tavle.components import component_bundle, host_props, mount_block
 from tavle.graph import deps_layout
 from ui_paths import UI_FIXTURES
 
-from varde.pages.render import render_page
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 TESTS = Path(__file__).parent

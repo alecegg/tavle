@@ -11,8 +11,8 @@ from tavle.blocks_render.backend import data_model_props, endpoint_props
 from tavle.blocks_render.change import copy_line
 from ui_paths import UI_STATIC_DIR
 
-from varde.pages.page_check import check
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 PLAIN_MODEL: dict[str, object] = {

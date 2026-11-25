@@ -13,10 +13,10 @@ from tavle.components import export_page, mount_block
 from tavle.shell import make_read_only
 from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 
-from varde.pages.assemble import include_ctx
-from varde.pages.page_check import PAGE_SPECS
-from varde.pages.render import render_page
-from varde.pages.template import page_css
+from varde.pagelib.page.assemble import include_ctx
+from varde.pagelib.page.page_check import PAGE_SPECS
+from varde.pagelib.page.render import render_page
+from varde.pagelib.page.template import page_css
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
 CODE_DIFF_CASES = {

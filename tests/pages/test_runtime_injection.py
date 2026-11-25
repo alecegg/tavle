@@ -14,8 +14,8 @@ import pytest
 from tavle.components import component_bundle
 from ui_fence import statement_text
 
-from varde.pages.assemble import assemble_static
-from varde.pages.render import classify_url, render_page
+from varde.pagelib.page.assemble import assemble_static
+from varde.pagelib.page.render import classify_url, render_page
 from varde.pages.serve import PageServer
 
 VECTORS = json.loads(

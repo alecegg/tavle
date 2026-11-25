@@ -9,7 +9,7 @@ from typing import Any
 
 import pytest
 
-from varde.pages.actions import menu_entries
+from varde.pagelib.page.actions import menu_entries
 from varde.pages.serve import PageServer
 
 pytestmark = pytest.mark.slow

@@ -11,13 +11,13 @@ from typing import Any
 
 import pytest
 
+from varde.pagelib.page.include import include_sources
 from varde.pages.comments import (
     comments_path,
     fold,
     fold_with_sources,
     read_rows,
 )
-from varde.pages.include import include_sources
 from varde.pages.store import sources_for, store_comment
 from varde.pages.watch import comment_line, new_open_comments
 

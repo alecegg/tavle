@@ -15,7 +15,7 @@ from tavle.blocks_render.flow import copy_text
 from tavle.blocks_render.flow import flow_props as _flow_props
 from tavle.blocks_render.registry import COMPONENTS
 
-from varde.pages.render import render_page
+from varde.pagelib.page.render import render_page
 from varde.pages.serve import PageServer
 
 

@@ -11,18 +11,25 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import parse_qs, unquote, urlsplit
 
+from varde.pagelib.page.edit import (
+    EditError,
+    accept_replacement,
+    apply_edit,
+    read_block,
+)
+from varde.pagelib.page.template import (
+    BUNDLE_SCRIPT,
+    page_css,
+    static_file,
+    static_scripts,
+)
+from varde.pagelib.page.theme_page import ThemeLayers, doc_theme, no_layers
 from varde.pages.assemble_served import assemble_page
 from varde.pages.comments import (
     comments_path,
     fold,
     mark_applied,
     read_rows,
-)
-from varde.pages.edit import (
-    EditError,
-    accept_replacement,
-    apply_edit,
-    read_block,
 )
 from varde.pages.netbind import (
     LOOPBACK,
@@ -47,8 +54,6 @@ from varde.pages.server_parts import (
     write_event_stream,
 )
 from varde.pages.store import EDIT_OFF, sources_for, store_comment
-from varde.pages.template import BUNDLE_SCRIPT, page_css, static_file, static_scripts
-from varde.pages.theme.page import ThemeLayers, doc_theme, no_layers
 from varde.pages.validation import parse_json_object, strings
 from varde.ui import TOKENS_CSS, Problem, ThemeError, component_bundle, load, theme_css
 

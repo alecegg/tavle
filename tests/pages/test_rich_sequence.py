@@ -26,8 +26,8 @@ from tavle.blocks_render.sequence_layout import (
     place_actors,
 )
 
-from varde.pages.page_check import check
-from varde.pages.render import render_page
+from varde.pagelib.page.page_check import check
+from varde.pagelib.page.render import render_page
 
 
 def sequence_props(data: dict[str, Any]) -> Any:

@@ -18,9 +18,9 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde.pages.fences import ui_statements
-from varde.pages.include_statement import INCLUDE
-from varde.pages.select import (
+from varde.pagelib.page.fences import ui_statements
+from varde.pagelib.page.include_statement import INCLUDE
+from varde.pagelib.page.select import (
     Selector,
     SelectorError,
     SourceBlock,

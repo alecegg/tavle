@@ -9,7 +9,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
-from varde.pages.render import PageBlock, render_page
+from varde.pagelib.page.render import PageBlock, render_page
 
 MAX_SOURCE = 32 * 1024
 

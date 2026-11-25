@@ -14,9 +14,9 @@ from tavle.blocks_render.registry import COMPONENTS
 from tavle.components import host_props
 from ui_paths import UI_STATIC_DIR
 
-from varde.pages.assemble import assemble_static
+from varde.pagelib.page.assemble import assemble_static
+from varde.pagelib.page.page_check import check
 from varde.pages.assemble_served import assemble_page
-from varde.pages.page_check import check
 from varde.pages.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

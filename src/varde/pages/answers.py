@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from varde.pages.fences import ui_statements
+from varde.pagelib.page.fences import ui_statements
 from varde.ui import (
     COMPONENTS,
     CONTROLS,

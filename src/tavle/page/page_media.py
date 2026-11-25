@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from varde.pages.fences import ui_statements
+from varde.pagelib.page.fences import ui_statements
 from varde.ui import Media, Problem, probe
 
 

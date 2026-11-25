@@ -6,7 +6,7 @@ from hashlib import sha256
 from html import escape
 from pathlib import Path
 
-from varde.pages.render import split_frontmatter, strip_comments
+from varde.pagelib.page.render import split_frontmatter, strip_comments
 from varde.ui import (
     Layer,
     ResolvedTheme,

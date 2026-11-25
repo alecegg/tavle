@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from varde.pages.actions import BLOCK_TYPES, kind_allowed
+from varde.pagelib.page.actions import BLOCK_TYPES, kind_allowed
+from varde.pagelib.page.render import render_page
 from varde.pages.comments import comments_path, fold, read_rows
-from varde.pages.render import render_page
 from varde.pages.store import store_comment
 
 DOC = """# Title
