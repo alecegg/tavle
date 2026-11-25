@@ -63,7 +63,8 @@ def mutmut_config(others: list[str]) -> str:
     copied too.
     """
     rows = ", ".join(f'"{entry}"' for entry in others)
-    skipped = [arg for test in UNSUPPORTED_IN_COPY for arg in ("--deselect", test)]
+    skipped = ["-m", "not slow and not matrix_full"]
+    skipped += [arg for test in UNSUPPORTED_IN_COPY for arg in ("--deselect", test)]
     deselects = ", ".join(f'"{arg}"' for arg in skipped)
     return (
         "\n[tool.mutmut]\n"
@@ -270,7 +271,7 @@ def run(work: Path, workers: int, patterns: list[str]) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
-    parser.add_argument("--workers", type=int, default=6)
+    parser.add_argument("--workers", type=int, default=2)
     parser.add_argument(
         "--tag", default="", help="separate copy name, lets two runs overlap"
     )
@@ -284,8 +285,15 @@ def main() -> int:
         metavar="PATTERN",
         help="test and count only mutants whose names match this glob (repeatable)",
     )
+    parser.add_argument("--clean", action="store_true", help="delete the copy and exit")
     args = parser.parse_args()
+    if args.tag and not re.fullmatch(r"[A-Za-z0-9_-]+", args.tag):
+        parser.error("tag must contain only letters, digits, underscores or hyphens")
     work = work_dir(args.tag)
+    if args.clean:
+        if work.exists():
+            shutil.rmtree(work)
+        return 0
     if args.fresh:
         discard_copy(work)
     return run(work, args.workers, args.only)

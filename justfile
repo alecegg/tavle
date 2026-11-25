@@ -28,4 +28,4 @@ hooks:
     .githooks/install
 
 mutate *args:
-    python3 scripts/mutate.py {{args}}
+    scripts/capped.sh "${MUTATION_MEM:-4G}" "${MUTATION_MINUTES:-20}" uv run --locked python scripts/mutate.py {{args}}
