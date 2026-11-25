@@ -9,7 +9,7 @@ from typing import Any
 
 from ..comments.comments import ANSWER_KINDS, fold, mark_latest_decisions, read_rows
 from ..page.assemble import include_ctx, parse_page_stream, read_markdown
-from ..page.render import RenderedPage
+from ..page.render import RenderedPage, main_open
 from ..page.template import page_shell
 from ..page.theme_page import ThemeLayers, no_layers, page_theme
 
@@ -99,7 +99,7 @@ def _served_main(
     threads = render_threads(page, mark_latest_decisions(fold(read_rows(doc))))
     theme = page_theme(doc, text, theme_layers)
     return (
-        f'<main data-role="page">{theme.style}{theme.error}{page.body}{threads}</main>',
+        f"{main_open(page)}{theme.style}{theme.error}{page.body}{threads}</main>",
         sources,
     )
 

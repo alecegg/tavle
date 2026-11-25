@@ -208,6 +208,7 @@
   ctx.refresh = refresh;
   let menu = null;
   let stopToc = () => {};
+  let stopSections = () => {};
   let closeEvents = () => {};
   const stop = () => {
     stopped = true;
@@ -216,6 +217,7 @@
     closeEvents();
     if (menu) menu.destroy();
     stopToc();
+    stopSections();
   };
   // The host window posts {type:"varde-refresh"} when the document changes.
   function onHostMessage(event) {
@@ -231,6 +233,11 @@
   import('./toc.js').then((toc) => {
     if (!stopped) stopToc = toc.mountToc(tree);
   });
+  if (root()?.dataset.sections) {
+    import('./sections.js').then((sections) => {
+      if (!stopped) stopSections = sections.mountSections(tree);
+    });
+  }
   if (inline) return stop;
   window.addEventListener('message', onHostMessage);
   if (!apiBase) {

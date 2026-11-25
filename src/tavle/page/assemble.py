@@ -10,8 +10,8 @@ from ..shell import make_read_only
 from .include import IncludeError, find_includes, resolve_includes
 from .markdown_syntax import FenceScanner
 from .page_media import page_media
-from .render import PageCtx, RenderedPage, render_page, strip_comments
-from .template import page_css
+from .render import PageCtx, RenderedPage, main_open, render_page, strip_comments
+from .template import page_css, static_file
 from .theme_page import ThemeLayers, no_layers, require_theme
 
 
@@ -79,14 +79,28 @@ def include_ctx(
     return ctx, {name: part.source.path for name, part in parts.items()}
 
 
-def render_fragment(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
-    """Render the read-only page body with its theme for a host shell."""
+def _read_only_main(doc: Path, theme_layers: ThemeLayers) -> tuple[RenderedPage, str]:
+    """The page and its read-only `main` element with the theme."""
     text = read_markdown(doc)
     page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
     style = require_theme(doc, text, theme_layers)
-    return f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
+    return page, f"{main_open(page)}{style}{make_read_only(page.body)}</main>"
+
+
+def render_fragment(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
+    """Render the read-only page body with its theme for a host shell."""
+    return _read_only_main(doc, theme_layers)[1]
+
+
+def _section_script(page: RenderedPage) -> str:
+    """Inline section toggles for a collapsible export; served pages import them."""
+    if not page.sections:
+        return ""
+    module = static_file("sections.js").read_text(encoding="utf-8")
+    return f'<script type="module">{module}\nmountSections(document);</script>'
 
 
 def assemble_static(doc: Path, theme_layers: ThemeLayers = no_layers) -> str:
     """Self-contained export with read-only inputs and an inline component bundle."""
-    return export_page(doc.name, render_fragment(doc, theme_layers), page_css())
+    page, main = _read_only_main(doc, theme_layers)
+    return export_page(doc.name, main + _section_script(page), page_css())

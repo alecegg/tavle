@@ -108,6 +108,13 @@ class RenderedPage:
     body: str
     status: str
     blocks: tuple[PageBlock, ...]
+    sections: str = ""
+
+
+def main_open(page: RenderedPage) -> str:
+    """Open the page root with its optional section behavior."""
+    attr = f' data-sections="{page.sections}"' if page.sections else ""
+    return f'<main data-role="page"{attr}>'
 
 
 @dataclass(frozen=True)
@@ -709,7 +716,10 @@ def render_page(
     parts = parse_blocks(content, scope=scope)
     titled = any(part.kind == "heading" and part.level == 1 for part in parts)
     header = header_html(fields, doc_name, count_words(content), titled=titled)
-    return assemble_parts(parts, header, status, scope.base)
+    page = assemble_parts(parts, header, status, scope.base)
+    return replace(
+        page, sections="collapsible" if fields.get("sections") == "collapsible" else ""
+    )
 
 
 def _place_part(

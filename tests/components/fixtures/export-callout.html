@@ -920,6 +920,13 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 }
 @media print { .doc-toc { display: none; } }
 
+main[data-sections="collapsible"] > .block.heading:has(> h2) { position: sticky; top: 0; z-index: 5; background: var(--vd-surface); }
+main[data-sections="collapsible"] h2 > button[data-section-toggle] { min-height: 44px; width: 100%; text-align: start; font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; }
+main[data-sections="collapsible"] h2 > button[data-section-toggle]::before { content: '▾ '; }
+main[data-sections="collapsible"] h2 > button[aria-expanded="false"]::before { content: '▸ '; }
+@container vd-doc (width < 64rem) { main[data-sections="collapsible"]:has(> .doc-toc) > .block.heading:has(> h2) { top: 44px; } }
+@media print { main[data-sections="collapsible"] > .block.heading:has(> h2) { position: static; } }
+
 /* Table block: scroll region, typed columns, groups, stack mode. Tokens only. */
 .vb-scroll { overflow: auto; max-inline-size: 100%; border: 1px solid var(--vd-border); border-radius: var(--vd-radius-m); background:
   linear-gradient(to right, var(--vd-surface) 50%, transparent) local 0 0 / 2rem 100% no-repeat,
@@ -933,8 +940,9 @@ textarea.decision-text:disabled, textarea.decision-text:read-only { background: 
 .vb-scroll:focus-visible { outline: 2px solid var(--vd-focus-ring); outline-offset: 2px; }
 .vb-table { display: table; margin-block: 0; inline-size: 100%; min-inline-size: min-content; overflow: visible; font-size: var(--vd-text-sm); border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; }
 .vb-table th, .vb-table td { border: 0; border-block-end: 1px solid var(--vd-border); padding: var(--vd-space-2) var(--vd-space-3); text-align: start; vertical-align: top; line-height: 1.3; overflow-wrap: normal; word-break: normal; hyphens: none; }
-/* Short tokens never break mid-word; a narrow region scrolls sideways instead. */
-.vb-table .vb-status, .vb-table .vb-badge, .vb-table code, .vb-table .vb-bar-num, .vb-table td.vb-num { white-space: nowrap; }
+/* Numbers stay on one line; words and code wrap, so no table needs to scroll sideways. */
+.vb-table .vb-bar-num, .vb-table td.vb-num { white-space: nowrap; }
+.vb-table code { overflow-wrap: anywhere; }
 .vb-table thead th { white-space: nowrap; background: var(--vd-surface-elevated); border-block-end: 2px solid var(--vd-text); font-weight: var(--vd-label-weight); font-size: var(--vd-label-size); letter-spacing: var(--vd-label-tracking); text-transform: uppercase; }
 .vb-table tbody tr { background: var(--vd-surface); }
 .vb-table tbody tr:nth-child(even) { background: var(--vd-surface); }
@@ -966,7 +974,7 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-bar-track { fill: var(--vd-surface-sunk); stroke: var(--vd-border-interactive); stroke-width: 0.5; }
 .vb-bar-fill { fill: var(--vd-accent); }
 .vb-bar-num { display: inline-block; min-inline-size: 3ch; }
-.vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: var(--vd-space-2) 0; }
+.vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: 0 var(--vd-space-2); }
 /* A bar whose controls are all hidden takes no room. */
 .vb-filterbar:not(:has(> :not([hidden]))) { display: none; }
 .vb-filter { flex: 1; min-inline-size: 8rem; min-block-size: 44px; font: inherit; padding: 0.3em 0.6em; background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }

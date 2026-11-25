@@ -18,7 +18,8 @@ CSS_FILES = sorted(
 )
 PART_NAMES = (
     "00-tokens", "01-base", "10-chrome", "20-choice", "21-form", "22-comment",
-    "23-decision", "24-ranking", "25-slider", "30-menu", "31-toc", "40-table",
+    "23-decision", "24-ranking", "25-slider", "30-menu", "31-toc",
+    "32-sections", "40-table",
     "41-chart",    "42-diagram", "43-flow", "44-wireframe", "45-code", "46-callout",
     "47-change", "48-annotated", "50-blocks", "52-diff", "53-filetree",
     "54-checklist", "55-containers", "56-matrix", "57-sequence", "58-screen-flow",

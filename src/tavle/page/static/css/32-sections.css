@@ -1,0 +1,6 @@
+main[data-sections="collapsible"] > .block.heading:has(> h2) { position: sticky; top: 0; z-index: 5; background: var(--vd-surface); }
+main[data-sections="collapsible"] h2 > button[data-section-toggle] { min-height: 44px; width: 100%; text-align: start; font: inherit; color: inherit; background: transparent; border: 0; cursor: pointer; }
+main[data-sections="collapsible"] h2 > button[data-section-toggle]::before { content: '▾ '; }
+main[data-sections="collapsible"] h2 > button[aria-expanded="false"]::before { content: '▸ '; }
+@container vd-doc (width < 64rem) { main[data-sections="collapsible"]:has(> .doc-toc) > .block.heading:has(> h2) { top: 44px; } }
+@media print { main[data-sections="collapsible"] > .block.heading:has(> h2) { position: static; } }
