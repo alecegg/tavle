@@ -200,6 +200,19 @@ function rowCount(table) {
   return Array.from(table.tBodies).reduce((sum, body) => sum + dataRows(body).length, 0);
 }
 
+function totalProgress(table) {
+  const cells = Array.from(table.querySelectorAll('tbody tr:not(.vb-group-head) [data-total]'));
+  if (!cells.length) return null;
+  const done = cells.reduce((sum, cell) => sum + Number(cell.dataset.done), 0);
+  const total = cells.reduce((sum, cell) => sum + Number(cell.dataset.total), 0);
+  const wrap = make('label', 'vb-total-progress');
+  const progress = make('progress');
+  progress.max = Math.max(total, 1);
+  progress.value = done;
+  wrap.append('Total: ' + done + ' of ' + total + ' ', progress);
+  return wrap;
+}
+
 function addToolbar(table, state, total) {
   const region = table.closest('.vb-scroll');
   if (!region) return;
@@ -208,6 +221,8 @@ function addToolbar(table, state, total) {
   const hint = make('span', 'vb-scrollhint', 'Scrolls sideways');
   if (total >= MIN_ROWS_FOR_FILTER) bar.append(...filterField(table, state, total));
   if (state.sortable && table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
+  const progress = totalProgress(table);
+  if (progress) bar.append(progress);
   bar.append(hint);
   trackOverflow(region, hint);
   region.before(bar);

@@ -122,8 +122,9 @@ function cellLabel(c, index, spec, rec) {
 function cellAttrs(c, cell, index, spec, tag, rec) {
   const attrs = { 'data-label': cellLabel(c, index, spec, rec) };
   if (tag === 'th') attrs.scope = 'row';
-  if (spec.kinds[index] === 'progress') attrs['data-sort'] = cell[1] ? cell[0] / cell[1] : 0;
-  return attrs;
+  if (spec.kinds[index] !== 'progress') return attrs;
+  const [done, total] = cell;
+  return { ...attrs, 'data-sort': total ? done / total : 0, 'data-done': done, 'data-total': total };
 }
 
 function rowCell(m, c, cell, index, spec) {
