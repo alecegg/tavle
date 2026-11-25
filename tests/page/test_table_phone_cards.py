@@ -9,6 +9,8 @@ from playwright.sync_api import sync_playwright
 
 from tavle import PageServer
 
+pytestmark = pytest.mark.slow
+
 
 @pytest.mark.parametrize("width,stack", [(375, None), (375, False), (1024, None)])
 def test_table_cards(tmp_path: Path, width: int, stack: bool | None) -> None:

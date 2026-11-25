@@ -12,8 +12,6 @@ Each page load is audited once for every family in its fixture (`audit.py` colle
 when set (one file per fixture, mode, scheme and width). Fixtures live in
 `tests/pages/fixtures/widgets/`: `normal.md`, `stress.md`, and `rich-<kind>.md`
 plus `rich-<kind>-stress.md` added by the rich-block tasks (picked up by glob).
-Pending families (`pending.py`) are `xfail(raises=AssertionError)` until the
-widget task removes the line.
 A page whose `ui` fences render as code raises `NotRendered` (never xfailed).
 Chromium runs single-process (sandbox-safe), so each page load gets its own browser.
 """
@@ -24,7 +22,6 @@ import pytest
 
 from .cells import Cell, all_cells
 from .driver import Matrix
-from .pending import PENDING
 
 pytestmark = pytest.mark.slow
 
@@ -34,14 +31,7 @@ def _scope(cell: Cell) -> list[pytest.MarkDecorator]:
 
 
 def _param(cell: Cell) -> object:
-    reason = PENDING.get(cell.family)
-    if not reason:
-        return pytest.param(cell, id=cell.id, marks=_scope(cell))
-    # AssertionError only: audit findings are expected while a family is
-    # pending; a page that is not rendered (NotRendered) is a hard failure.
-    # Not strict: some modes find nothing for a family before its redesign.
-    xfail = pytest.mark.xfail(reason=reason, raises=AssertionError)
-    return pytest.param(cell, id=cell.id, marks=[*_scope(cell), xfail])
+    return pytest.param(cell, id=cell.id, marks=_scope(cell))
 
 
 @pytest.mark.parametrize("cell", [_param(c) for c in all_cells()])

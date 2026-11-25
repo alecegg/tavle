@@ -301,8 +301,7 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
 
     root = Path(__file__).resolve().parents[2]
     uv = shutil.which("uv")
-    if uv is None:
-        pytest.skip("uv not available")
+    assert uv
     out = tmp_path / "wheels"
     result = subprocess.run(  # noqa: S603
         [

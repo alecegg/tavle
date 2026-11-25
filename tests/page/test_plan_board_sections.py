@@ -11,6 +11,8 @@ from tavle import PageServer
 from tavle.page.assemble import assemble_static, render_fragment
 from tavle.page.render import main_open, render_page
 
+pytestmark = pytest.mark.slow
+
 
 def test_section_opt_in_and_export(tmp_path):
     doc = tmp_path / "page.md"
@@ -54,7 +56,6 @@ def _served(doc, check) -> None:
         server.server_close()
 
 
-@pytest.mark.slow
 def test_collapse_a_section_and_print(tmp_path: Path) -> None:
     doc = tmp_path / "board.md"
     doc.write_text(_long_page("---\nsections: collapsible\n---\n"))
@@ -80,7 +81,6 @@ def test_collapse_a_section_and_print(tmp_path: Path) -> None:
     _served(doc, check)
 
 
-@pytest.mark.slow
 def test_sticky_heading(tmp_path: Path) -> None:
     doc = tmp_path / "board.md"
     doc.write_text(_long_page("---\nsections: collapsible\n---\n"))
@@ -96,7 +96,6 @@ def test_sticky_heading(tmp_path: Path) -> None:
     _served(doc, check)
 
 
-@pytest.mark.slow
 def test_page_without_the_key_has_no_toggles(tmp_path: Path) -> None:
     doc = tmp_path / "plain.md"
     doc.write_text(_long_page(""))

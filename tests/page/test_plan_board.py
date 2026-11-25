@@ -9,6 +9,8 @@ from playwright.sync_api import sync_playwright
 
 from tavle import PageServer
 
+pytestmark = pytest.mark.slow
+
 
 @pytest.mark.parametrize("count", [12, 17])
 def test_toolbar_order(tmp_path: Path, count: int) -> None:

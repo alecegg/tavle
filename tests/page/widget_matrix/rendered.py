@@ -1,8 +1,7 @@
 """Hard precondition: a cell audits rendered components, not a code block.
 
 A page that shows `ui` fences as plain code has no widgets to fail, so every
-audit would pass vacuously. `NotRendered` is not an AssertionError, so a
-pending-family `xfail(raises=AssertionError)` cannot hide it.
+audit would pass vacuously.
 """
 
 from __future__ import annotations
