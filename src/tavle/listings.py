@@ -72,6 +72,15 @@ def finding_row(finding: BlockError) -> dict[str, object]:
     }
 
 
+def check_result(
+    errors: list[BlockError], warnings: list[BlockError]
+) -> dict[str, list[dict[str, object]]]:
+    return {
+        "errors": [finding_row(e) for e in errors],
+        "warnings": [finding_row(w) for w in warnings],
+    }
+
+
 def block_rows(name: str | None) -> list[dict[str, object]]:
     return [
         _with_answer_schema(row)

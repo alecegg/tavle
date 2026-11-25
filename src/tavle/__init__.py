@@ -77,6 +77,7 @@ from .lines import Statement as Statement
 from .lines import parse_lines as parse_lines
 from .listings import block_rows as block_rows
 from .listings import block_types as block_types
+from .listings import check_result as check_result
 from .listings import check_text_lines as check_text_lines
 from .listings import comment_text as comment_text
 from .listings import filtered_comments as filtered_comments

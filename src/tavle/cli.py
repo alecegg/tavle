@@ -7,10 +7,10 @@ import webbrowser
 from pathlib import Path
 
 from .listings import (
+    check_result,
     check_text_lines,
     comment_text,
     filtered_comments,
-    finding_row,
     parse_port,
 )
 from .page.assemble import assemble_static, render_fragment
@@ -99,14 +99,7 @@ def run_comments(args: argparse.Namespace) -> int:
 def run_check(args: argparse.Namespace) -> int:
     errors, warnings = check_doc(args.doc)
     if args.json:
-        print(
-            json.dumps(
-                {
-                    "errors": [finding_row(e) for e in errors],
-                    "warnings": [finding_row(w) for w in warnings],
-                }
-            )
-        )
+        print(json.dumps(check_result(errors, warnings)))
     else:
         print("\n".join(check_text_lines(args.doc, errors, warnings)))
     return int(bool(errors))
