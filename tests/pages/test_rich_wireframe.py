@@ -29,7 +29,7 @@ from tavle.blocks_render.screens import (
 
 from varde.pagelib.page import page_check
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def wireframe_props(data: dict[str, Any]) -> Any:

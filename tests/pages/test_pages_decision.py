@@ -15,7 +15,7 @@ from ui_fence import ui_fence
 from varde.pagelib.comments.comments import append_reply, fold, read_rows
 from varde.pagelib.page import template
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 HOSTILE = "<script>alert(1)</script>"
 BLOCK = (

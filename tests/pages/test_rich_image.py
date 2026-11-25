@@ -21,7 +21,7 @@ from tavle.media import Media, Problem, probe
 
 from varde.pagelib.page.assemble import assemble_static
 from varde.pagelib.page.page_check import check
-from varde.pages.assemble_served import assemble_page
+from varde.pagelib.serve.assemble_served import assemble_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105

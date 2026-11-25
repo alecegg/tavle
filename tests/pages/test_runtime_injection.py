@@ -16,7 +16,7 @@ from ui_fence import statement_text
 
 from varde.pagelib.page.assemble import assemble_static
 from varde.pagelib.page.render import classify_url, render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 VECTORS = json.loads(
     (Path(__file__).parent / "fixtures/url-vectors.json").read_text(encoding="utf-8")

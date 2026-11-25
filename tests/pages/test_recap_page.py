@@ -13,7 +13,7 @@ from ui_fence import statement_text
 
 from varde.pagelib.comments.comments import fold, read_rows
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 UNSAFE = [r"<script", r"style=", r"<[^>]*\son[a-z]+=", r"<img"]

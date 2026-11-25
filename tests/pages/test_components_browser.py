@@ -9,7 +9,7 @@ from typing import Any
 
 import pytest
 
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 pytestmark = pytest.mark.slow
 

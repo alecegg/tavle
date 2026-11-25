@@ -22,7 +22,7 @@ def test_theme_file_edit_visible_on_next_request(tmp_path: Path) -> None:
     import http.client
     import threading
 
-    from varde.pages.serve import PageServer
+    from varde.pagelib.serve.serve import PageServer
 
     doc = tmp_path / "page.md"
     doc.write_text("# Page", encoding="utf-8")

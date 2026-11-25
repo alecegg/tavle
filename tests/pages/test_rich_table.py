@@ -14,7 +14,7 @@ import pytest
 from tavle.blocks import check_props
 from tavle.blocks.tables import numeric
 
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 UI = Path(str(files("tavle")))
 CSS = re.sub(

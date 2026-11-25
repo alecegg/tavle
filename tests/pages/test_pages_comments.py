@@ -157,7 +157,7 @@ def test_watch_line_collapses_injected_anchor_newlines() -> None:
 
 
 def test_reply_resolves_comment_for_open_listing_and_watch(tmp_path: Path) -> None:
-    from varde.pages.assemble_served import render_thread
+    from varde.pagelib.serve.assemble_served import render_thread
 
     doc = tmp_path / "page.html"
     answered = append_comment(doc, "a", "q", "answered one")

@@ -16,8 +16,8 @@ from varde.pagelib.comments.comments import fold, read_rows
 from varde.pagelib.page.assemble import parse_page_stream
 from varde.pagelib.page.page_check import check
 from varde.pagelib.page.render import render_page
-from varde.pages.assemble_served import assemble
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.assemble_served import assemble
+from varde.pagelib.serve.serve import PageServer
 
 MIGRATE = Path(__file__).parent / "fixtures" / "migrate"
 OLD_IDS = ["pick", "opts", "graph", "rc"]

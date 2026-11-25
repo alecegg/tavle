@@ -32,15 +32,15 @@ from varde.pagelib.page.template import (
     static_scripts,
 )
 from varde.pagelib.page.theme_page import ThemeLayers, doc_theme, no_layers
-from varde.pages.assemble_served import assemble_page
-from varde.pages.netbind import (
+from varde.pagelib.serve.assemble_served import assemble_page
+from varde.pagelib.serve.netbind import (
     LOOPBACK,
     allowed_hosts,
     allowed_origins,
     classify_host,
     is_loopback,
 )
-from varde.pages.server_parts import (
+from varde.pagelib.serve.server_parts import (
     MAX_BODY,
     MAX_STREAMS,
     READ_TIMEOUT,

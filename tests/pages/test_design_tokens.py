@@ -250,7 +250,7 @@ def test_export_inlines_the_same_css() -> None:
 
 
 def test_served_route_returns_the_concatenation() -> None:
-    from varde.pages.serve import static_body
+    from varde.pagelib.serve.serve import static_body
 
     assert static_body("app.css") == page_css().encode("utf-8")
 

@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 from . import audit, checks
 from .cells import FIXTURES, WALK_MODES, Cell, families_in, scope_for

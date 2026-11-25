@@ -15,7 +15,7 @@ from typing import Any
 
 import pytest
 
-from varde.pages.serve import PageServer, edit_denied
+from varde.pagelib.serve.serve import PageServer, edit_denied
 
 DOC = "# Plan\n\nBody text.\n\n```html\n<p>hi</p>\n```\n"
 
@@ -163,7 +163,7 @@ def test_loopback_edit_stays_on(
 
 
 def test_real_non_loopback_default_policy() -> None:
-    from varde.pages import netbind
+    from varde.pagelib.serve import netbind
 
     assert netbind.is_loopback("127.0.0.1")
     assert not netbind.is_loopback("100.64.147.39")

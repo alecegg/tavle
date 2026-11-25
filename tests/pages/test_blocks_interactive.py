@@ -13,7 +13,7 @@ import pytest
 
 from varde.pagelib.page.render import render_page
 from varde.pagelib.page.template import page_scripts
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 DOC = """# Plan
 

@@ -31,7 +31,7 @@ from ui_paths import UI_STATIC_DIR
 
 from varde.pagelib.page.page_check import check
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def screen_flow_props(data: dict[str, Any]) -> Any:

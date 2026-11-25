@@ -13,7 +13,7 @@ import pytest
 from varde.pagelib.comments.answers import answer_value, validate_answer
 from varde.pagelib.comments.comments import comments_path, fold, read_rows
 from varde.pagelib.comments.store import store_comment
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 DOC = (
     "# Plan\n\nBody.\n\n"

@@ -27,7 +27,7 @@ from ui_paths import UI_FIXTURES
 
 from varde.pagelib.page.page_check import check
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 FIXTURES = UI_FIXTURES
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")

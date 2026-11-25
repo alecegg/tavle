@@ -16,8 +16,8 @@ from ui_paths import UI_STATIC_DIR
 
 from varde.pagelib.page.assemble import assemble_static
 from varde.pagelib.page.page_check import check
-from varde.pages.assemble_served import assemble_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.assemble_served import assemble_page
+from varde.pagelib.serve.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105

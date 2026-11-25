@@ -35,7 +35,7 @@ from tavle.graph import deps_layout
 from ui_paths import UI_FIXTURES
 
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 TESTS = Path(__file__).parent
 FIXTURES = UI_FIXTURES

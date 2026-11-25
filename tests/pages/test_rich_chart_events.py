@@ -22,7 +22,7 @@ from tavle.blocks_render.chart_model import (
 from tavle.blocks_render.charts import chart_props as _chart_props
 from tavle.lines import parse_lines
 
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def chart_props(data: dict[str, Any]) -> Any:

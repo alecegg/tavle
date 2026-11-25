@@ -10,7 +10,7 @@ from ui_paths import UI_STATIC_DIR
 
 from varde.pagelib.page.render import render_page
 from varde.pagelib.page.toc import toc_entries, toc_html
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pagelib/page/static/css"
 UI_CSS_DIR = UI_STATIC_DIR / "css"

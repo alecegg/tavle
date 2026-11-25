@@ -31,7 +31,7 @@ from tavle.blocks_render.registry import COMPONENTS
 from tavle.lines import parse_lines
 
 from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def diagram_props(data: dict[str, Any]) -> Any:

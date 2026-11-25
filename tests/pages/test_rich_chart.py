@@ -27,7 +27,7 @@ from tavle.lines import parse_lines
 from ui_paths import UI_STATIC_DIR
 
 from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def chart_props(data: dict[str, Any]) -> Any:

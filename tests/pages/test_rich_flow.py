@@ -16,7 +16,7 @@ from tavle.blocks_render.flow import flow_props as _flow_props
 from tavle.blocks_render.registry import COMPONENTS
 
 from varde.pagelib.page.render import render_page
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 
 def flow_props(data: dict[str, Any]) -> Any:

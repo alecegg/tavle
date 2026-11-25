@@ -15,7 +15,7 @@ from tavle.blocks_render.code import (
     ALIASES,
 )
 
-from varde.pages.serve import PageServer
+from varde.pagelib.serve.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SAMPLES = {
