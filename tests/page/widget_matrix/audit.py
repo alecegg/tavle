@@ -272,20 +272,17 @@ return true;
 }"""
 )
 
+# Every scroll offset on the page; the walk samples it until it stops changing. The
+# wait happens in Python, since a page with JavaScript off never runs animation frames.
+SCROLL_POSITIONS_JS = """() => [window.scrollX, window.scrollY,
+  ...[...document.querySelectorAll('*')].flatMap((n) => [n.scrollLeft, n.scrollTop])]"""
+
 FOCUS_JS = (
-    "async (scope) => {"
+    "(scope) => {"
     + SHARED_JS
     + r"""
 const el = document.activeElement;
 if (!el || el === document.body || !inScope(el, scope)) return null;
-const scrollPosition = () => [window.scrollX, window.scrollY, ...[...document.querySelectorAll('*')].flatMap((n) => [n.scrollLeft, n.scrollTop])];
-let previous = scrollPosition(), stable = 0;
-while (stable < 2) {
-  await new Promise(requestAnimationFrame);
-  const current = scrollPosition();
-  stable = current.length === previous.length && current.every((value, i) => value === previous[i]) ? stable + 1 : 0;
-  previous = current;
-}
 const own = getComputedStyle(el), r = el.getBoundingClientRect();
 // A range input draws its ring on the thumb pseudo-element; getComputedStyle cannot read that
 // pseudo in Chromium, so read the matching stylesheet rule instead.

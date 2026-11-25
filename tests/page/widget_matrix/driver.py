@@ -17,6 +17,9 @@ from . import audit, checks
 from .cells import FIXTURES, WALK_MODES, Cell, families_in, scope_for
 from .rendered import ROOTS_JS, NotRendered, not_rendered
 
+SETTLED_SAMPLES = 2
+FRAME_MS = 17  # one frame at 60 Hz
+SETTLE_LIMIT_MS = 2000
 TAB_LIMIT = 150
 VIEWPORT_HEIGHT = 800
 ZOOM_FACTOR = 2
@@ -76,12 +79,27 @@ def tab_walk(page: Any, scope: dict[str, Any]) -> list[dict[str, Any]]:
         return []
     stops: list[dict[str, Any]] = []
     for _ in range(TAB_LIMIT):
+        wait_for_scroll_to_settle(page)
         stop = page.evaluate(audit.FOCUS_JS, scope)
         if stop is None:
             break
         stops.append(stop)
         page.keyboard.press("Tab")
     return stops
+
+
+def wait_for_scroll_to_settle(page: Any) -> None:
+    """Return once every scroll offset is unchanged across two frame-length waits,
+    or after SETTLE_LIMIT_MS, so a scroll that never ends cannot hang the walk."""
+    previous = page.evaluate(audit.SCROLL_POSITIONS_JS)
+    unchanged = 0
+    for _ in range(SETTLE_LIMIT_MS // FRAME_MS):
+        page.wait_for_timeout(FRAME_MS)
+        current = page.evaluate(audit.SCROLL_POSITIONS_JS)
+        unchanged = unchanged + 1 if current == previous else 0
+        if unchanged == SETTLED_SAMPLES:
+            return
+        previous = current
 
 
 def audit_family(page: Any, cell: Cell, family: str) -> list[str]:
