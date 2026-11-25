@@ -69,3 +69,17 @@ def test_counts_judge_only_the_matched_mutants():
     stats = module.counts(grouped)
     assert (stats["killed"], stats["no_tests"], stats["total"]) == (2, 1, 4)
     assert module.score(stats) == 50
+
+
+def test_changed_module_patterns():
+    paths = [
+        "src/tavle/a/b.py",
+        "src/tavle/a/__init__.py",
+        "src/tavle/a/x.css",
+        "other/x.py",
+    ]
+    assert load_script().changed_module_patterns(paths) == [
+        "tavle.a.b.*",
+        "tavle.a.x_*",
+        "tavle.a.xǁ*",
+    ]

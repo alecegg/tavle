@@ -60,6 +60,27 @@ STATUS_LINE = re.compile(r"^\s*(?P<name>\S+): (?P<status>[a-z ]+?)\s*$")
 FAILED_LINE = re.compile(r"^FAILED (?P<test>\S+)", re.MULTILINE)
 
 
+def changed_module_patterns(paths: list[str]) -> list[str]:
+    """Convert changed Python paths under src/tavle to mutmut globs.
+
+    mutmut drops `__init__` from mutant names and prefixes each mangled function with
+    `x_` (or `xǁ` for a method), so a package's own mutants match `tavle.a.x_*` and
+    `tavle.a.xǁ*`, never its submodules.
+    """
+    patterns = []
+    for name in paths:
+        path = Path(name)
+        if path.suffix != ".py" or path.parts[:2] != ("src", "tavle"):
+            continue
+        module = ".".join(path.with_suffix("").parts[1:])
+        if path.stem != "__init__":
+            patterns.append(f"{module}.*")
+            continue
+        package = module.removesuffix(".__init__")
+        patterns.extend([f"{package}.x_*", f"{package}.xǁ*"])
+    return patterns
+
+
 def pytest_selection(marker: str) -> list[str]:
     """pytest arguments that select `marker` and skip tests unsupported in a copy."""
     deselects = [a for test in UNSUPPORTED_IN_COPY for a in ("--deselect", test)]
@@ -355,6 +376,26 @@ def run_slow(work: Path, patterns: list[str]) -> int:
     return 0
 
 
+def changed_patterns_from_git(base: str) -> list[str] | None:
+    diff = execute(
+        [
+            shutil.which("git") or "/usr/bin/git",
+            "diff",
+            "--name-only",
+            base,
+            "--",
+            "src/tavle",
+        ],
+        REPO,
+        dict(os.environ),
+        check=False,
+    )
+    if diff.returncode:
+        print(diff.stderr, file=sys.stderr, end="")
+        return None
+    return changed_module_patterns(diff.stdout.splitlines())
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     parser.add_argument("--workers", type=int, default=2)
@@ -376,11 +417,24 @@ def main() -> int:
         metavar="PATTERN",
         help="test and count only mutants whose names match this glob (repeatable)",
     )
+    parser.add_argument("--changed", metavar="BASE")
     parser.add_argument("--clean", action="store_true", help="delete the copy and exit")
     parser.add_argument("--min-score", type=int, default=0)
     args = parser.parse_args()
     if args.tag and not re.fullmatch(r"[A-Za-z0-9_-]+", args.tag):
         parser.error("tag must contain only letters, digits, underscores or hyphens")
+    if args.changed:
+        patterns = changed_patterns_from_git(args.changed)
+        if patterns is None:
+            return 1
+        if not patterns:
+            print("no changed modules")
+            return 0
+        args.only.extend(patterns)
+    return run_args(args)
+
+
+def run_args(args: argparse.Namespace) -> int:
     work = work_dir(args.tag)
     if args.clean:
         if work.exists():
