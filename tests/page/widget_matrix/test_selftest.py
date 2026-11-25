@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from itertools import combinations
 from typing import Any
 
 import pytest
@@ -12,9 +13,12 @@ from .cells import (
     MODES,
     SCHEMES,
     WIDTHS,
+    Cell,
     all_cells,
     families_in,
     scope_for,
+    selected_keys,
+    uncovered,
     widths_for,
 )
 from .colors import contrast_ratio, parse_color, ratio_over
@@ -298,3 +302,36 @@ def test_selftest_subset_covers_every_fixture_family_scheme_and_mode() -> None:
     assert {c.mode for c in cells} == set(MODES)
     assert len({c.width for c in cells if c.mode == "default"}) >= 2
     assert len({c.page_key for c in cells}) <= 700  # keeps the per-change run short
+
+
+def test_pairwise_subset_covers_pairs() -> None:
+    assert not uncovered(selected_keys())
+
+
+def _axis_pairs(cell: Cell) -> set[tuple[object, ...]]:
+    axes = (
+        ("family", cell.family),
+        ("width", cell.width),
+        ("scheme", cell.scheme),
+        ("mode", cell.mode),
+    )
+    return set(combinations(axes, 2))
+
+
+def test_pairwise_detects_a_dropped_pair() -> None:
+    selected = selected_keys()
+    keys_by_pair: dict[tuple[object, ...], set[tuple[str, int, str, str]]] = {}
+    for cell in all_cells():
+        if cell.page_key in selected:
+            for pair in _axis_pairs(cell):
+                keys_by_pair.setdefault(pair, set()).add(cell.page_key)
+    pair, keys = min(((p, k) for p, k in keys_by_pair.items() if len(k) == 1), key=repr)
+    assert pair in uncovered(selected - keys)
+
+
+def test_pairwise_selects_every_fixture() -> None:
+    cells = all_cells()
+    selected = selected_keys()
+    assert {c.fixture for c in cells if c.page_key in selected} == {
+        c.fixture for c in cells
+    }
