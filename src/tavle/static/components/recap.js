@@ -1,4 +1,4 @@
-// Recap block as a component: `varde learn docs recap --json` output as changes and drift.
+// Recap block as a component: a docs recap (changes and drift) given as block data.
 // static/recap.js wires the judgment buttons by class and `data-item`.
 const VERDICTS = { accepted: 'Accept', rejected: 'Reject', open: 'Open' };
 const RANGES = [['+', 'added'], ['-', 'removed']];

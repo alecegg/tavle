@@ -9,7 +9,7 @@
 // shows no block menu (the host disables the page's own controls).
 //
 // A shadow-root mount opens no EventSource and no parent message listener: the host calls the
-// returned `refresh()`. `destroy()` removes everything the mount registered. `varde` is the
+// returned `refresh()`. `destroy()` removes everything the mount registered. `tavle` is the
 // mount's own helper object (what `window.tavle` is for the document page).
 // Styling: the page stylesheet (`static/app.css`) puts its tokens, `body` look and `scroll-padding`
 // on `:host` as well as `:root`, so loading it into the shadow root styles the page. The host

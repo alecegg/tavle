@@ -58,6 +58,15 @@ def test_commands(tmp_path: Path) -> None:
     assert command("render", tmp_path / "missing").returncode == 2
 
 
+def test_export_refuses_to_overwrite_its_source(tmp_path: Path) -> None:
+    doc = tmp_path / "page.md"
+    doc.write_text("# Title\n")
+    result = command("export", doc, "--out", doc)
+    assert result.returncode == 1
+    assert "would overwrite the source" in result.stderr
+    assert doc.read_text() == "# Title\n"
+
+
 def test_theme_flag(tmp_path: Path) -> None:
     doc = tmp_path / "page.md"
     doc.write_text("# Page\n")

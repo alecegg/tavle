@@ -259,7 +259,7 @@ def test_symlink_to_a_dotfile_inside_the_roots_is_rejected(root: Path) -> None:
     [
         ".env",
         ".git/x.md",
-        ".varde/x.md",
+        ".cache/x.md",
         "a.env.md",
         "my-secret.md",
         "credentials.md",
