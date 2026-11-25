@@ -74,7 +74,7 @@ Each language SHALL have a floor in `scripts/mutation-floors.json` that is at le
 
 ### Requirement: New tests must kill
 
-Every test file added in a pull request that imports a mutated module SHALL be the sole killer of at least one mutant of those modules, and the gate SHALL run in CI job `mutation` on pull requests (changed modules) and weekly (all modules).
+Every test node (each parametrize case counts) added in a pull request that imports a mutated module SHALL be the sole killer of at least one mutant of those modules, and the gate SHALL run in CI job `mutation` on pull requests (changed modules) and weekly (all modules).
 
 #### Scenario: A duplicate new test fails the gate
 
@@ -88,12 +88,21 @@ Every test file added in a pull request that imports a mutated module SHALL be t
 
 ### Requirement: Standing test-quality rules
 
-The default suite SHALL fail on a test with no assertion that can fail, an `assert x == x`, an identical duplicate test body within a file, a repeated parametrize row, or a test that reads `src/tavle/**/*.py` text.
+The default suite SHALL fail on a test with no assertion that can fail, an `assert x == x`, an identical duplicate test body within a file, a repeated parametrize row, a test that reads `src/tavle/**/*.py` text, or a cross-product parametrization (two or more stacked `parametrize` decorators on one function, or cases built with `itertools.product`) whose cases do not come from the pairwise cover.
 
 #### Scenario: Planted tautologies fail
 
 - **WHEN** `uv run --locked pytest tests/test_test_quality.py -q -p no:cacheprovider` runs
 - **THEN** it passes, and each rule reports a planted violation in `tmp_path` and no hit on the real tests
+
+### Requirement: Recorded test count
+
+CI job `test` SHALL fail when the collected test counts (fast, slow, total, vitest) differ from `tests/test-counts.json`.
+
+#### Scenario: An unrecorded test fails the count check
+
+- **WHEN** `uv run --locked pytest tests/test_test_counts.py -q -p no:cacheprovider` runs
+- **THEN** it passes, including a planted count file one below the collected total failing with both numbers, and `rg -n "just test-counts" .github/workflows/tests.yml` prints the step in job `test`
 
 ### Requirement: Evidence-based test deletion
 

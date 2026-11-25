@@ -120,7 +120,7 @@ Per area: run the mutation tool on the area's source, list non-killed mutants, a
 - Score: Python `killed / (total - skipped)`; `no_tests`, `survived`, `timeout`, `suspicious` and `segfault` all stay in the denominator and none counts as killed, so a survivor that becomes a timeout cannot raise the score. `skipped` must be 0 (exclusions are forbidden). JavaScript `Killed / (Killed + Survived + NoCoverage + Timeout + RuntimeError)` computed from the json report by the gate (Stryker's own `thresholds.break` counts a timeout as killed, so it is not used). Slow-only mutants count as survivors.
 - Floors live in one file, `scripts/mutation-floors.json` (`{"python": N, "js": N}`). They are set by tasks 6.2 and 6.3 from the measured post-audit score, rounded down to a whole percent, at least 1.
 - Never lowered, mechanically: `scripts/mutation_gate.py` reads the floors at the merge base (`git show BASE:scripts/mutation-floors.json`) and fails when either working floor is lower or missing. `tests/test_mutation_floors.py` fails when a floor is below 1. The CI workflow passes no `--min-score`, and `mutate.py --min-score` can only raise a run's floor.
-- New-test gate (anti-tautology): in the PR run, every added test file that imports a mutated module must be the sole killer of at least one mutant of those modules (task 6.5); a new test that adds no unique kill fails. Files importing no mutated module are listed as not judged and left to the standing static rules `tests/test_test_quality.py` (task 6.1), which run in the default suite.
+- New-test gate (anti-tautology): runs in the PR run; what it judges is in D12 (task 6.5).
 - Where it runs: `.github/workflows/mutation.yml`, job `mutation`. On `pull_request` it runs `just mutation-gate origin/<base>`: only changed modules are mutated, and the global floor applies to that subset. A weak module that a PR touches must therefore be brought up by tests; there is no exemption. A weekly `schedule` (and `workflow_dispatch`) runs `--all`. Job limits: `timeout-minutes: 60` for PRs and 350 for the weekly run; if the full-run wall time recorded in Result exceeds 300 minutes the weekly run splits into a matrix over areas (task 6.7), staying under GitHub's 6 hour cap. A changed `__init__.py` maps to its own module only, not the package.
 - Not in `just test` or the pre-push hook: a run takes minutes to hours (measured in tasks 2.7 to 2.11 and 3.4 to 3.7).
 
@@ -135,6 +135,16 @@ Audit deletions are checked by `scripts/check_audit_removals.py` (task 4.3). Aft
 ### D11. Follow-up
 
 Apply the same to varde as a separate change named `varde-test-audit`: copy the criteria (D6), this change's `scripts/mutate.py`, `scripts/capped.sh`, `scripts/mutation_gate.py` and floors rule, and measure varde's baseline first. It starts after this change is archived and is not planned further here.
+
+### D12. Test growth stays under control
+
+Owner request (2026-11-25): an audit is only worth doing if rules keep the count down afterwards. Measured: 6,540 collected tests from 1,141 test functions; one function (`test_matrix.py::test_cell`, a 54 x 34 x 5 x 2 x 8 cross product) is 3,432 of them; 23 other functions have more than 20 parametrize cases. Three standing rules, all merge gates:
+
+- Each added test is judged, not each added file. The new-test gate (task 6.5) diffs collected node ids between `BASE` and the working tree (`pytest --collect-only -q`, vitest `list --json`) and requires each added node that imports a mutated module to be the sole killer of at least one mutant. A parametrized function's added cases are added nodes, so a new row that kills nothing new fails. Nodes that import no mutated module are listed as not judged and fall to the next two rules.
+- No cross-product parametrization (task 6.1, rule C6). A test function with two or more stacked `parametrize` decorators, or a `parametrize` whose cases come from `itertools.product`, fails the default suite. Combinations come from a pairwise cover instead; the only cover today is `tests/page/widget_matrix/cells.py`, and a case set built by calling it passes.
+- A recorded count (task 6.10). `tests/test-counts.json` holds the collected count per selection (fast, slow, total, vitest). A CI step in job `test` fails when the collected counts differ from the file, so every pull request that adds or removes tests shows the change in its diff, including browser and asset-text tests that mutation cannot judge.
+
+Alternatives: a cap on cases per parametrize (rejected: data-driven contract tests over every component spec are legitimate, and the per-node kill gate already rejects rows that add nothing); a count ceiling that never rises (rejected: forbids legitimate new tests; the recorded count makes growth visible and the kill gate judges it).
 
 ## Assumptions
 
