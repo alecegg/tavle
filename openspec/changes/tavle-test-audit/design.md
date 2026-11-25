@@ -36,6 +36,7 @@ Wall time (not measured serially; see the last row):
 | `pytest -m matrix_full -n 3` | 2,905 passed, 1 failed, 953 s wall (15 min 53 s) |
 | `npx vitest run` | 341 passed, 20.3 s wall (14.9 s test time; jsdom created 10 times, 19.7 s) |
 | current `just test` (`pytest` serial, no `-n`) | not run; about 3,360 s (56 min) estimated as 724 s plus 2,906 cells at 0.91 s (478 s / 526) |
+| pre-push measured (`just test-fast`, after task 1.5 on `d0b5bf8`) | lint, 2,785 pytest and 341 vitest passed, 36 s wall |
 
 Slowest non-matrix files by summed time: `test_theme_browser.py` 29.4 s (17 tests), `test_rich_diagram.py` 16.9 s (30), `test_table_phone_cards.py` 13.7 s (7), `test_wheel_standalone.py` 12.2 s (1), `test_rich_chart.py` 10.4 s (41). Largest files by count: `test_components_contract.py` 736, `test_tokens_shared.py` 116, `test_actions.py` 91, `test_blocks_inputs.py` 86, `test_extract_inputs.py` 80.
 
