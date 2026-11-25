@@ -15,7 +15,8 @@ from varde.ui import (
 
 PAGE_SPECS = {**COMPONENT_SPECS, "include": INCLUDE}
 CUSTOM_REMOVED = (
-    "the `custom` block was removed; use `ui` components (`varde pages blocks`)"
+    "the `custom` block was removed; "
+    "use `ui` components (the block catalog lists the components)"
 )
 
 
@@ -26,7 +27,7 @@ OLD_FENCES = frozenset(
 )
 TOML_FENCE_REMOVED = (
     "typed fences were replaced by `ui` statements; "
-    "rewrite this one as a statement (`varde pages blocks <type>`) "
+    "rewrite this one as a statement (the block catalog lists the components) "
     "(for ordinary code, use another language tag)"
 )
 

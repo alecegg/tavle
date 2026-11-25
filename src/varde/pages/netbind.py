@@ -1,4 +1,4 @@
-"""Bind address rules for `varde pages serve --host`.
+"""Bind address rules for the page server's host option.
 
 Loopback or Tailscale IPv4 only.
 """

@@ -38,7 +38,7 @@ def test_converted_fixture_passes_learn_check_and_the_old_one_is_removed() -> No
     errors = check((MIGRATE / "old.md").read_text())
     assert {e.rule for e in errors} == {"toml-fence-removed"}
     assert len(errors) == len(OLD_IDS)
-    assert all("varde pages blocks" in e.message for e in errors)
+    assert all("the block catalog lists the components" in e.message for e in errors)
 
 
 def test_a_statement_per_anchor_with_its_own_line_span() -> None:
