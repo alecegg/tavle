@@ -87,6 +87,7 @@ from .media import Problem as Problem
 from .media import load as load
 from .media import probe as probe
 from .page.assemble import assemble_static as assemble_static
+from .page.assemble import render_fragment as render_fragment
 from .page.page_check import PAGE_SPECS as PAGE_SPECS
 from .page.page_check import check as check
 from .page.page_quality import quality_warnings as quality_warnings
