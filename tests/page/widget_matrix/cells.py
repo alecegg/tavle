@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import cache
+from itertools import combinations
 from pathlib import Path
 
 WIDTHS = (320, 375, 768, 1024, 1440)
@@ -29,11 +31,6 @@ PAGE_FIXTURES = {
 # band (21.4 rem container) and 1024 shares 768's (62 rem, in the 44-64 rem band).
 # Every mode keeps one width per band with a sample; default mode keeps all five.
 OTHER_MODE_WIDTHS = (320, 768, 1440)
-SUBSET_DEFAULT_WIDTHS = (320, 1440)
-SUBSET_MODE_WIDTH = 320
-SUBSET_MODE_SCHEME = "light"
-# Rich blocks share one stylesheet, so the subset runs them in three modes only.
-SUBSET_RICH_MODES = ("default", "coarse", "nojs", "rtl")
 WALK_MODES = ("default", "reduced-motion", "zoom200", "coarse", "nojs", "rtl")
 
 
@@ -52,12 +49,8 @@ class Cell:
 
     @property
     def in_subset(self) -> bool:
-        """Per-change run: two default widths, one width for other modes."""
-        if self.mode == "default":
-            return self.width in SUBSET_DEFAULT_WIDTHS
-        if rich_family(self.fixture) and self.mode not in SUBSET_RICH_MODES:
-            return False
-        return self.width == SUBSET_MODE_WIDTH and self.scheme == SUBSET_MODE_SCHEME
+        """Whether this page belongs to the pairwise default run."""
+        return self.page_key in selected_keys()
 
     @property
     def page_key(self) -> tuple[str, int, str, str]:
@@ -104,3 +97,45 @@ def all_cells(directory: Path = FIXTURES) -> list[Cell]:
         for width in widths_for(mode)
         for scheme in SCHEMES
     ]
+
+
+PageKey = tuple[str, int, str, str]
+Requirement = tuple[object, ...]
+
+
+@cache
+def _coverage() -> dict[PageKey, frozenset[Requirement]]:
+    coverage: dict[PageKey, set[Requirement]] = {}
+    for cell in all_cells():
+        requirements = coverage.setdefault(cell.page_key, set())
+        requirements.add(("fixture", cell.fixture))
+        axes = (
+            ("family", cell.family),
+            ("width", cell.width),
+            ("scheme", cell.scheme),
+            ("mode", cell.mode),
+        )
+        requirements.update(combinations(axes, 2))
+    return {key: frozenset(value) for key, value in coverage.items()}
+
+
+def uncovered(keys: set[PageKey] | frozenset[PageKey]) -> set[Requirement]:
+    """Return valid axis pairs and fixtures absent from the selected pages."""
+    coverage = _coverage()
+    required = set().union(*coverage.values())
+    for key in keys:
+        required.difference_update(coverage[key])
+    return required
+
+
+@cache
+def selected_keys() -> frozenset[PageKey]:
+    """Greedily cover requirements, resolving ties by sorted page key."""
+    coverage = _coverage()
+    remaining = uncovered(frozenset())
+    selected: set[PageKey] = set()
+    while remaining:
+        key = min(coverage, key=lambda k: (-len(coverage[k] & remaining), k))
+        selected.add(key)
+        remaining.difference_update(coverage[key])
+    return frozenset(selected)

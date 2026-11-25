@@ -7,6 +7,8 @@ scheme and mode. Axes: widths 320 375 768 1024 1440; light and dark; modes
 default, reduced-motion, zoom200 (device scale 2), coarse (touch), forced-colors,
 print, nojs (JavaScript disabled) and rtl (`dir=rtl` on the page).
 
+The default run uses a greedy pairwise cover of family, width, scheme and mode,
+plus every fixture; remaining pages run with the matrix_full marker.
 Each page load is audited once for every family in its fixture (`audit.py` collects,
 `checks.py` decides). Full-page PNGs go to a temp dir, or to `$VARDE_WIDGET_SHOTS`
 when set (one file per fixture, mode, scheme and width). Fixtures live in
@@ -27,6 +29,7 @@ pytestmark = pytest.mark.slow
 
 
 def _scope(cell: Cell) -> list[pytest.MarkDecorator]:
+    """Mark pages outside the pairwise cover for the full matrix."""
     return [] if cell.in_subset else [pytest.mark.matrix_full]
 
 
