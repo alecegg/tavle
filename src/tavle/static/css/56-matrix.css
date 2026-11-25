@@ -5,6 +5,8 @@
 .vd-matrix .vb-status-warn { color: var(--vd-tone-warning-text); }
 .vd-matrix .vb-status-bad { color: var(--vd-tone-risk-text); }
 .vd-matrix .vb-table .vb-status { white-space: normal; overflow-wrap: break-word; }
+/* Phone cards: a long status breaks anywhere, since the card no longer scrolls. */
+@media screen and (max-width: 40rem) { .vd-matrix .vb-table-stack .vb-status { overflow-wrap: anywhere; } }
 .vd-matrix .vb-table td:not(:first-child) { min-inline-size: 13rem; }
 .vd-matrix .vb-table thead th { white-space: normal; overflow-wrap: break-word; }
 .vd-matrix .vb-table thead th:not(:first-child) { min-inline-size: 13rem; }

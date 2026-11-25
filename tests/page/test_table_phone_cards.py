@@ -60,3 +60,51 @@ def test_table_cards(tmp_path: Path, width: int, stack: bool | None) -> None:
         server.shutdown()
         server.server_close()
         thread.join(5)
+
+
+@pytest.mark.parametrize("width", [375, 1024])
+def test_markdown_table_cards(tmp_path: Path, width: int) -> None:
+    doc = tmp_path / "table.md"
+    doc.write_text(
+        "# Tables\n\n| **One** | Two & three | Three | Four | Five |\n"
+        "| --- | --- | --- | --- | --- |\n| Alpha | Beta | Gamma | Delta | "
+        + "longword" * 30
+        + " |\n"
+    )
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(args=BROWSER_ARGS)
+            try:
+                page = browser.new_page(viewport={"width": width, "height": 900})
+                page.route("**/events", lambda route: route.abort())
+                page.goto(f"http://127.0.0.1:{server.port}/")
+                table = page.locator("table.vb-table-stack")
+                row = table.locator("tbody tr").first
+                assert row.locator("td").evaluate_all(
+                    "es => es.map(e => e.dataset.label)"
+                ) == ["One", "Two & three", "Three", "Four", "Five"]
+                if width == 375:
+                    assert row.evaluate("e => getComputedStyle(e).display") == "block"
+                    assert (
+                        row.evaluate("e => getComputedStyle(e).borderTopWidth") != "0px"
+                    )
+                    assert row.locator("td").evaluate_all(
+                        "es => es.map(e => getComputedStyle(e, '::before').content)"
+                    ) == ["none", '"Two & three"', '"Three"', '"Four"', '"Five"']
+                    assert table.evaluate("e => e.scrollWidth <= e.clientWidth")
+                    assert table.locator("..").evaluate(
+                        "e => e.scrollWidth <= e.clientWidth"
+                    )
+                else:
+                    assert (
+                        row.evaluate("e => getComputedStyle(e).display") == "table-row"
+                    )
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(5)

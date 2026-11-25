@@ -517,6 +517,11 @@ def _alignment(cell: str) -> str:
     return "right" if cell.endswith(":") else ""
 
 
+def _plain_text(cell: str) -> str:
+    """A cell's text with inline markup removed, for a phone card label."""
+    return html.unescape(_TAG.sub("", render_inline(cell)))
+
+
 def _parse_table(lines: list[str], i: int) -> tuple[PagePart, int]:
     header = _split_row(lines[i])
     aligns = [_alignment(c) for c in _split_row(lines[i + 1])]
@@ -526,18 +531,24 @@ def _parse_table(lines: list[str], i: int) -> tuple[PagePart, int]:
         rows.append(_split_row(lines[j]))
         j += 1
 
-    def cell(tag: str, index: int, text: str) -> str:
+    labels = [html.escape(_plain_text(h), quote=True) for h in header]
+
+    def cell(tag: str, index: int, text: str, extra: str = "") -> str:
         align = aligns[index] if index < len(aligns) and aligns[index] else ""
         cls = f' class="align-{align}"' if align else ""
-        return f"<{tag}{cls}>{render_inline(text)}</{tag}>"
+        return f"<{tag}{cls}{extra}>{render_inline(text)}</{tag}>"
+
+    def body_cell(index: int, text: str) -> str:
+        label = labels[index] if index < len(labels) else ""
+        return cell("td", index, text, f' data-label="{label}"')
 
     head = "".join(cell("th", n, c) for n, c in enumerate(header))
     body = "".join(
-        "<tr>" + "".join(cell("td", n, c) for n, c in enumerate(r)) + "</tr>"
+        "<tr>" + "".join(body_cell(n, c) for n, c in enumerate(r)) + "</tr>"
         for r in rows
     )
     table = (
-        '<div class="scroll"><table>'
+        '<div class="scroll"><table class="vb-table-stack">'
         f"<thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>"
     )
     return PagePart("other", table, "\n".join(lines[i:j]), block_type="table"), j

@@ -70,7 +70,7 @@ def test_task_list_hr_quote_and_fence() -> None:
 def test_table_with_pipe_in_code() -> None:
     body = body_of("| a | b |\n|---|:-:|\n| `x | y` | 2 |\n")
     assert "<th>a</th>" in body and '<th class="align-center">b</th>' in body
-    assert "<td><code>x | y</code></td>" in body
+    assert '<td data-label="a"><code>x | y</code></td>' in body
 
 
 def test_comments_dropped_outside_fences_only() -> None:
@@ -178,7 +178,7 @@ def test_nul_input_cannot_forge_tokens() -> None:
 
 def test_nul_in_table_row_does_not_crash_or_hang() -> None:
     body = body_of("|a|b|\n|-|-|\n|\x005\x00|x|\n|`\x000\x00`|y|\n")
-    assert "<table>" in body
+    assert "<table " in body
     assert "\x00" not in body
 
 
