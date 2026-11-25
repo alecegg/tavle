@@ -6,18 +6,18 @@
 // inline script, no eval, no HTML built from data.
 //
 // Loaded as a classic deferred script (the page shell and static map are
-// owned by other files). It only defines `vardePageParts.recap(tree, ctx)`; each mounted
-// page gets its own helpers in `ctx.varde` (and `window.varde` for the document page).
-(globalThis.vardePageParts ||= {}).recap = (tree, ctx) => {
+// owned by other files). It only defines `tavlePageParts.recap(tree, ctx)`; each mounted
+// page gets its own helpers in `ctx.tavle` (and `window.tavle` for the document page).
+(globalThis.tavlePageParts ||= {}).recap = (tree, ctx) => {
   'use strict';
   const page = tree.querySelector('main[data-role="page"]');
   if (!page) return;
   const publish = (helpers) => {
-    ctx.varde = Object.freeze(helpers);
-    if (tree === document) window.varde = ctx.varde;
+    ctx.tavle = Object.freeze(helpers);
+    if (tree === document) window.tavle = ctx.tavle;
   };
 
-  const { readProps, classifyUrl, safeUrl, formState, register, hydrate, mountInputs, setNote } = globalThis.vardePageParts.inputRuntime(tree, ctx);
+  const { readProps, classifyUrl, safeUrl, formState, register, hydrate, mountInputs, setNote } = globalThis.tavlePageParts.inputRuntime(tree, ctx);
 
   // ---- answer bridge ----------------------------------------------------------
 
@@ -30,7 +30,7 @@
     const apiBase = ctx.apiBase;
     const headers = apiBase
       ? { 'Content-Type': 'application/json' }
-      : { 'Content-Type': 'application/json', 'X-Varde-Token': ctx.token };
+      : { 'Content-Type': 'application/json', [globalThis.tavlePageParts.tokenHeader]: ctx.token };
     const payload = item.kind === 'drift'
       ? { anchor: item.anchor, kind: 'drift', item: item.id, verdict: value, text: text || '' }
       : { anchor: item.anchor, kind: 'answer', item: item.id, value, text: text || '' };
@@ -133,7 +133,7 @@
     decide(entry, 'commented', area.value);
   }
 
-  publish({ ...ctx.varde, inputs: ctx.inputs });
+  publish({ ...ctx.tavle, inputs: ctx.inputs });
   mountInputs();
 
   // One delegated click handler: it keeps working when app.js swaps blocks.

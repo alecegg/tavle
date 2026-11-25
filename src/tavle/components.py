@@ -123,9 +123,9 @@ def component_bundle() -> str:
             + ";"
             for name in names
         ),
-        "globalThis.vardeComponents = components; // read by dashboard views",
+        "globalThis.tavleComponents = components; // read by dashboard views",
         f"const mountComponents = {_scoped(mount, 'mountComponents')};",
-        "globalThis.vardeMountComponents = mountComponents; // shadow-root hosts",
+        "globalThis.tavleMountComponents = mountComponents; // shadow-root hosts",
         _BOOT + "})();",
     ]
     return "\n".join(parts)

@@ -44,7 +44,7 @@ MOUNT = """async ([hostId, extra, options]) => {
   const parsed = new DOMParser().parseFromString(html, 'text/html');
   const main = document.importNode(parsed.querySelector('main[data-role="page"]'), true);
   if (extra) main.insertAdjacentHTML('beforeend', extra);
-  const token = parsed.querySelector('meta[name="varde-token"]').content;
+  const token = parsed.querySelector('meta[name="tavle-token"]').content;
   const style = document.createElement('style');
   style.textContent = css;
   const shadow = document.getElementById(hostId).attachShadow({ mode: 'open' });
@@ -143,7 +143,7 @@ def test_comment_posts_with_the_mount_token(site: tuple[Any, PageServer]) -> Non
         lambda r: r.method == "POST" and r.url.endswith("/comments")
     ) as sent:
         page.locator("#host-a .composer .primary").click()
-    assert sent.value.headers["x-varde-token"]
+    assert sent.value.headers["x-tavle-token"]
     assert '"text":"hello"' in sent.value.post_data
 
 
@@ -159,7 +159,7 @@ def test_press_outside_the_shadow_closes_the_menu(site: tuple[Any, PageServer]) 
     assert count_in(page, ".menu-popup") == 0
 
 
-def test_each_mount_has_its_own_helpers_and_window_varde_is_unset(
+def test_each_mount_has_its_own_helpers_and_window_tavle_is_unset(
     site: tuple[Any, PageServer],
 ) -> None:
     page, _ = site
@@ -167,10 +167,10 @@ def test_each_mount_has_its_own_helpers_and_window_varde_is_unset(
     mount(page, "host-b")
     same = page.evaluate(
         """() => {
-          const [a, b] = [window.mounts['host-a'].varde, window.mounts['host-b'].varde];
+          const [a, b] = [window.mounts['host-a'].tavle, window.mounts['host-b'].tavle];
           a.formState.set('x', 1);
           a.register('probe', { hydrate() {} });
-          return [a === b, b.formState.get('x'), window.varde === undefined, Boolean(a.inputs)];
+          return [a === b, b.formState.get('x'), window.tavle === undefined, Boolean(a.inputs)];
         }"""
     )
     assert same == [False, None, True, True]
@@ -184,7 +184,7 @@ def test_inline_mount_opens_no_event_stream_and_ignores_the_parent_message(
     page.on("request", lambda r: seen.append(r.url))
     mount(page)
     page.evaluate(
-        "() => window.postMessage({ type: 'varde-refresh' }, location.origin)"
+        "() => window.postMessage({ type: 'tavle-refresh' }, location.origin)"
     )
     page.wait_for_timeout(500)
     assert not [u for u in seen if u.endswith("/events")]

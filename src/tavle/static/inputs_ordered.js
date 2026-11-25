@@ -2,7 +2,7 @@
 // `inputs_runtime.js` (`ctx.inputs`: the send/submit/focus helpers shared with `choice`). The
 // server writes all markup; props are the slider's three numbers only. Text goes
 // through textContent; no inline script or style, no HTML built from data.
-(globalThis.vardePageParts ||= {}).inputs = (tree, ctx) => {
+(globalThis.tavlePageParts ||= {}).inputs = (tree, ctx) => {
   'use strict';
   const host = ctx.inputs;
   if (!host) {
@@ -160,4 +160,4 @@
 };
 
 // The served page's script tag: this is the last one, so every part is defined and the page can mount.
-if (document.currentScript) globalThis.vardePageParts.mountDocument();
+if (document.currentScript) globalThis.tavlePageParts.mountDocument();

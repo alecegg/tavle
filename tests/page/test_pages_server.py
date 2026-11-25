@@ -59,7 +59,7 @@ class Running:
         headers: dict[str, str | None] = {
             "Content-Type": "application/json",
             "Origin": f"http://{self.host}",
-            "X-Varde-Token": self.token,
+            "X-Tavle-Token": self.token,
         }
         headers.update(overrides)
         sent = {k: v for k, v in headers.items() if v is not None}
@@ -110,7 +110,7 @@ def test_page_has_headers_token_and_first_party_assets(running: Running) -> None
     assert status == 200 and headers["Content-Type"].startswith("text/html")
     assert_security_headers(headers)
     text = body.decode()
-    assert f'name="varde-token" content="{running.token}"' in text
+    assert f'name="tavle-token" content="{running.token}"' in text
     assert '<script src="/static/app.js" defer></script>' in text
     assert '<script src="/static/blocks.js" defer></script>' in text
     assert '<script src="/static/recap.js" defer></script>' in text
@@ -172,7 +172,7 @@ def test_bad_host_rejected_everywhere(running: Running, host: str) -> None:
             "Host": host,
             "Content-Type": "application/json",
             "Origin": f"http://{running.host}",
-            "X-Varde-Token": running.token,
+            "X-Tavle-Token": running.token,
         },
     )
     assert status == 403
@@ -208,8 +208,8 @@ def test_comment_text_is_escaped_in_page(running: Running) -> None:
 @pytest.mark.parametrize(
     ("overrides", "status"),
     [
-        ({"X-Varde-Token": None}, 403),
-        ({"X-Varde-Token": "wrong"}, 403),
+        ({"X-Tavle-Token": None}, 403),
+        ({"X-Tavle-Token": "wrong"}, 403),
         ({"Content-Type": "text/plain"}, 415),
         ({"Content-Type": None}, 415),
         ({"Origin": "http://evil.example"}, 403),
@@ -237,7 +237,7 @@ def test_post_oversize_and_bad_payloads(running: Running) -> None:
         {
             "Content-Type": "application/json",
             "Origin": f"http://{running.host}",
-            "X-Varde-Token": running.token,
+            "X-Tavle-Token": running.token,
         },
     )
     assert status == 400
@@ -334,7 +334,7 @@ def test_stalled_post_body_times_out(running: Running, monkeypatch) -> None:
         (
             f"POST /comments HTTP/1.1\r\nHost: {running.host}\r\n"
             f"Origin: http://{running.host}\r\nContent-Type: application/json\r\n"
-            f"X-Varde-Token: {running.token}\r\nContent-Length: 500\r\n\r\n"
+            f"X-Tavle-Token: {running.token}\r\nContent-Length: 500\r\n\r\n"
         ).encode()
     )
     start = time.monotonic()

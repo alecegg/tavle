@@ -1,8 +1,8 @@
 // Component props, state and input hydration, independent of the page host.
-(globalThis.vardePageParts ||= {}).inputRuntime = (tree, ctx) => {
+(globalThis.tavlePageParts ||= {}).inputRuntime = (tree, ctx) => {
   'use strict';
-  const { readFields } = globalThis.vardePageParts.inputFields;
-  const mountInputWidgets = globalThis.vardePageParts.inputWidgets;
+  const { readFields } = globalThis.tavlePageParts.inputFields;
+  const mountInputWidgets = globalThis.tavlePageParts.inputWidgets;
   // ---- props: parse, then whitelist -----------------------------------------
 
   // Port of pages/render.py classify_url; tests/docs/fixtures/url-vectors.json is

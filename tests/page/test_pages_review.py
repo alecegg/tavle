@@ -44,7 +44,7 @@ class Client:
             "Host": self.host,
             "Content-Type": "application/json",
             "Origin": f"http://{self.host}",
-            "X-Varde-Token": self.server.token,
+            "X-Tavle-Token": self.server.token,
         }
         headers.update(overrides)
         sent = {k: v for k, v in headers.items() if v is not None}
@@ -151,8 +151,8 @@ def test_unknown_anchor_is_404(client: Client) -> None:
 def test_edit_rejects_missing_token_and_wrong_origin(client: Client) -> None:
     anchor = anchors(client.doc)["Hello"]
     payload = {"anchor": anchor, "base_hash": "x", "new_source": "y"}
-    assert client.post("/edit", payload, **{"X-Varde-Token": None})[0] == 403
-    assert client.post("/edit", payload, **{"X-Varde-Token": "wrong"})[0] == 403
+    assert client.post("/edit", payload, **{"X-Tavle-Token": None})[0] == 403
+    assert client.post("/edit", payload, **{"X-Tavle-Token": "wrong"})[0] == 403
     assert client.post("/edit", payload, Origin="http://evil.test")[0] == 403
     assert client.post("/edit", payload, Origin=None)[0] == 403
     assert client.post("/edit", payload, **{"Content-Type": "text/plain"})[0] == 415
@@ -286,7 +286,7 @@ def test_accept_rejects_stale_hash_and_missing_quote(client: Client) -> None:
         == 403
     )
     assert (
-        client.post("/accept", {"comment_id": cid}, **{"X-Varde-Token": None})[0] == 403
+        client.post("/accept", {"comment_id": cid}, **{"X-Tavle-Token": None})[0] == 403
     )
     assert client.doc.read_bytes() == DOC.encode()
 

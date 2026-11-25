@@ -36,7 +36,7 @@ def test_serve_and_comments(tmp_path):
                 assert response.status == 200
                 assert response.getheader("Content-Security-Policy")
                 page = response.read().decode()
-                match = re.search(r'name="varde-token" content="([^"]+)"', page)
+                match = re.search(r'name="tavle-token" content="([^"]+)"', page)
                 assert match is not None
                 body = json.dumps({"anchor": "title", "quote": "Title", "text": "note"})
                 headers = {
@@ -47,7 +47,7 @@ def test_serve_and_comments(tmp_path):
                 response = conn.getresponse()
                 assert response.status == 403
                 response.read()
-                headers["X-Varde-Token"] = match.group(1)
+                headers["X-Tavle-Token"] = match.group(1)
                 conn.request("POST", "/comments", body, headers)
                 response = conn.getresponse()
                 assert response.status == 201

@@ -91,7 +91,7 @@ class Running:
             "Host": host,
             "Content-Type": "application/json",
             "Origin": f"http://{host}",
-            "X-Varde-Token": self.server.token,
+            "X-Tavle-Token": self.server.token,
             **overrides,
         }
         sent = {k: v for k, v in headers.items() if v is not None}
@@ -151,7 +151,7 @@ def test_bad_drift_fields_are_400(running, payload):
 
 
 def test_drift_needs_token_and_origin(running):
-    assert running.post(drift(), **{"X-Varde-Token": "wrong"}) == 403
+    assert running.post(drift(), **{"X-Tavle-Token": "wrong"}) == 403
     assert running.post(drift(), Origin="http://evil.example") == 403
     assert read_rows(running.doc) == []
 

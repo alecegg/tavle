@@ -4748,7 +4748,7 @@ function view(m, props, c) {
 
 return { view };
 })();
-globalThis.vardeComponents = components; // read by dashboard views
+globalThis.tavleComponents = components; // read by dashboard views
 const mountComponents = (() => {
 // Mount contract. A block host is `<div data-mithril="NAME">` holding one
 // `<script type="application/json">` with the props and a `<noscript>` fallback.
@@ -4779,7 +4779,7 @@ function mountComponents(root, m, components) {
 
 return mountComponents;
 })();
-globalThis.vardeMountComponents = mountComponents; // shadow-root hosts
+globalThis.tavleMountComponents = mountComponents; // shadow-root hosts
 const run = () => mountComponents(document, window.m, components);
 const loading = document.readyState === 'loading';
 if (loading) document.addEventListener('DOMContentLoaded', run);

@@ -25,7 +25,7 @@ def doc(tmp_path: Path) -> Path:
 def test_served_page_keeps_the_existing_shell(doc: Path) -> None:
     out = assemble_page(doc, token='t"k')
     assert out.startswith('<!doctype html><html lang="en"><head><meta charset="utf-8">')
-    assert '<meta name="varde-token" content="t&quot;k"><title>page.md</title>' in out
+    assert '<meta name="tavle-token" content="t&quot;k"><title>page.md</title>' in out
     scripts = re.findall(r'<script src="([^"]+)" defer></script>', out)
     assert scripts == [
         f"/static/{n}"
@@ -147,7 +147,7 @@ def test_api_base_page_posts_to_serve_without_a_token(doc: Path) -> None:
         f'<body data-api-base="{API_BASE}" data-page-url="/pages/plans/p/plan.md">'
         in out
     )
-    assert "varde-token" not in out and "tok" not in out.split("<body")[0]
+    assert "tavle-token" not in out and "tok" not in out.split("<body")[0]
     assert render_document(doc, "tok", API_BASE) == out
 
 
@@ -167,10 +167,13 @@ def test_page_scripts_gate_every_server_call_on_the_api_base() -> None:
     assert "fetch(apiBase + '/comments'" in app
     assert "fetch(apiBase + path" in app and "fetch(apiBase + '/comments'" in recap
     assert "fetch(pageUrl" in app and "fetch('/'" not in app
-    # X-Varde-Token only on the non-api-base branch; EventSource only without a base
-    assert app.count("X-Varde-Token") == 1 and recap.count("X-Varde-Token") == 1
+    # app.js owns the header name; both scripts send it only on the non-api-base
+    # branch. EventSource only without a base.
+    header_entry = "[globalThis.tavlePageParts.tokenHeader]: ctx.token"
+    assert app.count("X-Tavle-Token") == 1 and "X-Tavle-Token" not in recap
+    assert app.count(header_entry) == 1 and recap.count(header_entry) == 1
     assert "if (!apiBase) {\n    const events = new EventSource('/events');" in app
-    assert "varde-refresh" in app
+    assert "tavle-refresh" in app
     assert "apiBase ? [] :" in app and "readOnly: Boolean(apiBase)" in app
     assert "handlers.readOnly" in menu
 

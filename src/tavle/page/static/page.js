@@ -10,7 +10,7 @@
 //
 // A shadow-root mount opens no EventSource and no parent message listener: the host calls the
 // returned `refresh()`. `destroy()` removes everything the mount registered. `varde` is the
-// mount's own helper object (what `window.varde` is for the document page).
+// mount's own helper object (what `window.tavle` is for the document page).
 // Styling: the page stylesheet (`static/app.css`) puts its tokens, `body` look and `scroll-padding`
 // on `:host` as well as `:root`, so loading it into the shadow root styles the page. The host
 // page decides the scroller: make `:host` (or an ancestor) the scroll container, or let the window
@@ -21,5 +21,5 @@ const PARTS = ['./app.js', './blocks.js', './inputs_fields.js', './inputs_widget
 
 export async function mountPage(root, { apiBase = '', apiQuery = '', pageUrl = '/', token = '', refresh, readOnly = false } = {}) {
   await Promise.all(PARTS.map((part) => import(part)));
-  return globalThis.vardePageParts.mount(root, { apiBase, apiQuery, pageUrl, token, refresh, readOnly });
+  return globalThis.tavlePageParts.mount(root, { apiBase, apiQuery, pageUrl, token, refresh, readOnly });
 }

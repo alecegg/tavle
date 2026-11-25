@@ -15,7 +15,7 @@ READ_TIMEOUT = 10
 POLL_SECONDS = 0.5
 HEARTBEAT_SECONDS = 15
 # A header name, not a credential.
-TOKEN_HEADER = "X-Varde-Token"  # mollify: ignore[hardcoded-secret]  # noqa: S105
+TOKEN_HEADER = "X-Tavle-Token"  # mollify: ignore[hardcoded-secret]  # noqa: S105
 SECURITY_HEADERS = {
     "Content-Security-Policy": (
         "default-src 'none'; style-src 'self'; script-src 'self'; "

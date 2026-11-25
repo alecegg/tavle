@@ -1,5 +1,5 @@
-(globalThis.vardePageParts ||= {}).inputWidgets = function mountInputs({ register, onSubmit, fail, setNote, sendAnswer }) {
-  const { fieldValue } = globalThis.vardePageParts.inputFields;
+(globalThis.tavlePageParts ||= {}).inputWidgets = function mountInputs({ register, onSubmit, fail, setNote, sendAnswer }) {
+  const { fieldValue } = globalThis.tavlePageParts.inputFields;
 
   function textOf(root, kind) {
     const area = root.querySelector('.' + kind + '-text');

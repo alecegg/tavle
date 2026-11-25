@@ -1,9 +1,10 @@
 // Comments, editing and live refresh for one mounted page. It only defines
-// `vardePageParts.app(tree, ctx)` and `vardePageParts.mount`; nothing runs at load.
+// `tavlePageParts.app(tree, ctx)` and `tavlePageParts.mount`; nothing runs at load.
 // `tree` is the document or the shadow root the page lives in; `ctx` is the mount's state.
-(globalThis.vardePageParts ||= {}).app = (tree, ctx) => {
+(globalThis.tavlePageParts ||= {}).tokenHeader = "X-Tavle-Token";
+globalThis.tavlePageParts.app = (tree, ctx) => {
   'use strict';
-  const tokenMeta = () => tree.querySelector('meta[name="varde-token"]');
+  const tokenMeta = () => tree.querySelector('meta[name="tavle-token"]');
   // Set when serve hosts the page: posts go to `{apiBase}/comments`, no token,
   // refresh reads `pageUrl`, and there is no live event stream or editing.
   const apiBase = ctx.apiBase;
@@ -11,7 +12,7 @@
   const inline = tree !== document; // the host page owns refresh timing and the event stream
   const postHeaders = () => apiBase
     ? { 'Content-Type': 'application/json' }
-    : { 'Content-Type': 'application/json', 'X-Varde-Token': ctx.token };
+    : { 'Content-Type': 'application/json', [globalThis.tavlePageParts.tokenHeader]: ctx.token };
   const root = () => tree.querySelector('main[data-role="page"]');
   const composers = new Map(); // anchor -> draft text kept across refreshes
   let generation = 0;
@@ -189,7 +190,7 @@
     if (stopped || mine !== generation) return;
     const parsed = new DOMParser().parseFromString(text, 'text/html');
     const fresh = parsed.querySelector('main[data-role="page"]');
-    const freshToken = parsed.querySelector('meta[name="varde-token"]');
+    const freshToken = parsed.querySelector('meta[name="tavle-token"]');
     if (!fresh || (!apiBase && !freshToken)) return;
     updateToken(freshToken);
     const { createSync } = await import('./sync.js');
@@ -219,9 +220,9 @@
     stopToc();
     stopSections();
   };
-  // The host window posts {type:"varde-refresh"} when the document changes.
+  // The host window posts {type:"tavle-refresh"} when the document changes.
   function onHostMessage(event) {
-    if (event.origin === location.origin && event.source === window.parent && event.data && event.data.type === 'varde-refresh') scheduleRefresh();
+    if (event.origin === location.origin && event.source === window.parent && event.data && event.data.type === 'tavle-refresh') scheduleRefresh();
   }
   decorate();
   import('./menu.js').then((module) => {
@@ -250,10 +251,10 @@
 };
 
 // Runs the page parts (app, blocks, recap, inputs) on `tree` with one shared `ctx`, and
-// returns { refresh, destroy, varde }. A tree mounts once; `page.js` calls this for any root and
+// returns { refresh, destroy, tavle }. A tree mounts once; `page.js` calls this for any root and
 // `mountDocument` is the served page's call.
-(globalThis.vardePageParts ||= {}).mount = (tree, opts = {}) => {
-  const parts = globalThis.vardePageParts;
+(globalThis.tavlePageParts ||= {}).mount = (tree, opts = {}) => {
+  const parts = globalThis.tavlePageParts;
   const mounted = (parts.mounted ||= new WeakMap());
   if (mounted.has(tree)) return mounted.get(tree);
   const ctx = {
@@ -264,7 +265,7 @@
     loadPage: opts.refresh || null, // optional () => Promise<string>: the page's fresh HTML
     readOnly: Boolean(opts.readOnly), // no block menu, so nothing to comment on or edit
     refresh: null,
-    varde: null,
+    tavle: null,
   };
   const stops = ['app', 'blocks', 'recap', 'inputs'].map((name) => parts[name] && parts[name](tree, ctx));
   const handle = {
@@ -273,7 +274,7 @@
       mounted.delete(tree);
       stops.forEach((stop) => stop && stop());
     },
-    get varde() { return ctx.varde; },
+    get tavle() { return ctx.tavle; },
   };
   mounted.set(tree, handle);
   return handle;
@@ -281,9 +282,9 @@
 
 // The served page: options come from the body's data attributes and the token meta, as the
 // page shell writes them.
-globalThis.vardePageParts.mountDocument = () => {
-  const meta = document.querySelector('meta[name="varde-token"]');
-  return globalThis.vardePageParts.mount(document, {
+globalThis.tavlePageParts.mountDocument = () => {
+  const meta = document.querySelector('meta[name="tavle-token"]');
+  return globalThis.tavlePageParts.mount(document, {
     apiBase: document.body.dataset.apiBase,
     pageUrl: document.body.dataset.pageUrl,
     token: meta ? meta.content : '',

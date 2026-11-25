@@ -73,7 +73,7 @@ def request(
         headers.setdefault("Origin", f"http://{host}")
         headers["Content-Type"] = "application/json"
         if token:
-            headers["X-Varde-Token"] = srv.token
+            headers["X-Tavle-Token"] = srv.token
         payload = json.dumps(body or {})
     conn = http.client.HTTPConnection("127.0.0.1", srv.port, timeout=5)
     conn.request(method, path, payload, headers)

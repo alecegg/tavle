@@ -3,8 +3,8 @@
 // block works without this script; each widget is added on top of the markup.
 // The widgets live in ES modules by kind (table, tabs, flow, chart, diagram, wireframe, code, annotated, er, sequence, image, screen-flow; viewport is
 // shared pan and zoom); this classic script loads them and wires `enhance`.
-// It only defines `vardePageParts.blocks(root)`, which returns a stop function; `page.js` calls it once per mounted page.
-(globalThis.vardePageParts ||= {}).blocks = (root) => {
+// It only defines `tavlePageParts.blocks(root)`, which returns a stop function; `page.js` calls it once per mounted page.
+(globalThis.tavlePageParts ||= {}).blocks = (root) => {
   'use strict';
   const page = root.querySelector('main[data-role="page"]');
   if (!page) return;

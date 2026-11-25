@@ -120,12 +120,12 @@ def test_browser_runs_no_script_and_whitelists_props(
         """([props, schema]) => {
             const el = document.createElement('div');
             el.setAttribute('data-props', JSON.stringify(props));
-            return [window.varde.readProps(el, schema),
-                    window.varde.safeUrl('javascript:alert(1)'),
-                    window.varde.safeUrl(' java\\nscript:alert(1)'),
-                    window.varde.safeUrl('https://example.com/a'),
-                    window.varde.safeUrl('#frag'),
-                    window.varde.safeUrl('docs/page.md')];
+            return [window.tavle.readProps(el, schema),
+                    window.tavle.safeUrl('javascript:alert(1)'),
+                    window.tavle.safeUrl(' java\\nscript:alert(1)'),
+                    window.tavle.safeUrl('https://example.com/a'),
+                    window.tavle.safeUrl('#frag'),
+                    window.tavle.safeUrl('docs/page.md')];
         }""",
         [PROBE, SCHEMA],
     )
@@ -168,12 +168,12 @@ def test_browser_classify_url_matches_python_vectors(
     shared_page.goto(f"http://127.0.0.1:{site.port}/")
     shared_page.wait_for_selector(".decision-verdict")
     got = shared_page.evaluate(
-        "(urls) => urls.map((u) => window.varde.classifyUrl(u))",
+        "(urls) => urls.map((u) => window.tavle.classifyUrl(u))",
         [v["url"] for v in VECTORS],
     )
     assert got == [v["kind"] for v in VECTORS]
     safe = shared_page.evaluate(
-        "(urls) => urls.map((u) => window.varde.safeUrl(u))",
+        "(urls) => urls.map((u) => window.tavle.safeUrl(u))",
         [v["url"] for v in VECTORS],
     )
     assert safe == [None if v["kind"] == "text" else v["url"] for v in VECTORS]
@@ -192,7 +192,7 @@ def test_data_props_hydrates_through_whitelist(
     page.goto(f"http://127.0.0.1:{site.port}/")
     page.wait_for_selector(".decision-verdict")
     page.evaluate(
-        """() => window.varde.register('probe', {
+        """() => window.tavle.register('probe', {
             props: { title: 'string', href: 'url', ok: 'url', n: 'number' },
             hydrate(element, props) {
                 const label = document.createElement('span');

@@ -1,4 +1,4 @@
-(globalThis.vardePageParts ||= {}).inputFields = (() => {
+(globalThis.tavlePageParts ||= {}).inputFields = (() => {
   const FIELD_TYPES = ['text', 'number', 'select', 'checkbox'];
   const FIELD_NAME = /^[a-z][a-z0-9_-]{0,47}$/; // the server's rule; bars `__proto__`
 

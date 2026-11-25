@@ -147,7 +147,7 @@ def _request(
         headers |= {
             "Origin": f"http://{host}",
             "Content-Type": "application/json",
-            "X-Varde-Token": server.token,
+            "X-Tavle-Token": server.token,
         }
     conn = http.client.HTTPConnection("127.0.0.1", server.port, timeout=5)
     conn.request(method, path, json.dumps(body) if body else None, headers)

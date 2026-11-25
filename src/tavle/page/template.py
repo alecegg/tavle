@@ -10,7 +10,7 @@ from importlib.resources.abc import Traversable
 
 from ..shell import UI_STATIC, css_files, join_css
 
-# Load order for the known scripts (`recap.js` hosts `window.varde` and
+# Load order for the known scripts (`recap.js` hosts `window.tavle` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other
 # `static/*.js` follows alphabetically.
 _SCRIPT_ORDER = (
@@ -77,7 +77,7 @@ def _served_head(token: str | None, title_tag: str) -> str:
     )
     token_meta = ""
     if token is not None:
-        token_meta = f'<meta name="varde-token" content="{html.escape(token)}">'
+        token_meta = f'<meta name="tavle-token" content="{html.escape(token)}">'
     return (
         f"{token_meta}"
         f'{title_tag}<link rel="stylesheet" href="/static/app.css">{scripts}'
