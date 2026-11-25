@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "vitest.config.js",
+    "related": true
+  },
+  "mutate": ["src/tavle/static/**/*.js", "!src/tavle/static/vendor/**"],
+  "concurrency": 2,
+  "reporters": ["clear-text", "json"],
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  }
+}

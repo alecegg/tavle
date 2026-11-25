@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@stryker-mutator/core": "10.1.1",
+    "@stryker-mutator/vitest-runner": "10.1.1",
     "fallow": "3.41.0",
     "jsdom": "30.1.3",
     "vitest": "5.0.5"
