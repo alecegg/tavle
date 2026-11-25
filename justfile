@@ -1,6 +1,7 @@
 set shell := ["bash", "-cu"]
 
 lint:
+    uv run --locked lint-imports
     uv run --locked ruff check
     uv run --locked ruff format --check
     scripts/check-ruff-baseline.sh
