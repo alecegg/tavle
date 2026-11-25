@@ -108,3 +108,39 @@ def test_markdown_table_cards(tmp_path: Path, width: int) -> None:
         server.shutdown()
         server.server_close()
         thread.join(5)
+
+
+@pytest.mark.parametrize("width", [700, 1024])
+def test_long_status_and_code_wrap_instead_of_scrolling(
+    tmp_path: Path, width: int
+) -> None:
+    status = "planned after the three changes above, in build order (Sonnet, 46 tasks)"
+    doc = tmp_path / "wide.md"
+    doc.write_text(
+        "# Wide\n\n```ui id=queue\n"
+        'queue = table(columns: ["change", "what it covers", "state"], '
+        'types: {"state": "status"}, rows: [["varde-reach-reuse", '
+        '"Reach from each language project description for every supported '
+        'toolchain and build system", '
+        f'"{status}"]])\n```\n'
+    )
+    server = PageServer(doc, 0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    try:
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(args=BROWSER_ARGS)
+            try:
+                page = browser.new_page(viewport={"width": width, "height": 900})
+                page.route("**/events", lambda route: route.abort())
+                page.goto(f"http://127.0.0.1:{server.port}/")
+                region = page.locator(".vb-scroll")
+                region.wait_for()
+                assert region.evaluate("e => e.scrollWidth <= e.clientWidth")
+                assert page.evaluate(
+                    "document.documentElement.scrollWidth <= innerWidth"
+                )
+            finally:
+                browser.close()
+    finally:
+        server.shutdown()

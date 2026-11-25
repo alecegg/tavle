@@ -474,11 +474,20 @@ def _rule(selector: str) -> str:
     )
 
 
-def test_cells_wrap_only_at_word_boundaries_and_tokens_stay_whole() -> None:
+def test_cells_wrap_at_word_boundaries_and_numbers_stay_whole() -> None:
     cell = _rule(".vb-table th, .vb-table td")
     assert "overflow-wrap: normal" in cell and "word-break: normal" in cell
     assert "hyphens: none" in cell
-    assert "white-space: nowrap" in _rule(".vb-table .vb-status")
+    assert "white-space: nowrap" in _rule(".vb-table .vb-bar-num, .vb-table td.vb-num")
+    # Status text wraps between words so no table scrolls sideways.
+    screen = CSS[: CSS.index("@media print")]
+    nowrap = [
+        sel
+        for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", screen)
+        if "nowrap" in body
+    ]
+    assert not any(".vb-status" in sel for sel in nowrap)
+    assert "overflow-wrap: anywhere" in _rule(".vb-table code")
     assert "min-inline-size: min-content" in _rule(".vb-table")
 
 
