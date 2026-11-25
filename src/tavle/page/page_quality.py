@@ -8,14 +8,12 @@ import re
 from collections.abc import Collection
 from dataclasses import dataclass
 
-from varde.pagelib.page.fences import FenceSpan, dedent_lines, scan_fences
-from varde.pagelib.page.markdown_syntax import HEADING as _HEADING
-from varde.pagelib.page.markdown_syntax import slugify
-from varde.pagelib.page.render import (
-    split_frontmatter,
-    strip_comments,
-)
-from varde.ui import OPEN_CHOICES, BlockError, parse_lines
+from ..blocks.check import OPEN_CHOICES, BlockError
+from ..lines.parse import parse_lines
+from .fences import FenceSpan, dedent_lines, scan_fences
+from .markdown_syntax import HEADING as _HEADING
+from .markdown_syntax import slugify
+from .render import split_frontmatter, strip_comments
 
 # One phrase per line, lower case.
 STALE_PHRASES = (

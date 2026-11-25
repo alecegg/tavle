@@ -2,16 +2,16 @@
 
 from pathlib import Path
 
-from varde.pagelib.page.fences import find_fences, ui_results
-from varde.pagelib.page.include_statement import INCLUDE
-from varde.ui import (
+from ..blocks.check import (
     COMPONENT_SPECS,
     INPUT_COMPONENTS,
     SPECS,
     BlockError,
     check_props,
-    container_errors,
 )
+from ..blocks.containers import container_errors
+from .fences import find_fences, ui_results
+from .include_statement import INCLUDE
 
 PAGE_SPECS = {**COMPONENT_SPECS, "include": INCLUDE}
 CUSTOM_REMOVED = (
@@ -57,8 +57,8 @@ def _duplicate_id(
 def _ui_errors(doc_text: str, root: Path | None) -> list[BlockError]:
     """Parse, props, include and heading-id errors for a document's `ui` text."""
     # Lazy: these import the page renderer, which imports this package.
-    from varde.pagelib.page.include import include_errors
-    from varde.pagelib.page.select import heading_id_errors
+    from .include import include_errors
+    from .select import heading_id_errors
 
     errors: list[BlockError] = []
     first_seen: dict[str, int] = {}

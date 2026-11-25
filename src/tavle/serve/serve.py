@@ -11,36 +11,26 @@ from pathlib import Path
 from typing import Any, cast
 from urllib.parse import parse_qs, unquote, urlsplit
 
-from varde.pagelib.comments.comments import (
-    comments_path,
-    fold,
-    mark_applied,
-    read_rows,
-)
-from varde.pagelib.comments.store import EDIT_OFF, sources_for, store_comment
-from varde.pagelib.comments.validation import parse_json_object, strings
-from varde.pagelib.page.edit import (
-    EditError,
-    accept_replacement,
-    apply_edit,
-    read_block,
-)
-from varde.pagelib.page.template import (
-    BUNDLE_SCRIPT,
-    page_css,
-    static_file,
-    static_scripts,
-)
-from varde.pagelib.page.theme_page import ThemeLayers, doc_theme, no_layers
-from varde.pagelib.serve.assemble_served import assemble_page
-from varde.pagelib.serve.netbind import (
+from ..comments.comments import comments_path, fold, mark_applied, read_rows
+from ..comments.store import EDIT_OFF, sources_for, store_comment
+from ..comments.validation import parse_json_object, strings
+from ..components import component_bundle
+from ..media import Problem, load
+from ..page.edit import EditError, accept_replacement, apply_edit, read_block
+from ..page.template import BUNDLE_SCRIPT, page_css, static_file, static_scripts
+from ..page.theme_page import ThemeLayers, doc_theme, no_layers
+from ..shell import TOKENS_CSS
+from ..theme.css import theme_css
+from ..theme.tokens import ThemeError
+from .assemble_served import assemble_page
+from .netbind import (
     LOOPBACK,
     allowed_hosts,
     allowed_origins,
     classify_host,
     is_loopback,
 )
-from varde.pagelib.serve.server_parts import (
+from .server_parts import (
     MAX_BODY,
     MAX_STREAMS,
     READ_TIMEOUT,
@@ -55,7 +45,6 @@ from varde.pagelib.serve.server_parts import (
     watch_files,
     write_event_stream,
 )
-from varde.ui import TOKENS_CSS, Problem, ThemeError, component_bundle, load, theme_css
 
 # `app.css` without the tokens: the host page that mounts a page owns them
 INLINE_CSS = "app-inline.css"

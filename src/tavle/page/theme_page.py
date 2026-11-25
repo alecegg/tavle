@@ -6,16 +6,12 @@ from hashlib import sha256
 from html import escape
 from pathlib import Path
 
-from varde.pagelib.page.render import split_frontmatter, strip_comments
-from varde.ui import (
-    Layer,
-    ResolvedTheme,
-    ThemeError,
-    parse_frontmatter,
-    resolve_layers,
-    style_element,
-    theme_css,
-)
+from ..theme.css import style_element, theme_css
+from ..theme.layers import Layer, parse_frontmatter
+from ..theme.merge import resolve_layers
+from ..theme.resolved import ResolvedTheme
+from ..theme.tokens import ThemeError
+from .render import split_frontmatter, strip_comments
 
 ThemeLayers = Callable[[Path], Sequence[tuple[Layer, str]]]
 

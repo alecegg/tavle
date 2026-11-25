@@ -4,22 +4,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from varde.pagelib.page.include import (
-    IncludeError,
-    find_includes,
-    resolve_includes,
-)
-from varde.pagelib.page.markdown_syntax import FenceScanner
-from varde.pagelib.page.page_media import page_media
-from varde.pagelib.page.render import (
-    PageCtx,
-    RenderedPage,
-    render_page,
-    strip_comments,
-)
-from varde.pagelib.page.template import page_css
-from varde.pagelib.page.theme_page import ThemeLayers, no_layers, require_theme
-from varde.ui import export_page, make_read_only, parse_lines
+from ..components import export_page
+from ..lines.parse import parse_lines
+from ..shell import make_read_only
+from .include import IncludeError, find_includes, resolve_includes
+from .markdown_syntax import FenceScanner
+from .page_media import page_media
+from .render import PageCtx, RenderedPage, render_page, strip_comments
+from .template import page_css
+from .theme_page import ThemeLayers, no_layers, require_theme
 
 
 def read_markdown(doc: Path) -> str:

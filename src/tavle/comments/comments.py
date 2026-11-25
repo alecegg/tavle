@@ -13,9 +13,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from varde.pagelib.page.include import IncludeSource, read_source_text
-from varde.pagelib.page.select import read_source
-from varde.ui import CONTROLS
+from ..limits import CONTROLS
+from ..page.include import IncludeSource, read_source_text
+from ..page.select import read_source
 
 _KEPT_KEYS = (
     "id", "ts", "anchor", "quote", "text", "state", "actor",

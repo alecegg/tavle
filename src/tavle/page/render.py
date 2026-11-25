@@ -6,41 +6,30 @@ import textwrap
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field, replace
 
-from varde.pagelib.page.actions import component_block_type
-from varde.pagelib.page.anchors import AnchorState, block_hash
-from varde.pagelib.page.header import count_words, header_html
-from varde.pagelib.page.include_statement import INCLUDE
-from varde.pagelib.page.markdown_syntax import FENCE as _FENCE
-from varde.pagelib.page.markdown_syntax import HEADING as _HEADING
-from varde.pagelib.page.markdown_syntax import FenceScanner, fence_closes
-from varde.pagelib.page.page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
-from varde.pagelib.page.toc import toc_entries, toc_html
-from varde.ui import (
-    Filled,
-    Marker,
-    Media,
-    ParseError,
-    Placed,
-    Problem,
-    Statement,
-    change_summary_props,
-    check_props,
-    code_props,
-    code_titles,
-    collect_markers,
+from ..blocks.change_summary import Marker, collect_markers
+from ..blocks.check import check_props, props_errors
+from ..blocks_render import (
     error_card,
     errors_card,
-    fill_containers,
-    image_props,
-    link_file_trees,
     mount_client_block,
-    parse_lines,
-    props_errors,
     render_block,
-    render_refused,
-    tab_headings,
-    target_id,
 )
+from ..blocks_render.change_summary import change_summary_props
+from ..blocks_render.code import code_props
+from ..blocks_render.containers import Filled, Placed, fill_containers, tab_headings
+from ..blocks_render.file_tree import code_titles, link_file_trees, target_id
+from ..blocks_render.image import image_props, render_refused
+from ..lines.parse import ParseError, Statement, parse_lines
+from ..media import Media, Problem
+from .actions import component_block_type
+from .anchors import AnchorState, block_hash
+from .header import count_words, header_html
+from .include_statement import INCLUDE
+from .markdown_syntax import FENCE as _FENCE
+from .markdown_syntax import HEADING as _HEADING
+from .markdown_syntax import FenceScanner, fence_closes
+from .page_check import CUSTOM_REMOVED, OLD_FENCES, TOML_FENCE_REMOVED
+from .toc import toc_entries, toc_html
 
 
 @dataclass(frozen=True)

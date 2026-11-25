@@ -2,8 +2,8 @@
 
 from pathlib import Path
 
-from varde.pagelib.page.fences import ui_statements
-from varde.ui import Media, Problem, probe
+from ..media import Media, Problem, probe
+from .fences import ui_statements
 
 
 def page_media(

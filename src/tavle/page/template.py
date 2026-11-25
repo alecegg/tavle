@@ -8,7 +8,7 @@ from functools import cache
 from importlib.resources import files
 from importlib.resources.abc import Traversable
 
-from varde.ui import UI_STATIC, css_files, join_css
+from ..shell import UI_STATIC, css_files, join_css
 
 # Load order for the known scripts (`recap.js` hosts `window.varde` and
 # `inputs_ordered.js` uses it, so they come last in that order); any other
@@ -25,11 +25,11 @@ _SCRIPT_ORDER = (
 _MODULE_SYNTAX = re.compile(r"^(import|export)\s", re.MULTILINE)
 
 
-_HOST_STATIC = files("varde.pagelib.page").joinpath("static")
+_HOST_STATIC = files("tavle.page").joinpath("static")
 
 
 def static_file(name: str) -> Traversable:
-    """A served `/static/<name>` file: varde's own page scripts, else the library's."""
+    """A served `/static/<name>` file: tavle's own page scripts, else the library's."""
     host = _HOST_STATIC.joinpath(name)
     return host if host.is_file() else UI_STATIC.joinpath(name)
 

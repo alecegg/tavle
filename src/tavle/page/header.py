@@ -12,8 +12,8 @@ import math
 import re
 from urllib.parse import urlsplit
 
-from varde.pagelib.page.markdown_syntax import FenceScanner
-from varde.ui import dated_html
+from ..blocks_render.common import dated_html
+from .markdown_syntax import FenceScanner
 
 STRIP_KEYS = ("status", "plan", "commit", "links")
 _META_KEYS = ("type", "risk", "status_at")

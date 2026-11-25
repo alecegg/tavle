@@ -2,7 +2,9 @@
 
 from typing import TypedDict
 
-from varde.ui import PRESET_NAMES, TOKENS, ResolvedTheme, Token, load_preset
+from .presets import PRESET_NAMES, load_preset
+from .resolved import ResolvedTheme
+from .tokens import TOKENS, Token
 
 type Values = dict[str, dict[str, object]]
 

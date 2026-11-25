@@ -7,23 +7,14 @@ from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
-from varde.pagelib.comments.answers import answer_fields, validate_answer
-from varde.pagelib.comments.comments import (
-    ANSWER_KINDS,
-    KINDS,
-    append_comment,
-    append_part_comment,
-)
-from varde.pagelib.comments.validation import (
-    MAX_QUOTE,
-    parse_json_object,
-    strings,
-)
-from varde.pagelib.page.actions import kind_allowed
-from varde.pagelib.page.assemble import read_markdown
-from varde.pagelib.page.include import IncludeError, IncludeSource, include_sources
-from varde.pagelib.page.render import render_page
-from varde.ui import MAX_ITEM, MAX_TEXT
+from ..limits import MAX_ITEM, MAX_TEXT
+from ..page.actions import kind_allowed
+from ..page.assemble import read_markdown
+from ..page.include import IncludeError, IncludeSource, include_sources
+from ..page.render import render_page
+from .answers import answer_fields, validate_answer
+from .comments import ANSWER_KINDS, KINDS, append_comment, append_part_comment
+from .validation import MAX_QUOTE, parse_json_object, strings
 
 EDIT_OFF = "editing is off; serve with --allow-edit"
 

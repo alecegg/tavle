@@ -17,8 +17,8 @@ included part) and `error`.
 
 from collections.abc import Mapping
 
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.ui import INPUT_BLOCK_TYPES
+from ..blocks.spec import INPUT_BLOCK_TYPES
+from .page_check import PAGE_SPECS
 
 BLOCK_TYPES: tuple[str, ...] = (
     "prose",

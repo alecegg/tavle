@@ -4,8 +4,8 @@ import re
 from collections.abc import Iterator
 from dataclasses import dataclass
 
-from varde.pagelib.page.markdown_syntax import FENCE, FenceScanner
-from varde.ui import ParseResult, Statement, parse_lines
+from ..lines.parse import ParseResult, Statement, parse_lines
+from .markdown_syntax import FENCE, FenceScanner
 
 _ID_WORD = re.compile(r"^id=(.*)$")
 
