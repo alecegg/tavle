@@ -210,7 +210,7 @@ function addToolbar(table, state, total) {
   if (state.sortable && table.classList.contains('vb-table-stack')) bar.append(sortPicker(table, state));
   bar.append(hint);
   trackOverflow(region, hint);
-  region.after(bar);
+  region.before(bar);
   if (collapses(total)) region.after(moreToggle(table, state));
   showRows(table, state);
 }

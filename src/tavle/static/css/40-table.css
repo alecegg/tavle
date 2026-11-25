@@ -44,7 +44,7 @@ th[aria-sort="descending"] .vb-sort::after { border-block-start: 0.4em solid cur
 .vb-bar-track { fill: var(--vd-surface-sunk); stroke: var(--vd-border-interactive); stroke-width: 0.5; }
 .vb-bar-fill { fill: var(--vd-accent); }
 .vb-bar-num { display: inline-block; min-inline-size: 3ch; }
-.vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: var(--vd-space-2) 0; }
+.vb-filterbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--vd-space-2); margin-block: 0 var(--vd-space-2); }
 /* A bar whose controls are all hidden takes no room. */
 .vb-filterbar:not(:has(> :not([hidden]))) { display: none; }
 .vb-filter { flex: 1; min-inline-size: 8rem; min-block-size: 44px; font: inherit; padding: 0.3em 0.6em; background: var(--vd-surface); color: var(--vd-text); border: 1px solid var(--vd-border-interactive); border-radius: var(--vd-radius-m); }
