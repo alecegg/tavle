@@ -8,7 +8,7 @@ Tavle owns the component vocabulary for standalone pages and app surfaces. Pytho
 
 ## Checks
 
-Run `just test` for pytest, vitest, pyright and ruff. Run `openspec validate --all --strict` for OpenSpec changes. The library has no runtime dependencies and makes no model API calls.
+Run `just test` (CI job `test`) for lint, pytest without `matrix_full` cells, and vitest; `just test-fast` (pre-push) also skips `slow` tests; `just test-matrix` (CI job `matrix`) runs the widget-matrix cells outside the default subset, and fixture x width, scheme and mode pairs run only there. Run `openspec validate --all --strict` for OpenSpec changes. The library has no runtime dependencies and makes no model API calls.
 
 <!-- flow:begin -->
 ## Flow skills

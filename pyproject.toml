@@ -32,8 +32,8 @@ dev = [
 timeout = 300
 timeout_method = "thread"
 markers = [
-    "slow: integration, stress, scale, browser, or full-matrix test",
-    "matrix_full: widget-matrix cell outside the per-change subset; deselect with -m 'not matrix_full'",
+    "slow: integration, stress, scale, or browser test; skipped by just test-fast (pre-push)",
+    "matrix_full: widget-matrix cell outside the default subset; runs only in just test-matrix (CI job matrix)",
 ]
 
 [tool.pyright]

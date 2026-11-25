@@ -27,7 +27,7 @@ Run `uv run tavle` in this checkout on a Markdown page. Each verb takes the page
 
 ## Checks
 
-Run `just test` for lint, Python tests and JavaScript tests. `just lint` checks Ruff, Pyright, Mollify and Fallow; `just hooks` installs the Git hooks: pre-commit runs `just lint` and pre-push runs `just test`. Mollify and Ruff use checked-in baselines for existing findings.
+Run `just test` (CI job `test`) for lint, Python tests without `matrix_full` cells, and JavaScript tests. Run `just test-fast` for the same without `slow` tests; it is the pre-push check. Run `just test-matrix` (CI job `matrix`) for the widget-matrix cells outside the default subset: fixture x width, scheme and mode pairs run only there, not in `test` or pre-push. `just lint` checks Ruff, Pyright, Mollify and Fallow; `just hooks` installs the Git hooks: pre-commit runs `just lint` and pre-push runs `just test-fast`. Mollify and Ruff use checked-in baselines for existing findings.
 
 Run `just mutate --only 'tavle.theme.merge.*'` to run mutmut over `src/tavle` in a throwaway copy under `$TMPDIR`; add `--fresh` to discard the cached results, and see `scripts/mutate.py` for the other options.
 
