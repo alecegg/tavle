@@ -13,6 +13,13 @@ A `table` block's toolbar (filter field, phone sort select, hide-done switch, to
 - **WHEN** a table with 12 rows is rendered
 - **THEN** the `.vb-filterbar` element precedes the `.vb-scroll` element in document order and `.vb-more` follows it
 
+### Requirement: Tables never scroll sideways
+A table that stacks (no `stack: false`) SHALL show its rows as cards whenever its grid would be wider than its region, at any viewport width. Status, badge and code cell text SHALL wrap; number cells SHALL stay on one line.
+
+#### Scenario: Unbreakable text at a narrow desktop width
+- **WHEN** a 4-column table with a 60-character path in a text cell is shown at 700px
+- **THEN** its rows show as cards and neither the page nor the table region scrolls sideways; at 1400px it shows as a grid
+
 ### Requirement: Progress column
 A column typed `progress` SHALL take cells that are `[done, total]` pairs of non-negative integers with done at most total; any other cell SHALL be a `type` fault. Each cell SHALL show a bar filled to done/total and the text "done of total". Sorting SHALL order by done/total. A table with a progress column SHALL show one total bar above its rows, labelled with the summed done and total of every row, hidden rows included.
 
