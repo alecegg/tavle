@@ -1,7 +1,6 @@
 from pathlib import Path
 
-from varde.pagelib.page.theme_page import doc_theme, no_layers
-from varde.ui import parse_toml
+from tavle import doc_theme, no_layers, parse_toml
 
 
 def test_caller_layers_and_front_matter(tmp_path: Path) -> None:
@@ -22,7 +21,7 @@ def test_theme_file_edit_visible_on_next_request(tmp_path: Path) -> None:
     import http.client
     import threading
 
-    from varde.pagelib.serve.serve import PageServer
+    from tavle import PageServer
 
     doc = tmp_path / "page.md"
     doc.write_text("# Page", encoding="utf-8")

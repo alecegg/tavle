@@ -21,4 +21,5 @@ jobs:
       - run: uv tool dir --bin >> "$GITHUB_PATH"
       - run: uv sync --locked
       - run: npm ci
+      - run: uv run --locked playwright install --with-deps chromium
       - run: just test
