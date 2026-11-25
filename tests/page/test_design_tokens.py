@@ -9,9 +9,9 @@ from pathlib import Path
 import pytest
 from ui_paths import UI_STATIC_DIR
 
-from varde.pagelib.page.template import page_css, page_shell
+from tavle.page.template import page_css, page_shell
 
-CSS_DIR = Path(str(files("varde.pagelib.page").joinpath("static", "css")))
+CSS_DIR = Path(str(files("tavle.page").joinpath("static", "css")))
 UI_CSS_DIR = UI_STATIC_DIR / "css"
 CSS_FILES = sorted(
     [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
@@ -250,7 +250,7 @@ def test_export_inlines_the_same_css() -> None:
 
 
 def test_served_route_returns_the_concatenation() -> None:
-    from varde.pagelib.serve.serve import static_body
+    from tavle.serve.serve import static_body
 
     assert static_body("app.css") == page_css().encode("utf-8")
 

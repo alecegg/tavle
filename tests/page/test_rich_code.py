@@ -10,12 +10,11 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props
+
+from tavle import PageServer, check_props
 from tavle.blocks_render.code import (
     ALIASES,
 )
-
-from varde.pagelib.serve.serve import PageServer
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 SAMPLES = {

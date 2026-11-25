@@ -12,10 +12,9 @@ from typing import Any
 import pytest
 from ui_fence import ui_fence
 
-from varde.pagelib.comments.comments import append_reply, fold, read_rows
-from varde.pagelib.page import template
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, append_reply, fold, read_rows
+from tavle.page import template
+from tavle.page.render import render_page
 
 HOSTILE = "<script>alert(1)</script>"
 BLOCK = (

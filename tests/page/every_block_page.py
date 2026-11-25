@@ -3,11 +3,9 @@
 import base64
 from pathlib import Path
 
-from tavle.shell import make_read_only
-
-from varde.pagelib.page.assemble import include_ctx
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pagelib.page.render import render_page
+from tavle import PAGE_SPECS, make_read_only
+from tavle.page.assemble import include_ctx
+from tavle.page.render import render_page
 
 PIXEL = base64.b64decode(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="

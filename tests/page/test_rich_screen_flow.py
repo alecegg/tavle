@@ -13,9 +13,10 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle.blocks import check_props
+from ui_paths import UI_STATIC_DIR
+
+from tavle import COMPONENTS, PageServer, check, check_props
 from tavle.blocks.screen_flow import MAX_SCREENS, MAX_STEPS
-from tavle.blocks_render.registry import COMPONENTS
 from tavle.blocks_render.screen_flow import (
     alternative_lines,
     copy_text,
@@ -27,11 +28,7 @@ from tavle.blocks_render.screen_flow_layout import (
     Screen,
     plan_flow,
 )
-from ui_paths import UI_STATIC_DIR
-
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle.page.render import render_page
 
 
 def screen_flow_props(data: dict[str, Any]) -> Any:

@@ -16,18 +16,21 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks.check import COMPONENT_SPECS, check_props
-from tavle.blocks_render.inputs import choice_props, form_props
-from tavle.blocks_render.inputs_ordered import ranking_props, slider_props
-from tavle.blocks_render.registry import COMPONENTS
-from tavle.components import component_bundle
-from tavle.shell import make_read_only
 from ui_fence import block_host, example_fence
 from ui_paths import UI_FIXTURES
 
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle import (
+    COMPONENT_SPECS,
+    COMPONENTS,
+    PageServer,
+    check,
+    check_props,
+    component_bundle,
+    make_read_only,
+)
+from tavle.blocks_render.inputs import choice_props, form_props
+from tavle.blocks_render.inputs_ordered import ranking_props, slider_props
+from tavle.page.render import render_page
 
 FIXTURES = UI_FIXTURES
 BLOCKS = ("choice", "form", "comment", "ranking", "slider")

@@ -10,7 +10,15 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle.blocks import check_props, type_text
+
+from tavle import (
+    COMPONENTS,
+    PAGE_SPECS,
+    PageServer,
+    check_props,
+    parse_lines,
+    type_text,
+)
 from tavle.blocks.diagrams import DIAGRAM, MAX_EDGES, MAX_NODES
 from tavle.blocks_render.diagram_layout import (
     Box,
@@ -27,11 +35,6 @@ from tavle.blocks_render.diagrams import (
 from tavle.blocks_render.diagrams import (
     diagram_props as _diagram_props,
 )
-from tavle.blocks_render.registry import COMPONENTS
-from tavle.lines import parse_lines
-
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pagelib.serve.serve import PageServer
 
 
 def diagram_props(data: dict[str, Any]) -> Any:
@@ -589,7 +592,7 @@ def test_emphasis_survives_validation_render_copy_and_collapse() -> None:
 
 
 def test_static_export_keeps_emphasis_and_text_alternative(tmp_path: Path) -> None:
-    from varde.pagelib.page.assemble import assemble_static
+    from tavle import assemble_static
 
     doc = tmp_path / "diagram.md"
     doc.write_text(
@@ -608,7 +611,7 @@ def test_static_export_keeps_emphasis_and_text_alternative(tmp_path: Path) -> No
 def test_warning_edges_keep_their_styles_in_static_export(
     tmp_path: Path, shared_page: Any
 ) -> None:
-    from varde.pagelib.page.assemble import assemble_static
+    from tavle import assemble_static
 
     doc = tmp_path / "styles.md"
     doc.write_text(

@@ -6,7 +6,7 @@ from typing import Any
 
 import pytest
 
-from varde.pagelib.page.assemble import assemble_static
+from tavle import assemble_static
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 

@@ -4,10 +4,9 @@ import re
 from pathlib import Path
 
 from every_block_page import every_block_page
-from tavle.components import export_page
 
-from varde.pagelib.page.assemble import assemble_static
-from varde.pagelib.page.template import page_css
+from tavle import assemble_static, export_page
+from tavle.page.template import page_css
 
 
 def test_every_block_export_with_and_without_theme(tmp_path: Path, monkeypatch) -> None:

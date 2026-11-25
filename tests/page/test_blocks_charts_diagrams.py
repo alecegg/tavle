@@ -14,22 +14,25 @@ from collections.abc import Mapping
 from typing import Any
 
 import pytest
-from tavle.blocks import COMPONENT_SPECS, check_props
+from ui_paths import UI_FIXTURES
+
+from tavle import (
+    COMPONENT_SPECS,
+    COMPONENTS,
+    Media,
+    check_props,
+    image_props,
+    parse_lines,
+)
 from tavle.blocks_render.charts import chart_props
 from tavle.blocks_render.diagrams import diagram_props
 from tavle.blocks_render.flow import flow_props
-from tavle.blocks_render.image import image_props
-from tavle.blocks_render.registry import COMPONENTS
 from tavle.blocks_render.screen_flow import screen_flow_props
 from tavle.blocks_render.screens import ui_states_props, wireframe_props
 from tavle.blocks_render.sequence import sequence_props
 from tavle.blocks_render.state import state_props
 from tavle.components import component_bundle, mount_block
-from tavle.lines.parse import parse_lines
-from tavle.media import Media
-from ui_paths import UI_FIXTURES
-
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 FIXTURES = UI_FIXTURES
 PROPS = {

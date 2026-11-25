@@ -12,12 +12,10 @@ from typing import Any
 
 import pytest
 
-from varde.pagelib.comments.comments import fold, read_rows
-from varde.pagelib.page.assemble import parse_page_stream
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.assemble_served import assemble
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, check, fold, read_rows
+from tavle.page.assemble import parse_page_stream
+from tavle.page.render import render_page
+from tavle.serve.assemble_served import assemble
 
 MIGRATE = Path(__file__).parent / "fixtures" / "migrate"
 OLD_IDS = ["pick", "opts", "graph", "rc"]
@@ -229,7 +227,7 @@ def test_a_bad_widget_answer_is_refused_and_stores_nothing(
 def test_error_card_carries_the_fence_span_and_cannot_touch_other_text(
     tmp_path: Path,
 ) -> None:
-    from varde.pagelib.page import edit
+    from tavle.page import edit
 
     fence = [
         "```ui\n",
@@ -259,7 +257,7 @@ def test_served_and_edit_anchors_agree_after_an_include(tmp_path: Path) -> None:
         "```\n\nsecond\n\nthird\n",
         encoding="utf-8",
     )
-    from varde.pagelib.page.assemble import include_ctx, read_markdown
+    from tavle.page.assemble import include_ctx, read_markdown
 
     text = read_markdown(doc)
     served = [

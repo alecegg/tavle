@@ -11,10 +11,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props
-from tavle.blocks.tables import numeric
 
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, check_props
+from tavle.blocks.tables import numeric
 
 UI = Path(str(files("tavle")))
 CSS = re.sub(

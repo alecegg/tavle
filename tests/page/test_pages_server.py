@@ -11,11 +11,10 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.comments import append_reply, comments_path, fold, read_rows
-from varde.pagelib.page.template import page_scripts
-from varde.pagelib.serve import serve as serve_mod
-from varde.pagelib.serve import server_parts
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, append_reply, comments_path, fold, read_rows
+from tavle.page.template import page_scripts
+from tavle.serve import serve as serve_mod
+from tavle.serve import server_parts
 
 DOC = "---\nstatus: todo\n---\n\n# Title\n\nHello **world**.\n\n## Part\n\nSecond.\n"
 REQUIRED_HEADERS = {
@@ -321,11 +320,11 @@ def test_built_wheel_contains_static_assets(tmp_path: Path) -> None:
         timeout=300,
     )
     assert result.returncode == 0, result.stderr
-    wheel = next(out.glob("varde-*.whl"))
+    wheel = next(out.glob("tavle-*.whl"))
     names = zipfile.ZipFile(wheel).namelist()
     # The component CSS and scripts ship in the UI library's own wheel.
     for asset in ("app.js", "page.js"):
-        assert f"varde/pagelib/page/static/{asset}" in names
+        assert f"tavle/page/static/{asset}" in names
 
 
 def test_stalled_post_body_times_out(running: Running, monkeypatch) -> None:

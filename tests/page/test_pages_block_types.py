@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.page.actions import component_block_type
-from varde.pagelib.page.render import render_page
+from tavle.page.actions import component_block_type
+from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 DOC = """# Title
@@ -80,7 +80,7 @@ def test_error_blocks() -> None:
 
 
 def test_unresolved_include_is_a_part() -> None:
-    from varde.pagelib.page.render import PageCtx
+    from tavle.page.render import PageCtx
 
     text = '```ui\ni = include(source: "a.md", select: "frontmatter")\n```\n'
     ctx = PageCtx("p.md")
@@ -88,7 +88,7 @@ def test_unresolved_include_is_a_part() -> None:
 
 
 def test_resolved_include_part_is_raw_and_keeps_its_data_part() -> None:
-    from varde.pagelib.page.render import PageCtx
+    from tavle.page.render import PageCtx
 
     part = '<section class="part" data-part="i"></section>'
     ctx = PageCtx("p.md", parts={"i": part})
@@ -107,7 +107,7 @@ def test_ids_are_unique_on_rich_fixtures(path: Path) -> None:
 
 
 def test_wrapper_attributes_are_escaped() -> None:
-    from varde.pagelib.page.render import _wrap
+    from tavle.page.render import _wrap
 
     out = _wrap('a"><b', "0" * 12, "x", 'v"><i')
     assert "<b" not in out and "<i" not in out
@@ -123,7 +123,7 @@ def test_hash_and_anchor_unchanged_by_types() -> None:
 
 
 def test_ui_statements_give_document_lines() -> None:
-    from varde.pagelib.page.fences import ui_statements
+    from tavle.page.fences import ui_statements
 
     one = 'a = callout(tone: "info", text: "A")'
     two = 'b = callout(tone: "info", text: "B")'

@@ -11,15 +11,15 @@ from typing import Any
 
 import pytest
 
-from varde.pagelib.comments.comments import (
+from tavle.comments.comments import (
     comments_path,
     fold,
     fold_with_sources,
     read_rows,
 )
-from varde.pagelib.comments.store import sources_for, store_comment
-from varde.pagelib.comments.watch import comment_line, new_open_comments
-from varde.pagelib.page.include import include_sources
+from tavle.comments.store import sources_for, store_comment
+from tavle.comments.watch import comment_line, new_open_comments
+from tavle.page.include import include_sources
 
 SOURCE = """\
 ---
@@ -367,7 +367,7 @@ def test_concurrent_part_writes_never_interleave_or_blank(
 WRITER = """
 import json, sys
 from pathlib import Path
-from varde.pagelib.comments.store import sources_for, store_comment
+from tavle.comments.store import sources_for, store_comment
 doc, root, number = Path(sys.argv[1]), Path(sys.argv[2]), sys.argv[3]
 for i in range(20):
     raw = json.dumps({"anchor": "beta-id/1", "part": "beta",
@@ -412,7 +412,7 @@ def test_torn_tail_is_repaired_in_the_same_write_and_blank_lines_are_skipped(
 def test_source_page_state_rows_never_reach_an_including_page(
     root: Path, doc: Path
 ) -> None:
-    from varde.pagelib.comments.comments import append_comment, mark_latest_decisions
+    from tavle import append_comment, mark_latest_decisions
 
     for extra in (
         {"kind": "answer", "item": "ship", "value": "approved"},
@@ -436,7 +436,7 @@ def test_source_page_state_rows_never_reach_an_including_page(
 def test_watch_reports_a_broken_include_once_on_stderr(
     root: Path, doc: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    from varde.pagelib.comments.watch import watch_lines
+    from tavle import watch_lines
 
     (root / "src.md").unlink()
     ticks = iter(range(3))

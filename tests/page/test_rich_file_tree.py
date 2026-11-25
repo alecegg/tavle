@@ -6,15 +6,14 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props, type_text
+
+from tavle import PAGE_SPECS, check_props, type_text
 from tavle.blocks_render.file_tree import (
     compact,
     fold,
     match_target,
     summary_text,
 )
-
-from varde.pagelib.page.page_check import PAGE_SPECS
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 HOSTILE = '<img src=x onerror=alert(1)> "q" &amp; <script>alert(1)</script>'

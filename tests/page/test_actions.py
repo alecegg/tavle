@@ -1,7 +1,7 @@
 import pytest
-from tavle.blocks_render.registry import COMPONENTS
 
-from varde.pagelib.page.actions import (
+from tavle import COMPONENTS
+from tavle.page.actions import (
     ALLOWED_KINDS,
     BLOCK_TYPES,
     component_block_type,

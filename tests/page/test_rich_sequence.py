@@ -12,8 +12,8 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle.blocks import check_props
-from tavle.blocks_render.registry import COMPONENTS
+
+from tavle import COMPONENTS, check, check_props
 from tavle.blocks_render.sequence import (
     sequence_props as _sequence_props,
 )
@@ -25,9 +25,7 @@ from tavle.blocks_render.sequence_layout import (
     layout,
     place_actors,
 )
-
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 
 def sequence_props(data: dict[str, Any]) -> Any:

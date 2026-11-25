@@ -8,11 +8,11 @@ import re
 from pathlib import Path
 
 from every_block_page import every_block_page
-from tavle.blocks import COMPONENT_SPECS
-from tavle.components import export_page, mount_block
 from test_components_contract import CALLOUTS, FIXTURES, check_fixture
 
-from varde.pagelib.page.template import page_css
+from tavle import COMPONENT_SPECS
+from tavle.components import export_page, mount_block
+from tavle.page.template import page_css
 
 # one recorded case per code and diff block, checked in `code_diff.test.js`
 CODE_DIFF_CASES = {

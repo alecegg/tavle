@@ -8,11 +8,12 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props
+from ui_paths import UI_ROOT
+
+from tavle import check_props
 from tavle.blocks_render.annotated_code import (
     read_notes,
 )
-from ui_paths import UI_ROOT
 
 UI = UI_ROOT
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

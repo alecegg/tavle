@@ -10,15 +10,15 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.comments import (
+from tavle import (
+    PageServer,
     append_comment,
     comments_path,
     fold,
     read_rows,
 )
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve import serve as serve_impl
-from varde.pagelib.serve.serve import PageServer
+from tavle.page.render import render_page
+from tavle.serve import serve as serve_impl
 
 DOC = (
     "---\nstatus: todo\n---\n\n# Title\n\nHello **world**.\n\n"

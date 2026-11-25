@@ -11,21 +11,17 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.components import component_bundle
 from ui_fence import statement_text
 
-from varde.pagelib.page.assemble import assemble_static
-from varde.pagelib.page.render import classify_url, render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, assemble_static, component_bundle
+from tavle.page.render import classify_url, render_page
 
 VECTORS = json.loads(
     (Path(__file__).parent / "fixtures/url-vectors.json").read_text(encoding="utf-8")
 )
-SRC = Path(__file__).parents[2] / "src/varde"
+SRC = Path(__file__).parents[2] / "src/tavle"
 # page scripts (varde.pages) and component enhancers (tavle), served together
-SCRIPTS = sorted(
-    [*(SRC / "pagelib/page/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
-)
+SCRIPTS = sorted([*(SRC / "page/static").glob("*.js"), *(SRC / "static").glob("*.js")])
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 JS_URL = "javascript:alert(1)"
 DECISION = statement_text(

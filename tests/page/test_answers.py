@@ -10,10 +10,9 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.answers import answer_value, validate_answer
-from varde.pagelib.comments.comments import comments_path, fold, read_rows
-from varde.pagelib.comments.store import store_comment
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, comments_path, fold, read_rows
+from tavle.comments.answers import answer_value, validate_answer
+from tavle.comments.store import store_comment
 
 DOC = (
     "# Plan\n\nBody.\n\n"
@@ -183,7 +182,7 @@ def http_post(server: PageServer, raw: bytes) -> int:
 
 
 def test_served_valid_answer_is_201_and_delivered_by_watch(server: PageServer) -> None:
-    from varde.pagelib.comments.watch import new_open_comments
+    from tavle.comments.watch import new_open_comments
 
     assert http_post(server, row("go", "denied", "too risky")) == 201
     [fresh] = new_open_comments(server.doc, set())
@@ -225,7 +224,7 @@ def test_served_answer_with_edit_off_is_stored_on_a_remote_bind(
 
 
 def test_comment_line_for_answer_rows() -> None:
-    from varde.pagelib.comments.watch import comment_line
+    from tavle.comments.watch import comment_line
 
     line = comment_line(
         {"id": "c1", "kind": "answer", "item": "go", "value": "denied", "text": "no"}
@@ -255,9 +254,8 @@ def test_validate_answer_allows_newlines_and_tabs_in_text() -> None:
 def test_validate_answer_rejects_control_characters_in_string_values(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    from tavle.blocks.spec import AnswerSchema
-
-    from varde.pagelib.comments import answers
+    from tavle import AnswerSchema
+    from tavle.comments import answers
 
     schema = AnswerSchema("string", ("text",), ())
     monkeypatch.setattr(answers, "answer_schema", lambda doc, item: schema)
@@ -271,9 +269,8 @@ def test_validate_answer_rejects_control_characters_in_string_values(
 def test_number_answers_must_be_finite(
     monkeypatch: pytest.MonkeyPatch, bad: object
 ) -> None:
-    from tavle.blocks.spec import AnswerSchema
-
-    from varde.pagelib.comments import answers
+    from tavle import AnswerSchema
+    from tavle.comments import answers
 
     schema = AnswerSchema("number", (), ())
     monkeypatch.setattr(answers, "answer_schema", lambda doc, item: schema)
@@ -283,7 +280,7 @@ def test_number_answers_must_be_finite(
 
 
 def test_comment_line_replaces_terminal_controls() -> None:
-    from varde.pagelib.comments.watch import comment_line
+    from tavle.comments.watch import comment_line
 
     hostile = f"\x1b]0;pwn\x07 hi\x00 {BIDI} end"
     line = comment_line(
@@ -294,7 +291,7 @@ def test_comment_line_replaces_terminal_controls() -> None:
 
 
 def test_cli_comment_text_uses_the_same_cleaning() -> None:
-    from varde.pagelib.listings import comment_text
+    from tavle import comment_text
 
     out = comment_text(
         {

@@ -12,16 +12,12 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle import media
-from tavle.blocks import check_props
+
+from tavle import Media, Problem, assemble_static, check, check_props, media, probe
 from tavle.blocks.image import src_fault
 from tavle.blocks.image_header import read_header
 from tavle.blocks_render.image import copy_text, image_props
-from tavle.media import Media, Problem, probe
-
-from varde.pagelib.page.assemble import assemble_static
-from varde.pagelib.page.page_check import check
-from varde.pagelib.serve.assemble_served import assemble_page
+from tavle.serve.assemble_served import assemble_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 TOKEN = "t"  # noqa: S105

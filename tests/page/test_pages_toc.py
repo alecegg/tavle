@@ -8,11 +8,11 @@ from typing import Any
 import pytest
 from ui_paths import UI_STATIC_DIR
 
-from varde.pagelib.page.render import render_page
-from varde.pagelib.page.toc import toc_entries, toc_html
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer
+from tavle.page.render import render_page
+from tavle.page.toc import toc_entries, toc_html
 
-CSS_DIR = Path(__file__).resolve().parents[2] / "src/varde/pagelib/page/static/css"
+CSS_DIR = Path(__file__).resolve().parents[2] / "src/tavle/page/static/css"
 UI_CSS_DIR = UI_STATIC_DIR / "css"
 
 

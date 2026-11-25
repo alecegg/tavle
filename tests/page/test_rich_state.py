@@ -12,13 +12,13 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle.blocks import check_props
+
+from tavle import COMPONENTS, check, check_props
 from tavle.blocks_render.diagram_layout import (
     EdgeSpec,
     layout_graph,
     loop_room,
 )
-from tavle.blocks_render.registry import COMPONENTS
 from tavle.blocks_render.state import state_props as _state_props
 from tavle.blocks_render.state_graph import (
     graph_specs,
@@ -28,9 +28,7 @@ from tavle.blocks_render.state_graph import (
     transitions_of,
     unreachable_ids,
 )
-
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 
 def state_props(data: dict[str, Any]) -> Any:

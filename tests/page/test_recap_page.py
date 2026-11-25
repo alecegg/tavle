@@ -11,9 +11,8 @@ from pathlib import Path
 import pytest
 from ui_fence import statement_text
 
-from varde.pagelib.comments.comments import fold, read_rows
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, fold, read_rows
+from tavle.page.render import render_page
 
 HOSTILE = '<script>alert(1)</script>"><img src=x onerror=alert(1)>'
 UNSAFE = [r"<script", r"style=", r"<[^>]*\son[a-z]+=", r"<img"]

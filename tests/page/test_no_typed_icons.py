@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-PAGES = Path(__file__).parents[2] / "src/varde/pagelib"
+PAGES = Path(__file__).parents[2] / "src/tavle"
 TYPED_ICONS = re.compile("[✓✕●○▲▼◆◐✎▬]")
 
 

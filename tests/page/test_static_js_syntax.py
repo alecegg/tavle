@@ -8,11 +8,9 @@ from pathlib import Path
 
 import pytest
 
-SRC = Path(__file__).parents[2] / "src/varde"
+SRC = Path(__file__).parents[2] / "src/tavle"
 # page scripts (varde.pages) and component enhancers (tavle), served together
-SCRIPTS = sorted(
-    [*(SRC / "pagelib/page/static").glob("*.js"), *(SRC / "ui/static").glob("*.js")]
-)
+SCRIPTS = sorted([*(SRC / "page/static").glob("*.js"), *(SRC / "static").glob("*.js")])
 NODE = shutil.which("node")
 
 

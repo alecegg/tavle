@@ -1,13 +1,12 @@
 """The block code split by kind keeps every existing render output unchanged."""
 
-from tavle.blocks import SPECS, check_props, props_errors
+from tavle import SPECS, check_props, props_errors
 from tavle.blocks import charts as chart_spec
 from tavle.blocks import diagrams as diagram_spec
 from tavle.blocks import flow as flow_spec
 from tavle.blocks import tables as table_spec
 from tavle.blocks_render import diagrams, flow, registry
-
-from varde.pagelib.page.include_statement import INCLUDE
+from tavle.page.include_statement import INCLUDE
 
 TABLE = {
     "columns": ["a", "b<"],
@@ -46,7 +45,7 @@ def test_diagram_modules_wait_for_rb_diagram() -> None:
 
 
 def test_block_scripts_are_es_modules_imported_by_blocks_js() -> None:
-    from varde.pagelib.page.template import page_scripts, static_scripts
+    from tavle.page.template import page_scripts, static_scripts
 
     parts = {"dom.js", "table.js", "tabs.js", "flow.js", "chart.js", "viewport.js"}
     assert parts <= set(static_scripts())
@@ -81,9 +80,8 @@ def test_include_property_faults_are_single_and_name_the_field() -> None:
 
 
 def test_static_script_names_are_unique():
-    from tavle.shell import UI_STATIC
-
-    from varde.pagelib.page.template import _HOST_STATIC
+    from tavle import UI_STATIC
+    from tavle.page.template import _HOST_STATIC
 
     host = {p.name for p in _HOST_STATIC.iterdir() if p.name.endswith(".js")}
     ui = {p.name for p in UI_STATIC.iterdir() if p.name.endswith(".js")}

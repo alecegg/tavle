@@ -4,12 +4,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tavle.blocks import check_props
-from tavle.blocks_render.registry import COMPONENTS
 from ui_paths import UI_STATIC_DIR
 
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
+from tavle import COMPONENTS, check, check_props
+from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 

@@ -7,10 +7,10 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.comments import comments_path, fold, read_rows
-from varde.pagelib.comments.store import store_comment
-from varde.pagelib.page.actions import BLOCK_TYPES, kind_allowed
-from varde.pagelib.page.render import render_page
+from tavle import comments_path, fold, read_rows
+from tavle.comments.store import store_comment
+from tavle.page.actions import BLOCK_TYPES, kind_allowed
+from tavle.page.render import render_page
 
 DOC = """# Title
 

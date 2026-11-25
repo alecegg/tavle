@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from varde.pagelib.serve.server_parts import (
+from tavle.serve.server_parts import (
     SECURITY_HEADERS,
     Broadcaster,
     file_signature,

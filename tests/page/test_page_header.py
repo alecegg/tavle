@@ -7,14 +7,14 @@ from pathlib import Path
 import pytest
 from ui_paths import UI_STATIC_DIR
 
-from varde.pagelib.page.header import (
+from tavle.page.header import (
     count_words,
     header_html,
     parse_links,
     reading_minutes,
     status_tone,
 )
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 
@@ -173,10 +173,10 @@ def test_iso_dates_are_wrapped_so_they_cannot_split_at_a_hyphen() -> None:
 
 
 def test_fence_consumers_keep_their_closing_rules():
-    from varde.pagelib.page.fences import scan_fences
-    from varde.pagelib.page.header import count_words
-    from varde.pagelib.page.render import strip_comments
-    from varde.pagelib.page.select import heading_id_errors
+    from tavle.page.fences import scan_fences
+    from tavle.page.header import count_words
+    from tavle.page.render import strip_comments
+    from tavle.page.select import heading_id_errors
 
     lines = ["````code", "``` info", "<!-- hidden -->", "```` tail", "# Title {#Bad}"]
     assert count_words(lines) == 1

@@ -13,14 +13,12 @@ from pathlib import Path
 
 import pytest
 from cases_loader import Case, load_cases
-from tavle.blocks.check import check_props
-from tavle.blocks_render import render_block
-from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
-from tavle.components import component_bundle, mount_block
 from ui_paths import UI_FIXTURES, UI_STATIC_DIR
 
-from varde.pagelib.page.assemble import assemble_static
-from varde.pagelib.page.render import render_page
+from tavle import assemble_static, check_props, render_block
+from tavle.blocks_render.registry import COMPONENTS, PAGE_STATEMENTS
+from tavle.components import component_bundle, mount_block
+from tavle.page.render import render_page
 
 FIXTURES = UI_FIXTURES
 COMPONENT_FILES = UI_STATIC_DIR / "components"

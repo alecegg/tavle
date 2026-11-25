@@ -9,13 +9,12 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props
+
+from tavle import check, check_props
 from tavle.blocks.diff_rows import (
     diff_rows,
     text_lines,
 )
-
-from varde.pagelib.page.page_check import check
 
 UI = Path(str(files("tavle")))
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"

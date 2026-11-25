@@ -5,14 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from tavle.blocks import check_props
+from ui_paths import UI_STATIC_DIR
+
+from tavle import check, check_props
 from tavle.blocks.change import CHANGES, change_rule_faults
 from tavle.blocks_render.backend import data_model_props, endpoint_props
 from tavle.blocks_render.change import copy_line
-from ui_paths import UI_STATIC_DIR
-
-from varde.pagelib.page.page_check import check
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 PLAIN_MODEL: dict[str, object] = {

@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.comments import (
+from tavle import (
     append_comment,
     append_status,
     comments_path,

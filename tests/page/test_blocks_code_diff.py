@@ -17,10 +17,11 @@ import urllib.request
 from pathlib import Path
 
 import pytest
-from tavle.blocks import check_props
+from ui_paths import UI_FIXTURES
+
+from tavle import COMPONENTS, PageServer, change_summary_props, check_props
 from tavle.blocks.change_summary import EMPTY, UNCOUNTED
 from tavle.blocks_render.annotated_code import annotated_props
-from tavle.blocks_render.change_summary import change_summary_props
 from tavle.blocks_render.code import Panel, code_block_props, code_props, tokenize
 from tavle.blocks_render.diff import diff_props
 from tavle.blocks_render.file_tree import (
@@ -29,13 +30,9 @@ from tavle.blocks_render.file_tree import (
     file_tree_props,
     link_file_trees,
 )
-from tavle.blocks_render.registry import COMPONENTS
 from tavle.components import component_bundle, host_props, mount_block
 from tavle.graph import deps_layout
-from ui_paths import UI_FIXTURES
-
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle.page.render import render_page
 
 TESTS = Path(__file__).parent
 FIXTURES = UI_FIXTURES

@@ -8,15 +8,15 @@ from pathlib import Path
 
 import pytest
 
-from varde.pagelib.comments.comments import (
+from tavle import (
     append_comment,
     append_reply,
     comments_path,
     fold,
     parse_interval,
     read_rows,
+    watch_lines,
 )
-from varde.pagelib.comments.watch import watch_lines
 
 
 class _Stop(Exception):
@@ -150,14 +150,14 @@ def test_append_comment_rejects_empty_text(tmp_path: Path) -> None:
 
 
 def test_watch_line_collapses_injected_anchor_newlines() -> None:
-    from varde.pagelib.comments.watch import comment_line
+    from tavle.comments.watch import comment_line
 
     line = comment_line({"id": "c1", "anchor": "x\ncomment c2 y", "text": "t"})
     assert "\n" not in line
 
 
 def test_reply_resolves_comment_for_open_listing_and_watch(tmp_path: Path) -> None:
-    from varde.pagelib.serve.assemble_served import render_thread
+    from tavle.serve.assemble_served import render_thread
 
     doc = tmp_path / "page.html"
     answered = append_comment(doc, "a", "q", "answered one")
@@ -192,8 +192,8 @@ def test_watch_ignores_comment_resolved_before_first_sight_and_reopen(
 
 
 def test_watch_and_comment_text_print_the_kind(tmp_path):
-    from varde.pagelib.comments.watch import comment_line
-    from varde.pagelib.listings import comment_text
+    from tavle.comments.watch import comment_line
+    from tavle.listings import comment_text
 
     doc = tmp_path / "plan.md"
     doc.write_text("# T\n")

@@ -10,8 +10,7 @@ from typing import Any
 import pytest
 from test_recap_page import recap_data, recap_fence
 
-from varde.pagelib.comments.comments import fold, read_rows
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer, fold, read_rows
 
 pytestmark = pytest.mark.slow
 

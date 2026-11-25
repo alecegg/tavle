@@ -9,8 +9,8 @@ from typing import Any
 
 import pytest
 
-from varde.pagelib.page.actions import menu_entries
-from varde.pagelib.serve.serve import PageServer
+from tavle import PageServer
+from tavle.page.actions import menu_entries
 
 pytestmark = pytest.mark.slow
 

@@ -4,7 +4,7 @@ import json
 import re
 import tomllib
 
-from tavle.blocks_render.registry import COMPONENTS
+from tavle import COMPONENTS
 from tavle.components import mount_block
 
 # Keep control and bidi characters visible within a single statement line.

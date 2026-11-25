@@ -12,7 +12,16 @@ from typing import Any
 
 import pytest
 from scene_html import svg_html
-from tavle.blocks import check_props, type_text
+from ui_paths import UI_STATIC_DIR
+
+from tavle import (
+    COMPONENTS,
+    PAGE_SPECS,
+    PageServer,
+    check_props,
+    parse_lines,
+    type_text,
+)
 from tavle.blocks.charts import CHART, MAX_SERIES
 from tavle.blocks_render.chart_model import build_model, copy_text
 from tavle.blocks_render.chart_scale import (
@@ -22,12 +31,6 @@ from tavle.blocks_render.chart_scale import (
     thin_step,
 )
 from tavle.blocks_render.charts import chart_props as _chart_props
-from tavle.blocks_render.registry import COMPONENTS
-from tavle.lines import parse_lines
-from ui_paths import UI_STATIC_DIR
-
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pagelib.serve.serve import PageServer
 
 
 def chart_props(data: dict[str, Any]) -> Any:

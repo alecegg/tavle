@@ -10,13 +10,11 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle.blocks import check_props
+
+from tavle import COMPONENTS, PageServer, check_props
 from tavle.blocks_render.flow import copy_text
 from tavle.blocks_render.flow import flow_props as _flow_props
-from tavle.blocks_render.registry import COMPONENTS
-
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle.page.render import render_page
 
 
 def flow_props(data: dict[str, Any]) -> Any:

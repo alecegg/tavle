@@ -12,11 +12,10 @@ from typing import Any
 
 import pytest
 from scene_html import shapes_html
-from tavle import blocks
-from tavle.blocks import check_props
+
+from tavle import COMPONENTS, PageServer, blocks, check_props
 from tavle.blocks.screens import KINDS, SURFACES
 from tavle.blocks_render import screens
-from tavle.blocks_render.registry import COMPONENTS
 from tavle.blocks_render.screens import (
     copy_text,
 )
@@ -26,10 +25,8 @@ from tavle.blocks_render.screens import (
 from tavle.blocks_render.screens import (
     wireframe_props as _wireframe_props,
 )
-
-from varde.pagelib.page import page_check
-from varde.pagelib.page.render import render_page
-from varde.pagelib.serve.serve import PageServer
+from tavle.page import page_check
+from tavle.page.render import render_page
 
 
 def wireframe_props(data: dict[str, Any]) -> Any:

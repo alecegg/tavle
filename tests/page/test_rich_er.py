@@ -8,9 +8,9 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from tavle.blocks import check_props, type_text
+
+from tavle import PAGE_SPECS, check_props, render_block, type_text
 from tavle.blocks.backend import validate_data_model
-from tavle.blocks_render import render_block
 from tavle.blocks_render.backend import data_model_props
 from tavle.blocks_render.er import (
     declared_relations,
@@ -23,9 +23,7 @@ from tavle.blocks_render.er_layout import (
     place,
     route,
 )
-
-from varde.pagelib.page.page_check import PAGE_SPECS
-from varde.pagelib.page.render import render_page
+from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
 JSON_PROPS = re.compile(r'<script type="application/json">.*?</script>', re.DOTALL)

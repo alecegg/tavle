@@ -14,15 +14,13 @@ import re
 from pathlib import Path
 
 import pytest
-from tavle.blocks import check_props
+from ui_paths import UI_FIXTURES, UI_STATIC_DIR
+
+from tavle import COMPONENTS, check_props, component_bundle
 from tavle.blocks.decision import OPTIONS
 from tavle.blocks.option_matrix import FIRST_COLUMN, SCALES
 from tavle.blocks_render.decision import LABELS, VERDICT_OF
-from tavle.blocks_render.registry import COMPONENTS
-from tavle.components import component_bundle
-from ui_paths import UI_FIXTURES, UI_STATIC_DIR
-
-from varde.pagelib.page.render import classify_url, render_page
+from tavle.page.render import classify_url, render_page
 
 TESTS = Path(__file__).parent
 FIXTURES = UI_FIXTURES

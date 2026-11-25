@@ -13,8 +13,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-
-from varde.base.browser_args import BROWSER_ARGS
+from browser_args import BROWSER_ARGS
 
 
 def _launch_browser(launch: Callable[..., Any]) -> Any:
@@ -69,7 +68,7 @@ def browser_session() -> Iterator[Any]:
 @pytest.fixture(autouse=True)
 def _fast_server_shutdown(monkeypatch: pytest.MonkeyPatch) -> None:
     """Poll every 20 ms; the 0.5 s default delays each test teardown by up to 0.5 s."""
-    from varde.pagelib.serve.serve import PageServer
+    from tavle import PageServer
 
     original = PageServer.serve_forever
 

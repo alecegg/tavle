@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from tavle.blocks_render import COMPONENTS
+from tavle import COMPONENTS
 
 STATEMENT = re.compile(r"^[A-Za-z][\w-]*\s*=\s*([a-z][\w-]*)\(", re.MULTILINE)
 ROOTS_JS = r"""() => ({

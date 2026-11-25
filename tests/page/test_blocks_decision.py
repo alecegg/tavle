@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from tavle import blocks
 from ui_fence import example_fence, ui_fence
 
-from varde.pagelib.page import page_check
-from varde.pagelib.page.page_check import PAGE_SPECS
+from tavle import PAGE_SPECS, blocks
+from tavle.page import page_check
 
 VALID = 'question = "Ship it?"\n'
 
