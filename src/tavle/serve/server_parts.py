@@ -111,15 +111,23 @@ def file_signature(path: Path) -> tuple[int, int] | None:
 
 def watch_files(
     paths: Sequence[Path], broadcaster: Broadcaster, halt: threading.Event
-) -> None:
-    """Publish whenever a watched file changes, until `halt` is set."""
+) -> threading.Thread:
+    """Start a daemon thread that publishes whenever a watched file changes.
+
+    The baseline is read before this returns, so a change made right after
+    the call is published.
+    """
 
     def current() -> list[tuple[int, int] | None]:
         return [file_signature(path) for path in paths]
 
-    seen = current()
-    while not halt.wait(POLL_SECONDS):
-        latest = current()
-        if latest != seen:
-            seen = latest
-            broadcaster.publish()
+    def poll(seen: list[tuple[int, int] | None]) -> None:
+        while not halt.wait(POLL_SECONDS):
+            latest = current()
+            if latest != seen:
+                seen = latest
+                broadcaster.publish()
+
+    thread = threading.Thread(target=poll, args=(current(),), daemon=True)
+    thread.start()
+    return thread

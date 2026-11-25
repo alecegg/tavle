@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
+import threading
 from pathlib import Path
 
+import pytest
+
+from tavle.serve import server_parts
 from tavle.serve.server_parts import (
     SECURITY_HEADERS,
     Broadcaster,
@@ -12,6 +16,7 @@ from tavle.serve.server_parts import (
     new_token,
     origin_allowed,
     token_matches,
+    watch_files,
 )
 
 ORIGINS = {"http://127.0.0.1:8000"}
@@ -60,3 +65,19 @@ def test_file_signature_changes_with_content(tmp_path: Path) -> None:
     path.write_text("ab", encoding="utf-8")
     assert first is not None
     assert file_signature(path) != first
+
+
+def test_watch_files_publishes_a_change_made_right_after_the_call(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(server_parts, "POLL_SECONDS", 0.01)
+    path = tmp_path / "a.md"
+    path.write_text("a", encoding="utf-8")
+    broadcaster, halt = Broadcaster(), threading.Event()
+    thread = watch_files((path,), broadcaster, halt)
+    path.write_text("ab", encoding="utf-8")
+    try:
+        assert broadcaster.wait(0, 5) == (1, False)
+    finally:
+        halt.set()
+        thread.join(5)

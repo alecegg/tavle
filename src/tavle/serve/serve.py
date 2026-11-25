@@ -127,16 +127,9 @@ class PageServer(ThreadingHTTPServer):
         return f"http://{self.host}:{self.port}/"
 
     def serve_forever(self, poll_interval: float = 0.5) -> None:
-        self._poller = threading.Thread(
-            target=watch_files,
-            args=(
-                (self.doc, comments_path(self.doc)),
-                self.broadcaster,
-                self._halt,
-            ),
-            daemon=True,
+        self._poller = watch_files(
+            (self.doc, comments_path(self.doc)), self.broadcaster, self._halt
         )
-        self._poller.start()
         try:
             super().serve_forever(poll_interval)
         finally:
