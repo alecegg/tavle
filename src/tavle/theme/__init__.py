@@ -1,1 +1,1 @@
-"""Theme tokens and derivation."""
+"""Theme tokens, derivation and display."""

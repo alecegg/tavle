@@ -1,4 +1,4 @@
-"""UI components: statement parser, specs, views, CSS and theme maths."""
+"""UI components and pages: blocks, views, CSS, theme, page render, comments, server."""
 
 from .blocks import catalog as catalog
 from .blocks import index_text as index_text
@@ -43,6 +43,23 @@ from .blocks_render.file_tree import target_id as target_id
 from .blocks_render.image import image_props as image_props
 from .blocks_render.image import render_refused as render_refused
 from .blocks_render.registry import COMPONENTS as COMPONENTS
+from .comments.answers import answer_schema as answer_schema
+from .comments.comments import KINDS as KINDS
+from .comments.comments import anchor_slug as anchor_slug
+from .comments.comments import append_comment as append_comment
+from .comments.comments import append_reply as append_reply
+from .comments.comments import append_status as append_status
+from .comments.comments import comments_path as comments_path
+from .comments.comments import fold as fold
+from .comments.comments import (
+    mark_latest_decisions as mark_latest_decisions,
+)
+from .comments.comments import parse_interval as parse_interval
+from .comments.comments import read_rows as read_rows
+from .comments.comments import target_anchor as target_anchor
+from .comments.validation import parse_json_object as parse_json_object
+from .comments.validation import strings as strings
+from .comments.watch import watch_lines as watch_lines
 from .components import component_bundle as component_bundle
 from .components import export_page as export_page
 from .contrast import RGBA as RGBA
@@ -58,10 +75,45 @@ from .lines import ParseError as ParseError
 from .lines import ParseResult as ParseResult
 from .lines import Statement as Statement
 from .lines import parse_lines as parse_lines
+from .listings import block_rows as block_rows
+from .listings import block_types as block_types
+from .listings import check_text_lines as check_text_lines
+from .listings import comment_text as comment_text
+from .listings import filtered_comments as filtered_comments
+from .listings import finding_row as finding_row
+from .listings import parse_port as parse_port
 from .media import Media as Media
 from .media import Problem as Problem
 from .media import load as load
 from .media import probe as probe
+from .page.assemble import assemble_static as assemble_static
+from .page.page_check import PAGE_SPECS as PAGE_SPECS
+from .page.page_check import check as check
+from .page.page_quality import quality_warnings as quality_warnings
+from .page.theme_page import ThemeLayers as ThemeLayers
+from .page.theme_page import doc_theme as doc_theme
+from .page.theme_page import no_layers as no_layers
+from .page.theme_page import page_theme as page_theme
+from .serve.netbind import LOOPBACK as LOOPBACK
+from .serve.netbind import allowed_hosts as allowed_hosts
+from .serve.netbind import allowed_origins as allowed_origins
+from .serve.netbind import bind_error_message as bind_error_message
+from .serve.netbind import classify_host as classify_host
+from .serve.serve import PageServer as PageServer
+from .serve.serve import serve as serve
+from .serve.server_parts import MAX_BODY as MAX_BODY
+from .serve.server_parts import MAX_STREAMS as MAX_STREAMS
+from .serve.server_parts import READ_TIMEOUT as READ_TIMEOUT
+from .serve.server_parts import SECURITY_HEADERS as SECURITY_HEADERS
+from .serve.server_parts import TOKEN_HEADER as TOKEN_HEADER
+from .serve.server_parts import Broadcaster as Broadcaster
+from .serve.server_parts import host_allowed as host_allowed
+from .serve.server_parts import is_json_type as is_json_type
+from .serve.server_parts import new_token as new_token
+from .serve.server_parts import origin_allowed as origin_allowed
+from .serve.server_parts import token_matches as token_matches
+from .serve.server_parts import watch_files as watch_files
+from .serve.server_parts import write_event_stream as write_event_stream
 from .shell import TOKENS_CSS as TOKENS_CSS
 from .shell import UI_STATIC as UI_STATIC
 from .shell import css_files as css_files
@@ -81,7 +133,16 @@ from .theme.merge import resolve_layers as resolve_layers
 from .theme.presets import PRESET_NAMES as PRESET_NAMES
 from .theme.presets import load_preset as load_preset
 from .theme.resolved import ResolvedTheme as ResolvedTheme
+from .theme.show import Catalog as Catalog
+from .theme.show import Values as Values
+from .theme.show import catalog_text as catalog_text
+from .theme.show import preset_values as preset_values
+from .theme.show import resolved_values as resolved_values
+from .theme.show import theme_catalog as theme_catalog
+from .theme.show import values_text as values_text
 from .theme.tokens import TOKENS as TOKENS
 from .theme.tokens import ThemeError as ThemeError
 from .theme.tokens import Token as Token
 from .theme.validate import validate_theme as validate_theme
+
+serve_page = serve
