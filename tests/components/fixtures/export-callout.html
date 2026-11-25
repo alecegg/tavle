@@ -452,8 +452,10 @@ svg { max-inline-size: 100%; block-size: auto; }
 main { padding-block: var(--vd-space-6) var(--vd-space-9); padding-inline-start: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-left)); padding-inline-end: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-right)); }
 
 /* header and status line */
-/* title band: the file-name header, or the page's own leading H1 when it has one */
-.doc-header, main > .block:first-of-type > h1:first-child { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); margin-block-end: var(--vd-space-5); padding: var(--vd-space-4); }
+/* Title band: the file-name header, or the page's own leading H1. A title is type, not a card;
+   only a header that also carries metadata is framed. */
+.doc-header, main > .block:first-of-type > h1:first-child { margin-block-end: var(--vd-space-5); }
+.doc-header:has(> :not(.doc-name)) { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); padding: var(--vd-space-4); }
 .doc-name { color: var(--vd-heading-color); text-transform: var(--vd-heading-case); font-family: var(--vd-font-heading); font-size: var(--vd-title-size); font-weight: var(--vd-title-weight); letter-spacing: var(--vd-title-tracking); line-height: var(--vd-leading-heading); margin: 0; }
 .status { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); margin-block: var(--vd-space-1) 0; }
 .task.done { color: var(--vd-text-secondary); }
@@ -4465,16 +4467,21 @@ function link(m, c, cell) {
   return label;
 }
 
-function bar(m, c, cell, top) {
-  const value = Number(c.shared.pyStr(cell));
+function barGraphic(m, c, value, top) {
   const width = c.shared.fixed((barPercent(value, top) * BAR_WIDTH) / 100, 1);
-  return [
-    m('svg.vb-bar-svg', { viewBox: `0 0 ${BAR_WIDTH} ${BAR_HEIGHT}`, 'aria-hidden': 'true', focusable: 'false' }, [
+  return m('svg.vb-bar-svg', { viewBox: `0 0 ${BAR_WIDTH} ${BAR_HEIGHT}`, 'aria-hidden': 'true', focusable: 'false' }, [
       m('rect.vb-bar-track', { width: String(BAR_WIDTH), height: String(BAR_HEIGHT) }),
       m('rect.vb-bar-fill', { width, height: String(BAR_HEIGHT) })
-    ]),
-    m('span.vb-bar-num', c.shared.pyStr(cell))
-  ];
+    ]);
+}
+
+function bar(m, c, cell, top) {
+  return [barGraphic(m, c, Number(c.shared.pyStr(cell)), top), m('span.vb-bar-num', c.shared.pyStr(cell))];
+}
+
+function progress(m, c, cell) {
+  const [done, total] = cell;
+  return [barGraphic(m, c, done, total), m('span.vb-bar-num', `${done} of ${total}`)];
 }
 
 function status(m, c, cell, extras) {
@@ -4486,24 +4493,35 @@ function status(m, c, cell, extras) {
 function cellView(m, c, cell, kind, top, extras) {
   if (kind === 'link') return link(m, c, cell);
   if (kind === 'bar') return bar(m, c, cell, top);
+  if (kind === 'progress') return progress(m, c, cell);
   if (kind === 'status') return status(m, c, cell, extras);
   return dated(m, c, cell);
 }
 
 const numeric = (kind) => kind === 'number' || kind === 'bar';
 
+function cellLabel(c, index, spec, rec) {
+  if (rec) return `${spec.extras.recommended.label} (recommended)`;
+  return c.shared.pyStr(spec.columns[index]);
+}
+
+function cellAttrs(c, cell, index, spec, tag, rec) {
+  const attrs = { 'data-label': cellLabel(c, index, spec, rec) };
+  if (tag === 'th') attrs.scope = 'row';
+  if (spec.kinds[index] === 'progress') attrs['data-sort'] = cell[1] ? cell[0] / cell[1] : 0;
+  return attrs;
+}
+
+function rowCell(m, c, cell, index, spec) {
+  const tag = spec.rowHeader && index === 0 ? 'th' : 'td';
+  const rec = spec.extras.recommended && spec.extras.recommended.index === index;
+  const attrs = cellAttrs(c, cell, index, spec, tag, rec);
+  const cls = rec ? '.vd-matrix-rec' : numeric(spec.kinds[index]) ? '.vb-num' : '';
+  return m(tag + cls, attrs, cellView(m, c, cell, spec.kinds[index], spec.tops[index], spec.extras));
+}
+
 function row(m, c, cells, spec) {
-  return m(
-    'tr',
-    cells.map((cell, index) => {
-      const tag = spec.rowHeader && index === 0 ? 'th' : 'td';
-      const rec = spec.extras.recommended && spec.extras.recommended.index === index;
-      const attrs = { 'data-label': rec ? `${spec.extras.recommended.label} (recommended)` : c.shared.pyStr(spec.columns[index]) };
-      if (tag === 'th') attrs.scope = 'row';
-      const cls = rec ? '.vd-matrix-rec' : numeric(spec.kinds[index]) ? '.vb-num' : '';
-      return m(tag + cls, attrs, cellView(m, c, cell, spec.kinds[index], spec.tops[index], spec.extras));
-    })
-  );
+  return m('tr', cells.map((cell, index) => rowCell(m, c, cell, index, spec)));
 }
 
 function head(m, c, spec) {

@@ -17,7 +17,7 @@ function collapses(matched) {
 function cellValue(row, column) {
   const cell = row.cells[column];
   if (!cell) return '';
-  return cell.textContent.trim();
+  return cell.dataset.sort ?? cell.textContent.trim();
 }
 
 function compareCells(a, b) {

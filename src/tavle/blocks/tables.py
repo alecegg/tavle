@@ -3,7 +3,7 @@
 from ..blocks.rules import Fault, duplicates, is_number, str_map, tables
 from ..blocks.spec import BlockSpec, PropertySpec
 
-COLUMN_TYPES = ("text", "number", "status", "bar", "link")
+COLUMN_TYPES = ("text", "number", "status", "bar", "link", "progress")
 NUMERIC_TYPES = ("number", "bar")
 
 
@@ -39,6 +39,8 @@ def _typed_cell_faults(kind: object, cell: object, where: str) -> list[Fault]:
     faults: list[Fault] = []
     if kind in NUMERIC_TYPES and not numeric(cell):
         faults.append(Fault("cell-number", f"{where} must be a number"))
+    if kind == "progress" and not _progress_cell(cell):
+        faults.append(Fault("type", f"{where} must be a valid [done, total] pair"))
     if kind == "link" and not _link_cell(cell):
         text = "must be a URL or a [label, url] pair of strings"
         faults.append(Fault("cell-link", f"{where} {text}"))
@@ -56,6 +58,15 @@ def _cell_faults(
             kind = kinds.get(name) if isinstance(name, str) else None
             faults += _typed_cell_faults(kind, cell, f"table.rows[{n}] '{name}'")
     return faults
+
+
+def _progress_cell(cell: object) -> bool:
+    return (
+        isinstance(cell, list)
+        and len(cell) == 2
+        and all(type(part) is int and part >= 0 for part in cell)
+        and cell[0] <= cell[1]
+    )
 
 
 def _link_cell(cell: object) -> bool:
@@ -131,8 +142,8 @@ TABLE = BlockSpec(
         "caption, footnote: text above and under the table.",
         "columns: unique column names.",
         "rows: each row has one cell per column.",
-        "types: maps a column name to text, number, status, bar or link; number and",
-        "  bar cells are numbers; a link cell is a URL or a [label, url] pair.",
+        "types: text, number, status, bar, progress or link; number and",
+        "  bar cells are numbers; progress is [done, total]; links are URLs or pairs.",
         "sticky_column: keeps the first column in view.",
         "stack: defaults to true; false keeps the scrolling grid on phones.",
         "groups: row groups, each with a label and its rows.",

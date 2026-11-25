@@ -81,16 +81,21 @@ function link(m, c, cell) {
   return label;
 }
 
-function bar(m, c, cell, top) {
-  const value = Number(c.shared.pyStr(cell));
+function barGraphic(m, c, value, top) {
   const width = c.shared.fixed((barPercent(value, top) * BAR_WIDTH) / 100, 1);
-  return [
-    m('svg.vb-bar-svg', { viewBox: `0 0 ${BAR_WIDTH} ${BAR_HEIGHT}`, 'aria-hidden': 'true', focusable: 'false' }, [
+  return m('svg.vb-bar-svg', { viewBox: `0 0 ${BAR_WIDTH} ${BAR_HEIGHT}`, 'aria-hidden': 'true', focusable: 'false' }, [
       m('rect.vb-bar-track', { width: String(BAR_WIDTH), height: String(BAR_HEIGHT) }),
       m('rect.vb-bar-fill', { width, height: String(BAR_HEIGHT) })
-    ]),
-    m('span.vb-bar-num', c.shared.pyStr(cell))
-  ];
+    ]);
+}
+
+function bar(m, c, cell, top) {
+  return [barGraphic(m, c, Number(c.shared.pyStr(cell)), top), m('span.vb-bar-num', c.shared.pyStr(cell))];
+}
+
+function progress(m, c, cell) {
+  const [done, total] = cell;
+  return [barGraphic(m, c, done, total), m('span.vb-bar-num', `${done} of ${total}`)];
 }
 
 function status(m, c, cell, extras) {
@@ -102,24 +107,35 @@ function status(m, c, cell, extras) {
 function cellView(m, c, cell, kind, top, extras) {
   if (kind === 'link') return link(m, c, cell);
   if (kind === 'bar') return bar(m, c, cell, top);
+  if (kind === 'progress') return progress(m, c, cell);
   if (kind === 'status') return status(m, c, cell, extras);
   return dated(m, c, cell);
 }
 
 const numeric = (kind) => kind === 'number' || kind === 'bar';
 
+function cellLabel(c, index, spec, rec) {
+  if (rec) return `${spec.extras.recommended.label} (recommended)`;
+  return c.shared.pyStr(spec.columns[index]);
+}
+
+function cellAttrs(c, cell, index, spec, tag, rec) {
+  const attrs = { 'data-label': cellLabel(c, index, spec, rec) };
+  if (tag === 'th') attrs.scope = 'row';
+  if (spec.kinds[index] === 'progress') attrs['data-sort'] = cell[1] ? cell[0] / cell[1] : 0;
+  return attrs;
+}
+
+function rowCell(m, c, cell, index, spec) {
+  const tag = spec.rowHeader && index === 0 ? 'th' : 'td';
+  const rec = spec.extras.recommended && spec.extras.recommended.index === index;
+  const attrs = cellAttrs(c, cell, index, spec, tag, rec);
+  const cls = rec ? '.vd-matrix-rec' : numeric(spec.kinds[index]) ? '.vb-num' : '';
+  return m(tag + cls, attrs, cellView(m, c, cell, spec.kinds[index], spec.tops[index], spec.extras));
+}
+
 function row(m, c, cells, spec) {
-  return m(
-    'tr',
-    cells.map((cell, index) => {
-      const tag = spec.rowHeader && index === 0 ? 'th' : 'td';
-      const rec = spec.extras.recommended && spec.extras.recommended.index === index;
-      const attrs = { 'data-label': rec ? `${spec.extras.recommended.label} (recommended)` : c.shared.pyStr(spec.columns[index]) };
-      if (tag === 'th') attrs.scope = 'row';
-      const cls = rec ? '.vd-matrix-rec' : numeric(spec.kinds[index]) ? '.vb-num' : '';
-      return m(tag + cls, attrs, cellView(m, c, cell, spec.kinds[index], spec.tops[index], spec.extras));
-    })
-  );
+  return m('tr', cells.map((cell, index) => rowCell(m, c, cell, index, spec)));
 }
 
 function head(m, c, spec) {
