@@ -27,7 +27,8 @@ from varde.pages.render import (
     strip_comments,
 )
 from varde.pages.template import page_css, page_shell
-from varde.pages.theme.page import page_theme, require_theme
+from varde.pages.theme.page import ThemeLayers, page_theme, require_theme
+from varde.pages.theme.resolve import file_layers
 from varde.ui import export_page, make_read_only, parse_lines
 
 
@@ -170,13 +171,15 @@ class AssembledPage:
     parts: dict[str, Path] = field(default_factory=dict)
 
 
-def _served_main(doc: Path) -> tuple[str, dict[str, Path]]:
+def _served_main(
+    doc: Path, theme_layers: ThemeLayers = file_layers
+) -> tuple[str, dict[str, Path]]:
     """The served page's `main` element, and the paths of its includes."""
     text = read_markdown(doc)
     ctx, sources = include_ctx(text, doc)
     page = parse_page_stream(text, doc.name, ctx)
     threads = render_threads(page, mark_latest_decisions(fold(read_rows(doc))))
-    theme = page_theme(doc, text)
+    theme = page_theme(doc, text, theme_layers)
     return (
         f'<main data-role="page">{theme.style}{theme.error}{page.body}{threads}</main>',
         sources,
@@ -193,13 +196,13 @@ def assemble_page(doc: Path, *, token: str, api_base: str = "") -> str:
     return assemble(doc, token=token, api_base=api_base).html
 
 
-def assemble_static(doc: Path) -> str:
+def assemble_static(doc: Path, theme_layers: ThemeLayers = file_layers) -> str:
     """Self-contained export: no token or comments; inputs read-only.
 
     The only script is the component bundle, inlined when a block needs it.
     """
     text = read_markdown(doc)
     page = render_page(text, doc.name, include_ctx(text, doc, export=True)[0])
-    style = require_theme(doc, text)
+    style = require_theme(doc, text, theme_layers)
     main = f'<main data-role="page">{style}{make_read_only(page.body)}</main>'
     return export_page(doc.name, main, page_css())
