@@ -31,7 +31,10 @@ dev = [
 [tool.pytest.ini_options]
 timeout = 300
 timeout_method = "thread"
-markers = ["slow: integration, stress, scale, browser, or full-matrix test"]
+markers = [
+    "slow: integration, stress, scale, browser, or full-matrix test",
+    "matrix_full: widget-matrix cell outside the per-change subset; deselect with -m 'not matrix_full'",
+]
 
 [tool.pyright]
 typeCheckingMode = "standard"
