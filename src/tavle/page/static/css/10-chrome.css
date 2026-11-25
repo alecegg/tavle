@@ -2,8 +2,10 @@
 main { padding-block: var(--vd-space-6) var(--vd-space-9); padding-inline-start: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-left)); padding-inline-end: max(clamp(var(--vd-space-4), 4vw, var(--vd-space-7)), env(safe-area-inset-right)); }
 
 /* header and status line */
-/* title band: the file-name header, or the page's own leading H1 when it has one */
-.doc-header, main > .block:first-of-type > h1:first-child { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); margin-block-end: var(--vd-space-5); padding: var(--vd-space-4); }
+/* Title band: the file-name header, or the page's own leading H1. A title is type, not a card;
+   only a header that also carries metadata is framed. */
+.doc-header, main > .block:first-of-type > h1:first-child { margin-block-end: var(--vd-space-5); }
+.doc-header:has(> :not(.doc-name)) { background: var(--vd-surface-elevated); border: 1px solid var(--vd-border); border-radius: var(--vd-radius-l); padding: var(--vd-space-4); }
 .doc-name { color: var(--vd-heading-color); text-transform: var(--vd-heading-case); font-family: var(--vd-font-heading); font-size: var(--vd-title-size); font-weight: var(--vd-title-weight); letter-spacing: var(--vd-title-tracking); line-height: var(--vd-leading-heading); margin: 0; }
 .status { color: var(--vd-text-secondary); font-size: var(--vd-text-sm); margin-block: var(--vd-space-1) 0; }
 .task.done { color: var(--vd-text-secondary); }

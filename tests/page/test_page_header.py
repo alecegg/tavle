@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+from importlib.resources import files
 from pathlib import Path
 
 import pytest
@@ -183,3 +185,13 @@ def test_fence_consumers_keep_their_closing_rules():
     assert strip_comments(lines)[2] == "<!-- hidden -->"
     assert heading_id_errors("\n".join(lines))[0][1] == "heading-id-invalid"
     assert scan_fences(lines)[0].end is None
+
+
+def test_title_is_type_and_only_a_header_with_metadata_is_framed() -> None:
+    css = files("tavle.page").joinpath("static", "css", "10-chrome.css").read_text()
+    rules = {
+        sel.strip(): body for sel, body in re.findall(r"([^{}]+)\{([^{}]*)\}", css)
+    }
+    titles = [sel for sel in rules if "h1" in sel or ".doc-header" in sel]
+    framed = [sel for sel in titles if "border:" in rules[sel]]
+    assert framed == [".doc-header:has(> :not(.doc-name))"]
