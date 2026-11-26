@@ -103,7 +103,7 @@ Risk R1: the vitest config uses `projects` with a custom `root` and an alias for
 
 A test is a deletion or merge candidate when any holds:
 
-- C1 No unique kill: removing it changes no mutant status. Python: the mode chosen in task 2.6, `--without <test>` leave-one-out reruns, or per-mutant kill sets from mutmut's covering-test map when reruns do not fit 20 minutes per area. JavaScript: Stryker `--disableBail` with the json reporter records every killing test per mutant (`killedBy`).
+- C1 No unique kill: removing it changes no mutant status. Python: `--without <test>` leave-one-out reruns that test only the baseline's killed mutants in functions the test covers (mutmut's `tests_by_mangled_function_name` in the baseline copy's `mutants/mutmut-stats.json`), with the test deselected in a separate `--tag` copy; a lost kill is a mutant killed in the baseline and not killed in the rerun. Measured in task 2.6: a full `tavle.theme.*` baseline takes 1004 s (1505 mutants: 1272 killed, 227 survived, 6 timeouts), so full-scope reruns cannot fit, and per-test kill sets would take 99,355 single-test runs (6,301 s of test time alone) for the same scope. JavaScript: Stryker `--disableBail` with the json reporter records every killing test per mutant (`killedBy`).
 - C2 Asserts its own fixture: the expected value is built from the input by the same expression the code uses, or the test asserts a literal it just set.
 - C3 Restates the implementation: the assertion copies the source (a regex over source text, a constant copied from the module, `assert f(x) == f(x)`).
 - C4 No assertion that can fail: no `assert`, `assert True`, a name compared to itself.
