@@ -29,3 +29,8 @@ hooks:
 
 mutate *args:
     scripts/capped.sh "${MUTATION_MEM:-4G}" "${MUTATION_MINUTES:-20}" uv run --locked python scripts/mutate.py {{args}}
+
+mutate-js *args:
+    #!/usr/bin/env bash
+    trap 'rm -rf /var/tmp/tmp-alec/stryker-tavle' EXIT
+    scripts/capped.sh "${MUTATION_MEM:-4G}" "${MUTATION_MINUTES:-20}" npx stryker run --ignorePatterns .venv --tempDirName /var/tmp/tmp-alec/stryker-tavle {{args}}
