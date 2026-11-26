@@ -113,7 +113,7 @@ C1 comes from mutation data. C2 to C5 come from the one-time scan (task 4.1) and
 
 ### D7. Process per area
 
-Per area: run the mutation tool on the area's source, list non-killed mutants, apply C1 to C5 to the area's tests, delete or merge, rerun the area's tests and mutation tool. Gate for the area: tests pass, score not lower than before, every removed test named in `audit/<area>.md` (checked by `scripts/check_audit_removals.py`, task 4.3). Every non-killed mutant ends as one of: killed by a new fast test; `equivalent` with the argument; `slow-only` with the slow test id (D3). Neither a skip, an xfail, a `do_not_mutate` pattern, nor a score exclusion is used. Areas are the 5.x tasks, each at most 6 test files.
+Per area: run the mutation tool on the area's source, list non-killed mutants, apply C1 to C5 to the area's tests, delete or merge, rerun the area's tests and mutation tool. Gate for the area: tests pass, score not lower than before, every removed test named in `audit/<area>.md` (checked by `scripts/check_audit_removals.py`, task 4.3). Every non-killed mutant ends as one of: killed by a new fast test; `equivalent` with the argument; `slow-only` with the slow test id (D3). Neither a skip, an xfail, a `do_not_mutate` pattern, nor a score exclusion is used. Areas are the 5.x tasks, each at most 6 test files per job. An area runs C1 with `--without <file> --baseline <tag>` against the baseline copy of its source (tasks 2.7 to 2.11 keep those copies); the lead deletes a baseline copy after the last area that reads it.
 
 ### D8. Mutation-score gate
 
