@@ -129,7 +129,7 @@ function cellAttrs(c, cell, index, spec, tag, rec) {
   if (tag === 'th') attrs.scope = 'row';
   if (spec.kinds[index] !== 'progress') return attrs;
   const [done, total] = cell;
-  return { ...attrs, 'data-sort': total ? done / total : 0, 'data-done': done, 'data-total': total };
+  return { ...attrs, 'data-sort': total ? done / total : 0, 'data-progress-done': done, 'data-total': total };
 }
 
 function rowCell(m, c, cell, index, spec) {

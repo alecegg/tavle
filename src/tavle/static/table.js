@@ -116,7 +116,7 @@ function showRows(table, state) {
   if (state.more) updateMore(state, matched);
   if (state.doneStatus) {
     const hidden = state.hideDone ? table.querySelectorAll('tbody tr[data-done="true"]').length : 0;
-    state.doneStatus.textContent = hidden + ' done hidden';
+    state.doneStatus.textContent = hidden ? hidden + ' done hidden' : '';
   }
   return matched;
 }
@@ -207,7 +207,7 @@ function rowCount(table) {
 function totalProgress(table) {
   const cells = Array.from(table.querySelectorAll('tbody tr:not(.vb-group-head) [data-total]'));
   if (!cells.length) return null;
-  const done = cells.reduce((sum, cell) => sum + Number(cell.dataset.done), 0);
+  const done = cells.reduce((sum, cell) => sum + Number(cell.dataset.progressDone), 0);
   const total = cells.reduce((sum, cell) => sum + Number(cell.dataset.total), 0);
   const wrap = make('label', 'vb-total-progress');
   const progress = make('progress');
@@ -235,7 +235,8 @@ function trackCards(table, region) {
     const probe = table.cloneNode(true);
     probe.classList.remove('vb-cards');
     Object.assign(probe.style, { position: 'fixed', visibility: 'hidden', inlineSize: 'max-content', inset: '0 auto auto 0' });
-    document.body.append(probe);
+    probe.querySelectorAll('tr[hidden]').forEach((row) => { row.hidden = false; });
+    table.parentNode.append(probe);
     const cards = window.matchMedia('(max-width: 40rem)').matches || probe.scrollWidth > region.clientWidth + 1;
     probe.remove();
     table.classList.toggle('vb-cards', cards);

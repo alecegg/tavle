@@ -108,3 +108,23 @@ def test_page_without_the_key_has_no_toggles(tmp_path: Path) -> None:
         )
 
     _served(doc, check)
+
+
+def test_exported_section_button(tmp_path: Path) -> None:
+    doc = tmp_path / "board.md"
+    doc.write_text(
+        "---\nsections: collapsible\n---\n# Board\n\n## First\n\nSection text.\n"
+    )
+    exported = tmp_path / "board.html"
+    exported.write_text(assemble_static(doc))
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(args=BROWSER_ARGS)
+        try:
+            page = browser.new_page()
+            page.goto(exported.as_uri())
+            button = page.locator("#h-first button[data-section-toggle]")
+            button.click()
+            assert button.get_attribute("aria-expanded") == "false"
+            assert page.get_by_text("Section text.").is_hidden()
+        finally:
+            browser.close()

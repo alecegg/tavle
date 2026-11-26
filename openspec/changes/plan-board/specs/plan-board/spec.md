@@ -10,7 +10,7 @@ Tables and sections for pages that track work: where table controls sit, progres
 A `table` block's toolbar (filter field, phone sort select, hide-done switch, total progress) SHALL render before the table's scroll region. The "Show all rows" toggle SHALL render after it.
 
 #### Scenario: Toolbar order
-- **WHEN** a table with 12 rows is rendered
+- **WHEN** a table with 17 rows is rendered
 - **THEN** the `.vb-filterbar` element precedes the `.vb-scroll` element in document order and `.vb-more` follows it
 
 ### Requirement: Tables never scroll sideways
@@ -50,8 +50,8 @@ A page with front matter `sections: collapsible` SHALL give each `##` heading a 
 - **THEN** that section's `##` heading is at the top of the viewport
 
 ### Requirement: Plan board template
-The `varde-visualize` skill SHALL ship `assets/plan-board.md`, a page with front matter `sections: collapsible`, a stats strip, and tables using `progress`, `status` and `hide_done: true`, which passes `varde pages check`.
+The `varde-visualize` skill SHALL ship `assets/plan-board.md`, a page with front matter `sections: collapsible`, a stats strip, and tables using `progress`, `status` and `hide_done: true`, which passes `varde pages blocks --check`.
 
 #### Scenario: Template checks
-- **WHEN** `varde pages check` runs on `assets/plan-board.md`
+- **WHEN** `varde pages blocks --check` runs on `assets/plan-board.md`
 - **THEN** it reports no errors
