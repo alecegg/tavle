@@ -156,7 +156,13 @@ def test_answer_text_is_escaped_in_page_and_post(
     assert dialogs == []
 
 
-@pytest.mark.parametrize("vector", VECTORS, ids=lambda v: repr(v["url"]))
+def _vector_id(vector: dict[str, str]) -> str:
+    """An ASCII id: escaped control and non-ASCII ids do not round-trip as
+    command-line node ids, which aborts mutmut's clean run."""
+    return re.sub(r"[^A-Za-z0-9:/.-]", "_", vector["url"])
+
+
+@pytest.mark.parametrize("vector", VECTORS, ids=_vector_id)
 def test_classify_url_vectors(vector: dict[str, str]) -> None:
     assert classify_url(vector["url"]) == vector["kind"]
 
