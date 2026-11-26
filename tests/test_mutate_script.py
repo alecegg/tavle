@@ -83,3 +83,30 @@ def test_changed_module_patterns():
         "tavle.a.x_*",
         "tavle.a.xǁ*",
     ]
+
+
+def test_affected_mutants():
+    module = load_script()
+    stats = {"f": ["tests/a.py::one", "tests/a.py::two"], "g": ["tests/b.py::one"]}
+    killed = ["f__mutmut_1", "g__mutmut_1"]
+    cases = [
+        ({}, [], ["tests/a.py"], []),
+        (stats, killed, ["tests/missing.py"], []),
+        (stats, killed, ["tests/a.py::one"], ["f__mutmut_1"]),
+        (stats, killed, ["tests/a.py"], ["f__mutmut_1"]),
+        (stats, [], ["tests/a.py"], []),  # A timeout is absent from killed.
+        (stats, killed, ["tests/a"], []),  # A path prefix is not a file.
+        (stats, killed, ["tests/a.py", "tests/b.py"], ["f__mutmut_1", "g__mutmut_1"]),
+    ]
+    for coverage, baseline, tests, expected in cases:
+        assert module.affected_mutants(coverage, baseline, tests) == expected
+
+
+def test_lost_kills():
+    module = load_script()
+    for baseline, without, expected in [
+        ([], [], []),
+        (["a", "b"], ["b"], ["a"]),
+        (["a"], ["a"], []),
+    ]:
+        assert module.lost_kills(baseline, without) == expected

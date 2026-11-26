@@ -87,7 +87,7 @@ def pytest_selection(marker: str) -> list[str]:
     return ["-m", marker, *deselects]
 
 
-def mutmut_config(others: list[str]) -> str:
+def mutmut_config(others: list[str], tests: list[str] | None = None) -> str:
     """The [tool.mutmut] table: mutate `src/tavle`, run `tests`.
 
     mutmut names a mutant after its path relative to the project root, minus a leading
@@ -98,7 +98,11 @@ def mutmut_config(others: list[str]) -> str:
     copied too.
     """
     rows = ", ".join(f'"{entry}"' for entry in others)
-    deselects = ", ".join(f'"{arg}"' for arg in pytest_selection(FAST_TESTS))
+    deselects = ", ".join(
+        f'"{arg}"'
+        for arg in pytest_selection(FAST_TESTS)
+        + [a for test in (tests or []) for a in ("--deselect", test)]
+    )
     return (
         "\n[tool.mutmut]\n"
         'source_paths = ["src/tavle"]\n'
@@ -290,18 +294,81 @@ def stop_copy_processes(work: Path) -> None:
 
 
 def mutate_in_copy(
-    workers: int, work: Path, patterns: list[str]
+    workers: int, work: Path, patterns: list[str], tests: list[str] | None = None
 ) -> subprocess.CompletedProcess[str]:
     """Refresh the copy, append the mutmut config, and run mutmut over it."""
     copy_repo(work)
     prepare_venv(work)
     others = [entry.name for entry in top_level_entries()]
     with (work / "pyproject.toml").open("a", encoding="utf-8") as config:
-        config.write(mutmut_config(others))
+        config.write(mutmut_config(others, tests))
     stale_stats = work / "mutants" / "mutmut-stats.json"  # stale test mapping
     stale_stats.unlink(missing_ok=True)
     env = isolated_env(work)
     return mutmut(work, env, "run", "--max-children", str(workers), "--", *patterns)
+
+
+def affected_mutants(
+    stats: dict[str, list[str]], killed: list[str], tests: list[str]
+) -> list[str]:
+    """Killed mutants in functions that any of `tests` (file or node id) covers."""
+
+    def matches(node: str, test: str) -> bool:
+        return node == test or ("::" not in test and node.startswith(test + "::"))
+
+    return sorted(
+        name
+        for name in killed
+        if any(
+            matches(node, test)
+            for node in stats.get(name.rsplit("__mutmut_", 1)[0], [])
+            for test in tests
+        )
+    )
+
+
+def lost_kills(baseline: list[str], without: list[str]) -> list[str]:
+    """Mutants killed in the baseline and not killed without the test."""
+    return sorted(set(baseline) - set(without))
+
+
+def baseline_data(work: Path) -> tuple[dict[str, list[str]], list[str]]:
+    """The baseline copy's test coverage per function and its killed mutant names."""
+    root = work / "mutants"
+    stats = json.loads((root / "mutmut-stats.json").read_text())
+    killed = []
+    for path in root.rglob("*.meta"):
+        codes = json.loads(path.read_text())["exit_code_by_key"]
+        killed.extend(name for name, code in codes.items() if code == 1)
+    return stats["tests_by_mangled_function_name"], killed
+
+
+def run_without(tag: str, tests: list[str], workers: int, patterns: list[str]) -> int:
+    """Rerun the affected killed mutants matching `patterns` without `tests`."""
+    stats, killed = baseline_data(work_dir(tag))
+    affected = affected_mutants(stats, killed, tests)
+    names = matching({"killed": affected}, patterns).get("killed", [])
+    if not names:
+        print("lost kills")
+        return 0
+    work = work_dir(tag + "-without")
+    try:
+        done = mutate_in_copy(workers, work, names, tests)
+    finally:
+        stop_copy_processes(work)
+    output = done.stdout + done.stderr
+    (work / "run.log").write_text(output)
+    if done.returncode:
+        report_mutmut_failure(output)
+        return 1
+    results = mutmut(work, isolated_env(work), "results", "--all", "true")
+    if results.returncode:
+        report_mutmut_failure(results.stdout + results.stderr)
+        return 1
+    grouped = matching(parse_results(results.stdout), names)
+    print("lost kills")
+    print("\n".join(lost_kills(names, grouped.get("killed", []))))
+    return 0
 
 
 def report_clean_run_failure(failing: list[str]) -> int:
@@ -396,6 +463,13 @@ def changed_patterns_from_git(base: str) -> list[str] | None:
     return changed_module_patterns(diff.stdout.splitlines())
 
 
+def validate_without(parser: argparse.ArgumentParser, args: argparse.Namespace) -> None:
+    if bool(args.without) != bool(args.baseline):
+        parser.error("--without and --baseline must be used together")
+    if args.baseline and not re.fullmatch(r"[A-Za-z0-9_-]+", args.baseline):
+        parser.error("invalid baseline tag")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
     parser.add_argument("--workers", type=int, default=2)
@@ -417,12 +491,23 @@ def main() -> int:
         metavar="PATTERN",
         help="test and count only mutants whose names match this glob (repeatable)",
     )
+    parser.add_argument(
+        "--without",
+        action="append",
+        default=[],
+        metavar="TEST",
+        help="rerun affected killed mutants with TEST deselected (repeatable)",
+    )
+    parser.add_argument("--baseline", metavar="TAG", help="baseline copy for --without")
     parser.add_argument("--changed", metavar="BASE")
     parser.add_argument("--clean", action="store_true", help="delete the copy and exit")
     parser.add_argument("--min-score", type=int, default=0)
     args = parser.parse_args()
     if args.tag and not re.fullmatch(r"[A-Za-z0-9_-]+", args.tag):
         parser.error("tag must contain only letters, digits, underscores or hyphens")
+    validate_without(parser, args)
+    if args.without:
+        return run_without(args.baseline, args.without, args.workers, args.only)
     if args.changed:
         patterns = changed_patterns_from_git(args.changed)
         if patterns is None:
