@@ -103,7 +103,7 @@ Risk R1: the vitest config uses `projects` with a custom `root` and an alias for
 
 A test is a deletion or merge candidate when any holds:
 
-- C1 No unique kill: removing it changes no mutant status. Python: `--without <test>` leave-one-out reruns that test only the baseline's killed mutants in functions the test covers (mutmut's `tests_by_mangled_function_name` in the baseline copy's `mutants/mutmut-stats.json`), with the test deselected in a separate `--tag` copy; a lost kill is a mutant killed in the baseline and not killed in the rerun. Measured in task 2.6: a full `tavle.theme.*` baseline takes 1004 s (1505 mutants: 1272 killed, 227 survived, 6 timeouts), so full-scope reruns cannot fit, and per-test kill sets would take 99,355 single-test runs (6,301 s of test time alone) for the same scope. Measured rerun cost (2.6): 1.3 to 1.7 s per affected mutant, so an area job runs `--without` once per test file and the lead groups files into jobs of at most about 700 affected mutants (under 20 minutes); a file above that is split by module with `--only` globs, which narrow the affected set. JavaScript: Stryker `--disableBail` with the json reporter records every killing test per mutant (`killedBy`).
+- C1 No unique kill: removing it changes no mutant status. Python: `--without <test>` leave-one-out reruns that test only the baseline's killed mutants in functions the test covers (mutmut's `tests_by_mangled_function_name` in the baseline copy's `mutants/mutmut-stats.json`), with the test deselected in a separate `--tag` copy; a lost kill is a mutant killed in the baseline and not killed in the rerun. Measured in task 2.6: a full `tavle.theme.*` baseline takes 1004 s (1505 mutants: 1272 killed, 227 survived, 6 timeouts), so full-scope reruns cannot fit, and per-test kill sets would take 99,355 single-test runs (6,301 s of test time alone) for the same scope. Measured rerun cost (2.6): 1.3 to 1.7 s per affected mutant, so an area job runs `--without` once per test file and the lead groups files into jobs of at most about 700 affected mutants (under 20 minutes); a file above that is split by module with `--only` globs, which narrow the affected set. JavaScript: Stryker `--disableBail` with the json reporter records every killing test per mutant (`killedBy`). Since 2026-11-27 the audit takes C1 from first-killer data of one full run instead (D13); `--without` stays for the new-test gate (D12, task 6.5).
 - C2 Asserts its own fixture: the expected value is built from the input by the same expression the code uses, or the test asserts a literal it just set.
 - C3 Restates the implementation: the assertion copies the source (a regex over source text, a constant copied from the module, `assert f(x) == f(x)`).
 - C4 No assertion that can fail: no `assert`, `assert True`, a name compared to itself.
@@ -113,7 +113,7 @@ C1 comes from mutation data. C2 to C5 come from the one-time scan (task 4.1) and
 
 ### D7. Process per area
 
-Per area: run the mutation tool on the area's source, list non-killed mutants, apply C1 to C5 to the area's tests, delete or merge, rerun the area's tests and mutation tool. Gate for the area: tests pass, score not lower than before, every removed test named in `audit/<area>.md` (checked by `scripts/check_audit_removals.py`, task 4.3). Every non-killed mutant ends as one of: killed by a new fast test; `equivalent` with the argument; `slow-only` with the slow test id (D3). Neither a skip, an xfail, a `do_not_mutate` pattern, nor a score exclusion is used. Areas are the 5.x tasks, each at most 6 test files per job. An area runs C1 with `--without <file> --baseline <tag>` against the baseline copy of its source (tasks 2.7 to 2.11 keep those copies); the lead deletes a baseline copy after the last area that reads it.
+Per area (tasks 5.8a on; D13): list the area's baseline survivors with `just mutate --report`, apply C2 to C5 to the area's tests, delete or merge, give each survivor one row, prove each claimed kill with a single-mutant check, and run the owned tests. Gate for the area: tests pass, every non-stale survivor has exactly one row and each `killed` row has a passing check (`just mutate --audit`), and every removed test is named in `audit/<area>.md` (checked by `scripts/check_audit_removals.py`, task 4.3). Every non-killed mutant ends as one of: killed by a new fast test; `equivalent` with the argument; `slow-only` with the slow test id (D3). Neither a skip, an xfail, a `do_not_mutate` pattern, nor a score exclusion is used. C1 and the mutation scores come from the end-of-plan runs (6.11, 6.3), not from the area task. Tasks 5.1 to 5.8 ran the earlier form: C1 by `--without` and an area mutation run in each task.
 
 ### D8. Mutation-score gate
 
@@ -146,14 +146,44 @@ Owner request (2026-11-25): an audit is only worth doing if rules keep the count
 
 Alternatives: a cap on cases per parametrize (rejected: data-driven contract tests over every component spec are legitimate, and the per-node kill gate already rejects rows that add nothing); a count ceiling that never rises (rejected: forbids legitimate new tests; the recorded count makes growth visible and the kill gate judges it).
 
+### D13. Cheap area tasks, expensive runs once at the end
+
+Owner (2026-11-27), on area tasks that took 1 to 3 hours each, each with a C1 leave-one-out pass and an area mutation run of about 40 minutes, and an `after:` chain that made every area wait for the one before: "No part of that is reasonable." Rule: per task, only cheap static checks and targeted tests; expensive full runs happen once, at the end of the plan, before integration.
+
+Measured inputs (2026-11-27):
+
+- C1 yield: 1 of the 53 delete or merge rows in the 7 finished areas came from C1 (theme-core); the rest came from C2 to C5.
+- File-level `--without` over every test file would cost about 110 hours (sum of affected killed mutants per package from the baseline stats, times the 1.3 to 1.7 s per mutant of task 2.6); per-mutant kill sets about 25 hours of serial test time.
+- Fixed cost of one `scripts/mutate.py` run: about 200 s (stats collection and the clean run; the 5.8 grouped run took 243 s for 222 mutants).
+- Single-mutant check, from the repo root with the copy's venv, `MUTANT_UNDER_TEST=<name>` and `PYTHONPATH=<copy>/mutants/src` over one test file (106 tests): 9.4 s for a killed mutant, 6.4 s for a survivor, 8.4 s for the clean run, at load 23 with another mutation run active.
+- Whole-tree run at the pre-audit per-package rates (2 workers): about 3.9 hours. `tavle.theme.*` dropped from 1004 s to 497 s after its audit, because killed mutants stop at the first failing test.
+
+Decision:
+
+- An area task works from the survivors its baseline already lists, applies C2 to C5 statically, writes tests, and proves each claimed kill with `just mutate --check` (task 2.13): the area's own copy cloned from the baseline copy, refreshed to the working tree, one pytest process per mutant over the named test files. A batch of 50 kills takes about 5 minutes at 2 workers (from the numbers above). No area or C1 mutation run. Areas are split to about 50 to 110 survivors (A5) and have no `after:` link unless they share a file.
+- C1 comes from one full run (task 6.11). A pytest plugin records the first failing test of each killed mutant (task 2.16). mutmut runs each mutant's covering tests with `-x -p no:randomly`, so with deterministic tests, deleting every test that is no mutant's first killer keeps every kill: each mutant's first killer stays. Extra mutation time: none. It misses tests whose kills are all shared with a later-running test (those stay); it never flags a test that is a mutant's only killer. JavaScript C1 is exact from `killedBy` with `--disableBail` in task 6.3.
+- All heavy runs are lead tasks at the end, each under `flock /var/tmp/tmp-alec/heavy.lock`: 6.11 (Python, about 2 to 2.5 hours, unverified; at most about 3.9 hours), 6.3 (JavaScript, about 2.3 hours: 67 minutes for components at the measured 1.24 s per mutant, the static half unverified), 2.12 (full-matrix value with a render-diff prefilter, under 1 hour, unverified), 7.1 (about 25 to 30 minutes with no mutation rerun). Floors (6.2, 6.3) and 5.26 read these runs' results.
+- No second mutation run in 7.1. The tests added after 6.11 (6.12) only add kills, and 6.13's C1 deletions keep every kill by the argument above, so the 6.11 score is a lower bound for the final tree. The weekly `--all` run (6.7) re-measures after merge.
+
+Speedups (do not lower what is measured):
+
+- One whole-tree run instead of six per-package runs saves about 5 x 200 s, about 17 minutes (from the measured fixed cost).
+- First-killer C1 replaces about 110 hours of leave-one-out runs with no extra run time (computed above).
+- Fewer survivors after the audit shorten the run (theme: 2.0 times faster, measured); the whole-tree figure is a projection.
+- `--workers 3` in 6.11 matches A3 but is unverified: 2.2 set 2 for the 4 GB cap, so 6.11 checks rate and memory over its first 10 minutes.
+- Stryker `--incremental` only lets a capped JS run resume; each run starts with no incremental file, so nothing from before the audit is reused.
+
+Rejected: keeping `mutmut-stats.json` between runs (new tests would be missing from the covering-test map, so a mutant could read survived although a new test kills it); `--changed` for the end run (this branch changes most modules); reusing baseline verdicts (the baselines recorded no killer per mutant); a per-package end run (adds the fixed cost five times, no extra information); a final mutation rerun in 7.1 (another 2 to 2.5 hours for a score the argument above already bounds).
+
 ## Assumptions
 
-All confirmed by the lead:
+A1 to A4 confirmed by the lead:
 
 - A1: `slow` browser tests are left out of per-mutant runs; see D3.
 - A2: asset-text and browser tests are audited by static criteria, not by mutation; see D3.
 - A3: `-n 3` for every parallel run.
 - A4 (to be checked by task 3.1): `@stryker-mutator/*` do not trigger `fallow dead-code` unused-dependency findings; if they do the task stops for the lead, with no ignore-list edit.
+- A5 (medium confidence, set 2026-11-27): an area of 50 to 110 baseline survivors fits about 20 minutes for an Opus or Sonnet builder with `--check`. The lead checks it on the first three area tasks and re-splits the rest if they run over.
 
 ## Open questions
 
