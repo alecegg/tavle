@@ -488,6 +488,7 @@ def changed_patterns_from_git(base: str) -> list[str] | None:
             shutil.which("git") or "/usr/bin/git",
             "diff",
             "--name-only",
+            "--diff-filter=d",
             base,
             "--",
             "src/tavle",
