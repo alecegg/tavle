@@ -64,3 +64,24 @@ export function keepInside(view, target, { margin = 4, insetTop = 0, vertical = 
   if (rect.top < top) view.scrollTop -= top - rect.top;
   else if (rect.bottom > bottom) view.scrollTop += rect.bottom - bottom;
 }
+
+// Make `target` the one tab stop inside `view`, then scroll it into view (`options` as keepInside).
+export function takeTabStop(view, target, options) {
+  for (const other of view.querySelectorAll('[tabindex="0"]')) if (other !== view) other.setAttribute('tabindex', '-1');
+  target.setAttribute('tabindex', '0');
+  keepInside(view, target, options);
+}
+
+// The live status line of a selectable view: a `p` placed after `host` that announces each change.
+export function statusReadout(host, className, text) {
+  const readout = make('p', className, text);
+  readout.setAttribute('role', 'status');
+  readout.setAttribute('aria-live', 'polite');
+  host.after(readout);
+  return readout;
+}
+
+// Replace the class names `pattern` matches on `node` with `role` (a leading space, or '').
+export function swapClassRole(node, pattern, role) {
+  node.setAttribute('class', node.getAttribute('class').replace(pattern, '') + role);
+}

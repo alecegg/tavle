@@ -10,6 +10,24 @@ globalThis.tavlePageParts.app = (tree, ctx) => {
   const apiBase = ctx.apiBase;
   const pageUrl = ctx.pageUrl;
   const inline = tree !== document; // the host page owns refresh timing and the event stream
+  // The send and cancel buttons of an inline composer, and the error line that goes below them.
+  function composerActions(label, onSend, onCancel) {
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    const submit = document.createElement('button');
+    submit.type = 'button';
+    submit.className = 'primary';
+    submit.textContent = label;
+    submit.addEventListener('click', onSend);
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.textContent = 'Cancel';
+    cancel.addEventListener('click', onCancel);
+    actions.append(submit, cancel);
+    const error = document.createElement('p');
+    error.className = 'error';
+    return { actions, error };
+  }
   const postHeaders = () => apiBase
     ? { 'Content-Type': 'application/json' }
     : { 'Content-Type': 'application/json', [globalThis.tavlePageParts.tokenHeader]: ctx.token };
@@ -87,23 +105,10 @@ globalThis.tavlePageParts.app = (tree, ctx) => {
     textarea.setAttribute('aria-label', 'Comment');
     textarea.value = draft || '';
     textarea.addEventListener('input', () => composers.set(anchor, textarea.value));
-    const actions = document.createElement('div');
-    actions.className = 'actions';
-    const submit = document.createElement('button');
-    submit.type = 'button';
-    submit.className = 'primary';
-    submit.textContent = 'Send';
-    submit.addEventListener('click', () => send(block, form, textarea));
-    const cancel = document.createElement('button');
-    cancel.type = 'button';
-    cancel.textContent = 'Cancel';
-    cancel.addEventListener('click', () => {
+    const { actions, error } = composerActions('Send', () => send(block, form, textarea), () => {
       composers.delete(anchor);
       form.remove();
     });
-    const error = document.createElement('p');
-    error.className = 'error';
-    actions.append(submit, cancel);
     form.append(textarea, actions, error);
     mountForm(block, form, offset);
     if (draft === undefined) textarea.focus({ preventScroll: true });
@@ -123,7 +128,7 @@ globalThis.tavlePageParts.app = (tree, ctx) => {
 
   async function openEditor(...args) {
     const { createEditor } = await import('./editor.js');
-    return createEditor({ root, post, showError, refresh, mountForm })(...args);
+    return createEditor({ root, post, showError, refresh, mountForm, composerActions })(...args);
   }
 
   async function accept(thread, button) {

@@ -1,4 +1,4 @@
-export function createEditor({ root, post, showError, refresh, mountForm }) {
+export function createEditor({ root, post, showError, refresh, mountForm, composerActions }) {
   // Smallest differing middle of two texts, widened by one character when empty.
   function changedSpan(before, after) {
     let head = 0;
@@ -55,20 +55,8 @@ export function createEditor({ root, post, showError, refresh, mountForm }) {
     const textarea = document.createElement('textarea');
     textarea.setAttribute('aria-label', mode === 'edit' ? 'Block source' : 'Suggested source');
     textarea.value = loaded.source;
-    const actions = document.createElement('div');
-    actions.className = 'actions';
-    const submit = document.createElement('button');
-    submit.type = 'button';
-    submit.className = 'primary';
-    submit.textContent = mode === 'edit' ? 'Save' : 'Suggest';
-    submit.addEventListener('click', () => saveEditor(block, form, textarea, loaded, mode));
-    const cancel = document.createElement('button');
-    cancel.type = 'button';
-    cancel.textContent = 'Cancel';
-    cancel.addEventListener('click', () => form.remove());
-    const error = document.createElement('p');
-    error.className = 'error';
-    actions.append(submit, cancel);
+    const label = mode === 'edit' ? 'Save' : 'Suggest';
+    const { actions, error } = composerActions(label, () => saveEditor(block, form, textarea, loaded, mode), () => form.remove());
     form.append(textarea, actions, error);
     mountForm(block, form, offset);
     textarea.focus({ preventScroll: true });

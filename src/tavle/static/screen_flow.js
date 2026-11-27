@@ -4,14 +4,11 @@
 // entry in the text list gets a heavy edge. Arrow keys follow the reading order (lane by
 // lane, step by step), Home and End jump, Escape clears. The layout is drawn on the server
 // (an across and a down drawing; CSS shows one), so no layout runs here.
-import { control, make, keepInside } from './dom.js';
-import { mountViewport } from './viewport.js';
-import { ARROWS_AND_ENDS, handleViewKey } from './view_keys.js';
+import { keepInside, statusReadout } from './dom.js';
+import { mountSharedView, sharedBar } from './viewport.js';
+import { ARROWS_AND_ENDS, bindHoverAndFocus, handleViewKey, itemAfter, onItemFocus } from './view_keys.js';
 
 const HINT = 'Select a screen to read its regions, notes and next step.';
-const ZOOM_IN = 1.25;
-const ZOOM_OUT = 0.8;
-const STEP = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
 
 function labelOf(screen) {
   const title = screen.querySelector(':scope > title');
@@ -43,10 +40,7 @@ export function enhanceScreenFlow(block) {
   const views = Array.from(host.querySelectorAll('.vd-sf-view')).map(readView).filter(Boolean);
   if (!views.length) return;
   const items = new Map(Array.from(block.querySelectorAll('.vd-sf-item')).map((li) => [li.dataset.screen, li]));
-  const readout = make('p', 'vd-sf-detail', HINT);
-  readout.setAttribute('role', 'status');
-  readout.setAttribute('aria-live', 'polite');
-  host.after(readout);
+  const readout = statusReadout(host, 'vd-sf-detail', HINT);
   const state = { selected: null, hover: null, focus: null };
 
   function paint() {
@@ -75,14 +69,6 @@ export function enhanceScreenFlow(block) {
     paint();
   }
 
-  function move(list, screen, key) {
-    const at = list.indexOf(screen);
-    let next = at + (STEP[key] || 0);
-    if (key === 'Home') next = 0;
-    if (key === 'End') next = list.length - 1;
-    list[(next + list.length) % list.length].focus();
-  }
-
   const viewports = views.map(({ view, svg, screens }) => {
     svg.setAttribute('role', 'group');
     view.setAttribute('aria-label', svg.getAttribute('aria-label') + ' (arrow keys pan, plus and minus zoom, 0 resets the view)');
@@ -93,23 +79,19 @@ export function enhanceScreenFlow(block) {
       screen.setAttribute('aria-label', labelOf(screen));
     }
     if (screens[0]) screens[0].setAttribute('tabindex', '0');
-    const viewport = mountViewport(view, svg, { minScale: 0.5, maxScale: 4 });
-    viewport.bar.remove(); // one bar above the drawings acts on every view
-    view.addEventListener('focusin', (event) => {
-      const target = event.target.closest('.vd-sf-screen');
-      if (!target) return;
+    const viewport = mountSharedView(view, svg, { minScale: 0.5, maxScale: 4 });
+    onItemFocus(view, '.vd-sf-screen', (target) => {
       for (const other of screens) other.setAttribute('tabindex', other === target ? '0' : '-1');
       keepInside(view, target, { margin: 8 });
       state.focus = target.dataset.screen;
       paint();
     });
-    view.addEventListener('focusout', () => { state.focus = null; paint(); });
-    view.addEventListener('pointerover', (event) => {
-      const target = event.target.closest('.vd-sf-screen');
-      state.hover = target ? target.dataset.screen : null;
-      paint();
+    bindHoverAndFocus(view, {
+      selector: '.vd-sf-screen',
+      state,
+      keyOf: (target) => (target ? target.dataset.screen : null),
+      paint,
     });
-    view.addEventListener('pointerleave', () => { state.hover = null; paint(); });
     view.addEventListener('click', (event) => {
       const target = event.target.closest('.vd-sf-screen');
       if (target) select(target.dataset.screen);
@@ -120,7 +102,7 @@ export function enhanceScreenFlow(block) {
       handleViewKey(event, {
         activate: () => select(target.dataset.screen),
         clear,
-        move: (key) => move(screens, target, key),
+        move: (key) => itemAfter(screens, target, key).focus(),
         moveKeys: ARROWS_AND_ENDS,
       });
     });
@@ -134,11 +116,5 @@ export function enhanceScreenFlow(block) {
     }
   }
 
-  const bar = make('div', 'vb-controls vb-flowbar');
-  bar.append(
-    control('+', () => viewports.forEach((v) => v.zoom(ZOOM_IN)), 'vb-ctl', 'Zoom in'),
-    control('−', () => viewports.forEach((v) => v.zoom(ZOOM_OUT)), 'vb-ctl', 'Zoom out'),
-    control('Reset', fit, 'vb-ctl', 'Reset flow view'),
-  );
-  host.before(bar);
+  host.before(sharedBar(viewports, fit, { label: 'Reset', aria: 'Reset flow view' }));
 }

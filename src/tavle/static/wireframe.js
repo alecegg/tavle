@@ -4,40 +4,20 @@
 // reads its kind and notes while its notes-list entries get a heavy edge. Arrow keys
 // move between regions in reading order, Home and End jump, Escape clears.
 // No layout runs in the browser.
-import { control, make, keepInside } from './dom.js';
-import { mountViewport } from './viewport.js';
-import { ARROWS_AND_ENDS, handleViewKey } from './view_keys.js';
+import { keepInside, statusReadout, swapClassRole } from './dom.js';
+import { fitWidth, mountSharedView, sharedBar } from './viewport.js';
+import { ARROWS_AND_ENDS, bindHoverAndFocus, handleViewKey, itemAfter, onItemFocus } from './view_keys.js';
 
 const HINT = 'Select a region to read its notes.';
 const MIN_FIT = 0.5;
 const SCROLLBAR = 18;
-const ZOOM_IN = 1.25;
-const ZOOM_OUT = 0.8;
 const TAP_MS = 350;
 const TAP_PX = 30;
 const ROLE = / vw-(sel|hot)/g;
-const STEP = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
 
 function labelOf(region) {
   const title = region.querySelector('title');
   return title ? title.textContent : region.dataset.region;
-}
-
-function setRole(node, role) {
-  node.setAttribute('class', node.getAttribute('class').replace(ROLE, '') + role);
-}
-
-// Size the svg to the width: never above 1:1, never below `floor` (a scale).
-function fitWidth(svg, available, floor) {
-  if (!svg.dataset.natW) {
-    svg.dataset.natW = svg.getAttribute('width');
-    svg.dataset.natH = svg.getAttribute('height');
-  }
-  const natW = Number(svg.dataset.natW);
-  const natH = Number(svg.dataset.natH);
-  const scale = Math.min(1, Math.max(floor, available / natW));
-  svg.setAttribute('width', String(Math.round(natW * scale)));
-  svg.setAttribute('height', String(Math.round(natH * scale)));
 }
 
 // Two taps close together fit the view; pinches and drags never count as taps.
@@ -94,7 +74,7 @@ function paintFrame(frame, selected, chosen) {
   for (const region of frame.regions) {
     const key = frame.index + ':' + region.dataset.region;
     const role = key === selected ? ' vw-sel' : key === chosen ? ' vw-hot' : '';
-    setRole(region, role);
+    swapClassRole(region, ROLE, role);
     region.setAttribute('aria-pressed', String(key === selected));
   }
   for (const note of frame.notes) {
@@ -109,10 +89,7 @@ export function enhanceWireframe(block) {
   if (!host) return;
   const frames = Array.from(host.querySelectorAll('.vw-fig')).map(readFrame).filter(Boolean);
   if (!frames.length) return;
-  const readout = make('p', 'vw-detail', HINT);
-  readout.setAttribute('role', 'status');
-  readout.setAttribute('aria-live', 'polite');
-  host.after(readout);
+  const readout = statusReadout(host, 'vw-detail', HINT);
   const state = { selected: null, hover: null, focus: null };
 
   function paint() {
@@ -133,15 +110,6 @@ export function enhanceWireframe(block) {
     paint();
   }
 
-  function move(frame, region, key) {
-    const list = frame.regions;
-    const at = list.indexOf(region);
-    let next = at + (STEP[key] || 0);
-    if (key === 'Home') next = 0;
-    if (key === 'End') next = list.length - 1;
-    list[(next + list.length) % list.length].focus();
-  }
-
   const viewports = frames.map((frame) => {
     const { view, svg, regions } = frame;
     svg.setAttribute('role', 'group');
@@ -153,23 +121,19 @@ export function enhanceWireframe(block) {
       region.setAttribute('aria-label', labelOf(region) + ', region');
     }
     if (regions[0]) regions[0].setAttribute('tabindex', '0');
-    const viewport = mountViewport(view, svg, { minScale: 0.25, maxScale: 8 });
-    viewport.bar.remove(); // one bar above the frames acts on every view
-    view.addEventListener('focusin', (event) => {
-      const target = event.target.closest('.vw-region');
-      if (!target) return;
+    const viewport = mountSharedView(view, svg, { minScale: 0.25, maxScale: 8 });
+    onItemFocus(view, '.vw-region', (target) => {
       for (const other of regions) other.setAttribute('tabindex', other === target ? '0' : '-1');
       keepInside(view, target, { margin: 8 });
       state.focus = frame.index + ':' + target.dataset.region;
       paint();
     });
-    view.addEventListener('focusout', () => { state.focus = null; paint(); });
-    view.addEventListener('pointerover', (event) => {
-      const target = event.target.closest('.vw-region');
-      state.hover = target ? frame.index + ':' + target.dataset.region : null;
-      paint();
+    bindHoverAndFocus(view, {
+      selector: '.vw-region',
+      state,
+      keyOf: (target) => (target ? frame.index + ':' + target.dataset.region : null),
+      paint,
     });
-    view.addEventListener('pointerleave', () => { state.hover = null; paint(); });
     view.addEventListener('click', (event) => {
       const target = event.target.closest('.vw-region');
       if (target) select(frame, target);
@@ -180,7 +144,7 @@ export function enhanceWireframe(block) {
       handleViewKey(event, {
         activate: () => select(frame, target),
         clear,
-        move: (key) => move(frame, target, key),
+        move: (key) => itemAfter(regions, target, key).focus(),
         moveKeys: ARROWS_AND_ENDS,
       });
     });
@@ -196,11 +160,5 @@ export function enhanceWireframe(block) {
   }
 
   for (const frame of frames) bindDoubleTap(frame.svg, fit);
-  const bar = make('div', 'vb-controls vb-flowbar');
-  bar.append(
-    control('+', () => viewports.forEach((v) => v.zoom(ZOOM_IN)), 'vb-ctl', 'Zoom in'),
-    control('−', () => viewports.forEach((v) => v.zoom(ZOOM_OUT)), 'vb-ctl', 'Zoom out'),
-    control('Fit', fit, 'vb-ctl', 'Fit whole wireframe'),
-  );
-  host.before(bar);
+  host.before(sharedBar(viewports, fit, { label: 'Fit', aria: 'Fit whole wireframe' }));
 }

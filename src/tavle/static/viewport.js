@@ -121,6 +121,37 @@ function bindKeys(frame, motion) {
   });
 }
 
+// Size the svg to the width: never above 1:1, never below `floor` (a scale).
+export function fitWidth(svg, available, floor) {
+  if (!svg.dataset.natW) {
+    svg.dataset.natW = svg.getAttribute('width');
+    svg.dataset.natH = svg.getAttribute('height');
+  }
+  const natW = Number(svg.dataset.natW);
+  const natH = Number(svg.dataset.natH);
+  const scale = Math.min(1, Math.max(floor, available / natW));
+  svg.setAttribute('width', String(Math.round(natW * scale)));
+  svg.setAttribute('height', String(Math.round(natH * scale)));
+}
+
+// Mount a view whose control bar is shared: the caller places one bar that acts on every view.
+export function mountSharedView(frame, svg, options) {
+  const viewport = mountViewport(frame, svg, options);
+  viewport.bar.remove();
+  return viewport;
+}
+
+// One control bar for several mounted views: + and - zoom every one, and `fit` resets the layout.
+export function sharedBar(viewports, fit, { label, aria }) {
+  const bar = make('div', 'vb-controls vb-flowbar');
+  bar.append(
+    control('+', () => viewports.forEach((v) => v.zoom(BUTTON_IN)), 'vb-ctl', 'Zoom in'),
+    control('−', () => viewports.forEach((v) => v.zoom(BUTTON_OUT)), 'vb-ctl', 'Zoom out'),
+    control(label, fit, 'vb-ctl', aria),
+  );
+  return bar;
+}
+
 // The frame must already be in the document: the control bar goes just before it.
 export function mountViewport(frame, svg, options) {
   const limits = { min: 0.25, max: 8 };

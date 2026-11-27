@@ -3,8 +3,10 @@
 // highlights what must come before it (dotted outline) and what follows (heavy
 // outline) and says so in the readout; arrow keys on a step follow its edges.
 // No layout runs in the browser.
-import { control, make, keepInside, whileConnected } from './dom.js';
-import { mountViewport } from './viewport.js';
+import { control, make, statusReadout, swapClassRole, takeTabStop, whileConnected } from './dom.js';
+import { fitWidth, mountSharedView } from './viewport.js';
+import { bindHoverAndFocus, onItemFocus } from './view_keys.js';
+import { readAdjacency } from './view_graph.js';
 
 const HINT = 'Select a step to see what comes before and after it.';
 const FOLLOW = { ArrowRight: 'out', ArrowDown: 'out', ArrowLeft: 'in', ArrowUp: 'in' };
@@ -13,19 +15,6 @@ const SCROLLBAR = 18;
 const ZOOM_IN = 1.25;
 const ZOOM_OUT = 0.8;
 const ROLE = / vd-(sel|dim)| vf-(up|down)/g;
-
-function readEdges(view) {
-  const out = new Map();
-  const into = new Map();
-  for (const edge of view.querySelectorAll('.vd-edge')) {
-    const { from, to } = edge.dataset;
-    if (!out.has(from)) out.set(from, []);
-    if (!into.has(to)) into.set(to, []);
-    out.get(from).push(to);
-    into.get(to).push(from);
-  }
-  return { out, into };
-}
 
 function reachable(start, edges) {
   const seen = new Set();
@@ -48,23 +37,6 @@ function labelOf(node) {
 
 function naming(ids, byId) {
   return ids.length ? ids.map((id) => labelOf(byId.get(id))).join(', ') : 'none';
-}
-
-// Size the svg to the width, never above 1:1 and never below `floor` (a scale).
-function fitWidth(svg, available, floor) {
-  if (!svg.dataset.natW) {
-    svg.dataset.natW = svg.getAttribute('width');
-    svg.dataset.natH = svg.getAttribute('height');
-  }
-  const natW = Number(svg.dataset.natW);
-  const natH = Number(svg.dataset.natH);
-  const scale = Math.min(1, Math.max(floor, available / natW));
-  svg.setAttribute('width', String(Math.round(natW * scale)));
-  svg.setAttribute('height', String(Math.round(natH * scale)));
-}
-
-function setRole(node, role) {
-  node.setAttribute('class', node.getAttribute('class').replace(ROLE, '') + role);
 }
 
 function nodeRole(name, id, before, after) {
@@ -90,11 +62,8 @@ export function enhanceFlow(block) {
   if (!svg || !host) return;
   const nodes = Array.from(view.querySelectorAll('.vd-node'));
   const byId = new Map(nodes.map((n) => [n.dataset.id, n]));
-  const { out, into } = readEdges(view);
-  const readout = make('p', 'vd-detail', HINT);
-  readout.setAttribute('role', 'status');
-  readout.setAttribute('aria-live', 'polite');
-  host.after(readout);
+  const { out, into } = readAdjacency(view);
+  const readout = statusReadout(host, 'vd-detail', HINT);
   const state = { selected: null, hover: null, focus: null };
   const cycle = new Map();
 
@@ -104,7 +73,7 @@ export function enhanceFlow(block) {
     const after = id ? reachable(id, out) : new Set();
     for (const [name, node] of byId) {
       const role = nodeRole(name, id, before, after);
-      setRole(node, role);
+      swapClassRole(node, ROLE, role);
       node.setAttribute('aria-pressed', String(name === state.selected));
     }
     const upSet = new Set([...before, id]);
@@ -152,25 +121,19 @@ export function enhanceFlow(block) {
     node.setAttribute('aria-label', labelOf(node) + ', step');
   }
   if (nodes[0]) nodes[0].setAttribute('tabindex', '0');
-  const viewport = mountViewport(view, svg, { minScale: 0.25, maxScale: 8 });
-  viewport.bar.remove(); // one bar below acts on the view
+  const viewport = mountSharedView(view, svg, { minScale: 0.25, maxScale: 8 });
 
-  view.addEventListener('focusin', (event) => {
-    const target = event.target.closest('.vd-node');
-    if (!target) return;
-    for (const other of view.querySelectorAll('[tabindex="0"]')) if (other !== view) other.setAttribute('tabindex', '-1');
-    target.setAttribute('tabindex', '0');
-    keepInside(view, target);
+  onItemFocus(view, '.vd-node', (target) => {
+    takeTabStop(view, target);
     state.focus = target.dataset.id;
     paint();
   });
-  view.addEventListener('focusout', () => { state.focus = null; paint(); });
-  view.addEventListener('pointerover', (event) => {
-    const node = event.target.closest('.vd-node');
-    state.hover = node ? node.dataset.id : null;
-    paint();
+  bindHoverAndFocus(view, {
+    selector: '.vd-node',
+    state,
+    keyOf: (node) => (node ? node.dataset.id : null),
+    paint,
   });
-  view.addEventListener('pointerleave', () => { state.hover = null; paint(); });
   view.addEventListener('click', (event) => {
     const node = event.target.closest('.vd-node');
     if (node) select(node);

@@ -8,6 +8,7 @@ lint:
     uv run --locked pyright --warnings
     scripts/check-mollify.sh
     npx fallow dead-code --fail-on-issues
+    npx fallow dupes --fail-on-issues
     npx fallow health --fail-on-issues
     npx fallow architecture --fail-on-issues
 

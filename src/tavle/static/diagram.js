@@ -3,26 +3,13 @@
 // or hover highlights its neighbours; click or Enter selects it and announces its
 // detail; group headers collapse and expand by showing another pre-computed state;
 // arrow keys on a node move along its edges. No layout runs in the browser.
-import { control, keepInside, make, whileConnected } from './dom.js';
-import { mountViewport } from './viewport.js';
-import { ARROWS, handleViewKey } from './view_keys.js';
+import { control, make, statusReadout, takeTabStop, whileConnected } from './dom.js';
+import { fitWidth, mountSharedView } from './viewport.js';
+import { ARROWS, bindHoverAndFocus, handleViewKey, onItemFocus } from './view_keys.js';
+import { readAdjacency } from './view_graph.js';
 
 const HINT = 'Select a node for details.';
 const FOLLOW = { ArrowRight: 'out', ArrowDown: 'out', ArrowLeft: 'in', ArrowUp: 'in' };
-
-function readAdjacency(view) {
-  const out = new Map();
-  const into = new Map();
-  for (const edge of view.querySelectorAll('.vd-edge')) {
-    const from = edge.dataset.from;
-    const to = edge.dataset.to;
-    if (!out.has(from)) out.set(from, []);
-    if (!into.has(to)) into.set(to, []);
-    out.get(from).push(to);
-    into.get(to).push(from);
-  }
-  return { out, into };
-}
 
 function nodeLabel(node) {
   const title = node.querySelector('title');
@@ -100,28 +87,12 @@ const SCROLLBAR = 18;
 const ZOOM_IN = 1.25;
 const ZOOM_OUT = 0.8;
 
-// Size the svg to the width, never above 1:1 and never below `floor` (a scale).
-function fitWidth(svg, available, floor) {
-  if (!svg.dataset.natW) {
-    svg.dataset.natW = svg.getAttribute('width');
-    svg.dataset.natH = svg.getAttribute('height');
-  }
-  const natW = Number(svg.dataset.natW);
-  const natH = Number(svg.dataset.natH);
-  const scale = Math.min(1, Math.max(floor, available / natW));
-  svg.setAttribute('width', String(Math.round(natW * scale)));
-  svg.setAttribute('height', String(Math.round(natH * scale)));
-}
-
 export function enhanceDiagram(block) {
   if (!block.classList.contains('diagram')) return;
   const views = Array.from(block.querySelectorAll('.vd-view'));
   const host = block.querySelector('.vd-views');
   if (!views.length || !host) return;
-  const readout = make('p', 'vb-readout vd-detail', HINT);
-  readout.setAttribute('role', 'status');
-  readout.setAttribute('aria-live', 'polite');
-  host.after(readout);
+  const readout = statusReadout(host, 'vb-readout vd-detail', HINT);
   const state = { mask: 0, selected: null, hover: null, focus: null };
   const mounted = new Map();
 
@@ -191,26 +162,20 @@ export function enhanceDiagram(block) {
     const first = nodes[0] || heads[0];
     if (first) first.setAttribute('tabindex', '0');
     const adjacency = readAdjacency(view);
-    const viewport = mountViewport(view, svg, { minScale: 0.25, maxScale: 8 });
-    viewport.bar.remove(); // one shared bar below acts on the shown view
+    const viewport = mountSharedView(view, svg, { minScale: 0.25, maxScale: 8 });
     mounted.set(view, { adjacency, viewport, svg, cycle: new Map() });
 
-    view.addEventListener('focusin', (event) => {
-      const target = event.target.closest('.vd-node, .vd-group-head');
-      if (!target) return;
-      for (const other of view.querySelectorAll('[tabindex="0"]')) if (other !== view) other.setAttribute('tabindex', '-1');
-      target.setAttribute('tabindex', '0');
-      keepInside(view, target);
+    onItemFocus(view, '.vd-node, .vd-group-head', (target) => {
+      takeTabStop(view, target);
       state.focus = target.classList.contains('vd-node') ? target.dataset.id : null;
       repaint();
     });
-    view.addEventListener('focusout', () => { state.focus = null; repaint(); });
-    view.addEventListener('pointerover', (event) => {
-      const node = event.target.closest('.vd-node');
-      state.hover = node ? node.dataset.id : null;
-      repaint();
+    bindHoverAndFocus(view, {
+      selector: '.vd-node',
+      state,
+      keyOf: (node) => (node ? node.dataset.id : null),
+      paint: repaint,
     });
-    view.addEventListener('pointerleave', () => { state.hover = null; repaint(); });
     view.addEventListener('click', (event) => {
       const group = event.target.closest('.vd-super, .vd-group-head');
       if (group) return toggleGroup(group);
