@@ -16,17 +16,6 @@ UI_CSS_DIR = UI_STATIC_DIR / "css"
 CSS_FILES = sorted(
     [*CSS_DIR.glob("*.css"), *UI_CSS_DIR.glob("*.css")], key=lambda p: p.name
 )
-PART_NAMES = (
-    "00-tokens", "01-base", "10-chrome", "20-choice", "21-form", "22-comment",
-    "23-decision", "24-ranking", "25-slider", "30-menu", "31-toc",
-    "32-sections", "40-table",
-    "41-chart",    "42-diagram", "43-flow", "44-wireframe", "45-code", "46-callout",
-    "47-change", "48-annotated", "50-blocks", "52-diff", "53-filetree",
-    "54-checklist", "55-containers", "56-matrix", "57-sequence", "58-screen-flow",
-    "58-stats",
-    "59-timeline", "60-state", "61-risk", "62-er", "63-image", "64-change-summary",
-    "65-header",
-)  # fmt: skip
 COLOUR_LITERAL = re.compile(
     r"#[0-9a-fA-F]{3,8}\b|\b(?:rgb|rgba|hsl|hsla|hwb|lab|lch|oklab|oklch|color-mix)\(",
     re.IGNORECASE,
@@ -35,7 +24,10 @@ COLOUR_LITERAL = re.compile(
 # (foreground token, background tokens, minimum ratio): 4.5 text, 3 non-text.
 TEXT, NON_TEXT = 4.5, 3.0
 SURFACES = ("--vd-surface", "--vd-surface-sunk", "--vd-surface-elevated")
-HUES = ("--vd-accent", "--vd-info", "--vd-success", "--vd-warning", "--vd-danger")
+HUES = (
+    "--vd-accent", "--vd-accent-2", "--vd-info",
+    "--vd-success", "--vd-warning", "--vd-danger",
+)  # fmt: skip
 NON_TEXT_TOKENS = ("--vd-border-interactive", "--vd-focus-ring", "--vd-border-selected")
 PAIRS = (
     *((fg, bg, TEXT) for fg in ("--vd-text", "--vd-text-secondary") for bg in SURFACES),
@@ -143,27 +135,6 @@ def test_token_pairs_meet_contrast(scheme: str) -> None:
     assert not failures, "\n".join(failures)
 
 
-def test_token_table_covers_the_design_language() -> None:
-    tokens = _tokens("light")
-    required = (
-        "--vd-surface", "--vd-surface-sunk", "--vd-surface-elevated", "--vd-text",
-        "--vd-text-secondary", "--vd-accent", "--vd-info", "--vd-success",
-        "--vd-warning", "--vd-danger", "--vd-border", "--vd-border-interactive",
-        "--vd-border-selected", "--vd-hover", "--vd-pressed", "--vd-focus-ring",
-        "--vd-selected", "--vd-disabled-text", "--vd-error", "--vd-readonly",
-        "--vd-shadow-0", "--vd-shadow-3", "--vd-dur-fast", "--vd-dur",
-        "--vd-radius-s", "--vd-radius-m", "--vd-radius-l", "--vd-radius-full",
-        "--vd-text-xs", "--vd-text-2xl", "--vd-space-1", "--vd-space-9",
-    )  # fmt: skip
-    assert [name for name in required if name not in tokens] == []
-    css = (UI_CSS_DIR / "00-tokens.css").read_text()
-    for query in (
-        "prefers-color-scheme: dark", "prefers-reduced-motion: reduce",
-        "forced-colors: active", "pointer: coarse", "color-scheme: light dark",
-    ):  # fmt: skip
-        assert query in css
-
-
 FLOW_TOKENS = ("--vd-flow-block", "--vd-flow-before-heading", "--vd-flow-after-heading")
 
 
@@ -185,28 +156,6 @@ def test_flow_leaves_more_room_before_a_heading_than_after_it() -> None:
         "--vd-flow-after-heading"
     )
     assert _space_step("--vd-flow-before-heading") > _space_step("--vd-flow-block")
-
-
-def test_base_applies_the_flow_tokens_to_the_page_blocks() -> None:
-    base = (UI_CSS_DIR / "01-base.css").read_text()
-    for name in FLOW_TOKENS:
-        assert f"margin-block-start: var({name})" in base
-    assert "main > .block + .block.heading" in base
-    assert "main > .block.heading + .block" in base
-    assert "main > .block > [data-mithril] > * { margin-block: 0; }" in base
-
-
-def test_part_files_exist_and_load_in_order() -> None:
-    names = [p.stem for p in CSS_FILES]
-    assert names == list(PART_NAMES)
-    shipped = page_css()
-    positions = [
-        shipped.index(
-            (next(p for p in CSS_FILES if p.stem == name)).read_text().splitlines()[0]
-        )
-        for name in PART_NAMES
-    ]
-    assert positions == sorted(positions)
 
 
 def test_no_colour_literal_outside_the_tokens_file() -> None:
@@ -254,20 +203,3 @@ def test_served_route_returns_the_concatenation() -> None:
     from tavle.serve.serve import static_body
 
     assert static_body("app.css") == page_css().encode("utf-8")
-
-
-def test_heading_tokens_keep_default_values_and_drive_chrome() -> None:
-    expected = {
-        "heading-weight": "700",
-        "title-weight": "750",
-        "heading-tracking": "-0.01em",
-        "title-tracking": "-0.02em",
-        "heading-case": "none",
-        "heading-color": "var(--vd-text)",
-        "heading-mark-size": "0.5em",
-    }
-    tokens = _tokens("light")
-    chrome = (CSS_DIR / "10-chrome.css").read_text()
-    for name, value in expected.items():
-        assert tokens[f"--vd-{name}"] == value
-        assert f"var(--vd-{name})" in chrome

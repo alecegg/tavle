@@ -20,11 +20,8 @@ def test_vendored_mithril_hash_matches_recorded_row() -> None:
     assert REPO / path == VENDORED
     assert hashlib.sha256(VENDORED.read_bytes()).hexdigest() == recorded
     assert (version, licence) == ("2.3.8", "MIT")
-
-
-def test_header_names_the_recorded_version_and_licence() -> None:
     header = VENDORED.read_text(encoding="utf-8").splitlines()[0]
-    assert "mithril 2.3.8" in header and "MIT" in header
+    assert f"mithril {version}" in header and licence in header
 
 
 def test_licence_file_ships_beside_the_vendored_file() -> None:

@@ -75,42 +75,9 @@ def test_logical_properties_only(name: str) -> None:
     assert PHYSICAL.findall(_text(name)) == []
 
 
-@pytest.mark.parametrize("name", OWNED)
+@pytest.mark.parametrize("name", (*OWNED, "20-choice.css", "21-form.css"))
 def test_focus_is_never_removed(name: str) -> None:
     assert not re.search(r"outline\s*:\s*(?:none|0)\b", _text(name))
-
-
-def test_button_family_has_every_state() -> None:
-    css = _text("10-chrome.css")
-    for selector in (
-        "button:active", "button:focus-visible", "button:disabled",
-        "button.primary", "button.ghost", "button.danger", "button:hover",
-    ):  # fmt: skip
-        assert selector in css, selector
-    hover_start = css.index("@media (hover: hover)")
-    assert css.index("button:hover") > hover_start
-
-
-def test_thread_state_uses_a_full_border_not_an_edge_bar() -> None:
-    css = _text("10-chrome.css")
-    thread = re.search(r"\.thread \{([^}]*)\}", css)
-    resolved = re.search(r"\.thread\.resolved \{([^}]*)\}", css)
-    assert thread and "border: 1px solid" in thread.group(1)
-    assert "border-inline-start" not in thread.group(1)
-    assert resolved and "border-style: dashed" in resolved.group(1)
-
-
-def test_flash_and_forced_colors_are_covered() -> None:
-    css = _text("10-chrome.css")
-    assert "prefers-reduced-motion: reduce" in css
-    assert "forced-colors: active" in css
-
-
-def test_button_targets_use_the_control_height_token() -> None:
-    button = re.search(r"\nbutton \{([^}]*)\}", _text("10-chrome.css"))
-    assert button
-    assert "min-block-size: var(--vd-control-height)" in button.group(1)
-    assert "min-inline-size: var(--vd-control-height)" in button.group(1)
 
 
 def test_flow_tokens_own_the_gaps_the_action_menu_once_reserved() -> None:

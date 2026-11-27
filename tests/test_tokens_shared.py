@@ -11,6 +11,7 @@ import pytest
 
 TOKENS = files("tavle").joinpath("static", "css", "00-tokens.css")
 CSS = Path(str(TOKENS)).read_text()
+CHROME = Path(str(files("tavle.page").joinpath("static", "css", "10-chrome.css")))
 
 
 def _body(selector_start: str) -> str:
@@ -57,16 +58,6 @@ def test_flow_tokens_are_declared_once_for_both_schemes() -> None:
 Rgb = tuple[float, float, float]
 SCHEMES = ("light", "dark")
 SURFACES = ("--vd-surface", "--vd-surface-elevated", "--vd-surface-sunk")
-# body copy 4.5:1; large text and UI parts 3:1
-TEXT_TOKENS = (
-    "--vd-text",
-    "--vd-text-secondary",
-    "--vd-accent",
-    "--vd-accent-2",
-    "--vd-success",
-    "--vd-warning",
-    "--vd-danger",
-)
 TONES = ("info", "decision", "risk", "warning", "success")
 
 
@@ -149,47 +140,30 @@ def test_page_card_and_sunk_surfaces_are_visibly_distinct(scheme: str) -> None:
 
 
 @pytest.mark.parametrize("scheme", SCHEMES)
-@pytest.mark.parametrize("surface", SURFACES)
-@pytest.mark.parametrize("text", TEXT_TOKENS)
-def test_text_tokens_meet_aa_on_every_surface(
-    scheme: str, surface: str, text: str
-) -> None:
-    ground = _color(scheme, surface)
-    assert _contrast(_color(scheme, text, ground), ground) >= 4.5
-
-
-@pytest.mark.parametrize("scheme", SCHEMES)
-@pytest.mark.parametrize("surface", SURFACES)
-def test_interactive_borders_and_on_accent_text_meet_ui_contrast(
-    scheme: str, surface: str
-) -> None:
-    ground = _color(scheme, surface)
-    assert _contrast(_color(scheme, "--vd-border-interactive", ground), ground) >= 3.0
-    accent = _color(scheme, "--vd-accent")
-    assert _contrast(_color(scheme, "--vd-on-accent"), accent) >= 4.5
-
-
-@pytest.mark.parametrize("scheme", SCHEMES)
-@pytest.mark.parametrize("surface", SURFACES)
-@pytest.mark.parametrize("tone", TONES)
-def test_tone_text_meets_aa_on_its_tint_over_every_surface(
-    scheme: str, surface: str, tone: str
-) -> None:
+def test_tone_text_meets_aa_on_its_tint_over_every_surface(scheme: str) -> None:
     tokens = _scheme(scheme)
-    ground = _color(scheme, surface)
-    tint = _parse(_resolve(tokens[f"--vd-tone-{tone}-tint"], tokens), ground)
-    assert _contrast(_color(scheme, f"--vd-tone-{tone}-text"), tint) >= 4.5
+    failures = []
+    for surface in SURFACES:
+        ground = _color(scheme, surface)
+        for tone in TONES:
+            tint = _parse(_resolve(tokens[f"--vd-tone-{tone}-tint"], tokens), ground)
+            ratio = _contrast(_color(scheme, f"--vd-tone-{tone}-text"), tint)
+            if ratio < 4.5:
+                failures.append(f"{tone} on {surface}: {ratio:.2f}")
+    assert not failures, "\n".join(failures)
 
 
 @pytest.mark.parametrize("scheme", SCHEMES)
-@pytest.mark.parametrize("surface", SURFACES)
-@pytest.mark.parametrize("tone", TONES)
-def test_tone_edge_meets_ui_contrast_on_every_surface(
-    scheme: str, surface: str, tone: str
-) -> None:
+def test_tone_edge_meets_ui_contrast_on_every_surface(scheme: str) -> None:
     """The tone triple (`h s% l%`) draws badges and edges, so it needs 3:1."""
-    edge = _parse(f"hsl({_scheme(scheme)[f'--vd-tone-{tone}']})")
-    assert _contrast(edge, _color(scheme, surface)) >= 3.0
+    failures = []
+    for tone in TONES:
+        edge = _parse(f"hsl({_scheme(scheme)[f'--vd-tone-{tone}']})")
+        for surface in SURFACES:
+            ratio = _contrast(edge, _color(scheme, surface))
+            if ratio < 3.0:
+                failures.append(f"{tone} on {surface}: {ratio:.2f}")
+    assert not failures, "\n".join(failures)
 
 
 @pytest.mark.parametrize("scheme", SCHEMES)
@@ -210,7 +184,7 @@ def test_neutral_family_has_a_hue_and_the_accents_are_two_hues(scheme: str) -> N
     assert len(hues) == 2
 
 
-def test_heading_tokens_are_shared_across_schemes() -> None:
+def test_heading_tokens_are_shared_across_schemes_and_drive_chrome() -> None:
     names = (
         "heading-weight",
         "title-weight",
@@ -224,6 +198,7 @@ def test_heading_tokens_are_shared_across_schemes() -> None:
     for name in names:
         token = f"--vd-{name}"
         assert token in light
+        assert f"var({token})" in CHROME.read_text()
         assert CSS.count(f"{token}:") == 1
         for selector in (
             "@media (prefers-color-scheme: dark)",
