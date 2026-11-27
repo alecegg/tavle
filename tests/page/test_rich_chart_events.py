@@ -14,7 +14,13 @@ from scene_html import svg_html
 
 from tavle import PageServer, check_props, parse_lines
 from tavle.blocks.chart_notes import MAX_NOTES
-from tavle.blocks_render.chart_events import hatch_path, place_pins
+from tavle.blocks_render.chart_events import (
+    draw_events,
+    events_top,
+    hatch_path,
+    place_pins,
+    rows_for,
+)
 from tavle.blocks_render.chart_model import (
     Event,
     build_model,
@@ -185,6 +191,107 @@ def test_hatch_paths_stay_inside_the_rect() -> None:
         xs, ys = nums[0::2], nums[1::2]
         assert xs and min(xs) >= 9.9 and max(xs) <= 50.1
         assert min(ys) >= 19.9 and max(ys) <= 60.1
+
+
+@pytest.mark.timeout(2, method="signal")
+@pytest.mark.parametrize(
+    ("style", "expected"),
+    [
+        ("/", "M0.0 8.0L8.0 0.0M8.0 8.0L16.0 0.0"),
+        ("\\", "M0.0 0.0L8.0 8.0M8.0 0.0L16.0 8.0"),
+        ("x", "M0.0 8.0L8.0 0.0M8.0 8.0L16.0 0.0M0.0 0.0L8.0 8.0M8.0 0.0L16.0 8.0"),
+        ("-", "M0.0 4.0L16.0 4.0"),
+        ("|", "M4.0 0.0L4.0 8.0M12.0 0.0L12.0 8.0"),
+    ],
+)
+def test_hatch_lines_are_eight_apart(style: str, expected: str) -> None:
+    assert hatch_path(0, 0, 16, 8, style) == expected
+
+
+def test_event_rows_grow_one_per_four_events_up_to_three() -> None:
+    assert [rows_for(n) for n in range(14)] == [
+        0,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+    ]
+    assert events_top(build_model(with_notes(LINE, *[MARK] * 5))) == 66.0
+
+
+def _marks(*placed: tuple[float, str]) -> list[tuple[Event, float, float]]:
+    return [
+        (Event(n, label, "a", None, "info"), x, x)
+        for n, (x, label) in enumerate(placed, 1)
+    ]
+
+
+@pytest.mark.parametrize(
+    ("spans", "rows", "right", "expected"),
+    [
+        # an exact fit keeps the label
+        (_marks((0, "abcde")), 1, 68.0, [(11, 0, "abcde")]),
+        # pins are clamped half a pin inside the plot
+        (_marks((0, ""), (100, "")), 1, 100.0, [(11, 0, ""), (89, 0, "")]),
+        # a pin exactly 4 past the last end shares its row; a closer one moves down
+        (
+            _marks((11, "abcde"), (83, ""), (105, "")),
+            2,
+            1000.0,
+            [(11, 0, "abcde"), (83, 0, ""), (105, 1, "")],
+        ),
+        # a label that does not fit is dropped before the pin changes row
+        (
+            _marks((100, "abcde"), (110, ""), (990, "abcde")),
+            2,
+            1000.0,
+            [(100, 0, "abcde"), (110, 1, ""), (989, 0, "")],
+        ),
+        # with no room, the pin goes after the last pin of the emptiest row
+        (
+            _marks((100, "abcde"), (110, ""), (112, ""), (145, "")),
+            2,
+            1000.0,
+            [(100, 0, "abcde"), (110, 1, ""), (140, 1, ""), (166, 1, "")],
+        ),
+    ],
+)
+def test_pin_placement(
+    spans: list[tuple[Event, float, float]],
+    rows: int,
+    right: float,
+    expected: list[tuple[float, int, str]],
+) -> None:
+    pins = place_pins(spans, 0.0, right, rows)
+    assert [(p.x, p.lane, p.label) for p in pins] == expected
+
+
+def _flat(shapes: list[Any]) -> list[tuple[str, dict[str, str]]]:
+    out: list[tuple[str, dict[str, str]]] = []
+    for tag, attrs, content in shapes:
+        out.append((tag, attrs))
+        if isinstance(content, list):
+            out += _flat(content)
+    return out
+
+
+def test_pins_sit_one_row_apart_and_a_zero_width_band_keeps_one_unit() -> None:
+    model = build_model(with_notes(LINE, *[MARK] * 5))
+    mark = Event(1, "", "a", None, "info")
+    band = Event(2, "", "a", "a", "info")
+    spans = [(mark, 100.0, 100.0), (mark, 100.0, 100.0), (band, 50.0, 50.0)]
+    found = _flat(draw_events(model, spans, 0.0, 1000.0, 66.0, 200.0))
+    assert [a["cy"] for tag, a in found if tag == "circle"] == ["15.0", "43.0"]
+    assert [a["width"] for _, a in found if a.get("class") == "vb-band"] == ["1.0"]
 
 
 def test_stress_fixture_renders_without_nan_and_every_event_is_listed() -> None:

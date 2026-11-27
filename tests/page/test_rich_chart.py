@@ -6,7 +6,7 @@ import itertools
 import re
 import threading
 import time
-from collections.abc import Iterator
+from collections.abc import Iterator, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -23,12 +23,14 @@ from tavle import (
     type_text,
 )
 from tavle.blocks.charts import CHART, MAX_SERIES
-from tavle.blocks_render.chart_model import build_model, copy_text
+from tavle.blocks_render.chart_model import Series, build_model, copy_text
 from tavle.blocks_render.chart_scale import (
     compact,
     fmt,
     nice_ticks,
+    raw,
     thin_step,
+    tick_decimals,
 )
 from tavle.blocks_render.charts import chart_props as _chart_props
 
@@ -384,8 +386,8 @@ def test_every_prop_text_is_escaped() -> None:
             "notes": [{"x": "<l>", "label": "<n>"}],
         }
     )
-    for raw in ("<t>", "<u>", "<d>", "<l>", "<s>", "<n>"):
-        assert raw not in out
+    for tag in ("<t>", "<u>", "<d>", "<l>", "<s>", "<n>"):
+        assert tag not in out
 
 
 def test_props_carry_text_and_shapes_but_no_markup() -> None:
@@ -411,6 +413,87 @@ def test_nice_ticks_and_number_forms() -> None:
     assert thin_step(10, 100, 40) == 1 and thin_step(200, 1.5, 60) > 20
 
 
+@pytest.mark.parametrize(
+    ("low", "high", "target", "expected"),
+    [
+        (0, 10, 1, [0, 10]),
+        (0, 10, 10, list(range(11))),
+        (0, 0, 5, [-1, -0.5, 0, 0.5, 1]),
+    ],
+)
+def test_nice_ticks_step_follows_the_target(
+    low: float, high: float, target: int, expected: list[float]
+) -> None:
+    assert nice_ticks(low, high, target) == expected
+
+
+@pytest.mark.parametrize(
+    ("ticks", "expected"),
+    [([5], 0), ([0, 0.5], 1), ([0, 0.1], 1), ([0, 1e-7], 6)],
+)
+def test_tick_decimals_follow_the_step(ticks: list[float], expected: int) -> None:
+    assert tick_decimals(ticks) == expected
+
+
+@pytest.mark.parametrize(
+    ("count", "slot", "widest", "expected"),
+    [
+        (1, 10, 100, 1),
+        (2, 10, 100, 11),
+        (5, 0, 10, 1),
+        (5, 1, 10, 18),
+        (5, 10, 22, 3),
+    ],
+)
+def test_thin_step_keeps_labels_eight_units_apart(
+    count: int, slot: float, widest: float, expected: int
+) -> None:
+    assert thin_step(count, slot, widest) == expected
+
+
+def test_csv_numbers_keep_a_lower_case_exponent() -> None:
+    assert raw(1e20) == "1e+20"
+
+
+def test_series_kinds_follow_the_chart_kind() -> None:
+    combo = build_model(
+        props("combo", series=[{**SERIES[0], "type": "line"}, SERIES[1]])
+    )
+    assert [s.kind for s in combo.series] == ["line", "line"]
+    assert [s.kind for s in build_model(props("sparkline")).series] == ["line"]
+    assert build_model(props("donut")).series == [
+        Series(0, "before", [30.0], [], "left", "slice"),
+        Series(1, "after", [70.0], [], "left", "slice"),
+    ]
+
+
+def test_decimals_title_and_heading_reach_the_text_forms() -> None:
+    plain = chart_props(BASE)
+    assert plain["title"] == "chart" and plain["heading"] == ""
+    out = chart_props({**BASE, "decimals": 1})
+    assert out["table"]["rows"][0]["cells"] == [["120.0 ms", 0], ["400.0 ms", 1]]
+    assert out["desc"] == "Bar chart with 2 series; values run from 80.0 to 400.0 ms."
+    one = chart_props(
+        props("donut", labels=["x"], series=[{"name": "s", "values": [5]}])
+    )
+    assert one["desc"] == "Donut chart with 1 slice; values run from 5 to 5 ms."
+
+
+@pytest.mark.timeout(2, method="signal")
+def test_scatter_event_ends_are_formatted_numbers() -> None:
+    data = props(
+        "scatter",
+        series=[{"name": "s", "x": [0, 2000], "values": [1, 2]}],
+        notes=[{"from": 1000, "to": 1500, "label": "n"}],
+    )
+    assert chart_props(data)["events"][0]["where"] == "1,000 to 1,500"
+
+
+def test_copy_quotes_only_cells_with_csv_specials() -> None:
+    text = copy_text(build_model({**BASE, "labels": ["X-ray", "b"]}))
+    assert text.splitlines()[1] == "X-ray,120,400"
+
+
 def test_spec_example_validates_and_every_kind_is_listed() -> None:
     result = parse_lines(CHART.example)
     assert result.errors == []
@@ -425,36 +508,509 @@ def test_old_props_stay_valid_and_new_ones_are_optional() -> None:
     assert rules({"kind": "bar", "series": old["series"]}) == {"missing-key"}
 
 
-def test_validation_names_each_fault() -> None:
+def _points(count: int) -> dict[str, Any]:
+    return {
+        **BASE,
+        "labels": [f"l{i}" for i in range(count)],
+        "series": [{"name": "s", "values": [1] * count}],
+    }
+
+
+SCATTER_A = {"name": "a", "x": [1, 2], "values": [3, 4]}
+FINITE = "values must be a list of finite numbers"
+X_LIST = "x must be a list of numbers, one per value"
+DECIMALS = "chart.decimals must be a whole number from 0 to 6"
+
+
+@pytest.mark.parametrize(
+    ("data", "faults"),
+    [
+        (
+            {**BASE, "kind": "line", "stack": True},
+            [("type", "chart.stack applies to bar or combo charts")],
+        ),
+        ({**BASE, "kind": "combo", "stack": True}, []),
+        (
+            {**BASE, "kind": "line", "horizontal": True},
+            [("type", "chart.horizontal applies to bar charts")],
+        ),
+        ({**BASE, "decimals": 0}, []),
+        ({**BASE, "decimals": 6}, []),
+        ({**BASE, "decimals": -1}, [("type", DECIMALS)]),
+        ({**BASE, "decimals": 7}, [("type", DECIMALS)]),
+        (
+            {"kind": "bar", "series": SERIES},
+            [("missing-key", "chart: missing required key 'labels'")],
+        ),
+        (
+            {**BASE, "series": [{"name": "s", "values": [1, float("nan")]}]},
+            [("type", f"series[1].{FINITE}")],
+        ),
+        (_points(500), []),
+        (_points(501), [("too-many", "series[1].values: at most 500 numbers")]),
+        (
+            props("donut", series=[{"name": "s", "values": [1, -1]}]),
+            [("donut-negative", "series[1].values must not be negative")],
+        ),
+        (
+            {**BASE, "series": [SERIES[0], {"name": "s", "values": [1]}]},
+            [
+                (
+                    "series-length",
+                    "series[2].values has 1 numbers, expected 2 (one per label)",
+                )
+            ],
+        ),
+        (props("scatter", labels=["a"]), []),
+        (
+            props("scatter", series=[SCATTER_A, {"name": "s", "values": [1]}]),
+            [("type", f"series[2].{X_LIST}")],
+        ),
+        (
+            props(
+                "scatter",
+                series=[
+                    SCATTER_A,
+                    {"name": "b", "x": [1, float("inf")], "values": [1, 2]},
+                ],
+            ),
+            [("type", f"series[2].{X_LIST}")],
+        ),
+        (
+            props(
+                "scatter", series=[SCATTER_A, {"name": "b", "x": [1, 2], "values": [1]}]
+            ),
+            [("series-length", "series[2].x has 2 numbers, expected 1")],
+        ),
+        (
+            props("scatter", series=[{"name": "s", "values": [float("nan")]}]),
+            [("type", f"series[1].{FINITE}"), ("type", f"series[1].{X_LIST}")],
+        ),
+        (
+            {
+                **BASE,
+                "series": [SERIES[0], {**SERIES[1], "axis": "right", "type": "line"}],
+            },
+            [
+                ("type", "series[2].axis applies to combo charts"),
+                ("type", "series[2].type applies to combo charts"),
+            ],
+        ),
+        (
+            {**BASE, "series": [SERIES[0], {**SERIES[1], "x": [1, 2]}]},
+            [("type", "series[2].x applies to scatter charts")],
+        ),
+        (
+            {
+                **BASE,
+                "labels": ["a"],
+                "series": [
+                    {"name": f"s{i}", "values": [1]} for i in range(MAX_SERIES + 1)
+                ],
+            },
+            [("too-many", "chart.series: at most 12 series")],
+        ),
+        (props("donut", series=SERIES), [("type", "chart: a donut takes one series")]),
+        (
+            props("sparkline", series=SERIES),
+            [("type", "chart: a sparkline takes one series")],
+        ),
+    ],
+)
+def test_validation_names_each_fault(
+    data: dict[str, Any], faults: list[tuple[str, str]]
+) -> None:
+    assert [(f.rule, f.message) for f in check_props("chart", data, 1)] == faults
+
+
+def test_other_faults_name_their_rule() -> None:
     assert "unknown-key" in rules({**BASE, "colour": "red"})
     assert "type" in rules({**BASE, "kind": "pie"})
-    assert "type" in rules({**BASE, "decimals": 9}) and "type" in rules(
-        {**BASE, "stack": "yes"}
-    )
-    assert "type" in rules({**BASE, "kind": "line", "stack": True})
-    assert "type" in rules({**BASE, "kind": "line", "horizontal": True})
-    assert "series-length" in rules({**BASE, "series": [{"name": "s", "values": [1]}]})
+    assert "type" in rules({**BASE, "stack": "yes"})
     assert "type" in rules({**BASE, "series": [{"name": "s", "values": []}]})
-    assert "donut-negative" in rules(
-        props("donut", series=[{"name": "s", "values": [1, -1]}])
-    )
-    assert "type" in rules(props("donut", series=SERIES))
-    assert "type" in rules(props("sparkline", series=SERIES))
-    assert "type" in rules({**BASE, "series": [{**SERIES[0], "axis": "right"}]})
-    assert "type" in rules({**BASE, "series": [{**SERIES[0], "x": [1, 2]}]})
-    assert "type" in rules(props("scatter", series=[{"name": "s", "values": [1]}]))
-    assert "series-length" in rules(
-        props("scatter", series=[{"name": "s", "x": [1, 2], "values": [1]}])
-    )
     assert "note-x" in rules({**BASE, "notes": [{"x": "nope", "label": "n"}]})
     assert "note-x" in rules(props("scatter", notes=[{"x": "a", "label": "n"}]))
-    assert "too-many" in rules(
-        {
-            **BASE,
-            "labels": ["a"],
-            "series": [{"name": f"s{i}", "values": [1]} for i in range(MAX_SERIES + 1)],
+
+
+# ---- Drawn geometry ----------------------------------------------------------
+
+
+def _flat(shapes: list[Any]) -> Iterator[tuple[str, dict[str, str], Any]]:
+    for tag, attrs, content in shapes:
+        yield tag, attrs, content
+        if isinstance(content, list):
+            yield from _flat(content)
+
+
+def _shapes(data: dict[str, Any]) -> list[tuple[str, dict[str, str], Any]]:
+    assert check_props("chart", data, 1) == []
+    return list(_flat(chart_props(data)["shapes"]))
+
+
+def _texts(data: dict[str, Any], cls: str) -> list[tuple[float, float, str, str]]:
+    """(x, y, anchor, text) of each text element of class `cls`."""
+    return [
+        (float(a["x"]), float(a["y"]), a["text-anchor"], c)
+        for tag, a, c in _shapes(data)
+        if tag == "text" and a["class"] == cls
+    ]
+
+
+def _values(data: dict[str, Any], cls: str = "vb-tick") -> list[str]:
+    """The value-axis tick texts (anchored at an end, not under a label)."""
+    return [t for _, _, anchor, t in _texts(data, cls) if anchor != "middle"]
+
+
+def _rects(data: dict[str, Any], cls: str) -> list[tuple[float, ...]]:
+    keys = ("x", "y", "width", "height")
+    return [
+        tuple(float(a[k]) for k in keys)
+        for tag, a, _ in _shapes(data)
+        if tag == "rect" and a["class"].startswith(cls)
+    ]
+
+
+def _attr(data: dict[str, Any], tag: str, cls: str, key: str) -> list[str]:
+    return [
+        a[key] for t, a, _ in _shapes(data) if t == tag and a["class"].startswith(cls)
+    ]
+
+
+def _chart(kind: str, labels: list[str], *values: Sequence[float], **more: Any) -> Any:
+    series = [{"name": f"s{i}", "values": v} for i, v in enumerate(values)]
+    return {"kind": kind, "labels": labels, "series": series, **more}
+
+
+def _labels(count: int) -> list[str]:
+    return [f"l{i}" for i in range(count)]
+
+
+def test_value_axes_reach_zero_for_bars_and_areas_and_keep_decimals() -> None:
+    assert _values(_chart("bar", LABELS, [0.5, 0.8])) == [
+        "0.0",
+        "0.2",
+        "0.4",
+        "0.6",
+        "0.8",
+    ]
+    assert _values(_chart("bar", LABELS, [-5, -3])) == [
+        "-5",
+        "-4",
+        "-3",
+        "-2",
+        "-1",
+        "0",
+    ]
+    assert _values(_chart("area", LABELS, [5, 6])) == ["0", "2", "4", "6"]
+    line = _chart("line", LABELS, [1, 2], decimals=1)
+    assert _values(line) == ["1.0", "1.2", "1.4", "1.6", "1.8", "2.0"]
+
+
+def test_a_chart_with_only_a_right_axis_starts_at_the_left_edge() -> None:
+    right = [
+        {"name": "p", "values": [1, 2], "axis": "right"},
+        {"name": "q", "values": [2, 3], "axis": "right"},
+    ]
+    data = {"kind": "combo", "labels": ["a", "b"], "series": right}
+    assert _texts(data, "vb-tick") == [
+        (345.6, 186.0, "start", "0"),
+        (345.6, 128.0, "start", "1"),
+        (345.6, 70.0, "start", "2"),
+        (345.6, 12.0, "start", "3"),
+        (93.9, 203.0, "middle", "a"),
+        (257.7, 203.0, "middle", "b"),
+    ]
+
+
+def test_stacks_put_zero_and_small_values_on_the_positive_run() -> None:
+    data = _chart("bar", ["a"], [5], [0.5], [0], stack=True)
+    assert _rects(data, "vb-bar") == [
+        (53.2, 41.0, 262.1, 145.0),
+        (53.2, 26.5, 262.1, 14.5),
+        (53.2, 26.0, 262.1, 1.0),
+    ]
+
+
+def test_bars_keep_a_one_unit_minimum_and_a_minimum_width() -> None:
+    assert _rects(_chart("bar", LABELS, [100, 1]), "vb-bar") == [
+        (52.7, 12.0, 124.3, 174.0),
+        (208.1, 184.3, 124.3, 1.7),
+    ]
+    crowded = _chart("bar", _labels(40), *[[1] * 40] * 12)
+    assert _rects(crowded, "vb-bar")[0] == (37.5, 12.0, 0.6, 174.0)
+    one = _chart("bar", ["a"], [1])
+    assert _rects(one, "vb-bar") == [(68.3, 12.0, 248.6, 174.0)]
+    assert _rects(one, "vb-col") == [(37.2, 12.0, 310.8, 174.0)]
+
+
+def test_negative_areas_fill_up_to_zero() -> None:
+    area = _chart("area", LABELS, [-5, -3])
+    assert _attr(area, "polygon", "vb-area", "points") == [
+        "108.6,12.0 108.6,186.0 268.2,116.4 268.2,12.0"
+    ]
+
+
+def test_note_labels_take_two_rows_and_shift_the_plot_down() -> None:
+    notes = [
+        {"x": "a", "label": "start"},
+        {"x": "b", "label": "a much longer note text here"},
+        {"x": "c", "label": "third"},
+        {"x": "f", "label": "end"},
+    ]
+    data = _chart("line", list("abcdef"), [1, 2, 3, 4, 5, 6], notes=notes)
+    assert _texts(data, "vb-note-label") == [
+        (47.7, 40.0, "middle", "start"),
+        (102.3, 40.0, "start", "a much longer note te…"),
+        (156.9, 23.0, "middle", "third"),
+        (320.7, 40.0, "middle", "end"),
+    ]
+    assert [y for _, y, a, _ in _texts(data, "vb-tick") if a == "end"] == [
+        186.0,
+        158.0,
+        130.0,
+        102.0,
+        74.0,
+        46.0,
+    ]
+
+
+def test_end_labels_stack_apart_and_drop_out_when_they_cannot_fit() -> None:
+    close = _chart("line", LABELS, [1, 2], [1, 2.1], [5, 1])
+    assert _texts(close, "vb-end") == [
+        (333.2, 138.2, "start", "s1"),
+        (333.2, 155.2, "start", "s0"),
+        (333.2, 186.0, "start", "s2"),
+    ]
+    crowded = _chart("line", LABELS, [1, 0], [1, 0.01], [1, 0.02], [1, 0.03])
+    assert _texts(crowded, "vb-end") == []
+    assert _texts(_chart("area", LABELS, [1, 2], [2, 3]), "vb-end") == [
+        (333.2, 12.0, "start", "s1"),
+        (333.2, 70.0, "start", "s0"),
+    ]
+    six = _chart("line", LABELS, *[[i, i + 1] for i in range(6)])
+    assert len(_texts(six, "vb-end")) == 6
+
+
+def test_end_labels_need_150_units_of_plot_and_cut_long_names() -> None:
+    def pair(names: tuple[str, str], top: float) -> dict[str, Any]:
+        series = [
+            {"name": names[0], "values": [0, top]},
+            {"name": names[1], "values": [top, 0]},
+        ]
+        return {"kind": "line", "labels": LABELS, "series": series, "decimals": 6}
+
+    exact = pair(("abcdefghijkl", "b"), 5)
+    assert _values(exact)[:1] == ["0.000000"]
+    assert _texts(exact, "vb-end") == [
+        (249.2, 12.0, "start", "abcdefghijkl"),
+        (249.2, 186.0, "start", "b"),
+    ]
+    assert _texts(pair(("abcdefghijkl", "b"), 50), "vb-end") == []
+    long = {**pair(("abcdefghijklm", "nopqrstuvwxyz"), 2), "decimals": 0}
+    assert _texts(long, "vb-end") == [
+        (249.2, 12.0, "start", "abcdefghijk…"),
+        (249.2, 186.0, "start", "nopqrstuvwx…"),
+    ]
+
+
+def _noted(count: int, *notes: tuple[int, int]) -> dict[str, Any]:
+    """A flat line over `count` labels with notes (label index, text length)."""
+    labels = _labels(count)
+    marks = [
+        {"x": labels[i], "label": chr(97 + n % 26) * size}
+        for n, (i, size) in enumerate(notes)
+    ]
+    return _chart("line", labels, [1] * count, notes=marks)
+
+
+@pytest.mark.parametrize(
+    ("data", "expected"),
+    [
+        # too wide to centre at the left edge: left to the list
+        (_noted(2, (0, 17)), []),
+        (_noted(8, (1, 14)), [(102.3, 23.0, "start", "a" * 14)]),
+        (
+            _noted(6, (2, 1), (3, 12)),
+            [(171.6, 40.0, "middle", "a"), (222.0, 23.0, "middle", "b" * 12)],
+        ),
+        (
+            _noted(21, (0, 15), (2, 7)),
+            [(52.8, 40.0, "start", "a" * 15), (81.6, 23.0, "middle", "b" * 7)],
+        ),
+        (
+            _noted(21, (1, 20), (11, 4), (19, 22)),
+            [(67.2, 40.0, "start", "a" * 20), (211.2, 23.0, "middle", "b" * 4)],
+        ),
+        (
+            _noted(23, (9, 5), (14, 9), (17, 24), (20, 17)),
+            [
+                (170.5, 40.0, "middle", "a" * 5),
+                (236.2, 40.0, "middle", "b" * 9),
+                (275.7, 23.0, "middle", "c" * 21 + "…"),
+            ],
+        ),
+    ],
+)
+def test_note_labels_keep_six_units_apart_or_are_left_to_the_list(
+    data: dict[str, Any], expected: list[tuple[float, float, str, str]]
+) -> None:
+    assert _texts(data, "vb-note-label") == expected
+
+
+@pytest.mark.parametrize(
+    "ends",
+    [
+        [(10, 0.75), (1, 5.75), (0, 1.25), (3, 1.25)],
+        [(10, 6.25), (9, 6.0)],
+    ],
+)
+def test_end_labels_that_would_run_below_the_plot_are_all_dropped(
+    ends: list[tuple[float, float]],
+) -> None:
+    assert _texts(_chart("line", ["a", "b"], *map(list, ends)), "vb-end") == []
+
+
+def _lengths(*sizes: int) -> dict[str, Any]:
+    labels = [chr(97 + i % 26) * n for i, n in enumerate(sizes)]
+    return _chart("bar", labels, [1] * len(sizes))
+
+
+@pytest.mark.parametrize(
+    ("data", "expected"),
+    [
+        (
+            _lengths(9, 11, 8, 11, 2, 4, 15),
+            [(59.4, "a" * 9), (192.6, "d" * 11), (304.6, "g" * 11 + "…")],
+        ),
+        (
+            _lengths(
+                15, 12, 6, 11, 12, 12, 7, 15, 2, 14, 5, 11, 3, 13, 6, 17, 10, 17, 12
+            ),
+            [(55.4, "a" * 11 + "…"), (274.4, "o" * 6)],
+        ),
+        (
+            _lengths(
+                *(12, 16, 16, 6, 11, 16, 9, 11, 15, 6, 12, 12, 10, 7, 10, 9, 16, 9, 10),
+                *(11, 16, 4, 5, 3, 5, 17, 8, 9, 12, 17, 15, 7, 9, 9, 5, 17, 13, 4, 17),
+            ),
+            [(55.4, "a" * 12), (152.8, "o" * 10), (264.3, "c" * 12)],
+        ),
+    ],
+)
+def test_thinned_labels_skip_any_that_clamping_pushes_onto_a_neighbour(
+    data: dict[str, Any], expected: list[tuple[float, str]]
+) -> None:
+    ticks = _texts(data, "vb-tick")
+    assert [(x, t) for x, _, anchor, t in ticks if anchor == "middle"] == expected
+
+
+def test_more_than_24_points_is_dense() -> None:
+    assert not chart_props(_chart("line", _labels(24), list(range(24))))["dense"]
+    assert chart_props(_chart("line", _labels(25), list(range(25))))["dense"]
+    assert not chart_props(_chart("bar", _labels(24), [1] * 24, horizontal=True))[
+        "dense"
+    ]
+
+
+def test_horizontal_bars_stack_or_group_per_row() -> None:
+    stacked = _chart("bar", ["a", "b"], [5, 1], [2, 0.01], horizontal=True, stack=True)
+    assert chart_props(stacked)["box"] == "0 0 360 88"
+    assert _rects(stacked, "vb-bar") == [
+        (21.2, 10.3, 203.0, 18.4),
+        (21.2, 33.3, 40.6, 18.4),
+        (224.2, 10.3, 81.2, 18.4),
+        (61.3, 33.3, 1.0, 18.4),
+    ]
+    grouped = _chart("bar", ["a", "b"], [5, 1], [2, 0.01], horizontal=True)
+    assert chart_props(grouped)["box"] == "0 0 360 96"
+    assert _rects(grouped, "vb-bar") == [
+        (21.2, 10.7, 324.8, 10.8),
+        (21.2, 37.7, 65.0, 10.8),
+        (21.2, 21.5, 129.9, 10.8),
+        (20.7, 48.5, 1.0, 10.8),
+    ]
+    # A bar one to two units wide starts at zero, not half a unit before it.
+    narrow = _chart("bar", ["a", "b"], [1, 0.005], horizontal=True)
+    assert _rects(narrow, "vb-bar")[1] == (21.2, 33.3, 1.6, 18.4)
+
+
+def test_horizontal_axis_rows_and_labels() -> None:
+    def hbar(labels: list[str], values: list[float], **more: Any) -> Any:
+        return _chart("bar", labels, values, horizontal=True, **more)
+
+    ticks = _texts(hbar(["a", "b"], [5, 6], decimals=1), "vb-tick")
+    assert [t for *_, t in ticks] == ["0.0", "2.0", "4.0", "6.0", "a", "b"]
+    one = hbar(["a"], [5])
+    assert _rects(one, "vb-bar") == [(21.2, 10.2, 324.8, 17.6)]
+    assert _rects(one, "vb-col") == [(21.2, 8.0, 324.8, 22.0)]
+    tall = hbar(_labels(155), [1] * 155)
+    assert chart_props(tall)["box"] == "0 0 360 1400"
+    assert len([t for *_, a, t in _texts(tall, "vb-tick") if a == "end"]) == 78
+    cut = _texts(hbar(["abcdefghijklmno", "b"], [1, 2]), "vb-tick")
+    assert [t for *_, a, t in cut if a == "end"] == ["abcdefghijklm…", "b"]
+    thin = _chart("bar", _labels(60), *[[1] * 60] * 12, horizontal=True)
+    assert _rects(thin, "vb-bar")[0] == (39.7, 10.3, 306.3, 1.5)
+
+
+def test_scatter_notes_inside_the_x_ticks_draw_a_rule() -> None:
+    xs = (0, 1, 9, 10)
+    notes = [{"x": x, "label": f"n{x}"} for x in xs]
+    data = {
+        "kind": "scatter",
+        "series": [{"name": "s", "x": [0, 10], "values": [5, 6]}],
+        "notes": notes,
+    }
+    assert _attr(data, "line", "vb-note", "x1") == ["37.2", "68.1", "315.1", "346.0"]
+    assert [y for _, y, a, _ in _texts(data, "vb-tick") if a == "end"][-1] == 46.0
+    assert _values({**data, "decimals": 2})[:2] == ["5.00", "5.20"]
+
+
+def test_scatter_x_axis_does_not_reach_zero() -> None:
+    data = {"kind": "scatter", "series": [{"name": "s", "x": [5, 6], "values": [5, 6]}]}
+    bottom = [t for _, _, a, t in _texts(data, "vb-tick") if a == "middle"]
+    assert bottom == ["5.0", "5.2", "5.4", "5.6", "5.8", "6.0"]
+
+
+def test_sparkline_spreads_points_or_centres_one() -> None:
+    def spark(values: list[float]) -> dict[str, Any]:
+        labels = _labels(len(values))
+        return {
+            "kind": "sparkline",
+            "labels": labels,
+            "series": [{"name": "s", "values": values}],
         }
-    )
+
+    assert _attr(spark([3]), "polyline", "vb-line", "points") == ["80.0,22.0"]
+    assert _attr(spark([3, 4]), "polyline", "vb-line", "points") == [
+        "6.0,38.0 154.0,6.0"
+    ]
+    assert _rects(spark([3, 4]), "vb-col") == [
+        (0.0, 0.0, 80.0, 44.0),
+        (80.0, 0.0, 80.0, 44.0),
+    ]
+
+
+def _donut(*values: float) -> dict[str, Any]:
+    return {
+        "kind": "donut",
+        "labels": _labels(len(values)),
+        "series": [{"name": "s", "values": list(values)}],
+    }
+
+
+def test_donut_arcs_skip_empty_slices_and_flag_large_ones() -> None:
+    whole = "M180.0 30.0A80 80 0 1 1 180.0 30.0L180.0 60.0A50 50 0 1 0 180.0 60.0Z"
+    assert _attr(_donut(0, 0), "path", "vb-slice", "d") == []
+    assert _texts(_donut(0, 0), "vb-center") == [(180.0, 110.0, "middle", "0")]
+    assert _attr(_donut(0, 5), "path", "vb-slice", "d") == [whole]
+    assert _texts(_donut(0, 5), "vb-pct") == [(180.0, 202.0, "middle", "100%")]
+    assert _texts(_donut(5), "vb-center") == [(180.0, 110.0, "middle", "5")]
+    assert _attr(_donut(1, 1), "path", "vb-slice", "d") == [
+        "M180.0 30.0A80 80 0 0 1 180.0 190.0L180.0 160.0A50 50 0 0 0 180.0 60.0Z",
+        "M180.0 190.0A80 80 0 0 1 180.0 30.0L180.0 60.0A50 50 0 0 0 180.0 160.0Z",
+    ]
+    keys = [a for _, a, _ in _shapes(_donut(1, 24)) if "vb-slice-key" in a["class"]]
+    assert len(keys) == 2
 
 
 # ---- Chromium (slow tier) ---------------------------------------------------
@@ -598,6 +1154,8 @@ def test_interact_tooltip_is_not_clipped_at_320(open_page: Any) -> None:
     [
         (9999, "9,999"),
         (10000, "10k"),
+        (12_345, "12.3k"),
+        (99_900, "99.9k"),
         (-10000, "-10k"),
         (1_000_000, "1M"),
         (1_000_000_000, "1G"),
