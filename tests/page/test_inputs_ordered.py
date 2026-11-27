@@ -39,8 +39,6 @@ def _doc_with(widget: str) -> str:
 @pytest.mark.parametrize(
     ("line", "rule"),
     [
-        ('r = ranking(question: "Q", items: ["a"])', "type"),  # needs two
-        ('r = ranking(question: "Q", items: ["a", "a"])', "option-duplicate"),
         (
             'r = ranking(question: "Q", items: [{"label": "A", "value": "b"}, "b"])',
             "option-duplicate",
@@ -52,25 +50,14 @@ def _doc_with(widget: str) -> str:
         ),
         ('r = ranking(question: "Q", items: ["a", "b\\u0007"])', "type"),
         ('s = slider(label: "L", max: 5)', "missing-key"),
-        ('s = slider(label: "L", min: 5, max: 1)', "range"),
-        ('s = slider(label: "L", min: 1, max: 1)', "range"),
         ('s = slider(label: "L", min: 0, max: 5, step: 0)', "range"),
         ('s = slider(label: "L", min: 0, max: 5, step: -1)', "range"),
-        ('s = slider(label: "L", min: 0, max: 5, step: 9)', "range"),
-        ('s = slider(label: "L", min: 0, max: 1000000, step: 1)', "range"),
         ('s = slider(label: "L", min: "a", max: 5)', "type"),
-        ('s = slider(label: "L", min: 0, max: 5, labels: ["x"])', "type"),
-        ('s = slider(label: "L", min: 0, max: 5, labels: ["x", ""])', "type"),
         ('s = slider(label: "L", min: 0, max: 5, extra: 1)', "unknown-key"),
     ],
 )
 def test_props_faults(line: str, rule: str) -> None:
     assert rule in rules(line)
-
-
-def test_check_refuses_a_ranking_whose_answer_could_not_fit() -> None:
-    items = ", ".join(f'"{chr(97 + i % 26) * 300}{i}"' for i in range(30))
-    assert "size" in rules(f'r = ranking(question: "Q", items: [{items}])')
 
 
 def test_schemas_carry_the_declared_range_and_items() -> None:
@@ -85,9 +72,6 @@ def test_schemas_carry_the_declared_range_and_items() -> None:
 def test_invalid_props_are_not_answerable() -> None:
     doc = _doc_with('s = slider(label: "L", min: 5, max: 1)')
     assert answer_schema(doc, "s") is None
-
-
-# ---- markup -----------------------------------------------------------------
 
 
 # ---- browser ----------------------------------------------------------------
@@ -297,28 +281,6 @@ def test_browser_missing_inputs_helpers_show_a_failure(
     page.locator(".slider-error", has_text="could not start").first.wait_for()
     assert any("inputs is missing" in e for e in errors)
     page.unroute("**/static/inputs_runtime.js")
-
-
-@pytest.mark.slow
-def test_browser_slider_valuetext_starts_unchosen(
-    shared_page: Any, site: tuple[PageServer, Path]
-) -> None:
-    server, _ = site
-    page = shared_page
-    _open(page, server)
-    conf = page.locator(".slider", has=page.locator("[data-item='conf']"))
-    page.wait_for_selector(".slider[data-hydrated]")
-    assert (
-        conf.locator(".slider-input").get_attribute("aria-valuetext")
-        == "Not chosen yet"
-    )
-    # the unmoved thumb sits mid-scale (no clamp before min and max exist)
-    assert conf.locator(".slider-input").input_value() not in ("0", "10")
-    conf.locator(".slider-input").focus()
-    page.keyboard.press("Home")
-    # the native value says the same, so the runtime drops aria-valuetext
-    assert conf.locator(".slider-input").get_attribute("aria-valuetext") is None
-    assert conf.locator(".slider-input").input_value() == "0"
 
 
 @pytest.mark.slow

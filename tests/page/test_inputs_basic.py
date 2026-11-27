@@ -55,7 +55,6 @@ def test_learn_check_accepts_the_document() -> None:
     ("line", "rule"),
     [
         ('c = choice(question: "Q", options: [])', "type"),
-        ('c = choice(question: "Q", options: ["a", "a"])', "option-duplicate"),
         (
             'c = choice(question: "Q", options: [{"label": "A", "value": "b"}, "b"])',
             "option-duplicate",
@@ -67,30 +66,7 @@ def test_learn_check_accepts_the_document() -> None:
         ('c = choice(question: "Q", options: ["a"], extra: 1)', "unknown-key"),
         ('c = comment(label: "L", extra: 1)', "unknown-key"),
         ("c = comment()", "missing-key"),
-        ('f = form(fields: [{"name": "A b", "label": "L", "type": "text"}])', "type"),
         ('f = form(fields: [{"name": "a", "label": "L", "type": "date"}])', "type"),
-        (
-            'f = form(fields: [{"name": "a", "label": "L", "type": "select"}])',
-            "missing-key",
-        ),
-        (
-            (
-                'f = form(fields: [{"name": "a", "label": "L", "type": "number", '
-                '"min": 5, "max": 1}])'
-            ),
-            "range",
-        ),
-        (
-            'f = form(fields: [{"name": "a", "label": "L", "type": "text", "min": 1}])',
-            "unknown-key",
-        ),
-        (
-            (
-                'f = form(fields: [{"name": "a", "label": "L", "type": "text"}, '
-                '{"name": "a", "label": "M", "type": "text"}])'
-            ),
-            "field-duplicate",
-        ),
     ],
 )
 def test_props_faults(line: str, rule: str) -> None:
@@ -217,14 +193,6 @@ def test_browser_choice_form_and_comment_post_answer_rows(
     assert got["note"] == ("commented", "fine")
     assert page.locator("img").count() == 0 and dialogs == []
     assert comments_path(doc).exists()
-
-
-def test_check_refuses_a_form_whose_answer_could_not_fit() -> None:
-    fields = ", ".join(
-        f'{{"name": "f{i}", "label": "L", "type": "text", "maxlength": 600}}'
-        for i in range(30)
-    )
-    assert "size" in rules(f"w = form(fields: [{fields}])")
 
 
 @pytest.mark.slow

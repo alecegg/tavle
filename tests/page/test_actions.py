@@ -18,34 +18,28 @@ def test_every_type_has_kinds_and_comment():
     assert all(kind_allowed(t, "comment") for t in BLOCK_TYPES)
 
 
-@pytest.mark.parametrize("block_type", ["prose", "heading", "list", "table"])
-def test_text_types_allow_suggestion(block_type):
-    assert kind_allowed(block_type, "suggestion")
-    assert "suggest" in menu_entries(block_type, allow_edit=True, in_part=False)
+def test_only_text_types_allow_suggestion():
+    assert {t for t in BLOCK_TYPES if kind_allowed(t, "suggestion")} == {
+        "prose",
+        "heading",
+        "list",
+        "table",
+    }
 
 
-@pytest.mark.parametrize(
-    "block_type",
-    ["code", "widget", "decision", "visual", "status", "part", "error"],
-)
-def test_other_types_refuse_suggestion(block_type):
-    assert not kind_allowed(block_type, "suggestion")
-    assert "suggest" not in menu_entries(block_type, allow_edit=True, in_part=False)
-
-
-@pytest.mark.parametrize("allow_edit,in_part", FLAGS)
 @pytest.mark.parametrize("block_type", BLOCK_TYPES)
-def test_entries_write_only_accepted_kinds(block_type, allow_edit, in_part):
-    entries = menu_entries(block_type, allow_edit=allow_edit, in_part=in_part)
-    for entry, kind in ROW_ENTRY_KIND.items():
-        if entry in entries:
-            assert kind_allowed(block_type, kind)
-    assert entries[0] == "comment" and entries[-1] == "copy-link"
-    assert ("suggest" in entries) == (
-        kind_allowed(block_type, "suggestion") and not in_part
-    )
-    assert ("edit" in entries) == (allow_edit and not in_part and block_type != "part")
-    assert len(entries) <= 6
+def test_entries_write_only_accepted_kinds(block_type):
+    suggestable = kind_allowed(block_type, "suggestion")
+    for allow_edit, in_part in FLAGS:
+        flags = f"allow_edit={allow_edit}, in_part={in_part}"
+        entries = menu_entries(block_type, allow_edit=allow_edit, in_part=in_part)
+        written = [ROW_ENTRY_KIND[e] for e in entries if e in ROW_ENTRY_KIND]
+        assert all(kind_allowed(block_type, kind) for kind in written), flags
+        assert entries[0] == "comment" and entries[-1] == "copy-link", flags
+        assert ("suggest" in entries) == (suggestable and not in_part), flags
+        editable = allow_edit and not in_part and block_type != "part"
+        assert ("edit" in entries) == editable, flags
+        assert len(entries) <= 6, flags
 
 
 @pytest.mark.parametrize("block_type", BLOCK_TYPES)
