@@ -1,6 +1,10 @@
 import importlib.util
 import sys
+import sysconfig
+import venv
 from pathlib import Path
+
+import pytest
 
 
 def load_script():
@@ -50,6 +54,45 @@ def test_slow_prints_each_survivors_killer(tmp_path, monkeypatch, capsys):
         "tavle.a.x__mutmut_2: survived",
         "mutate tavle --slow: slow-only 1, survived 1",
     ]
+
+
+def write(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text)
+
+
+def fixture_copy(work: Path) -> None:
+    """A work copy whose venv installs `src` editably; `mutants/src` holds a mutant."""
+    venv.create(work / ".venv", symlinks=True)
+    python = work / ".venv" / "bin" / "python"
+    version = f"python{sys.version_info.major}.{sys.version_info.minor}"
+    site = work / ".venv" / "lib" / version / "site-packages"
+    write(site / "editable.pth", f"{work / 'src'}\n{sysconfig.get_path('purelib')}\n")
+    runner = work / ".venv" / "bin" / "pytest"
+    write(
+        runner, f"#!{python}\nimport pytest\nraise SystemExit(pytest.console_main())\n"
+    )
+    runner.chmod(0o755)
+    write(work / "src" / "probe.py", "def answer():\n    return 1\n")
+    write(
+        work / "mutants" / "src" / "probe.py",
+        "import os\n\n\ndef answer():\n"
+        '    return 2 if os.environ.get("MUTANT_UNDER_TEST") == "mutant" else 1\n',
+    )
+    write(work / "mutants" / "pytest.ini", "[pytest]\nmarkers = slow\n")
+    write(
+        work / "mutants" / "tests" / "test_probe.py",
+        "import probe\nimport pytest\n\n\n@pytest.mark.slow\n"
+        "def test_answer():\n    assert probe.answer() == 1\n",
+    )
+
+
+@pytest.mark.slow
+def test_slow_killer_runs_the_mutated_tree(tmp_path):
+    fixture_copy(tmp_path)
+    slow_killer = load_script().slow_killer
+    assert slow_killer(tmp_path, "mutant") == "tests/test_probe.py::test_answer"
+    assert slow_killer(tmp_path, "other") == "survived"
 
 
 def test_score_and_floor():

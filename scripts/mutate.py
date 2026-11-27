@@ -421,7 +421,12 @@ def slow_killer(work: Path, name: str) -> str:
     """The first slow test that fails with mutant `name` active, or `survived`."""
     command = [str(work / ".venv" / "bin" / "pytest"), "-x", "-q", "-n", "3"]
     command += ["-p", "no:cacheprovider", *pytest_selection(SLOW_TESTS), "tests"]
-    env = isolated_env(work) | {"MUTANT_UNDER_TEST": name}
+    # The venv installs `<work>/src` editably. `mutmut run` swaps in `mutants/src` on
+    # its own sys.path; PYTHONPATH does it here, for CLI subprocesses of tests too.
+    env = isolated_env(work) | {
+        "MUTANT_UNDER_TEST": name,
+        "PYTHONPATH": str(work / "mutants" / "src"),
+    }
     result = execute(command, work / "mutants", env, check=False)
     failures = failed_tests(result.stdout + result.stderr)
     return failures[0] if failures else "survived"
