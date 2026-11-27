@@ -4,6 +4,7 @@ import pytest
 from ui_fence import example_fence, statement_text, toml_props
 
 from tavle import blocks
+from tavle.blocks.rules import Fault, check_keys, duplicates, str_field, str_map
 from tavle.blocks.spec import AnswerSchema, BlockSpec, PropertySpec
 from tavle.blocks_render import COMPONENTS, render_block
 from tavle.blocks_render.registry import PAGE_STATEMENTS
@@ -126,16 +127,46 @@ def test_table_row_width_and_chart_series_length():
 
 
 def test_unknown_key_is_reported():
-    assert rules(fenced("table", 'columns = ["a"]\nrows = [["1"]]\nbogus = 1\n')) == [
-        "unknown-key"
-    ]
+    body = 'columns = ["a"]\nrows = [["1"]]\nbogus = 1\nextra = 2\n'
+    assert rules(fenced("table", body)) == ["unknown-key", "unknown-key"]
 
 
 def test_covers_is_reserved_and_validated():
     ok = 'covers = ["order", "post-orders"]\ncolumns = ["a"]\nrows = [["1"]]\n'
     assert check(fenced("table", ok)) == []
-    bad = 'covers = "order"\ncolumns = ["a"]\nrows = [["1"]]\n'
-    assert rules(fenced("table", bad)) == ["covers"]
+    table = {"columns": ["a"], "rows": [["1"]]}
+    message = "covers must be a list of block ids"
+    for covers in ("order", ["Bad Id"]):
+        errors = blocks.check_props("table", {**table, "covers": covers}, 3, "t1")
+        assert errors == [blocks.BlockError(3, "covers", message, "t1", "covers")]
+
+
+def test_unknown_component_lists_the_known_names():
+    specs = {name: blocks.SPECS[name] for name in ("table", "chart")}
+    message = "unknown component 'nope'; known: chart, table"
+    assert blocks.check_props("nope", {}, 2, "s1", specs) == [
+        blocks.BlockError(2, "component-unknown", message, "s1")
+    ]
+    assert blocks.check_props("nope", {}, 2, specs=specs)[0].statement_id == ""
+
+
+def test_errors_have_no_statement_id_unless_one_is_given():
+    for errors in (
+        blocks.check_props("table", {}, 1),
+        blocks.props_errors(blocks.SPECS["table"], {}, 1),
+    ):
+        assert errors and {e.statement_id for e in errors} == {""}
+
+
+def test_field_helpers_name_the_fault_and_the_place():
+    assert str_field({"a": " "}, "a", "w") == [
+        Fault("type", "w: 'a' must be a non-empty string")
+    ]
+    assert str_map([], "w") == [Fault("type", "w must be a non-empty table of strings")]
+    assert check_keys({"x": 1}, set(), set(), "w") == [
+        Fault("unknown-key", "w: unknown key 'x'")
+    ]
+    assert duplicates(["a", "a", "b", "a"]) == ["a"]
 
 
 def test_ill_formed_ids():
@@ -246,13 +277,13 @@ def test_deps_and_recap_validation():
     assert blocks.check_props("recap", {}, 1)
 
 
-def test_property_metadata_construction_and_defaults():
-    prop = PropertySpec("title", "string")
-    assert (prop.required, prop.enum, prop.items, prop.fields) == (False, (), None, ())
-    detailed = PropertySpec("choice", "string", True, ("yes", "no"))
-    spec = BlockSpec("test", "summary", (), "", lambda _: [], properties=(detailed,))
-    assert spec.properties == (detailed,)
-    assert BlockSpec("t", "", (), "", lambda _: []).properties == ()
+def test_enum_applies_to_each_item_of_a_string_list():
+    tags = PropertySpec("tags", "list", items="string", enum=("a",))
+    spec = BlockSpec("test", "", (), "", lambda _: [], properties=(tags,))
+    errors = blocks.props_errors(spec, {"tags": ["a", "b"]}, 1)
+    assert [(e.path, e.message) for e in errors] == [
+        ("tags[2]", "'tags[2]' must be one of a")
+    ]
 
 
 def test_generic_property_validation(monkeypatch):
@@ -303,22 +334,30 @@ def test_generic_property_validation(monkeypatch):
         assert blocks.check_props("test", {"title": "yes", "span": span}, 1) == []
 
 
+NONEMPTY = "nonempty requires a string or a list"
+ITEMS = "items requires a list"
+FIELDS = "fields requires an object or list of objects"
+ENUM = "enum requires a string or list of strings"
+SUB_FIELDS = (PropertySpec("x", "string"),)
+
+
 @pytest.mark.parametrize(
-    "kwargs",
+    ("kwargs", "message"),
     [
-        {"type": "string", "items": "string"},
-        {"type": "integer", "enum": ("a",)},
-        {"type": "any", "enum": ("a",)},
-        {"type": "any", "items": "string"},
-        {"type": "list", "items": "integer", "enum": ("a",)},
-        {"type": "string", "fields": (PropertySpec("x", "string"),)},
-        {"type": "list", "items": "string", "fields": (PropertySpec("x", "string"),)},
-        {"type": "integer", "nonempty": True},
+        ({"type": "string", "items": "string"}, ITEMS),
+        ({"type": "integer", "enum": ("a",)}, ENUM),
+        ({"type": "any", "enum": ("a",)}, ENUM),
+        ({"type": "any", "items": "string"}, ITEMS),
+        ({"type": "list", "items": "integer", "enum": ("a",)}, ENUM),
+        ({"type": "string", "fields": SUB_FIELDS}, FIELDS),
+        ({"type": "list", "items": "string", "fields": SUB_FIELDS}, FIELDS),
+        ({"type": "integer", "nonempty": True}, NONEMPTY),
     ],
 )
-def test_property_metadata_rejects_impossible_combinations(kwargs):
-    with pytest.raises(ValueError):
+def test_property_metadata_rejects_impossible_combinations(kwargs, message):
+    with pytest.raises(ValueError) as raised:
         PropertySpec("p", **kwargs)
+    assert str(raised.value) == message
 
 
 def test_nonempty_rejects_a_blank_string_and_an_empty_list_once(
@@ -338,9 +377,9 @@ def test_nonempty_rejects_a_blank_string_and_an_empty_list_once(
     monkeypatch.setitem(blocks.COMPONENT_SPECS, "test", spec)
     assert blocks.check_props("test", {"title": "t", "tags": [""]}, 1) == []
     errors = blocks.check_props("test", {"title": "  ", "tags": []}, 1)
-    assert [e.message for e in errors] == [
-        "'title' must not be empty",
-        "'tags' must not be empty",
+    assert [(e.message, e.path) for e in errors] == [
+        ("'title' must not be empty", "title"),
+        ("'tags' must not be empty", "tags"),
     ]
 
 

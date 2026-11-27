@@ -31,7 +31,7 @@ def example_page(name: str, old: str = "", new: str = "") -> str:
 @pytest.mark.parametrize("name", blocks.TYPES)
 def test_every_example_renders_classed_html(name):
     out = example_page(name)
-    assert 'class="vb' in out or 'data-mithril="' + name + '"' in out
+    assert f'data-mithril="{name}"' in out
     assert "vb-error" not in out
     markup = re.sub(JSON_PROPS, "", out)  # a client block's props are data, not markup
     for pattern in UNSAFE:
@@ -78,48 +78,50 @@ def test_hostile_every_field_escaped():
         assert raw not in out
 
 
-def test_markers():
-    out = example_page("data-model")
-    assert 'data-mithril="data-model"' in out and '"kind": "many-to-one"' in out
-    out = example_page("endpoint")
-    assert 'data-mithril="endpoint"' in out and '"auth": "bearer"' in out
-    assert '"auth": "none"' in example_page("endpoint", '"bearer"', '"none"')
+@pytest.mark.parametrize(
+    ("name", "old", "new", "expected"),
+    [
+        ("data-model", "", "", '"kind": "many-to-one"'),
+        ("endpoint", "", "", '"auth": "bearer"'),
+        ("endpoint", '"bearer"', '"none"', '"auth": "none"'),
+        ("chart", "", "", '"kind": "bar"'),
+        ("chart", '"bar"', '"line"', "vb-line"),
+        ("flow", "", "", '"desc": "flow of 4 steps, top to bottom"'),
+    ],
+)
+def test_example_props_reach_the_page(name, old, new, expected):
+    assert expected in example_page(name, old, new)
 
 
-def test_wireframe_ui_states_flow_table_chart_shapes():
-    assert 'data-mithril="wireframe"' in example_page("wireframe")
-    states = example_page("ui-states")
-    assert 'data-mithril="ui-states"' in states and "vb-error" not in states
-    assert 'data-mithril="flow"' in example_page("flow")
-    assert 'data-mithril="table"' in example_page("table")
-    bar = example_page("chart")
-    assert 'data-mithril="chart"' in bar and '"kind": "bar"' in bar
-    line = example_page("chart", '"bar"', '"line"')
-    assert 'data-mithril="chart"' in line and "vb-line" in line
-
-
-def test_invalid_block_renders_error_card_with_errors():
-    out = page("endpoint", 'method = "GET"\npath = "/x"\n[[responses]]\nstatus = 200\n')
-    assert "vb-error" in out and "missing-key" in out
-
-
-def test_parse_error_renders_one_error_card():
-    out = render_page("```ui id=t\nt = table(columns: \n```\n", "t.md").body
-    assert "vb-error" in out and "ui block has" in out
-
-
-def test_old_typed_fence_renders_a_removed_card():
-    out = render_page("```table id=t\ncolumns = []\n```\n", "t.md").body
-    assert "vb-error" in out and "toml-fence-removed" in out
-
-
-def test_chart_rejects_non_finite():
-    out = render_page(
-        '```ui id=c\nc = chart(kind: "bar", labels: ["a"], '
-        'series: [{"name": "s", "values": ["x"]}])\n```\n',
-        "t.md",
-    ).body
-    assert "vb-error" in out
+@pytest.mark.parametrize(
+    ("source", "expected"),
+    [
+        pytest.param(
+            ui_fence(
+                "endpoint", 'method = "GET"\npath = "/x"\n[[responses]]\nstatus = 200\n'
+            ),
+            "missing-key",
+            id="invalid-block",
+        ),
+        pytest.param(
+            "```ui id=t\nt = table(columns: \n```\n", "ui block has", id="parse-error"
+        ),
+        pytest.param(
+            "```table id=t\ncolumns = []\n```\n",
+            "toml-fence-removed",
+            id="old-typed-fence",
+        ),
+        pytest.param(
+            '```ui id=c\nc = chart(kind: "bar", labels: ["a"], '
+            'series: [{"name": "s", "values": ["x"]}])\n```\n',
+            "series",
+            id="non-number-chart-value",
+        ),
+    ],
+)
+def test_faulty_source_renders_an_error_card(source, expected):
+    out = render_page(source, "t.md").body
+    assert "vb-error" in out and expected in out
 
 
 def test_negative_values_and_flat_series_render():

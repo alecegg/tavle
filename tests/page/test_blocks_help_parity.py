@@ -1,4 +1,4 @@
-"""The text help of a component lists the properties its JSON catalog entry has."""
+"""The text help, index and JSON catalog of component specs."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import Any
 
 import pytest
 
-from tavle import PAGE_SPECS, blocks
+from tavle import PAGE_SPECS, BlockSpec, PropertySpec, blocks
 
 FIELD_LINE = re.compile(r"^( *)(\S+) +(required|optional) +(.+)$")
 
@@ -66,3 +66,84 @@ def test_every_widget_has_a_property_in_the_json() -> None:
             PAGE_SPECS,
         )
     )
+
+
+SHOWS = PropertySpec("shows", "string", nonempty=True)
+DEMO = BlockSpec(
+    "demo",
+    "a demo",
+    ("first line", "", "  indented  "),
+    "d = demo()",
+    lambda _: [],
+    properties=(
+        PropertySpec("title", "string", required=True, enum=("a", "b")),
+        PropertySpec("n", "integer"),
+    ),
+    extra_keys=PropertySpec("state", "object", fields=(SHOWS,)),
+)
+PLAIN = BlockSpec("plain", "no fields", (), "p = plain()", lambda _: [])
+SPECS = {"plain": PLAIN, "demo": DEMO}
+
+
+def test_type_text_lays_out_fields_details_and_syntax() -> None:
+    assert blocks.type_text(SPECS, "demo") == (
+        "demo - a demo\n"
+        "\n"
+        "Fields:\n"
+        "  title    required  string: a | b\n"
+        "  n        optional  integer\n"
+        "  <state>  optional  object\n"
+        "    shows  optional  string, nonempty\n"
+        "\n"
+        "Details:\n"
+        "  first line\n"
+        "\n"
+        "    indented\n"
+        "\n"
+        "Line syntax (in a ```ui fence):\n"
+        "  d = demo()\n"
+    )
+    assert blocks.type_text(SPECS, "plain") == (
+        "plain - no fields\n\nLine syntax (in a ```ui fence):\n  p = plain()\n"
+    )
+
+
+def test_index_text_lists_each_component_by_name() -> None:
+    assert blocks.index_text(SPECS) == (
+        "demo - a demo\n"
+        "plain - no fields\n"
+        "\n"
+        "Fields and an example: varde pages blocks <TYPE>\n"
+    )
+
+
+def test_catalog_holds_every_named_component_as_plain_data() -> None:
+    demo, plain = blocks.catalog(SPECS)
+    assert demo["name"] == "demo"
+    assert demo["extra_keys"] == {
+        "name": "state",
+        "type": "object",
+        "required": False,
+        "enum": (),
+        "items": None,
+        "fields": (
+            {
+                "name": "shows",
+                "type": "string",
+                "required": False,
+                "enum": (),
+                "items": None,
+                "fields": (),
+                "nonempty": True,
+            },
+        ),
+        "nonempty": False,
+    }
+    assert plain == {
+        "name": "plain",
+        "summary": "no fields",
+        "block_type": "visual",
+        "properties": [],
+        "extra_keys": None,
+    }
+    assert blocks.catalog(SPECS, ("plain",)) == [plain]
