@@ -58,6 +58,13 @@ FAST_TESTS = "not slow and not matrix_full"
 SLOW_TESTS = "slow and not matrix_full"
 STATUS_LINE = re.compile(r"^\s*(?P<name>\S+): (?P<status>[a-z ]+?)\s*$")
 FAILED_LINE = re.compile(r"^FAILED (?P<test>\S+)", re.MULTILINE)
+ERROR_LINE = re.compile(r"^ERROR (?P<detail>.+)$", re.MULTILINE)
+# xdist's report for a worker that died, which pytest-timeout's thread method also does.
+CRASH_LINE = re.compile(
+    r"^worker '\w+' crashed while running '(?P<test>.+)'$", re.MULTILINE
+)
+# Starts a `--slow` result that is neither a killer test id nor `survived`.
+SLOW_ERROR = "error: "
 
 
 def changed_module_patterns(paths: list[str]) -> list[str]:
@@ -180,7 +187,7 @@ def effective_floor(floor: int, minimum: int) -> int:
 
 
 def failed_tests(output: str) -> list[str]:
-    """Names of the tests that failed in mutmut's clean run, in output order."""
+    """Names of the tests that pytest output lists as FAILED, in output order."""
     return FAILED_LINE.findall(output)
 
 
@@ -417,8 +424,26 @@ def run(work: Path, workers: int, patterns: list[str], minimum: int) -> int:
     )
 
 
+def slow_verdict(returncode: int, output: str) -> str:
+    """Judge one pytest run: `survived`, the killer's test id, or `error: <reason>`.
+
+    A test whose worker crashed or timed out is listed as FAILED but is no killer.
+    """
+    if returncode == 0:
+        return "survived"
+    crashed = [test.split()[0] for test in CRASH_LINE.findall(output)]
+    failures = [test for test in failed_tests(output) if test not in crashed]
+    if failures:
+        return failures[0]
+    if crashed:
+        return f"{SLOW_ERROR}worker crashed or timed out in {crashed[0]}"
+    errors = ERROR_LINE.findall(output)
+    detail = f": {errors[0]}" if errors else ""
+    return f"{SLOW_ERROR}pytest exit {returncode}{detail}"
+
+
 def slow_killer(work: Path, name: str) -> str:
-    """The first slow test that fails with mutant `name` active, or `survived`."""
+    """Run the slow tests with mutant `name` active; see `slow_verdict`."""
     command = [str(work / ".venv" / "bin" / "pytest"), "-x", "-q", "-n", "3"]
     command += ["-p", "no:cacheprovider", *pytest_selection(SLOW_TESTS), "tests"]
     # The venv installs `<work>/src` editably. `mutmut run` swaps in `mutants/src` on
@@ -428,8 +453,7 @@ def slow_killer(work: Path, name: str) -> str:
         "PYTHONPATH": str(work / "mutants" / "src"),
     }
     result = execute(command, work / "mutants", env, check=False)
-    failures = failed_tests(result.stdout + result.stderr)
-    return failures[0] if failures else "survived"
+    return slow_verdict(result.returncode, result.stdout + result.stderr)
 
 
 def run_slow(work: Path, patterns: list[str]) -> int:
@@ -440,11 +464,21 @@ def run_slow(work: Path, patterns: list[str]) -> int:
         return 2
     names = survivors.read_text(encoding="utf-8").split()
     names = matching({"survived": names}, patterns).get("survived", [])
-    killers = {name: slow_killer(work, name) for name in names}
-    for name, killer in killers.items():
-        print(f"{name}: {killer}")
-    killed = sum(killer != "survived" for killer in killers.values())
-    print(f"mutate tavle --slow: slow-only {killed}, survived {len(names) - killed}")
+    judged: dict[str, str] = {}
+    errors: dict[str, str] = {}
+    for name in names:
+        result = slow_killer(work, name)
+        bucket = errors if result.startswith(SLOW_ERROR) else judged
+        bucket[name] = result
+    for name, result in judged.items():
+        print(f"{name}: {result}")
+    survived = sum(result == "survived" for result in judged.values())
+    killed = len(judged) - survived
+    print(f"mutate tavle --slow: slow-only {killed}, survived {survived}")
+    if errors:
+        print(f"mutate tavle --slow: error {len(errors)}, neither killed nor survived")
+        for name, result in errors.items():
+            print(f"{name}: {result}")
     return 0
 
 
@@ -481,7 +515,7 @@ def main() -> int:
     parser.add_argument(
         "--slow",
         action="store_true",
-        help="try the last run's survivors against the slow tests; print each killer",
+        help="try the last run's survivors against the slow tests; print each result",
     )
     parser.add_argument(
         "--tag", default="", help="separate copy name, lets two runs overlap"

@@ -61,6 +61,25 @@ def write(path: Path, text: str) -> None:
     path.write_text(text)
 
 
+# Each mutant name triggers one way a slow run can end.
+MUTATED_PROBE = """\
+import os
+import time
+
+MUTANT = os.environ.get("MUTANT_UNDER_TEST")
+if MUTANT == "import-error":
+    raise ImportError(MUTANT)
+
+
+def answer():
+    if MUTANT == "crash":
+        os._exit(3)
+    if MUTANT == "hang":
+        time.sleep(30)
+    return 2 if MUTANT == "mutant" else 1
+"""
+
+
 def fixture_copy(work: Path) -> None:
     """A work copy whose venv installs `src` editably; `mutants/src` holds a mutant."""
     venv.create(work / ".venv", symlinks=True)
@@ -74,12 +93,11 @@ def fixture_copy(work: Path) -> None:
     )
     runner.chmod(0o755)
     write(work / "src" / "probe.py", "def answer():\n    return 1\n")
+    write(work / "mutants" / "src" / "probe.py", MUTATED_PROBE)
     write(
-        work / "mutants" / "src" / "probe.py",
-        "import os\n\n\ndef answer():\n"
-        '    return 2 if os.environ.get("MUTANT_UNDER_TEST") == "mutant" else 1\n',
+        work / "mutants" / "pytest.ini",
+        "[pytest]\nmarkers = slow\ntimeout = 2\ntimeout_method = thread\n",
     )
-    write(work / "mutants" / "pytest.ini", "[pytest]\nmarkers = slow\n")
     write(
         work / "mutants" / "tests" / "test_probe.py",
         "import probe\nimport pytest\n\n\n@pytest.mark.slow\n"
@@ -93,6 +111,58 @@ def test_slow_killer_runs_the_mutated_tree(tmp_path):
     slow_killer = load_script().slow_killer
     assert slow_killer(tmp_path, "mutant") == "tests/test_probe.py::test_answer"
     assert slow_killer(tmp_path, "other") == "survived"
+
+
+@pytest.fixture(scope="module")
+def probe_copy(tmp_path_factory):
+    work = tmp_path_factory.mktemp("probe")
+    fixture_copy(work)
+    return work
+
+
+CRASHED = "worker crashed or timed out in tests/test_probe.py::test_answer"
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize(
+    ("mutant", "reason"),
+    [
+        ("import-error", "pytest exit 2: tests/test_probe.py"),
+        ("crash", CRASHED),
+        ("hang", CRASHED),
+    ],
+)
+def test_slow_killer_reports_a_broken_run_as_error(probe_copy, mutant, reason):
+    assert load_script().slow_killer(probe_copy, mutant) == f"error: {reason}"
+
+
+def test_slow_verdict():
+    verdict = load_script().slow_verdict
+    crash = "worker 'gw0' crashed while running 't.py::a[x y]'\nFAILED t.py::a[x y]\n"
+    cases = [
+        (0, "1 passed", "survived"),
+        (2, "FAILED t.py::b - assert 0\nERROR t.py::c - boom", "t.py::b"),
+        (1, crash + "FAILED t.py::b - assert 0", "t.py::b"),
+        (2, "ERROR t.py::c - boom", "error: pytest exit 2: t.py::c - boom"),
+        (5, "no tests ran", "error: pytest exit 5"),
+        (-11, "", "error: pytest exit -11"),
+    ]
+    for returncode, output, expected in cases:
+        assert verdict(returncode, output) == expected
+
+
+def test_slow_counts_errors_apart(tmp_path, monkeypatch, capsys):
+    module = load_script()
+    results = {"m.a__mutmut_1": "error: pytest exit 3", "m.a__mutmut_2": "survived"}
+    (tmp_path / "survivors.txt").write_text("\n".join(results) + "\n")
+    monkeypatch.setattr(module, "slow_killer", lambda work, name: results[name])
+    assert module.run_slow(tmp_path, []) == 0
+    assert capsys.readouterr().out.splitlines() == [
+        "m.a__mutmut_2: survived",
+        "mutate tavle --slow: slow-only 0, survived 1",
+        "mutate tavle --slow: error 1, neither killed nor survived",
+        "m.a__mutmut_1: error: pytest exit 3",
+    ]
 
 
 def test_score_and_floor():
