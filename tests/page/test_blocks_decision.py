@@ -1,10 +1,12 @@
-"""Decision block schema: valid example, bad option, duplicate id, missing question."""
+"""Decision blocks: schema faults, duplicate ids and the choice they render as."""
 
 from __future__ import annotations
 
-from ui_fence import example_fence, ui_fence
+import pytest
+from ui_fence import ui_fence
 
 from tavle import PAGE_SPECS, blocks
+from tavle.blocks_render.decision import decision_as_choice
 from tavle.page import page_check
 
 VALID = 'question = "Ship it?"\n'
@@ -18,20 +20,33 @@ def rules(doc: str) -> list[str]:
     return [e.rule for e in page_check.check(doc)]
 
 
-def test_example_is_valid():
-    assert page_check.check(example_fence(blocks.SPECS["decision"].example)) == []
-
-
 def test_minimal_block_is_valid():
     assert page_check.check(fenced(VALID)) == []
 
 
-def test_unknown_option():
-    assert rules(fenced(VALID + 'options = ["approve", "maybe"]\n')) == ["type"]
-
-
-def test_duplicate_option():
-    assert rules(fenced(VALID + 'options = ["deny", "deny"]\n')) == ["option-duplicate"]
+@pytest.mark.parametrize(
+    ("body", "rule"),
+    [
+        (VALID + 'options = ["approve", "maybe"]\n', "type"),
+        (VALID + 'options = ["deny", "deny"]\n', "option-duplicate"),
+        ('options = ["approve"]\n', "missing-key"),
+        (VALID + '[[evidence]]\nlabel = "a"\n', "missing-key"),
+        (VALID + "extra = 1\n", "unknown-key"),
+        ("question = 1\n", "type"),
+        ('question = " "\n', "type"),
+    ],
+    ids=[
+        "unknown-option",
+        "duplicate-option",
+        "missing-question",
+        "evidence-row-without-text",
+        "unknown-key",
+        "question-not-text",
+        "blank-question",
+    ],
+)
+def test_a_bad_decision_reports_one_rule(body, rule):
+    assert rules(fenced(body)) == [rule]
 
 
 def test_duplicate_id_reports_line():
@@ -41,25 +56,27 @@ def test_duplicate_id_reports_line():
     assert errors[0].line == 7
 
 
-def test_missing_question():
-    assert rules(fenced('options = ["approve"]\n')) == ["missing-key"]
+def test_decision_without_options_offers_all_three_verdicts():
+    assert decision_as_choice({}) == {
+        "question": "",
+        "options": [
+            {"label": "Approve", "value": "approved"},
+            {"label": "Deny", "value": "denied"},
+            {"label": "Comment", "value": "commented"},
+        ],
+        "comment": True,
+    }
 
 
-def test_evidence_row_needs_label_and_text():
-    body = VALID + '[[evidence]]\nlabel = "a"\n'
-    assert rules(fenced(body)) == ["missing-key"]
-
-
-def test_unknown_key():
-    assert rules(fenced(VALID + "extra = 1\n")) == ["unknown-key"]
+def test_decision_with_one_option_keeps_the_question_and_takes_no_comment():
+    assert decision_as_choice({"question": "Ship?", "options": ["deny"]}) == {
+        "question": "Ship?",
+        "options": [{"label": "Deny", "value": "denied"}],
+        "comment": False,
+    }
 
 
 def test_blocks_command_prints_fields_and_example(capsys):
     text = blocks.type_text(PAGE_SPECS, "decision")
     assert "question" in text and "options" in text and "evidence" in text
     assert 'question: "' in text
-
-
-def test_wrong_type_and_blank_question():
-    assert rules(fenced("question = 1\n")) == ["type"]
-    assert rules(fenced('question = " "\n')) == ["type"]

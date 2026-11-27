@@ -13,7 +13,6 @@ import pytest
 from ui_fence import ui_fence
 
 from tavle import PageServer, append_reply, fold, read_rows
-from tavle.page import template
 from tavle.page.render import render_page
 
 HOSTILE = "<script>alert(1)</script>"
@@ -165,6 +164,21 @@ def test_pages_decision_resolve_by_reply_folds_resolved(running):
     assert row["state"] == "resolved" and row["replies"][0]["text"] == "applied"
 
 
+DISABLED_AT_POST = """
+window.disabledAtPost = [];
+const send = window.fetch;
+window.fetch = (url, init) => {
+  if (init && init.method === 'POST') {
+    const buttons = [...document.querySelectorAll('.decision-item button')]
+      .filter((button) => button.closest('[data-item=ship]'));
+    window.disabledAtPost.push(
+      buttons.length > 0 && buttons.every((button) => button.disabled));
+  }
+  return send(url, init);
+};
+"""
+
+
 @pytest.mark.slow
 def test_pages_decision_one_click(browser_session: Any, running) -> None:
     server, doc = running
@@ -172,6 +186,7 @@ def test_pages_decision_one_click(browser_session: Any, running) -> None:
     page.set_default_timeout(10_000)
     posts: list[str] = []
     page.on("request", lambda r: posts.append(r.url) if r.method == "POST" else None)
+    page.add_init_script(DISABLED_AT_POST)
     page.goto(f"http://127.0.0.1:{server.port}/")
     page.wait_for_selector(".decision-verdict")
     page.locator('[data-item="ship"] [data-verdict="approved"]').click()
@@ -189,16 +204,9 @@ def test_pages_decision_one_click(browser_session: Any, running) -> None:
         " === 'commented'"
     )
     assert len(posts) == 2
+    # every button of the item is disabled while its answer is in flight
+    assert page.evaluate("window.disabledAtPost") == [True, True]
+    assert page.locator('.decision-item[data-item="ship"] button:disabled').count() == 0
     verdicts = [r["value"] for r in fold(read_rows(doc))]  # unified answer row
     assert verdicts == ["approved", "commented"]
     page.goto("about:blank")
-
-
-def test_pages_decision_buttons_disabled_while_posting() -> None:
-    js = (Path(template.__file__).parent / "static" / "recap.js").read_text()
-    start = js.index("async function decide")
-    body = js[start : js.index("function chooseDecision")]
-    off, post, on = (
-        body.index(s) for s in ("disabled = true", "await post(", "disabled = false")
-    )
-    assert off < post < on

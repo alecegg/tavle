@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 
-from tavle.page.actions import component_block_type
 from tavle.page.render import render_page
 
 FIXTURES = Path(__file__).parent / "fixtures" / "widgets"
@@ -50,13 +49,12 @@ def test_each_markdown_kind_has_its_type() -> None:
 
 def test_ui_statements_use_the_component_type() -> None:
     got = types(DOC)
-    for name, component in (
-        ("pick", "choice"),
-        ("ship", "decision"),
-        ("c", "chart"),
-        ("note", "callout"),
-    ):
-        assert got[name] == component_block_type(component)
+    assert [got[name] for name in ("pick", "ship", "c", "note")] == [
+        "widget",
+        "decision",
+        "visual",
+        "visual",
+    ]
     assert got["bad"] == "visual"  # a bad prop still renders as its component
 
 
