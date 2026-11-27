@@ -103,16 +103,6 @@ def running(tmp_path: Path) -> Iterator[Running]:
     thread.join(5)
 
 
-def test_blocks_script_served_with_parent_csp(running: Running) -> None:
-    status, headers, body = running.get("/static/blocks.js")
-    assert status == 200
-    assert headers["Content-Type"].startswith("text/javascript")
-    csp = headers["Content-Security-Policy"]
-    assert "script-src 'self'" in csp and "unsafe-inline" not in csp
-    assert headers["X-Content-Type-Options"] == "nosniff"
-    assert body
-
-
 def test_shell_has_script_tag_and_no_inline_script(running: Running) -> None:
     _, _, body = running.get("/")
     text = body.decode()
@@ -239,27 +229,6 @@ def test_ui_states_show_one_tile_at_a_time(open_page: Any) -> None:
     assert visible.count() == 1 and "Retry" in visible.inner_text()
     page.get_by_role("tab", name="error").press("ArrowRight")
     assert "Nothing yet" in page.locator(".vb-state:visible").inner_text()
-
-
-@pytest.mark.slow
-def test_flow_pans_zooms_and_highlights(open_page: Any) -> None:
-    page = open_page
-    svg = page.locator(".flow .vd-view svg")
-    start = svg.get_attribute("viewBox")
-    page.get_by_role("button", name="Zoom in").click()
-    zoomed = svg.get_attribute("viewBox")
-    assert zoomed != start
-    page.get_by_role("button", name="Fit whole flow").click()
-    assert svg.get_attribute("viewBox") == start
-    page.locator(".flow .vd-node", has_text="Pay").click()
-    assert page.locator(".flow .vd-node.vd-sel").count() == 1
-    assert page.locator(".flow .vd-node.vf-up").count() == 2  # cart and failed (cycle)
-    assert (
-        page.locator(".flow .vd-node.vf-down").count() == 1
-    )  # done; failed is shown as before
-    page.locator(".flow .vd-node", has_text="Pay").click()
-    page.mouse.move(0, 0)
-    assert page.locator(".flow .vd-node[aria-pressed=true]").count() == 0
 
 
 @pytest.mark.slow

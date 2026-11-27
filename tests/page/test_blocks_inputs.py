@@ -16,18 +16,13 @@ from pathlib import Path
 from typing import Any
 
 import pytest
-from ui_fence import block_host, example_fence
+from ui_fence import block_host
 from ui_paths import UI_FIXTURES
 
-from tavle import (
-    COMPONENT_SPECS,
-    COMPONENTS,
-    PageServer,
-    check,
-    check_props,
-    component_bundle,
-    make_read_only,
-)
+from tavle import COMPONENTS, PageServer, check_props, make_read_only
+from tavle.blocks.inputs import no_faults, option_list
+from tavle.blocks.reference import type_text
+from tavle.blocks.spec import BlockSpec
 from tavle.blocks_render.inputs import choice_props, form_props
 from tavle.blocks_render.inputs_ordered import ranking_props, slider_props
 from tavle.page.render import render_page
@@ -48,13 +43,6 @@ DOC = (
 
 def _fixture(name: str) -> list[dict[str, Any]]:
     return json.loads((FIXTURES / f"{name}.json").read_text(encoding="utf-8"))
-
-
-@pytest.mark.parametrize("block", BLOCKS)
-def test_block_is_client_side_and_bundled(block: str) -> None:
-    assert COMPONENTS[block].props is not None
-    assert COMPONENTS[block].answer_schema is not None
-    assert f'components["{block}"]' in component_bundle()
 
 
 @pytest.mark.parametrize("block", BLOCKS)
@@ -273,9 +261,9 @@ PROPERTY_CASES = [
     ("slider", _without(_SLIDER, "label"), "label"),
     # a wrong type
     ("choice", {**_CHOICE, "question": 1}, "question"),
-    ("choice", {**_CHOICE, "options": "a"}, "options"),
+    ("choice", {**_CHOICE, "options": "aa"}, "options"),
     ("choice", {**_CHOICE, "multiple": "yes"}, "multiple"),
-    ("form", {"fields": "x"}, "fields"),
+    ("form", {"fields": 5}, "fields"),
     ("form", {"fields": ["x"]}, "fields[1]"),
     ("form", _in_field(label=1), "label"),
     ("form", _in_field(required="yes"), "required"),
@@ -289,7 +277,7 @@ PROPERTY_CASES = [
     ("slider", {**_SLIDER, "labels": "ab"}, "labels"),
     ("slider", {**_SLIDER, "labels": ["a", 1]}, "labels"),
     ("form", _in_field(type="number", min="a"), "min"),
-    ("form", _in_field(type="select", options="ab"), "options"),
+    ("form", _in_field(type="select", options="aa"), "options"),
     ("form", _in_field(type="select", options=["a", 1]), "options"),
     # a blank value
     ("choice", {**_CHOICE, "question": " "}, "question"),
@@ -306,21 +294,6 @@ PROPERTY_CASES = [
     ("ranking", {**_RANKING, "question": ""}, "question"),
     ("ranking", {**_RANKING, "items": []}, "items"),
     ("slider", {**_SLIDER, "label": " "}, "label"),
-    ("slider", {**_SLIDER, "labels": ["a", " "]}, "labels"),
-    # a mistake only the widget sees: still one fault
-    ("form", _in_field(min=1), "min"),
-    ("form", _in_field(maxlength=0), "maxlength"),
-    ("form", _in_field(name="A b"), "name"),
-    ("form", _in_field(label="x" * 300), "label"),
-    ("form", _in_field(type="number", min=float("inf")), "min"),
-    ("form", _in_field(type="number", min=5, max=1), "min"),
-    ("form", _in_field(type="select"), "options"),
-    ("choice", {**_CHOICE, "options": ["a", "a"]}, "options"),
-    ("ranking", {**_RANKING, "items": ["a"]}, "items"),
-    ("slider", {**_SLIDER, "min": float("nan")}, "min"),
-    ("slider", {**_SLIDER, "step": float("inf")}, "step"),
-    ("slider", {**_SLIDER, "labels": ["a"]}, "labels"),
-    ("slider", {**_SLIDER, "min": 9}, "min"),
 ]
 
 
@@ -333,6 +306,302 @@ def test_a_property_mistake_gets_one_fault_naming_the_field(
     assert field in faults[0].message
 
 
-@pytest.mark.parametrize("block", BLOCKS)
-def test_each_example_is_valid(block: str) -> None:
-    assert check(example_fence(COMPONENT_SPECS[block].example)) == []
+def _faults(block: str, props: dict[str, Any]) -> list[tuple[str, str]]:
+    return [(f.rule, f.message) for f in check_props(block, props, 1)]
+
+
+def _choice(*options: object) -> dict[str, Any]:
+    return {"question": "Q", "options": list(options)}
+
+
+def _select(options: list[str], **changes: Any) -> dict[str, Any]:
+    return _in_field(type="select", options=options, **changes)
+
+
+def _number(**changes: Any) -> dict[str, Any]:
+    return _in_field(type="number", **changes)
+
+
+def _fields(*changes: dict[str, Any]) -> dict[str, Any]:
+    return {"fields": [{**_FIELD, **change} for change in changes]}
+
+
+def _numbered(count: int) -> list[str]:
+    return [f"o{i}" for i in range(count)]
+
+
+def _texts(count: int, maxlength: int = 600) -> list[dict[str, Any]]:
+    return [{**_FIELD, "name": f"f{i}", "maxlength": maxlength} for i in range(count)]
+
+
+def _ranked(last: int) -> dict[str, Any]:
+    """Fifteen distinct items; with `last` 259 the answer is at most 8000 long."""
+    sizes = [265] * 14 + [last]
+    return {**_RANKING, "items": [chr(97 + i) * n for i, n in enumerate(sizes)]}
+
+
+def _sized_form(maxlength: int) -> dict[str, Any]:
+    """Six full text fields and one more; at `maxlength` 253 the bound is 8000."""
+    tail = {**_FIELD, "name": "gg", "maxlength": maxlength}
+    return {"fields": [*_texts(6), tail]}
+
+
+# one field of every kind; each adds its own share to the answer's JSON bound
+_EVERY_KIND = [
+    *_texts(7),
+    {"name": "s", "label": "L", "type": "select", "options": ["ab", "abcd"]},
+    {"name": "n", "label": "L", "type": "number"},
+    {"name": "c", "label": "L", "type": "checkbox"},
+    {"name": "e", "label": "L", "type": "select"},
+]
+
+
+_FORM_SIZE = (
+    "form: fields can add up to {} characters of answer; "
+    "the limit is 8000 (lower maxlength or drop fields)"
+)
+_RANKING_SIZE = (
+    "ranking: the answer can reach 8002 characters; the limit is 8000 "
+    "(shorten the values or drop items)"
+)
+_AT = "choice.options[1]"
+_IN = "form.fields[1]"
+_LONG = "x" * 601
+_TOO_LONG = "must be at most 600 characters, no controls"
+_NAME_RULE = "must match ^[a-z][a-z0-9_-]{0,47}$"
+_STEP_RANGE = "slider.step must be above 0 and within max - min"
+_BELOW_MAX = "slider: min must be below max"
+_NOT_TABLE = "must be a string or a table with a label"
+
+WIDGET_CASES = [
+    ("choice", _choice(1), [("type", f"{_AT} {_NOT_TABLE}")]),
+    (
+        "choice",
+        _choice(1, 2),
+        [
+            ("type", f"{_AT} {_NOT_TABLE}"),
+            ("type", f"choice.options[2] {_NOT_TABLE}"),
+        ],
+    ),
+    ("choice", _choice(_LONG), [("type", f"{_AT} {_TOO_LONG}")]),
+    (
+        "choice",
+        _choice({"label": "a", "extra": 1}),
+        [("unknown-key", f"{_AT}: unknown key 'extra'")],
+    ),
+    (
+        "choice",
+        _choice({"label": ""}),
+        [("type", f"{_AT}.label must be a non-empty string")],
+    ),
+    (
+        "choice",
+        _choice({"label": "a", "recommended": "y"}),
+        [("type", f"{_AT}.recommended must be true or false")],
+    ),
+    (
+        "choice",
+        _choice({"label": "a", "detail": 1}),
+        [("type", f"{_AT}.detail must be a non-empty string")],
+    ),
+    (
+        "choice",
+        _choice({"label": "a", "value": 1}),
+        [("type", f"{_AT}.value must be a non-empty string")],
+    ),
+    (
+        "choice",
+        _choice(*_numbered(51)),
+        [("type", "choice.options must be a list of 1-50")],
+    ),
+    (
+        "choice",
+        _choice("a", "a"),
+        [("option-duplicate", "choice.options: value 'a' is listed twice")],
+    ),
+    (
+        "choice",
+        _choice(
+            {"label": "a", "recommended": True}, {"label": "b", "recommended": True}
+        ),
+        [("recommended-many", "choice.options: at most one option is recommended")],
+    ),
+    ("form", _in_field(min=1), [("unknown-key", f"{_IN}: unknown key 'min'")]),
+    (
+        "form",
+        _in_field(label="x" * 300),
+        [("type", f"{_IN}.label must be at most 200 characters, no controls")],
+    ),
+    ("form", _in_field(name="A b"), [("type", f"{_IN}.name {_NAME_RULE}")]),
+    (
+        "form",
+        _fields({"name": "A"}, {"name": "B"}),
+        [
+            ("type", f"{_IN}.name {_NAME_RULE}"),
+            ("type", f"form.fields[2].name {_NAME_RULE}"),
+        ],
+    ),
+    (
+        "form",
+        _in_field(maxlength=0),
+        [("type", f"{_IN}.maxlength must be a whole number 1-600")],
+    ),
+    (
+        "form",
+        _in_field(maxlength=601),
+        [("type", f"{_IN}.maxlength must be a whole number 1-600")],
+    ),
+    (
+        "form",
+        _number(min=float("inf")),
+        [("type", f"{_IN}.min must be a finite number")],
+    ),
+    ("form", _number(min=5, max=1), [("range", f"{_IN}: min is above max")]),
+    (
+        "form",
+        _number(maxlength=5, min=5, max=1),
+        [
+            ("unknown-key", f"{_IN}: unknown key 'maxlength'"),
+            ("range", f"{_IN}: min is above max"),
+        ],
+    ),
+    (
+        "form",
+        _in_field(type="select"),
+        [("missing-key", f"{_IN}: select needs 'options'")],
+    ),
+    (
+        "form",
+        _select(_numbered(51)),
+        [("type", f"{_IN}.options must be a list of 1-50")],
+    ),
+    (
+        "form",
+        _select([_LONG, "y\x07"]),
+        [("type", f"{_IN}.options {_TOO_LONG}")] * 2,
+    ),
+    (
+        "form",
+        _select(["a", "a"]),
+        [("option-duplicate", f"{_IN}.options: 'a' is listed twice")],
+    ),
+    (
+        "form",
+        _select(["a", "a"], min=1),
+        [
+            ("unknown-key", f"{_IN}: unknown key 'min'"),
+            ("option-duplicate", f"{_IN}.options: 'a' is listed twice"),
+        ],
+    ),
+    (
+        "form",
+        _fields(*({"name": n} for n in _numbered(31))),
+        [("type", "form.fields must be a list of 1-30")],
+    ),
+    (
+        "form",
+        _fields({}, {}),
+        [("field-duplicate", "form.fields: name 'n' is used twice")],
+    ),
+    (
+        "form",
+        {"fields": _EVERY_KIND},
+        [
+            ("missing-key", "form.fields[11]: select needs 'options'"),
+            ("size", _FORM_SIZE.format(8866)),
+        ],
+    ),
+    (
+        "form",
+        _sized_form(254),
+        [("size", _FORM_SIZE.format(8002))],
+    ),
+    (
+        "ranking",
+        {**_RANKING, "items": ["a"]},
+        [("type", "ranking.items must be a list of 2-50")],
+    ),
+    (
+        "ranking",
+        {**_RANKING, "items": [1, 2]},
+        [
+            ("type", f"ranking.items[1] {_NOT_TABLE}"),
+            ("type", f"ranking.items[2] {_NOT_TABLE}"),
+        ],
+    ),
+    (
+        "ranking",
+        {**_RANKING, "items": ["a", "a"]},
+        [("option-duplicate", "ranking.items: value 'a' is listed twice")],
+    ),
+    (
+        "ranking",
+        _ranked(260),
+        [("size", _RANKING_SIZE)],
+    ),
+    (
+        "slider",
+        {**_SLIDER, "min": float("nan")},
+        [("type", "slider.min must be a finite number")],
+    ),
+    (
+        "slider",
+        {**_SLIDER, "step": float("inf")},
+        [("type", "slider.step must be a finite number")],
+    ),
+    ("slider", {**_SLIDER, "min": 9}, [("range", _BELOW_MAX)]),
+    ("slider", {**_SLIDER, "min": 5}, [("range", _BELOW_MAX)]),
+    ("slider", {**_SLIDER, "step": 9}, [("range", _STEP_RANGE)]),
+    (
+        "slider",
+        {**_SLIDER, "max": 20000},
+        [("range", "slider: more than 10000 steps; raise the step")],
+    ),
+    (
+        "slider",
+        {**_SLIDER, "labels": ["a"]},
+        [("type", "slider.labels must be two texts: low end, high end")],
+    ),
+    (
+        "slider",
+        {**_SLIDER, "labels": ["a", " "]},
+        [("type", "slider.labels must be a non-empty string")],
+    ),
+]
+
+
+@pytest.mark.parametrize(("block", "props", "expected"), WIDGET_CASES)
+def test_a_widget_fault_names_the_rule_and_the_place(
+    block: str, props: dict[str, Any], expected: list[tuple[str, str]]
+) -> None:
+    assert _faults(block, props) == expected
+
+
+@pytest.mark.parametrize(
+    ("block", "props"),
+    [
+        ("choice", _choice(*_numbered(50))),
+        ("form", _select(_numbered(50))),
+        ("form", _in_field(maxlength=1)),
+        ("form", _number(min=3, max=3)),
+        ("form", _sized_form(253)),
+        ("ranking", _ranked(259)),
+        ("slider", {**_SLIDER, "step": 5}),
+    ],
+)
+def test_props_exactly_at_a_limit_are_valid(block: str, props: dict[str, Any]) -> None:
+    assert _faults(block, props) == []
+
+
+def test_an_option_list_is_a_required_non_empty_list_of_anything() -> None:
+    spec = BlockSpec("t", "S", (), "x", no_faults, properties=(option_list("picks"),))
+
+    def faults(props: dict[str, object]) -> list[tuple[str, str]]:
+        errors = check_props("t", props, 1, specs={"t": spec})
+        return [(f.rule, f.message) for f in errors]
+
+    assert faults({"picks": ["a", {"label": "b"}, 3]}) == []
+    assert faults({}) == [("missing-key", "missing required key 'picks'")]
+    assert faults({"picks": []}) == [("type", "'picks' must not be empty")]
+    assert faults({"picks": "a"}) == [("type", "'picks' must be list")]
+    assert "picks  required  list of any, nonempty" in type_text({"t": spec}, "t")

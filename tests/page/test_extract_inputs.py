@@ -6,6 +6,7 @@ import json
 
 import pytest
 
+from tavle import allowed_value, check_slider_value
 from tavle.blocks_render.decision import decision_as_choice
 from tavle.comments.answers import answer_schema, validate_answer
 from tavle.page.page_check import check
@@ -71,7 +72,7 @@ def test_a_maximal_ranking_that_passes_check_is_accepted_by_validate_answer() ->
     ],
 )
 def test_ordered_answer_accepts(item: str, value: object) -> None:
-    validate_answer(ORDERED_DOC, item, value, "")
+    assert validate_answer(ORDERED_DOC, item, value, "") is None
 
 
 @pytest.mark.parametrize(
@@ -86,14 +87,11 @@ def test_ordered_answer_accepts(item: str, value: object) -> None:
         ("order", "a"),
         ("order", ["a", "b", 3]),
         ("order", ["a", "b", "c\x00"]),
-        ("conf", 11),
         ("conf", -1),
-        ("conf", 3),  # off the step of 2
         ("conf", 4.5),
         ("conf", True),
         ("conf", "4"),
         ("conf", None),
-        ("conf", float("nan")),
         ("conf", float("inf")),
         ("conf", -float("inf")),
         ("conf", 10**400),
@@ -149,13 +147,14 @@ def test_slider_rejections_name_the_range_or_the_step() -> None:
         ("setup", GOOD_FORM, ""),
         ("setup", {**GOOD_FORM, "n": None}, ""),
         ("note", "commented", "hello"),
-        ("ship", "approved", ""),
+        ("setup", {**GOOD_FORM, "n": 1}, ""),  # the lowest allowed
+        ("setup", {**GOOD_FORM, "n": 10}, ""),  # the highest allowed
     ],
 )
 def test_choice_form_comment_answer_accepts(
     item: str, value: object, text: str
 ) -> None:
-    validate_answer(CHOICE_DOC, item, value, text)
+    assert validate_answer(CHOICE_DOC, item, value, text) is None
 
 
 @pytest.mark.parametrize(
@@ -173,22 +172,6 @@ def test_choice_form_comment_answer_accepts(
         ("many", ["x"], "bad\x1b[2J"),
         ("note", "commented", ""),
         ("note", "other", "hello"),
-        ("setup", {**GOOD_FORM, "extra": 1}, ""),
-        ("setup", {"owner": "ann"}, ""),
-        ("setup", {**GOOD_FORM, "owner": ""}, ""),  # required
-        ("setup", {**GOOD_FORM, "owner": "toolong"}, ""),  # maxlength 5
-        ("setup", {**GOOD_FORM, "owner": "a\x07"}, ""),
-        ("setup", {**GOOD_FORM, "n": 0}, ""),  # below min
-        ("setup", {**GOOD_FORM, "n": 11}, ""),  # above max
-        ("setup", {**GOOD_FORM, "n": float("nan")}, ""),
-        ("setup", {**GOOD_FORM, "n": float("inf")}, ""),
-        ("setup", {**GOOD_FORM, "n": 10**400}, ""),
-        ("setup", {**GOOD_FORM, "n": True}, ""),
-        ("setup", {**GOOD_FORM, "n": "3"}, ""),
-        ("setup", {**GOOD_FORM, "region": "asia"}, ""),
-        ("setup", {**GOOD_FORM, "ok": False}, ""),  # required checkbox
-        ("setup", {**GOOD_FORM, "ok": "yes"}, ""),
-        ("setup", ["owner"], ""),
         ("missing", "a", ""),
     ],
 )
@@ -197,6 +180,72 @@ def test_choice_form_comment_answer_rejects(
 ) -> None:
     with pytest.raises(ValueError):
         validate_answer(CHOICE_DOC, item, value, text)
+
+
+_EXACT_FIELDS = "form value must hold exactly the form's fields"
+_NOT_FINITE = "field 'n' must be a finite number"
+_OWNER_TEXT = "field 'owner' must be text up to 5 characters"
+
+
+@pytest.mark.parametrize(
+    ("value", "message"),
+    [
+        ({**GOOD_FORM, "extra": 1}, _EXACT_FIELDS),
+        ({"owner": "ann"}, _EXACT_FIELDS),
+        (["owner"], "form value must be an object"),
+        ({**GOOD_FORM, "owner": ""}, "field 'owner' is required"),
+        ({**GOOD_FORM, "owner": "toolong"}, _OWNER_TEXT),  # maxlength 5
+        ({**GOOD_FORM, "owner": "a\x07"}, _OWNER_TEXT),
+        ({**GOOD_FORM, "n": 0}, "field 'n' is below 1"),
+        ({**GOOD_FORM, "n": 11}, "field 'n' is above 10"),
+        ({**GOOD_FORM, "n": float("nan")}, _NOT_FINITE),
+        ({**GOOD_FORM, "n": float("inf")}, _NOT_FINITE),
+        ({**GOOD_FORM, "n": 10**400}, _NOT_FINITE),
+        ({**GOOD_FORM, "n": True}, _NOT_FINITE),
+        ({**GOOD_FORM, "n": "3"}, _NOT_FINITE),
+        ({**GOOD_FORM, "region": "asia"}, "field 'region' must be one of its options"),
+        ({**GOOD_FORM, "ok": False}, "field 'ok' is required"),
+        ({**GOOD_FORM, "ok": "yes"}, "field 'ok' must be true or false"),
+    ],
+)
+def test_form_answer_rejection_says_why(value: object, message: str) -> None:
+    with pytest.raises(ValueError) as caught:
+        validate_answer(CHOICE_DOC, "setup", value, "")
+    assert str(caught.value) == message
+
+
+@pytest.mark.parametrize(
+    ("kind", "value", "allowed"),
+    [
+        ("string", "x" * 600, True),
+        ("string", "x" * 601, False),
+        ("string", ["x"], False),
+        ("list", [str(i) for i in range(100)], True),
+        ("list", [str(i) for i in range(101)], False),
+    ],
+)
+def test_a_free_answer_is_bounded_text(kind: str, value: object, allowed: bool) -> None:
+    assert allowed_value(kind, value, ()) is allowed
+
+
+@pytest.mark.parametrize(
+    ("bounds", "value"),
+    [
+        ((1, 10, 3), 4),  # steps count from min, not from zero
+        ((0, 10000, 1000), 1000 + 1e-7),  # the tolerance grows with the step
+        ((0.0, 2.0**30, 1.0), 1.0 + 2.0**-21),  # exactly two float spacings off
+    ],
+)
+def test_a_value_within_float_tolerance_of_a_step_is_on_it(
+    bounds: tuple[float, float, float], value: float
+) -> None:
+    assert check_slider_value(bounds, value) is None
+
+
+def test_slider_value_check_refuses_a_non_finite_number() -> None:
+    with pytest.raises(ValueError) as caught:
+        check_slider_value((0, 10, 2), float("nan"))
+    assert str(caught.value) == "value must be a finite number"
 
 
 def test_decision_is_a_choice_preset_and_old_rows_still_validate() -> None:
