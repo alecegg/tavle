@@ -42,3 +42,30 @@ def test_shared_defaults_and_coverage() -> None:
         )
     )
     assert result["--vd-heading-mark-size"] == "0"
+
+
+def test_scales_fonts_and_case() -> None:
+    result = derive_shape(
+        {
+            "font-body": "serif",
+            "font-heading": "mono",
+            "type-scale": 1.2,
+            "heading-scale": 1.2,
+            "heading-weight": 700,
+            "heading-tracking": -0.01,
+            "heading-case": "upper",
+            "heading-color": "text",
+            "heading-marker": "none",
+            "radius": 10,
+            "space-scale": 1.2,
+            "section-gap": 8,
+            "page-width": 60,
+        }
+    )
+    assert result["--vd-font-body"] == 'Georgia, "Times New Roman", serif'
+    assert result["--vd-font-heading"] == '"SFMono-Regular", Consolas, monospace'
+    assert result["--vd-heading-case"] == "uppercase"
+    assert result["--vd-text-md"] == "1.2rem"
+    assert result["--vd-title-size"] == "clamp(2.1rem, 1.56rem + 1.92vw, 2.7rem)"
+    assert result["--vd-space-1"] == "0.3rem"
+    assert result["--vd-radius-m"] == "7.5px"

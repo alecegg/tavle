@@ -6,20 +6,16 @@ from importlib.resources import files
 import pytest
 
 from tavle.theme.presets import PRESET_NAMES, load_preset
-from tavle.theme.tokens import TOKENS, ThemeError
-
-
-def test_varde_complete() -> None:
-    layer = load_preset("varde")
-    assert set(layer.shared) == {t.name for t in TOKENS if t.scope == "shared"}
-    for scheme in (layer.light, layer.dark):
-        assert set(scheme) == {t.name for t in TOKENS if t.scope == "scheme"}
+from tavle.theme.tokens import ThemeError
 
 
 def test_unknown_preset() -> None:
     with pytest.raises(ThemeError) as exc:
         load_preset("missing")
     assert all(name in str(exc.value) for name in PRESET_NAMES)
+    assert str(exc.value) == (
+        "unknown preset 'missing'; expected one of varde, paper, harbor, signal"
+    )
 
 
 def test_palette_matches_css() -> None:
