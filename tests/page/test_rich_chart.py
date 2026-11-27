@@ -591,3 +591,17 @@ def test_interact_tooltip_is_not_clipped_at_320(open_page: Any) -> None:
         )
         assert all(gap >= -0.5 for gap in inside), inside
     page.set_viewport_size({"width": 900, "height": 700})
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        (9999, "9,999"),
+        (10000, "10k"),
+        (-10000, "-10k"),
+        (1_000_000, "1M"),
+        (1_000_000_000, "1G"),
+    ],
+)
+def test_compact_scale_boundaries(value: float, expected: str) -> None:
+    assert compact(value) == expected
