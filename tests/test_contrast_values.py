@@ -1,27 +1,15 @@
-"""Contrast math: exact channel values, error text, clamps and the failure margin."""
+"""Contrast math: exact channel values and error text."""
 
 import pytest
 
-from tavle.contrast import (
-    FAIL_MARGIN,
-    composite,
-    fails_threshold,
-    parse_rgba,
-    relative_luminance,
-)
+from tavle.contrast import composite, parse_rgba, relative_luminance
 
 
-def test_unsupported_colour_error_quotes_the_text() -> None:
-    with pytest.raises(ValueError, match="^unsupported colour: 'hsl\\(0\\)'$"):
-        parse_rgba("hsl(0)")
-
-
-@pytest.mark.parametrize(
-    ("text", "alpha"),
-    [("rgba(1, 2, 3, 5)", 1.0), ("rgba(1, 2, 3, -2)", 0.0), ("rgba(1 2 3 / 50%)", 0.5)],
-)
-def test_alpha_is_clamped_to_the_unit_range(text: str, alpha: float) -> None:
-    assert parse_rgba(text)[3] == alpha
+@pytest.mark.parametrize("text", ["#fff", "hsl(0)"])
+def test_unsupported_colour_error_quotes_the_text(text: str) -> None:
+    with pytest.raises(ValueError) as error:
+        parse_rgba(text)
+    assert str(error.value) == f"unsupported colour: {text!r}"
 
 
 def test_composite_of_nothing_is_transparent_black() -> None:
@@ -45,8 +33,6 @@ def test_luminance_of_black_white_and_dark_channels() -> None:
     assert relative_luminance((255, 0, 0, 1)) == pytest.approx(0.2126)
     assert relative_luminance((0, 255, 0, 1)) == pytest.approx(0.7152)
     assert relative_luminance((0, 0, 255, 1)) == pytest.approx(0.0722)
-
-
-def test_a_ratio_exactly_at_the_margin_does_not_fail() -> None:
-    assert fails_threshold(4.5 - FAIL_MARGIN, 4.5) is False
-    assert fails_threshold(4.5 - FAIL_MARGIN - 0.001, 4.5) is True
+    # The sRGB cutoff itself (0.04045 * 255) is still on the linear segment.
+    cutoff = relative_luminance((10.31475, 10.31475, 10.31475, 1))
+    assert cutoff == pytest.approx(0.04045 / 12.92, rel=0, abs=1e-10)

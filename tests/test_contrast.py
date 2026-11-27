@@ -30,26 +30,18 @@ def test_ratio_matches_reference_values(
     assert ours == pytest.approx(expected, abs=1e-9)
 
 
-def test_black_on_white_is_21() -> None:
-    ratio = contrast_ratio(parse_rgba("rgb(0, 0, 0)"), parse_rgba("rgb(255, 255, 255)"))
-    assert ratio == pytest.approx(21.0)
-
-
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
         ("rgb(1, 2, 3)", (1, 2, 3, 1.0)),
         ("rgba(1, 2, 3, 0.5)", (1, 2, 3, 0.5)),
         ("rgb(1 2 3 / 50%)", (1, 2, 3, 0.5)),
+        ("rgba(1, 2, 3, 5)", (1, 2, 3, 1.0)),
+        ("rgba(1, 2, 3, -2)", (1, 2, 3, 0.0)),
     ],
 )
 def test_parse_rgba(text: str, expected: tuple[float, ...]) -> None:
     assert parse_rgba(text) == expected
-
-
-def test_parse_rejects_other_colour_syntax() -> None:
-    with pytest.raises(ValueError):
-        parse_rgba("#fff")
 
 
 def test_translucent_foreground_is_composited() -> None:
@@ -76,5 +68,5 @@ def test_large_text_threshold(
 
 
 def test_fail_margin_is_0_05() -> None:
-    assert not fails_threshold(4.46, 4.5)
-    assert fails_threshold(4.44, 4.5)
+    assert fails_threshold(4.45, 4.5) is False
+    assert fails_threshold(4.449, 4.5) is True
