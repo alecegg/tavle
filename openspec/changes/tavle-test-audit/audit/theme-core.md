@@ -2,24 +2,45 @@
 
 - Source (`--only` globs): `tavle.theme.*`
 - Test files: `tests/test_theme_css.py`, `tests/test_theme_derive_colour.py`, `tests/test_theme_derive_shape.py`, `tests/test_theme_layers.py`, `tests/test_theme_presets_load.py`, `tests/test_theme_presets_valid.py`, `tests/test_theme_tokens.py`, `tests/test_theme_validate.py`
-- Collected tests (file order as above): 32 before (2, 2, 1, 7, 3, 5, 9, 3), 74 after (6, 8, 2, 23, 2, 9, 14, 10). Test functions: 19 before, 34 after.
+- Collected tests (file order as above): 32 before (2, 2, 1, 7, 3, 5, 9, 3), 70 after (6, 8, 2, 23, 2, 5, 14, 10). Test functions: 19 before, 33 after.
 - Mutation score before: 84% (1505 mutants: 1272 killed, 227 survived, 6 timeout; `audit/py-theme.md`)
-- Mutation score after: 95% (1505 mutants: 1443 killed, 62 survived, 0 timeout). The full run gave 1441 killed, 62 survived, 2 timeout; `x_derive_colour__mutmut_135` and `_136` were then rerun alone with `--only` after the grey-on-grey case moved into the first-run test, and both were killed.
+- Mutation score after: 95% (1505 mutants: 1443 killed, 62 survived, 0 timeout). One full run on the final test files (497 s) after the C1 deletion; its 62 survivors are the mutants marked equivalent below.
 
-## C1 (leave-one-out, baseline `t26`): NOT RUN
+## C1 (leave-one-out, baseline `t26`)
 
-The 20-minute budget ran out after the final mutation run, so the procedure's stop rule applies and task 5.2 stays unticked. No test was deleted or merged on C1 evidence. Still to do, once per file, with `just mutate --without tests/test_theme_<name>.py --baseline t26 --only 'tavle.theme.*'`, then `just mutate --tag t26-without --clean`. Affected mutants per file: css 1146, derive_colour 487, derive_shape 179, layers 183, presets_load 126, presets_valid 704, tokens 43, validate 807 (3,675 in total; at the 1.3 to 1.7 s per mutant of `audit/leave-one-out.md` that is about 80 to 105 minutes, and `css` alone exceeds one job).
+Runs used `tc52`, a copy of `t26`'s `mutants/`. The eight files were first left out together (`--without` repeated, `--only 'tavle.theme.*'`), then each alone with `--only` naming the 148 kills that run lost.
 
-## Decisions (C2 to C5)
+| `--without` | mutants judged | lost kills | wall |
+|---|---|---|---|
+| all eight files | 1219 | 148 | 680 s |
+| `test_theme_css.py` | 126 | 3 (`css.x_style_element`) | 88 s |
+| `test_theme_derive_colour.py` | 18 | 2 (`derive_colour.x_derive_colour`) | 63 s |
+| `test_theme_derive_shape.py` | 50 | none | 70 s |
+| `test_theme_layers.py` | 50 | 38 (`layers`) | 131 s |
+| `test_theme_presets_load.py` | 30 | 2 (`presets.x_load_preset`) | 63 s |
+| `test_theme_presets_valid.py` | 65 | none | 66 s |
+| `test_theme_tokens.py` | 12 | 6 (`tokens`) | 64 s |
+| `test_theme_validate.py` | 71 | 16 (`validate.x_validate_theme`) | 99 s |
+
+`t26` does not count the 171 mutants first killed by this task's new tests, so the two files with no lost kill were judged on those too. `just mutate --tag tc52` over the 171 names killed all of them (115 s), then:
+
+- `--without tests/test_theme_presets_valid.py`: no lost kills (106 s).
+- `--without tests/test_theme_derive_shape.py`: lost `derive_shape.x_derive_shape__mutmut_124` and `_151` (59 s), so it is not a candidate.
+
+Only `test_theme_presets_valid.py` is a C1 candidate.
+
+## Decisions
 
 | test id | decision | criterion | evidence |
 |---|---|---|---|
+| `test_theme_presets_valid.py::test_preset_css_is_pinned` | delete | C1 | `--without tests/test_theme_presets_valid.py` loses no kill; it pins a digest of current output and guards no recorded regression or published contract |
+| `test_theme_presets_valid.py::test_preset_is_complete_and_valid`, `::test_presets_have_distinct_identities` | keep | C1 | guard the shipped preset TOML files behind the public `load_preset`, which mutmut does not mutate |
 | `test_theme_presets_load.py::test_varde_complete` | delete | C5 | same `load_preset("varde")` call and the same two set assertions as `test_theme_presets_valid.py::test_preset_is_complete_and_valid[varde]` |
 | `test_theme_derive_shape.py::test_shared_defaults_and_coverage` | keep | C3 | static hit reads `00-tokens.css`; it guards CSS and Python token parity, not a copy of `derive_shape` |
 | `test_theme_tokens.py::test_colour_rejects_css` | keep | C5 | static identical body with `test_bad_intervals_error`, which calls different code |
 | `test_theme_validate.py::test_preset_and_derived_dark_pass` | keep | C4 | `validate_theme` raises on failure; the derived-dark call has no other test |
 
-The digest tests (`test_pinned_derivations`, `test_preset_css_is_pinned`) pin current output; an intended colour change updates the digest.
+The digest test (`test_pinned_derivations`) pins current output; an intended colour change updates the digest.
 
 ## Survivors
 

@@ -1,13 +1,9 @@
 """Built-in presets are complete, valid and visually distinct."""
 
-import hashlib
 from typing import cast
 
 import pytest
 
-from tavle.theme.css import theme_css
-from tavle.theme.layers import Layer
-from tavle.theme.merge import resolve_layers
 from tavle.theme.presets import PRESET_NAMES, load_preset
 from tavle.theme.tokens import TOKENS
 from tavle.theme.validate import validate_theme
@@ -39,17 +35,3 @@ def test_presets_have_distinct_identities() -> None:
         [p.shared["radius"] for p in presets],
     ):
         assert len(set(values)) == len(PRESET_NAMES)
-
-
-@pytest.mark.parametrize(
-    ("name", "digest"),
-    [
-        ("varde", "289addaa5d14720d"),
-        ("paper", "53fdb5a20c06918c"),
-        ("harbor", "2ad0a1e707d91ef9"),
-        ("signal", "0542df377b98f802"),
-    ],
-)
-def test_preset_css_is_pinned(name: str, digest: str) -> None:
-    css = theme_css(resolve_layers([(Layer(preset=name), "page")]))
-    assert hashlib.sha256(css.encode()).hexdigest()[:16] == digest
