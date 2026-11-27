@@ -1,9 +1,15 @@
-"""Line syntax parser: valid cases, every error class, partial input."""
+"""Line syntax parser: valid cases, every error site, recovery, partial input."""
 
 import pytest
 
-from tavle.lines import Ref, parse_lines
+from tavle.lines import ParseError, Ref, parse_lines
 from tavle.lines.grammar import EXAMPLES
+
+# A parser that stops advancing must fail the test, not hang the run.
+pytestmark = pytest.mark.timeout(2, method="signal")
+
+_NOT_CLOSED_AT_END = "statement is not closed before the end of the text"
+_BAD_ESCAPE = "bad string escape: Invalid \\escape: line 1 column "
 
 
 @pytest.mark.parametrize("example", EXAMPLES)
@@ -15,7 +21,7 @@ def test_pinned_examples_parse(example):
 
 def test_values_of_every_type():
     text = (
-        'a = chart(s: "x\\ny", i: 3, f: -1.5, e: 1e2, t: true, n: null,'
+        'a = chart(s: "x\\ny", i: 3, f: -1.5, e: 1e2, E: 1E2, t: true, n: null,'
         ' arr: [1, [2]], obj: {"k": {bare: false}})'
     )
     (stmt,) = parse_lines(text).statements
@@ -25,12 +31,31 @@ def test_values_of_every_type():
         "i": 3,
         "f": -1.5,
         "e": 100.0,
+        "E": 100.0,
         "t": True,
         "n": None,
         "arr": [1, [2]],
         "obj": {"k": {"bare": False}},
     }
     assert isinstance(stmt.props["i"], int)
+
+
+def test_refs_resolve_at_any_nesting():
+    text = "a = flow()\nb = flow(x: [a, [a]], y: {k: a, j: {k: a}}, z: [{k: a}])"
+    result = parse_lines(text)
+    assert result.errors == []
+    ref = Ref("a")
+    assert result.statements[1].props == {
+        "x": [ref, [ref]],
+        "y": {"k": ref, "j": {"k": ref}},
+        "z": [{"k": ref}],
+    }
+
+
+def test_commas_need_no_space():
+    result = parse_lines("a = flow(x:[1,2],y:{k:1,j:2})")
+    assert result.errors == []
+    assert result.statements[0].props == {"x": [1, 2], "y": {"k": 1, "j": 2}}
 
 
 def test_reference_and_multiline_and_comments():
@@ -58,44 +83,97 @@ def test_unicode_and_hash_inside_string():
     assert stmt.props["t"] == "héllo # 日本 é"
 
 
-def test_deep_nesting_within_limit():
-    text = "a = flow(x: " + "[" * 20 + "]" * 20 + ")"
-    assert parse_lines(text).errors == []
+@pytest.mark.parametrize(
+    ("empty", "wrap"),
+    [("[]", "[{}]"), ("{}", "{{k: {}}}")],
+    ids=["array", "object"],
+)
+def test_nesting_stops_after_32_levels(empty, wrap):
+    value = empty
+    for _ in range(31):
+        value = wrap.format(value)
+    assert parse_lines(f"a = flow(x: {value})").errors == []
+    result = parse_lines(f"a = flow(x: {wrap.format(value)})")
+    assert result.errors == [ParseError(1, "depth", "nesting deeper than 32")]
 
 
-def test_empty_and_comment_only():
-    assert parse_lines("").statements == []
-    assert parse_lines("# only\n\n").errors == []
+@pytest.mark.parametrize("text", ["", "# only\n\n", "# no newline at the end"])
+def test_empty_and_comment_only(text):
+    result = parse_lines(text)
+    assert (result.statements, result.errors) == ([], [])
 
 
 @pytest.mark.parametrize(
-    ("text", "rule", "line"),
+    ("text", "rule", "line", "message"),
     [
-        ("A = flow()", "id-invalid", 1),
-        ("a = flow()\nb = flow()\na = flow()", "id-duplicate", 3),
-        ("\n\na = flow(x: 1, x: 2)", "prop-duplicate", 3),
-        ('a = flow(o: {"k": 1, "k": 2})', "prop-duplicate", 1),
-        ("a = flow(x: b)", "ref-unknown", 1),
-        ("a = flow(x: a)", "ref-unknown", 1),
-        ("a = flow()  junk", "trailing", 1),
-        ("a flow()", "syntax", 1),
-        ("a = (x: 1)", "syntax", 1),
-        ("a = flow x", "syntax", 1),
-        ("a = flow(x 1)", "syntax", 1),
-        ("a = flow(\n  x: 1\n  y: 2\n)", "syntax", 3),
-        ("a = flow(x: 01)", "syntax", 1),
-        ("a = flow(x: -)", "syntax", 1),
-        ("a = flow(x: [1 2])", "syntax", 1),
-        ('a = flow(x: "bad \\q")', "syntax", 1),
-        ('a = flow(\n  x: "open\n)', "unterminated", 2),
-        ("a = flow(x: 1", "unterminated", 1),
-        ("ok = flow()\n\nb = flow(x: [", "unterminated", 3),
-        ("a = flow(x: " + "[" * 40 + "]" * 40 + ")", "depth", 1),
+        ("A = flow()", "id-invalid", 1, "id 'A' must match ^[a-z][a-z0-9-]{0,47}$"),
+        ("true = flow()", "id-invalid", 1, "id 'true' is a reserved literal"),
+        ("false = flow()", "id-invalid", 1, "id 'false' is a reserved literal"),
+        ("null = flow()", "id-invalid", 1, "id 'null' is a reserved literal"),
+        (
+            "a = flow()\nb = flow()\na = flow()",
+            "id-duplicate",
+            3,
+            "id 'a' is already used at line 1",
+        ),
+        ("\n\na = flow(x: 1, x: 2)", "prop-duplicate", 3, "duplicate prop 'x'"),
+        ('a = flow(o: {"k": 1, "k": 2})', "prop-duplicate", 1, "duplicate key 'k'"),
+        ("a = flow(x: b)", "ref-unknown", 1, "'b' is not an earlier statement"),
+        ("a = flow(x: a)", "ref-unknown", 1, "'a' is not an earlier statement"),
+        ("a = flow() x", "trailing", 1, "text after the closing ')'"),
+        ("a = flow()\nb = flow() x", "trailing", 2, "text after the closing ')'"),
+        ("(x)", "syntax", 1, "expected '<id> = Component(...)', found '('"),
+        ("a flow()", "syntax", 1, "expected '=' after the id, found 'f'"),
+        ("a = (x: 1)", "syntax", 1, "expected a component name after '='"),
+        ("a = flow x", "syntax", 1, "expected '(' after the component name, found 'x'"),
+        ("a = flow(1: 2)", "syntax", 1, "expected a prop name, found '1'"),
+        ("a = flow(x 1)", "syntax", 1, "expected ':' after prop name, found '1'"),
+        (
+            "a = flow(\n  x: 1\n  y: 2\n)",
+            "syntax",
+            3,
+            "expected ',' or ')' after value",
+        ),
+        ("a = flow(x: 01)", "syntax", 1, "expected ',' or ')' after value"),
+        ("a = flow(x: [1 2])", "syntax", 1, "expected ',' or ']' in array"),
+        ("a = flow(x: {k: 1 j: 2})", "syntax", 1, "expected ',' or '}' in object"),
+        ("a = flow(x: {1: 2})", "syntax", 1, "expected an object key"),
+        ("a = flow(x: {k 1})", "syntax", 1, "expected ':' after key, found '1'"),
+        ("a = flow(x: @)", "syntax", 1, "unexpected '@'"),
+        ("a = flow(x: -)", "syntax", 1, "bad number"),
+        ("a = flow(x: 1e999)", "syntax", 1, "number is out of range"),
+        pytest.param(
+            "a = flow(x: " + "9" * 5000 + ")",
+            "syntax",
+            1,
+            "integer has too many digits",
+            id="huge-integer",
+        ),
+        ('a = flow(x: "bad \\q")', "syntax", 1, _BAD_ESCAPE + "6 (char 5)"),
+        # A backslash can carry a string onto the next line; report where it starts.
+        ('a = flow(x: "q\\\n")', "syntax", 1, _BAD_ESCAPE + "3 (char 2)"),
+        (
+            'a = flow(x: "a\tb")',
+            "syntax",
+            1,
+            "raw control character in string (use an escape such as \\t)",
+        ),
+        ('a = flow(x: "\\ud800")', "syntax", 1, "lone surrogate escape in string"),
+        ('a = flow(x: "\\udfff")', "syntax", 1, "lone surrogate escape in string"),
+        (
+            'a = flow(\n  x: "open\n)',
+            "unterminated",
+            2,
+            "string is not closed on its line",
+        ),
+        ("a = flow(x: 1", "unterminated", 1, _NOT_CLOSED_AT_END),
+        ("ok = flow()\n\nb = flow(x: [", "unterminated", 3, _NOT_CLOSED_AT_END),
     ],
 )
-def test_error_classes_have_lines(text, rule, line):
+def test_error_classes_have_lines(text, rule, line, message):
     result = parse_lines(text)
-    assert (result.errors[0].rule, result.errors[0].line) == (rule, line), result.errors
+    assert result.errors == [ParseError(line, rule, message)]
+    assert all(statement.line != line for statement in result.statements)
 
 
 def test_error_text_and_recovery():
@@ -106,23 +184,53 @@ def test_error_text_and_recovery():
     assert result.errors[0].text().startswith("line 1: syntax: ")
 
 
-def test_partial_tail_is_pending_not_error():
-    text = "a = flow(x: 1)\nb = table(rows: [1, 2,"
+@pytest.mark.parametrize(
+    ("text", "kept"),
+    [
+        ("a = flow(x: 1\nb = flow()\nc = flow()", ["b", "c"]),
+        ('a = flow(x: [1],\n  y: "s"\nb = flow()', ["b"]),
+    ],
+)
+def test_missing_close_paren_does_not_swallow_next_statement(text, kept):
+    result = parse_lines(text)
+    message = "statement is not closed before the next statement"
+    assert result.errors == [ParseError(1, "unterminated", message)]
+    assert [s.id for s in result.statements] == kept
+
+
+@pytest.mark.parametrize(
+    "tail", ["b = table(rows: [1, 2,", 'b = table(rows: [1, 2,\n  "x']
+)
+def test_partial_tail_is_pending_not_error(tail):
+    text = f"a = flow(x: 1)\n{tail}"
+    partial = parse_lines(text, partial=True)
+    assert partial.errors == []
+    assert [s.id for s in partial.statements] == ["a"]
+    assert partial.pending == tail
+    strict = parse_lines(text)
+    assert strict.errors == [ParseError(2, "unterminated", _NOT_CLOSED_AT_END)]
+    assert [s.id for s in strict.statements] == ["a"]
+    assert strict.pending == ""
+
+
+@pytest.mark.parametrize(
+    ("text", "rule", "kept", "pending"),
+    [
+        ("A = flow()\nb = fl", "id-invalid", [], "b = fl"),
+        ("a = flow()\nb = x(t: nope)\nc = fl", "ref-unknown", ["a"], "c = fl"),
+    ],
+)
+def test_partial_still_reports_real_errors(text, rule, kept, pending):
     result = parse_lines(text, partial=True)
-    assert result.errors == []
-    assert [s.id for s in result.statements] == ["a"]
-    assert result.pending == "b = table(rows: [1, 2,"
-    assert parse_lines(text).errors[0].rule == "unterminated"
-
-
-def test_partial_still_reports_real_errors():
-    result = parse_lines("A = flow()\nb = fl", partial=True)
-    assert result.errors[0].rule == "id-invalid"
-    assert result.pending == "b = fl"
+    assert [e.rule for e in result.errors] == [rule]
+    assert [s.id for s in result.statements] == kept
+    assert result.pending == pending
 
 
 def test_partial_complete_text_has_no_pending():
-    assert parse_lines("a = flow()\n", partial=True).pending == ""
+    result = parse_lines("a = flow()\n", partial=True)
+    assert result.pending == ""
+    assert [s.id for s in result.statements] == ["a"]
 
 
 def test_no_dynamic_evaluation():
@@ -131,16 +239,9 @@ def test_no_dynamic_evaluation():
     assert result.statements == []
 
 
-def test_huge_integer_is_an_error_not_a_crash():
-    result = parse_lines("a = flow(x: " + "9" * 5000 + ")")
-    assert result.errors[0].rule == "syntax"
-    assert "too many digits" in result.errors[0].message
-    assert result.errors[0].line == 1
-
-
 @pytest.mark.parametrize(
     "tail",
-    ["tru", "b", "1.", "1e", "1e+", "-", '"abc', '"ab\\', "[1, tr"],
+    ["tru", "b", "1.", "1e", "1e+", "1e999", "-", '"abc', '"ab\\', "[1, tr"],
 )
 def test_partial_mid_token_cutoff_is_pending(tail):
     text = f"b = flow()\na = table(x: {tail}"
@@ -157,42 +258,9 @@ def test_partial_cutoff_before_open_paren_is_pending(tail):
     assert result.pending == tail
 
 
-def test_missing_close_paren_does_not_swallow_next_statement():
-    result = parse_lines("a = flow(x: 1\nb = flow()\nc = flow()")
-    assert [(e.rule, e.line) for e in result.errors] == [("unterminated", 1)]
-    assert [s.id for s in result.statements] == ["b", "c"]
-
-
-def test_missing_close_paren_after_comma_and_value_forms():
-    result = parse_lines('a = flow(x: [1],\n  y: "s"\nb = flow()')
-    assert [(e.rule, e.line) for e in result.errors] == [("unterminated", 1)]
-    assert [s.id for s in result.statements] == ["b"]
-
-
 def test_hyphenated_component_names_and_refs():
     text = "my-model = data-model(a: 1)\nscreens = ui-states(of: my-model)"
     result = parse_lines(text)
     assert result.errors == []
     assert [s.component for s in result.statements] == ["data-model", "ui-states"]
     assert result.statements[1].props == {"of": Ref("my-model")}
-
-
-def test_non_finite_number_rejected():
-    assert parse_lines("a = flow(x: 1e999)").errors[0].rule == "syntax"
-
-
-def test_lone_surrogate_rejected():
-    assert parse_lines('a = flow(x: "\\ud800")').errors[0].rule == "syntax"
-
-
-def test_raw_tab_in_string_has_clear_message():
-    (error,) = parse_lines('a = flow(x: "a\tb")').errors
-    assert "control character" in error.message
-    assert "escape sequence" not in error.message
-
-
-@pytest.mark.parametrize("literal", ["true", "false", "null"])
-def test_literal_words_are_not_valid_ids(literal):
-    result = parse_lines(f"{literal} = flow()")
-    assert (result.errors[0].rule, result.errors[0].line) == ("id-invalid", 1)
-    assert result.statements == []
