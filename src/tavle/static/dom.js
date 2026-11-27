@@ -15,9 +15,11 @@ export function overlayParent(node) {
   return tree instanceof ShadowRoot ? tree : document.body;
 }
 
-// The focused element of the tree `node` lives in (a shadow root keeps its own).
+// The element focused in the tree `node` lives in (a shadow root keeps its own), or null
+// when none is: a document reports document.body as its active element then.
 export function focusedIn(node) {
-  return node.getRootNode().activeElement || null;
+  const active = node.getRootNode().activeElement;
+  return active && active !== document.body ? active : null;
 }
 
 // A window event that acts for `node` only: it stops, and unhooks itself, once `node` leaves the page.

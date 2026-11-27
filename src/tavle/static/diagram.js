@@ -3,7 +3,7 @@
 // or hover highlights its neighbours; click or Enter selects it and announces its
 // detail; group headers collapse and expand by showing another pre-computed state;
 // arrow keys on a node move along its edges. No layout runs in the browser.
-import { control, make, whileConnected } from './dom.js';
+import { control, keepInside, make, whileConnected } from './dom.js';
 import { mountViewport } from './viewport.js';
 import { ARROWS, handleViewKey } from './view_keys.js';
 
@@ -53,26 +53,6 @@ function prepareHead(head) {
   head.setAttribute('tabindex', '-1');
   head.setAttribute('aria-expanded', 'true');
   head.setAttribute('aria-label', head.querySelector('.vd-group-label').textContent + ', group');
-}
-
-const RING_MARGIN = 4;
-
-// Scroll the view so a focused element, with its focus ring, sits inside the scrollport.
-function keepInside(view, target) {
-  const box = view.getBoundingClientRect();
-  const rect = target.getBoundingClientRect();
-  const left = box.left + view.clientLeft + RING_MARGIN;
-  const right = box.left + view.clientLeft + view.clientWidth - RING_MARGIN;
-  const top = box.top + view.clientTop + RING_MARGIN;
-  const bottom = box.top + view.clientTop + view.clientHeight - RING_MARGIN;
-  if (rect.width <= right - left) {
-    if (rect.left < left) view.scrollLeft -= left - rect.left;
-    else if (rect.right > right) view.scrollLeft += rect.right - right;
-  }
-  if (rect.height <= bottom - top) {
-    if (rect.top < top) view.scrollTop -= top - rect.top;
-    else if (rect.bottom > bottom) view.scrollTop += rect.bottom - bottom;
-  }
 }
 
 function nodeRole(name, id, near) {

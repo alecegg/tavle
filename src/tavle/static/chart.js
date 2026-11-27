@@ -22,6 +22,11 @@ function columnLines(group) {
   return [label, ...group.map((mark) => `${parts(mark)[0]}: ${parts(mark)[2]}`)];
 }
 
+// "label: series value; series value" for a column; an empty column is only its message.
+function columnReadout(lines) {
+  return lines.length > 1 ? `${lines[0]}: ${lines.slice(1).join('; ')}` : lines[0];
+}
+
 function pointLines(mark) {
   const [name, label, value] = parts(mark);
   return [name, `${label}: ${value}`];
@@ -113,9 +118,7 @@ export function enhanceChart(block) {
     lit = group;
     for (const mark of group) mark.classList.add(ON);
     const lines = byColumn ? columnLines(group) : pointLines(group[0]);
-    readout.textContent = byColumn
-      ? `${lines[0]}: ${lines.slice(1).join('; ')}`
-      : parts(group[0]).join(' / ');
+    readout.textContent = byColumn ? columnReadout(lines) : parts(group[0]).join(' / ');
     place(group, lines);
   }
 

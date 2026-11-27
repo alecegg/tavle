@@ -70,7 +70,7 @@ describe('legend toggles', () => {
     hover(block.querySelector('rect.vb-col[data-index="0"]'));
     toggleFor(block, 0).click();
     toggleFor(block, 1).click();
-    expect(readout(block)).toContain('No series shown.');
+    expect(readout(block)).toBe('No series shown.');
   });
 
   it('redraws the shown point on the same index after its series is hidden', () => {

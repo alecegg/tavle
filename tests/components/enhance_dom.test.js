@@ -87,6 +87,13 @@ describe('focusedIn', () => {
     expect(focusedIn(probe)).toBeNull();
   });
 
+  it('returns null for a light-DOM node when the document has nothing focused', () => {
+    const probe = make('div');
+    document.body.append(probe);
+    document.activeElement.blur();
+    expect(focusedIn(probe)).toBeNull();
+  });
+
   it('returns null for a detached node', () => {
     expect(focusedIn(make('div'))).toBeNull();
   });
