@@ -3,6 +3,8 @@
 Usage: scripts/check_audit_removals.py BASE AREA
 
 Compares each test file that `git diff --name-only BASE` lists with its content at BASE.
+When the audit file has a `- Test files:` line, only the backticked paths on it are
+compared, so audits of other areas running in the same checkout do not count.
 A Python test is `def test_...` or `async def test_...` at any indent; a JavaScript test
 is the title of an `it(` or `test(` call. A name counts as removed when the file at BASE
 had it and the working-tree file no longer does. Each removed name must appear as a
@@ -21,6 +23,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT_DIR = Path("openspec/changes/tavle-test-audit/audit")
 PY_TEST = re.compile(r"^[ \t]*(?:async[ \t]+)?def[ \t]+(test_\w*)", re.MULTILINE)
+TEST_FILES_LINE = re.compile(r"^- Test files:(.*)$", re.MULTILINE)
 JS_TEST = re.compile(r"""^[ \t]*(?:it|test)\([ \t]*(['"`])(.+?)\1""", re.MULTILINE)
 
 
@@ -39,6 +42,14 @@ def removed_names(base: dict[str, str], working: dict[str, str]) -> list[str]:
     for path, base_text in base.items():
         removed |= test_names(path, base_text) - test_names(path, working.get(path, ""))
     return sorted(removed)
+
+
+def owned_test_paths(audit_text: str) -> set[str] | None:
+    """Backticked paths on the audit's `- Test files:` line; None without one."""
+    line = TEST_FILES_LINE.search(audit_text)
+    if line is None:
+        return None
+    return set(re.findall(r"`([^`]+)`", line.group(1)))
 
 
 def unrecorded(names: list[str], audit_text: str) -> list[str]:
@@ -68,6 +79,15 @@ def changed_test_paths(base: str) -> list[str]:
     return [path for path in result.stdout.splitlines() if is_test_path(path)]
 
 
+def area_test_paths(base: str, audit_text: str) -> list[str]:
+    """Changed test paths, limited to the audit's own test files when it lists them."""
+    paths = changed_test_paths(base)
+    owned = owned_test_paths(audit_text)
+    if owned is None:
+        return paths
+    return [path for path in paths if path in owned]
+
+
 def working_text(path: str) -> str:
     full = ROOT / path
     return full.read_text() if full.is_file() else ""
@@ -79,7 +99,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("area")
     args = parser.parse_args(argv)
 
-    paths = changed_test_paths(args.base)
+    audit = AUDIT_DIR / f"{args.area}.md"
+    audit_text = (ROOT / audit).read_text() if (ROOT / audit).is_file() else ""
+    paths = area_test_paths(args.base, audit_text)
     base = {path: base_text(args.base, path) for path in paths}
     working = {path: working_text(path) for path in paths}
     names = removed_names(base, working)
@@ -87,8 +109,6 @@ def main(argv: list[str] | None = None) -> int:
         print("no test names removed")
         return 0
 
-    audit = AUDIT_DIR / f"{args.area}.md"
-    audit_text = (ROOT / audit).read_text() if (ROOT / audit).is_file() else ""
     missing = unrecorded(names, audit_text)
     for name in missing:
         print(f"removed but not recorded in {audit}: {name}")

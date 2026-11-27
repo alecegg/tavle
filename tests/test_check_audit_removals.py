@@ -97,3 +97,18 @@ def test_only_test_files_are_checked():
     assert module.is_test_path("tests/components/x.test.js")
     assert not module.is_test_path("src/tavle/x.py")
     assert not module.is_test_path("tests/fixtures/data.json")
+
+
+def test_owned_paths_come_from_the_test_files_line():
+    audit = (
+        "# Audit\n\n- Test files: `tests/test_a.py`, `tests/page/test_b.py`\n"
+        "- Source: `x`\n"
+    )
+    assert load_script().owned_test_paths(audit) == {
+        "tests/test_a.py",
+        "tests/page/test_b.py",
+    }
+
+
+def test_an_audit_without_a_test_files_line_owns_every_path():
+    assert load_script().owned_test_paths("# Audit\n\nno header\n") is None
