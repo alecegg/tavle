@@ -10,10 +10,6 @@ class Fault:
     path: str = ""  # property path such as `rows[2].name`; empty when unknown
 
 
-def type_name(value: object) -> str:
-    return type(value).__name__
-
-
 def is_number(value: object) -> bool:
     return isinstance(value, int | float) and not isinstance(value, bool)
 
@@ -52,29 +48,12 @@ def str_map(value: object, where: str) -> list[Fault]:
     return [Fault("type", f"{where}.{k} must be a string") for k in bad]
 
 
-def list_of(value: object, where: str, kind: type = str) -> list[Fault]:
-    if not isinstance(value, list) or not value:
-        return [Fault("type", f"{where} must be a non-empty list of {kind.__name__}")]
-    if all(isinstance(item, kind) for item in value):
-        return []
-    return [Fault("type", f"{where} must contain only {kind.__name__} values")]
-
-
 def tables(data: dict[str, object], key: str, where: str) -> list[dict[str, object]]:
     """Return data[key] when it is a list of tables, else an empty list."""
     value = data.get(key)
     if isinstance(value, list) and all(isinstance(item, dict) for item in value):
         return list(value)
     return []
-
-
-def tables_fault(data: dict[str, object], key: str, where: str) -> list[Fault]:
-    value = data.get(key)
-    if key not in data:
-        return []
-    if isinstance(value, list) and value and all(isinstance(i, dict) for i in value):
-        return []
-    return [Fault("type", f"{where}: '{key}' must be a non-empty array of tables")]
 
 
 def duplicates(names: list[str]) -> list[str]:
