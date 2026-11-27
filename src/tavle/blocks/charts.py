@@ -102,7 +102,7 @@ def _one_series_faults(
 def _series_faults(data: dict[str, object]) -> list[Fault]:
     kind = data.get("kind")
     labels = data.get("labels") or None  # an empty list is reported by the properties
-    items = tables(data, "series", "chart")
+    items = tables(data, "series")
     faults: list[Fault] = []
     if len(items) > MAX_SERIES:
         faults.append(Fault("too-many", f"chart.series: at most {MAX_SERIES} series"))

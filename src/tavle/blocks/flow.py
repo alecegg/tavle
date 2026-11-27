@@ -5,7 +5,7 @@ from ..blocks.spec import BlockSpec, PropertySpec
 
 
 def validate_flow(data: dict[str, object]) -> list[Fault]:
-    steps = tables(data, "step", "flow")
+    steps = tables(data, "step")
     ids = [n for s in steps if isinstance(n := s.get("id"), str)]
     faults = [
         Fault("step-duplicate", f"flow: step id '{name}' is used more than once")

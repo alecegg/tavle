@@ -63,9 +63,6 @@
     return block ? { kind, id: entry.dataset.item, anchor: block.dataset.anchor } : null;
   }
 
-  // test_pages_decision pins this local name in `decide`.
-  const post = postAnswer;
-
   async function judge(button) {
     const recap = button.closest('.recap');
     const entry = button.closest('.recap-item');
@@ -105,7 +102,7 @@
     const controls = entry.querySelectorAll('button');
     markRowsOlder(entry.dataset.item);
     controls.forEach((control) => { control.disabled = true; });
-    const saved = await post(item, verdict, text, { container: decision, selector: '.decision-error' });
+    const saved = await postAnswer(item, verdict, text, { container: decision, selector: '.decision-error' });
     controls.forEach((control) => { control.disabled = false; });
     if (!saved) return;
     entry.querySelector('.decision-state').textContent = verdict;

@@ -13,7 +13,7 @@ LAYOUT_NOTE = (
 
 def layout_faults(data: dict[str, object]) -> list[Fault]:
     # The properties check that layout is one of LAYOUTS.
-    count = len(tables(data, "entity", "data-model"))
+    count = len(tables(data, "entity"))
     if data.get("layout") == "graph" and count > MAX_GRAPH_ENTITIES:
         return [
             Fault(

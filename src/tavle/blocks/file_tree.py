@@ -49,7 +49,7 @@ def _collapse_faults(data: dict[str, object]) -> list[Fault]:
 
 def validate_file_tree(data: dict[str, object]) -> list[Fault]:
     faults = _collapse_faults(data)
-    entries = tables(data, "entries", "file-tree")
+    entries = tables(data, "entries")
     for n, entry in enumerate(entries, 1):
         faults += _entry_faults(entry, f"file-tree.entries[{n}]")
     paths = [str(e["path"]) for e in entries if isinstance(e.get("path"), str)]

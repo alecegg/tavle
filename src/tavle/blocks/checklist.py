@@ -26,7 +26,7 @@ def validate_checklist(data: dict[str, object]) -> list[Fault]:
         if len(items) > MAX_ITEMS
         else []
     )
-    for n, item in enumerate(tables(data, "items", "checklist"), 1):
+    for n, item in enumerate(tables(data, "items"), 1):
         faults += _agree_faults(item, f"checklist: items[{n}]")
     return faults
 

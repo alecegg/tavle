@@ -15,7 +15,7 @@ MAX_GROUPS = 3  # one pre-computed layout per subset of collapsed groups
 
 def _group_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     faults: list[Fault] = []
-    entries = tables(data, "groups", "diagram")
+    entries = tables(data, "groups")
     names = [n for g in entries if isinstance(n := g.get("id"), str)]
     faults += [
         Fault("group-duplicate", f"diagram: group id '{name}' is used more than once")
@@ -30,7 +30,7 @@ def _node_faults(
     data: dict[str, object], groups: list[str]
 ) -> tuple[list[Fault], list[str]]:
     faults: list[Fault] = []
-    entries = tables(data, "nodes", "diagram")
+    entries = tables(data, "nodes")
     names = [n for e in entries if isinstance(n := e.get("id"), str)]
     faults += [
         Fault("node-duplicate", f"diagram: node id '{name}' is used more than once")
@@ -50,7 +50,7 @@ def _node_faults(
 
 def _edge_faults(data: dict[str, object], nodes: list[str]) -> list[Fault]:
     faults: list[Fault] = []
-    entries = tables(data, "edges", "diagram")
+    entries = tables(data, "edges")
     if len(entries) > MAX_EDGES:
         faults.append(Fault("too-many", f"diagram: at most {MAX_EDGES} edges"))
     for n, edge in enumerate(entries, 1):
@@ -67,7 +67,7 @@ def _edge_faults(data: dict[str, object], nodes: list[str]) -> list[Fault]:
 def _tree_parents(data: dict[str, object]) -> tuple[dict[str, str], list[Fault]]:
     parent: dict[str, str] = {}
     faults: list[Fault] = []
-    for edge in tables(data, "edges", "diagram"):
+    for edge in tables(data, "edges"):
         source, target = edge.get("from"), edge.get("to")
         if not (isinstance(source, str) and isinstance(target, str)):
             continue
@@ -103,11 +103,7 @@ def validate_diagram(data: dict[str, object]) -> list[Fault]:
     group_faults, groups = _group_faults(data)
     node_faults, nodes = _node_faults(data, groups)
     faults = group_faults + node_faults + _edge_faults(data, nodes)
-    used = {
-        g
-        for n in tables(data, "nodes", "diagram")
-        if isinstance(g := n.get("group"), str)
-    }
+    used = {g for n in tables(data, "nodes") if isinstance(g := n.get("group"), str)}
     faults += [
         Fault("group-empty", f"diagram: group '{g}' has no nodes")
         for g in groups

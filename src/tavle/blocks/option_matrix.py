@@ -23,7 +23,7 @@ def rating_scale(cell: object) -> str | None:
 
 
 def _unique_faults(data: dict[str, object], key: str, field: str) -> list[Fault]:
-    names = [str(e.get(field)) for e in tables(data, key, "matrix") if field in e]
+    names = [str(e.get(field)) for e in tables(data, key) if field in e]
     return [
         Fault("duplicate", f"matrix.{key}: {field} '{name}' is repeated")
         for name in duplicates(names)
@@ -32,7 +32,7 @@ def _unique_faults(data: dict[str, object], key: str, field: str) -> list[Fault]
 
 def _option_faults(data: dict[str, object]) -> list[Fault]:
     faults: list[Fault] = []
-    options = tables(data, "options", "matrix")
+    options = tables(data, "options")
     if len(options) > MAX_OPTIONS:
         faults.append(Fault("limit", f"matrix: at most {MAX_OPTIONS} options"))
     if any(o.get("label") == FIRST_COLUMN for o in options):
@@ -48,7 +48,7 @@ def _option_faults(data: dict[str, object]) -> list[Fault]:
 
 def _weight_faults(data: dict[str, object]) -> list[Fault]:
     faults: list[Fault] = []
-    for n, entry in enumerate(tables(data, "criteria", "matrix"), 1):
+    for n, entry in enumerate(tables(data, "criteria"), 1):
         weight = entry.get("weight")
         if "weight" in entry and (
             not isinstance(weight, int)
@@ -66,7 +66,7 @@ def _weight_faults(data: dict[str, object]) -> list[Fault]:
 
 def _criteria_faults(data: dict[str, object]) -> list[Fault]:
     faults = _weight_faults(data)
-    if len(tables(data, "criteria", "matrix")) > MAX_CRITERIA:
+    if len(tables(data, "criteria")) > MAX_CRITERIA:
         faults.append(Fault("limit", f"matrix: at most {MAX_CRITERIA} criteria"))
     return faults + _unique_faults(data, "criteria", "id")
 
@@ -91,8 +91,8 @@ def _row_faults(
 
 def _grid_faults(data: dict[str, object]) -> list[Fault]:
     cells = data["cells"]
-    options = tables(data, "options", "matrix")
-    criteria = tables(data, "criteria", "matrix")
+    options = tables(data, "options")
+    criteria = tables(data, "criteria")
     if not isinstance(cells, list) or not all(isinstance(r, list) for r in cells):
         return [
             Fault("type", "matrix: 'cells' must be a list of rows, one per criterion")
@@ -125,7 +125,7 @@ def _recommended_faults(data: dict[str, object]) -> list[Fault]:
     value = data["recommended"]
     if not isinstance(value, str) or not value.strip():
         return []  # the properties report a wrong type or a blank value
-    ids = [o.get("id") for o in tables(data, "options", "matrix")]
+    ids = [o.get("id") for o in tables(data, "options")]
     if value in ids:
         return []
     return [Fault("recommended", f"matrix.recommended: no option with id '{value}'")]

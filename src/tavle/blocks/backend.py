@@ -74,14 +74,14 @@ def _entity_faults(
         faults.append(
             Fault("entity-key", f"{where}: key '{key}' is not a declared field")
         )
-    for n, relation in enumerate(tables(entity, "relations", where), 1):
+    for n, relation in enumerate(tables(entity, "relations"), 1):
         faults += _relation_faults(relation, names, f"{where}.relations[{n}]")
     return faults
 
 
 def validate_data_model(data: dict[str, object]) -> list[Fault]:
     faults = layout_faults(data)
-    entities = tables(data, "entity", "data-model")
+    entities = tables(data, "entity")
     named = [n for e in entities if isinstance(n := e.get("name"), str)]
     faults += [
         Fault("entity-duplicate", f"entity '{name}' is declared more than once")
@@ -116,7 +116,7 @@ def _response_faults(response: dict[str, object], where: str) -> list[Fault]:
 def validate_endpoint(data: dict[str, object]) -> list[Fault]:
     faults = _route_faults(data) + change_rule_faults(data, "endpoint")
     faults += _typed_map_faults(data.get("request"), "endpoint.request")
-    for n, response in enumerate(tables(data, "responses", "endpoint"), 1):
+    for n, response in enumerate(tables(data, "responses"), 1):
         faults += _response_faults(response, f"responses[{n}]")
     return faults
 

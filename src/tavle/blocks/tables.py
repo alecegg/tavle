@@ -85,7 +85,7 @@ def _row_count(group: dict[str, object]) -> int | None:
 
 
 def _group_faults(data: dict[str, object], row_count: int) -> list[Fault]:
-    counts = [_row_count(g) for g in tables(data, "groups", "table")]
+    counts = [_row_count(g) for g in tables(data, "groups")]
     faults = [
         Fault("type", f"table.groups[{n}].rows must be a positive integer")
         for n, count in enumerate(counts, 1)

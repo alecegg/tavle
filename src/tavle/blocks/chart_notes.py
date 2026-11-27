@@ -37,7 +37,7 @@ def _point_fault(data: dict[str, object], value: object, where: str) -> Fault | 
 def _scatter_span(data: dict[str, object]) -> tuple[float, float] | None:
     xs = [
         x
-        for s in tables(data, "series", "chart")
+        for s in tables(data, "series")
         for x in (s.get("x") if isinstance(s.get("x"), list) else [])  # type: ignore[union-attr]
         if _finite(x)
     ]
@@ -109,7 +109,7 @@ def _note_rule_faults(
 def note_rule_faults(data: dict[str, object]) -> list[Fault]:
     """Rules the metadata cannot express: count, marker or band form, positions."""
     faults: list[Fault] = []
-    found = tables(data, "notes", "chart")
+    found = tables(data, "notes")
     if len(found) > MAX_NOTES:
         faults.append(Fault("too-many", f"chart.notes: at most {MAX_NOTES} notes"))
     for n, note in enumerate(found, 1):

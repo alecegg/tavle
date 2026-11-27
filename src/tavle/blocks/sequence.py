@@ -10,7 +10,7 @@ MAX_STEPS = 200
 
 def _actor_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     faults: list[Fault] = []
-    entries = tables(data, "actors", "sequence")
+    entries = tables(data, "actors")
     names = [n for a in entries if isinstance(n := a.get("id"), str)]
     faults += [
         Fault("actor-duplicate", f"sequence: actor id '{name}' is used more than once")
@@ -38,7 +38,7 @@ def _step_faults(step: dict[str, object], actors: list[str], where: str) -> list
 
 def _steps_faults(data: dict[str, object], actors: list[str]) -> list[Fault]:
     faults: list[Fault] = []
-    entries = tables(data, "steps", "sequence")
+    entries = tables(data, "steps")
     if len(entries) > MAX_STEPS:
         faults.append(Fault("too-many", f"sequence: at most {MAX_STEPS} steps"))
     for n, step in enumerate(entries, 1):

@@ -48,7 +48,7 @@ def str_map(value: object, where: str) -> list[Fault]:
     return [Fault("type", f"{where}.{k} must be a string") for k in bad]
 
 
-def tables(data: dict[str, object], key: str, where: str) -> list[dict[str, object]]:
+def tables(data: dict[str, object], key: str) -> list[dict[str, object]]:
     """Return data[key] when it is a list of tables, else an empty list."""
     value = data.get(key)
     if isinstance(value, list) and all(isinstance(item, dict) for item in value):

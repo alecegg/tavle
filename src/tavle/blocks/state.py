@@ -19,7 +19,7 @@ def _initial_faults(entries: list[dict[str, object]]) -> list[Fault]:
 
 def _state_faults(data: dict[str, object]) -> tuple[list[Fault], list[str]]:
     faults: list[Fault] = []
-    entries = tables(data, "states", "state")
+    entries = tables(data, "states")
     names = [n for s in entries if isinstance(n := s.get("id"), str)]
     faults += [
         Fault("state-duplicate", f"state: state id '{name}' is used more than once")
@@ -39,7 +39,7 @@ def _end_fault(move: dict[str, object], key: str, names: list[str], where: str):
 
 def _move_faults(data: dict[str, object], names: list[str]) -> list[Fault]:
     faults: list[Fault] = []
-    for n, move in enumerate(tables(data, "transitions", "state"), 1):
+    for n, move in enumerate(tables(data, "transitions"), 1):
         where = f"transitions[{n}]"
         faults += _end_fault(move, "from", names, where)
         faults += _end_fault(move, "to", names, where)

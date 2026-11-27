@@ -22,7 +22,7 @@ def _ids(data: dict[str, object]) -> list[str] | None:
 
 
 def _screen_faults(data: dict[str, object]) -> list[Fault]:
-    entries = tables(data, "screens", WHERE)
+    entries = tables(data, "screens")
     ids = [i for s in entries if isinstance(i := s.get("id"), str)]
     faults = [
         Fault("screen-duplicate", f"{WHERE}: screen id '{name}' is used twice")
@@ -43,7 +43,7 @@ def _end_fault(step: dict[str, object], key: str, ids: list[str], where: str):
 
 
 def _step_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
-    steps = tables(data, "steps", WHERE)
+    steps = tables(data, "steps")
     faults: list[Fault] = []
     if len(steps) > MAX_STEPS:
         faults.append(Fault("too-many", f"{WHERE}: at most {MAX_STEPS} steps"))
@@ -67,7 +67,7 @@ def _members(lane: object) -> list[str] | None:
 
 
 def _lane_faults(data: dict[str, object], ids: list[str]) -> list[Fault]:
-    lanes = tables(data, "lanes", WHERE)
+    lanes = tables(data, "lanes")
     named = [_members(lane) for lane in lanes]
     faults = [
         Fault("lane-screen", f"lanes[{n}]: '{name}' is not a screen id")
@@ -106,7 +106,7 @@ def _links_well_formed(data: dict[str, object]) -> bool:
 def _lane_of(data: dict[str, object]) -> dict[str, int]:
     """Lane index per screen id; empty when no lanes are declared."""
     out: dict[str, int] = {}
-    for k, lane in enumerate(tables(data, "lanes", WHERE)):
+    for k, lane in enumerate(tables(data, "lanes")):
         members = lane.get("screens")
         for name in members if isinstance(members, list) else []:
             if isinstance(name, str):
@@ -115,7 +115,7 @@ def _lane_of(data: dict[str, object]) -> dict[str, int]:
 
 
 def _pairs(data: dict[str, object], ids: list[str]) -> list[tuple[str, str]]:
-    steps = tables(data, "steps", WHERE)
+    steps = tables(data, "steps")
     return [
         (a, b)
         for s in steps

@@ -21,7 +21,7 @@ def validate_risk(data: dict[str, object]) -> list[Fault]:
         if len(items) > MAX_ITEMS
         else []
     )
-    return faults + _unique_id_faults(tables(data, "item", "risk"))
+    return faults + _unique_id_faults(tables(data, "item"))
 
 
 RISK = BlockSpec(
