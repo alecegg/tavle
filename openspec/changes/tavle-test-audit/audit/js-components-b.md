@@ -1,0 +1,218 @@
+# JS components baseline, last half
+
+Files: last 18 of `src/tavle/static/components/*.js`, run as three Stryker runs one at a time (`shared.js` alone; then seven files; then ten files). Logs are under `/var/tmp/tmp-alec/`: `t3x-js-comp-b1.log` (rc=0, wall 443 s), `t3x-js-comp-b2.log` (rc=0, wall 1879 s), `t3x-js-comp-b3.log` (rc=0, wall 1371 s).
+
+- Mutation tool: Stryker 10.1.1, Vitest runner, `just mutate-js --disableBail`, default `stryker.config.json` (`vitest.related: true`).
+- `src/tavle/page/static/*.js` has no vitest tests (Playwright only) and stays out of Stryker.
+- Counts: total 1913, killed 1737, survived 111, NoCoverage 64, timeout 1, runtime errors 0.
+- Score: 90.80 % (Killed / (Killed + Survived + NoCoverage + Timeout + RuntimeError) = 1737 / 1913).
+
+## Runs
+
+| Run | Files | Total | Killed | Survived | NoCoverage | Timeout | Wall |
+|---|---|---|---|---|---|---|---|
+| 1 | 1 | 288 | 260 | 20 | 8 | 0 | 443 s |
+| 2 | 7 | 723 | 690 | 17 | 16 | 0 | 1879 s |
+| 3 | 10 | 902 | 787 | 74 | 40 | 1 | 1371 s |
+
+## Non-killed mutants
+
+- `src/tavle/static/components/matrix.js:13` StringLiteral (NoCoverage)
+- `src/tavle/static/components/matrix.js:13` ConditionalExpression (Survived)
+- `src/tavle/static/components/matrix.js:13` MethodExpression (Survived)
+- `src/tavle/static/components/matrix.js:18` StringLiteral (NoCoverage)
+- `src/tavle/static/components/matrix.js:22` MethodExpression (Survived)
+- `src/tavle/static/components/matrix.js:67` StringLiteral (Survived)
+- `src/tavle/static/components/matrix.js:87` ArrayDeclaration (NoCoverage)
+- `src/tavle/static/components/matrix.js:87` ArrayDeclaration (NoCoverage)
+- `src/tavle/static/components/matrix.js:94` ConditionalExpression (Survived)
+- `src/tavle/static/components/mount.js:14` ConditionalExpression (Survived)
+- `src/tavle/static/components/mount.js:14` LogicalOperator (Survived)
+- `src/tavle/static/components/mount.js:14` ConditionalExpression (Survived)
+- `src/tavle/static/components/mount.js:14` LogicalOperator (Survived)
+- `src/tavle/static/components/mount.js:17` ArrowFunction (Survived)
+- `src/tavle/static/components/ranking.js:4` EqualityOperator (Survived)
+- `src/tavle/static/components/recap.js:7` ConditionalExpression (Survived)
+- `src/tavle/static/components/recap.js:17` StringLiteral (NoCoverage)
+- `src/tavle/static/components/recap.js:17` StringLiteral (NoCoverage)
+- `src/tavle/static/components/recap.js:33` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/recap.js:33` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/recap.js:33` EqualityOperator (NoCoverage)
+- `src/tavle/static/components/recap.js:33` EqualityOperator (NoCoverage)
+- `src/tavle/static/components/recap.js:33` UnaryOperator (NoCoverage)
+- `src/tavle/static/components/recap.js:33` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/recap.js:33` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/recap.js:33` EqualityOperator (NoCoverage)
+- `src/tavle/static/components/recap.js:33` EqualityOperator (NoCoverage)
+- `src/tavle/static/components/recap.js:33` MethodExpression (Survived)
+- `src/tavle/static/components/recap.js:33` ArrowFunction (Survived)
+- `src/tavle/static/components/recap.js:58` LogicalOperator (Survived)
+- `src/tavle/static/components/recap.js:58` ConditionalExpression (Survived)
+- `src/tavle/static/components/risks.js:48` EqualityOperator (Survived)
+- `src/tavle/static/components/risks.js:80` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:8` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:8` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:8` BooleanLiteral (Survived)
+- `src/tavle/static/components/shared.js:9` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:9` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:9` BooleanLiteral (Survived)
+- `src/tavle/static/components/shared.js:10` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:15` Regex (Survived)
+- `src/tavle/static/components/shared.js:43` ArrayDeclaration (NoCoverage)
+- `src/tavle/static/components/shared.js:43` MethodExpression (Survived)
+- `src/tavle/static/components/shared.js:43` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:43` LogicalOperator (Survived)
+- `src/tavle/static/components/shared.js:43` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:43` LogicalOperator (Survived)
+- `src/tavle/static/components/shared.js:43` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:43` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:76` MethodExpression (Survived)
+- `src/tavle/static/components/shared.js:83` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:90` StringLiteral (Survived)
+- `src/tavle/static/components/shared.js:101` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:102` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:138` ArrayDeclaration (NoCoverage)
+- `src/tavle/static/components/shared.js:139` BooleanLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:139` ArrowFunction (Survived)
+- `src/tavle/static/components/shared.js:152` StringLiteral (NoCoverage)
+- `src/tavle/static/components/shared.js:154` ConditionalExpression (Survived)
+- `src/tavle/static/components/shared.js:154` StringLiteral (Survived)
+- `src/tavle/static/components/shared.js:154` StringLiteral (Survived)
+- `src/tavle/static/components/stats.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/stats.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/stats.js:10` StringLiteral (Survived)
+- `src/tavle/static/components/stats.js:10` EqualityOperator (Survived)
+- `src/tavle/static/components/stats.js:11` MethodExpression (Survived)
+- `src/tavle/static/components/stats.js:22` MethodExpression (Survived)
+- `src/tavle/static/components/stats.js:22` MethodExpression (Survived)
+- `src/tavle/static/components/stats.js:22` Regex (Survived)
+- `src/tavle/static/components/stats.js:22` Regex (Survived)
+- `src/tavle/static/components/stats.js:28` ConditionalExpression (Survived)
+- `src/tavle/static/components/stats.js:28` ConditionalExpression (Survived)
+- `src/tavle/static/components/stats.js:28` StringLiteral (Survived)
+- `src/tavle/static/components/stats.js:33` StringLiteral (NoCoverage)
+- `src/tavle/static/components/stats.js:33` MethodExpression (Survived)
+- `src/tavle/static/components/stats.js:49` StringLiteral (NoCoverage)
+- `src/tavle/static/components/stats.js:59` ConditionalExpression (Survived)
+- `src/tavle/static/components/stats.js:59` EqualityOperator (Survived)
+- `src/tavle/static/components/stats.js:79` StringLiteral (NoCoverage)
+- `src/tavle/static/components/stats.js:79` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:3` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:4` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:4` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:4` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:4` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:5` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:5` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:5` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:6` ArrayDeclaration (Survived)
+- `src/tavle/static/components/table.js:6` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:6` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:6` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:6` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:9` Regex (Survived)
+- `src/tavle/static/components/table.js:21` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:22` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:39` LogicalOperator (Survived)
+- `src/tavle/static/components/table.js:39` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:49` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:62` StringLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:63` AssignmentOperator (Timeout)
+- `src/tavle/static/components/table.js:65` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:69` ArrayDeclaration (Survived)
+- `src/tavle/static/components/table.js:96` BlockStatement (NoCoverage)
+- `src/tavle/static/components/table.js:98` ArrayDeclaration (NoCoverage)
+- `src/tavle/static/components/table.js:98` StringLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:98` StringLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:115` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:115` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:130` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:130` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:132` ObjectLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:132` ArithmeticOperator (NoCoverage)
+- `src/tavle/static/components/table.js:144` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:144` ArrowFunction (Survived)
+- `src/tavle/static/components/table.js:144` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:144` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:144` LogicalOperator (Survived)
+- `src/tavle/static/components/table.js:144` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:144` EqualityOperator (Survived)
+- `src/tavle/static/components/table.js:144` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:144` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:144` EqualityOperator (Survived)
+- `src/tavle/static/components/table.js:144` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:145` ObjectLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:168` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:185` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:190` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:190` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:191` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:191` EqualityOperator (Survived)
+- `src/tavle/static/components/table.js:191` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:192` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:196` StringLiteral (Survived)
+- `src/tavle/static/components/table.js:205` StringLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:205` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:205` MethodExpression (Survived)
+- `src/tavle/static/components/table.js:212` ConditionalExpression (Survived)
+- `src/tavle/static/components/table.js:213` StringLiteral (NoCoverage)
+- `src/tavle/static/components/table.js:213` ConditionalExpression (Survived)
+- `src/tavle/static/components/tabs.js:7` BlockStatement (Survived)
+- `src/tavle/static/components/tabs.js:8` ArrowFunction (Survived)
+- `src/tavle/static/components/tabs.js:9` CallExpression (Survived)
+- `src/tavle/static/components/tabs.js:10` StringLiteral (Survived)
+- `src/tavle/static/components/tabs.js:12` StringLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:12` ArrowFunction (Survived)
+- `src/tavle/static/components/tabs.js:18` BlockStatement (NoCoverage)
+- `src/tavle/static/components/tabs.js:19` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:19` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:19` LogicalOperator (NoCoverage)
+- `src/tavle/static/components/tabs.js:19` MethodExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:20` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:20` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:20` LogicalOperator (NoCoverage)
+- `src/tavle/static/components/tabs.js:20` StringLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:21` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:21` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:21` LogicalOperator (NoCoverage)
+- `src/tavle/static/components/tabs.js:21` StringLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:24` BlockStatement (NoCoverage)
+- `src/tavle/static/components/tabs.js:25` StringLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:26` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:26` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:26` LogicalOperator (NoCoverage)
+- `src/tavle/static/components/tabs.js:27` BooleanLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:27` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:27` ConditionalExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:28` CallExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:29` CallExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:30` CallExpression (NoCoverage)
+- `src/tavle/static/components/tabs.js:31` ObjectLiteral (NoCoverage)
+- `src/tavle/static/components/tabs.js:31` StringLiteral (NoCoverage)
+- `src/tavle/static/components/ui-states.js:12` ConditionalExpression (Survived)
+
+## Killing tests per source file
+
+| File | Total | Killed | Survived | NoCoverage | Timeout | Killed by |
+|---|---|---|---|---|---|---|
+| `src/tavle/static/components/icons.js` | 125 | 125 | 0 | 0 | 0 | `tests/components/blocks_text.test.js`, `tests/components/callout.test.js`, `tests/components/containers.test.js`, `tests/components/mount.test.js` |
+| `src/tavle/static/components/image.js` | 30 | 30 | 0 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
+| `src/tavle/static/components/matrix.js` | 144 | 135 | 5 | 4 | 0 | `tests/components/blocks_text.test.js` |
+| `src/tavle/static/components/mount.js` | 29 | 24 | 5 | 0 | 0 | `tests/components/callout.test.js`, `tests/components/containers.test.js`, `tests/components/inputs.test.js`, `tests/components/mount.test.js` |
+| `src/tavle/static/components/ranking.js` | 54 | 53 | 1 | 0 | 0 | `tests/components/inputs.test.js`, `tests/components/inputs_markup.test.js` |
+| `src/tavle/static/components/recap.js` | 193 | 177 | 5 | 11 | 0 | `tests/components/blocks_text.test.js` |
+| `src/tavle/static/components/risks.js` | 148 | 146 | 1 | 1 | 0 | `tests/components/blocks_text.test.js` |
+| `src/tavle/static/components/screen-flow.js` | 43 | 43 | 0 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
+| `src/tavle/static/components/sequence.js` | 22 | 22 | 0 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
+| `src/tavle/static/components/shared.js` | 288 | 260 | 20 | 8 | 0 | `tests/components/backend.test.js`, `tests/components/blocks_text.test.js`, `tests/components/callout.test.js`, `tests/components/charts_diagrams.test.js`, `tests/components/code_diff.test.js`, `tests/components/containers.test.js`, `tests/components/inputs.test.js`, `tests/components/inputs_markup.test.js` |
+| `src/tavle/static/components/slider.js` | 38 | 38 | 0 | 0 | 0 | `tests/components/inputs.test.js`, `tests/components/inputs_markup.test.js` |
+| `src/tavle/static/components/state.js` | 24 | 24 | 0 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
+| `src/tavle/static/components/stats.js` | 154 | 135 | 16 | 3 | 0 | `tests/components/blocks_text.test.js` |
+| `src/tavle/static/components/table.js` | 429 | 366 | 52 | 10 | 1 | `tests/components/blocks_text.test.js`, `tests/components/code_diff.test.js` |
+| `src/tavle/static/components/tabs.js` | 34 | 2 | 5 | 27 | 0 | `tests/components/containers.test.js` |
+| `src/tavle/static/components/timeline.js` | 81 | 81 | 0 | 0 | 0 | `tests/components/blocks_text.test.js` |
+| `src/tavle/static/components/ui-states.js` | 25 | 24 | 1 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
+| `src/tavle/static/components/wireframe.js` | 52 | 52 | 0 | 0 | 0 | `tests/components/charts_diagrams.test.js` |
